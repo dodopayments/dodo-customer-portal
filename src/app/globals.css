@@ -2,20 +2,195 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: var(--background);
+    --card-foreground: var(--foreground);
+    --popover: var(--background);
+    --popover-foreground: var(--foreground);
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: var(--primary);
+    --muted: var(--secondary);
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 75 99% 56%;
+    --accent-foreground: var(--primary);
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--primary-foreground);
+    --border: 217 16% 84%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: var(--accent);
+    --radius: 0.5rem;
+
+    /* Chart Colors */
+    --chart-1: 219 100% 54%;
+    --chart-2: 208 100% 77%;
+    --chart-3: 212 100% 92%;
+    --chart-4: 77 100% 45%;
+    --chart-5: 27 87% 67%;
+
+    /* Background Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f7f9;
+    --bg-tertiary: #f9fafb;
+    --bg-focused: #eceef2;
+    --bg-disabled: #f2f4f7;
+    --bg-error-primary: #fef3f2;
+    --bg-error-secondary: #fee4e2;
+    --bg-warning-primary: #fffaeb;
+    --bg-warning-secondary: #fef0c7;
+    --bg-success-primary: #ecfdf3;
+    --bg-success-secondary: #dcfae6;
+    --bg-error-solid: #d92d20;
+    --bg-warning-solid: #dc6803;
+
+    /* Border Colors */
+    --border-primary: #d0d5dd;
+    --border-secondary: #e4e7ec;
+    --border-tertiary: #f2f4f7;
+    --border-disabled: var(--border-primary);
+    --border-disabled-subtle: var(--border-secondary);
+    --border-brand: #a6e500;
+    --border-error: #f04438;
+
+    /* Text Colors */
+    --text-primary: #0d0d0d;
+    --text-white: #ffffff;
+    --text-secondary: #344054;
+    --text-tertiary: #424e62;
+    --text-disabled: #667085;
+    --text-placeholder: var(--text-disabled);
+    --text-success-primary: #079455;
+    --text-error-primary: #d92d20;
+
+    /* Button Colors */
+    --button-primary-bg: #0d0d0d;
+    --button-primary-bg-hover: #c6fe1e;
+    --button-primary-text: #ffffff;
+    --button-primary-fg-hover: #0d0d0d;
+    --button-secondary-bg: #f6f7f9;
+    --button-secondary-bg-hover: #eceef2;
+    --button-secondary-text: #344054;
+    --button-secondary-text-hover: #424e62;
+    --button-clink: #0a4ceb;
+    --button-clink-hover: #0f3ebe;
+  }
+
+  .dark {
+    --background: 0, 0%, 5%;
+    --foreground: 210 40% 98%;
+    --card: 0, 0%, 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 75, 99%, 56%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 0, 0%, 20%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 75, 99%, 56%;
+    --chart-1: 219, 100%, 54%;
+    --chart-2: 210, 100%, 86%;
+    --chart-3: 212, 100%, 92%;
+    --chart-4: 77, 100%, 45%;
+    --chart-5: 27 87% 67%;
+    /* Background color variables for dark mode */
+    --bg-primary: #0d0d0d;
+    --bg-secondary: #1b1b1b;
+    --bg-tertiary: #1b1b1b;
+    --bg-focused: #0d0d0d;
+    --bg-disabled: #1b1b1b;
+    --bg-error-primary: #f04438;
+    --bg-error-secondary: #d92d20;
+    --bg-warning-primary: #f79009;
+    --bg-warning-secondary: #dc6803;
+    --bg-success-primary: #17b26a;
+    --bg-success-secondary: #079455;
+    --bg-error-solid: #d92d20;
+    --bg-warning-solid: #dc6803;
+    /* Border color variables for dark mode */
+    --border-primary: #323232;
+    --border-secondary: #1f2023;
+    --border-tertiary: #1f2023;
+    --border-disabled: #333741;
+    --border-disabled-subtle: #333741;
+    --border-brand: #a6e500;
+    --border-error: #f97066;
+    /* Text color variables for dark mode */
+    --text-primary: #ffffff;
+    --text-white: #0d0d0d;
+    --text-secondary: #909090;
+    --text-tertiary: #909090;
+    --text-disabled: #888888;
+    --text-placeholder: #888888;
+    --text-success-primary: #47cd89;
+    --text-error-primary: #f97066;
+    /* Button colors - Dark mode */
+    --button-primary-bg: #ffffff;
+    --button-primary-bg-hover: #c6fe1e;
+    --button-primary-text: #ffffff;
+    --button-primary-fg-hover: #0d0d0d;
+    --button-secondary-bg: #1b1b1b;
+    --button-secondary-bg-hover: #141414;
+    --button-secondary-text: #ffffff;
+    --button-secondary-text-hover: #ffffff;
+    --button-clink: #ffffff;
+    --button-clink-hover: #ffffff;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Autofill Styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg-primary) inset;
+  transition: background-color 5000s ease-in-out 0s, border-color 0.3s ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-primary);
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-secondary) inset;
+  }
+}
+
+/* Remove Number Input Arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@layer base {
+  * {@apply border-border;}
+  body {@apply bg-background text-foreground;}
 }
