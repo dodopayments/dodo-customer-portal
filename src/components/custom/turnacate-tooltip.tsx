@@ -1,7 +1,6 @@
+"use client";
 import React from "react";
-
 import { Copy } from "lucide-react"; 
-
 import { Check } from "@phosphor-icons/react";
 import { TooltipProvider } from "../ui/tooltip";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
