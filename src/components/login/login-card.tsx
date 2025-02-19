@@ -12,32 +12,32 @@ import Image from "next/image";
 
 import React from "react";
 
-const MagicLinkStatus = () => {
-  return (
-    <div className="relative z-10">
-      <CardHeader className="flex px-8 pt-12 flex-col items-center gap-2">
-        <Image
-          src="/images/business.svg"
-          alt="logo"
-          className="mb-6"
-          width={38}
-          height={38}
-        />
-        <CardTitle>Almost there!</CardTitle>
-        <CardDescription className="text-center">
-          Login using the link sent to{" "}
-          <span className="text-text-primary">johndoe@example.com</span>. Make
-          sure you check your spam folder!
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="px-8 py-8 pb-12">
-        <Button variant="secondary" className="w-full">
-          Go back
-        </Button>
-      </CardContent>
-    </div>
-  );
-};
+// const MagicLinkStatus = () => {
+//   return (
+//     <div className="relative z-10">
+//       <CardHeader className="flex px-8 pt-12 flex-col items-center gap-2">
+//         <Image
+//           src="/images/business.svg"
+//           alt="logo"
+//           className="mb-6"
+//           width={38}
+//           height={38}
+//         />
+//         <CardTitle>Almost there!</CardTitle>
+//         <CardDescription className="text-center">
+//           Login using the link sent to{" "}
+//           <span className="text-text-primary">johndoe@example.com</span>. Make
+//           sure you check your spam folder!
+//         </CardDescription>
+//       </CardHeader>
+//       <CardContent className="px-8 py-8 pb-12">
+//         <Button variant="secondary" className="w-full">
+//           Go back
+//         </Button>
+//       </CardContent>
+//     </div>
+//   );
+// };
 
 const LoginForm = () => {
   return (
@@ -78,8 +78,8 @@ const LoginCard = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      {/* <LoginForm /> */}
-      <MagicLinkStatus />
+      <LoginForm />
+      {/* <MagicLinkStatus /> */}
     </Card>
   );
 };

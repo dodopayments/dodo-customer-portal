@@ -1,4 +1,4 @@
-# Dodo Payments Starter
+# Dodo Payments Customer Portal
 
 ## Getting Started
 
