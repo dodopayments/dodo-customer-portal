@@ -30,14 +30,16 @@ const BusinessName = ({
   return (
     <div className="flex items-center justify-center gap-2">
       {image ? (
-      <Image
-        src={image}
+        <Image
+          src={image}
           className="rounded-full object-cover object-center"
           alt="logo"
           width={32}
           height={32}
         />
-      ): <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />}
+      ) : (
+        <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />
+      )}
       <span
         className={cn(
           "text-text-primary font-display text-xl font-semibold",
@@ -59,8 +61,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await dispatch(fetchBusiness()).unwrap();
-        console.log(response);
+        await dispatch(fetchBusiness()).unwrap();
       } catch (error: any) {
         if (error.message.includes("Request failed with status code 401")) {
           redirect("/expired");
@@ -74,14 +75,14 @@ export default function Navbar() {
     try {
       // Clear token and cookies
       tokenHelper.logout();
-      
+
       // Clear Redux state
       dispatch(setTokenData(null));
-      
+
       // Redirect to expired/login page
-      router.push('/expired');
+      router.push("/expired");
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error("Logout failed:", error);
     }
   };
 
@@ -89,8 +90,11 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-bg-primary border-b border-border-secondary">
       <div className="relative flex items-center gap-6 justify-between py-4 pb-3 md:px-12 px-4">
         <div className="flex items-center gap-6">
-
-          <BusinessName image={businessData?.logo} hide name={businessData?.name ?? ""} />
+          <BusinessName
+            image={businessData?.logo}
+            hide
+            name={businessData?.name ?? ""}
+          />
           <div className="hidden lg:block">
             <Pills />
           </div>
@@ -125,8 +129,8 @@ export default function Navbar() {
                   </div>
                   <MobilePills closeSheet={() => setIsOpen(false)} />
                   <div className="mt-auto p-4">
-                    <Button 
-                      variant="secondary" 
+                    <Button
+                      variant="secondary"
                       className="w-full"
                       onClick={() => {
                         handleLogout();

@@ -41,7 +41,7 @@
     "next-themes": "^0.4.4",
     "nextjs-toploader": "^3.7.15",
     "react": "^19.0.0",
-    "react-day-picker": "^9.5.1",
+    "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-image-crop": "^11.0.7",

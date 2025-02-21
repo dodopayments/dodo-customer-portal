@@ -122,7 +122,11 @@ export default function DateFilter({
     <div className={cn("grid gap-2", className)}>
       <Dialog>
         {date?.from && date?.to ? (
-          <Button variant="secondary" onClick={() => setDateFilter(undefined)}>
+          <Button variant="secondary" onClick={() => {
+            setDateFilter(undefined)
+            setDate({from: undefined, to: undefined})
+            setPageNumber(0)
+          }}>
             <CalendarDots className="w-5 h-5 mr-1" />
             <>
               <span>

@@ -4,38 +4,36 @@
 import { ColumnDef } from "@tanstack/react-table";
 import IDTooltip from "../custom/turnacate-tooltip";
 import { Badge } from "../ui/badge";
-import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
+import {
+  CurrencyCode,
+  decodeCurrency,
+  formatCurrency,
+} from "@/lib/currency-helper";
 import parseIso from "@/lib/date-helper";
 import { getBadge } from "@/lib/badge-helper";
 
-type RefundTableType = {
-  RefundId: string;
-  AssociatedPayment: string;
-  Status: string;
-  Currency: CurrencyCode;
-  TimeStamp: string;
-  Amount: string;
-};
-export const RefundColumn: ColumnDef<RefundTableType>[] = [
+import { RefundResponse } from "@/redux/slice/transaction/transactionSlice";
+
+export const RefundColumn: ColumnDef<RefundResponse>[] = [
   {
-    accessorKey: "RefundId",
+    accessorKey: "refund_id",
     header: "Refund Id",
-    cell: ({ row }) => <IDTooltip idValue={row.getValue("RefundId")} />,
+    cell: ({ row }) => <IDTooltip idValue={row.getValue("refund_id")} />,
   },
   {
-    accessorKey: "AssociatedPayment",
+    accessorKey: "payment_id",
     header: "Associated Payment",
     cell: ({ row }) => (
       <div className="flex gap-2 items-center">
-        <IDTooltip idValue={row.getValue("AssociatedPayment")} />
+        <IDTooltip idValue={row.getValue("payment_id")} />
       </div>
     ),
   },
   {
-    accessorKey: "Status",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("Status") as string;
+      const status = row.getValue("status") as string;
       const { color, message } = getBadge(status);
       return (
         <Badge dot={false} variant={color as any}>
@@ -46,7 +44,7 @@ export const RefundColumn: ColumnDef<RefundTableType>[] = [
   },
 
   {
-    accessorKey: "TimeStamp",
+    accessorKey: "created_at",
     header: "Date",
     cell: (info) => {
       const dateStr = info.getValue<string>();
@@ -54,11 +52,15 @@ export const RefundColumn: ColumnDef<RefundTableType>[] = [
     },
   },
   {
-    accessorKey: "Amount",
+    accessorKey: "amount",
     header: "Amount",
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("Amount"));
-      const formatted = formatCurrency(amount, row.original.Currency);
+      const amount = parseFloat(row.getValue("amount"));
+      const currency = row.original.currency as CurrencyCode;
+      const formatted = formatCurrency(
+        decodeCurrency(amount, currency),
+        currency
+      );
       return <div className="text-left">{formatted}</div>;
     },
   },

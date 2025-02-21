@@ -32,6 +32,7 @@ function initializeApi() {
   }
 
   return {
+    api_url: API_URL,
     api: axios.create({
       baseURL: API_URL,
       headers: {
@@ -50,7 +51,7 @@ export const internalApi = axios.create({
 
 export const api = initializeApi().api;
 export const Mode = initializeApi().mode;
-
+export const api_url = initializeApi().api_url;
 // Add this to your API interceptors
 api.interceptors.request.use((config) => {
   const tokenData = tokenHelper.get();

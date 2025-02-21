@@ -4,55 +4,31 @@
 import { ColumnDef } from "@tanstack/react-table";
 import IDTooltip from "../custom/turnacate-tooltip";
 import { Badge } from "../ui/badge";
-import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
+import {
+  CurrencyCode,
+  decodeCurrency,
+  formatCurrency,
+} from "@/lib/currency-helper";
 import parseIso from "@/lib/date-helper";
 import { getBadge } from "@/lib/badge-helper";
+import { PaymentResponse } from "@/redux/slice/transaction/transactionSlice";
+import { Button } from "../ui/button";
+import { DownloadSimple } from "@phosphor-icons/react";
+import Link from "next/link";
+import { api_url } from "@/lib/http";
 
-type PaymentTableType = {
-  ID: string;
-  Status: string;
-  Currency: CurrencyCode;
-  PricingType: string;
-  Amount: string;
-  TimeStamp: string;
-  PaymentMethod: string;
-  CustomerName: string;
-};
-export const PaymentColumn: ColumnDef<PaymentTableType>[] = [
+export const PaymentColumn: ColumnDef<PaymentResponse>[] = [
   {
-    accessorKey: "ID",
+    accessorKey: "payment_id",
     header: "Payment ID",
-    cell: ({ row }) => <IDTooltip idValue={row.getValue("ID")} />,
+    cell: ({ row }) => <IDTooltip idValue={row.getValue("payment_id")} />,
   },
   {
-    accessorKey: "Status",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("Status") as string;
+      const status = row.getValue("status") as string;
       const { color, message } = getBadge(status, false, true);
-      return (
-        <Badge id="step6" dot={false} variant={color as any}>
-          {message}
-        </Badge>
-      );
-    },
-  },
-  {
-    accessorKey: "PricingType",
-    header: "Pricing Type",
-    cell: ({ row }) => {
-      const status = row.getValue("PricingType") as string;
-      const { color, message } = getBadge(status, false, true);
-      if (
-        row.getValue("Amount") == 0 &&
-        row.getValue("PricingType") == "Subscription"
-      ) {
-        return (
-          <Badge dot={false} variant={"default"}>
-            {"Mandate"}
-          </Badge>
-        );
-      }
       return (
         <Badge dot={false} variant={color as any}>
           {message}
@@ -61,19 +37,36 @@ export const PaymentColumn: ColumnDef<PaymentTableType>[] = [
     },
   },
   {
-    accessorKey: "Amount",
+    accessorKey: "payment_method",
+    header: "Payment Method",
+    cell: ({ row }) => {
+      return (
+        <div className="text-left">
+          {row.original.payment_method
+            ? (row.getValue("payment_method") as string).toUpperCase()
+            : "-"}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "total_amount",
     header: "Amount",
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("Amount"));
-      const formatted = formatCurrency(amount, row.original.Currency);
+      const amount = parseFloat(row.getValue("total_amount"));
+      const currency = row.original.currency as CurrencyCode;
+      const formatted = formatCurrency(
+        decodeCurrency(amount, currency),
+        currency
+      );
       return <div className="text-left">{formatted}</div>;
     },
   },
   {
-    accessorKey: "TimeStamp",
+    accessorKey: "created_at",
     header: "Date (UTC)",
     cell: ({ row }) => {
-      const dateStr = row.getValue("TimeStamp") as string;
+      const dateStr = row.getValue("created_at") as string;
       return (
         <div className="w-full">
           <div className="max-w-24">{parseIso(dateStr)}</div>
@@ -83,12 +76,21 @@ export const PaymentColumn: ColumnDef<PaymentTableType>[] = [
   },
 
   {
-    accessorKey: "PaymentMethod",
-    header: "Payment Method",
-  },
-
-  {
-    accessorKey: "CustomerName",
-    header: "Customer Name",
+    accessorKey: "actions",
+    header: "Invoice",
+    cell: ({ row }) => {
+      return (
+        <div className="text-left">
+          <Button variant={"secondary"} key={row.original.payment_id} asChild>
+            <Link
+              target="_blank"
+              href={`${api_url}/invoices/payments/${row.original.payment_id}`}
+            >
+              <DownloadSimple className="w-4 h-4 mr-2" /> Invoice
+            </Link>
+          </Button>
+        </div>
+      );
+    },
   },
 ];
