@@ -28,6 +28,7 @@ function initializeApi() {
 
     default:
       API_URL = process.env.NEXT_PUBLIC_TEST_URL!;
+      MODE = "test";
       break;
   }
 

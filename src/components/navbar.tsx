@@ -7,7 +7,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import { redirect, useParams, usePathname, useRouter } from "next/navigation";
@@ -17,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { fetchBusiness } from "@/redux/slice/business/businessSlice";
 import { setTokenData } from "@/redux/slice/token/tokenSlice";
 import { tokenHelper } from "@/lib/token-helper";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const BusinessName = ({
   image,
@@ -30,13 +30,10 @@ const BusinessName = ({
   return (
     <div className="flex items-center justify-center gap-2">
       {image ? (
-        <Image
-          src={image}
-          className="rounded-full object-cover object-center"
-          alt="logo"
-          width={32}
-          height={32}
-        />
+        <Avatar>
+          <AvatarImage src={image} />
+          <AvatarFallback name={name} />
+        </Avatar>
       ) : (
         <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />
       )}
@@ -57,7 +54,6 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   const businessData = useAppSelector((state) => state.business.business);
   const router = useRouter();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,14 +69,10 @@ export default function Navbar() {
 
   const handleLogout = () => {
     try {
-      // Clear token and cookies
+      const businessId = businessData?.business_id;
       tokenHelper.logout();
-
-      // Clear Redux state
+      router.push(`/login/${businessId}`);
       dispatch(setTokenData(null));
-
-      // Redirect to expired/login page
-      router.push("/expired");
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -239,22 +231,22 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
     {
       id: 1,
       tile: "Billing history",
-      href: "/billing-history",
+      href: "/session/billing-history",
     },
     {
       id: 2,
       tile: "Subscriptions",
-      href: "/subscriptions",
+      href: "/session/subscriptions",
     },
     {
       id: 3,
       tile: "License Keys",
-      href: "/license-keys",
+      href: "/session/license-keys",
     },
     {
       id: 4,
       tile: "Profile",
-      href: "/profile",
+      href: "/session/profile",
     },
   ];
 

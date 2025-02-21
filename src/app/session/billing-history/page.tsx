@@ -11,9 +11,9 @@ import {
   fetchRefunds,
 } from "@/redux/slice/transaction/transactionSlice";
 import TablePagination from "@/components/ui/dodo/TablePagination";
-import FilterButton from "@/components/custom/filter-dropdown";
-import { DateRange } from "react-day-picker";
-import DateFilter from "@/components/custom/date-filter";
+  import { DateRange } from "react-day-picker";
+import Loading from "@/components/loading";
+import { FilterControls } from "@/components/custom/filter-controls";
 
 const STATUS_OPTIONS = [
   { label: "In Progress", value: "processing" },
@@ -22,62 +22,37 @@ const STATUS_OPTIONS = [
   { label: "Not Initiated", value: "requires_payment_method" },
 ];
 
-const FilterControls = ({
-  dateFilter,
-  setDateFilter,
-  statusFilter,
-  setStatusFilter,
-  setPageNumber,
-}: {
-  dateFilter: DateRange | undefined;
-  setDateFilter: (range: DateRange | undefined) => void;
-  statusFilter: string[];
-  setStatusFilter: (value: string[]) => void;
-  setPageNumber: (page: number) => void;
-}) => (
-  <div className="flex items-center gap-2">
-    <DateFilter
-      dateFilter={dateFilter}
-      setPageNumber={setPageNumber}
-      setDateFilter={setDateFilter}
-    />
-    <FilterButton
-      filters={statusFilter[0]}
-      setFilters={(value) => setStatusFilter(value ? [value] : [])}
-      setPageNumber={setPageNumber}
-      label="Status"
-      options={STATUS_OPTIONS}
-    />
-  </div>
-);
 
 const Page = () => {
   const dispatch = useAppDispatch();
   const { payments, refunds } = useAppSelector((state) => state.transaction);
-  
-  // Payments state
+  const [isLoading, setIsLoading] = useState(false);
   const [pageNumberPayments, setPageNumberPayments] = useState(0);
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<DateRange | undefined>();
-  
-  // Refunds state
+
   const [pageNumberRefunds, setPageNumberRefunds] = useState(0);
   const [statusFilterRefunds, setStatusFilterRefunds] = useState<string[]>([]);
-  const [dateFilterRefunds, setDateFilterRefunds] = useState<DateRange | undefined>();
+  const [dateFilterRefunds, setDateFilterRefunds] = useState<
+    DateRange | undefined
+  >();
 
-  // Fetch payments
   useEffect(() => {
-    const params = {
-      pageSize: 10,
-      pageNumber: pageNumberPayments,
-      created_at_gte: dateFilter?.from,
-      created_at_lte: dateFilter?.to,
-      status: statusFilter[0],
+    const fetchPaymentsData = async () => {
+      setIsLoading(true);
+      const params = {
+        pageSize: 10,
+        pageNumber: pageNumberPayments,
+        created_at_gte: dateFilter?.from,
+        created_at_lte: dateFilter?.to,
+        status: statusFilter[0],
+      };
+      await dispatch(fetchPayments(params));
+      setIsLoading(false);
     };
-    dispatch(fetchPayments(params));
+    fetchPaymentsData();
   }, [dispatch, pageNumberPayments, dateFilter, statusFilter]);
 
-  // Fetch refunds
   useEffect(() => {
     const params = {
       pageSize: 10,
@@ -89,8 +64,16 @@ const Page = () => {
     dispatch(fetchRefunds(params));
   }, [dispatch, pageNumberRefunds, dateFilterRefunds, statusFilterRefunds]);
 
-  const showRefunds = refunds.data.length != 0 || dateFilterRefunds || statusFilterRefunds;
+  const showRefunds =
+    refunds.data.length != 0 || dateFilterRefunds || statusFilterRefunds;
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-10rem)]">
+        <Loading />
+      </div>
+    );
+  }
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6  flex flex-col h-full">
       <PageHeader
@@ -104,12 +87,13 @@ const Page = () => {
               statusFilter={statusFilter}
               setStatusFilter={setStatusFilter}
               setPageNumber={setPageNumberPayments}
+              options={STATUS_OPTIONS}
             />
           )
         }
       />
       <Separator className="my-6" />
-      
+
       {/* Payments Section */}
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
@@ -121,6 +105,7 @@ const Page = () => {
               statusFilter={statusFilter}
               setStatusFilter={setStatusFilter}
               setPageNumber={setPageNumberPayments}
+              options={STATUS_OPTIONS}
             />
           )}
         </div>
@@ -147,6 +132,7 @@ const Page = () => {
               statusFilter={statusFilterRefunds}
               setStatusFilter={setStatusFilterRefunds}
               setPageNumber={setPageNumberRefunds}
+              options={STATUS_OPTIONS}
             />
           </div>
           <div className="flex flex-col">

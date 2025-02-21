@@ -6,31 +6,23 @@ import IDTooltip from "../custom/turnacate-tooltip";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import parseIso from "@/lib/date-helper";
+import { LicenseResponse } from "@/redux/slice/license/licenseSlice";
 
-type LicenseTableType = {
-  LicenseId: string;
-  Status: string;
-  ProductId: string;
-  Expiry: string;
-  ProductType: string;
-  CustomerId: string;
-};
-
-export const LicenseColumn: ColumnDef<LicenseTableType>[] = [
+export const LicenseColumn: ColumnDef<LicenseResponse>[] = [
   {
-    accessorKey: "LicenseId",
-    header: "License ID",
+    accessorKey: "key",
+    header: "License Key",
     cell: ({ row }) => (
       <div className="flex items-center">
-        <IDTooltip idValue={row.getValue("LicenseId")} />
+        <IDTooltip idValue={row.getValue("key")} />
       </div>
     ),
   },
   {
-    accessorKey: "Status",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("Status") as string;
+      const status = row.getValue("status") as string;
       const { color, message } = getBadge(status, false, true);
       return (
         <Badge dot={false} variant={color as any}>
@@ -40,21 +32,21 @@ export const LicenseColumn: ColumnDef<LicenseTableType>[] = [
     },
   },
   {
-    accessorKey: "ProductId",
+    accessorKey: "product_id",
     header: "Product Id",
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
-          <IDTooltip idValue={row.getValue("ProductId")} />
+          <IDTooltip idValue={row.getValue("product_id")} />
         </div>
       );
     },
   },
   {
-    accessorKey: "Expiry",
+    accessorKey: "expires_at",
     header: "Expiry (UTC)",
     cell: ({ row }) => {
-      const isoDate = row.getValue("Expiry") as string;
+      const isoDate = row.getValue("expires_at") as string;
       if (isoDate == "Never Expires" || isoDate == "Same as Subscripton") {
         return <div className="pl-3">{isoDate}</div>;
       }
@@ -62,25 +54,16 @@ export const LicenseColumn: ColumnDef<LicenseTableType>[] = [
     },
   },
   {
-    accessorKey: "ProductType",
-    header: "Product Type",
-    cell: ({ row }) => {
-      const status = row.getValue("ProductType") as string;
-      const { color, message } = getBadge(status, false, true);
-      return (
-        <Badge dot={false} variant={color as any}>
-          {message}
-        </Badge>
-      );
-    },
+    accessorKey: "instances_count",
+    header: "Activations used",
   },
   {
-    accessorKey: "CustomerId",
-    header: "Customer Id",
+    accessorKey: "payment_id",
+    header: "Payment Id",
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
-          <IDTooltip idValue={row.getValue("CustomerId")} />
+          <IDTooltip idValue={row.getValue("payment_id")} />
         </div>
       );
     },

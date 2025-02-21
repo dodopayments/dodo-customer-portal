@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setTokenData } from "@/redux/slice/token/tokenSlice";
 import { tokenHelper } from "@/lib/token-helper";
 import LoadingOverlay from "@/components/loading-overlay";
+import { fetchBusiness } from "@/redux/slice/business/businessSlice";
 
 const Page = () => {
   const router = useRouter();
@@ -17,7 +19,20 @@ const Page = () => {
       try {
         const tokenData = tokenHelper.store(params.token as string);
         if (tokenData) {
-          dispatch(setTokenData(tokenData));
+          
+          const fetchData = async () => {
+            try {
+              await dispatch(setTokenData(tokenData));
+              await dispatch(fetchBusiness()).unwrap();
+            } catch (error: any) {
+              if (
+                error.message.includes("Request failed with status code 401")
+              ) {
+                router.push("/expired");
+              }
+            }
+          };
+          fetchData();
           router.push("/session/billing-history");
         } else {
           router.push("/expired");

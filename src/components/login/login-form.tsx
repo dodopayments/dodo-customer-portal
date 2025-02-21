@@ -10,10 +10,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
-import { Envelope } from "@phosphor-icons/react";
+import { z } from "zod";
 
 import {
   TURNSTILE_ERROR_MESSAGES,
@@ -27,23 +26,48 @@ import { api, internalApi } from "@/lib/http";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import LoadingOverlay from "../loading-overlay";
-const MagicLinkStatus = ({ email }: { email: string }) => (
-  <div className="flex flex-col justify-center items-center">
-    <div className="bg-bg-secondary rounded-full p-3 mb-6">
-      <Envelope className="w-6 h-6 text-text-primary" />
-    </div>
-    <h2 className="font-semibold font-display text-center text-text-primary text-3xl">
-      Check your email
-    </h2>
-    <div className="text-text-secondary font-light mt-1 tracking-wide text-center text-base">
-      <p>We sent a login link to</p>
-      <p>{email}</p>
-    </div>
-  </div>
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+
+const emailSchema = z.object({
+  email: z
+    .string()
+    .email("Please enter a valid email address")
+    .min(1, "Email is required"),
+});
+
+const MagicLinkStatus = ({
+  email,
+  business,
+  setSuccess,
+}: {
+  email: string;
+  business: any;
+  setSuccess: (success: boolean) => void;
+}) => (
+  <CardHeader className="flex px-7 pb-4 pt-12 flex-col items-center gap-2">
+    <Avatar className="mb-6">
+      <AvatarImage src={business.image} />
+      <AvatarFallback name={business.name} />
+    </Avatar>
+    <CardTitle>Almost there!</CardTitle>
+    <CardDescription className="text-center">
+      Login using the link sent to{" "}
+      <span className="text-text-primary">{email}</span>. Make sure you check
+      your spam folder!
+    </CardDescription>
+    <Button
+      variant={"secondary"}
+      className="w-full mt-2"
+      onClick={() => setSuccess(false)}
+    >
+      Go back
+    </Button>
+  </CardHeader>
 );
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const params = useParams();
   const business_id = params.business_id as string;
   const [pageLoading, setPageLoading] = useState(true);
@@ -82,6 +106,16 @@ export const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setEmailError("");
+
+    try {
+      emailSchema.parse({ email });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setEmailError(error.errors[0].message);
+        return;
+      }
+    }
 
     if (!validateTurnstileToken(turnstileState.token)) {
       turnstileHandlers.setError(TURNSTILE_ERROR_MESSAGES.REQUIRED);
@@ -91,7 +125,7 @@ export const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await api.post(
-        "/dashboard/customer-portal-login",
+        "/customer-portal-login",
         {
           email,
           business_id: business_id,
@@ -128,18 +162,10 @@ export const LoginForm = () => {
       {!success ? (
         <>
           <CardHeader className="flex px-8 pt-12 flex-col items-center gap-2">
-            {business.image ? (
-              <Image
-                src={business.image}
-                alt={business.name}
-                className="mb-6  rounded-lg object-cover object-center"
-                width={38}
-                height={38}
-                priority
-              />
-            ) : (
-              <div className="mb-6 w-10 h-10 bg-bg-secondary rounded-lg" />
-            )}
+            <Avatar className="mb-6">
+              <AvatarImage src={business.image} />
+              <AvatarFallback name={business.name} />
+            </Avatar>
             <CardTitle>Log into {business.name}</CardTitle>
             <CardDescription>
               Enter your email for a link to signup
@@ -151,12 +177,20 @@ export const LoginForm = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="Enter your email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError("");
+                  }}
+                  className={emailError ? "border-text-error-primary" : ""}
                 />
+                {emailError && (
+                  <p className="text-text-error-primary text-sm" role="alert">
+                    {emailError}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col w-full">
@@ -187,8 +221,12 @@ export const LoginForm = () => {
           </CardContent>
         </>
       ) : (
-        <CardContent className="px-8 py-12">
-          <MagicLinkStatus email={email} />
+        <CardContent>
+          <MagicLinkStatus
+            email={email}
+            business={business}
+            setSuccess={setSuccess}
+          />
         </CardContent>
       )}
     </div>
