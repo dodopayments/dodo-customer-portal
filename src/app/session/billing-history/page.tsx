@@ -14,6 +14,7 @@ import TablePagination from "@/components/ui/dodo/TablePagination";
 import { DateRange } from "react-day-picker";
 import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
+import { selectBusiness } from "@/redux/slice/business/businessSlice";
 
 const STATUS_OPTIONS = [
   { label: "In Progress", value: "processing" },
@@ -29,7 +30,7 @@ const Page = () => {
   const [pageNumberPayments, setPageNumberPayments] = useState(0);
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<DateRange | undefined>();
-
+  const business = useAppSelector(selectBusiness);
   const [pageNumberRefunds, setPageNumberRefunds] = useState(0);
   const [statusFilterRefunds, setStatusFilterRefunds] = useState<string[]>([]);
   const [dateFilterRefunds, setDateFilterRefunds] = useState<
@@ -73,10 +74,10 @@ const Page = () => {
     );
   }
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6  flex flex-col h-full">
+    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
       <PageHeader
         title="Billing History"
-        description="View all your orders with Turbo Repo"
+        description={`View all your orders with ${business?.name}`}
         actions={
           !showRefunds && (
             <FilterControls

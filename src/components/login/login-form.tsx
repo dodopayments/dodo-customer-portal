@@ -51,7 +51,7 @@ const MagicLinkStatus = ({
     </Avatar>
     <CardTitle>Almost there!</CardTitle>
     <CardDescription className="text-center">
-      Login using the link sent to{" "}
+    Access link sent to email{" "}
       <span className="text-text-primary">{email}</span>. Make sure you check
       your spam folder!
     </CardDescription>
@@ -169,9 +169,9 @@ export const LoginForm = () => {
               <AvatarImage src={business.image} />
               <AvatarFallback name={business.name} />
             </Avatar>
-            <CardTitle>Log into {business.name}</CardTitle>
+            <CardTitle>{business.name}&apos;s Customer Portal</CardTitle>
             <CardDescription>
-              Enter your email for a link to signup
+            Enter your email to receive the access link to your customer portal
             </CardDescription>
           </CardHeader>
           <CardContent className=" px-4 sm:px-8  py-8 pb-12">
@@ -218,7 +218,7 @@ export const LoginForm = () => {
                 type="submit"
                 disabled={isLoading || !!turnstileState.error}
               >
-                {isLoading ? "Sending..." : "Send me a link!"}
+                {isLoading ? "Sending..." : "Get Access Link!"}
               </Button>
             </form>
           </CardContent>
