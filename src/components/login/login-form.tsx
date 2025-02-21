@@ -51,21 +51,19 @@ const MagicLinkStatus = ({
     </Avatar>
     <CardTitle>Almost there!</CardTitle>
     <CardDescription className="text-center">
-    Access link sent to email{" "}
+      Access link sent to email{" "}
       <span className="text-text-primary">{email}</span>. Make sure you check
       your spam folder!
     </CardDescription>
     <Button
       variant={"secondary"}
-      className="w-full mt-2"
+      className="w-full mt-4"
       onClick={() => setSuccess(false)}
     >
       Go back
     </Button>
   </CardHeader>
 );
-
-
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -161,20 +159,21 @@ export const LoginForm = () => {
 
   return (
     <div className="relative z-10">
-      
       {!success ? (
         <>
-          <CardHeader className="flex px-8 pt-12 flex-col items-center gap-2">
+          <CardHeader className="flex px-8 pt-12 flex-col items-center">
             <Avatar className="mb-6">
               <AvatarImage src={business.image} />
               <AvatarFallback name={business.name} />
             </Avatar>
-            <CardTitle>{business.name}&apos;s Customer Portal</CardTitle>
-            <CardDescription>
-            Enter your email to receive the access link to your customer portal
+            <CardTitle className="text-center text-[22px]">
+              {business.name}&apos;s Billing portal
+            </CardTitle>
+            <CardDescription className="text-center text-[14px]">
+              Enter your email to receive the access link
             </CardDescription>
           </CardHeader>
-          <CardContent className=" px-4 sm:px-8  py-8 pb-12">
+          <CardContent className=" px-4 sm:px-8  py-8 pt-5 pb-12">
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
