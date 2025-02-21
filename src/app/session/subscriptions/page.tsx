@@ -50,7 +50,7 @@ const Page = () => {
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16  flex flex-col h-full">
       <PageHeader
         title="Subscriptions"
-        description={`View all your active subscriptions with ${business?.name}`}
+        description={`View all your subscriptions with ${business?.name}`}
         actions={
           <div className="flex items-center gap-2">
             <FilterControls
@@ -63,7 +63,9 @@ const Page = () => {
                 { label: "Active", value: "active" },
                 { label: "On Hold", value: "on_hold" },
                 { label: "Cancelled", value: "cancelled" },
+                { label: "Pending", value: "pending" },
                 { label: "Expired", value: "expired" },
+                { label: "Failed", value: "failed" },
               ]}
             />
             

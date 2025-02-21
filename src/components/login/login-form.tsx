@@ -217,7 +217,7 @@ export const LoginForm = () => {
                 type="submit"
                 disabled={isLoading || !!turnstileState.error}
               >
-                {isLoading ? "Sending..." : "Get Access Link!"}
+                {isLoading ? "Sending..." : "Get Access Link"}
               </Button>
             </form>
           </CardContent>

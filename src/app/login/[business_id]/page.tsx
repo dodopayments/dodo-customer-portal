@@ -4,10 +4,12 @@ import { internalApi } from "@/lib/http";
 import LoginCard from "../../../components/login/login-card";
 import FooterPill from "@/components/footer-pill";
 
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata({ params }: { params: { business_id: string } }) {
+  const business_id = await params.business_id;
+  
   try {
     const response = await internalApi.get(
-      `/checkout/businesses/${params.business_id}`
+      `/checkout/businesses/${business_id}`
     );
     const business = response.data;
 
@@ -19,8 +21,7 @@ export async function generateMetadata({ params }: { params: any }) {
     console.error("Error fetching business metadata:", error);
     return {
       title: "Dodo Payments",
-      description:
-        "Login or signup to access your DodoPayments customer portal",
+      description: "Login or signup to access your DodoPayments customer portal",
     };
   }
 }
