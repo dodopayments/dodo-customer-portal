@@ -17,6 +17,7 @@ import { fetchBusiness } from "@/redux/slice/business/businessSlice";
 import { setTokenData } from "@/redux/slice/token/tokenSlice";
 import { tokenHelper } from "@/lib/token-helper";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import Head from 'next/head';
 
 const BusinessName = ({
   image,
@@ -67,6 +68,13 @@ export default function Navbar() {
     fetchData();
   }, []);
 
+  // Add useEffect to update document title when business data changes
+  useEffect(() => {
+    if (businessData?.name) {
+      document.title = `${businessData.name} - DodoPayments`;
+    }
+  }, [businessData?.name]);
+
   const handleLogout = () => {
     try {
       const businessId = businessData?.business_id;
@@ -79,66 +87,71 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-bg-primary border-b border-border-secondary">
-      <div className="relative flex items-center gap-6 justify-between py-4 pb-3 md:px-12 px-4">
-        <div className="flex items-center gap-6">
-          <BusinessName
-            image={businessData?.logo}
-            hide
-            name={businessData?.name ?? ""}
-          />
-          <div className="hidden lg:block">
-            <Pills />
+    <>
+      <Head>
+        <title>{businessData?.name ? `${businessData.name} - DodoPayments` : 'DodoPayments'}</title>
+      </Head>
+      <nav className="sticky top-0 z-50 bg-bg-primary border-b border-border-secondary">
+        <div className="relative flex items-center gap-6 justify-between py-4 pb-3 md:px-12 px-4">
+          <div className="flex items-center gap-6">
+            <BusinessName
+              image={businessData?.logo}
+              hide
+              name={businessData?.name ?? ""}
+            />
+            <div className="hidden lg:block">
+              <Pills />
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <ThemeSwitch />
+            <div className="lg:block hidden">
+              <Button variant="secondary" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
+            <div className="lg:hidden">
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="secondary" size="icon">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="right"
+                  className="w-[300px] px-2 sm:w-[400px]"
+                >
+                  <SheetTitle className="hidden">
+                    Navigation Side Panel for Mobile
+                  </SheetTitle>
+                  <div className="flex flex-col h-full">
+                    <div className="px-4 py-6 w-full flex justify-start">
+                      <BusinessName
+                        image={businessData?.logo ?? "/images/business.svg"}
+                        name={businessData?.name ?? "Turbo repo"}
+                      />
+                    </div>
+                    <MobilePills closeSheet={() => setIsOpen(false)} />
+                    <div className="mt-auto p-4">
+                      <Button
+                        variant="secondary"
+                        className="w-full"
+                        onClick={() => {
+                          handleLogout();
+                          setIsOpen(false);
+                        }}
+                      >
+                        Logout
+                      </Button>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <ThemeSwitch />
-          <div className="lg:block hidden">
-            <Button variant="secondary" onClick={handleLogout}>
-              Logout
-            </Button>
-          </div>
-          <div className="lg:hidden">
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant="secondary" size="icon">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="w-[300px] px-2 sm:w-[400px]"
-              >
-                <SheetTitle className="hidden">
-                  Navigation Side Panel for Mobile
-                </SheetTitle>
-                <div className="flex flex-col h-full">
-                  <div className="px-4 py-6 w-full flex justify-start">
-                    <BusinessName
-                      image={businessData?.logo ?? "/images/business.svg"}
-                      name={businessData?.name ?? "Turbo repo"}
-                    />
-                  </div>
-                  <MobilePills closeSheet={() => setIsOpen(false)} />
-                  <div className="mt-auto p-4">
-                    <Button
-                      variant="secondary"
-                      className="w-full"
-                      onClick={() => {
-                        handleLogout();
-                        setIsOpen(false);
-                      }}
-                    >
-                      Logout
-                    </Button>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 

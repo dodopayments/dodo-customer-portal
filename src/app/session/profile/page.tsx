@@ -44,21 +44,21 @@ const Page = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label>FirstName</Label>
-            <Input disabled value={user?.name?.split(" ")[0] || ""} />
+            <Input readOnly className="cursor-default" value={user?.name?.split(" ")[0] || ""} />
           </div>
           <div className="space-y-2">
             <Label>Last Name</Label>
-            <Input disabled value={user?.name?.split(" ")[1] || ""} />
+            <Input readOnly className="cursor-default" value={user?.name?.split(" ")[1] || ""} />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label>Phone Number</Label>
-            <Input disabled value={user?.phone_number || ""} />
+            <Input readOnly className="cursor-default" value={user?.phone_number || ""} />
           </div>
           <div className="space-y-2">
             <Label>Email</Label>
-            <Input disabled value={user?.email || ""  } />
+            <Input readOnly className="cursor-default" value={user?.email || ""  } />
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ import {
   fetchRefunds,
 } from "@/redux/slice/transaction/transactionSlice";
 import TablePagination from "@/components/ui/dodo/TablePagination";
-  import { DateRange } from "react-day-picker";
+import { DateRange } from "react-day-picker";
 import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 
@@ -21,7 +21,6 @@ const STATUS_OPTIONS = [
   { label: "Failed", value: "failed" },
   { label: "Not Initiated", value: "requires_payment_method" },
 ];
-
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -64,8 +63,7 @@ const Page = () => {
     dispatch(fetchRefunds(params));
   }, [dispatch, pageNumberRefunds, dateFilterRefunds, statusFilterRefunds]);
 
-  const showRefunds =
-    refunds.data.length != 0 || dateFilterRefunds || statusFilterRefunds;
+  const showRefunds = refunds.data.length > 0 || Boolean(dateFilterRefunds) || statusFilterRefunds.length > 0;
 
   if (isLoading) {
     return (
@@ -105,7 +103,12 @@ const Page = () => {
               statusFilter={statusFilter}
               setStatusFilter={setStatusFilter}
               setPageNumber={setPageNumberPayments}
-              options={STATUS_OPTIONS}
+              options={[
+                { label: "succeeded", value: "succeeded" },
+                { label: "failed", value: "failed" },
+                { label: "pending", value: "pending" },
+                { label: "review", value: "review" },
+              ]}
             />
           )}
         </div>
