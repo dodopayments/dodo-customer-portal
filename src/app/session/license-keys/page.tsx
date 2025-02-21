@@ -10,10 +10,11 @@ import TablePagination from "@/components/ui/dodo/TablePagination";
 import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 import { DateRange } from "react-day-picker";
-
+import { selectBusiness } from "@/redux/slice/business/businessSlice";
 const Page = () => {
   const dispatch = useAppDispatch();
   const { licenses } = useAppSelector((state) => state.license);
+  const business = useAppSelector(selectBusiness);
   const [isLoading, setIsLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
@@ -46,10 +47,10 @@ const Page = () => {
   }
 
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 flex flex-col h-full">
+    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16  flex flex-col h-full">
       <PageHeader
         title="License Keys"
-        description="View all your license keys shared by Marketly"
+        description={`View all your license keys shared by ${business?.name}`}
         actions={
           <div className="flex items-center gap-2">
             <FilterControls

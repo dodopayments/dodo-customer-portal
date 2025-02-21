@@ -31,8 +31,8 @@ const BusinessName = ({
   return (
     <div className="flex items-center justify-center gap-2">
       {image ? (
-        <Avatar>
-          <AvatarImage src={image} />
+        <Avatar className="w-7 h-7">
+          <AvatarImage  src={image} />
           <AvatarFallback name={name} />
         </Avatar>
       ) : (
@@ -68,7 +68,6 @@ export default function Navbar() {
     fetchData();
   }, []);
 
-  // Add useEffect to update document title when business data changes
   useEffect(() => {
     if (businessData?.name) {
       document.title = `${businessData.name} - DodoPayments`;

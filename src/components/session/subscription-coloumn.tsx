@@ -40,7 +40,7 @@ export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
   },
   {
     accessorKey: "recurring_pre_tax_amount",
-    header: "Amount",
+    header: "Subscription Amount",
     cell: ({ row }) => {
       const recurring_pre_tax_amount = row.getValue(
         "recurring_pre_tax_amount"
@@ -73,7 +73,7 @@ export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
   },
   {
     accessorKey: "next_billing_date",
-    header: "Renews On",
+    header: "Next Billing Date",
     cell: ({ row }) => {
       const next_billing_date = row.getValue("next_billing_date") as string;
       return <div className="pl-3">{parseIso(next_billing_date)}</div>;
