@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/navbar";
 import NextTopLoader from "nextjs-toploader";
 import FooterPill from "@/components/footer-pill";
+import TokenInitialize from "@/hooks/token-initialize";
 
 const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -21,7 +22,9 @@ const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
       />
       <Navbar />
       <main className="flex-1 overflow-y-auto">
-        <div className="h-full">{children}</div>
+        <div className="h-full">
+          <TokenInitialize>{children}</TokenInitialize>
+        </div>
       </main>
       <FooterPill align="end" />
     </div>

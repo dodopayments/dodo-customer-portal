@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Gabarito, Inter } from "next/font/google";
 import { ThemeProvider } from "@/hooks/theme-provider";
-import { Toaster } from "sonner";
-
 import "./globals.css";
-import { StoreProvider } from "@/store/provider";
+import { StoreProvider } from "@/redux/provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import ThemeToaster from "@/hooks/theme-toaster";
 
 // Load fonts
 const inter = Inter({
@@ -71,7 +70,7 @@ export default async function RootLayout({
           >
             <NextIntlClientProvider messages={messages}>
               <main className="mx-auto max-w-[1920px]">
-                <Toaster position="top-right" richColors />
+                <ThemeToaster />
                 {children}
               </main>
             </NextIntlClientProvider>

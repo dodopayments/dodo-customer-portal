@@ -4,8 +4,13 @@ import {
   configureStore,
   ThunkAction,
 } from "@reduxjs/toolkit";
-
-const rootReducer = combineSlices();
+import businessReducer from "./slice/business/businessSlice";
+import tokenReducer from "./slice/token/tokenSlice";
+const rootReducer = combineSlices({
+  token: tokenReducer,
+  business: businessReducer,
+  
+});
 export const makeStore = () =>
   configureStore({
     reducer: rootReducer,
@@ -13,7 +18,7 @@ export const makeStore = () =>
   });
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof makeStore>;
-// Infer the `AppDispatch` type from the store itself
+
 export type AppDispatch = AppStore["dispatch"];
 export type AppThunk<ThunkReturnType = void> = ThunkAction<
   ThunkReturnType,

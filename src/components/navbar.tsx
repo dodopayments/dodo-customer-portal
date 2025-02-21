@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
@@ -9,21 +10,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
-import { useParams, usePathname } from "next/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { redirect, useParams, usePathname, useRouter } from "next/navigation";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import { fetchBusiness } from "@/redux/slice/business/businessSlice";
+import { setTokenData } from "@/redux/slice/token/tokenSlice";
+import { tokenHelper } from "@/lib/token-helper";
 
-const BusinessName = ({ image, name }: { image: string; name: string }) => {
+const BusinessName = ({
+  image,
+  name,
+  hide,
+}: {
+  image?: string;
+  name: string;
+  hide?: boolean;
+}) => {
   return (
     <div className="flex items-center justify-center gap-2">
+      {image ? (
       <Image
         src={image}
-        className="rounded-full object-cover object-center"
-        alt="logo"
-        width={32}
-        height={32}
-      />
-      <span className="text-text-primary font-display text-xl font-semibold">
+          className="rounded-full object-cover object-center"
+          alt="logo"
+          width={32}
+          height={32}
+        />
+      ): <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />}
+      <span
+        className={cn(
+          "text-text-primary font-display text-xl font-semibold",
+          hide && "md:block hidden"
+        )}
+      >
         {name}
       </span>
     </div>
@@ -32,12 +52,45 @@ const BusinessName = ({ image, name }: { image: string; name: string }) => {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const dispatch = useAppDispatch();
+  const businessData = useAppSelector((state) => state.business.business);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await dispatch(fetchBusiness()).unwrap();
+        console.log(response);
+      } catch (error: any) {
+        if (error.message.includes("Request failed with status code 401")) {
+          redirect("/expired");
+        }
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleLogout = () => {
+    try {
+      // Clear token and cookies
+      tokenHelper.logout();
+      
+      // Clear Redux state
+      dispatch(setTokenData(null));
+      
+      // Redirect to expired/login page
+      router.push('/expired');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-bg-primary border-b border-border-secondary">
       <div className="relative flex items-center gap-6 justify-between py-4 pb-3 md:px-12 px-4">
         <div className="flex items-center gap-6">
-          <BusinessName image="/images/business.svg" name="Turbo repo" />
+
+          <BusinessName image={businessData?.logo} hide name={businessData?.name ?? ""} />
           <div className="hidden lg:block">
             <Pills />
           </div>
@@ -45,7 +98,9 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <ThemeSwitch />
           <div className="lg:block hidden">
-            <Button variant="secondary">Logout</Button>
+            <Button variant="secondary" onClick={handleLogout}>
+              Logout
+            </Button>
           </div>
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -54,14 +109,30 @@ export default function Navbar() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] px-2 sm:w-[400px]">
+              <SheetContent
+                side="right"
+                className="w-[300px] px-2 sm:w-[400px]"
+              >
+                <SheetTitle className="hidden">
+                  Navigation Side Panel for Mobile
+                </SheetTitle>
                 <div className="flex flex-col h-full">
                   <div className="px-4 py-6 w-full flex justify-start">
-                    <BusinessName image="/images/business.svg" name="Turbo repo" />
+                    <BusinessName
+                      image={businessData?.logo ?? "/images/business.svg"}
+                      name={businessData?.name ?? "Turbo repo"}
+                    />
                   </div>
                   <MobilePills closeSheet={() => setIsOpen(false)} />
                   <div className="mt-auto p-4">
-                    <Button variant="secondary" className="w-full">
+                    <Button 
+                      variant="secondary" 
+                      className="w-full"
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                    >
                       Logout
                     </Button>
                   </div>
@@ -106,8 +177,6 @@ const Pills = () => {
   ];
 
   const [active, setActive] = useState<Props>(ITEMS[0]);
-  const params = useParams();
-  const token = params.token;
   const pathname = usePathname();
 
   useEffect(() => {
@@ -124,7 +193,7 @@ const Pills = () => {
       {ITEMS.map((item) => (
         <Link
           key={item.id}
-          href={token ? `/session/${token}${item.href}` : item.href}
+          href={`/session/${item.href}`}
           className={cn(
             "py-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors",
             active.id === item.id

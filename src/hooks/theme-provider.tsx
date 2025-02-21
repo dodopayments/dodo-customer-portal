@@ -7,14 +7,14 @@ import {
 } from "next-themes";
 import { usePathname } from "next/navigation";
 
-const routes = ["light-only"];
+const routes = ["/login"];
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const pathname = usePathname();
   const forcedThemeFromPathname = routes.some((route) =>
     pathname.startsWith(route)
   )
-    ? "light"
+    ? "dark"
     : undefined;
 
   return (

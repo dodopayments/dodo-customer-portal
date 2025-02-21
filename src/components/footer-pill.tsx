@@ -2,17 +2,19 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
-const FooterPill = ({ align }: { align: "center" | "start" | "end" }) => {
+const FooterPill = ({
+  align = "center",
+}: {
+  align?: "center" | "start" | "end";
+}) => {
   return (
     <footer
       className={cn(
         "fixed bottom-4 md:bottom-8 left-0 w-full flex items-center justify-center px-2 sm:px-10",
-        align === "center" && "justify-center",
-        align === "start" && "justify-start",
-        align === "end" && "justify-end"
+        `justify-${align}`
       )}
     >
-      <div className="flex items-center justify-center bg-bg-secondary rounded-lg py-[10px] px-[12px] gap-[6px]">
+      <div className="flex items-center justify-center bg-bg-secondary border border-border-secondary rounded-lg py-[10px] px-[12px] gap-[6px]">
         <Image
           src="/images/brand-assets/logo/logo.svg"
           alt="logo"
