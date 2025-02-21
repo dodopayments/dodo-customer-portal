@@ -65,6 +65,8 @@ const MagicLinkStatus = ({
   </CardHeader>
 );
 
+
+
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -159,6 +161,7 @@ export const LoginForm = () => {
 
   return (
     <div className="relative z-10">
+      
       {!success ? (
         <>
           <CardHeader className="flex px-8 pt-12 flex-col items-center gap-2">
