@@ -16,12 +16,6 @@ import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
 
-const STATUS_OPTIONS = [
-  { label: "In Progress", value: "processing" },
-  { label: "Successful", value: "succeeded" },
-  { label: "Failed", value: "failed" },
-  { label: "Not Initiated", value: "requires_payment_method" },
-];
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -86,7 +80,12 @@ const Page = () => {
               statusFilter={statusFilter}
               setStatusFilter={setStatusFilter}
               setPageNumber={setPageNumberPayments}
-              options={STATUS_OPTIONS}
+              options={[
+                { label: "In Progress", value: "processing" },
+                { label: "Successful", value: "succeeded" },
+                { label: "Failed", value: "failed" },
+                { label: "Not Initiated", value: "requires_payment_method" },
+              ]}
             />
           )
         }
@@ -105,10 +104,10 @@ const Page = () => {
               setStatusFilter={setStatusFilter}
               setPageNumber={setPageNumberPayments}
               options={[
-                { label: "succeeded", value: "succeeded" },
-                { label: "failed", value: "failed" },
-                { label: "pending", value: "pending" },
-                { label: "review", value: "review" },
+                { label: "Successful", value: "succeeded" },
+                { label: "Failed", value: "failed" },
+                { label: "Not Initiated", value: "requires_payment_method" },
+                { label: "In Progress", value: "processing" },
               ]}
             />
           )}
@@ -136,7 +135,12 @@ const Page = () => {
               statusFilter={statusFilterRefunds}
               setStatusFilter={setStatusFilterRefunds}
               setPageNumber={setPageNumberRefunds}
-              options={STATUS_OPTIONS}
+              options={[
+                { label: "Successful", value: "succeeded" },
+                { label: "Failed", value: "failed" },
+                { label: "Pending", value: "pending" },
+                { label: "Review", value: "review" },
+              ]}
             />
           </div>
           <div className="flex flex-col">
