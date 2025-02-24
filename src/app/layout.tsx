@@ -6,6 +6,7 @@ import { StoreProvider } from "@/redux/provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
+import { CSPostHogProvider } from "@/hooks/posthogProvider";
 
 // Load fonts
 const inter = Inter({
@@ -56,6 +57,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <StoreProvider>
+      <CSPostHogProvider>
       <html
         lang="en"
         className={`${inter.variable} ${gabarito.variable} h-full`}
@@ -77,6 +79,7 @@ export default async function RootLayout({
           </ThemeProvider>
         </body>
       </html>
+      </CSPostHogProvider>
     </StoreProvider>
   );
 }
