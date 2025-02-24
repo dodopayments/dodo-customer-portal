@@ -17,7 +17,9 @@ import { fetchBusiness } from "@/redux/slice/business/businessSlice";
 import { setTokenData } from "@/redux/slice/token/tokenSlice";
 import { tokenHelper } from "@/lib/token-helper";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import Head from 'next/head';
+import Head from "next/head";
+import { Banner, MobileBanner } from "./ui/dodo/banner";
+import { Mode } from "@/lib/http";
 
 const BusinessName = ({
   image,
@@ -32,8 +34,8 @@ const BusinessName = ({
     <div className="flex items-center justify-center gap-2">
       {image ? (
         <Avatar className="w-7 h-7">
-          <AvatarImage  src={image} />
-          <AvatarFallback name={name} />
+          <AvatarImage src={image} />
+          <AvatarFallback className="text-xs" name={name} />
         </Avatar>
       ) : (
         <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />
@@ -88,10 +90,23 @@ export default function Navbar() {
   return (
     <>
       <Head>
-        <title>{businessData?.name ? `${businessData.name} - DodoPayments` : 'DodoPayments'}</title>
+        <title>
+          {businessData?.name
+            ? `${businessData.name} - DodoPayments`
+            : "DodoPayments"}
+        </title>
       </Head>
-      <nav className="sticky top-0 z-50 bg-bg-primary border-b border-border-secondary">
-        <div className="relative flex items-center gap-6 justify-between py-4 pb-3 md:px-12 px-4">
+      <nav
+        className={`sticky top-0 z-50 bg-bg-primary  border-border-secondary ${
+          Mode == "live" ? "border-b" : ""
+        }`}
+      >
+        <Banner />
+        <div
+          className={`relative flex items-center  gap-6 justify-between py-4 pb-3 md:px-12 px-4 ${
+            Mode == "test" ? "mt-2" : ""
+          }`}
+        >
           <div className="flex items-center gap-6">
             <BusinessName
               image={businessData?.logo}
@@ -126,8 +141,8 @@ export default function Navbar() {
                   <div className="flex flex-col h-full">
                     <div className="px-4 py-6 w-full flex justify-start">
                       <BusinessName
-                        image={businessData?.logo ?? "/images/business.svg"}
-                        name={businessData?.name ?? "Turbo repo"}
+                        image={businessData?.logo}
+                        name={businessData?.name ?? ""}
                       />
                     </div>
                     <MobilePills closeSheet={() => setIsOpen(false)} />
@@ -149,6 +164,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
+        <MobileBanner />
       </nav>
     </>
   );

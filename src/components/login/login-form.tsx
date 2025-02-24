@@ -73,7 +73,7 @@ export const LoginForm = () => {
   const [pageLoading, setPageLoading] = useState(true);
   const [business, setBusiness] = useState<any>({
     name: "",
-    image: "/images/business.svg",
+    image: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
