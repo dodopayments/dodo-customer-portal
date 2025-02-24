@@ -61,8 +61,7 @@ const Page = () => {
               setPageNumber={setPageNumber}
               options={[
                 { label: "Active", value: "active" },
-                { label: "On Hold", value: "on_hold" },
-                { label: "Cancelled", value: "cancelled" },
+                { label: "Disabled", value: "disabled" },
                 { label: "Expired", value: "expired" },
               ]}
             />
