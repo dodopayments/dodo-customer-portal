@@ -11,6 +11,9 @@ import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 import { DateRange } from "react-day-picker";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
+import { Key } from "@phosphor-icons/react";
+
+
 const Page = () => {
   const dispatch = useAppDispatch();
   const { licenses } = useAppSelector((state) => state.license);
@@ -46,6 +49,34 @@ const Page = () => {
     );
   }
 
+  const renderContent = () => {
+    if (licenses.data.length === 0 && !isLoading && !Boolean(dateFilter) && statusFilter.length === 0) {
+      return (
+        <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
+          <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full">
+            <Key className="w-6 h-6" />
+          </span>
+          <span className="text-base font-display text-center tracking-wide text-text-secondary">
+            No Active License Keys
+          </span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col">
+        <BaseDataTable data={licenses.data} columns={LicenseColumn} />
+        <TablePagination
+          currentPage={pageNumber}
+          pageSize={10}
+          currentPageItems={licenses.data.length}
+          hasNextPage={licenses.data.length >= 10}
+          onPageChange={setPageNumber}
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16  flex flex-col h-full">
       <PageHeader
@@ -69,16 +100,7 @@ const Page = () => {
         }
       />
       <Separator className="my-6" />
-      <div className="flex flex-col">
-        <BaseDataTable data={licenses.data} columns={LicenseColumn} />
-        <TablePagination
-          currentPage={pageNumber}
-          pageSize={10}
-          currentPageItems={licenses.data.length}
-          hasNextPage={licenses.data.length >= 10}
-          onPageChange={setPageNumber}
-        />
-      </div>
+      {renderContent()}
     </div>
   );
 };

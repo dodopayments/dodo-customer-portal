@@ -11,6 +11,7 @@ import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 import { DateRange } from "react-day-picker";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
+import { ArrowClockwise } from "@phosphor-icons/react";
 const Page = () => {
   const dispatch = useAppDispatch();
   const { subscriptions } = useAppSelector((state) => state.subscription);
@@ -46,6 +47,39 @@ const Page = () => {
     );
   }
 
+  const renderContent = () => {
+    if (
+      subscriptions.data.length === 0 &&
+      !isLoading &&
+      !Boolean(dateFilter) &&
+      statusFilter.length === 0
+    ) {
+      return (
+        <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
+          <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full">
+            <ArrowClockwise className="w-6 h-6" />
+          </span>
+          <span className="text-base font-display text-center tracking-wide text-text-secondary">
+            No Active Subscriptions
+          </span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col">
+        <BaseDataTable data={subscriptions.data} columns={SubscriptionColumn} />
+        <TablePagination
+          currentPage={pageNumber}
+          pageSize={10}
+          currentPageItems={subscriptions.data.length}
+          hasNextPage={subscriptions.data.length >= 10}
+          onPageChange={setPageNumber}
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16  flex flex-col h-full">
       <PageHeader
@@ -68,21 +102,11 @@ const Page = () => {
                 { label: "Failed", value: "failed" },
               ]}
             />
-            
           </div>
         }
       />
       <Separator className="my-6" />
-      <div className="flex flex-col">
-        <BaseDataTable data={subscriptions.data} columns={SubscriptionColumn} />
-        <TablePagination
-          currentPage={pageNumber}
-          pageSize={10}
-          currentPageItems={subscriptions.data.length}
-          hasNextPage={subscriptions.data.length >= 10}
-          onPageChange={setPageNumber}
-        />
-      </div>
+      {renderContent()}
     </div>
   );
 };
