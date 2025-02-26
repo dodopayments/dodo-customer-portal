@@ -11,7 +11,9 @@ import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 import { DateRange } from "react-day-picker";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
-import { ArrowClockwise } from "@phosphor-icons/react";
+import { Repeat } from "@phosphor-icons/react";
+
+
 const Page = () => {
   const dispatch = useAppDispatch();
   const { subscriptions } = useAppSelector((state) => state.subscription);
@@ -39,15 +41,16 @@ const Page = () => {
     fetchSubscriptionsData();
   }, [dispatch, pageNumber, statusFilter, dateFilter]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-10rem)]">
-        <Loading />
-      </div>
-    );
-  }
+  
 
   const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
+          <Loading />
+        </div>
+      );
+    }
     if (
       subscriptions.data.length === 0 &&
       !isLoading &&
@@ -57,7 +60,7 @@ const Page = () => {
       return (
         <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
           <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full">
-            <ArrowClockwise className="w-6 h-6" />
+            <Repeat className="w-6 h-6" />
           </span>
           <span className="text-base font-display text-center tracking-wide text-text-secondary">
             No Active Subscriptions

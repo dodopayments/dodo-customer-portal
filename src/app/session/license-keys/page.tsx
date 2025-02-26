@@ -41,15 +41,16 @@ const Page = () => {
     fetchLicensesData();
   }, [dispatch, pageNumber, statusFilter, dateFilter]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-10rem)]">
-        <Loading />
-      </div>
-    );
-  }
+ 
 
   const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
+          <Loading />
+        </div>
+      );
+    }
     if (licenses.data.length === 0 && !isLoading && !Boolean(dateFilter) && statusFilter.length === 0) {
       return (
         <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
