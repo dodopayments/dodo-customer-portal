@@ -28,47 +28,51 @@ const Page = () => {
     fethcData();
   }, [dispatch]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[calc(100vh-10rem)]">
-        <Loading />
-      </div>
-    );
-  }
 
-  return (
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
+          <Loading />
+        </div>
+      );
+    }
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="space-y-2">
+      <Label>Name</Label>
+      <Input
+        readOnly
+        className="cursor-default  focus-visible:ring-0 focus-visible:ring-offset-0  focus-visible:outline-none"
+        value={user?.name}
+      />
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="space-y-2">
+        <Label>Phone Number</Label>
+        <Input
+          readOnly
+          className="cursor-default focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none"
+          value={user?.phone_number || ""}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label>Email</Label>
+        <Input
+          readOnly
+          className="cursor-default focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none"
+          value={user?.email || ""}
+        />
+      </div>
+    </div>
+  </div>)
+}
+return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16  flex flex-col h-full">
       <PageHeader title="Profile" description="View your profile information" />
       <Separator className="my-6" />
-      <div className="flex flex-col gap-4">
-        <div className="space-y-2">
-          <Label>Name</Label>
-          <Input
-            readOnly
-            className="cursor-default  focus-visible:ring-0 focus-visible:ring-offset-0  focus-visible:outline-none"
-            value={user?.name}
-          />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label>Phone Number</Label>
-            <Input
-              readOnly
-              className="cursor-default focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none"
-              value={user?.phone_number || ""}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Email</Label>
-            <Input
-              readOnly
-              className="cursor-default focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none"
-              value={user?.email || ""}
-            />
-          </div>
-        </div>
-      </div>
+      {renderContent()}
     </div>
   );
 };

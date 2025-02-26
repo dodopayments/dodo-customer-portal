@@ -16,7 +16,6 @@ import Loading from "@/components/loading";
 import { FilterControls } from "@/components/custom/filter-controls";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
 
-
 const Page = () => {
   const dispatch = useAppDispatch();
   const { payments, refunds } = useAppSelector((state) => state.transaction);
@@ -58,15 +57,87 @@ const Page = () => {
     dispatch(fetchRefunds(params));
   }, [dispatch, pageNumberRefunds, dateFilterRefunds, statusFilterRefunds]);
 
-  const showRefunds = refunds.data.length > 0 || Boolean(dateFilterRefunds) || statusFilterRefunds.length > 0;
+  const showRefunds =
+    refunds.data.length > 0 ||
+    Boolean(dateFilterRefunds) ||
+    statusFilterRefunds.length > 0;
 
-  if (isLoading) {
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
+          <Loading />
+        </div>
+      );
+    }
     return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-10rem)]">
-        <Loading />
+      <div className="flex flex-col ">
+        {/* Payments Section */}
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <span className="font-display font-medium text-lg">Payments</span>
+            {showRefunds && (
+              <FilterControls
+                dateFilter={dateFilter}
+                setDateFilter={setDateFilter}
+                statusFilter={statusFilter}
+                setStatusFilter={setStatusFilter}
+                setPageNumber={setPageNumberPayments}
+                options={[
+                  { label: "Successful", value: "succeeded" },
+                  { label: "Failed", value: "failed" },
+                  { label: "Not Initiated", value: "requires_payment_method" },
+                  { label: "In Progress", value: "processing" },
+                ]}
+              />
+            )}
+          </div>
+          <div className="flex flex-col">
+            <BaseDataTable data={payments.data} columns={PaymentColumn} />
+            <TablePagination
+              currentPage={pageNumberPayments}
+              pageSize={10}
+              currentPageItems={payments.data.length}
+              hasNextPage={payments.data.length >= 10}
+              onPageChange={setPageNumberPayments}
+            />
+          </div>
+        </div>
+
+        {/* Refunds Section */}
+        {showRefunds && (
+          <div className="flex flex-col gap-4 mt-6">
+            <div className="flex items-center justify-between">
+              <span className="font-display font-medium text-lg">Refunds</span>
+              <FilterControls
+                dateFilter={dateFilterRefunds}
+                setDateFilter={setDateFilterRefunds}
+                statusFilter={statusFilterRefunds}
+                setStatusFilter={setStatusFilterRefunds}
+                setPageNumber={setPageNumberRefunds}
+                options={[
+                  { label: "Successful", value: "succeeded" },
+                  { label: "Failed", value: "failed" },
+                  { label: "Pending", value: "pending" },
+                  { label: "Review", value: "review" },
+                ]}
+              />
+            </div>
+            <div className="flex flex-col">
+              <BaseDataTable data={refunds.data} columns={RefundColumn} />
+              <TablePagination
+                currentPage={pageNumberRefunds}
+                pageSize={10}
+                currentPageItems={refunds.data.length}
+                hasNextPage={refunds.data.length >= 10}
+                onPageChange={setPageNumberRefunds}
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
-  }
+  };
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
       <PageHeader
@@ -91,70 +162,7 @@ const Page = () => {
         }
       />
       <Separator className="my-6" />
-
-      {/* Payments Section */}
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between">
-          <span className="font-display font-medium text-lg">Payments</span>
-          {showRefunds && (
-            <FilterControls
-              dateFilter={dateFilter}
-              setDateFilter={setDateFilter}
-              statusFilter={statusFilter}
-              setStatusFilter={setStatusFilter}
-              setPageNumber={setPageNumberPayments}
-              options={[
-                { label: "Successful", value: "succeeded" },
-                { label: "Failed", value: "failed" },
-                { label: "Not Initiated", value: "requires_payment_method" },
-                { label: "In Progress", value: "processing" },
-              ]}
-            />
-          )}
-        </div>
-        <div className="flex flex-col">
-          <BaseDataTable data={payments.data} columns={PaymentColumn} />
-          <TablePagination
-            currentPage={pageNumberPayments}
-            pageSize={10}
-            currentPageItems={payments.data.length}
-            hasNextPage={payments.data.length >= 10}
-            onPageChange={setPageNumberPayments}
-          />
-        </div>
-      </div>
-
-      {/* Refunds Section */}
-      {showRefunds && (
-        <div className="flex flex-col gap-4 mt-6">
-          <div className="flex items-center justify-between">
-            <span className="font-display font-medium text-lg">Refunds</span>
-            <FilterControls
-              dateFilter={dateFilterRefunds}
-              setDateFilter={setDateFilterRefunds}
-              statusFilter={statusFilterRefunds}
-              setStatusFilter={setStatusFilterRefunds}
-              setPageNumber={setPageNumberRefunds}
-              options={[
-                { label: "Successful", value: "succeeded" },
-                { label: "Failed", value: "failed" },
-                { label: "Pending", value: "pending" },
-                { label: "Review", value: "review" },
-              ]}
-            />
-          </div>
-          <div className="flex flex-col">
-            <BaseDataTable data={refunds.data} columns={RefundColumn} />
-            <TablePagination
-              currentPage={pageNumberRefunds}
-              pageSize={10}
-              currentPageItems={refunds.data.length}
-              hasNextPage={refunds.data.length >= 10}
-              onPageChange={setPageNumberRefunds}
-            />
-          </div>
-        </div>
-      )}
+      {renderContent()}
     </div>
   );
 };
