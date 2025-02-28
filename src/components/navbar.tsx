@@ -217,7 +217,7 @@ const Pills = () => {
       {ITEMS.map((item) => (
         <Link
           key={item.id}
-          href={`/session/${item.href}`}
+          href={`/session${item.href}`}
           className={cn(
             "py-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors",
             active.id === item.id
@@ -259,22 +259,22 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
     {
       id: 1,
       tile: "Billing history",
-      href: "/session/billing-history",
+      href: "/billing-history",
     },
     {
       id: 2,
       tile: "Subscriptions",
-      href: "/session/subscriptions",
+      href: "/subscriptions",
     },
     {
       id: 3,
       tile: "License Keys",
-      href: "/session/license-keys",
+      href: "/license-keys",
     },
     {
       id: 4,
       tile: "Profile",
-      href: "/session/profile",
+      href: "/profile",
     },
   ];
 
@@ -295,7 +295,7 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
       {ITEMS.map((item) => (
         <Link
           key={item.id}
-          href={token ? `/session/${token}${item.href}` : item.href}
+          href={token ? `/session/${token}${item.href}` : `/session${item.href}`}
           className={cn(
             "p-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors rounded-md",
             active.id === item.id
