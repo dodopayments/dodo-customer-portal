@@ -1,11 +1,11 @@
-export interface CountriesList {
+export interface CountriesListType {
   name: string;
   code: string;
   latitude: number;
   longitude: number;
 }
 
-export const CountriesList: CountriesList[] = [
+export const CountriesList: CountriesListType[] = [
   {
     code: "AD",
     latitude: 42.546245,
