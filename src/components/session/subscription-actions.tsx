@@ -4,6 +4,8 @@ import { Row } from "@tanstack/react-table";
 import {
   cancelSubscription,
   SubscriptionResponse,
+  fetchSubscriptions,
+  updateBillingDetails,
 } from "@/redux/slice/subscription/subscriptoinSlice";
 import {
   DropdownMenu,
@@ -12,31 +14,29 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
 import { useState } from "react";
-import { DotsThreeVertical, Warning } from "@phosphor-icons/react";
+import { DotsThreeVertical } from "@phosphor-icons/react";
 import { useAppDispatch } from "@/hooks/redux-hooks";
-import { fetchSubscriptions } from "@/redux/slice/subscription/subscriptoinSlice";
 import { toast } from "sonner";
+import { BillingDetailsDialog } from "./billing-details-dialog";
+import { CancelSubscriptionDialog } from "./cancel-subscription-dialog";
+import { BillingDetailsFormValues } from "./subscription-form-schema";
+
 interface SubscriptionActionsProps {
   row: Row<SubscriptionResponse>;
+  isActive: boolean;
 }
 
-export function SubscriptionActions({ row }: SubscriptionActionsProps) {
+export function SubscriptionActions({
+  row,
+  isActive,
+}: SubscriptionActionsProps) {
   const dispatch = useAppDispatch();
   const [showCancelDialog, setShowCancelDialog] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [showUpdateBillingDialog, setShowUpdateBillingDialog] = useState(false);
 
   const handleCancelSubscription = async () => {
     try {
-      setIsLoading(true);
       await dispatch(cancelSubscription(row.original.subscription_id));
       await dispatch(
         fetchSubscriptions({
@@ -49,8 +49,30 @@ export function SubscriptionActions({ row }: SubscriptionActionsProps) {
     } catch (error) {
       toast.error("Error cancelling subscription");
       console.error("Error cancelling subscription:", error);
-    } finally {
-      setIsLoading(false);
+    }
+  };
+
+  const onBillingSubmit = async (data: BillingDetailsFormValues) => {
+    try {
+      await dispatch(
+        updateBillingDetails({
+          subscription_id: row.original.subscription_id,
+          data: {
+            billing: {
+              city: data.city,
+              country: data.country,
+              state: data.state,
+              street: data.addressLine,
+              zipcode: data.postalCode,
+            },
+            tax_id: data.taxId || null,
+          },
+        })
+      ).unwrap();
+      toast.success("Billing details updated successfully");
+      setShowUpdateBillingDialog(false);
+    } catch {
+      return;
     }
   };
 
@@ -64,49 +86,30 @@ export function SubscriptionActions({ row }: SubscriptionActionsProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => setShowCancelDialog(true)}>
-            Cancel Subscription
+          <DropdownMenuItem onClick={() => setShowUpdateBillingDialog(true)}>
+            Update Billing Details
           </DropdownMenuItem>
+          {isActive && (
+            <DropdownMenuItem onClick={() => setShowCancelDialog(true)}>
+              Cancel Subscription
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Dialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
-        <DialogContent className="max-w-[95vw] rounded-lg  sm:max-w-[480px]">
-          <div className="space-y-2">
-            <DialogHeader className="mb-3 space-y-0">
-              <div className="bg-bg-error-secondary p-3 w-fit h-fit rounded-full text-border-error dark:text-[#FECDCA]">
-                <Warning className="w-6 h-6" />
-                {/* <SmileySad className="w-6 h-6" /> */}
-              </div>
-              <DialogTitle className="pt-4">
-                Are you certain you want to cancel your subscription to this
-                service?
-              </DialogTitle>
-              <DialogDescription>
-                Once you proceed, you will lose access to all associated
-                benefits and this action cannot be reversed.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className="gap-2 flex flex-row pt-4 w-full sm:gap-0">
-              <Button
-                variant="secondary"
-                className="w-full"
-                onClick={() => setShowCancelDialog(false)}
-              >
-                Close
-              </Button>
-              <Button
-                variant={"destructive"}
-                onClick={handleCancelSubscription}
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? "Cancelling..." : "Cancel"}
-              </Button>
-            </DialogFooter>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <BillingDetailsDialog
+        open={showUpdateBillingDialog}
+        onOpenChange={setShowUpdateBillingDialog}
+        subscriptionId={row.original.subscription_id}
+        initialName={row.original.customer.name}
+        onSubmit={onBillingSubmit}
+      />
+
+      <CancelSubscriptionDialog
+        open={showCancelDialog}
+        onOpenChange={setShowCancelDialog}
+        onConfirm={handleCancelSubscription}
+      />
     </>
   );
 }

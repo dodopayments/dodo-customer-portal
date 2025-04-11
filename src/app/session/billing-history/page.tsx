@@ -65,7 +65,7 @@ const Page = () => {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
+        <div className="flex justify-center items-center min-h-[calc(100vh-50rem)]">
           <Loading />
         </div>
       );

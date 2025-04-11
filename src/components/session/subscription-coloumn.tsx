@@ -83,13 +83,12 @@ export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
     accessorKey: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      return row.original.status === "active" ? (
+      return (
         <div className="flex items-center">
-          <SubscriptionActions row={row} />
-        </div>
-      ) : (
-        <div className="flex  w-full items-center pl-[13px] justify-start">
-          <span className="text-text-secondary">-</span>
+          <SubscriptionActions
+            isActive={row.original.status === "active"}
+            row={row}
+          />
         </div>
       );
     },

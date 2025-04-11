@@ -18,11 +18,5 @@ export function CSPostHogProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (auth.email) {
-  //     posthog.identify(auth.email, { name: auth.userName });
-  //   }
-  // }, [auth.email, auth.userName]);
-
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }

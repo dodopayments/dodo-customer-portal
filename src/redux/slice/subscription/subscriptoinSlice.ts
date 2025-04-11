@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { tokenHelper } from "@/lib/token-helper";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { setTokenData } from "../token/tokenSlice";
-
 import { api } from "@/lib/http";
+import parseError from "@/lib/parseError";
 
 export type SubscriptionResponse = {
   created_at: string;
@@ -82,6 +83,53 @@ export const fetchSubscriptions = createAsyncThunk(
   }
 );
 
+export const updateBillingDetails = createAsyncThunk(
+  "transaction/updateBillingDetails",
+  async (
+    {
+      subscription_id,
+      data,
+    }: {
+      subscription_id: string;
+      data: {
+        billing: {
+          city: string;
+          country: string;
+          state: string;
+          street: string;
+          zipcode: string;
+        };
+        tax_id: string | null;
+      };
+    },
+    { dispatch }
+  ) => {
+    try {
+      const tokenData = tokenHelper.get();
+      if (!tokenData) {
+        dispatch(setTokenData(null));
+        throw new Error("No valid token found");
+      }
+
+      const response = await api.patch(
+        `/customer-portal/subscriptions/${subscription_id}`,
+        JSON.stringify(data),
+        {
+          headers: { Authorization: `Bearer ${tokenData.token}` },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          dispatch(setTokenData(null));
+        }
+      }
+      parseError(error, "Error updating billing details");
+      throw error;
+    }
+  }
+);
 export const cancelSubscription = createAsyncThunk(
   "transaction/cancelSubscription",
   async (subscription_id: string, { dispatch }) => {
