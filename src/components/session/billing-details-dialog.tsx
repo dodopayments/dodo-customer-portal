@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { Receipt } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import { CountriesList } from "@/constants/Countries";
+import { CountriesList, CountriesListType } from "@/constants/Countries";
 
 import {
   Dialog,
@@ -43,7 +43,7 @@ export function BillingDetailsDialog({
   initialName,
   onSubmit,
 }: BillingDetailsDialogProps) {
-  const [countries, setCountries] = useState<CountriesList[]>([]);
+  const [countries, setCountries] = useState<CountriesListType[]>([]);
   const [isLoadingCountry, setIsLoadingCountry] = useState(false);
   const [checked, setChecked] = useState(false);
 

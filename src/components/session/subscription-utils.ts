@@ -1,5 +1,5 @@
 import { internalApi } from "@/lib/http";
-import { CountriesList } from "@/constants/Countries";
+import { CountriesListType } from "@/constants/Countries";
 
 export async function fetchSupportedCountries(): Promise<string[]> {
   const response = await internalApi.get<string[]>(
@@ -10,8 +10,8 @@ export async function fetchSupportedCountries(): Promise<string[]> {
 
 export async function getMatchedCountries(
   countryValues: string[],
-  countryObjects: ReadonlyArray<CountriesList>
-): Promise<CountriesList[]> {
+  countryObjects: ReadonlyArray<CountriesListType>
+): Promise<CountriesListType[]> {
   const filtered = countryObjects.filter((country) =>
     countryValues.includes(country.code)
   );
