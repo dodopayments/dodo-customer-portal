@@ -14,6 +14,13 @@ export type SubscriptionResponse = {
     email: string;
     name: string;
   };
+  billing: {
+    city: string;
+    country: string;
+    state: string;
+    street: string;
+    zipcode: string;
+  };
   discount_id: string;
   metadata: object;
   next_billing_date: string;

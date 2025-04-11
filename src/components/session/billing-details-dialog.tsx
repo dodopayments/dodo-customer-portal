@@ -22,17 +22,21 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { SelectNative } from "../ui/select-native";
 
-import { fetchSupportedCountries, getMatchedCountries } from "./subscription-utils";
-import { 
-  billingDetailsFormSchema, 
-  BillingDetailsFormValues 
+import {
+  fetchSupportedCountries,
+  getMatchedCountries,
+} from "./subscription-utils";
+import {
+  billingDetailsFormSchema,
+  BillingDetailsFormValues,
 } from "./subscription-form-schema";
+import { SubscriptionResponse } from "@/redux/slice/subscription/subscriptoinSlice";
 
 interface BillingDetailsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   subscriptionId: string;
-  initialName: string;
+  initialData: SubscriptionResponse;
   onSubmit: (data: BillingDetailsFormValues) => void;
 }
 
@@ -40,7 +44,7 @@ export function BillingDetailsDialog({
   open,
   onOpenChange,
   subscriptionId,
-  initialName,
+  initialData,
   onSubmit,
 }: BillingDetailsDialogProps) {
   const [countries, setCountries] = useState<CountriesListType[]>([]);
@@ -50,27 +54,27 @@ export function BillingDetailsDialog({
   const form = useForm<BillingDetailsFormValues>({
     resolver: zodResolver(billingDetailsFormSchema),
     defaultValues: {
-      fullName: initialName,
-      country: "US",
-      addressLine: "",
-      state: "",
-      city: "",
-      postalCode: "",
+      fullName: initialData.customer.name,
+      country: initialData.billing.country,
+      addressLine: initialData.billing.street,
+      state: initialData.billing.state,
+      city: initialData.billing.city,
+      postalCode: initialData.billing.zipcode,
       taxId: "",
     },
   });
 
   useEffect(() => {
     form.reset({
-      fullName: initialName,
-      country: "US",
-      addressLine: "",
-      state: "",
-      city: "",
-      postalCode: "",
+      fullName: initialData.customer.name,
+      country: initialData.billing.country,
+      addressLine: initialData.billing.street,
+      state: initialData.billing.state,
+      city: initialData.billing.city,
+      postalCode: initialData.billing.zipcode,
       taxId: "",
     });
-  }, [initialName, form, open]);
+  }, [initialData, form, open]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,7 +96,10 @@ export function BillingDetailsDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[95vw] rounded-lg sm:max-w-[480px]">
+      <DialogContent
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        className="max-w-[95vw] rounded-lg sm:max-w-[480px]"
+      >
         <DialogHeader className="mb-3 space-y-0">
           <div className="bg-bg-secondary p-3 w-fit h-fit rounded-full">
             <Receipt className="w-6 h-6" />
@@ -319,4 +326,4 @@ export function BillingDetailsDialog({
       </DialogContent>
     </Dialog>
   );
-} 
+}

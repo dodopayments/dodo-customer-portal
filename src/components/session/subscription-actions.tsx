@@ -101,7 +101,7 @@ export function SubscriptionActions({
         open={showUpdateBillingDialog}
         onOpenChange={setShowUpdateBillingDialog}
         subscriptionId={row.original.subscription_id}
-        initialName={row.original.customer.name}
+        initialData={row.original}
         onSubmit={onBillingSubmit}
       />
 
