@@ -4,10 +4,15 @@ import { internalApi } from "@/lib/http";
 import LoginCard from "../../../components/login/login-card";
 import FooterPill from "@/components/footer-pill";
 
-export async function generateMetadata({ params }: { params: any }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ business_id: string }>;
+}) {
+  const { business_id } = await params;
   try {
     const response = await internalApi.get(
-      `/checkout/businesses/${params.business_id}`
+      `/checkout/businesses/${business_id}`
     );
     const business = response.data;
 
