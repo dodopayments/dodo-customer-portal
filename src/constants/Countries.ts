@@ -1,4 +1,4 @@
-interface CountriesList {
+export interface CountriesList {
   name: string;
   code: string;
   latitude: number;
