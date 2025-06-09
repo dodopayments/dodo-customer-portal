@@ -5,6 +5,8 @@ import { AxiosError } from "axios";
 import { setTokenData } from "../token/tokenSlice";
 import { api } from "@/lib/http";
 import parseError from "@/lib/parseError";
+import { RootState } from "@/redux/configure-store";
+import type { AppDispatch } from "@/redux/configure-store";
 
 export type SubscriptionResponse = {
   created_at: string;
@@ -35,7 +37,28 @@ export type SubscriptionResponse = {
   subscription_period_interval: string;
   tax_inclusive: boolean;
   trial_period_days: number;
+  cancel_at_next_billing_date?: boolean;
 };
+
+// Subscription type for the advanced cancel thunk
+export type Subscription = SubscriptionResponse;
+
+// Helper function to get access token
+export const getAccessToken = createAsyncThunk(
+  "subscription/getAccessToken",
+  async (_, { dispatch }) => {
+    const tokenData = tokenHelper.get();
+    if (!tokenData) {
+      dispatch(setTokenData(null));
+      throw new Error("No valid token found");
+    }
+    return tokenData.token;
+  }
+);
+
+// Selectors (keeping for potential future use)
+// export const selectMode = (): string => Mode;
+// export const selectApiByMode = (mode: string) => api;
 
 export const fetchSubscriptions = createAsyncThunk(
   "transaction/fetchSubscriptions",
@@ -91,7 +114,7 @@ export const fetchSubscriptions = createAsyncThunk(
 );
 
 export const updateBillingDetails = createAsyncThunk(
-  "transaction/updateBillingDetails",
+  "subscription/updateBillingDetails",
   async (
     {
       subscription_id,
@@ -117,27 +140,77 @@ export const updateBillingDetails = createAsyncThunk(
         dispatch(setTokenData(null));
         throw new Error("No valid token found");
       }
-
-      const response = await api.patch(
-        `/customer-portal/subscriptions/${subscription_id}`,
-        JSON.stringify(data),
+      const response = await api.put(
+        `/customer-portal/subscriptions/${subscription_id}/billing-details`,
+        data,
         {
           headers: { Authorization: `Bearer ${tokenData.token}` },
         }
       );
       return response.data;
-    } catch (error: any) {
-      if (error instanceof AxiosError) {
-        if (error.response?.status === 401) {
-          dispatch(setTokenData(null));
-        }
-      }
-      parseError(error, "Error updating billing details");
+    } catch (error) {
+      parseError(error);
       throw error;
     }
   }
 );
-export const cancelSubscription = createAsyncThunk(
+
+// Advanced cancelSubscription thunk
+export const cancelSubscription = createAsyncThunk<
+  Subscription,
+  {
+    selectedId: string;
+    subscription_id: string;
+    nextBillingDate: boolean;
+    revoke?: boolean;
+  },
+  { state: RootState; dispatch: AppDispatch }
+>(
+  "subscriptions/cancelSubscription",
+  async (
+    { selectedId, subscription_id, nextBillingDate, revoke },
+    { dispatch }
+  ) => {
+    const accessToken = await dispatch(getAccessToken()).unwrap();
+    let body;
+
+    if (revoke) {
+      body = JSON.stringify({
+        cancel_at_next_billing_date: false,
+      });
+    } else {
+      if (nextBillingDate) {
+        body = JSON.stringify({
+          cancel_at_next_billing_date: nextBillingDate,
+        });
+      } else {
+        body = JSON.stringify({
+          status: "cancelled",
+        });
+      }
+    }
+    try {
+      const response = await api.patch<Subscription>(
+        `/customer-portal/subscriptions/${subscription_id}`,
+        body,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "business-id": selectedId,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      parseError(error, "Failed to cancel subscription");
+      throw error;
+    }
+  }
+);
+
+export const cancelSubscriptionLegacy = createAsyncThunk(
   "transaction/cancelSubscription",
   async (subscription_id: string, { dispatch }) => {
     try {
@@ -189,6 +262,15 @@ const subscriptionSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSubscriptions.fulfilled, (state, action) => {
       state.subscriptions.data = action.payload.items;
+    });
+    builder.addCase(cancelSubscription.fulfilled, (state, action) => {
+      // Update the subscription in the state with the new data
+      const index = state.subscriptions.data.findIndex(
+        (sub) => sub.subscription_id === action.payload.subscription_id
+      );
+      if (index !== -1) {
+        state.subscriptions.data[index] = action.payload;
+      }
     });
   },
 });
