@@ -31,6 +31,15 @@ export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       const { color, message } = getBadge(status, false, true);
+      const cancel_at_next_billing_date =
+        row.original.cancel_at_next_billing_date;
+      if (cancel_at_next_billing_date && status !== "cancelled") {
+        return (
+          <Badge dot={false} variant="default">
+            Scheduled for cancellation
+          </Badge>
+        );
+      }
       return (
         <Badge dot={false} variant={color as any}>
           {message}
