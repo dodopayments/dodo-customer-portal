@@ -15,6 +15,8 @@ export type PaymentResponse = {
   };
   metadata: object;
   payment_id: string;
+  brand_id: string;
+  digital_products_delivered: boolean;
   payment_method: string;
   payment_method_type: string;
   status: string;
@@ -31,6 +33,21 @@ export type RefundResponse = {
   reason: string;
   refund_id: string;
   status: string;
+};
+
+export type DigitalProductResponse = {
+  deliverable: {
+    external_url?: string;
+    files?: {
+      file_id: string;
+      file_name: string;
+      url: string;
+    }[];
+    instructions?: string;
+  };
+  description?: string;
+  name: string;
+  product_id: string;
 };
 
 export const fetchPayments = createAsyncThunk(
@@ -136,6 +153,27 @@ export const fetchRefunds = createAsyncThunk(
       }
       throw error;
     }
+  }
+);
+
+export const fetchDigitalProducts = createAsyncThunk(
+  "transaction/fetchDigitalProducts",
+  async (payment_id: string, { dispatch }) => {
+    const tokenData = tokenHelper.get();
+    if (!tokenData) {
+      dispatch(setTokenData(null));
+      throw new Error("No valid token found");
+    }
+
+    const response = await api.get<{ items: DigitalProductResponse[] }>(
+      `/customer-portal/payments/${payment_id}/digital-product-deliverables`,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenData.token}`,
+        },
+      }
+    );
+    return response.data;
   }
 );
 

@@ -20,11 +20,11 @@ const gabarito = Gabarito({
 });
 
 export const metadata: Metadata = {
-  title: "Dodo Payments",
+  title: "Dodo Payments | Customer Portal",
   description: "Launch and Accept Global Payments in less than 60 minutes",
   metadataBase: new URL("https://dodopayments.com"),
   openGraph: {
-    title: "Dodo Payments",
+    title: "Dodo Payments | Customer Portal",
     description: "Launch and Accept Global Payments in less than 60 minutes",
     images: [
       {

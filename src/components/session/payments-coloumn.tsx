@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 import { DownloadSimple } from "@phosphor-icons/react";
 import Link from "next/link";
 import { api_url } from "@/lib/http";
+import DigitalDeliveryDialog from "./digital-delivery-dialog";
 
 export const PaymentColumn: ColumnDef<PaymentResponse>[] = [
   {
@@ -91,6 +92,22 @@ export const PaymentColumn: ColumnDef<PaymentResponse>[] = [
           </Button>
         </div>
       );
+    },
+  },
+  {
+    accessorKey: "digital_products_delivered",
+    header: "Files",
+    cell: ({ row }) => {
+      if (row.original.digital_products_delivered) {
+        return (
+          <DigitalDeliveryDialog
+            key={row.original.payment_id}
+            payment_id={row.original.payment_id}
+          />
+        );
+      } else {
+        return <div className="text-left">-</div>;
+      }
     },
   },
 ];
