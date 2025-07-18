@@ -63,7 +63,7 @@ export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
       if (row.original.on_demand) {
         return (
           <div className="flex items-center gap-2">
-            <span className="text-text-secondary">On Demand</span>
+            <span className="text-text-secondary">Billed On Demand</span>
             <Popover>
               <PopoverTrigger asChild>
                 <Info className="w-3 h-3 text-text-primary hover:text-text-secondary cursor-pointer" />
