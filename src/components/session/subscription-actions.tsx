@@ -27,11 +27,13 @@ import { selectBusiness } from "@/redux/slice/business/businessSlice";
 interface SubscriptionActionsProps {
   row: Row<SubscriptionResponse>;
   isActive: boolean;
+  isOnDemand: boolean;
 }
 
 export function SubscriptionActions({
   row,
   isActive,
+  isOnDemand,
 }: SubscriptionActionsProps) {
   const dispatch = useAppDispatch();
   const selectedBusiness = useAppSelector(selectBusiness);
@@ -192,7 +194,9 @@ export function SubscriptionActions({
                   onClick={() => handleSubmit({ nextBillingDate: true })}
                   disabled={loading}
                 >
-                  Cancel at End of Period
+                  {isOnDemand
+                    ? "Cancel at Next Charge"
+                    : "Cancel at End of Period"}
                 </DropdownMenuItem>
               )}
             </>

@@ -26,6 +26,7 @@ export type SubscriptionResponse = {
   discount_id: string;
   metadata: object;
   next_billing_date: string;
+  on_demand: boolean;
   payment_frequency_count: number;
   payment_frequency_interval: string;
   product_id: string;
