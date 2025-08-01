@@ -141,9 +141,13 @@ export const updateBillingDetails = createAsyncThunk(
         dispatch(setTokenData(null));
         throw new Error("No valid token found");
       }
-      const response = await api.put(
-        `/customer-portal/subscriptions/${subscription_id}/billing-details`,
-        data,
+      const patchData = {
+        billing: data.billing,
+        tax_id: data.tax_id === "" ? null : data.tax_id,
+      };
+      const response = await api.patch(
+        `/customer-portal/subscriptions/${subscription_id}`,
+        patchData,
         {
           headers: { Authorization: `Bearer ${tokenData.token}` },
         }
