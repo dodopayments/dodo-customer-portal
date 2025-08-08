@@ -19,21 +19,23 @@ const gabarito = Gabarito({
   variable: "--font-gabarito",
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || 'https://dodopayments.com';
+
 export const metadata: Metadata = {
   title: "Dodo Payments | Customer Portal",
   description: "Launch and Accept Global Payments in less than 60 minutes",
-  metadataBase: new URL("https://dodopayments.com"),
+  metadataBase: new URL(baseUrl),
   openGraph: {
     title: "Dodo Payments | Customer Portal",
     description: "Launch and Accept Global Payments in less than 60 minutes",
-    images: [
-      {
-        url: "images/brand-assets/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Dodo Payments",
-      },
-    ],
+    type: 'website',
+    siteName: 'Dodo Payments',
+    // Dynamic OG images are now handled by opengraph-image.tsx files in each route
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Dodo Payments | Customer Portal",
+    description: "Launch and Accept Global Payments in less than 60 minutes",
   },
 };
 
