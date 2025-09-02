@@ -15,16 +15,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 
-interface DataTableProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
+interface DataTableProps<TData, TValue>
+  extends React.HTMLAttributes<HTMLDivElement> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   rounded?: boolean;
+  onRowClick?: (row: TData) => void;
 }
 
 export default function BaseDataTable<TData, TValue>({
   columns,
   data,
+  onRowClick,
   rounded = false,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
@@ -40,7 +44,11 @@ export default function BaseDataTable<TData, TValue>({
 
   return (
     <div className="w-full h-full gap-1 lg:gap-0 flex flex-col">
-      <div className={`border border-border-secondary overflow-hidden ${rounded ? "rounded-xl" : "rounded-t-xl "}`}>
+      <div
+        className={`border border-border-secondary overflow-hidden ${
+          rounded ? "rounded-xl" : "rounded-t-xl "
+        }`}
+      >
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -67,6 +75,8 @@ export default function BaseDataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className={cn(onRowClick ? "cursor-pointer" : "")}
+                  onClick={() => onRowClick?.(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

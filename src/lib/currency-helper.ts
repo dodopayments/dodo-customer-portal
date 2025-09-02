@@ -201,6 +201,20 @@ export const decodeCurrency = (
   return Number((value / divisor).toFixed(precision));
 };
 
+export const getCurrencySymbol = (
+  currency: CurrencyCode | undefined | null
+): string => {
+  return (
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency ?? "USD",
+    })
+      .formatToParts(1)
+      .find((part) => part.type === "currency")?.value ?? "$"
+  );
+};
+
+
 export const formatCurrency = (
   value: number,
   currency: CurrencyCode | undefined | null,

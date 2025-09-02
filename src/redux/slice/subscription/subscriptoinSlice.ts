@@ -44,6 +44,26 @@ export type SubscriptionResponse = {
 // Subscription type for the advanced cancel thunk
 export type Subscription = SubscriptionResponse;
 
+export type UsageHistoryResponse = {
+  chargeable_units: string;
+  consumed_units: string;
+  currency: string;
+  free_threshold: number;
+  last_submitted_event_timestamp?: string;
+  meter_id: string;
+  meter_name: string;
+  price_per_unit: string;
+  subscription_id: string;
+  total_price: string;
+};
+
+export type UsageHistoryResponseByMeterId = {
+  consumed_units: string;
+  event_id: string;
+  event_name: string;
+  timestamp: string;
+};
+
 // Helper function to get access token
 export const getAccessToken = createAsyncThunk(
   "subscription/getAccessToken",
@@ -95,6 +115,106 @@ export const fetchSubscriptions = createAsyncThunk(
             created_at_gte,
             created_at_lte,
             status,
+          },
+          headers: {
+            Authorization: `Bearer ${tokenData.token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          dispatch(setTokenData(null));
+        }
+        throw error;
+      }
+      throw error;
+    }
+  }
+);
+
+export const fetchUsageHistory = createAsyncThunk(
+  "transaction/fetchUsageHistory",
+  async (
+    {
+      pageSize,
+      pageNumber,
+    }: {
+      pageSize: number;
+      pageNumber: number;
+    },
+    { dispatch }
+  ) => {
+    try {
+      const tokenData = tokenHelper.get();
+      if (!tokenData) {
+        dispatch(setTokenData(null));
+        throw new Error("No valid token found");
+      }
+
+      const response = await api.get<{ items: UsageHistoryResponse[] }>(
+        "/customer-portal/subscriptions/usage-history",
+        {
+          params: {
+            page_size: pageSize,
+            page_number: pageNumber,
+          },
+          headers: {
+            Authorization: `Bearer ${tokenData.token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          dispatch(setTokenData(null));
+        }
+        throw error;
+      }
+      throw error;
+    }
+  }
+);
+export const fetchUsageHistoryByMeterId = createAsyncThunk(
+  "transaction/fetchUsageHistory",
+  async (
+    {
+      pageSize,
+      pageNumber,
+      start,
+      end,
+      subscription_id,
+      meter_id,
+    }: {
+      pageSize: number;
+      pageNumber: number;
+      start?: string;
+      end?: string;
+      subscription_id: string;
+      meter_id: string;
+    },
+    { dispatch }
+  ) => {
+    try {
+      const tokenData = tokenHelper.get();
+      if (!tokenData) {
+        dispatch(setTokenData(null));
+        throw new Error("No valid token found");
+      }
+
+      const response = await api.get<{
+        items: UsageHistoryResponseByMeterId[];
+      }>(
+        `/customer-portal/subscriptions/${subscription_id}/meters/${meter_id}`,
+
+        {
+          params: {
+            page_size: pageSize,
+            page_number: pageNumber,
+            start: start ? start : "2020-09-02T07:19:53.000Z",
+            end: end ? end : new Date().toISOString(),
           },
           headers: {
             Authorization: `Bearer ${tokenData.token}`,
