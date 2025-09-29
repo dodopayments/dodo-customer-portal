@@ -190,11 +190,16 @@ const Pills = () => {
     },
     {
       id: 3,
+      tile: "Usage",
+      href: "/usage", 
+    },
+    {
+      id: 4,
       tile: "License Keys",
       href: "/license-keys",
     },
     {
-      id: 4,
+      id: 5,
       tile: "Profile",
       href: "/profile",
     },
