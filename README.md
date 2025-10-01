@@ -35,19 +35,25 @@ Documentation: [`Customer Portal – Dodo Payments Docs`](https://docs.dodopayme
 
 ## Getting Started
 
-1. Install dependencies
+1. Copy environment file
+
+```bash
+cp .env.example .env.local
+```
+
+2. Install dependencies
 
 ```bash
 npm install
 ```
 
-2. Run the dev server
+3. Run the dev server
 
 ```bash
 npm run dev
 ```
 
-3. Open http://localhost:3000
+4. Open http://localhost:3000
 
 ## Project Structure
 
