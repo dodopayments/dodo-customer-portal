@@ -1,8 +1,17 @@
 import {withSentryConfig} from "@sentry/nextjs";
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
+import lingoCompiler from "lingo.dev/compiler";
 
-const withNextIntl = createNextIntlPlugin();
+const withLingo = lingoCompiler.next({
+  sourceRoot: "src/app",
+  lingoDir: "lingo",
+  sourceLocale: "en",
+  targetLocales: ["es", "fr", "de", "it"],
+  rsc: true,
+  useDirective: false,
+  debug: false,
+  models: "lingo.dev",
+});
 
 const nextConfig: NextConfig = {
   images: {
@@ -15,7 +24,8 @@ const nextConfig: NextConfig = {
   /* config options here */
 };
 
-export default withSentryConfig(withSentryConfig(withNextIntl(nextConfig), {
+// Keep Sentry wrapping; apply Lingo around nextConfig
+export default withSentryConfig(withSentryConfig(withLingo(nextConfig), {
 // For all available options, see:
 // https://github.com/getsentry/sentry-webpack-plugin#options
 
