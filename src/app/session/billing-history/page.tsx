@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import BaseDataTable from "@/components/custom/base-data-table";
-import { PaymentColumn } from "@/components/session/payments-coloumn";
-import { RefundColumn } from "@/components/session/refunds-coloumn";
+import { PaymentColumn } from "@/components/session/payments-column";
+import { RefundColumn } from "@/components/session/refunds-column";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import {
   fetchPayments,

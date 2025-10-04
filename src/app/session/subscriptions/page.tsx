@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import BaseDataTable from "@/components/custom/base-data-table";
-import { SubscriptionColumn } from "@/components/session/subscription-coloumn";
+import { SubscriptionColumn } from "@/components/session/subscription-column";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { fetchSubscriptions } from "@/redux/slice/subscription/subscriptoinSlice";
 import TablePagination from "@/components/ui/dodo/TablePagination";
