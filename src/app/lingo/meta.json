@@ -1,0 +1,853 @@
+{
+  "version": 0.1,
+  "files": {
+    "../components/custom/base-data-table.tsx": {
+      "scopes": {
+        "4/declaration/body/1/argument/1/1/3/1/expression/alternate/1": {
+          "type": "element",
+          "hash": "6e92a896ff2b3407b21c944beeef73c4",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No results."
+        }
+      }
+    },
+    "../components/custom/date-filter.tsx": {
+      "scopes": {
+        "10/declaration/body/7/argument/1/1/expression/alternate/1": {
+          "type": "element",
+          "hash": "8f78805217c56c92b7fcb997964ba263",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:CalendarDots></element:CalendarDots> Select Date Range"
+        },
+        "10/declaration/body/7/argument/1/1/expression/consequent/3/1": {
+          "type": "element",
+          "hash": "44bcae57c2b1d155f0ba921274690eb8",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<function:format/> - <function:format/>"
+        },
+        "10/declaration/body/7/argument/1/3/1/3": {
+          "type": "element",
+          "hash": "11cb1a7083ead750d1deb07be4a985a6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Select Date Range"
+        },
+        "10/declaration/body/7/argument/1/3/1/5": {
+          "type": "element",
+          "hash": "edb7cd83a93ba2ad3cfe5c38aa50bf64",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Select the date range to filter the data"
+        },
+        "10/declaration/body/7/argument/1/3/3/11/1/3/expression/right/3": {
+          "type": "element",
+          "hash": "9f39060a747ff1eab251d823a50094da",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "–"
+        },
+        "10/declaration/body/7/argument/1/3/3/3/1": {
+          "type": "element",
+          "hash": "5fd5b293d3cdf1232227db1975510d34",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Presets"
+        },
+        "10/declaration/body/7/argument/1/3/3/3/3": {
+          "type": "element",
+          "hash": "ab74397dfd76ed864ac3de4d8b5d5bd5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Calendar"
+        },
+        "10/declaration/body/7/argument/1/3/5/1/1/1": {
+          "type": "element",
+          "hash": "25b06367926e28e1cf86d51b92ed9802",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Cancel"
+        },
+        "10/declaration/body/7/argument/1/3/5/3/1": {
+          "type": "element",
+          "hash": "cdc10283f4c5713adda230a6c7c3a5c3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Apply Filter"
+        }
+      }
+    },
+    "../components/custom/filter-controls.tsx": {
+      "scopes": {
+        "3/declaration/0/init/body/3-label": {
+          "type": "attribute",
+          "hash": "4e1fcce15854d824919b4a582c697c90",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Status"
+        }
+      }
+    },
+    "../components/custom/filter-dropdown.tsx": {
+      "scopes": {
+        "9/0/init/body/6/argument/1/3/1/1": {
+          "type": "element",
+          "hash": "b92f1eb915d3c2dcb4da585be9dda904",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Filter by :"
+        },
+        "9/0/init/body/6/argument/1/3/1/5/5/1": {
+          "type": "element",
+          "hash": "6b9900200f0490846e031fc2aa83b383",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Clear"
+        },
+        "9/0/init/body/6/argument/1/3/1/5/5/3": {
+          "type": "element",
+          "hash": "78b14b15885638a5a85519f0e8cb48b2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Filter"
+        }
+      }
+    },
+    "../components/footer-pill.tsx": {
+      "scopes": {
+        "4/0/init/body/0/argument/1/1/1-alt": {
+          "type": "attribute",
+          "hash": "ab7fcfe33af795f928ad71ce45644474",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "logo"
+        },
+        "4/0/init/body/0/argument/1/1/3": {
+          "type": "element",
+          "hash": "1e405453200a0b7fcba5dc54a2ef9264",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Powered by Dodo Payments"
+        }
+      }
+    },
+    "../components/loading-overlay.tsx": {
+      "scopes": {
+        "0/0/init/body/1/3": {
+          "type": "element",
+          "hash": "82b4ea7ed1439094d7c4be13aaba9a66",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading..."
+        }
+      }
+    },
+    "../components/loading.tsx": {
+      "scopes": {
+        "0/0/init/body/0/argument/3": {
+          "type": "element",
+          "hash": "82b4ea7ed1439094d7c4be13aaba9a66",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading..."
+        }
+      }
+    },
+    "../components/login/login-card.tsx": {
+      "scopes": {
+        "3/0/init/body/0/argument/1/1-alt": {
+          "type": "attribute",
+          "hash": "7ac1d98abe5b3e8c11d63220f03ed783",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "texture"
+        }
+      }
+    },
+    "../components/login/login-form.tsx": {
+      "scopes": {
+        "14/0/init/body/3": {
+          "type": "element",
+          "hash": "0f86a46d434bb4595b8753d3cf2524e0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Almost there!"
+        },
+        "14/0/init/body/5": {
+          "type": "element",
+          "hash": "b0478a52d394dcd60d2a985ba2d7134e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Access link sent to email <element:span>{email}</element:span>. Make sure you check your spam folder!"
+        },
+        "14/0/init/body/7": {
+          "type": "element",
+          "hash": "f88901d168a95a2cfe6f893009b21a51",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Go back"
+        },
+        "15/declaration/0/init/body/14/argument/1/expression/consequent/1/3": {
+          "type": "element",
+          "hash": "510e73866c46ded8e26976cc8f36633e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "{business.name}'s Billing portal"
+        },
+        "15/declaration/0/init/body/14/argument/1/expression/consequent/1/5": {
+          "type": "element",
+          "hash": "f5ecf560c9eb48a5d837021d2e57faef",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Enter your email to receive the access link"
+        },
+        "15/declaration/0/init/body/14/argument/1/expression/consequent/3/1/1/1": {
+          "type": "element",
+          "hash": "e7f34943a0c2fb849db1839ff6ef5cb5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email"
+        },
+        "15/declaration/0/init/body/14/argument/1/expression/consequent/3/1/1/3-placeholder": {
+          "type": "attribute",
+          "hash": "39931962707c99b99a5a073ab579396b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Enter your email"
+        }
+      }
+    },
+    "../components/navbar.tsx": {
+      "scopes": {
+        "19/declaration/body/7/argument/3/3/3/3/1": {
+          "type": "element",
+          "hash": "a2f0f8ec83f3b11fbe2abfab39df9eae",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "19/declaration/body/7/argument/3/3/3/5/1/3/1": {
+          "type": "element",
+          "hash": "21d7d78e49ea0a072fd66188e3ba16fe",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Navigation Side Panel for Mobile"
+        },
+        "19/declaration/body/7/argument/3/3/3/5/1/3/3/5/1": {
+          "type": "element",
+          "hash": "043a9fc0b50bc08373e561259b0c658f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "20/declaration/body/7/argument/3/3/3/5/1": {
+          "type": "element",
+          "hash": "a2f0f8ec83f3b11fbe2abfab39df9eae",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        },
+        "20/declaration/body/7/argument/3/3/3/7/1/3/1": {
+          "type": "element",
+          "hash": "21d7d78e49ea0a072fd66188e3ba16fe",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Navigation Side Panel for Mobile"
+        },
+        "20/declaration/body/7/argument/3/3/3/7/1/3/3/5/1": {
+          "type": "element",
+          "hash": "043a9fc0b50bc08373e561259b0c658f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Logout"
+        }
+      }
+    },
+    "../components/session/billing-details-dialog.tsx": {
+      "scopes": {
+        "17/declaration/body/7/argument/1/1/3": {
+          "type": "element",
+          "hash": "246cd66ebbc3b60aad3df474823503ec",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Edit billing details - <expression/>"
+        },
+        "17/declaration/body/7/argument/1/1/5": {
+          "type": "element",
+          "hash": "c7dd7b173a666928853bfff564e091c0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Any changes will be reflected from the next recurring payment"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/11/1/openingElement/2/value/expression/body/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "ef40a2ee374d665318cece506c439dce",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Address line 1"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/15/1/openingElement/2/value/expression/body/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "118de561d4525b14f9bb29ac9e86161d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "State"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/19/1/openingElement/2/value/expression/body/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "1831f32e1babbb29af27fac3053504a2",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "City"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/19/3/openingElement/2/value/expression/body/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "a3133251f4c5dcb6ea9ad4bcc789607d",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Postal code"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/23/3": {
+          "type": "element",
+          "hash": "d11e41d6743d5d52e1c7d3054a3910c3",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Purchasing as a business"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/27/expression/right/1": {
+          "type": "element",
+          "hash": "43e38a83a12a7c4774ebbfe09a19113b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Tax ID Number"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/27/expression/right/3/openingElement/2/value/expression/body/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "43e38a83a12a7c4774ebbfe09a19113b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Tax ID Number"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/3/1": {
+          "type": "element",
+          "hash": "ba3094a10db2bb9234cb7e0dc86e40fd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Full Name"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/3/3/openingElement/2/value/expression/body/1/1-placeholder": {
+          "type": "attribute",
+          "hash": "ba3094a10db2bb9234cb7e0dc86e40fd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Full Name"
+        },
+        "17/declaration/body/7/argument/1/3/1/1/7/1/openingElement/2/value/expression/body/1/1/1/expression/consequent": {
+          "type": "element",
+          "hash": "82b4ea7ed1439094d7c4be13aaba9a66",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Loading..."
+        },
+        "17/declaration/body/7/argument/1/3/1/3/1": {
+          "type": "element",
+          "hash": "1a97bc2b1ad01b81b070928d056cc66b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Close"
+        },
+        "17/declaration/body/7/argument/1/3/1/3/3": {
+          "type": "element",
+          "hash": "63fd027eddb90064adebd6e92ef639f9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Save changes"
+        }
+      }
+    },
+    "../components/session/cancel-subscription-dialog.tsx": {
+      "scopes": {
+        "5/declaration/body/2/argument/1/1/1/3": {
+          "type": "element",
+          "hash": "503e68fc7e189b4f782bbe28c43aa7f1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Are you certain you want to cancel your subscription to this service?"
+        },
+        "5/declaration/body/2/argument/1/1/1/5": {
+          "type": "element",
+          "hash": "f70caedae6fe799cc23b0ecef1d4b5f8",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Once you proceed, you will lose access to all associated benefits and this action cannot be reversed."
+        },
+        "5/declaration/body/2/argument/1/1/3/1": {
+          "type": "element",
+          "hash": "a655681d2ed8e7fefc50238a3fc76b1a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Close"
+        }
+      }
+    },
+    "../components/session/digital-delivery-dialog.tsx": {
+      "scopes": {
+        "10/declaration/body/5/argument/3/1/1": {
+          "type": "element",
+          "hash": "cb59fd45cfd10674d2fd5f2d3969ac90",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Digital Products"
+        },
+        "10/declaration/body/5/argument/3/1/3": {
+          "type": "element",
+          "hash": "813a9548aabc535fbe293c8cdcb00b23",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Access your purchased digital products and downloads"
+        },
+        "10/declaration/body/5/argument/3/3/1/1/expression/0/body/5/expression/right/1": {
+          "type": "element",
+          "hash": "f30d10b46b2ebcd460e12a86ca76f00f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:LinkIcon></element:LinkIcon> Access External Resource"
+        },
+        "10/declaration/body/5/argument/3/3/1/1/expression/0/body/7/expression/right/1": {
+          "type": "element",
+          "hash": "199d2bc3bd774da09b9e3fcc62f3b9ef",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Instructions:"
+        }
+      }
+    },
+    "../components/session/payments-coloumn.tsx": {
+      "scopes": {
+        "12/declaration/0/init/5/2/value/body/0/argument/1/1": {
+          "type": "element",
+          "hash": "2a770eb71b51ff569f707d0c3d7ff00c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "<element:DownloadSimple></element:DownloadSimple> Invoice"
+        },
+        "12/declaration/0/init/6/2/value/body/0/alternate/0/argument": {
+          "type": "element",
+          "hash": "ccc26acd514d8f23f4874a17f57c26c9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "-"
+        }
+      }
+    },
+    "../components/session/subscription-actions.tsx": {
+      "scopes": {
+        "13/declaration/body/10/argument/1/1/1/1": {
+          "type": "element",
+          "hash": "44c5ee3792630e3dfcaae5b52a81ef32",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Open menu"
+        },
+        "13/declaration/body/10/argument/1/3/1": {
+          "type": "element",
+          "hash": "7d192cc3723af736c42827687fcf835c",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Update Billing Details"
+        },
+        "13/declaration/body/10/argument/1/3/3/expression/right/1": {
+          "type": "element",
+          "hash": "2f720af9b4902c279c2104b5cadc624b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Cancel Immediately"
+        },
+        "13/declaration/body/10/argument/1/3/3/expression/right/3/expression/consequent": {
+          "type": "element",
+          "hash": "5ddc266ec349a0606858dd4c663d717b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Revoke Cancellation"
+        }
+      }
+    },
+    "../components/session/subscription-coloumn.tsx": {
+      "scopes": {
+        "10/declaration/0/init/1/2/value/body/3/consequent/0/argument": {
+          "type": "element",
+          "hash": "844ec821f05ade611236b7ecb0bc45fc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Scheduled for cancellation"
+        },
+        "10/declaration/0/init/2/2/value/body/2/consequent/0/argument/1": {
+          "type": "element",
+          "hash": "b20a9d48b30f0a4c594b245d55555f32",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Billed On Demand"
+        },
+        "10/declaration/0/init/2/2/value/body/2/consequent/0/argument/3/3/1": {
+          "type": "element",
+          "hash": "98975fc6931c261c88fdd61230d070bd",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "On Demand Subscription"
+        },
+        "10/declaration/0/init/2/2/value/body/2/consequent/0/argument/3/3/3/1": {
+          "type": "element",
+          "hash": "a5499523a2947733aa2bafc24fde5f4f",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "By choosing this on-demand subscription, you'll be charged for what you use by your merchant—no fixed payment and schedule."
+        },
+        "10/declaration/0/init/2/2/value/body/2/consequent/0/argument/3/3/3/3": {
+          "type": "element",
+          "hash": "b64854d52ef513106b344fb8ad09ae29",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "You can check all charges and invoices in Billing History."
+        }
+      }
+    },
+    "../components/ui/dialog.tsx": {
+      "scopes": {
+        "10/0/init/0/body/3/3/3": {
+          "type": "element",
+          "hash": "2c2e22f8424a1031de89063bd0022e16",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Close"
+        }
+      }
+    },
+    "../components/ui/dodo/ThemeSwitch.tsx": {
+      "scopes": {
+        "4/0/init/body/5/argument-aria-label": {
+          "type": "attribute",
+          "hash": "8dd0f28672c7e0f644f6b3b5b90d6140",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Toggle Dark Mode"
+        }
+      }
+    },
+    "../components/ui/dodo/banner.tsx": {
+      "scopes": {
+        "2/declaration/0/init/body/1/argument/3": {
+          "type": "element",
+          "hash": "66b364bf16676200220c1f1d833b02c5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "You are in Test Mode.<element:Link>Learn More</element:Link>"
+        },
+        "3/declaration/0/init/body/1/argument/1": {
+          "type": "element",
+          "hash": "66b364bf16676200220c1f1d833b02c5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "You are in Test Mode.<element:Link>Learn More</element:Link>"
+        }
+      }
+    },
+    "../components/ui/pagination.tsx": {
+      "scopes": {
+        "13/0/init/body-aria-label": {
+          "type": "attribute",
+          "hash": "85620c2e33f602ff20fe6e5233cdb892",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Go to previous page"
+        },
+        "13/0/init/body/3": {
+          "type": "element",
+          "hash": "25c58dd62f190368a3d2c4c97b385ea9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Previous"
+        },
+        "15/0/init/body-aria-label": {
+          "type": "attribute",
+          "hash": "a8ecb84396af205fc7722faa92147281",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Go to next page"
+        },
+        "15/0/init/body/1": {
+          "type": "element",
+          "hash": "89ddbcf710eba274963494f312bdc8a9",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Next"
+        },
+        "17/0/init/body/3": {
+          "type": "element",
+          "hash": "5be9df97cef78b964ae01fd272496b79",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "More pages"
+        },
+        "4/0/init/body-aria-label": {
+          "type": "attribute",
+          "hash": "384d94b176acce25289ed8acbb5ed963",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "pagination"
+        }
+      }
+    },
+    "../components/ui/sheet.tsx": {
+      "scopes": {
+        "13/0/init/0/body/3/3/3": {
+          "type": "element",
+          "hash": "2c2e22f8424a1031de89063bd0022e16",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Close"
+        }
+      }
+    },
+    "error.tsx": {
+      "scopes": {
+        "2/0/init/body/0/argument/3": {
+          "type": "element",
+          "hash": "e4ab77446826e78e63e006f2a15b12c6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Something went wrong"
+        },
+        "2/0/init/body/0/argument/5": {
+          "type": "element",
+          "hash": "515a4f22c8fd0ff6d343b018a9a74c1e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "You might be having a network connection problem, the link might be expired, or the link/product might be invalid."
+        }
+      }
+    },
+    "expired/page.tsx": {
+      "scopes": {
+        "2/0/init/body/0/argument/1/3": {
+          "type": "element",
+          "hash": "4bb837f0be733b053c8370b611cdff70",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "For security reasons, this page has expired."
+        }
+      }
+    },
+    "not-found.tsx": {
+      "scopes": {
+        "2/0/init/body/0/argument/3": {
+          "type": "element",
+          "hash": "e4ab77446826e78e63e006f2a15b12c6",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Something went wrong"
+        },
+        "2/0/init/body/0/argument/5": {
+          "type": "element",
+          "hash": "515a4f22c8fd0ff6d343b018a9a74c1e",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "You might be having a network connection problem, the link might be expired, or the link/product might be invalid."
+        }
+      }
+    },
+    "session/billing-history/page.tsx": {
+      "scopes": {
+        "13/0/init/body/13/0/init/body/1/argument/3/1/1": {
+          "type": "element",
+          "hash": "1ce1a8d31ed709fb29fce2057045d104",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Payments"
+        },
+        "13/0/init/body/13/0/init/body/1/argument/7/expression/right/1/1": {
+          "type": "element",
+          "hash": "2d1ff3466d9db576ba5bd3c01995758b",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Refunds"
+        },
+        "13/0/init/body/14/argument/1-title": {
+          "type": "attribute",
+          "hash": "2c2802bfaca8774325efb30773ab89a1",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Billing History"
+        }
+      }
+    },
+    "session/license-keys/page.tsx": {
+      "scopes": {
+        "13/0/init/body/8/0/init/body/1/consequent/0/argument/3": {
+          "type": "element",
+          "hash": "bd12059e967db22664e3c8beea9879cc",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No Active License Keys"
+        },
+        "13/0/init/body/9/argument/1-title": {
+          "type": "attribute",
+          "hash": "446cf9b1295503cb96b698a04517351a",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "License Keys"
+        }
+      }
+    },
+    "session/profile/page.tsx": {
+      "scopes": {
+        "8/0/init/body/4/0/init/body/1/argument/1/1": {
+          "type": "element",
+          "hash": "9368b5a047572b6051f334af5aa76819",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Name"
+        },
+        "8/0/init/body/4/0/init/body/1/argument/5/1/1": {
+          "type": "element",
+          "hash": "704845f9e3c7c39379047333e20d2bed",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Phone Number"
+        },
+        "8/0/init/body/4/0/init/body/1/argument/5/3/1": {
+          "type": "element",
+          "hash": "e7f34943a0c2fb849db1839ff6ef5cb5",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Email"
+        },
+        "8/0/init/body/5/argument/1-description": {
+          "type": "attribute",
+          "hash": "0814b5736e5f9e820f49642661074e36",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "View your profile information"
+        },
+        "8/0/init/body/5/argument/1-title": {
+          "type": "attribute",
+          "hash": "d7878693f91303a438852d617f6d35df",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Profile"
+        }
+      }
+    },
+    "session/subscriptions/page.tsx": {
+      "scopes": {
+        "13/0/init/body/8/0/init/body/1/consequent/0/argument/3": {
+          "type": "element",
+          "hash": "f3c788c43a6bbf51d7176a0303eb2ff0",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "No Active Subscriptions"
+        },
+        "13/0/init/body/9/argument/1-title": {
+          "type": "attribute",
+          "hash": "0d17f4d8d660df40b41d82e0171af6ad",
+          "context": "",
+          "skip": false,
+          "overrides": {},
+          "content": "Subscriptions"
+        }
+      }
+    }
+  }
+}

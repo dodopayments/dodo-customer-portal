@@ -55,15 +55,16 @@ Key directories:
 
 - `src/app` – routes, layouts, and pages
 - `src/components` – UI components (shadcn/ui + custom)
-- `src/lib` – helpers for HTTP, i18n, currency, dates
+- `src/lib` – helpers for HTTP, currency, dates
 - `src/redux` – store and slices for session-scoped UI state
 
 ## Internationalization
 
-This app uses `next-intl`.
-
-- Messages live in `messages/`
-- Request-time config in `src/i18n/`
+- Uses Lingo.dev Compiler to localize JSX at build time.
+- Config: see `next.config.ts` (`sourceRoot: "src/app"`, `lingoDir: "lingo"`, `sourceLocale: "en"`, `targetLocales: [...]`).
+- Runtime: `LingoProvider` in `src/app/layout.tsx` loads `src/app/lingo/dictionary.js`.
+- Locale: set via `lingo-locale` cookie (defaults to `en`). Optional UI toggle available.
+- Build notes: ensure `LINGODOTDEV_API_KEY` is set.
 
 ## Contributing
 

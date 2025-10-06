@@ -3,10 +3,9 @@ import { Gabarito, Inter } from "next/font/google";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import "./globals.css";
 import { StoreProvider } from "@/redux/provider";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
 import { CSPostHogProvider } from "@/hooks/posthogProvider";
+import { LingoProvider, loadDictionary } from "lingo.dev/react/rsc";
 
 // Load fonts
 const inter = Inter({
@@ -51,10 +50,6 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // const locale = await getLocale();
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages();
   return (
     <StoreProvider>
       <CSPostHogProvider>
@@ -64,19 +59,19 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <body className="font-body w-full h-full overflow-x-hidden">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextIntlClientProvider messages={messages}>
+          <LingoProvider loadDictionary={(locale) => loadDictionary(locale)}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
               <main className="mx-auto max-w-[1920px]">
                 <ThemeToaster />
                 {children}
               </main>
-            </NextIntlClientProvider>
-          </ThemeProvider>
+            </ThemeProvider>
+          </LingoProvider>
         </body>
       </html>
       </CSPostHogProvider>
