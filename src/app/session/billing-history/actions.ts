@@ -1,38 +1,13 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { api_url } from "@/lib/http";
+import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
 
-export interface PaymentFilters {
-  pageSize?: number;
-  pageNumber?: number;
-  created_at_gte?: string;
-  created_at_lte?: string;
-  status?: string;
-}
+export interface PaymentFilters extends FilterParams {}
 
-export interface RefundFilters {
-  pageSize?: number;
-  pageNumber?: number;
-  created_at_gte?: string;
-  created_at_lte?: string;
-  status?: string;
-}
+export interface RefundFilters extends FilterParams {}
 
-async function getToken(): Promise<string | null> {
+export async function fetchPayments(filters: PaymentFilters = {}): Promise<PaginatedResponse<any>> {
   try {
-    const cookieStore = await cookies();
-    return cookieStore.get('session_token')?.value || null;
-  } catch {
-    return null;
-  }
-}
-
-export async function fetchPayments(filters: PaymentFilters = {}) {
-  try {
-    const token = await getToken();
-    if (!token) throw new Error('No token found');
-
     const params = new URLSearchParams();
     if (filters.pageSize) params.set('page_size', filters.pageSize.toString());
     if (filters.pageNumber !== undefined) params.set('page_number', filters.pageNumber.toString());
@@ -40,12 +15,7 @@ export async function fetchPayments(filters: PaymentFilters = {}) {
     if (filters.created_at_lte) params.set('created_at_lte', filters.created_at_lte);
     if (filters.status) params.set('status', filters.status);
 
-    const response = await fetch(`${api_url}/customer-portal/payments?${params}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await makeAuthenticatedRequest(`/customer-portal/payments?${params}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch payments: ${response.status}`);
@@ -63,11 +33,8 @@ export async function fetchPayments(filters: PaymentFilters = {}) {
   }
 }
 
-export async function fetchRefunds(filters: RefundFilters = {}) {
+export async function fetchRefunds(filters: RefundFilters = {}): Promise<PaginatedResponse<any>> {
   try {
-    const token = await getToken();
-    if (!token) throw new Error('No token found');
-
     const params = new URLSearchParams();
     if (filters.pageSize) params.set('page_size', filters.pageSize.toString());
     if (filters.pageNumber !== undefined) params.set('page_number', filters.pageNumber.toString());
@@ -75,12 +42,7 @@ export async function fetchRefunds(filters: RefundFilters = {}) {
     if (filters.created_at_lte) params.set('created_at_lte', filters.created_at_lte);
     if (filters.status) params.set('status', filters.status);
 
-    const response = await fetch(`${api_url}/customer-portal/refunds?${params}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await makeAuthenticatedRequest(`/customer-portal/refunds?${params}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch refunds: ${response.status}`);
@@ -100,15 +62,7 @@ export async function fetchRefunds(filters: RefundFilters = {}) {
 
 export async function fetchBusiness() {
   try {
-    const token = await getToken();
-    if (!token) throw new Error('No token found');
-
-    const response = await fetch(`${api_url}/customer-portal/business`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await makeAuthenticatedRequest('/customer-portal/business');
 
     if (!response.ok) {
       throw new Error(`Failed to fetch business: ${response.status}`);
