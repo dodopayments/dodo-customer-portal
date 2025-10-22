@@ -5,8 +5,8 @@ import BaseDataTable from "@/components/custom/base-data-table";
 import { PaymentColumn } from "@/components/session/payments-column";
 import { RefundColumn } from "@/components/session/refunds-column";
 import { fetchPayments, fetchRefunds, fetchBusiness } from "./actions";
-import ServerFilterControls from "./server-filter-controls";
-import ClientPagination from "./client-pagination";
+import ServerFilterControls from "@/components/common/server-filter-controls";
+import ClientPagination from "@/components/common/client-pagination";
 
 export interface PageProps {
   searchParams: Promise<{

@@ -1,11 +1,17 @@
 import Link from "next/link";
 
+interface StatusOption {
+  label: string;
+  value: string;
+}
+
 interface ServerFilterControlsProps {
   currentPage: number;
   currentStatus?: string;
   currentDateFrom?: string;
   currentDateTo?: string;
   showRefundsOption?: boolean;
+  statusOptions?: StatusOption[];
 }
 
 const PAYMENT_STATUS_OPTIONS = [
@@ -30,6 +36,7 @@ export default function ServerFilterControls({
   currentDateFrom,
   currentDateTo,
   showRefundsOption = false,
+  statusOptions,
 }: ServerFilterControlsProps) {
   const buildUrl = (params: Record<string, string>) => {
     const searchParams = new URLSearchParams();
@@ -57,23 +64,21 @@ export default function ServerFilterControls({
       searchParams.set('showRefunds', 'true');
     }
 
-    // Reset page to 0 when filters change
     searchParams.set('page', params.page !== undefined ? params.page.toString() : '0');
 
     return `?${searchParams.toString()}`;
   };
 
-  const statusOptions = showRefundsOption ? REFUND_STATUS_OPTIONS : PAYMENT_STATUS_OPTIONS;
+  const finalStatusOptions = statusOptions || (showRefundsOption ? REFUND_STATUS_OPTIONS : PAYMENT_STATUS_OPTIONS);
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      {/* Status Filter */}
       <div className="flex items-center gap-1">
         <span className="text-sm font-medium">Status:</span>
-        {statusOptions.map((option) => (
+        {finalStatusOptions.map((option) => (
           <Link
             key={option.value}
-            href={buildUrl({ status: option.value, page: 0 })}
+            href={buildUrl({ status: option.value, page: "0" })}
             className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors ${
               currentStatus === option.value
                 ? 'bg-primary text-primary-foreground'
@@ -85,7 +90,6 @@ export default function ServerFilterControls({
         ))}
       </div>
 
-      {/* Clear Filters */}
       {(currentStatus || currentDateFrom || currentDateTo) && (
         <Link
           href="?page=0"
@@ -95,10 +99,9 @@ export default function ServerFilterControls({
         </Link>
       )}
 
-      {/* Show Refunds Toggle */}
       {showRefundsOption && (
         <Link
-          href={buildUrl({ showRefunds: 'false', page: 0 })}
+          href={buildUrl({ showRefunds: 'false', page: "0" })}
           className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
         >
           Hide Refunds
