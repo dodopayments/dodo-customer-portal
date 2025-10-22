@@ -1,109 +1,87 @@
-"use client";
-import React, { useState, useEffect } from "react";
+import { Suspense } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
-import BaseDataTable from "@/components/custom/base-data-table";
-import { LicenseColumn } from "@/components/session/license-column";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import { fetchLicenses } from "@/redux/slice/license/licenseSlice";
-import TablePagination from "@/components/ui/dodo/TablePagination";
-import Loading from "@/components/loading";
-import { FilterControls } from "@/components/custom/filter-controls";
-import { DateRange } from "react-day-picker";
-import { selectBusiness } from "@/redux/slice/business/businessSlice";
-import { Key } from "@phosphor-icons/react";
+import { fetchLicenses, fetchBusiness } from "./actions";
+import ServerFilterControls from "@/components/common/server-filter-controls";
+import ClientPagination from "@/components/common/client-pagination";
+import LicenseKeysTable from "./license-keys-table";
 
+export interface PageProps {
+  searchParams: Promise<{
+    page?: string;
+    status?: string;
+    dateFrom?: string;
+    dateTo?: string;
+  }>;
+}
 
-const Page = () => {
-  const dispatch = useAppDispatch();
-  const { licenses } = useAppSelector((state) => state.license);
-  const business = useAppSelector(selectBusiness);
-  const [isLoading, setIsLoading] = useState(false);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [statusFilter, setStatusFilter] = useState<string[]>([]);
-  const [dateFilter, setDateFilter] = useState<DateRange | undefined>(
-    undefined
-  );
+export default async function LicenseKeysPage({ searchParams }: PageProps) {
+  const params = await searchParams;
 
-  useEffect(() => {
-    const fetchLicensesData = async () => {
-      setIsLoading(true);
-      const params = {
-        pageSize: 10,
-        pageNumber,
-        status: statusFilter[0],
-        created_at_gte: dateFilter?.from,
-        created_at_lte: dateFilter?.to,
-      };
-      await dispatch(fetchLicenses(params));
-      setIsLoading(false);
-    };
-    fetchLicensesData();
-  }, [dispatch, pageNumber, statusFilter, dateFilter]);
+  const pageNumber = parseInt(params.page || '0');
+  const status = params.status;
+  const dateFrom = params.dateFrom;
+  const dateTo = params.dateTo;
 
- 
+  const [licensesData, business] = await Promise.all([
+    fetchLicenses({
+      pageSize: 10,
+      pageNumber,
+      created_at_gte: dateFrom,
+      created_at_lte: dateTo,
+      status: status,
+    }),
+    fetchBusiness(),
+  ]);
 
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
-          <Loading />
-        </div>
-      );
-    }
-    if (licenses.data.length === 0 && !isLoading && !Boolean(dateFilter) && statusFilter.length === 0) {
-      return (
+  const LICENSE_STATUS_OPTIONS = [
+    { label: "Active", value: "active" },
+    { label: "Disabled", value: "disabled" },
+    { label: "Expired", value: "expired" },
+  ];
+
+  return (
+    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
+      <PageHeader
+        title="License Keys"
+        description={`View all your license keys shared by ${business?.name || 'your business'}`}
+        actions={
+          <ServerFilterControls
+            currentPage={pageNumber}
+            currentStatus={status}
+            currentDateFrom={dateFrom}
+            currentDateTo={dateTo}
+            statusOptions={LICENSE_STATUS_OPTIONS}
+          />
+        }
+      />
+      <Separator className="my-6" />
+
+      {licensesData.data.length === 0 ? (
         <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
-          <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full">
-            <Key className="w-6 h-6" />
+          <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
+            🔑
           </span>
           <span className="text-base font-display text-center tracking-wide text-text-secondary">
             No Active License Keys
           </span>
         </div>
-      );
-    }
-
-    return (
-      <div className="flex flex-col">
-        <BaseDataTable data={licenses.data} columns={LicenseColumn} />
-        <TablePagination
-          currentPage={pageNumber}
-          pageSize={10}
-          currentPageItems={licenses.data.length}
-          hasNextPage={licenses.data.length >= 10}
-          onPageChange={setPageNumber}
-        />
-      </div>
-    );
-  };
-
-  return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16  flex flex-col h-full">
-      <PageHeader
-        title="License Keys"
-        description={`View all your license keys shared by ${business?.name}`}
-        actions={
-          <div className="flex items-center gap-2">
-            <FilterControls
-              dateFilter={dateFilter}
-              setDateFilter={setDateFilter}
-              statusFilter={statusFilter}
-              setStatusFilter={setStatusFilter}
-              setPageNumber={setPageNumber}
-              options={[
-                { label: "Active", value: "active" },
-                { label: "Disabled", value: "disabled" },
-                { label: "Expired", value: "expired" },
-              ]}
+      ) : (
+        <div className="flex flex-col">
+          <LicenseKeysTable data={licensesData.data} />
+          <Suspense fallback={<div>Loading pagination...</div>}>
+            <ClientPagination
+              currentPage={pageNumber}
+              hasNextPage={licensesData.hasNext || false}
+              baseUrl={`?${new URLSearchParams({
+                ...(status && { status }),
+                ...(dateFrom && { dateFrom }),
+                ...(dateTo && { dateTo }),
+              }).toString()}`}
             />
-          </div>
-        }
-      />
-      <Separator className="my-6" />
-      {renderContent()}
+          </Suspense>
+        </div>
+      )}
     </div>
   );
-};
-
-export default Page;
+}
