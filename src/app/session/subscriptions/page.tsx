@@ -13,16 +13,18 @@ import { DateRange } from "react-day-picker";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
 import { Repeat } from "@phosphor-icons/react";
 
-
 const Page = () => {
   const dispatch = useAppDispatch();
-  const { subscriptions } = useAppSelector((state) => state.subscription);
+  const { subscriptions, updateBilling } = useAppSelector(
+    (state) => state.subscription
+  );
   const business = useAppSelector(selectBusiness);
   const [pageNumber, setPageNumber] = useState(0);
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<DateRange | undefined>(
     undefined
   );
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const fetchSubscriptionsData = useCallback(async () => {
     const params = {
@@ -33,13 +35,18 @@ const Page = () => {
       created_at_lte: dateFilter?.to,
     };
     await dispatch(fetchSubscriptions(params));
-  }, [dispatch, pageNumber, statusFilter, dateFilter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, pageNumber, statusFilter, dateFilter, refreshTrigger]);
 
   useEffect(() => {
     fetchSubscriptionsData();
   }, [fetchSubscriptionsData]);
 
-  
+  useEffect(() => {
+    if (updateBilling.loading === false && !updateBilling.error) {
+      setRefreshTrigger((prev) => prev + 1);
+    }
+  }, [updateBilling.loading, updateBilling.error]);
 
   const renderContent = () => {
     if (subscriptions.loading) {
@@ -69,9 +76,9 @@ const Page = () => {
 
     return (
       <div className="flex flex-col">
-        <BaseDataTable 
-          data={subscriptions.data} 
-          columns={createSubscriptionColumns()} 
+        <BaseDataTable
+          data={subscriptions.data}
+          columns={createSubscriptionColumns()}
         />
         <TablePagination
           currentPage={pageNumber}
