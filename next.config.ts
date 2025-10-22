@@ -1,53 +1,94 @@
-import {withSentryConfig} from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
+/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  crossOrigin: "anonymous",
   images: {
     remotePatterns: [
       {
-        hostname: "**",
+        protocol: "https",
+        hostname: "dodo-public-sandbox.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "dodo-public-live.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "dodo-backend-internal.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "prod-dodo-backend-internal.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "prod-dodo-backend-live-mode.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "prod-dodo-backend-test-mode.s3.ap-south-1.amazonaws.com",
       },
     ],
   },
-  /* config options here */
+
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value:
+              "camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=()",
+          },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "frame-ancestors 'self' dodopayments.com https://dodopayments.com *.dodopayments.com https://*.dodopayments.com;",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+        ],
+      },
+    ];
+  },
 };
 
-export default withSentryConfig(withSentryConfig(withNextIntl(nextConfig), {
-// For all available options, see:
-// https://github.com/getsentry/sentry-webpack-plugin#options
+const sentryConfig = {
+  org: "dodopayments",
+  project: process.env.NEXT_PUBLIC_SENTRY_PROJECT_NAME,
+  sentryUrl: "https://sentry.dodopayments.tech/",
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  disableLogger: true,
+};
 
-org: "dodo-payments",
-project: process.env.NEXT_PUBLIC_SENTRY_PROJECT_NAME,
+const config =
+  process.env.NODE_ENV === "production"
+    ? withSentryConfig(withNextIntl(nextConfig), sentryConfig)
+    : withNextIntl(nextConfig);
 
-// Only print logs for uploading source maps in CI
-silent: !process.env.CI,
-
-// For all available options, see:
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-
-// Upload a larger set of source maps for prettier stack traces (increases build time)
-widenClientFileUpload: true,
-
-// Automatically annotate React components to show their full name in breadcrumbs and session replay
-reactComponentAnnotation: {
-enabled: true,
-},
-
-// Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
-// This can increase your server load as well as your hosting bill.
-// Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
-// side errors will fail.
-tunnelRoute: "/monitoring",
-
-// Automatically tree-shake Sentry logger statements to reduce bundle size
-disableLogger: true,
-
-// Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
-// See the following for more information:
-// https://docs.sentry.io/product/crons/
-// https://vercel.com/docs/cron-jobs
-automaticVercelMonitors: true,
-}));
+export default config;

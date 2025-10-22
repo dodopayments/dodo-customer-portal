@@ -37,6 +37,7 @@ export type SubscriptionResponse = {
   subscription_period_count: number;
   subscription_period_interval: string;
   tax_inclusive: boolean;
+  tax_id?: string;
   trial_period_days: number;
   cancel_at_next_billing_date?: boolean;
 };
@@ -114,47 +115,48 @@ export const fetchSubscriptions = createAsyncThunk(
   }
 );
 
-export const updateBillingDetails = createAsyncThunk(
-  "subscription/updateBillingDetails",
-  async (
-    {
-      subscription_id,
-      data,
-    }: {
-      subscription_id: string;
-      data: {
-        billing: {
-          city: string;
-          country: string;
-          state: string;
-          street: string;
-          zipcode: string;
-        };
-        tax_id: string | null;
+export const updateBillingDetails = createAsyncThunk<
+  SubscriptionResponse,
+  {
+    subscription_id: string;
+    data: {
+      billing: {
+        city: string;
+        country: string;
+        state: string;
+        street: string;
+        zipcode: string;
       };
-    },
-    { dispatch }
-  ) => {
+      tax_id: string | null;
+    };
+  },
+  { state: RootState; dispatch: AppDispatch }
+>(
+  "subscription/updateBillingDetails",
+  async ({ subscription_id, data }, { dispatch }) => {
     try {
       const tokenData = tokenHelper.get();
       if (!tokenData) {
         dispatch(setTokenData(null));
         throw new Error("No valid token found");
       }
+      
       const patchData = {
         billing: data.billing,
         tax_id: data.tax_id === "" ? null : data.tax_id,
       };
-      const response = await api.patch(
+      
+      const response = await api.patch<SubscriptionResponse>(
         `/customer-portal/subscriptions/${subscription_id}`,
         patchData,
         {
           headers: { Authorization: `Bearer ${tokenData.token}` },
         }
       );
+      
       return response.data;
     } catch (error) {
-      parseError(error);
+      parseError(error, "Failed to update billing details");
       throw error;
     }
   }
@@ -177,23 +179,13 @@ export const cancelSubscription = createAsyncThunk<
     { dispatch }
   ) => {
     const accessToken = await dispatch(getAccessToken()).unwrap();
-    let body;
+    
+    const body = revoke
+      ? JSON.stringify({ cancel_at_next_billing_date: false })
+      : nextBillingDate
+        ? JSON.stringify({ cancel_at_next_billing_date: nextBillingDate })
+        : JSON.stringify({ status: "cancelled" });
 
-    if (revoke) {
-      body = JSON.stringify({
-        cancel_at_next_billing_date: false,
-      });
-    } else {
-      if (nextBillingDate) {
-        body = JSON.stringify({
-          cancel_at_next_billing_date: nextBillingDate,
-        });
-      } else {
-        body = JSON.stringify({
-          status: "cancelled",
-        });
-      }
-    }
     try {
       const response = await api.patch<Subscription>(
         `/customer-portal/subscriptions/${subscription_id}`,
@@ -247,12 +239,24 @@ export const cancelSubscriptionLegacy = createAsyncThunk(
 type initialState = {
   subscriptions: {
     data: SubscriptionResponse[];
+    loading: boolean;
+    error: string | null;
+  };
+  updateBilling: {
+    loading: boolean;
+    error: string | null;
   };
 };
 
 const initialState: initialState = {
   subscriptions: {
     data: [],
+    loading: false,
+    error: null,
+  },
+  updateBilling: {
+    loading: false,
+    error: null,
   },
 };
 
@@ -265,11 +269,24 @@ const subscriptionSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchSubscriptions.fulfilled, (state, action) => {
-      state.subscriptions.data = action.payload.items;
-    });
+    // Fetch subscriptions
+    builder
+      .addCase(fetchSubscriptions.pending, (state) => {
+        state.subscriptions.loading = true;
+        state.subscriptions.error = null;
+      })
+      .addCase(fetchSubscriptions.fulfilled, (state, action) => {
+        state.subscriptions.loading = false;
+        state.subscriptions.data = action.payload.items;
+        state.subscriptions.error = null;
+      })
+      .addCase(fetchSubscriptions.rejected, (state, action) => {
+        state.subscriptions.loading = false;
+        state.subscriptions.error = action.error.message || "Failed to fetch subscriptions";
+      });
+
+    // Cancel subscription
     builder.addCase(cancelSubscription.fulfilled, (state, action) => {
-      // Update the subscription in the state with the new data
       const index = state.subscriptions.data.findIndex(
         (sub) => sub.subscription_id === action.payload.subscription_id
       );
@@ -277,6 +294,28 @@ const subscriptionSlice = createSlice({
         state.subscriptions.data[index] = action.payload;
       }
     });
+
+    // Update billing details
+    builder
+      .addCase(updateBillingDetails.pending, (state) => {
+        state.updateBilling.loading = true;
+        state.updateBilling.error = null;
+      })
+      .addCase(updateBillingDetails.fulfilled, (state, action) => {
+        state.updateBilling.loading = false;
+        state.updateBilling.error = null;
+        // Update the subscription in the state with the new data
+        const index = state.subscriptions.data.findIndex(
+          (sub) => sub.subscription_id === action.payload.subscription_id
+        );
+        if (index !== -1) {
+          state.subscriptions.data[index] = action.payload;
+        }
+      })
+      .addCase(updateBillingDetails.rejected, (state, action) => {
+        state.updateBilling.loading = false;
+        state.updateBilling.error = action.error.message || "Failed to update billing details";
+      });
   },
 });
 
