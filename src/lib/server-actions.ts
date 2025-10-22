@@ -1,3 +1,5 @@
+"use server";
+
 import { cookies } from "next/headers";
 import { api_url } from "./http";
 
@@ -41,4 +43,19 @@ export interface FilterParams {
   created_at_gte?: string;
   created_at_lte?: string;
   status?: string;
+}
+
+export async function fetchBusiness() {
+  try {
+    const response = await makeAuthenticatedRequest('/customer-portal/business');
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch business: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching business:', error);
+    return null;
+  }
 }
