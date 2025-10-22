@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Store token in cookies
     const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
 
     const cookieStore = await cookies();
@@ -27,9 +26,7 @@ export async function GET(request: NextRequest) {
       path: "/",
       sameSite: "strict",
       secure: process.env.NODE_ENV === 'production',
-    });
-
-    // Fetch business data to validate token
+    })
     const response = await fetch(`${api_url}/customer-portal/business`, {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -21,14 +21,12 @@ export interface PageProps {
 export default async function BillingHistoryPage({ searchParams }: PageProps) {
   const params = await searchParams;
 
-  // Parse URL parameters
   const pageNumber = parseInt(params.page || '0');
   const status = params.status;
   const dateFrom = params.dateFrom;
   const dateTo = params.dateTo;
   const showRefunds = params.showRefunds === 'true';
 
-  // Fetch data server-side based on URL params
   const [paymentsData, refundsData, business] = await Promise.all([
     fetchPayments({
       pageSize: 10,
