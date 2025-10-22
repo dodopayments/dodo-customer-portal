@@ -51,7 +51,7 @@ export function BillingDetailsDialog({
 }: BillingDetailsDialogProps) {
   const [countries, setCountries] = useState<CountriesListType[]>([]);
   const [isLoadingCountry, setIsLoadingCountry] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(initialData.tax_id ? true : false);
 
   const form = useForm<BillingDetailsFormValues>({
     resolver: zodResolver(billingDetailsFormSchema),
