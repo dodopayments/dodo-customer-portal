@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import BaseDataTable from "@/components/custom/base-data-table";
-import { SubscriptionColumn } from "@/components/session/subscription-column";
+import { createSubscriptionColumns } from "@/components/session/subscription-column";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { fetchSubscriptions } from "@/redux/slice/subscription/subscriptoinSlice";
 import TablePagination from "@/components/ui/dodo/TablePagination";
@@ -18,33 +18,31 @@ const Page = () => {
   const dispatch = useAppDispatch();
   const { subscriptions } = useAppSelector((state) => state.subscription);
   const business = useAppSelector(selectBusiness);
-  const [isLoading, setIsLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<DateRange | undefined>(
     undefined
   );
 
-  useEffect(() => {
-    const fetchSubscriptionsData = async () => {
-      setIsLoading(true);
-      const params = {
-        pageSize: 10,
-        pageNumber,
-        status: statusFilter[0],
-        created_at_gte: dateFilter?.from,
-        created_at_lte: dateFilter?.to,
-      };
-      await dispatch(fetchSubscriptions(params));
-      setIsLoading(false);
+  const fetchSubscriptionsData = useCallback(async () => {
+    const params = {
+      pageSize: 10,
+      pageNumber,
+      status: statusFilter[0],
+      created_at_gte: dateFilter?.from,
+      created_at_lte: dateFilter?.to,
     };
-    fetchSubscriptionsData();
+    await dispatch(fetchSubscriptions(params));
   }, [dispatch, pageNumber, statusFilter, dateFilter]);
+
+  useEffect(() => {
+    fetchSubscriptionsData();
+  }, [fetchSubscriptionsData]);
 
   
 
   const renderContent = () => {
-    if (isLoading) {
+    if (subscriptions.loading) {
       return (
         <div className="flex justify-center items-center min-h-[calc(100vh-20rem)]">
           <Loading />
@@ -53,7 +51,7 @@ const Page = () => {
     }
     if (
       subscriptions.data.length === 0 &&
-      !isLoading &&
+      !subscriptions.loading &&
       !Boolean(dateFilter) &&
       statusFilter.length === 0
     ) {
@@ -71,7 +69,10 @@ const Page = () => {
 
     return (
       <div className="flex flex-col">
-        <BaseDataTable data={subscriptions.data} columns={SubscriptionColumn} />
+        <BaseDataTable 
+          data={subscriptions.data} 
+          columns={createSubscriptionColumns()} 
+        />
         <TablePagination
           currentPage={pageNumber}
           pageSize={10}

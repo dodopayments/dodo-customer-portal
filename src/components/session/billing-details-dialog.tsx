@@ -38,6 +38,7 @@ interface BillingDetailsDialogProps {
   subscriptionId: string;
   initialData: SubscriptionResponse;
   onSubmit: (data: BillingDetailsFormValues) => void;
+  isLoading?: boolean;
 }
 
 export function BillingDetailsDialog({
@@ -46,6 +47,7 @@ export function BillingDetailsDialog({
   subscriptionId,
   initialData,
   onSubmit,
+  isLoading = false,
 }: BillingDetailsDialogProps) {
   const [countries, setCountries] = useState<CountriesListType[]>([]);
   const [isLoadingCountry, setIsLoadingCountry] = useState(false);
@@ -60,7 +62,7 @@ export function BillingDetailsDialog({
       state: initialData.billing.state,
       city: initialData.billing.city,
       postalCode: initialData.billing.zipcode,
-      taxId: "",
+      taxId: initialData.tax_id || "",
     },
   });
 
@@ -72,7 +74,7 @@ export function BillingDetailsDialog({
       state: initialData.billing.state,
       city: initialData.billing.city,
       postalCode: initialData.billing.zipcode,
-      taxId: "",
+      taxId: initialData.tax_id || "",
     });
   }, [initialData, form, open]);
 
@@ -130,6 +132,7 @@ export function BillingDetailsDialog({
                         <Input
                           id="fullName"
                           placeholder="Full Name"
+                          disabled={isLoading}
                           {...field}
                         />
                       </FormControl>
@@ -152,7 +155,7 @@ export function BillingDetailsDialog({
                             "border-border-error"
                           }`}
                           {...field}
-                          disabled={isLoadingCountry}
+                          disabled={isLoadingCountry || isLoading}
                           onChange={(e) => {
                             field.onChange(e);
                           }}
@@ -188,6 +191,7 @@ export function BillingDetailsDialog({
                               "border-border-error focus-visible:border-border-error"
                           )}
                           placeholder="Address line 1"
+                          disabled={isLoading}
                           {...field}
                         />
                       </FormControl>
@@ -211,6 +215,7 @@ export function BillingDetailsDialog({
                               "border-border-error focus-visible:border-border-error"
                           )}
                           placeholder="State"
+                          disabled={isLoading}
                           {...field}
                         />
                       </FormControl>
@@ -234,6 +239,7 @@ export function BillingDetailsDialog({
                               "border-border-error focus-visible:border-border-error"
                           )}
                           placeholder="City"
+                          disabled={isLoading}
                           {...field}
                         />
                       </FormControl>
@@ -253,6 +259,7 @@ export function BillingDetailsDialog({
                               "border-border-error focus-visible:border-border-error"
                           )}
                           placeholder="Postal code"
+                          disabled={isLoading}
                           {...field}
                         />
                       </FormControl>
@@ -267,6 +274,7 @@ export function BillingDetailsDialog({
                   id="isBusinessPurchase"
                   className="mt-[0px]"
                   checked={checked}
+                  disabled={isLoading}
                   onCheckedChange={(state) => {
                     setChecked(state === true);
                     form.setValue("taxId", "");
@@ -298,6 +306,7 @@ export function BillingDetailsDialog({
                               form.formState.errors.taxId &&
                                 "border-border-error focus-visible:border-border-error"
                             )}
+                            disabled={isLoading}
                             {...field}
                           />
                         </FormControl>
@@ -314,11 +323,17 @@ export function BillingDetailsDialog({
                 variant="secondary"
                 className="w-full"
                 onClick={() => onOpenChange(false)}
+                disabled={isLoading}
               >
                 Close
               </Button>
-              <Button type="submit" className="w-full">
-                Save changes
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={isLoading}
+                loading={isLoading}
+              >
+                {isLoading ? "Saving..." : "Save changes"}
               </Button>
             </DialogFooter>
           </form>

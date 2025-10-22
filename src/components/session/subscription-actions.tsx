@@ -37,6 +37,7 @@ export function SubscriptionActions({
 }: SubscriptionActionsProps) {
   const dispatch = useAppDispatch();
   const selectedBusiness = useAppSelector(selectBusiness);
+  const { updateBilling } = useAppSelector((state) => state.subscription);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
   const [showUpdateBillingDialog, setShowUpdateBillingDialog] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -147,8 +148,10 @@ export function SubscriptionActions({
       ).unwrap();
       toast.success("Billing details updated successfully");
       setShowUpdateBillingDialog(false);
-    } catch {
-      return;
+      // The Redux state will automatically update the table via the reducer
+    } catch (error) {
+      console.error("Failed to update billing details:", error);
+      toast.error("Failed to update billing details. Please try again.");
     }
   };
 
@@ -210,6 +213,7 @@ export function SubscriptionActions({
         subscriptionId={row.original.subscription_id}
         initialData={row.original}
         onSubmit={onBillingSubmit}
+        isLoading={updateBilling.loading}
       />
 
       <CancelSubscriptionDialog

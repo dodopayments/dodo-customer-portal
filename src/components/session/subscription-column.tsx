@@ -17,7 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { SubscriptionActions } from "./subscription-actions";
 import { Info } from "@phosphor-icons/react";
 
-export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
+export const createSubscriptionColumns = (): ColumnDef<SubscriptionResponse>[] => [
   {
     accessorKey: "subscription_id",
     header: "Subscription ID",
@@ -142,3 +142,6 @@ export const SubscriptionColumn: ColumnDef<SubscriptionResponse>[] = [
     },
   },
 ];
+
+// Default export for backward compatibility
+export const SubscriptionColumn = createSubscriptionColumns();
