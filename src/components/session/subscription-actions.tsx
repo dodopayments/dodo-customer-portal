@@ -1,13 +1,7 @@
 "use client";
 
 import { Row } from "@tanstack/react-table";
-import {
-  cancelSubscription,
-  cancelSubscriptionLegacy,
-  SubscriptionResponse,
-  fetchSubscriptions,
-  updateBillingDetails,
-} from "@/redux/slice/subscription/subscriptoinSlice";
+import { SubscriptionResponse } from "@/redux/slice/subscription/subscriptoinSlice";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,12 +11,17 @@ import {
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { DotsThreeVertical } from "@phosphor-icons/react";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { toast } from "sonner";
 import { BillingDetailsDialog } from "./billing-details-dialog";
 import { CancelSubscriptionDialog } from "./cancel-subscription-dialog";
 import { BillingDetailsFormValues } from "./subscription-form-schema";
-import { selectBusiness } from "@/redux/slice/business/businessSlice";
+import { useBusiness } from "@/hooks/use-business";
+import { useRouter } from "next/navigation";
+import {
+  cancelSubscription,
+  cancelSubscriptionLegacy,
+  updateBillingDetails
+} from "@/app/session/subscriptions/actions";
 
 interface SubscriptionActionsProps {
   row: Row<SubscriptionResponse>;
@@ -35,9 +34,8 @@ export function SubscriptionActions({
   isActive,
   isOnDemand,
 }: SubscriptionActionsProps) {
-  const dispatch = useAppDispatch();
-  const selectedBusiness = useAppSelector(selectBusiness);
-  const { updateBilling } = useAppSelector((state) => state.subscription);
+  const { business: selectedBusiness } = useBusiness();
+  const router = useRouter();
   const [showCancelDialog, setShowCancelDialog] = useState(false);
   const [showUpdateBillingDialog, setShowUpdateBillingDialog] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -52,20 +50,14 @@ export function SubscriptionActions({
         return;
       }
 
-      await dispatch(
-        cancelSubscription({
-          selectedId: selectedBusiness.business_id,
-          subscription_id: row.original.subscription_id,
-          nextBillingDate: false,
-        })
-      ).unwrap();
+      await cancelSubscription({
+        selectedId: selectedBusiness.business_id,
+        subscription_id: row.original.subscription_id,
+        nextBillingDate: false,
+      });
 
-      await dispatch(
-        fetchSubscriptions({
-          pageSize: 10,
-          pageNumber: 0,
-        })
-      );
+      // Refresh the page to get updated data
+      router.refresh();
       toast.info("Subscription cancelled successfully");
       setShowCancelDialog(false);
     } catch (error) {
@@ -85,9 +77,7 @@ export function SubscriptionActions({
       setLoading(true);
 
       if (!nextBillingDate && !revoke) {
-        await dispatch(
-          cancelSubscriptionLegacy(row.original.subscription_id)
-        ).unwrap();
+        await cancelSubscriptionLegacy(row.original.subscription_id);
         toast.success("Your subscription has been cancelled immediately.");
       } else {
         if (!selectedBusiness?.business_id) {
@@ -95,14 +85,12 @@ export function SubscriptionActions({
           return;
         }
 
-        await dispatch(
-          cancelSubscription({
-            selectedId: selectedBusiness.business_id,
-            subscription_id: row.original.subscription_id,
-            nextBillingDate,
-            revoke,
-          })
-        ).unwrap();
+        await cancelSubscription({
+          selectedId: selectedBusiness.business_id,
+          subscription_id: row.original.subscription_id,
+          nextBillingDate,
+          revoke,
+        });
 
         if (revoke) {
           toast.success(
@@ -115,12 +103,8 @@ export function SubscriptionActions({
         }
       }
 
-      await dispatch(
-        fetchSubscriptions({
-          pageSize: 10,
-          pageNumber: 0,
-        })
-      );
+      // Refresh the page to get updated data
+      router.refresh();
     } catch (error) {
       console.error(error);
       toast.error("Failed to update subscription. Please try again.");
@@ -131,24 +115,23 @@ export function SubscriptionActions({
 
   const onBillingSubmit = async (data: BillingDetailsFormValues) => {
     try {
-      await dispatch(
-        updateBillingDetails({
-          subscription_id: row.original.subscription_id,
-          data: {
-            billing: {
-              city: data.city,
-              country: data.country,
-              state: data.state,
-              street: data.addressLine,
-              zipcode: data.postalCode,
-            },
-            tax_id: data.taxId || null,
+      await updateBillingDetails({
+        subscription_id: row.original.subscription_id,
+        data: {
+          billing: {
+            city: data.city,
+            country: data.country,
+            state: data.state,
+            street: data.addressLine,
+            zipcode: data.postalCode,
           },
-        })
-      ).unwrap();
+          tax_id: data.taxId || null,
+        },
+      });
       toast.success("Billing details updated successfully");
       setShowUpdateBillingDialog(false);
-      // The Redux state will automatically update the table via the reducer
+      // Refresh the page to get updated data
+      router.refresh();
     } catch (error) {
       console.error("Failed to update billing details:", error);
       toast.error("Failed to update billing details. Please try again.");
@@ -213,7 +196,7 @@ export function SubscriptionActions({
         subscriptionId={row.original.subscription_id}
         initialData={row.original}
         onSubmit={onBillingSubmit}
-        isLoading={updateBilling.loading}
+        isLoading={false}
       />
 
       <CancelSubscriptionDialog
