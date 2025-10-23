@@ -62,6 +62,13 @@ export default async function BillingHistoryPage({ searchParams }: PageProps) {
       <PageHeader
         title="Billing History"
         description={`View all your orders with ${business?.name || 'your business'}`}
+        actions= {
+          !shouldShowRefunds && (
+            <div className="flex items-center justify-between mb-4">
+              <Filters statusOptions={[]} />
+            </div>
+          )
+        }
       />
       <Separator className="my-6" />
 
@@ -70,7 +77,9 @@ export default async function BillingHistoryPage({ searchParams }: PageProps) {
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="font-display font-medium text-lg">Payments</span>
-            <Filters statusOptions={[]} />
+            {shouldShowRefunds && (
+              <Filters statusOptions={[]} />
+            )}
           </div>
           <div className="flex flex-col">
             <BaseDataTable data={paymentsData.data || []} columns={PaymentColumn} />

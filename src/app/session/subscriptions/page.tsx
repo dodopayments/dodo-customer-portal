@@ -48,6 +48,13 @@ export default async function SubscriptionsPage({ searchParams }: PageProps) {
       <PageHeader
         title="Subscriptions"
         description={`View all your subscriptions with ${business?.name || 'your business'}`}
+        actions= {
+          <div className="flex items-center justify-between mb-4">
+          <Filters
+            statusOptions={SUBSCRIPTION_STATUS_OPTIONS}
+          />
+        </div>
+        }
       />
       <Separator className="my-6" />
 
@@ -62,12 +69,6 @@ export default async function SubscriptionsPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-medium">Subscriptions</h2>
-            <Filters
-              statusOptions={SUBSCRIPTION_STATUS_OPTIONS}
-            />
-          </div>
           <SubscriptionsTable data={subscriptionsData.data} />
           <ServerPagination
             currentPage={pageNumber}
