@@ -6,7 +6,6 @@ interface StatusOption {
 }
 
 interface ServerFilterControlsProps {
-  currentPage: number;
   currentStatus?: string;
   currentDateFrom?: string;
   currentDateTo?: string;
@@ -32,7 +31,6 @@ const REFUND_STATUS_OPTIONS = [
 ];
 
 export default function ServerFilterControls({
-  currentPage,
   currentStatus,
   currentDateFrom,
   currentDateTo,

@@ -1,10 +1,9 @@
-import { Suspense } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import { fetchSubscriptions } from "./actions";
 import { fetchBusiness } from "@/lib/server-actions";
-import ServerFilterControls from "@/components/common/server-filter-controls";
-import ClientPagination from "@/components/common/client-pagination";
+import Filters from "@/components/common/filters";
+import ServerPagination from "@/components/common/server-pagination";
 import SubscriptionsTable from "./subscriptions-table";
 
 export interface PageProps {
@@ -49,15 +48,6 @@ export default async function SubscriptionsPage({ searchParams }: PageProps) {
       <PageHeader
         title="Subscriptions"
         description={`View all your subscriptions with ${business?.name || 'your business'}`}
-        actions={
-          <ServerFilterControls
-            currentPage={pageNumber}
-            currentStatus={status}
-            currentDateFrom={dateFrom}
-            currentDateTo={dateTo}
-            statusOptions={SUBSCRIPTION_STATUS_OPTIONS}
-          />
-        }
       />
       <Separator className="my-6" />
 
@@ -72,18 +62,24 @@ export default async function SubscriptionsPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="flex flex-col">
-          <SubscriptionsTable data={subscriptionsData.data} />
-          <Suspense fallback={<div>Loading pagination...</div>}>
-            <ClientPagination
-              currentPage={pageNumber}
-              hasNextPage={subscriptionsData.hasNext || false}
-              baseUrl={`?${new URLSearchParams({
-                ...(status && { status }),
-                ...(dateFrom && { dateFrom }),
-                ...(dateTo && { dateTo }),
-              }).toString()}`}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-medium">Subscriptions</h2>
+            <Filters
+              statusOptions={SUBSCRIPTION_STATUS_OPTIONS}
             />
-          </Suspense>
+          </div>
+          <SubscriptionsTable data={subscriptionsData.data} />
+          <ServerPagination
+            currentPage={pageNumber}
+            pageSize={10}
+            currentPageItems={subscriptionsData.data?.length || 0}
+            hasNextPage={subscriptionsData.hasNext || false}
+            baseUrl={`?${new URLSearchParams({
+              ...(status && { status }),
+              ...(dateFrom && { dateFrom }),
+              ...(dateTo && { dateTo }),
+            }).toString()}`}
+          />
         </div>
       )}
     </div>
