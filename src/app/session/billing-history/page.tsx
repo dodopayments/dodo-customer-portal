@@ -4,7 +4,7 @@ import BaseDataTable from "@/components/custom/base-data-table";
 import { PaymentColumn } from "@/components/session/payments-column";
 import { RefundColumn } from "@/components/session/refunds-column";
 import { fetchPayments, fetchRefunds, fetchBusiness } from "./actions";
-import ClientFilters from "./client-filters";
+import Filters from "@/components/common/filters";
 import ServerPagination from "@/components/common/server-pagination";
 
 export interface PageProps {
@@ -70,7 +70,7 @@ export default async function BillingHistoryPage({ searchParams }: PageProps) {
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="font-display font-medium text-lg">Payments</span>
-            <ClientFilters />
+            <Filters statusOptions={[]} />
           </div>
           <div className="flex flex-col">
             <BaseDataTable data={paymentsData.data || []} columns={PaymentColumn} />
@@ -93,7 +93,8 @@ export default async function BillingHistoryPage({ searchParams }: PageProps) {
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex items-center justify-between">
               <span className="font-display font-medium text-lg">Refunds</span>
-              <ClientFilters
+              <Filters
+                statusOptions={[]}
                 showRefundsOption={true}
                 isRefundSection={true}
               />

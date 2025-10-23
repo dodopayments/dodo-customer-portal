@@ -5,12 +5,22 @@ import { DateRange } from "react-day-picker";
 import { useState, useEffect } from "react";
 import { FilterControls } from "@/components/custom/filter-controls";
 
-interface ClientFiltersProps {
+interface StatusOption {
+  label: string;
+  value: string;
+}
+
+interface FiltersProps {
+  statusOptions: StatusOption[];
   showRefundsOption?: boolean;
   isRefundSection?: boolean;
 }
 
-export default function ClientFilters({ showRefundsOption = false, isRefundSection = false }: ClientFiltersProps) {
+export default function Filters({
+  statusOptions,
+  showRefundsOption = false,
+  isRefundSection = false
+}: FiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -65,7 +75,7 @@ export default function ClientFilters({ showRefundsOption = false, isRefundSecti
     router.replace(`?${params.toString()}`, { scroll: false });
   };
 
-  const options = showRefundsOption ? [
+  const options = statusOptions.length > 0 ? statusOptions : (showRefundsOption ? [
     { label: "Successful", value: "succeeded" },
     { label: "Failed", value: "failed" },
     { label: "Pending", value: "pending" },
@@ -75,7 +85,7 @@ export default function ClientFilters({ showRefundsOption = false, isRefundSecti
     { label: "Failed", value: "failed" },
     { label: "Not Initiated", value: "requires_payment_method" },
     { label: "In Progress", value: "processing" },
-  ];
+  ]);
 
   return (
     <FilterControls
