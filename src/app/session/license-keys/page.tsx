@@ -1,9 +1,8 @@
-import { Suspense } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import { fetchLicenses, fetchBusiness } from "./actions";
-import ServerFilterControls from "@/components/common/server-filter-controls";
-import ClientPagination from "@/components/common/client-pagination";
+import Filters from "@/components/common/filters";
+import ServerPagination from "@/components/common/server-pagination";
 import LicenseKeysTable from "./license-keys-table";
 
 export interface PageProps {
@@ -45,15 +44,6 @@ export default async function LicenseKeysPage({ searchParams }: PageProps) {
       <PageHeader
         title="License Keys"
         description={`View all your license keys shared by ${business?.name || 'your business'}`}
-        actions={
-          <ServerFilterControls
-            currentPage={pageNumber}
-            currentStatus={status}
-            currentDateFrom={dateFrom}
-            currentDateTo={dateTo}
-            statusOptions={LICENSE_STATUS_OPTIONS}
-          />
-        }
       />
       <Separator className="my-6" />
 
@@ -68,18 +58,24 @@ export default async function LicenseKeysPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="flex flex-col">
-          <LicenseKeysTable data={licensesData.data} />
-          <Suspense fallback={<div>Loading pagination...</div>}>
-            <ClientPagination
-              currentPage={pageNumber}
-              hasNextPage={licensesData.hasNext || false}
-              baseUrl={`?${new URLSearchParams({
-                ...(status && { status }),
-                ...(dateFrom && { dateFrom }),
-                ...(dateTo && { dateTo }),
-              }).toString()}`}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-medium">License Keys</h2>
+            <Filters
+              statusOptions={LICENSE_STATUS_OPTIONS}
             />
-          </Suspense>
+          </div>
+          <LicenseKeysTable data={licensesData.data} />
+          <ServerPagination
+            currentPage={pageNumber}
+            pageSize={10}
+            currentPageItems={licensesData.data?.length || 0}
+            hasNextPage={licensesData.hasNext || false}
+            baseUrl={`?${new URLSearchParams({
+              ...(status && { status }),
+              ...(dateFrom && { dateFrom }),
+              ...(dateTo && { dateTo }),
+            }).toString()}`}
+          />
         </div>
       )}
     </div>
