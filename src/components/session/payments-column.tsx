@@ -11,7 +11,25 @@ import {
 } from "@/lib/currency-helper";
 import parseIso from "@/lib/date-helper";
 import { getBadge } from "@/lib/badge-helper";
-import { PaymentResponse } from "@/redux/slice/transaction/transactionSlice";
+
+interface PaymentResponse {
+  created_at: string;
+  currency: string;
+  customer: {
+    customer_id: string;
+    email: string;
+    name: string;
+  };
+  metadata: object;
+  payment_id: string;
+  brand_id: string;
+  digital_products_delivered: boolean;
+  payment_method: string;
+  payment_method_type: string;
+  status: string;
+  subscription_id: string;
+  total_amount: number;
+}
 import { Button } from "../ui/button";
 import { DownloadSimple } from "@phosphor-icons/react";
 import Link from "next/link";

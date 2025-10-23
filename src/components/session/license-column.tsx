@@ -6,7 +6,21 @@ import IDTooltip from "../custom/turnacate-tooltip";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import parseIso from "@/lib/date-helper";
-import { LicenseResponse } from "@/redux/slice/license/licenseSlice";
+
+interface LicenseResponse {
+  activations_limit: number;
+  business_id: string;
+  created_at: string;
+  customer_id: string;
+  expires_at: string;
+  id: string;
+  instances_count: number;
+  key: string;
+  payment_id: string;
+  product_id: string;
+  status: string;
+  subscription_id: string;
+}
 
 export const LicenseColumn: ColumnDef<LicenseResponse>[] = [
   {
