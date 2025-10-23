@@ -88,14 +88,29 @@ export async function fetchSubscriptions(filters: FilterParams = {}): Promise<Pa
 export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   const { subscription_id, data } = params;
 
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscription_id}/billing`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
+  const patchData = {
+    billing: data.billing,
+    tax_id: data.tax_id === "" ? null : data.tax_id,
+  };
+
+  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscription_id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(patchData),
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to update billing details: ${error}`);
+    let errorMessage = `HTTP ${response.status}`;
+    try {
+      const errorText = await response.text();
+      if (errorText && errorText.trim()) {
+        errorMessage += `: ${errorText}`;
+      } else {
+        errorMessage += ` (${response.statusText || 'Unknown error'})`;
+      }
+    } catch {
+      errorMessage += ` (${response.statusText || 'Unknown error'})`;
+    }
+    throw new Error(`Failed to update billing details: ${errorMessage}`);
   }
 
   return response.json();
