@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
-import { fetchSubscriptions, fetchBusiness } from "./actions";
+import { fetchSubscriptions } from "./actions";
+import { fetchBusiness } from "@/lib/server-actions";
 import ServerFilterControls from "@/components/common/server-filter-controls";
 import ClientPagination from "@/components/common/client-pagination";
 import SubscriptionsTable from "./subscriptions-table";
