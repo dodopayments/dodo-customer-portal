@@ -2,11 +2,8 @@
 
 import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
 
-export interface PaymentFilters extends FilterParams {}
-
-export interface RefundFilters extends FilterParams {}
-
-export async function fetchPayments(filters: PaymentFilters = {}): Promise<PaginatedResponse<any>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchPayments(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
     const params = new URLSearchParams();
     if (filters.pageSize) params.set('page_size', filters.pageSize.toString());
@@ -33,7 +30,8 @@ export async function fetchPayments(filters: PaymentFilters = {}): Promise<Pagin
   }
 }
 
-export async function fetchRefunds(filters: RefundFilters = {}): Promise<PaginatedResponse<any>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchRefunds(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
     const params = new URLSearchParams();
     if (filters.pageSize) params.set('page_size', filters.pageSize.toString());

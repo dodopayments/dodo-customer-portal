@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,7 +7,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
-import { redirect, useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
 import { tokenHelper } from "@/lib/token-helper";
@@ -52,7 +50,7 @@ const BusinessName = ({
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { business: businessData, loading, error } = useBusiness();
+  const { business: businessData } = useBusiness();
   const router = useRouter();
 
   useEffect(() => {

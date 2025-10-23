@@ -2,9 +2,8 @@
 
 import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
 
-export interface LicenseFilters extends FilterParams {}
-
-export async function fetchLicenses(filters: LicenseFilters = {}): Promise<PaginatedResponse<any>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchLicenses(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
     const params = new URLSearchParams();
     if (filters.pageSize) params.set('page_size', filters.pageSize.toString());
