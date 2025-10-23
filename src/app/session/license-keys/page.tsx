@@ -44,6 +44,13 @@ export default async function LicenseKeysPage({ searchParams }: PageProps) {
       <PageHeader
         title="License Keys"
         description={`View all your license keys shared by ${business?.name || 'your business'}`}
+        actions= {
+          <div className="flex items-center justify-between mb-4">
+            <Filters
+              statusOptions={LICENSE_STATUS_OPTIONS}
+            />
+          </div>
+        }
       />
       <Separator className="my-6" />
 
@@ -58,12 +65,6 @@ export default async function LicenseKeysPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-medium">License Keys</h2>
-            <Filters
-              statusOptions={LICENSE_STATUS_OPTIONS}
-            />
-          </div>
           <LicenseKeysTable data={licensesData.data} />
           <ServerPagination
             currentPage={pageNumber}
