@@ -2,8 +2,6 @@
 
 import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
 
-export interface SubscriptionFilters extends FilterParams {}
-
 export interface CancelSubscriptionParams {
   selectedId: string;
   subscription_id: string;
@@ -59,7 +57,8 @@ export async function cancelSubscriptionLegacy(subscriptionId: string) {
   return response.json();
 }
 
-export async function fetchSubscriptions(filters: SubscriptionFilters = {}): Promise<PaginatedResponse<any>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function fetchSubscriptions(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
     const params = new URLSearchParams();
     if (filters.pageSize) params.set('page_size', filters.pageSize.toString());

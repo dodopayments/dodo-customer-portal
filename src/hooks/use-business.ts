@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { fetchBusiness } from "@/lib/server-actions";
 
 export function useBusiness() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [business, setBusiness] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

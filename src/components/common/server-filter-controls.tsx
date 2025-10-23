@@ -31,7 +31,6 @@ const REFUND_STATUS_OPTIONS = [
 ];
 
 export default function ServerFilterControls({
-  currentPage,
   currentStatus,
   currentDateFrom,
   currentDateTo,
