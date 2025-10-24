@@ -12,6 +12,8 @@ import { FilterControls } from "@/components/custom/filter-controls";
 import { DateRange } from "react-day-picker";
 import { selectBusiness } from "@/redux/slice/business/businessSlice";
 import { Key } from "@phosphor-icons/react";
+import { Input } from "@/components/ui/input";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 
 
 const Page = () => {
@@ -24,6 +26,18 @@ const Page = () => {
   const [dateFilter, setDateFilter] = useState<DateRange | undefined>(
     undefined
   );
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState<string>("");
+
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPageNumber(0); // Reset to first page when search changes
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   useEffect(() => {
     const fetchLicensesData = async () => {
@@ -34,12 +48,13 @@ const Page = () => {
         status: statusFilter[0],
         created_at_gte: dateFilter?.from,
         created_at_lte: dateFilter?.to,
+        search: debouncedSearch || undefined,
       };
       await dispatch(fetchLicenses(params));
       setIsLoading(false);
     };
     fetchLicensesData();
-  }, [dispatch, pageNumber, statusFilter, dateFilter]);
+  }, [dispatch, pageNumber, statusFilter, dateFilter, debouncedSearch]);
 
  
 
@@ -51,7 +66,7 @@ const Page = () => {
         </div>
       );
     }
-    if (licenses.data.length === 0 && !isLoading && !Boolean(dateFilter) && statusFilter.length === 0) {
+    if (licenses.data.length === 0 && !isLoading && !Boolean(dateFilter) && statusFilter.length === 0 && !debouncedSearch) {
       return (
         <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
           <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full">
@@ -101,6 +116,18 @@ const Page = () => {
         }
       />
       <Separator className="my-6" />
+      <div className="mb-4">
+        <div className="relative max-w-sm">
+          <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
+          <Input
+            type="text"
+            placeholder="Search by license key or product ID..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+      </div>
       {renderContent()}
     </div>
   );
