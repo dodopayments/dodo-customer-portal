@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { fetchLicenses, fetchBusiness } from "./actions";
 import Filters from "@/components/common/filters";
 import ServerPagination from "@/components/common/server-pagination";
-import LicenseKeysTable from "./license-keys-table";
+import { LicenseKeysTable } from "./license-keys-table";
 
 export interface PageProps {
   searchParams: Promise<{
@@ -44,7 +44,7 @@ export default async function LicenseKeysPage({ searchParams }: PageProps) {
       <PageHeader
         title="License Keys"
         description={`View all your license keys shared by ${business?.name || 'your business'}`}
-        actions= {
+        actions={
           <div className="flex items-center justify-between mb-4">
             <Filters
               statusOptions={LICENSE_STATUS_OPTIONS}

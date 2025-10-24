@@ -13,20 +13,6 @@ export async function GET(request: NextRequest) {
   try {
     const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
 
-    const cookieStore = await cookies();
-    cookieStore.set('session_token', token, {
-      expires: new Date(expiresAt),
-      path: "/",
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === 'production',
-    });
-
-    cookieStore.set('session_expiry', expiresAt.toString(), {
-      expires: new Date(expiresAt),
-      path: "/",
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === 'production',
-    })
     const response = await fetch(`${api_url}/customer-portal/business`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -40,7 +26,24 @@ export async function GET(request: NextRequest) {
       }
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
+    const cookieStore = await cookies();
+    cookieStore.set('session_token', token, {
+      expires: new Date(expiresAt),
+      path: "/",
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+    });
+
+    cookieStore.set('session_expiry', expiresAt.toString(), {
+      expires: new Date(expiresAt),
+      path: "/",
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+    });
+
     return NextResponse.redirect(new URL('/session/billing-history', request.url));
   } catch (error) {
     console.error('Token validation failed:', error);
