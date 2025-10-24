@@ -1,10 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { useAppDispatch } from "@/hooks/redux-hooks";
-import { fetchDigitalProducts } from "@/redux/slice/transaction/transactionSlice";
-import { DigitalProductResponse } from "@/redux/slice/transaction/transactionSlice";
 import { DownloadSimple, Link as LinkIcon } from "@phosphor-icons/react";
+
+interface DigitalProductResponse {
+  product_id: string;
+  name: string;
+  description?: string;
+  deliverable: {
+    files?: Array<{
+      file_id: string;
+      file_name: string;
+      url: string;
+    }>;
+    external_url?: string;
+    instructions?: string;
+  };
+}
 import {
   Dialog,
   DialogContent,
@@ -16,6 +28,7 @@ import {
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
+import { getToken } from "@/lib/server-actions";
 
 interface DigitalDeliveryDialogProps {
   payment_id: string;
@@ -27,16 +40,38 @@ export function DigitalDeliveryDialog({
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState<DigitalProductResponse[]>([]);
   const [isPreloading, setIsPreloading] = useState(false);
-  const dispatch = useAppDispatch();
 
   const handleOpenChange = async (newOpen: boolean) => {
     if (newOpen) {
       setIsPreloading(true);
       try {
-        const response = await dispatch(
-          fetchDigitalProducts(payment_id)
-        ).unwrap();
-        setProducts(response.items);
+        const token = await getToken();
+        if (!token) {
+          throw new Error('No authentication token found');
+        }
+
+        const apiUrl = typeof window !== "undefined"
+          ? (window.location.hostname === process.env.NEXT_PUBLIC_HOST_URL?.replace('https://', '')
+            ? process.env.NEXT_PUBLIC_LIVE_URL
+            : process.env.NEXT_PUBLIC_TEST_URL)
+          : process.env.NEXT_PUBLIC_TEST_URL;
+
+        const response = await fetch(
+          `${apiUrl}/customer-portal/payments/${payment_id}/digital-product-deliverables`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch digital products: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setProducts(data.items || []);
         setOpen(true);
       } catch (error) {
         console.error("Failed to load digital products:", error);

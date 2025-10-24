@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Gabarito, Inter } from "next/font/google";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import "./globals.css";
-import { StoreProvider } from "@/redux/provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
@@ -56,30 +55,28 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
-    <StoreProvider>
-      <CSPostHogProvider>
-      <html
-        lang="en"
-        className={`${inter.variable} ${gabarito.variable} h-full`}
-        suppressHydrationWarning
-      >
-        <body className="font-body w-full h-full overflow-x-hidden">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextIntlClientProvider messages={messages}>
-              <main className="mx-auto max-w-[1920px]">
-                <ThemeToaster />
-                {children}
-              </main>
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </body>
-      </html>
-      </CSPostHogProvider>
-    </StoreProvider>
+    <CSPostHogProvider>
+    <html
+      lang="en"
+      className={`${inter.variable} ${gabarito.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <body className="font-body w-full h-full overflow-x-hidden">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider messages={messages}>
+            <main className="mx-auto max-w-[1920px]">
+              <ThemeToaster />
+              {children}
+            </main>
+          </NextIntlClientProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+    </CSPostHogProvider>
   );
 }

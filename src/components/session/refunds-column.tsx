@@ -12,7 +12,16 @@ import {
 import parseIso from "@/lib/date-helper";
 import { getBadge } from "@/lib/badge-helper";
 
-import { RefundResponse } from "@/redux/slice/transaction/transactionSlice";
+interface RefundResponse {
+  amount: number;
+  business_id: string;
+  created_at: string;
+  currency: string;
+  payment_id: string;
+  reason: string;
+  refund_id: string;
+  status: string;
+}
 
 export const RefundColumn: ColumnDef<RefundResponse>[] = [
   {

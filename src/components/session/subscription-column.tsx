@@ -6,7 +6,7 @@ import IDTooltip from "../custom/turnacate-tooltip";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import parseIso from "@/lib/date-helper";
-import { SubscriptionResponse } from "@/redux/slice/subscription/subscriptoinSlice";
+import { SubscriptionResponse } from "@/types/subscription";
 import {
   CurrencyCode,
   decodeCurrency,

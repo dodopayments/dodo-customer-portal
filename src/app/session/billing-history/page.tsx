@@ -1,170 +1,133 @@
-"use client";
-import React, { useState, useEffect } from "react";
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import BaseDataTable from "@/components/custom/base-data-table";
 import { PaymentColumn } from "@/components/session/payments-column";
 import { RefundColumn } from "@/components/session/refunds-column";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import {
-  fetchPayments,
-  fetchRefunds,
-} from "@/redux/slice/transaction/transactionSlice";
-import TablePagination from "@/components/ui/dodo/TablePagination";
-import { DateRange } from "react-day-picker";
-import Loading from "@/components/loading";
-import { FilterControls } from "@/components/custom/filter-controls";
-import { selectBusiness } from "@/redux/slice/business/businessSlice";
+import { fetchPayments, fetchRefunds, fetchBusiness } from "./actions";
+import Filters from "@/components/common/filters";
+import ServerPagination from "@/components/common/server-pagination";
 
-const Page = () => {
-  const dispatch = useAppDispatch();
-  const { payments, refunds } = useAppSelector((state) => state.transaction);
-  const [isLoading, setIsLoading] = useState(false);
-  const [pageNumberPayments, setPageNumberPayments] = useState(0);
-  const [statusFilter, setStatusFilter] = useState<string[]>([]);
-  const [dateFilter, setDateFilter] = useState<DateRange | undefined>();
-  const business = useAppSelector(selectBusiness);
-  const [pageNumberRefunds, setPageNumberRefunds] = useState(0);
-  const [statusFilterRefunds, setStatusFilterRefunds] = useState<string[]>([]);
-  const [dateFilterRefunds, setDateFilterRefunds] = useState<
-    DateRange | undefined
-  >();
+export interface PageProps {
+  searchParams: Promise<{
+    page?: string;
+    status?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    refundPage?: string;
+    refundStatus?: string;
+    refundDateFrom?: string;
+    refundDateTo?: string;
+  }>;
+}
 
-  useEffect(() => {
-    const fetchPaymentsData = async () => {
-      setIsLoading(true);
-      const params = {
-        pageSize: 10,
-        pageNumber: pageNumberPayments,
-        created_at_gte: dateFilter?.from,
-        created_at_lte: dateFilter?.to,
-        status: statusFilter[0],
-      };
-      await dispatch(fetchPayments(params));
-      setIsLoading(false);
-    };
-    fetchPaymentsData();
-  }, [dispatch, pageNumberPayments, dateFilter, statusFilter]);
+export default async function BillingHistoryPage({ searchParams }: PageProps) {
+  const params = await searchParams;
 
-  useEffect(() => {
-    const params = {
+  const pageNumber = parseInt(params.page || '0');
+  const status = params.status;
+  const dateFrom = params.dateFrom;
+  const dateTo = params.dateTo;
+
+  const refundPageNumber = parseInt(params.refundPage || '0');
+  const refundStatus = params.refundStatus;
+  const refundDateFrom = params.refundDateFrom;
+  const refundDateTo = params.refundDateTo;
+
+  const [paymentsData, refundsData, business] = await Promise.all([
+    fetchPayments({
       pageSize: 10,
-      pageNumber: pageNumberRefunds,
-      created_at_gte: dateFilterRefunds?.from,
-      created_at_lte: dateFilterRefunds?.to,
-      status: statusFilterRefunds[0],
-    };
-    dispatch(fetchRefunds(params));
-  }, [dispatch, pageNumberRefunds, dateFilterRefunds, statusFilterRefunds]);
+      pageNumber,
+      created_at_gte: dateFrom,
+      created_at_lte: dateTo,
+      status: status,
+    }),
+    fetchRefunds({
+      pageSize: 10,
+      pageNumber: refundPageNumber,
+      created_at_gte: refundDateFrom,
+      created_at_lte: refundDateTo,
+      status: refundStatus,
+    }),
+    fetchBusiness(),
+  ]);
 
-  const showRefunds =
-    refunds.data.length > 0 ||
-    Boolean(dateFilterRefunds) ||
-    statusFilterRefunds.length > 0;
+  const shouldShowRefunds =
+    refundsData.data.length > 0 ||
+    Boolean(refundDateFrom) ||
+    Boolean(refundDateTo) ||
+    Boolean(refundStatus);
 
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className="flex justify-center items-center min-h-[calc(100vh-50rem)]">
-          <Loading />
-        </div>
-      );
-    }
-    return (
-      <div className="flex flex-col ">
+  return (
+    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
+      <PageHeader
+        title="Billing History"
+        description={`View all your orders with ${business?.name || 'your business'}`}
+        actions= {
+          !shouldShowRefunds && (
+            <div className="flex items-center justify-between mb-4">
+              <Filters statusOptions={[]} />
+            </div>
+          )
+        }
+      />
+      <Separator className="my-6" />
+
+      <div className="flex flex-col">
         {/* Payments Section */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="font-display font-medium text-lg">Payments</span>
-            {showRefunds && (
-              <FilterControls
-                dateFilter={dateFilter}
-                setDateFilter={setDateFilter}
-                statusFilter={statusFilter}
-                setStatusFilter={setStatusFilter}
-                setPageNumber={setPageNumberPayments}
-                options={[
-                  { label: "Successful", value: "succeeded" },
-                  { label: "Failed", value: "failed" },
-                  { label: "Not Initiated", value: "requires_payment_method" },
-                  { label: "In Progress", value: "processing" },
-                ]}
-              />
+            {shouldShowRefunds && (
+              <Filters statusOptions={[]} />
             )}
           </div>
           <div className="flex flex-col">
-            <BaseDataTable data={payments.data} columns={PaymentColumn} />
-            <TablePagination
-              currentPage={pageNumberPayments}
+            <BaseDataTable data={paymentsData.data || []} columns={PaymentColumn} />
+            <ServerPagination
+              currentPage={pageNumber}
               pageSize={10}
-              currentPageItems={payments.data.length}
-              hasNextPage={payments.data.length >= 10}
-              onPageChange={setPageNumberPayments}
+              currentPageItems={paymentsData.data?.length || 0}
+              hasNextPage={paymentsData.hasNext || false}
+              baseUrl={`?${new URLSearchParams({
+                ...(status && { status }),
+                ...(dateFrom && { dateFrom }),
+                ...(dateTo && { dateTo }),
+              }).toString()}`}
             />
           </div>
         </div>
 
         {/* Refunds Section */}
-        {showRefunds && (
+        {shouldShowRefunds && (
           <div className="flex flex-col gap-4 mt-6">
             <div className="flex items-center justify-between">
               <span className="font-display font-medium text-lg">Refunds</span>
-              <FilterControls
-                dateFilter={dateFilterRefunds}
-                setDateFilter={setDateFilterRefunds}
-                statusFilter={statusFilterRefunds}
-                setStatusFilter={setStatusFilterRefunds}
-                setPageNumber={setPageNumberRefunds}
-                options={[
-                  { label: "Successful", value: "succeeded" },
-                  { label: "Failed", value: "failed" },
-                  { label: "Pending", value: "pending" },
-                  { label: "Review", value: "review" },
-                ]}
+              <Filters
+                statusOptions={[]}
+                showRefundsOption={true}
+                isRefundSection={true}
               />
             </div>
             <div className="flex flex-col">
-              <BaseDataTable data={refunds.data} columns={RefundColumn} />
-              <TablePagination
-                currentPage={pageNumberRefunds}
+              <BaseDataTable data={refundsData.data || []} columns={RefundColumn} />
+              <ServerPagination
+                currentPage={refundPageNumber}
                 pageSize={10}
-                currentPageItems={refunds.data.length}
-                hasNextPage={refunds.data.length >= 10}
-                onPageChange={setPageNumberRefunds}
+                currentPageItems={refundsData.data?.length || 0}
+                hasNextPage={refundsData.hasNext || false}
+                baseUrl={`?${new URLSearchParams({
+                  ...(status && { status }),
+                  ...(dateFrom && { dateFrom }),
+                  ...(dateTo && { dateTo }),
+                  ...(refundStatus && { refundStatus }),
+                  ...(refundDateFrom && { refundDateFrom }),
+                  ...(refundDateTo && { refundDateTo }),
+                }).toString()}`}
               />
             </div>
           </div>
         )}
       </div>
-    );
-  };
-  return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
-      <PageHeader
-        title="Billing History"
-        description={`View all your orders with ${business?.name}`}
-        actions={
-          !showRefunds && (
-            <FilterControls
-              dateFilter={dateFilter}
-              setDateFilter={setDateFilter}
-              statusFilter={statusFilter}
-              setStatusFilter={setStatusFilter}
-              setPageNumber={setPageNumberPayments}
-              options={[
-                { label: "In Progress", value: "processing" },
-                { label: "Successful", value: "succeeded" },
-                { label: "Failed", value: "failed" },
-                { label: "Not Initiated", value: "requires_payment_method" },
-              ]}
-            />
-          )
-        }
-      />
-      <Separator className="my-6" />
-      {renderContent()}
     </div>
   );
-};
-
-export default Page;
+}

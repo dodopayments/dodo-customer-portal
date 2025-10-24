@@ -56,7 +56,6 @@ Key directories:
 - `src/app` – routes, layouts, and pages
 - `src/components` – UI components (shadcn/ui + custom)
 - `src/lib` – helpers for HTTP, i18n, currency, dates
-- `src/redux` – store and slices for session-scoped UI state
 
 ## Internationalization
 

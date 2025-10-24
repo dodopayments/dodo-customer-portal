@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,13 +7,11 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
-import { redirect, useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import { fetchBusiness } from "@/redux/slice/business/businessSlice";
-import { setTokenData } from "@/redux/slice/token/tokenSlice";
 import { tokenHelper } from "@/lib/token-helper";
+import { useBusiness } from "@/hooks/use-business";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Head from "next/head";
 import { Banner, MobileBanner } from "./ui/dodo/banner";
@@ -54,21 +50,8 @@ const BusinessName = ({
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useAppDispatch();
-  const businessData = useAppSelector((state) => state.business.business);
+  const { business: businessData } = useBusiness();
   const router = useRouter();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(fetchBusiness()).unwrap();
-      } catch (error: any) {
-        if (error.message.includes("Request failed with status code 401")) {
-          redirect("/expired");
-        }
-      }
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     if (businessData?.name) {
@@ -81,7 +64,6 @@ export default function Navbar() {
       const businessId = businessData?.business_id;
       tokenHelper.logout();
       router.push(`/login/${businessId}`);
-      dispatch(setTokenData(null));
     } catch (error) {
       console.error("Logout failed:", error);
     }

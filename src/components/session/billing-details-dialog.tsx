@@ -30,7 +30,7 @@ import {
   billingDetailsFormSchema,
   BillingDetailsFormValues,
 } from "./subscription-form-schema";
-import { SubscriptionResponse } from "@/redux/slice/subscription/subscriptoinSlice";
+import { SubscriptionResponse } from "@/types/subscription";
 
 interface BillingDetailsDialogProps {
   open: boolean;
