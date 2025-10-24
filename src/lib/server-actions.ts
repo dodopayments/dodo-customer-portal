@@ -21,13 +21,14 @@ export async function makeAuthenticatedRequest(
     throw new Error('No authentication token found');
   }
 
+  const headers = new Headers(options.headers);
+  headers.set('Authorization', `Bearer ${token}`);
+  headers.set('Content-Type', 'application/json');
+
   return fetch(`${api_url}${endpoint}`, {
     ...options,
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
+    cache: 'no-store',
+    headers,
   });
 }
 

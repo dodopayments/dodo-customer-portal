@@ -6,7 +6,7 @@ interface LicenseKeysTableProps {
   data: any[];
 }
 
-export default function LicenseKeysTable({ data }: LicenseKeysTableProps) {
+export function LicenseKeysTable({ data }: LicenseKeysTableProps) {
   return (
     <BaseDataTable
       data={data}
