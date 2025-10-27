@@ -127,6 +127,7 @@ export const updateBillingDetails = createAsyncThunk<
         street: string;
         zipcode: string;
       };
+      customer_name: string | null;
       tax_id: string | null;
     };
   },
@@ -140,12 +141,13 @@ export const updateBillingDetails = createAsyncThunk<
         dispatch(setTokenData(null));
         throw new Error("No valid token found");
       }
-      
+
       const patchData = {
         billing: data.billing,
+        customer_name: data.customer_name,
         tax_id: data.tax_id === "" ? null : data.tax_id,
       };
-      
+
       const response = await api.patch<SubscriptionResponse>(
         `/customer-portal/subscriptions/${subscription_id}`,
         patchData,
@@ -153,7 +155,7 @@ export const updateBillingDetails = createAsyncThunk<
           headers: { Authorization: `Bearer ${tokenData.token}` },
         }
       );
-      
+
       return response.data;
     } catch (error) {
       parseError(error, "Failed to update billing details");
@@ -179,7 +181,7 @@ export const cancelSubscription = createAsyncThunk<
     { dispatch }
   ) => {
     const accessToken = await dispatch(getAccessToken()).unwrap();
-    
+
     const body = revoke
       ? JSON.stringify({ cancel_at_next_billing_date: false })
       : nextBillingDate
@@ -282,7 +284,8 @@ const subscriptionSlice = createSlice({
       })
       .addCase(fetchSubscriptions.rejected, (state, action) => {
         state.subscriptions.loading = false;
-        state.subscriptions.error = action.error.message || "Failed to fetch subscriptions";
+        state.subscriptions.error =
+          action.error.message || "Failed to fetch subscriptions";
       });
 
     // Cancel subscription
@@ -314,7 +317,8 @@ const subscriptionSlice = createSlice({
       })
       .addCase(updateBillingDetails.rejected, (state, action) => {
         state.updateBilling.loading = false;
-        state.updateBilling.error = action.error.message || "Failed to update billing details";
+        state.updateBilling.error =
+          action.error.message || "Failed to update billing details";
       });
   },
 });
