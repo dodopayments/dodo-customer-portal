@@ -142,6 +142,7 @@ export function SubscriptionActions({
               street: data.addressLine,
               zipcode: data.postalCode,
             },
+            customer_name: data.fullName,
             tax_id: data.taxId || null,
           },
         })
