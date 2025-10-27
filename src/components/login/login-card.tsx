@@ -1,22 +1,15 @@
 import { Card } from "@/components/ui/card";
-import Image from "next/image";
+import { cn } from "@/lib/utils";
 import { LoginForm } from "./login-form";
+import FooterPill from "../footer-pill";
 
-const LoginCard = () => {
+const LoginCard = ({ className }: { className?: string }) => {
   return (
-    <Card className="w-full max-w-[95vw] mb-5 sm:0 sm:max-w-[400px] relative h-full overflow-hidden">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/texture.png"
-          width={400}
-          height={400}
-          alt="texture"
-          className="w-full h-full object-cover"
-          priority
-          quality={85}
-        />
+    <Card className={cn("w-full relative h-full overflow-hidden", className)}>
+      <LoginForm className="w-full max-w-md mx-auto" />
+      <div className="w-full flex justify-center absolute bottom-4 md:bottom-8">
+        <FooterPill align="center" isFixed={false} /> 
       </div>
-      <LoginForm />
     </Card>
   );
 };
