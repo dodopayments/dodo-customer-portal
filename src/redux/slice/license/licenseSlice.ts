@@ -38,12 +38,14 @@ export const fetchLicenses = createAsyncThunk(
       created_at_gte,
       created_at_lte,
       status,
+      search,
     }: {
       pageSize: number;
       pageNumber: number;
       created_at_gte?: Date;
       created_at_lte?: Date;
       status?: string;
+      search?: string;
     },
     { dispatch }
   ) => {
@@ -63,6 +65,7 @@ export const fetchLicenses = createAsyncThunk(
             created_at_gte,
             created_at_lte,
             status,
+            search,
           },
           headers: {
             Authorization: `Bearer ${tokenData.token}`,
