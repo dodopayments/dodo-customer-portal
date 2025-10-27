@@ -27,6 +27,7 @@ import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import LoadingOverlay from "../loading-overlay";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { cn } from "@/lib/utils";
 
 const emailSchema = z.object({
   email: z
@@ -65,7 +66,7 @@ const MagicLinkStatus = ({
   </CardHeader>
 );
 
-export const LoginForm = () => {
+export const LoginForm = ({ className }: { className?: string }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const params = useParams();
@@ -158,7 +159,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <div className="relative z-10">
+    <div className={cn("relative z-10", className)}>
       {!success ? (
         <>
           <CardHeader className="flex px-8 pt-12 flex-col items-center">

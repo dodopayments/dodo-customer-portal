@@ -5,14 +5,16 @@ import React from "react";
 
 const FooterPill = ({
   align = "center",
+  isFixed = true,
 }: {
   align?: "center" | "start" | "end";
+  isFixed?: boolean;
 }) => {
   return (
     <footer
 
       className={cn(
-        "fixed bottom-4 md:bottom-8 left-0 w-full flex items-center justify-center px-2 sm:px-10",
+        isFixed ? "fixed bottom-4 md:bottom-8 left-0 w-full flex items-center justify-center px-2 sm:px-10" : "w-full flex items-center justify-center",
         `justify-${align}`
       )}
     >
