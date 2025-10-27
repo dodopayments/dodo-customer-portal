@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Gabarito, Inter } from "next/font/google";
+import { Gabarito, Inter, Hanken_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
@@ -16,6 +16,11 @@ const inter = Inter({
 const gabarito = Gabarito({
   subsets: ["latin"],
   variable: "--font-gabarito",
+});
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -58,7 +63,7 @@ export default async function RootLayout({
     <CSPostHogProvider>
     <html
       lang="en"
-      className={`${inter.variable} ${gabarito.variable} h-full`}
+      className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="font-body w-full h-full overflow-x-hidden">
