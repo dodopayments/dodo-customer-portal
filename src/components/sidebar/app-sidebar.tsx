@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { useBusiness } from "@/hooks/use-business";
 import { useEffect } from "react";
 import { tokenHelper } from "@/lib/token-helper";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,6 +54,7 @@ const BusinessName = ({
 
 export function AppSidebar() {
     const { business: businessData } = useBusiness();
+    const pathname = usePathname();
     const router = useRouter();
 
     useEffect(() => {
@@ -71,8 +72,14 @@ export function AppSidebar() {
             console.error("Logout failed:", error);
         }
     };
+
+    const isActive = (path: string) => {
+        return pathname.includes(path);
+    };
+
+
     return (
-        <Sidebar className="p-6">
+        <Sidebar className="p-6 px-4 border-none">
             <SidebarHeader>
                 <BusinessName
                     image={businessData?.logo}
@@ -81,10 +88,10 @@ export function AppSidebar() {
                 />
             </SidebarHeader>
             <SidebarContent className="text-left mt-5">
-                <SidebarGroup className="text-left">
-                    <Button variant={'ghost'} className="text-left text-text-secondary">Orders</Button>
-                    <Button variant={'ghost'} className="text-left text-text-secondary">Payment Methods</Button>
-                    <Button variant={'ghost'} className="text-left text-text-secondary">Profile & Wallets</Button>
+                <SidebarGroup className="text-left gap-2">
+                    <Button variant={isActive('/orders') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/orders')}>Orders</Button>
+                    <Button variant={isActive('/payment-methods') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/payment-methods')}>Payment Methods</Button>
+                    <Button variant={isActive('/session/profile') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/profile')}>Profile & Wallets</Button>
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="self-stretch">
@@ -95,7 +102,7 @@ export function AppSidebar() {
                         width={16}
                         height={16}
                     />
-                    <p className="font-hanken font-medium text-xs leading-5 tracking-[-0.03em] text-white" style={{ leadingTrim: 'both', textEdge: 'cap' } as React.CSSProperties}>
+                    <p className="font-hanken font-medium text-xs leading-5 tracking-[-0.03em] text-primary" style={{ leadingTrim: 'both', textEdge: 'cap' } as React.CSSProperties}>
                         Powered by Dodo Payments
                     </p>
                 </Link>
