@@ -17,9 +17,10 @@ interface ItemCardProps {
     description: string;
     amount: string;
     searchPlaceholder?: string;
+    orderType: string;
 }
 
-export const ItemCard = ({ cardClassName, imageUrl, title, description, amount, searchPlaceholder }: ItemCardProps) => {
+export const ItemSection = ({ cardClassName, imageUrl, title, description, amount, searchPlaceholder, orderType }: ItemCardProps) => {
     const [search, setSearch] = useState("");
     return (
         <>

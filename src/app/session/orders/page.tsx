@@ -1,7 +1,7 @@
 import PageHeader from "@/components/page-header";
 import { fetchPayments, fetchRefunds, fetchBusiness } from "@/app/session/orders/actions";
 import { SessionTabs } from "@/components/session/tabs";
-import { ItemCard } from "@/components/session/item-card";
+import { ItemSection } from "@/components/session/item-section";
 
 export interface PageProps {
     searchParams: Promise<{
@@ -13,11 +13,14 @@ export interface PageProps {
         refundStatus?: string;
         refundDateFrom?: string;
         refundDateTo?: string;
+        orderType?: string;
     }>;
 }
 
 export default async function OrdersPage({ searchParams }: PageProps) {
     const params = await searchParams;
+    console.log("params", params);
+    const orderType = params?.orderType || 'one-time'; // one-time or subscription
 
     const pageNumber = parseInt(params.page || '0');
     const status = params.status;
@@ -50,9 +53,10 @@ export default async function OrdersPage({ searchParams }: PageProps) {
     return (
         <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
             <PageHeader>
-                <SessionTabs items={[{ value: 'payments', label: 'One-time purchases', link: '/session/orders' }, { value: 'subscriptions', label: 'Subscriptions', link: '/session/orders/subscriptions' }]} />
+                <SessionTabs items={[{ value: 'payments', label: 'One-time purchases', link: '/session/orders?orderType=one-time' }, { value: 'subscriptions', label: 'Subscriptions', link: '/session/orders?orderType=subscription' }]} />
             </PageHeader>
-            <ItemCard
+            <ItemSection
+                orderType={orderType}
                 cardClassName="w-full p-4 gap-4"
                 imageUrl="/images/login/login-img.png"
                 title="Mirage - Framer template"
@@ -60,7 +64,7 @@ export default async function OrdersPage({ searchParams }: PageProps) {
                 amount="$100.00"
                 searchPlaceholder="Search by order ID"
             >
-            </ItemCard>
+            </ItemSection>
         </div>
     );
 }
