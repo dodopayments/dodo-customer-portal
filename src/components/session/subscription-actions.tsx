@@ -56,8 +56,6 @@ export function SubscriptionActions({
         nextBillingDate: false,
       });
 
-      // Refresh the page to get updated data
-      router.refresh();
       toast.info("Subscription cancelled successfully");
       setShowCancelDialog(false);
     } catch (error) {
@@ -103,8 +101,6 @@ export function SubscriptionActions({
         }
       }
 
-      // Refresh the page to get updated data
-      router.refresh();
     } catch (error) {
       console.error(error);
       toast.error("Failed to update subscription. Please try again.");
@@ -130,8 +126,6 @@ export function SubscriptionActions({
       });
       toast.success("Billing details updated successfully");
       setShowUpdateBillingDialog(false);
-      // Refresh the page to get updated data
-      router.refresh();
     } catch (error) {
       console.error("Failed to update billing details:", error);
       toast.error("Failed to update billing details. Please try again.");

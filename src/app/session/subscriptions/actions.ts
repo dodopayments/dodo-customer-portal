@@ -57,6 +57,16 @@ export async function cancelSubscriptionLegacy(subscriptionId: string) {
   return response.json();
 }
 
+export async function fetchBusiness() {
+  try {
+    const response = await makeAuthenticatedRequest('/customer-portal/business');
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching business:', error);
+    return null;
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchSubscriptions(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {

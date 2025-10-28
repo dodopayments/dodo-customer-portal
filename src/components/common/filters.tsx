@@ -41,18 +41,19 @@ export default function Filters({
     return status ? [status] : [];
   });
 
+  const [isInitialized, setIsInitialized] = useState(false);
+
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    if (!isInitialized) {
+      setIsInitialized(true);
+      return;
+    }
+
+    const params = new URLSearchParams();
 
     if (isRefundSection) {
-      params.delete('refundDateFrom');
-      params.delete('refundDateTo');
-      params.delete('refundStatus');
       params.set('refundPage', '0');
     } else {
-      params.delete('dateFrom');
-      params.delete('dateTo');
-      params.delete('status');
       params.set('page', '0');
     }
 
@@ -66,8 +67,13 @@ export default function Filters({
       params.set(isRefundSection ? 'refundStatus' : 'status', statusFilter[0]);
     }
 
-    router.replace(`?${params.toString()}`, { scroll: false });
-  }, [dateFilter, statusFilter, router, searchParams, isRefundSection]);
+    const newUrl = `?${params.toString()}`;
+    const currentSearch = window.location.search;
+
+    if (newUrl !== currentSearch) {
+      router.replace(newUrl, { scroll: false });
+    }
+  }, [dateFilter, statusFilter, router, isRefundSection, isInitialized]);
 
   const handleSetPageNumber = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
