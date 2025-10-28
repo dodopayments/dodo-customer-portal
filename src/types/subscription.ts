@@ -3,6 +3,7 @@ export interface SubscriptionResponse {
   currency: string;
   customer: {
     customer_id: string;
+    phone_number: string | null;
     email: string;
     name: string;
   };

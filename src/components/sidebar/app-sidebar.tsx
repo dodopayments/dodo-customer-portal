@@ -73,10 +73,11 @@ export function AppSidebar() {
         }
     };
 
-    const isActive = (path: string) => {
-        return pathname.includes(path);
-    };
-
+    const navigation = [
+        { label: 'Orders', path: '/session/orders', activeCheck: ['/session/orders', '/session/subscriptions'] },
+        { label: 'Payment Methods', path: '/session/payment-methods' },
+        { label: 'Profile & Wallets', path: '/session/profile' },
+    ];
 
     return (
         <Sidebar className="p-6 px-4 border-none">
@@ -89,9 +90,24 @@ export function AppSidebar() {
             </SidebarHeader>
             <SidebarContent className="text-left mt-5">
                 <SidebarGroup className="text-left gap-2">
-                    <Button align="left" variant={isActive('/session/orders') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/orders')}>Orders</Button>
-                    <Button align="left" variant={isActive('/session/payment-methods') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/payment-methods')}>Payment Methods</Button>
-                    <Button align="left" variant={isActive('/session/profile') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/profile')}>Profile & Wallets</Button>
+                    {navigation.map(({ label, path, activeCheck }) => {
+                        const isActive = activeCheck
+                            ? activeCheck.some(check => pathname.includes(check))
+                            : pathname.includes(path);
+
+                        return (
+                            <Button
+                                key={path}
+                                align="left"
+                                variant={isActive ? 'secondary' : 'ghost'}
+                                className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal"
+                                style={{ leadingTrim: 'cap-height' } as React.CSSProperties}
+                                onClick={() => router.push(path)}
+                            >
+                                {label}
+                            </Button>
+                        );
+                    })}
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="self-stretch">
