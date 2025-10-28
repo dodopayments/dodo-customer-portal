@@ -1,14 +1,7 @@
 import PageHeader from "@/components/page-header";
-import { Separator } from "@/components/ui/separator";
-import BaseDataTable from "@/components/custom/base-data-table";
-import { PaymentColumn } from "@/components/session/payments-column";
-import { RefundColumn } from "@/components/session/refunds-column";
 import { fetchPayments, fetchRefunds, fetchBusiness } from "@/app/session/orders/actions";
-import Filters from "@/components/common/filters";
-import ServerPagination from "@/components/common/server-pagination";
 import { SessionTabs } from "@/components/session/tabs";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { ItemCard } from "@/components/session/item-card";
 
 export interface PageProps {
     searchParams: Promise<{
@@ -67,6 +60,14 @@ export default async function OrdersPage({ searchParams }: PageProps) {
             </PageHeader>
 
             <div className="flex flex-col mt-6">
+                <ItemCard
+                    className="w-full p-4 gap-4"
+                    imageUrl="/images/login/login-img.png"
+                    title="Mirage - Framer template"
+                    description="Mirage is a bold, conversion-focused Framer template for AI startups."
+                    amount="$100.00"
+                >
+                </ItemCard>
             </div>
         </div>
     );
