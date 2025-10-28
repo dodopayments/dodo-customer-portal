@@ -47,28 +47,20 @@ export default async function OrdersPage({ searchParams }: PageProps) {
         fetchBusiness(),
     ]);
 
-    const shouldShowRefunds =
-        refundsData.data.length > 0 ||
-        Boolean(refundDateFrom) ||
-        Boolean(refundDateTo) ||
-        Boolean(refundStatus);
-
     return (
         <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
             <PageHeader>
                 <SessionTabs items={[{ value: 'payments', label: 'One-time purchases', link: '/session/orders' }, { value: 'subscriptions', label: 'Subscriptions', link: '/session/orders/subscriptions' }]} />
             </PageHeader>
-
-            <div className="flex flex-col mt-6">
-                <ItemCard
-                    className="w-full p-4 gap-4"
-                    imageUrl="/images/login/login-img.png"
-                    title="Mirage - Framer template"
-                    description="Mirage is a bold, conversion-focused Framer template for AI startups."
-                    amount="$100.00"
-                >
-                </ItemCard>
-            </div>
+            <ItemCard
+                cardClassName="w-full p-4 gap-4"
+                imageUrl="/images/login/login-img.png"
+                title="Mirage - Framer template"
+                description="Mirage is a bold, conversion-focused Framer template for AI startups."
+                amount="$100.00"
+                searchPlaceholder="Search by order ID"
+            >
+            </ItemCard>
         </div>
     );
 }

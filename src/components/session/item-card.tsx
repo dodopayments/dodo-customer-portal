@@ -6,45 +6,57 @@ import Image from "next/image"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Key } from "lucide-react";
+import { Key, Search } from "lucide-react";
+import { Input } from "../ui/input";
+import { useState } from "react";
 
 interface ItemCardProps {
-    className?: string;
+    cardClassName?: string;
     imageUrl: string;
     title: string;
     description: string;
     amount: string;
+    searchPlaceholder?: string;
 }
 
-export const ItemCard = ({ className, imageUrl, title, description, amount }: ItemCardProps) => {
+export const ItemCard = ({ cardClassName, imageUrl, title, description, amount, searchPlaceholder }: ItemCardProps) => {
+    const [search, setSearch] = useState("");
     return (
-        <Card className={cn("border-b", className)}>
-            <CardContent className="flex flex-row items-center px-0 gap-2">
-                <Image src={imageUrl} alt={title} width={56} height={56} className="rounded-lg flex-none aspect-square object-cover" />
-                <div className="flex flex-col gap-2 flex-1">
-                    <div className="flex flex-row justify-between items-start gap-4">
-                        <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{title}</CardTitle>
-                        <CardDescription className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{amount}</CardDescription>
+        <>
+            <div className="flex flex-col gap-4">
+                <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-tertiary border-border-secondary" />
+                    <Input type="text" placeholder={searchPlaceholder} className="pl-10 border-border-secondary" value={search} onChange={(e) => setSearch(e.target.value)} />
+                </div>
+            </div>
+            <Card className={cn("border-b mt-6", cardClassName)}>
+                <CardContent className="flex flex-row items-center px-0 gap-2">
+                    <Image src={imageUrl} alt={title} width={56} height={56} className="rounded-lg flex-none aspect-square object-cover" />
+                    <div className="flex flex-col gap-2 flex-1">
+                        <div className="flex flex-row justify-between items-start gap-4">
+                            <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{title}</CardTitle>
+                            <CardDescription className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{amount}</CardDescription>
+                        </div>
+                        <p className="font-['Inter'] font-normal text-sm leading-[21px] text-text-secondary self-stretch">{description}</p>
                     </div>
-                    <p className="font-['Inter'] font-normal text-sm leading-[21px] text-text-secondary self-stretch">{description}</p>
-                </div>
-            </CardContent>
-            <Separator className="mb-4" />
-            <CardFooter className="flex flex-row justify-between p-0">
-                <div className="flex flex-row gap-2">
-                    <Button variant="secondary" className="w-full">
-                        <Key />
-                        View details
-                    </Button>
-                    <Button variant="secondary" className="w-full">
-                        <Key />
-                        View details
-                    </Button>
-                </div>
-                <Badge variant="green" dot={false} className="rounded-sm border-sm">
-                    Paid
-                </Badge>
-            </CardFooter>
-        </Card >
+                </CardContent>
+                <Separator className="mb-4" />
+                <CardFooter className="flex flex-row justify-between p-0">
+                    <div className="flex flex-row gap-2">
+                        <Button variant="secondary" className="w-full">
+                            <Key />
+                            View details
+                        </Button>
+                        <Button variant="secondary" className="w-full">
+                            <Key />
+                            View details
+                        </Button>
+                    </div>
+                    <Badge variant="green" dot={false} className="rounded-sm border-sm">
+                        Paid
+                    </Badge>
+                </CardFooter>
+            </Card >
+        </>
     )
 }
