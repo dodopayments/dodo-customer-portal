@@ -56,12 +56,13 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   loading?: boolean
+  align?: 'left' | 'center' | 'right'
 }
 
 export type ButtonIconProps = IconProps | IconRefProps;
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps & ButtonIconProps>(
-  ({ className, variant, effect, size, icon: Icon, iconPlacement, asChild = false, loading = false, children, ...props }, ref) => {
+  ({ className, variant, align = 'center', effect, size, icon: Icon, iconPlacement, asChild = false, loading = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const [isPressed, setIsPressed] = React.useState(false)
 
@@ -84,7 +85,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & ButtonIconProps
           "inline-flex items-center gap-1 w-full justify-center",
           "transition-all duration-200",
           loading ? "opacity-0 transform -translate-y-2" : "opacity-100 transform translate-y-0",
-          isPressed && "scale-[0.98] translate-y-[0.5px]"
+          isPressed && "scale-[0.98] translate-y-[0.5px]",
+          align === 'left' ? 'justify-start' : align === 'right' ? 'justify-end' : 'justify-center', 'text-left'
         )}>
           {Icon && iconPlacement === 'left' && (
             effect === 'expandIcon' ? (

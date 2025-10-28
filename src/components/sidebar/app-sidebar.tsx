@@ -89,9 +89,9 @@ export function AppSidebar() {
             </SidebarHeader>
             <SidebarContent className="text-left mt-5">
                 <SidebarGroup className="text-left gap-2">
-                    <Button variant={isActive('/session/orders') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/orders')}>Orders</Button>
-                    <Button variant={isActive('/session/payment-methods') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/payment-methods')}>Payment Methods</Button>
-                    <Button variant={isActive('/session/profile') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/profile')}>Profile & Wallets</Button>
+                    <Button align="left" variant={isActive('/session/orders') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/orders')}>Orders</Button>
+                    <Button align="left" variant={isActive('/session/payment-methods') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/payment-methods')}>Payment Methods</Button>
+                    <Button align="left" variant={isActive('/session/profile') ? 'secondary' : 'ghost'} className="text-left text-text-secondary font-display font-normal text-sm leading-5 tracking-normal" style={{ leadingTrim: 'cap-height' } as React.CSSProperties} onClick={() => router.push('/session/profile')}>Profile & Wallets</Button>
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="self-stretch">
