@@ -40,14 +40,12 @@ const oneTimeData: OneTimeData[] = [{
 
 export default async function OrdersPage({ searchParams }: PageProps) {
     const params = await searchParams;
-    console.log("params", params);
     const orderType = params?.orderType || 'one-time'; // one-time or subscription
 
     let data = [];
 
     if (orderType === 'subscriptions') {
         const subscriptionsData = await fetchSubscriptions();
-        console.log("subscriptionsData", subscriptionsData);
         data = subscriptionsData.data;
     } else {
         const oneTimeData = await fetchOneTime();

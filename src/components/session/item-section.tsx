@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils"
-import { CircleSlash, Search } from "lucide-react";
+import { CircleSlash, RefreshCcw, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { OneTimePurchaseCard } from "./one-time-purchase-card";
@@ -69,18 +69,32 @@ interface ItemCardProps {
 
 export const ItemSection = ({ cardClassName, searchPlaceholder, orderType, oneTimeData, subscriptionData, dataIndex = 0 }: ItemCardProps) => {
     const [search, setSearch] = useState("");
-    if ((orderType === "one-time" && oneTimeData.length === 0) || (orderType === "subscriptions" && subscriptionData.length === 0)) {
+    if (orderType === "one-time" && oneTimeData.length === 0) {
         return (
             <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
             <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
               <CircleSlash />
             </span>
             <span className="text-sm font-display text-center tracking-wide text-text-secondary">
-              No Active License Keys
+              No purchases at the moment
             </span>
           </div>
         )
     }
+
+    if (orderType === "subscriptions" && subscriptionData.length === 0) {
+        return (
+            <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
+            <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
+              <RefreshCcw />
+            </span>
+            <span className="text-sm font-display text-center tracking-wide text-text-secondary">
+              No active subscriptions at the moment
+            </span>
+          </div>
+        )
+    }
+
     return (
         <>
             <div className="flex flex-col gap-4">
