@@ -1,7 +1,7 @@
 import PageHeader from "@/components/page-header";
 import { fetchOneTime, fetchSubscriptions } from "@/app/session/orders/actions";
 import { SessionTabs } from "@/components/session/tabs";
-import { ItemSection } from "@/components/session/item-section";
+import { ItemSection, OneTimeData, SubscriptionData } from "@/components/session/item-section";
 
 export interface PageProps {
     searchParams: Promise<{
@@ -17,6 +17,27 @@ export interface PageProps {
     }>;
 }
 
+const oneTimeData: OneTimeData[] = [{
+    payment_id: 'pay_WxkxhuwJjeLzvqvAoJKrw',
+    status: 'requires_payment_method',
+    total_amount: 2200,
+    currency: 'USD',
+    payment_method: null,
+    payment_method_type: null,
+    created_at: '2025-10-06T10:01:06.398332Z',
+    digital_products_delivered: true,
+    product: {
+        product_id: 'prod_WxkxhuwJjeLzvqvAoJKrw',
+        name: 'Product 1',
+        description: 'Product 1 description',
+        price: 2200,
+        currency: 'USD',
+        image_url: '/images/login/login-img.png',
+        created_at: '2025-10-06T10:01:06.398332Z',
+        updated_at: '2025-10-06T10:01:06.398332Z',
+    },
+}]
+
 export default async function OrdersPage({ searchParams }: PageProps) {
     const params = await searchParams;
     console.log("params", params);
@@ -26,10 +47,10 @@ export default async function OrdersPage({ searchParams }: PageProps) {
 
     if (orderType === 'subscriptions') {
         const subscriptionsData = await fetchSubscriptions();
+        console.log("subscriptionsData", subscriptionsData);
         data = subscriptionsData.data;
     } else {
         const oneTimeData = await fetchOneTime();
-        console.log("oneTimeData", oneTimeData);
         data = oneTimeData.data;
     }
 
@@ -39,16 +60,13 @@ export default async function OrdersPage({ searchParams }: PageProps) {
                 <SessionTabs items={[{ value: 'one-time', label: 'One-time purchases', link: '/session/orders?orderType=one-time' }, { value: 'subscriptions', label: 'Subscriptions', link: '/session/orders?orderType=subscriptions' }]} currentTab={orderType} />
             </PageHeader>
             <ItemSection
-                orderType={orderType}
+                orderType={orderType as 'one-time' | 'subscriptions'}
                 cardClassName="w-full p-4 gap-4"
-                imageUrl="/images/login/login-img.png"
-                title="Mirage - Framer template"
-                description="Mirage is a bold, conversion-focused Framer template for AI startups."
-                amount="$100.00"
                 searchPlaceholder="Search by order ID"
-                data={data}
-            >
-            </ItemSection>
+                oneTimeData={data as OneTimeData[]}
+                subscriptionData={data as SubscriptionData[]}
+                dataIndex={0}
+            />
         </div>
     );
 }
