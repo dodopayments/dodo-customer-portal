@@ -9,10 +9,12 @@ type Item = {
     label: string;
     link: string;
 }
-export function SessionTabs({ className, items }: { className?: string, items: Item[] }) {
+export function SessionTabs({ className, items, currentTab }: { className?: string, items: Item[], currentTab: string }) {
     const router = useRouter();
+    console.log("items", items);
+    console.log("currentTab", currentTab);
     return (
-        <Tabs defaultValue={items[0].value} className={cn("w-[400px]", className)}>
+        <Tabs defaultValue={currentTab} className={cn("w-[400px]", className)}>
             <TabsList>
                 {items.map((item) => (
                     <TabsTrigger key={item.value} value={item.value} onClick={() => router.push(item.link)}>{item.label}</TabsTrigger>

@@ -1,5 +1,5 @@
 import PageHeader from "@/components/page-header";
-import { fetchPayments, fetchRefunds, fetchBusiness } from "@/app/session/orders/actions";
+import { fetchOneTime, fetchSubscriptions } from "@/app/session/orders/actions";
 import { SessionTabs } from "@/components/session/tabs";
 import { ItemSection } from "@/components/session/item-section";
 
@@ -26,34 +26,27 @@ export default async function OrdersPage({ searchParams }: PageProps) {
     const status = params.status;
     const dateFrom = params.dateFrom;
     const dateTo = params.dateTo;
+    let data = [];
+    let product = null;
 
-    const refundPageNumber = parseInt(params.refundPage || '0');
-    const refundStatus = params.refundStatus;
-    const refundDateFrom = params.refundDateFrom;
-    const refundDateTo = params.refundDateTo;
-
-    const [paymentsData, refundsData, business] = await Promise.all([
-        fetchPayments({
-            pageSize: 10,
-            pageNumber,
+    if (orderType === 'subscriptions') {
+        const subscriptionsData = await fetchSubscriptions({
             created_at_gte: dateFrom,
             created_at_lte: dateTo,
-            status: status,
-        }),
-        fetchRefunds({
-            pageSize: 10,
-            pageNumber: refundPageNumber,
-            created_at_gte: refundDateFrom,
-            created_at_lte: refundDateTo,
-            status: refundStatus,
-        }),
-        fetchBusiness(),
-    ]);
+        });
+        console.log("subscriptionsData", subscriptionsData);
+        data = subscriptionsData.data;
+    } else {
+        const oneTimeData = await fetchOneTime();
+        console.log("oneTimeData", oneTimeData);
+        data = oneTimeData.data;
+    }
+
 
     return (
         <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
             <PageHeader>
-                <SessionTabs items={[{ value: 'payments', label: 'One-time purchases', link: '/session/orders?orderType=one-time' }, { value: 'subscriptions', label: 'Subscriptions', link: '/session/orders?orderType=subscription' }]} />
+                <SessionTabs items={[{ value: 'one-time', label: 'One-time purchases', link: '/session/orders?orderType=one-time' }, { value: 'subscriptions', label: 'Subscriptions', link: '/session/orders?orderType=subscriptions' }]} currentTab={orderType} />
             </PageHeader>
             <ItemSection
                 orderType={orderType}
@@ -63,6 +56,7 @@ export default async function OrdersPage({ searchParams }: PageProps) {
                 description="Mirage is a bold, conversion-focused Framer template for AI startups."
                 amount="$100.00"
                 searchPlaceholder="Search by order ID"
+                data={data}
             >
             </ItemSection>
         </div>
