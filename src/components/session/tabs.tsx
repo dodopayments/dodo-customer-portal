@@ -11,8 +11,6 @@ type Item = {
 }
 export function SessionTabs({ className, items, currentTab }: { className?: string, items: Item[], currentTab: string }) {
     const router = useRouter();
-    console.log("items", items);
-    console.log("currentTab", currentTab);
     return (
         <Tabs defaultValue={currentTab} className={cn("w-[400px]", className)}>
             <TabsList>

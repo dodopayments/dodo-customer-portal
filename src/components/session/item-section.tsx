@@ -10,6 +10,18 @@ import { Key, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useState } from "react";
 
+interface OneTimeData {   
+    payment_id: string;
+    status: string;
+    total_amount: number;
+    currency: string;
+    payment_method: string | null;
+    payment_method_type: string | null;
+    created_at: string;
+    digital_products_delivered: boolean;
+    metadata: object;
+}
+
 interface SubscriptionData {
     subscription_id: string;
     recurring_pre_tax_amount: number;
@@ -45,7 +57,7 @@ interface ItemCardProps {
     amount: string;
     searchPlaceholder?: string;
     orderType: string;
-    data: SubscriptionData[];
+    data: SubscriptionData[] | OneTimeData[];
 }
 
 export const ItemSection = ({ cardClassName, imageUrl, title, description, amount, searchPlaceholder, orderType }: ItemCardProps) => {

@@ -22,26 +22,16 @@ export default async function OrdersPage({ searchParams }: PageProps) {
     console.log("params", params);
     const orderType = params?.orderType || 'one-time'; // one-time or subscription
 
-    const pageNumber = parseInt(params.page || '0');
-    const status = params.status;
-    const dateFrom = params.dateFrom;
-    const dateTo = params.dateTo;
     let data = [];
-    let product = null;
 
     if (orderType === 'subscriptions') {
-        const subscriptionsData = await fetchSubscriptions({
-            created_at_gte: dateFrom,
-            created_at_lte: dateTo,
-        });
-        console.log("subscriptionsData", subscriptionsData);
+        const subscriptionsData = await fetchSubscriptions();
         data = subscriptionsData.data;
     } else {
         const oneTimeData = await fetchOneTime();
         console.log("oneTimeData", oneTimeData);
         data = oneTimeData.data;
     }
-
 
     return (
         <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
