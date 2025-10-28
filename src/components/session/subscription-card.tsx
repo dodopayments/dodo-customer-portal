@@ -9,6 +9,7 @@ import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
 import { SubscriptionData } from "./item-section";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
+import { useRouter } from "next/navigation";
 
 interface SubscriptionCardProps {
     item: SubscriptionData;
@@ -16,6 +17,7 @@ interface SubscriptionCardProps {
 }
 
 export const SubscriptionCard = ({ item, cardClassName }: SubscriptionCardProps) => {
+    const router = useRouter();
     return (
         <Card className={cardClassName}>
             <CardContent className="flex flex-row items-center px-0 gap-2">
@@ -35,7 +37,7 @@ export const SubscriptionCard = ({ item, cardClassName }: SubscriptionCardProps)
             </CardContent>
             <Separator className="mb-4" />
             <CardFooter className="flex flex-row justify-between p-0">
-                <Button variant="secondary" onClick={() => window.open(`${api_url}/invoices/subscriptions/${item.subscription_id}`, '_blank')}>
+                <Button variant="secondary" onClick={() => router.push(`/session/subscriptions/${item.subscription_id}`)}>
                     View details
                 </Button>
                 <div className="flex flex-row gap-2">
