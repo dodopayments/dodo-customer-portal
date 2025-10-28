@@ -42,9 +42,13 @@ export async function fetchBusiness() {
   }
 }
 
-export async function fetchOneTime(): Promise<PaginatedResponse<any>> {
+export async function fetchOneTime(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
-    const response = await makeAuthenticatedRequest(`/customer-portal/payments`);
+    const params = new URLSearchParams();
+    if (filters.created_at_gte) params.set('created_at_gte', filters.created_at_gte);
+    if (filters.created_at_lte) params.set('created_at_lte', filters.created_at_lte);
+
+    const response = await makeAuthenticatedRequest(`/customer-portal/payments?${params}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch one-time: ${response.status}`);
@@ -52,8 +56,8 @@ export async function fetchOneTime(): Promise<PaginatedResponse<any>> {
 
     const data = await response.json();
     return {
-      data: data.items || [],
-      totalCount: data.total_count || 0,
+      data: data.items.filter((item: any) => item.subscription_id === null) || [],
+      totalCount: data.items.filter((item: any) => item.subscription_id === null).length || 0,
       hasNext: data.has_next || false
     };
   } catch (error) {
