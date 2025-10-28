@@ -1,7 +1,6 @@
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
-import { fetchSubscriptions } from "./actions";
-import { fetchBusiness } from "@/lib/server-actions";
+import { fetchSubscriptions, fetchBusiness } from "./actions";
 import Filters from "@/components/common/filters";
 import ServerPagination from "@/components/common/server-pagination";
 import SubscriptionsTable from "./subscriptions-table";
