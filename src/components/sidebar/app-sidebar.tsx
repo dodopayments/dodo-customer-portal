@@ -31,12 +31,12 @@ const BusinessName = ({
     return (
         <div className="flex items-center gap-2">
             {image ? (
-                <Avatar className="w-7 h-7">
+                <Avatar className="w-7 h-7 aspect-square">
                     <AvatarImage src={image} />
                     <AvatarFallback className="text-xs" name={name} />
                 </Avatar>
             ) : (
-                <div className="object-cover object-center bg-bg-secondary w-8 h-8" />
+                <div className="object-cover object-center bg-bg-secondary w-8 h-8 aspect-square" />
             )}
             <span
                 className={cn(
