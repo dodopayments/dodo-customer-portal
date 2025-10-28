@@ -18,6 +18,7 @@ interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   variant?: BadgeVariant;
   children: React.ReactNode;
   dot?: boolean;
+  type?: "default" | "icon";
 }
 
 const badgeVariants: Record<BadgeVariant, string> = {
@@ -41,36 +42,45 @@ const badgeVariants: Record<BadgeVariant, string> = {
 };
 
 const circleColors: Record<BadgeVariant, string> = {
-  default: "bg-[#667085] dark:bg-[#85888E]",
-  red: "bg-red-500 dark:bg-red-400",
-  yellow: "bg-yellow-500 dark:bg-[#F79009]",
-  green: "bg-green-500 dark:bg-[#17B26A]",
-  purple: "bg-purple-500 dark:bg-[#7A5AF8]",
+  default: "text-[#667085] dark:text-[#85888E]",
+  red: "text-red-500 dark:text-red-400",
+  yellow: "text-yellow-500 dark:text-[#F79009]",
+  green: "text-green-500 dark:text-[#17B26A]",
+  purple: "text-purple-500 dark:text-[#7A5AF8]",
   blue: "text-blue-500 dark:text-[#2E90FA]",
-  pink: "bg-pink-500 dark:bg-[#EE46BC]",
+  pink: "text-pink-500 dark:text-[#EE46BC]",
   orange: "dark:text-[#EF6820] text-white",
   orange2: "dark:text-[#EF6820] text-[#B93815]",
-  generic: "bg-[#667085] dark:bg-[#85888E]",
+  generic: "text-[#667085] dark:text-[#85888E]",
+};
+
+const badgeTypes = {
+  default:
+    "inline-flex font-body text-nowrap w-fit border-[1px] text-xs items-center rounded-md px-2 py-0.5 font-normal transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  icon: "p-[5px] rounded-md border",
 };
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   (
-    { className = "", variant = "default", dot = true, children, ...props },
+    {
+      className = "",
+      variant = "default",
+      dot = false,
+      type = "default",
+      children,
+      ...props
+    },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
       <div
         ref={ref}
-        className={cn(
-          `inline-flex font-body text-nowrap  w-fit border-2 text-xs items-center rounded-full px-2.5 py-0.5 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2`,
-          badgeVariants[variant],
-          className
-        )}
+        className={cn(badgeTypes[type], badgeVariants[variant], className)}
         {...props}
       >
         {dot && (
           <span
-            className={`mr-2 h-1.5 w-1.5 rounded-full ${circleColors[variant]}`}
+            className={`mr-2 h-1.5 w-1.5  rounded-full ${circleColors[variant]}`}
           ></span>
         )}
 

@@ -55,8 +55,9 @@ export async function fetchOneTime(filters: FilterParams = {}): Promise<Paginate
     }
 
     const data = await response.json();
+    console.log("data", data);
     return {
-      data: data.items.filter((item: any) => item.subscription_id === null) || [],
+      data: data.items || [],
       totalCount: data.items.filter((item: any) => item.subscription_id === null).length || 0,
       hasNext: data.has_next || false
     };

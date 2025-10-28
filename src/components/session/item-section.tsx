@@ -1,16 +1,24 @@
 "use client";
 
 import { cn } from "@/lib/utils"
-import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card"
-import Image from "next/image"
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Key, Search } from "lucide-react";
+import { CircleSlash, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useState } from "react";
+import { OneTimePurchaseCard } from "./one-time-purchase-card";
+import { SubscriptionCard } from "./subscription-card";
 
-interface OneTimeData {   
+export interface Product {
+    product_id: string;
+    name: string;
+    description: string;
+    price: number;
+    currency: string;
+    image_url: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface OneTimeData {
     payment_id: string;
     status: string;
     total_amount: number;
@@ -19,10 +27,10 @@ interface OneTimeData {
     payment_method_type: string | null;
     created_at: string;
     digital_products_delivered: boolean;
-    metadata: object;
+    product: Product;
 }
 
-interface SubscriptionData {
+export interface SubscriptionData {
     subscription_id: string;
     recurring_pre_tax_amount: number;
     tax_inclusive: boolean;
@@ -47,21 +55,32 @@ interface SubscriptionData {
     cancel_at_next_billing_date: boolean;
     billing: object;
     on_demand: boolean;
+    product: Product;
 }
 
 interface ItemCardProps {
     cardClassName?: string;
-    imageUrl: string;
-    title: string;
-    description: string;
-    amount: string;
     searchPlaceholder?: string;
-    orderType: string;
-    data: SubscriptionData[] | OneTimeData[];
+    orderType: 'one-time' | 'subscriptions';
+    oneTimeData: OneTimeData[];
+    subscriptionData: SubscriptionData[];
+    dataIndex?: number;
 }
 
-export const ItemSection = ({ cardClassName, imageUrl, title, description, amount, searchPlaceholder, orderType }: ItemCardProps) => {
+export const ItemSection = ({ cardClassName, searchPlaceholder, orderType, oneTimeData, subscriptionData, dataIndex = 0 }: ItemCardProps) => {
     const [search, setSearch] = useState("");
+    if ((orderType === "one-time" && oneTimeData.length === 0) || (orderType === "subscriptions" && subscriptionData.length === 0)) {
+        return (
+            <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
+            <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
+              <CircleSlash />
+            </span>
+            <span className="text-sm font-display text-center tracking-wide text-text-secondary">
+              No Active License Keys
+            </span>
+          </div>
+        )
+    }
     return (
         <>
             <div className="flex flex-col gap-4">
@@ -70,34 +89,22 @@ export const ItemSection = ({ cardClassName, imageUrl, title, description, amoun
                     <Input type="text" placeholder={searchPlaceholder} className="pl-10 border-border-secondary" value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
-            <Card className={cn("border-b mt-6", cardClassName)}>
-                <CardContent className="flex flex-row items-center px-0 gap-2">
-                    <Image src={imageUrl} alt={title} width={56} height={56} className="rounded-lg flex-none aspect-square object-cover" />
-                    <div className="flex flex-col gap-2 flex-1">
-                        <div className="flex flex-row justify-between items-start gap-4">
-                            <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{title}</CardTitle>
-                            <CardDescription className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{amount}</CardDescription>
-                        </div>
-                        <p className="font-['Inter'] font-normal text-sm leading-[21px] text-text-secondary self-stretch">{description}</p>
-                    </div>
-                </CardContent>
-                <Separator className="mb-4" />
-                <CardFooter className="flex flex-row justify-between p-0">
-                    <div className="flex flex-row gap-2">
-                        <Button variant="secondary" className="w-full">
-                            <Key />
-                            View details
-                        </Button>
-                        <Button variant="secondary" className="w-full">
-                            <Key />
-                            View details
-                        </Button>
-                    </div>
-                    <Badge variant="green" dot={false} className="rounded-sm border-sm">
-                        Paid
-                    </Badge>
-                </CardFooter>
-            </Card >
+            <div className="mt-6 flex flex-col gap-4">
+                {orderType === "one-time" && oneTimeData.map((item: OneTimeData, index: number) => (
+                    <OneTimePurchaseCard
+                        key={index}
+                        item={item}
+                        cardClassName={cn("border-b", cardClassName)}
+                    />
+                ))}
+                {orderType === "subscriptions" && subscriptionData.map((item: SubscriptionData, index: number) => (
+                    <SubscriptionCard
+                        key={index}
+                        item={item}
+                        cardClassName={cn("border-b", cardClassName)}
+                    />
+                ))}
+            </div>
         </>
     )
 }
