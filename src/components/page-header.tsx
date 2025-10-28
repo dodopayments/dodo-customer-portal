@@ -12,12 +12,6 @@ const PageHeader = ({ children, searchPlaceholder = "Search", searchValue, setSe
         {children}
       </section>
       <Separator className="mb-6" />
-      <div className="flex flex-col gap-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-tertiary border-border-secondary" />
-          <Input type="text" placeholder={searchPlaceholder} className="pl-10 border-border-secondary" value={searchValue} onChange={(e) => setSearchValue?.(e.target.value)} />
-        </div>
-      </div>
     </>
   );
 }
