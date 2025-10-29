@@ -79,7 +79,7 @@ function DownloadButton({ url }: { url: string }) {
                 </SheetHeader>
                 <Separator className="my-3" />
                 {isFillDetailsOpen ? (
-                    <InvoiceFillDetails url={url} onBack={() => setIsFillDetailsOpen(false)} />
+                    <InvoiceFillDetails url={url} />
                 ) : (
                     <>
                 

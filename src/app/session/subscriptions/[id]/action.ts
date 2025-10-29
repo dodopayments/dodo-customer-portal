@@ -155,3 +155,16 @@ export async function fetchInvoiceHistory(subscriptionId: string) {
     return null;
   }
 }
+
+export async function fetchUsageHistory(subscriptionId: string) {
+  try {
+    const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscriptionId}/usage-history`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch usage history: ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching usage history:', error);
+    return null;
+  }
+}

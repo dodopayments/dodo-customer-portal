@@ -11,10 +11,9 @@ import { fetchSupportedCountries, getMatchedCountries } from "@/components/sessi
 
 interface InvoiceFillDetailsProps {
     url: string;
-    onBack: () => void;
 }
 
-export function InvoiceFillDetails({ url, onBack }: InvoiceFillDetailsProps) {
+export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
     const [countries, setCountries] = useState<CountriesListType[]>([]);
     const [isLoadingCountry, setIsLoadingCountry] = useState(false);
     const [address, setAddress] = useState<string>("");
