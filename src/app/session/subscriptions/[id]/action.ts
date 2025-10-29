@@ -140,3 +140,18 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 
   return response.json();
 }
+
+export async function fetchInvoiceHistory(subscriptionId: string) {
+  try {
+    const response = await makeAuthenticatedRequest(`/customer-portal/payments?subscription_id=${subscriptionId}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch invoice history: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data.items);
+    return data;
+  } catch (error) {
+    console.error('Error fetching invoice history:', error);
+    return null;
+  }
+}
