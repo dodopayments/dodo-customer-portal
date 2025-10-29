@@ -1,6 +1,6 @@
 import { SubscriptionResponse } from "@/types/subscription";
 import { Card, CardContent, CardFooter } from "../ui/card";
-import { Button } from "../ui/button";
+import SubscriptionBillingEdit from "./subscription-billing-edit";
 
 export function SubscriptionBillingInfo({ subscription }: { subscription: SubscriptionResponse }) {
     return (
@@ -30,7 +30,7 @@ export function SubscriptionBillingInfo({ subscription }: { subscription: Subscr
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-row gap-2 p-0">
-                    <Button variant="secondary">Edit</Button>
+                    <SubscriptionBillingEdit subscription={subscription} />
                 </CardFooter>
             </Card>
         </div>
