@@ -13,6 +13,11 @@ export interface CancelSubscriptionParams {
 export interface UpdateBillingDetailsParams {
   subscription_id: string;
   data: {
+    customer: {
+      name: string;
+      email: string;
+      phone_number: string;
+    };
     billing: {
       city: string;
       country: string;
@@ -112,9 +117,13 @@ export async function fetchSubscription(id: string): Promise<SubscriptionRespons
 
 export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   const { subscription_id, data } = params;
+  console.log("dataaaaaaa", data);
 
   const patchData = {
     billing: data.billing,
+    customer_name: data.customer.name,
+    customer_email: data.customer.email,
+    phone_number: data.customer.phone_number,
     tax_id: data.tax_id === "" ? null : data.tax_id,
   };
 
@@ -140,7 +149,6 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 
   return response.json();
 }
-
 export async function fetchInvoiceHistory(subscriptionId: string) {
   try {
     const response = await makeAuthenticatedRequest(`/customer-portal/payments?subscription_id=${subscriptionId}`);
