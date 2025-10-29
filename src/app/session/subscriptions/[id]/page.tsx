@@ -16,7 +16,6 @@ export interface PageProps {
 
 export default async function SubscriptionPage({ params, searchParams }: PageProps) {
     const { id } = await params;
-    const { tab } = await searchParams;
     const subscription = await fetchSubscription(id);
     if (!subscription) {
         return notFound();
