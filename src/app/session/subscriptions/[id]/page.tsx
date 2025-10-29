@@ -8,14 +8,16 @@ import { SubscriptionDetails } from "@/components/session/subscription-details";
 import { SubscriptionBillingInfo } from "@/components/session/subscription-billing-info";
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
 
+
 export interface PageProps {
     params: Promise<{ id: string }>;
+    searchParams: Promise<{ tab?: string }>;
 }
 
-export default async function SubscriptionPage({ params }: PageProps) {
+export default async function SubscriptionPage({ params, searchParams }: PageProps) {
     const { id } = await params;
+    const { tab } = await searchParams;
     const subscription = await fetchSubscription(id);
-    console.log(subscription);
     if (!subscription) {
         return notFound();
     }
@@ -25,7 +27,7 @@ export default async function SubscriptionPage({ params }: PageProps) {
             <TopButtons />
             <SubscriptionDetails subscription={subscription} />
             <SubscriptionBillingInfo subscription={subscription} />
-            <SubscriptionTabsTable subscriptionId={id} subscription={subscription} />
+            <SubscriptionTabsTable subscriptionId={id} subscription={subscription} searchParams={searchParams} />
         </div>
     );
 }
