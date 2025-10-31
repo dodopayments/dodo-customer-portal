@@ -5,6 +5,7 @@ import { Mastercard } from "@/components/brand/mastercard";
 import { ApplePay } from "@/components/brand/applepay";
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "lucide-react";
+import { AddPaymentMethodSheet } from "@/components/session/add-payment-method-sheet";
 
 export default async function PaymentMethodsPage() {
     const paymentMethods = await fetchPaymentMethods();
@@ -19,7 +20,7 @@ export default async function PaymentMethodsPage() {
                         ))}
                     </div>
                     <div className="flex">
-                        <Button variant="secondary" className="my-auto">Add payment method</Button>
+                        <AddPaymentMethodSheet />
                     </div>
                 </Card>
             </div>
