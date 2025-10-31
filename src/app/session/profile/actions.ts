@@ -20,3 +20,17 @@ export async function fetchUser(): Promise<UserResponse> {
 
   return response.json();
 }
+
+export async function fetchWallets() {
+  try {
+    const response = await makeAuthenticatedRequest('/customer-portal/wallets');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch wallets: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching wallets:', error);
+    return null;
+  }
+}
