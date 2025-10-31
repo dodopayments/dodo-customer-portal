@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { CircleSlash, Search } from "lucide-react";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
 import { useState } from "react";
 import { OrderCard } from "./order-card";
 
