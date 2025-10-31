@@ -1,7 +1,6 @@
 import { fetchOrders } from "@/app/session/orders/actions";
-import { OrderData } from "@/components/session/orders";
-import { Orders } from "@/components/session/orders";
-
+import { OrderData } from "@/components/session/orders/orders";
+import { Orders } from "@/components/session/orders/orders";
 
 export default async function OrdersPage() {
     const ordersData = await fetchOrders();

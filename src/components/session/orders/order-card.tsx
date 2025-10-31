@@ -13,8 +13,7 @@ import { useState } from "react";
 import { parseIsoDate } from "@/lib/date-helper";
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { getProductCart } from "@/app/session/orders/actions";
-import { Product, ProductCartItem } from "./product";
-
+import { Product, ProductCartItem } from "../product";
 
 interface OrderCardProps {
     item: OrderData;
