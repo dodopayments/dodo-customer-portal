@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SubscriptionResponse } from "@/types/subscription";
+import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ import { updateBillingDetails } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 
 interface SubscriptionBillingEditProps {
-  subscription: SubscriptionResponse;
+  subscription: SubscriptionDetailsData;
   onClose?: () => void;
 }
 
@@ -57,7 +57,6 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
   }, []);
 
   const onSave = async (data: BillingDetailsFormValues) => {
-    console.log(data);
     try {
       const response = await updateBillingDetails({
         subscription_id: subscription.subscription_id,
@@ -183,7 +182,7 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
       )}
 
       <div className="flex flex-row gap-2 mt-4">
-        <Button variant="default" className="w-full" onClick={() => onSave({ fullName, email, phoneNumber, country, addressLine, state, city, postalCode, taxId })} disabled={isLoading}>Save Details</Button>
+        <Button variant="default" className="w-full" onClick={() => onSave({ fullName, email, phoneNumber, country, addressLine, state, city, postalCode, ...(isBusiness ? { taxId } : {}) })} disabled={isLoading}>Save Details</Button>
       </div>
     </div>
   );

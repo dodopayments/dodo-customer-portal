@@ -1,8 +1,8 @@
-import { SubscriptionResponse } from "@/types/subscription";
+import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import SubscriptionBillingEdit from "./subscription-billing-edit";
 
-export function SubscriptionBillingInfo({ subscription }: { subscription: SubscriptionResponse }) {
+export function SubscriptionBillingInfo({ subscription }: { subscription: SubscriptionDetailsData }) {
     return (
         <div className="flex flex-col gap-3">
             <h4 className="text-text-primary text-lg font-medium">Billing Information</h4>
