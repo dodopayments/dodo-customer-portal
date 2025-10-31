@@ -1,7 +1,7 @@
 "use server";
 
 import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
-import { SubscriptionResponse } from "@/types/subscription";
+import { SubscriptionDetailsData } from "./types";
 
 export interface CancelSubscriptionParams {
   selectedId: string;
@@ -63,57 +63,20 @@ export async function cancelSubscriptionLegacy(subscriptionId: string) {
   return response.json();
 }
 
-export async function fetchBusiness() {
+
+export async function fetchSubscription(id: string): Promise<SubscriptionDetailsData | null> {
   try {
-    const response = await makeAuthenticatedRequest('/customer-portal/business');
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching business:', error);
-    return null;
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function fetchSubscriptions(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
-  try {
-    const params = new URLSearchParams();
-    if (filters.pageSize) params.set('page_size', filters.pageSize.toString());
-    if (filters.pageNumber !== undefined) params.set('page_number', filters.pageNumber.toString());
-    if (filters.created_at_gte) params.set('created_at_gte', filters.created_at_gte);
-    if (filters.created_at_lte) params.set('created_at_lte', filters.created_at_lte);
-    if (filters.status) params.set('status', filters.status);
-
-    const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions?${params}`);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch subscriptions: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return {
-      data: data.items || [],
-      totalCount: data.total_count || 0,
-      hasNext: data.has_next || false
-    };
-  } catch (error) {
-    console.error('Error fetching subscriptions:', error);
-    return { data: [], totalCount: 0, hasNext: false };
-  }
-}
-
-export async function fetchSubscription(id: string): Promise<SubscriptionResponse | null> {
-    try {
-        const allSubscriptions = await fetchSubscriptions();
-        const subscription = allSubscriptions.data.find((subscription: any) => subscription.subscription_id === id);
-        if (subscription) {
-            return subscription;
-        }
-        return null;
+      const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${id}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch subscription: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
     } catch (error) {
-        console.error('Error fetching subscription:', error);
-        throw new Error('Failed to fetch subscription');
+      console.error('Error fetching subscription:', error);
+      return null;
     }
-}
+  }
 
 export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   const { subscription_id, data } = params;
@@ -149,6 +112,7 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 
   return response.json();
 }
+
 export async function fetchInvoiceHistory(subscriptionId: string) {
   try {
     const response = await makeAuthenticatedRequest(`/customer-portal/payments?subscription_id=${subscriptionId}`);

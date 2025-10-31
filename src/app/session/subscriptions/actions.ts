@@ -2,71 +2,6 @@
 
 import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
 
-export interface CancelSubscriptionParams {
-  selectedId: string;
-  subscription_id: string;
-  nextBillingDate?: boolean;
-  revoke?: boolean;
-}
-
-export interface UpdateBillingDetailsParams {
-  subscription_id: string;
-  data: {
-    billing: {
-      city: string;
-      country: string;
-      state: string;
-      street: string;
-      zipcode: string;
-    };
-    tax_id?: string | null;
-  };
-}
-
-export async function cancelSubscription(params: CancelSubscriptionParams) {
-  const { selectedId, subscription_id, nextBillingDate = false, revoke = false } = params;
-
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/cancel`, {
-    method: 'POST',
-    body: JSON.stringify({
-      business_id: selectedId,
-      subscription_id,
-      cancel_at_next_billing_date: nextBillingDate,
-      revoke,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to cancel subscription: ${error}`);
-  }
-
-  return response.json();
-}
-
-export async function cancelSubscriptionLegacy(subscriptionId: string) {
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscriptionId}/cancel`, {
-    method: 'POST',
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to cancel subscription: ${error}`);
-  }
-
-  return response.json();
-}
-
-export async function fetchBusiness() {
-  try {
-    const response = await makeAuthenticatedRequest('/customer-portal/business');
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching business:', error);
-    return null;
-  }
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchSubscriptions(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
@@ -93,35 +28,4 @@ export async function fetchSubscriptions(filters: FilterParams = {}): Promise<Pa
     console.error('Error fetching subscriptions:', error);
     return { data: [], totalCount: 0, hasNext: false };
   }
-}
-
-export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
-  const { subscription_id, data } = params;
-
-  const patchData = {
-    billing: data.billing,
-    tax_id: data.tax_id === "" ? null : data.tax_id,
-  };
-
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscription_id}`, {
-    method: 'PATCH',
-    body: JSON.stringify(patchData),
-  });
-
-  if (!response.ok) {
-    let errorMessage = `HTTP ${response.status}`;
-    try {
-      const errorText = await response.text();
-      if (errorText && errorText.trim()) {
-        errorMessage += `: ${errorText}`;
-      } else {
-        errorMessage += ` (${response.statusText || 'Unknown error'})`;
-      }
-    } catch {
-      errorMessage += ` (${response.statusText || 'Unknown error'})`;
-    }
-    throw new Error(`Failed to update billing details: ${errorMessage}`);
-  }
-
-  return response.json();
 }

@@ -74,7 +74,8 @@ export function AppSidebar() {
     };
 
     const navigation = [
-        { label: 'Orders', path: '/session/orders', activeCheck: ['/session/orders', '/session/subscriptions'] },
+        { label: 'Orders', path: '/session/orders', activeCheck: ['/session/orders'] },
+        { label: 'Manage Subscriptions', path: '/session/subscriptions', activeCheck: ['/session/subscriptions'] },
         { label: 'Payment Methods', path: '/session/payment-methods' },
         { label: 'Profile & Wallets', path: '/session/profile' },
     ];

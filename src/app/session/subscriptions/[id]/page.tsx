@@ -8,7 +8,6 @@ import { SubscriptionDetails } from "@/components/session/subscription-details";
 import { SubscriptionBillingInfo } from "@/components/session/subscription-billing-info";
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
 
-
 export interface PageProps {
     params: Promise<{ id: string }>;
     searchParams: Promise<{ tab?: string }>;
