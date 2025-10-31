@@ -1,5 +1,4 @@
-
-interface addOn {
+export interface AddOn {
     addon_id: string;
     quantity: number;
 }
@@ -23,8 +22,7 @@ export interface Meter {
 }
 
 export interface SubscriptionDetailsData {
-    addons: addOn[];
-    billing: billing;
+    addons: AddOn[];
     cancel_at_next_billing_date: boolean;
     cancelled_at: string;
     created_at: string;
