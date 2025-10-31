@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       httpOnly: true,
     });
 
-    return NextResponse.redirect(new URL('/session/billing-history', request.url));
+    return NextResponse.redirect(new URL('/session/orders', request.url));
   } catch (error) {
     console.error('Token validation failed:', error);
     return NextResponse.redirect(new URL('/expired', request.url));
