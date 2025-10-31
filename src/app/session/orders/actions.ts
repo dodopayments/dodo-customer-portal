@@ -42,6 +42,7 @@ export async function fetchBusiness() {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchOrders(filters: FilterParams = {}): Promise<PaginatedResponse<any>> {
   try {
     const params = new URLSearchParams();

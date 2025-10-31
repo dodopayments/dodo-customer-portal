@@ -37,7 +37,6 @@ export interface UsageHistoryResponse {
 
 export async function SubscriptionTabsTable({
     subscriptionId,
-    subscription,
     searchParams
 }: {
     subscriptionId: string,

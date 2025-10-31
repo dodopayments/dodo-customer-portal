@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "@/components/navbar";
 import NextTopLoader from "nextjs-toploader";
 import FooterPill from "@/components/footer-pill";
 import { SidebarProvider } from "@/components/ui/sidebar";

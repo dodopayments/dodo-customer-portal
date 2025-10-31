@@ -467,13 +467,8 @@ function DataGridTableLoader() {
   );
 }
 
-function DataGridTableRowSelect<TData>({
-  row,
-  size,
-}: {
-  row: Row<TData>;
-  size?: "sm" | "md" | "lg";
-}) {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+function DataGridTableRowSelect<TData>({row, size}: { row: Row<TData>; size?: "sm" | "md" | "lg"}) {
   return (
     <>
       <div
@@ -492,6 +487,7 @@ function DataGridTableRowSelect<TData>({
   );
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 function DataGridTableRowSelectAll({ size }: { size?: "sm" | "md" | "lg" }) {
   const { table, recordCount, isLoading } = useDataGrid();
 

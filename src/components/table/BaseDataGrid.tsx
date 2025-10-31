@@ -40,11 +40,11 @@ import {
   PaginationState,
   SortingState,
   useReactTable,
-  Row,
   Table,
 } from "@tanstack/react-table";
 import TableLocalStorage, { TableState } from "@/lib/utils";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface BaseDataGridProps<TData = any> {
   // Required props
   tableId: string;
@@ -90,6 +90,7 @@ export interface BaseDataGridProps<TData = any> {
   onTableReady?: (table: Table<TData>) => void;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function BaseDataGrid<TData = any>({
   tableId,
   data,
@@ -188,9 +189,8 @@ export function BaseDataGrid<TData = any>({
       columns.length > 0 &&
       !hasInitializedColumnOrder.current
     ) {
-      const defaultColumnOrder = columns.map(
-        (column) => (column as any).id || (column as any).accessorKey
-      );
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      const defaultColumnOrder = columns.map((column) => (column as any).id || (column as any).accessorKey);
       setColumnOrder(defaultColumnOrder);
       hasInitializedColumnOrder.current = true;
     }
@@ -243,6 +243,7 @@ export function BaseDataGrid<TData = any>({
     columns,
     data: data || [],
     pageCount: estimatedPageCount,
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     getRowId: (row: any, index) =>
       (row?.id || row?.productId || index).toString(),
     state: {

@@ -13,9 +13,8 @@ import { CurrencyCode } from "@/lib/currency-helper";
 import { AttachmentsSheet } from "./orders/attachment-sheets";
 import { Separator } from "../ui/separator";
 import { LicenseSheets } from "./orders/license-sheets";
-import { SubscriptionResponse } from "@/types/subscription";
 import { Badge } from "../ui/badge";
-import { getBadge } from "@/lib/badge-helper";
+import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 
 export interface DigitalProductResponse {
     product_id: string;
@@ -61,7 +60,7 @@ export const Product = ({ payment_id, subscription_id, product }: { payment_id: 
     const [digitalProductsLoading, setDigitalProductsLoading] = useState(false);
     const [digitalProductsError, setDigitalProductsError] = useState<string | null>(null);
     const [isLicenseSheetOpen, setIsLicenseSheetOpen] = useState(false);
-    const [subscription, setSubscription] = useState<SubscriptionResponse | null>(null);
+    const [subscription, setSubscription] = useState<SubscriptionDetailsData | null>(null);
 
     useEffect(() => {
         if (subscription_id) {

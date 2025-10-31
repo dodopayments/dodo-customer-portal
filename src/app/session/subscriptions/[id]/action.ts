@@ -1,6 +1,6 @@
 "use server";
 
-import { makeAuthenticatedRequest, PaginatedResponse, FilterParams } from "@/lib/server-actions";
+import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { SubscriptionDetailsData } from "./types";
 
 export interface CancelSubscriptionParams {

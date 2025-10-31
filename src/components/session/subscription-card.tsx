@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { SubscriptionData } from "./subscriptions/subscriptions";
-import { Badge } from "../ui/badge";
+import { Badge, type BadgeVariant } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { useRouter } from "next/navigation";
 import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
@@ -25,7 +25,7 @@ export const SubscriptionCard = ({ item, cardClassName }: SubscriptionCardProps)
                     <div className="flex flex-row justify-between items-start gap-4">
                         <div className="flex flex-row gap-2">
                             <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">{item.product.name}</CardTitle>
-                            <Badge variant={getBadge(item.status).color as any} dot={false} className="rounded-sm border-sm">
+                            <Badge variant={getBadge(item.status).color as BadgeVariant} dot={false} className="rounded-sm border-sm">
                                 {getBadge(item.status).message}
                             </Badge>
                         </div>

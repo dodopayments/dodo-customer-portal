@@ -86,11 +86,6 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
     setOpen(false);
   };
 
-  const onCancel = () => {
-    if (onClose) onClose();
-    setOpen(false);
-  };
-
   const form = (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
