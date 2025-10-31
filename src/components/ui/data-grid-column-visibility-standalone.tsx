@@ -22,7 +22,6 @@ function DataGridColumnVisibilityStandalone<TData>({
   table,
   columnVisibility,
   trigger,
-  className = "",
 }: DataGridColumnVisibilityStandaloneProps<TData>) {
   // Use the columnVisibility prop if provided, otherwise get from table state
   const currentColumnVisibility =

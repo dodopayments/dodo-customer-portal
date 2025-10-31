@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { useBusiness } from "@/hooks/use-business";
 import { useEffect } from "react";
 import { tokenHelper } from "@/lib/token-helper";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
