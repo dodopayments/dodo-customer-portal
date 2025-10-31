@@ -57,7 +57,7 @@ interface ItemCardProps {
     dataIndex?: number;
 }
 
-export const Subscriptions = ({ cardClassName, searchPlaceholder, subscriptionData, dataIndex = 0 }: ItemCardProps) => {
+export const Subscriptions = ({ cardClassName, searchPlaceholder, subscriptionData }: ItemCardProps) => {
     const [search, setSearch] = useState("");
 
     if (subscriptionData.length === 0) {

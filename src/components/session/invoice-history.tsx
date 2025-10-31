@@ -3,7 +3,7 @@
 import { BaseDataGrid } from "../table/BaseDataGrid";
 import { ColumnDef } from "@tanstack/react-table";
 import { InvoiceHistoryResponse } from "./subscription-tabs-table";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
@@ -12,18 +12,15 @@ import { Download } from "lucide-react";
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from "../ui/separator";
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "../ui/card";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { SelectNative } from "../ui/select-native";
 import InvoiceFillDetails from "./invoice-fill-details";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const InvoiceColumn: ColumnDef<any>[] = [{
     accessorKey: 'date',
     header: 'Date',
@@ -44,6 +41,7 @@ const InvoiceColumn: ColumnDef<any>[] = [{
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => {
+        /* eslint-disable @typescript-eslint/no-explicit-any */
         return <Badge variant={getBadge(row.original.status).color as any}>{getBadge(row.original.status).message}</Badge>;
     },
 }, {

@@ -18,7 +18,7 @@ interface TableState {
   columnSizing: Record<string, number>;
   filters?: Array<{
     id: string;
-    value: any;
+    value: any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
   }>;
 }
 
@@ -67,14 +67,15 @@ class TableLocalStorage {
     this.setStorage(updated);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial<T>): T {
     const result = { ...target };
     for (const key in source) {
       if (source[key] !== undefined) {
         if (typeof source[key] === 'object' && source[key] !== null && !Array.isArray(source[key])) {
-          result[key] = this.deepMerge((result[key] as any) || {}, source[key] as any) as any;
+          result[key] = this.deepMerge((result[key] as any) || {}, source[key] as any) as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
         } else {
-          result[key] = source[key] as any;
+          result[key] = source[key] as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
         }
       }
     }

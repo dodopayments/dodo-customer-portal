@@ -2,11 +2,12 @@
 
 import { BaseDataGrid } from "../table/BaseDataGrid";
 import { ColumnDef } from "@tanstack/react-table";
-import { UsageHistoryMeter, UsageHistoryResponse } from "./subscription-tabs-table";
+import { UsageHistoryResponse } from "./subscription-tabs-table";
 import { useMemo } from "react";
 import { CurrencyCode, decodeCurrency, formatCurrency } from "@/lib/currency-helper";
 
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const UsageSummaryColumn: ColumnDef<any>[] = [{
     accessorKey: 'start_date',
     header: 'Date',

@@ -24,7 +24,6 @@ import {
   ArrowLineRight,
   ArrowUp,
   Check,
-  CaretUpDown,
   PushPinSlash,
   Gear,
   DotsThree,

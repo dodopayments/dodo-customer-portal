@@ -5,7 +5,7 @@ import { LicenseKeyResponse } from "../product";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { getBadge } from "@/lib/badge-helper";
 import { Badge, BadgeVariant } from "@/components/ui/badge";
-import parseIso, { parseIsoDate } from "@/lib/date-helper";
+import { parseIsoDate } from "@/lib/date-helper";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 

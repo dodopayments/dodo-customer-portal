@@ -18,6 +18,12 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  // react-day-picker typing differences across versions: coerce custom icons
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const customComponents: any = {
+    IconLeft: () => <ChevronLeft className="h-4 w-4" />,
+    IconRight: () => <ChevronRight className="h-4 w-4" />,
+  };
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -66,10 +72,7 @@ function Calendar({
             }
           : undefined
       }
-      components={{
-        IconLeft: () => <ChevronLeft className="h-4 w-4" />,
-        IconRight: () => <ChevronRight className="h-4 w-4" />,
-      }}
+      components={customComponents}
       {...props}
     />
   );

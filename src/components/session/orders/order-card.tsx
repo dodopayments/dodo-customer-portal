@@ -3,7 +3,7 @@
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeVariant } from "@/components/ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { Download } from "lucide-react";
 import { api_url } from "@/lib/http";
@@ -59,7 +59,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             </CardContent>
             <CardFooter className="flex flex-row justify-between p-0">
                 <div className="flex flex-row gap-2">
-                    <Badge variant={getBadge(item.status).color as any} dot={false} className="rounded-sm border-sm">
+                    <Badge variant={getBadge(item.status).color as BadgeVariant} dot={false} className="rounded-sm border-sm">
                         {getBadge(item.status).message}
                     </Badge>
                     <p className="text-sm text-text-secondary">Purchased: {parseIsoDate(item.created_at)}</p>
