@@ -1,10 +1,10 @@
 import { Separator } from "../ui/separator";
 import { SessionTabs } from "./tabs";
-import { SubscriptionResponse } from "@/types/subscription";
 import { InvoiceHistory } from "./invoice-history";
 import { fetchInvoiceHistory, fetchUsageHistory } from "@/app/session/subscriptions/[id]/action";
 import { api_url } from "@/lib/http";
 import { UsageSummary } from "./usage-summary";
+import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 
 export interface InvoiceHistoryResponse {
     payment_id: string;
@@ -41,13 +41,19 @@ export async function SubscriptionTabsTable({
     searchParams
 }: {
     subscriptionId: string,
-    subscription: SubscriptionResponse,
+    subscription: SubscriptionDetailsData,
     searchParams: Promise<{ tab?: string }>
 }) {
     const params = await searchParams;
-    const tab = params?.tab || 'invoice-history';
     const invoiceHistory = await fetchInvoiceHistory(subscriptionId);
     const usageHistory = await fetchUsageHistory(subscriptionId);
+
+    const hasUsage = Array.isArray(usageHistory?.items) && usageHistory.items.length > 0;
+    const tab = !hasUsage
+        ? 'invoice-history'
+        : (params?.tab === 'usage-summary' || params?.tab === 'invoice-history'
+            ? params.tab
+            : 'invoice-history');
 
     const invoiceHistoryData: InvoiceHistoryResponse[] = invoiceHistory?.items?.map((item: InvoiceHistoryResponse) => ({
         payment_id: item.payment_id,
@@ -60,7 +66,7 @@ export async function SubscriptionTabsTable({
         download_url: `${api_url}/invoices/payments/${item.payment_id}`,
     }));
 
-    const usageHistoryData: UsageHistoryResponse[] = usageHistory?.items?.map((item: UsageHistoryResponse) => ({
+    const usageHistoryData: UsageHistoryResponse[] = hasUsage ? usageHistory.items.map((item: UsageHistoryResponse) => ({
         start_date: item.start_date,
         end_date: item.end_date,
         meters: item.meters.map((meter: UsageHistoryMeter) => ({
@@ -74,28 +80,30 @@ export async function SubscriptionTabsTable({
             price_per_unit: meter.price_per_unit,
             total_price: meter.total_price,
         })),
-    }));
+    })) : [];
 
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-col">
-                <SessionTabs
-                    className="w-full"
-                    items={[{
-                        value: 'invoice-history',
-                        label: 'Invoice History',
-                        link: `/session/subscriptions/${subscriptionId}?tab=invoice-history`
-                    }, {
-                        value: 'usage-summary',
-                        label: 'Usage Summary',
-                        link: `/session/subscriptions/${subscriptionId}?tab=usage-summary`
-                    }]}
-                    currentTab={tab}
-                />
-                <Separator className="my-0" />
-            </div>
+            {hasUsage && (
+                <div className="flex flex-col">
+                    <SessionTabs
+                        className="w-full"
+                        items={[{
+                            value: 'invoice-history',
+                            label: 'Invoice History',
+                            link: `/session/subscriptions/${subscriptionId}?tab=invoice-history`
+                        }, {
+                            value: 'usage-summary',
+                            label: 'Usage Summary',
+                            link: `/session/subscriptions/${subscriptionId}?tab=usage-summary`
+                        }]}
+                        currentTab={tab}
+                    />
+                    <Separator className="my-0" />
+                </div>
+            )}
             {tab === 'invoice-history' && <InvoiceHistory invoiceHistory={invoiceHistoryData} />}
-            {tab === 'usage-summary' && <UsageSummary usageHistory={usageHistoryData} />}
+            {hasUsage && tab === 'usage-summary' && <UsageSummary usageHistory={usageHistoryData} />}
         </div>
     )
 }
