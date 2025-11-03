@@ -1,26 +1,15 @@
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
-import { fetchUser, fetchWallets } from "./actions";
+import { fetchUser, fetchWalletLedger, fetchWallets } from "./actions";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { SessionTabs } from "@/components/session/tabs";
-import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
-
-interface WalletItem {
-  balance: number,
-  created_at: string,
-  currency: string,
-  customer_id: string,
-  updated_at: string,
-}
-interface Wallet {
-  items: WalletItem[];
-  total_balance_usd: number;
-}
+import { WalletItem, WalletLedgerItem } from "./types";
+import { Wallet } from "@/components/session/profile/wallets";
 
 export default async function ProfilePage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const user = await fetchUser();
   const wallets = await fetchWallets();
-
+  const walletLedger = await fetchWalletLedger();
+  console.log("walletLedger", walletLedger);
   const params = await searchParams;
   const tab = params?.tab || `${wallets?.items?.[0]?.currency?.toLowerCase()}-wallet` || 'usd-wallet';
 
@@ -52,7 +41,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-0">
             <p className="text-text-primary text-lg font-medium">Wallets</p>
-            <Wallet wallets={wallets?.items} allWallets={allWallets} tab={tab} />
+            <Wallet wallets={wallets?.items} allWallets={allWallets} tab={tab} walletLedger={walletLedger} />
           </div>
         </div>
       </div>
@@ -61,31 +50,3 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
 }
 
 
-function Wallet({ wallets, allWallets, tab }: { wallets: WalletItem[], allWallets: { value: string, label: string, link: string }[], tab: string }) {
-  if (allWallets.length === 0) {
-    return <p className="text-text-secondary text-sm">No wallets found</p>;
-  }
-  const selectedCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
-  const currentWallet: WalletItem | undefined = wallets.find((wallet: WalletItem) => wallet.currency?.toUpperCase() === selectedCurrency);
-  console.log("currentWallet", currentWallet);
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col">
-        <SessionTabs className="w-full" items={allWallets} currentTab={tab} />
-        <Separator className="my-0" />
-      </div>
-      <Card className="p-6 flex flex-col gap-4">
-          <CardHeader className="flex flex-col gap-1 p-3 items-center">
-            <CardTitle className="text-text-primary text-lg md:text-2xl text-green-500 font-medium text-center">{formatCurrency(currentWallet?.balance || 0, selectedCurrency as CurrencyCode)}</CardTitle>
-            <CardDescription className="text-text-secondary text-sm text-center">Available balance</CardDescription>
-          </CardHeader>
-          <Separator className="my-0" />
-          <CardContent className="flex flex-row gap-2 p-0">
-            <div className="flex flex-col gap-2">
-              <p className="text-sm">Recent Transactions</p>
-            </div>
-          </CardContent>
-        </Card>
-    </div>
-  )
-}
