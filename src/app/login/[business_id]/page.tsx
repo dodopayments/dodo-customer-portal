@@ -11,7 +11,7 @@ export async function generateMetadata({
   const { business_id } = await params;
   try {
     const response = await internalApi.get(
-      `/checkout/businesses/${business_id}`
+      `/checkout/businesses/${business_id}`,
     );
     const business = response.data;
 

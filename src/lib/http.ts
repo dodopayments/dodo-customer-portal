@@ -1,5 +1,5 @@
 import axios from "axios";
-import { tokenHelper } from './token-helper';
+import { tokenHelper } from "./token-helper";
 
 let API_URL: string;
 let MODE: string;

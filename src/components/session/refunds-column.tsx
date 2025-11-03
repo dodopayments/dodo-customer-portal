@@ -68,7 +68,7 @@ export const RefundColumn: ColumnDef<RefundResponse>[] = [
       const currency = row.original.currency as CurrencyCode;
       const formatted = formatCurrency(
         decodeCurrency(amount, currency),
-        currency
+        currency,
       );
       return <div className="text-left">{formatted}</div>;
     },

@@ -29,4 +29,3 @@ npm run dev
 ## Reporting security issues
 
 Please do not open public issues for security matters. See `SECURITY.md`.
-

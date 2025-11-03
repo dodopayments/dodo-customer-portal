@@ -9,43 +9,46 @@ import { SubscriptionBillingInfo } from "@/components/session/subscription-billi
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
 
 export interface PageProps {
-    params: Promise<{ id: string }>;
-    searchParams: Promise<{ tab?: string }>;
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }
 
-export default async function SubscriptionPage({ params, searchParams }: PageProps) {
-    const { id } = await params;
-    const subscription = await fetchSubscription(id);
-    if (!subscription) {
-        return notFound();
-    }
+export default async function SubscriptionPage({
+  params,
+  searchParams,
+}: PageProps) {
+  const { id } = await params;
+  const subscription = await fetchSubscription(id);
+  if (!subscription) {
+    return notFound();
+  }
 
-    return (
-        <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
-            <TopButtons />
-            <SubscriptionDetails subscription={subscription} />
-            <SubscriptionBillingInfo subscription={subscription} />
-            <SubscriptionTabsTable subscriptionId={id} subscription={subscription} searchParams={searchParams} />
-        </div>
-    );
+  return (
+    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
+      <TopButtons />
+      <SubscriptionDetails subscription={subscription} />
+      <SubscriptionBillingInfo subscription={subscription} />
+      <SubscriptionTabsTable
+        subscriptionId={id}
+        subscription={subscription}
+        searchParams={searchParams}
+      />
+    </div>
+  );
 }
 
 function TopButtons() {
-    return (
-        <PageHeader showSeparator={false}>
-            <Link href="/session/orders?orderType=subscriptions">
-                <Button variant="secondary">
-                    <ArrowLeft className="w-4 h-4" />
-                </Button>
-            </Link>
-            <div className="flex flex-row gap-2">
-                <Button variant="secondary">
-                    Change Plan
-                </Button>
-                <Button variant="secondary" className="text-red-500">
-                    Cancel Subscription
-                </Button>
-            </div>
-        </PageHeader>
-    )
+  return (
+    <PageHeader showSeparator={false}>
+      <Link href="/session/orders?orderType=subscriptions">
+        <Button variant="secondary">
+          <ArrowLeft className="w-4 h-4" />
+        </Button>
+      </Link>
+      <div className="flex flex-row gap-2">
+        <Button variant="secondary">Change Plan</Button>
+        <Button variant="destructive">Cancel Subscription</Button>
+      </div>
+    </PageHeader>
+  );
 }

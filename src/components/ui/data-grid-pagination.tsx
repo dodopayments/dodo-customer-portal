@@ -63,35 +63,35 @@ function DataGridPagination(props: DataGridPaginationProps) {
       data-slot="data-grid-pagination"
       className={cn(
         "flex flex-wrap flex-row justify-between items-center gap-2.5 py-2 grow",
-        mergedProps?.className
+        mergedProps?.className,
       )}
     >
       {!mergedProps?.disableRowPerPage && (
         <div className="flex flex-wrap items-center space-x-2.5 pb-0 order-1">
-        {isLoading ? (
-          mergedProps?.sizesSkeleton
-        ) : (
-          <>
-            <div className="text-sm text-text-secondary">Rows per page</div>
-            <Select
-              value={`${pageSize}`}
-              onValueChange={(value) => {
-                const newPageSize = Number(value);
-                table.setPageSize(newPageSize);
-              }}
-            >
-              <SelectTrigger className="w-fit h-8">
-                <SelectValue placeholder={`${pageSize}`} />
-              </SelectTrigger>
-              <SelectContent side="top" className="min-w-[50px]">
-                {mergedProps?.sizes?.map((size: number) => (
-                  <SelectItem key={size} value={`${size}`}>
-                    {size}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </>
+          {isLoading ? (
+            mergedProps?.sizesSkeleton
+          ) : (
+            <>
+              <div className="text-sm text-text-secondary">Rows per page</div>
+              <Select
+                value={`${pageSize}`}
+                onValueChange={(value) => {
+                  const newPageSize = Number(value);
+                  table.setPageSize(newPageSize);
+                }}
+              >
+                <SelectTrigger className="w-fit h-8">
+                  <SelectValue placeholder={`${pageSize}`} />
+                </SelectTrigger>
+                <SelectContent side="top" className="min-w-[50px]">
+                  {mergedProps?.sizes?.map((size: number) => (
+                    <SelectItem key={size} value={`${size}`}>
+                      {size}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </>
           )}
         </div>
       )}

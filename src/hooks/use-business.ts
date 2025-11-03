@@ -17,8 +17,8 @@ export function useBusiness() {
         setBusiness(businessData);
         setError(null);
       } catch (err) {
-        console.error('Failed to fetch business:', err);
-        setError('Failed to load business data');
+        console.error("Failed to fetch business:", err);
+        setError("Failed to load business data");
       } finally {
         setLoading(false);
       }

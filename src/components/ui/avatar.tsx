@@ -36,7 +36,7 @@ const Avatar = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
-      className
+      className,
     )}
     {...props}
   />
@@ -65,7 +65,7 @@ const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   AvatarFallbackProps
 >(({ className, name, singleInitials = false, ...props }, ref) => {
-  if (!name){
+  if (!name) {
     name = "Dodo";
   }
   const initials = React.useMemo(() => {
@@ -74,7 +74,7 @@ const AvatarFallback = React.forwardRef<
       return nameParts[0].charAt(0).toUpperCase();
     }
     return `${nameParts[0].charAt(0)}${nameParts[nameParts.length - 1].charAt(
-      0
+      0,
     )}`.toUpperCase();
   }, [name]);
 
@@ -89,11 +89,11 @@ const AvatarFallback = React.forwardRef<
       className={cn(
         "flex h-full w-full items-center justify-center rounded-full font-semibold",
         colorClass,
-        className
+        className,
       )}
       {...props}
-    >{singleInitials ? initials.charAt(0) : initials}
-      
+    >
+      {singleInitials ? initials.charAt(0) : initials}
     </AvatarPrimitive.Fallback>
   );
 });

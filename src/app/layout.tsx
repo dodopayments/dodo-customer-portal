@@ -20,7 +20,7 @@ const gabarito = Gabarito({
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-hanken-grotesk",
+  variable: "--font-display-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -61,27 +61,27 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <CSPostHogProvider>
-    <html
-      lang="en"
-      className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
-      suppressHydrationWarning
-    >
-      <body className="font-body w-full h-full overflow-x-hidden">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider messages={messages}>
-            <main className="mx-auto max-w-[1920px]">
-              <ThemeToaster />
-              {children}
-            </main>
-          </NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+      <html
+        lang="en"
+        className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
+        suppressHydrationWarning
+      >
+        <body className="font-body w-full h-full overflow-x-hidden">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextIntlClientProvider messages={messages}>
+              <main className="mx-auto max-w-[1920px]">
+                <ThemeToaster />
+                {children}
+              </main>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </body>
+      </html>
     </CSPostHogProvider>
   );
 }

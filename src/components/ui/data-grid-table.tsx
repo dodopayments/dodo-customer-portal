@@ -62,7 +62,7 @@ function DataGridTableBase({ children }: { children: ReactNode }) {
         !props.tableLayout?.columnsDraggable &&
           "border-separate border-spacing-0",
         props.tableLayout?.width === "fixed" ? "table-fixed" : "table-auto",
-        props.tableClassNames?.base
+        props.tableClassNames?.base,
       )}
     >
       {children}
@@ -77,7 +77,7 @@ function DataGridTableHead({ children }: { children: ReactNode }) {
     <thead
       className={cn(
         props.tableClassNames?.header,
-        props.tableLayout?.headerSticky && props.tableClassNames?.headerSticky
+        props.tableLayout?.headerSticky && props.tableClassNames?.headerSticky,
       )}
     >
       {children}
@@ -103,7 +103,7 @@ function DataGridTableHeadRow<TData>({
         props.tableLayout?.cellBorder && "[&_>:last-child]:border-e-0",
         props.tableLayout?.stripped && "bg-transparent",
         props.tableLayout?.headerBackground === false && "bg-transparent",
-        props.tableClassNames?.headerRow
+        props.tableClassNames?.headerRow,
       )}
     >
       {children}
@@ -165,7 +165,7 @@ function DataGridTableHeadRowCell<TData>({
         column.getIndex() === 0 ||
           column.getIndex() === header.headerGroup.headers.length - 1
           ? props.tableClassNames?.edgeCell
-          : ""
+          : "",
       )}
     >
       {children}
@@ -204,7 +204,7 @@ function DataGridTableBody({ children }: { children: ReactNode }) {
     <tbody
       className={cn(
         "[&_tr:last-child]:border-0 text-text-primary text-sm font-normal",
-        props.tableClassNames?.body
+        props.tableClassNames?.body,
       )}
     >
       {children}
@@ -227,7 +227,7 @@ function DataGridTableBodyRowSkeleton({ children }: { children: ReactNode }) {
         props.tableLayout?.stripped &&
           "odd:bg-muted/90 hover:bg-transparent odd:hover:bg-muted",
         table.options.enableRowSelection && "[&_>:first-child]:relative",
-        props.tableClassNames?.bodyRow
+        props.tableClassNames?.bodyRow,
       )}
     >
       {children}
@@ -263,7 +263,7 @@ function DataGridTableBodyRowSkeletonCell<TData>({
         column.getIndex() === 0 ||
           column.getIndex() === table.getVisibleFlatColumns().length - 1
           ? props.tableClassNames?.edgeCell
-          : ""
+          : "",
       )}
     >
       {children}
@@ -287,19 +287,19 @@ function DataGridTableBodyRow<TData>({
   const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
     const target = event.target as HTMLElement;
     const isInteractiveElement = target.closest(
-      'button, input, select, textarea, [data-no-row-click], [role="button"], [role="menuitem"], [role="tab"]'
+      'button, input, select, textarea, [data-no-row-click], [role="button"], [role="menuitem"], [role="tab"]',
     );
 
     const isDialogOverlay = target.closest(
-      '[data-radix-portal], [role="dialog"], [data-state*="open"], .fixed, .absolute[style*="z-index"], [data-state="open"], [data-state="closed"], [data-radix-dialog-overlay], [data-radix-dialog-content]'
+      '[data-radix-portal], [role="dialog"], [data-state*="open"], .fixed, .absolute[style*="z-index"], [data-state="open"], [data-state="closed"], [data-radix-dialog-overlay], [data-radix-dialog-content]',
     );
 
     const isOverlay = target.closest(
-      ".overlay, .backdrop, [data-overlay], [data-backdrop], .modal-overlay, .dialog-overlay, [data-radix-overlay]"
+      ".overlay, .backdrop, [data-overlay], [data-backdrop], .modal-overlay, .dialog-overlay, [data-radix-overlay]",
     );
 
     const isRadixPortal = target.closest(
-      "[data-radix-portal], [data-radix-dialog-overlay], [data-radix-dialog-content], [data-radix-dialog-title], [data-radix-dialog-description]"
+      "[data-radix-portal], [data-radix-dialog-overlay], [data-radix-dialog-content], [data-radix-dialog-title], [data-radix-dialog-description]",
     );
 
     if (isInteractiveElement || isDialogOverlay || isOverlay || isRadixPortal) {
@@ -331,7 +331,7 @@ function DataGridTableBodyRow<TData>({
         props.tableLayout?.stripped &&
           "odd:bg-muted/90 hover:bg-transparent odd:hover:bg-muted",
         table.options.enableRowSelection && "[&_>:first-child]:relative",
-        props.tableClassNames?.bodyRow
+        props.tableClassNames?.bodyRow,
       )}
     >
       {children}
@@ -346,7 +346,7 @@ function DataGridTableBodyRowExpandded<TData>({ row }: { row: Row<TData> }) {
     <tr
       className={cn(
         props.tableLayout?.rowBorder &&
-          "[&:not(:last-child)>td]:border-b border-border-secondary"
+          "[&:not(:last-child)>td]:border-b border-border-secondary",
       )}
     >
       <td colSpan={row.getVisibleCells().length}>
@@ -411,7 +411,7 @@ function DataGridTableBodyRowCell<TData>({
         column.getIndex() === 0 ||
           column.getIndex() === row.getVisibleCells().length - 1
           ? props.tableClassNames?.edgeCell
-          : ""
+          : "",
       )}
     >
       {children}
@@ -468,13 +468,19 @@ function DataGridTableLoader() {
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-function DataGridTableRowSelect<TData>({row, size}: { row: Row<TData>; size?: "sm" | "md" | "lg"}) {
+function DataGridTableRowSelect<TData>({
+  row,
+  size,
+}: {
+  row: Row<TData>;
+  size?: "sm" | "md" | "lg";
+}) {
   return (
     <>
       <div
         className={cn(
           "hidden absolute top-0 bottom-0 start-0 w-[2px] bg-primary",
-          row.getIsSelected() && "block"
+          row.getIsSelected() && "block",
         )}
       ></div>
       <Checkbox
@@ -521,12 +527,12 @@ function DataGridTable<TData>() {
                   const { column } = header;
 
                   return (
-                    <DataGridTableHeadRowCell  header={header} key={index}>
+                    <DataGridTableHeadRowCell header={header} key={index}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                       {props.tableLayout?.columnsResizable &&
                         column.getCanResize() && (
@@ -574,7 +580,7 @@ function DataGridTable<TData>() {
                         <DataGridTableBodyRowCell cell={cell} key={colIndex}>
                           {flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext()
+                            cell.getContext(),
                           )}
                         </DataGridTableBodyRowCell>
                       );

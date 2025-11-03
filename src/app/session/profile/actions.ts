@@ -12,7 +12,7 @@ export interface UserResponse {
 }
 
 export async function fetchUser(): Promise<UserResponse> {
-  const response = await makeAuthenticatedRequest('/customer-portal/profile');
+  const response = await makeAuthenticatedRequest("/customer-portal/profile");
 
   if (!response.ok) {
     throw new Error(`Failed to fetch user: ${response.status}`);
@@ -23,29 +23,30 @@ export async function fetchUser(): Promise<UserResponse> {
 
 export async function fetchWallets() {
   try {
-    const response = await makeAuthenticatedRequest('/customer-portal/wallets');
+    const response = await makeAuthenticatedRequest("/customer-portal/wallets");
     if (!response.ok) {
       throw new Error(`Failed to fetch wallets: ${response.status}`);
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching wallets:', error);
+    console.error("Error fetching wallets:", error);
     return null;
   }
 }
 
 export async function fetchWalletLedger() {
   try {
-    const response = await makeAuthenticatedRequest(`/customer-portal/wallets/ledger-entries`);
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/wallets/ledger-entries`,
+    );
     if (!response.ok) {
       throw new Error(`Failed to fetch wallet ledger: ${response.status}`);
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching wallet ledger:', error);
+    console.error("Error fetching wallet ledger:", error);
     return null;
   }
 }
-  

@@ -39,7 +39,7 @@ const BusinessName = ({
       <span
         className={cn(
           "text-text-primary font-display text-xl font-semibold",
-          hide && "md:block hidden"
+          hide && "md:block hidden",
         )}
       >
         {name}
@@ -204,7 +204,7 @@ const Pills = () => {
             "py-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors",
             active.id === item.id
               ? "text-button-secondary-text"
-              : "text-text-tertiary hover:text-button-secondary-text"
+              : "text-text-tertiary hover:text-button-secondary-text",
           )}
           onClick={() => setActive(item)}
           onMouseEnter={() => setIsHover(item)}
@@ -277,12 +277,14 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
       {ITEMS.map((item) => (
         <Link
           key={item.id}
-          href={token ? `/session/${token}${item.href}` : `/session${item.href}`}
+          href={
+            token ? `/session/${token}${item.href}` : `/session${item.href}`
+          }
           className={cn(
             "p-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors rounded-md",
             active.id === item.id
               ? "bg-button-secondary-bg text-button-secondary-text"
-              : "text-text-tertiary hover:text-button-secondary-text hover:bg-button-secondary-bg/50"
+              : "text-text-tertiary hover:text-button-secondary-text hover:bg-button-secondary-bg/50",
           )}
           onClick={() => {
             setActive(item);

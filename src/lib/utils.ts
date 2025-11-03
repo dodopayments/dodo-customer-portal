@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 interface TableState {
@@ -18,7 +18,7 @@ interface TableState {
   columnSizing: Record<string, number>;
   filters?: Array<{
     id: string;
-    value: any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
+    value: any /* eslint-disable-line @typescript-eslint/no-explicit-any */;
   }>;
 }
 
@@ -32,11 +32,11 @@ type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-const STORAGE_KEY = 'dodopayments_tables';
+const STORAGE_KEY = "dodopayments_tables";
 
 class TableLocalStorage {
   private static getStorage(): TablesStorage {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return this.getDefaultStorage();
     }
 
@@ -55,7 +55,7 @@ class TableLocalStorage {
   }
 
   private static setStorage(data: TablesStorage): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {}
@@ -68,14 +68,26 @@ class TableLocalStorage {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private static deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial<T>): T {
+  private static deepMerge<T extends Record<string, any>>(
+    target: T,
+    source: DeepPartial<T>,
+  ): T {
     const result = { ...target };
     for (const key in source) {
       if (source[key] !== undefined) {
-        if (typeof source[key] === 'object' && source[key] !== null && !Array.isArray(source[key])) {
-          result[key] = this.deepMerge((result[key] as any) || {}, source[key] as any) as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
+        if (
+          typeof source[key] === "object" &&
+          source[key] !== null &&
+          !Array.isArray(source[key])
+        ) {
+          result[key] = this.deepMerge(
+            (result[key] as any) || {},
+            source[key] as any,
+          ) as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
         } else {
-          result[key] = source[key] as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
+          result[key] = source[
+            key
+          ] as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
         }
       }
     }
@@ -90,8 +102,8 @@ class TableLocalStorage {
   static setTableState(tableId: string, state: TableState) {
     const updates: DeepPartial<TablesStorage> = {
       tables: {
-        [tableId]: state
-      }
+        [tableId]: state,
+      },
     };
     this.updateStorage(updates);
   }
@@ -105,7 +117,7 @@ class TableLocalStorage {
       columnVisibility: {},
       columnSizing: {},
       ...currentState,
-      ...stateUpdates
+      ...stateUpdates,
     };
     this.setTableState(tableId, newState);
   }
@@ -124,7 +136,7 @@ class TableLocalStorage {
   }
 
   static clear() {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     localStorage.removeItem(STORAGE_KEY);
   }
 

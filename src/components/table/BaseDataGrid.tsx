@@ -190,7 +190,9 @@ export function BaseDataGrid<TData = any>({
       !hasInitializedColumnOrder.current
     ) {
       /* eslint-disable @typescript-eslint/no-explicit-any */
-      const defaultColumnOrder = columns.map((column) => (column as any).id || (column as any).accessorKey);
+      const defaultColumnOrder = columns.map(
+        (column) => (column as any).id || (column as any).accessorKey,
+      );
       setColumnOrder(defaultColumnOrder);
       hasInitializedColumnOrder.current = true;
     }

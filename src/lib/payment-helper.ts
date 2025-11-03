@@ -4,17 +4,20 @@
  * @param maxLength - Maximum number of digits allowed (default: 16)
  * @returns Formatted card number string (e.g., "1234 5678 9012 3456")
  */
-export function formatCardNumber(value: string, maxLength: number = 16): string {
-    // Remove all non-digits
-    let digitsOnly = value.replace(/\D/g, "");
-    
-    // Limit to maxLength digits
-    if (digitsOnly.length > maxLength) {
-        digitsOnly = digitsOnly.slice(0, maxLength);
-    }
-    
-    // Add space after every 4 digits
-    return digitsOnly.match(/.{1,4}/g)?.join(" ") || digitsOnly;
+export function formatCardNumber(
+  value: string,
+  maxLength: number = 16,
+): string {
+  // Remove all non-digits
+  let digitsOnly = value.replace(/\D/g, "");
+
+  // Limit to maxLength digits
+  if (digitsOnly.length > maxLength) {
+    digitsOnly = digitsOnly.slice(0, maxLength);
+  }
+
+  // Add space after every 4 digits
+  return digitsOnly.match(/.{1,4}/g)?.join(" ") || digitsOnly;
 }
 
 /**
@@ -23,20 +26,20 @@ export function formatCardNumber(value: string, maxLength: number = 16): string 
  * @returns Formatted expiry date string (e.g., "12/25")
  */
 export function formatExpiryDate(value: string): string {
-    // Remove all non-digits
-    let digitsOnly = value.replace(/\D/g, "");
-    
-    // Limit to 4 digits
-    if (digitsOnly.length > 4) {
-        digitsOnly = digitsOnly.slice(0, 4);
-    }
-    
-    // Add slash after 2 digits
-    if (digitsOnly.length >= 2) {
-        return digitsOnly.slice(0, 2) + "/" + digitsOnly.slice(2);
-    }
-    
-    return digitsOnly;
+  // Remove all non-digits
+  let digitsOnly = value.replace(/\D/g, "");
+
+  // Limit to 4 digits
+  if (digitsOnly.length > 4) {
+    digitsOnly = digitsOnly.slice(0, 4);
+  }
+
+  // Add slash after 2 digits
+  if (digitsOnly.length >= 2) {
+    return digitsOnly.slice(0, 2) + "/" + digitsOnly.slice(2);
+  }
+
+  return digitsOnly;
 }
 
 /**
@@ -45,7 +48,7 @@ export function formatExpiryDate(value: string): string {
  * @returns Card number with only digits
  */
 export function unformatCardNumber(cardNumber: string): string {
-    return cardNumber.replace(/\s/g, "");
+  return cardNumber.replace(/\s/g, "");
 }
 
 /**
@@ -53,15 +56,17 @@ export function unformatCardNumber(cardNumber: string): string {
  * @param expiryDate - The formatted expiry date string (e.g., "12/25")
  * @returns Object with month and year, or null if invalid
  */
-export function parseExpiryDate(expiryDate: string): { month: string; year: string } | null {
-    const parts = expiryDate.split("/");
-    if (parts.length !== 2 || parts[0].length !== 2 || parts[1].length !== 2) {
-        return null;
-    }
-    return {
-        month: parts[0],
-        year: parts[1],
-    };
+export function parseExpiryDate(
+  expiryDate: string,
+): { month: string; year: string } | null {
+  const parts = expiryDate.split("/");
+  if (parts.length !== 2 || parts[0].length !== 2 || parts[1].length !== 2) {
+    return null;
+  }
+  return {
+    month: parts[0],
+    year: parts[1],
+  };
 }
 
 /**
@@ -70,8 +75,8 @@ export function parseExpiryDate(expiryDate: string): { month: string; year: stri
  * @returns true if valid, false otherwise
  */
 export function isValidCardNumber(cardNumber: string): boolean {
-    const digitsOnly = unformatCardNumber(cardNumber);
-    return /^\d{13,19}$/.test(digitsOnly); // Most cards are 13-19 digits
+  const digitsOnly = unformatCardNumber(cardNumber);
+  return /^\d{13,19}$/.test(digitsOnly); // Most cards are 13-19 digits
 }
 
 /**
@@ -80,18 +85,17 @@ export function isValidCardNumber(cardNumber: string): boolean {
  * @returns true if valid, false otherwise
  */
 export function isValidExpiryDate(expiryDate: string): boolean {
-    const parsed = parseExpiryDate(expiryDate);
-    if (!parsed) return false;
-    
-    const month = parseInt(parsed.month, 10);
-    const year = parseInt(parsed.year, 10);
-    
-    // Month should be between 01 and 12
-    if (month < 1 || month > 12) return false;
-    
-    // Year should be a valid 2-digit year (assuming 00-99 range)
-    if (year < 0 || year > 99) return false;
-    
-    return true;
-}
+  const parsed = parseExpiryDate(expiryDate);
+  if (!parsed) return false;
 
+  const month = parseInt(parsed.month, 10);
+  const year = parseInt(parsed.year, 10);
+
+  // Month should be between 01 and 12
+  if (month < 1 || month > 12) return false;
+
+  // Year should be a valid 2-digit year (assuming 00-99 range)
+  if (year < 0 || year > 99) return false;
+
+  return true;
+}

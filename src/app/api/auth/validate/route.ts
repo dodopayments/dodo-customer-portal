@@ -4,10 +4,10 @@ import { api_url } from "@/lib/http";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const token = searchParams.get('token');
+  const token = searchParams.get("token");
 
   if (!token) {
-    return NextResponse.redirect(new URL('/expired', request.url));
+    return NextResponse.redirect(new URL("/expired", request.url));
   }
 
   try {
@@ -22,31 +22,31 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       if (response.status === 401) {
-        return NextResponse.redirect(new URL('/expired', request.url));
+        return NextResponse.redirect(new URL("/expired", request.url));
       }
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const cookieStore = await cookies();
-    cookieStore.set('session_token', token, {
+    cookieStore.set("session_token", token, {
       expires: new Date(expiresAt),
       path: "/",
       sameSite: "strict",
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === "production",
       httpOnly: true,
     });
 
-    cookieStore.set('session_expiry', expiresAt.toString(), {
+    cookieStore.set("session_expiry", expiresAt.toString(), {
       expires: new Date(expiresAt),
       path: "/",
       sameSite: "strict",
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === "production",
       httpOnly: true,
     });
 
-    return NextResponse.redirect(new URL('/session/orders', request.url));
+    return NextResponse.redirect(new URL("/session/orders", request.url));
   } catch (error) {
-    console.error('Token validation failed:', error);
-    return NextResponse.redirect(new URL('/expired', request.url));
+    console.error("Token validation failed:", error);
+    return NextResponse.redirect(new URL("/expired", request.url));
   }
 }

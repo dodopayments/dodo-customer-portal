@@ -44,7 +44,7 @@ export default function DateFilter({
   });
 
   const [selectedPreset, setSelectedPreset] = React.useState<string | null>(
-    null
+    null,
   );
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(true);
 
@@ -122,20 +122,21 @@ export default function DateFilter({
     <div className={cn("grid gap-2", className)}>
       <Dialog>
         {date?.from && date?.to ? (
-          <Button variant="secondary" onClick={() => {
-            setDateFilter(undefined)
-            setDate({from: undefined, to: undefined})
-            setPageNumber(0)
-          }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setDateFilter(undefined);
+              setDate({ from: undefined, to: undefined });
+              setPageNumber(0);
+            }}
+          >
             <CalendarDots className="w-5 h-5 mr-1" />
             <>
               <span>
                 {format(date.from, "MMM d, yyyy")} -{" "}
                 {format(date.to, "MMM d, yyyy")}
               </span>
-              <X
-                className="w-4 h-4 ml-2"
-              />
+              <X className="w-4 h-4 ml-2" />
             </>
           </Button>
         ) : (
@@ -181,7 +182,7 @@ export default function DateFilter({
               className={cn(
                 "sm:block",
                 { hidden: isCalendarOpen },
-                "sm:w-[200px]"
+                "sm:w-[200px]",
               )}
             >
               <div className=" border rounded-md sm:rounded-r-none border-border-secondary h-full border-r-0">
@@ -211,7 +212,7 @@ export default function DateFilter({
               className={cn(
                 "sm:block border rounded-md sm:rounded-l-none border-border-secondary sm:border-l",
                 { hidden: !isCalendarOpen },
-                "flex-1"
+                "flex-1",
               )}
             >
               <div className="p-3 pb-0">

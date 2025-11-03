@@ -68,9 +68,9 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
     if (!searchTerm.trim()) return countries;
 
     const search = searchTerm.toLowerCase().trim();
-    
-    return countries.filter((country) => 
-      country.name.toLowerCase().includes(search)
+
+    return countries.filter((country) =>
+      country.name.toLowerCase().includes(search),
     );
   }, [countries, searchTerm]);
 
@@ -85,7 +85,8 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
             htmlFor={name}
             className="block text-sm font-medium mb-2 text-text-secondary"
           >
-            {label} {required && <span className="text-text-error-primary">*</span>}
+            {label}{" "}
+            {required && <span className="text-text-error-primary">*</span>}
           </label>
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -95,7 +96,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
                 aria-expanded={open}
                 className={cn(
                   "w-full justify-between shadow-sm text-sm items-center font-body font-normal",
-                  !field.value && "text-text-placeholder"
+                  !field.value && "text-text-placeholder",
                 )}
                 disabled={isLoading}
               >
@@ -109,7 +110,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
                       />
                       {
                         countries.find(
-                          (country) => country.code === field.value
+                          (country) => country.code === field.value,
                         )?.name
                       }
                     </>
@@ -122,7 +123,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent  className="w-90% p-0">
+            <PopoverContent className="w-90% p-0">
               <Command>
                 <CommandInput
                   className="bg-bg-primary"
@@ -138,7 +139,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
                         value={country.name}
                         onSelect={() => {
                           field.onChange(country.code);
-                          setSearchTerm(""); 
+                          setSearchTerm("");
                           setOpen(false);
                         }}
                       >
@@ -153,7 +154,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
                             "ml-auto h-4 w-4",
                             country.code === field.value
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                       </CommandItem>
@@ -164,7 +165,9 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
             </PopoverContent>
           </Popover>
           {error && (
-            <p className="mt-1 text-xs text-text-error-primary">{error.message}</p>
+            <p className="mt-1 text-xs text-text-error-primary">
+              {error.message}
+            </p>
           )}
         </div>
       )}

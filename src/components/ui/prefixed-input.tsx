@@ -40,7 +40,7 @@ const PrefixedInput = React.forwardRef<HTMLInputElement, PrefixedInputProps>(
         <span
           className={cn(
             "inline-flex items-center rounded-s-lg border border-border-primary bg-bg-primary px-3 text-sm text-text-placeholder",
-            prefixClassName
+            prefixClassName,
           )}
         >
           https://
@@ -54,7 +54,7 @@ const PrefixedInput = React.forwardRef<HTMLInputElement, PrefixedInputProps>(
         />
       </div>
     );
-  }
+  },
 );
 
 PrefixedInput.displayName = "PrefixedInput";

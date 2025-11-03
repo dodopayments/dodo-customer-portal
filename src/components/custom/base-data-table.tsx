@@ -16,7 +16,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-interface DataTableProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
+interface DataTableProps<TData, TValue>
+  extends React.HTMLAttributes<HTMLDivElement> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   rounded?: boolean;
@@ -40,7 +41,9 @@ export default function BaseDataTable<TData, TValue>({
 
   return (
     <div className="w-full h-full gap-1 lg:gap-0 flex flex-col">
-      <div className={`border border-border-secondary overflow-hidden ${rounded ? "rounded-xl" : "rounded-t-xl "}`}>
+      <div
+        className={`border border-border-secondary overflow-hidden ${rounded ? "rounded-xl" : "rounded-t-xl "}`}
+      >
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -54,7 +57,7 @@ export default function BaseDataTable<TData, TValue>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -72,7 +75,7 @@ export default function BaseDataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

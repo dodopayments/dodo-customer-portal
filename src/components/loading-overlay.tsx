@@ -1,4 +1,3 @@
-
 const LoadingOverlay = () => (
   <div className="fixed inset-0 bg-bg-primary flex items-center justify-center z-[100]">
     <div role="status">
