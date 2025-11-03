@@ -47,21 +47,20 @@ const FilterButton = ({
   };
 
   const handleApply = () => {
-    Promise.all([
-      setFilters(tempFilters),
-      setPageNumber(0),
-      setOpen(false),
-    ]);
+    Promise.all([setFilters(tempFilters), setPageNumber(0), setOpen(false)]);
   };
 
   return (
     <div className={`flex flex-col gap-4 ${className}`}>
-      <Popover open={open} onOpenChange={(isOpen) => {
-        setOpen(isOpen);
-        if (isOpen) {
-          setTempFilters(filters);
-        }
-      }}>
+      <Popover
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (isOpen) {
+            setTempFilters(filters);
+          }
+        }}
+      >
         <PopoverTrigger asChild>
           <Button variant="secondary" className="flex items-center gap-2">
             <Sliders className="w-4 h-4" />
@@ -91,7 +90,10 @@ const FilterButton = ({
                     checked={tempFilters === option.value}
                     onCheckedChange={() => handleCheckboxChange(option.value)}
                   />
-                  <Label htmlFor={`${id}-${index}`} className="font-normal text-sm">
+                  <Label
+                    htmlFor={`${id}-${index}`}
+                    className="font-normal text-sm"
+                  >
                     {option.label}
                   </Label>
                 </div>

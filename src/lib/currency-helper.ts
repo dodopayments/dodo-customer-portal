@@ -170,7 +170,7 @@ const CURRENCY_PRECISION: Record<CurrencyCode, number> = {
 } as Record<CurrencyCode, number>;
 
 export const getCurrencyPrecision = (
-  currency: CurrencyCode | undefined | null
+  currency: CurrencyCode | undefined | null,
 ): number => {
   const effectiveCurrency = currency ?? "USD";
   return CURRENCY_PRECISION[effectiveCurrency] ?? 2;
@@ -178,7 +178,7 @@ export const getCurrencyPrecision = (
 
 export const encodeCurrency = (
   value: number,
-  currency: CurrencyCode | undefined | null
+  currency: CurrencyCode | undefined | null,
 ): number => {
   const precision = getCurrencyPrecision(currency);
   const valueStr = value.toString();
@@ -194,7 +194,7 @@ export const encodeCurrency = (
 
 export const decodeCurrency = (
   value: number,
-  currency: CurrencyCode | undefined | null
+  currency: CurrencyCode | undefined | null,
 ): number => {
   const precision = getCurrencyPrecision(currency);
   const divisor = Math.pow(10, precision);
@@ -204,15 +204,20 @@ export const decodeCurrency = (
 export const formatCurrency = (
   value: number,
   currency: CurrencyCode | undefined | null,
-  compact: boolean = false
+  compact: boolean = false,
 ): string => {
   const precision = getCurrencyPrecision(currency);
   const effectiveCurrency = currency ?? "USD";
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: effectiveCurrency,
-    ...(compact ? { notation: "compact", compactDisplay: "short", minimumFractionDigits: 0, maximumFractionDigits: 0 } : { minimumFractionDigits: precision, maximumFractionDigits: precision,}),
-   
-   
+    ...(compact
+      ? {
+          notation: "compact",
+          compactDisplay: "short",
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }
+      : { minimumFractionDigits: precision, maximumFractionDigits: precision }),
   }).format(value);
 };

@@ -6,7 +6,7 @@ type BadgeResponse = {
 export function getBadge(
   status: string | null,
   isVerification?: boolean,
-  isPayment?: boolean
+  isPayment?: boolean,
 ): BadgeResponse {
   if (status === null) {
     if (isVerification) {

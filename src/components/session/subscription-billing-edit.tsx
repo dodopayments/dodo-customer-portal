@@ -7,7 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SelectNative } from "@/components/ui/select-native";
 import { CountriesList, CountriesListType } from "@/constants/Countries";
-import { fetchSupportedCountries, getMatchedCountries } from "@/components/session/subscription-utils";
+import {
+  fetchSupportedCountries,
+  getMatchedCountries,
+} from "@/components/session/subscription-utils";
 import {
   Sheet,
   SheetContent,
@@ -26,21 +29,36 @@ interface SubscriptionBillingEditProps {
   onClose?: () => void;
 }
 
-export default function SubscriptionBillingEdit({ subscription, onClose }: SubscriptionBillingEditProps) {
+export default function SubscriptionBillingEdit({
+  subscription,
+  onClose,
+}: SubscriptionBillingEditProps) {
   const [countries, setCountries] = useState<CountriesListType[]>([]);
   const [isLoadingCountry, setIsLoadingCountry] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const [fullName, setFullName] = useState<string>(subscription.customer.name || "");
+  const [fullName, setFullName] = useState<string>(
+    subscription.customer.name || "",
+  );
   const [email, setEmail] = useState<string>(subscription.customer.email || "");
-  const [phoneNumber, setPhoneNumber] = useState<string>(subscription.customer.phone_number || "");
-  const [country, setCountry] = useState<string>(subscription.billing.country || "");
-  const [addressLine, setAddressLine] = useState<string>(subscription.billing.street || "");
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    subscription.customer.phone_number || "",
+  );
+  const [country, setCountry] = useState<string>(
+    subscription.billing.country || "",
+  );
+  const [addressLine, setAddressLine] = useState<string>(
+    subscription.billing.street || "",
+  );
   const [state, setState] = useState<string>(subscription.billing.state || "");
   const [city, setCity] = useState<string>(subscription.billing.city || "");
-  const [postalCode, setPostalCode] = useState<string>(subscription.billing.zipcode || "");
+  const [postalCode, setPostalCode] = useState<string>(
+    subscription.billing.zipcode || "",
+  );
   const [taxId, setTaxId] = useState<string>(subscription.tax_id || "");
-  const [isBusiness, setIsBusiness] = useState<boolean>(subscription.tax_id ? true : false);
+  const [isBusiness, setIsBusiness] = useState<boolean>(
+    subscription.tax_id ? true : false,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -48,7 +66,10 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
       setIsLoading(true);
       setIsLoadingCountry(true);
       const countryCodes = await fetchSupportedCountries();
-      const matchedCountries = await getMatchedCountries(countryCodes, CountriesList);
+      const matchedCountries = await getMatchedCountries(
+        countryCodes,
+        CountriesList,
+      );
       setCountries(matchedCountries);
       setIsLoadingCountry(false);
       setIsLoading(false);
@@ -90,17 +111,34 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
         <Label htmlFor="fullName">Customer Name</Label>
-        <Input id="fullName" placeholder="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+        <Input
+          id="fullName"
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
       </div>
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="email">Email</Label>
-        <Input disabled={true} id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          disabled={true}
+          id="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="phoneNumber">Phone Number</Label>
-        <Input disabled={true} id="phoneNumber" placeholder="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+        <Input
+          disabled={true}
+          id="phoneNumber"
+          placeholder="Phone Number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -116,7 +154,9 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
               <option value="">Loading...</option>
             ) : (
               countries.map((c) => (
-                <option key={c.code} value={c.code}>{c.name}</option>
+                <option key={c.code} value={c.code}>
+                  {c.name}
+                </option>
               ))
             )}
           </SelectNative>
@@ -140,7 +180,6 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
           </div>
 
           <div className="grid grid-cols-2 gap-0 border-t border-border-secondary">
-
             <Input
               className="rounded-none rounded-bl-lg focus-visible:relative focus-visible:border-y focus-visible:z-20"
               placeholder="City"
@@ -148,14 +187,12 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
               onChange={(e) => setCity(e.target.value)}
             />
 
-
             <Input
               className="rounded-none rounded-br-lg border-l-0  focus-visible:relative focus-visible:border-y focus-visible:border-l focus-visible:z-20"
               placeholder="Postal code"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
             />
-
           </div>
         </div>
       </div>
@@ -172,12 +209,36 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
       {isBusiness && (
         <div className="flex flex-col gap-2">
           <Label htmlFor="taxId">Tax ID</Label>
-          <Input id="taxId" placeholder="Tax ID" value={taxId} onChange={(e) => setTaxId(e.target.value)} />
+          <Input
+            id="taxId"
+            placeholder="Tax ID"
+            value={taxId}
+            onChange={(e) => setTaxId(e.target.value)}
+          />
         </div>
       )}
 
       <div className="flex flex-row gap-2 mt-4">
-        <Button variant="default" className="w-full" onClick={() => onSave({ fullName, email, phoneNumber, country, addressLine, state, city, postalCode, ...(isBusiness ? { taxId } : {}) })} disabled={isLoading}>Save Details</Button>
+        <Button
+          variant="default"
+          className="w-full"
+          onClick={() =>
+            onSave({
+              fullName,
+              email,
+              phoneNumber,
+              country,
+              addressLine,
+              state,
+              city,
+              postalCode,
+              ...(isBusiness ? { taxId } : {}),
+            })
+          }
+          disabled={isLoading}
+        >
+          Save Details
+        </Button>
       </div>
     </div>
   );
@@ -189,7 +250,9 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4">
         <SheetHeader>
-          <SheetTitle className="text-left font-['Hanken_Grotesk'] font-semibold text-base leading-tight tracking-normal">Edit Billing Details</SheetTitle>
+          <SheetTitle className="text-left font-['Hanken_Grotesk'] font-semibold text-base leading-tight tracking-normal">
+            Edit Billing Details
+          </SheetTitle>
         </SheetHeader>
         <Separator className="my-3" />
         {form}
@@ -197,5 +260,3 @@ export default function SubscriptionBillingEdit({ subscription, onClose }: Subsc
     </Sheet>
   );
 }
-
-

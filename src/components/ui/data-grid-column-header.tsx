@@ -54,7 +54,10 @@ function DataGridColumnHeader<TData, TValue>({
     if (!title) return;
     const currentMeta = column.columnDef.meta ?? {};
     if (currentMeta.headerTitle !== title) {
-      column.columnDef.meta = { ...currentMeta, headerTitle: title } as typeof column.columnDef.meta;
+      column.columnDef.meta = {
+        ...currentMeta,
+        headerTitle: title,
+      } as typeof column.columnDef.meta;
     }
   }, [column, title]);
 
@@ -94,7 +97,7 @@ function DataGridColumnHeader<TData, TValue>({
       <div
         className={cn(
           "text-text-secondary font-normal inline-flex h-full items-center gap-1.5 text-[0.8125rem] leading-[calc(1.125/0.8125)] [&_svg]:size-3.5 [&_svg]:opacity-60",
-          className
+          className,
         )}
       >
         {icon && icon}
@@ -114,7 +117,7 @@ function DataGridColumnHeader<TData, TValue>({
           variant="ghost"
           className={cn(
             "text-text-secondary rounded-md font-[400] -ms-2 px-2 h-7 flex items-center justify-between hover:bg-bg-primary data-[state=open]:bg-bg-primary hover:text-text-primary data-[state=open]:text-text-primary",
-            className
+            className,
           )}
           disabled={isLoading || recordCount === 0}
           onClick={() => {
@@ -230,7 +233,7 @@ function DataGridColumnHeader<TData, TValue>({
                 <DropdownMenuItem
                   onClick={() =>
                     column.pin(
-                      column.getIsPinned() === "right" ? false : "right"
+                      column.getIsPinned() === "right" ? false : "right",
                     )
                   }
                 >
@@ -291,7 +294,7 @@ function DataGridColumnHeader<TData, TValue>({
                       .filter(
                         (col) =>
                           typeof col.accessorFn !== "undefined" &&
-                          col.getCanHide()
+                          col.getCanHide(),
                       )
                       .map((col) => {
                         return (

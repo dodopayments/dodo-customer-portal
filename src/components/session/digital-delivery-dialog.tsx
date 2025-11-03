@@ -47,14 +47,16 @@ export function DigitalDeliveryDialog({
       try {
         const token = await getToken();
         if (!token) {
-          throw new Error('No authentication token found');
+          throw new Error("No authentication token found");
         }
 
-        const apiUrl = typeof window !== "undefined"
-          ? (window.location.hostname === process.env.NEXT_PUBLIC_HOST_URL?.replace('https://', '')
-            ? process.env.NEXT_PUBLIC_LIVE_URL
-            : process.env.NEXT_PUBLIC_TEST_URL)
-          : process.env.NEXT_PUBLIC_TEST_URL;
+        const apiUrl =
+          typeof window !== "undefined"
+            ? window.location.hostname ===
+              process.env.NEXT_PUBLIC_HOST_URL?.replace("https://", "")
+              ? process.env.NEXT_PUBLIC_LIVE_URL
+              : process.env.NEXT_PUBLIC_TEST_URL
+            : process.env.NEXT_PUBLIC_TEST_URL;
 
         const response = await fetch(
           `${apiUrl}/customer-portal/payments/${payment_id}/digital-product-deliverables`,
@@ -63,11 +65,13 @@ export function DigitalDeliveryDialog({
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
-          }
+          },
         );
 
         if (!response.ok) {
-          throw new Error(`Failed to fetch digital products: ${response.status}`);
+          throw new Error(
+            `Failed to fetch digital products: ${response.status}`,
+          );
         }
 
         const data = await response.json();

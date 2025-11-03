@@ -12,7 +12,7 @@ const routes = ["/login"];
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const pathname = usePathname();
   const forcedThemeFromPathname = routes.some((route) =>
-    pathname.startsWith(route)
+    pathname.startsWith(route),
   )
     ? "dark"
     : undefined;

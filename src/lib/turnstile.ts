@@ -21,7 +21,7 @@ export const TURNSTILE_ERROR_MESSAGES = {
 
 export const createTurnstileHandlers = (
   turnstileRef: MutableRefObject<any>,
-  setState: (state: TurnstileState) => void
+  setState: (state: TurnstileState) => void,
 ): TurnstileHandlers => {
   const setToken = (token?: string) => {
     setState({ token, error: null });
@@ -47,7 +47,7 @@ export const createTurnstileHandlers = (
 
 export const handleTurnstileError = (
   error: string,
-  handlers: TurnstileHandlers
+  handlers: TurnstileHandlers,
 ) => {
   handlers.setError(TURNSTILE_ERROR_MESSAGES.ERROR);
   console.error("Turnstile error:", error);

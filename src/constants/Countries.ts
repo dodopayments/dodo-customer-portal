@@ -1365,7 +1365,7 @@ export const CountriesList: CountriesListType[] = [
   {
     code: "UM",
     latitude: 19.2823,
-    longitude: 166.6470,
+    longitude: 166.647,
     name: "U.S. Minor Outlying Islands",
   },
   {

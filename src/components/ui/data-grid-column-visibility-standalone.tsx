@@ -33,7 +33,7 @@ function DataGridColumnVisibilityStandalone<TData>({
       .getAllColumns()
       .filter(
         (column) =>
-          typeof column.accessorFn !== "undefined" && column.getCanHide()
+          typeof column.accessorFn !== "undefined" && column.getCanHide(),
       );
   }, [table, currentColumnVisibility]);
 

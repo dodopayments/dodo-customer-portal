@@ -12,4 +12,4 @@ export const billingDetailsFormSchema = z.object({
   taxId: z.string().optional(),
 });
 
-export type BillingDetailsFormValues = z.infer<typeof billingDetailsFormSchema>; 
+export type BillingDetailsFormValues = z.infer<typeof billingDetailsFormSchema>;

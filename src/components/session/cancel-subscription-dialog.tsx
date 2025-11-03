@@ -48,8 +48,8 @@ export function CancelSubscriptionDialog({
               service?
             </DialogTitle>
             <DialogDescription>
-              Once you proceed, you will lose access to all associated
-              benefits and this action cannot be reversed.
+              Once you proceed, you will lose access to all associated benefits
+              and this action cannot be reversed.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="gap-2 flex flex-row pt-4 w-full sm:gap-0">
@@ -73,4 +73,4 @@ export function CancelSubscriptionDialog({
       </DialogContent>
     </Dialog>
   );
-} 
+}

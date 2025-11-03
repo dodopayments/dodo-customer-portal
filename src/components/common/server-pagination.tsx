@@ -67,7 +67,6 @@ export default function ServerPagination({
     return [...new Set(pages)];
   };
 
-
   return (
     <div className="flex items-center w-full p-4 border border-border-secondary shadow-sm border-t-0 rounded-b-xl">
       <Pagination>

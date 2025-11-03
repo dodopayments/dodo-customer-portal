@@ -85,7 +85,7 @@ export const LoginForm = ({ className }: { className?: string }) => {
   const turnstileRef = useRef<any>(null);
   const turnstileHandlers = createTurnstileHandlers(
     turnstileRef,
-    setTurnstileState
+    setTurnstileState,
   );
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export const LoginForm = ({ className }: { className?: string }) => {
       try {
         setPageLoading(true);
         const response = await internalApi.get(
-          `/checkout/businesses/${business_id}`
+          `/checkout/businesses/${business_id}`,
         );
         setBusiness(response.data);
       } catch (error) {
@@ -126,7 +126,7 @@ export const LoginForm = ({ className }: { className?: string }) => {
     setIsLoading(true);
     try {
       const response = await api.post(
-        "/customer-portal-login",
+        "/customer-portal-login?send_email=false",
         {
           email,
           business_id: business_id,
@@ -135,14 +135,14 @@ export const LoginForm = ({ className }: { className?: string }) => {
           headers: {
             "cf-turnstile-response": turnstileState.token,
           },
-        }
+        },
       );
       console.log(
         "Submitting:",
         email,
         "with turnstile token:",
         turnstileState.token,
-        response
+        response,
       );
       toast.success("Login link sent to email");
       setSuccess(true);

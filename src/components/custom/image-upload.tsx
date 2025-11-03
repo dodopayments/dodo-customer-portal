@@ -121,7 +121,7 @@ const ImageUpload = ({
               }
             },
             file.type,
-            0.9
+            0.9,
           );
         };
 
@@ -130,7 +130,7 @@ const ImageUpload = ({
         };
       });
     },
-    [maxDimension]
+    [maxDimension],
   );
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,11 +184,11 @@ const ImageUpload = ({
       const { width, height } = e.currentTarget;
 
       if (aspect) {
-        const crop = centerAspectCrop(width/1.1 , height/1.1, aspect);
+        const crop = centerAspectCrop(width / 1.1, height / 1.1, aspect);
         setCrop(crop);
       }
     },
-    [aspect]
+    [aspect],
   );
 
   const getCroppedImg = useCallback(
@@ -216,13 +216,13 @@ const ImageUpload = ({
           0,
           0,
           crop.width * scaleX,
-          crop.height * scaleY
+          crop.height * scaleY,
         );
 
         resolve(canvas.toDataURL("image/png", 0.9));
       });
     },
-    []
+    [],
   );
 
   const onCropComplete = useCallback(
@@ -232,7 +232,7 @@ const ImageUpload = ({
         setCroppedImageUrl(croppedImageUrl);
       }
     },
-    [getCroppedImg]
+    [getCroppedImg],
   );
 
   const handleImageDelete = useCallback(() => {
@@ -271,7 +271,7 @@ const ImageUpload = ({
   const centerAspectCrop = (
     mediaWidth: number,
     mediaHeight: number,
-    aspect: number
+    aspect: number,
   ): Crop => {
     return centerCrop(
       makeAspectCrop(
@@ -282,10 +282,10 @@ const ImageUpload = ({
         },
         aspect,
         mediaWidth,
-        mediaHeight
+        mediaHeight,
       ),
       mediaWidth,
-      mediaHeight
+      mediaHeight,
     );
   };
 
@@ -302,7 +302,10 @@ const ImageUpload = ({
       name={name}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel>{label} {required && <span className="text-red-500 ml-1">*</span>} </FormLabel>
+          <FormLabel>
+            {label}{" "}
+            {required && <span className="text-red-500 ml-1">*</span>}{" "}
+          </FormLabel>
           <FormControl>
             <div className="relative">
               <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -371,7 +374,7 @@ const ImageUpload = ({
                   "hover:border-2 hover:border-border-brand",
                   field.value || defaultValue
                     ? "border-border-primary"
-                    : "border-border-primary"
+                    : "border-border-primary",
                 )}
               >
                 {(field.value || defaultValue) &&

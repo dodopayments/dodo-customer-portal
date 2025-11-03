@@ -3,7 +3,13 @@
 import React from "react";
 import { Separator } from "./ui/separator";
 
-const PageHeader = ({ children, showSeparator = true }: { children: React.ReactNode, showSeparator?: boolean }) => {
+const PageHeader = ({
+  children,
+  showSeparator = true,
+}: {
+  children: React.ReactNode;
+  showSeparator?: boolean;
+}) => {
   return (
     <>
       <section className="flex items-start md:items-center gap-4 md:flex-row flex-col  justify-between">
@@ -12,6 +18,6 @@ const PageHeader = ({ children, showSeparator = true }: { children: React.ReactN
       {showSeparator && <Separator className="mb-6" />}
     </>
   );
-}
+};
 
 export default PageHeader;

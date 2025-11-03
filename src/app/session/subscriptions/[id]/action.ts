@@ -30,17 +30,25 @@ export interface UpdateBillingDetailsParams {
 }
 
 export async function cancelSubscription(params: CancelSubscriptionParams) {
-  const { selectedId, subscription_id, nextBillingDate = false, revoke = false } = params;
+  const {
+    selectedId,
+    subscription_id,
+    nextBillingDate = false,
+    revoke = false,
+  } = params;
 
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/cancel`, {
-    method: 'POST',
-    body: JSON.stringify({
-      business_id: selectedId,
-      subscription_id,
-      cancel_at_next_billing_date: nextBillingDate,
-      revoke,
-    }),
-  });
+  const response = await makeAuthenticatedRequest(
+    `/customer-portal/subscriptions/cancel`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        business_id: selectedId,
+        subscription_id,
+        cancel_at_next_billing_date: nextBillingDate,
+        revoke,
+      }),
+    },
+  );
 
   if (!response.ok) {
     const error = await response.text();
@@ -51,9 +59,12 @@ export async function cancelSubscription(params: CancelSubscriptionParams) {
 }
 
 export async function cancelSubscriptionLegacy(subscriptionId: string) {
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscriptionId}/cancel`, {
-    method: 'POST',
-  });
+  const response = await makeAuthenticatedRequest(
+    `/customer-portal/subscriptions/${subscriptionId}/cancel`,
+    {
+      method: "POST",
+    },
+  );
 
   if (!response.ok) {
     const error = await response.text();
@@ -63,20 +74,23 @@ export async function cancelSubscriptionLegacy(subscriptionId: string) {
   return response.json();
 }
 
-
-export async function fetchSubscription(id: string): Promise<SubscriptionDetailsData | null> {
+export async function fetchSubscription(
+  id: string,
+): Promise<SubscriptionDetailsData | null> {
   try {
-      const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${id}`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch subscription: ${response.status}`);
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching subscription:', error);
-      return null;
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${id}`,
+    );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch subscription: ${response.status}`);
     }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching subscription:", error);
+    return null;
   }
+}
 
 export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   const { subscription_id, data } = params;
@@ -90,10 +104,13 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
     tax_id: data.tax_id === "" ? null : data.tax_id,
   };
 
-  const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscription_id}`, {
-    method: 'PATCH',
-    body: JSON.stringify(patchData),
-  });
+  const response = await makeAuthenticatedRequest(
+    `/customer-portal/subscriptions/${subscription_id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(patchData),
+    },
+  );
 
   if (!response.ok) {
     let errorMessage = `HTTP ${response.status}`;
@@ -102,10 +119,10 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
       if (errorText && errorText.trim()) {
         errorMessage += `: ${errorText}`;
       } else {
-        errorMessage += ` (${response.statusText || 'Unknown error'})`;
+        errorMessage += ` (${response.statusText || "Unknown error"})`;
       }
     } catch {
-      errorMessage += ` (${response.statusText || 'Unknown error'})`;
+      errorMessage += ` (${response.statusText || "Unknown error"})`;
     }
     throw new Error(`Failed to update billing details: ${errorMessage}`);
   }
@@ -115,7 +132,9 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 
 export async function fetchInvoiceHistory(subscriptionId: string) {
   try {
-    const response = await makeAuthenticatedRequest(`/customer-portal/payments?subscription_id=${subscriptionId}`);
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/payments?subscription_id=${subscriptionId}`,
+    );
     if (!response.ok) {
       throw new Error(`Failed to fetch invoice history: ${response.status}`);
     }
@@ -123,20 +142,22 @@ export async function fetchInvoiceHistory(subscriptionId: string) {
     console.log(data.items);
     return data;
   } catch (error) {
-    console.error('Error fetching invoice history:', error);
+    console.error("Error fetching invoice history:", error);
     return null;
   }
 }
 
 export async function fetchUsageHistory(subscriptionId: string) {
   try {
-    const response = await makeAuthenticatedRequest(`/customer-portal/subscriptions/${subscriptionId}/usage-history`);
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscriptionId}/usage-history`,
+    );
     if (!response.ok) {
       throw new Error(`Failed to fetch usage history: ${response.status}`);
     }
     return response.json();
   } catch (error) {
-    console.error('Error fetching usage history:', error);
+    console.error("Error fetching usage history:", error);
     return null;
   }
 }

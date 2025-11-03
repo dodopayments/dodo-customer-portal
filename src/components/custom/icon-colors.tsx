@@ -29,7 +29,7 @@ const IconColors = ({
       className={cn(
         "rounded-full w-fit p-3 flex items-center justify-center",
         getIconColor(color),
-        className
+        className,
       )}
     >
       {icon}
