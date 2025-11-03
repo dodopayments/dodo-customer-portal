@@ -34,3 +34,18 @@ export async function fetchWallets() {
     return null;
   }
 }
+
+export async function fetchWalletLedger() {
+  try {
+    const response = await makeAuthenticatedRequest(`/customer-portal/wallets/ledger-entries`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch wallet ledger: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching wallet ledger:', error);
+    return null;
+  }
+}
+  
