@@ -23,7 +23,7 @@ const SheetOverlay = React.forwardRef<
     data-slot="sheet-overlay"
     className={cn(
       "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
-      className,
+      className
     )}
     {...props}
     ref={ref}
@@ -43,13 +43,13 @@ const SheetContent = React.forwardRef<
 >(
   (
     { side = "right", className, children, floating = false, ...props },
-    ref,
+    ref
   ) => {
     const floatingStyles = floating
       ? {
           left: "left-0 top-0 bottom-0 h-[calc(100%-3rem)] w-[88vw] md:w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
           right:
-            "right-0 top-0 bottom-0 h-[calc(100%-3rem)] w-[88vw] md:w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+            "right-0 top-0 bottom-0 h-[calc(100%-3rem)] translate-y-[4%] translate-x-[-4%] w-[88vw] md:w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
         }
       : {
           left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
@@ -72,7 +72,7 @@ const SheetContent = React.forwardRef<
         defaultVariants: {
           side: "right",
         },
-      },
+      }
     );
 
     return (
@@ -91,7 +91,7 @@ const SheetContent = React.forwardRef<
         </SheetPrimitive.Content>
       </SheetPortal>
     );
-  },
+  }
 );
 SheetContent.displayName = SheetPrimitive.Content.displayName;
 
@@ -102,7 +102,7 @@ const SheetHeader = ({
   <div
     className={cn(
       "flex flex-col space-y-2 text-center sm:text-left",
-      className,
+      className
     )}
     {...props}
   />
@@ -116,7 +116,7 @@ const SheetFooter = ({
   <div
     className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className,
+      className
     )}
     {...props}
   />

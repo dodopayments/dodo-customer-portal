@@ -83,7 +83,7 @@ export function AppSidebar() {
       path: "/session/subscriptions",
       activeCheck: ["/session/subscriptions"],
     },
-    { label: "Payment Methods", path: "/session/payment-methods" },
+    // { label: "Payment Methods", path: "/session/payment-methods" },
     { label: "Profile & Wallets", path: "/session/profile" },
   ];
 

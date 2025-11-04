@@ -4,10 +4,9 @@ import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { SubscriptionDetailsData } from "./types";
 
 export interface CancelSubscriptionParams {
-  selectedId: string;
   subscription_id: string;
-  nextBillingDate?: boolean;
-  revoke?: boolean;
+  cancelAtNextBillingDate?: boolean;
+  revokeCancelation?: boolean;
 }
 
 export interface UpdateBillingDetailsParams {
@@ -29,57 +28,58 @@ export interface UpdateBillingDetailsParams {
   };
 }
 
-export async function cancelSubscription(params: CancelSubscriptionParams) {
-  const {
-    selectedId,
-    subscription_id,
-    nextBillingDate = false,
-    revoke = false,
-  } = params;
+export async function cancelSubscription({
+  subscription_id,
+  cancelAtNextBillingDate,
+  revokeCancelation,
+}: CancelSubscriptionParams) {
+  let url = `/customer-portal/subscriptions/${subscription_id}`;
+  let options: RequestInit;
 
-  const response = await makeAuthenticatedRequest(
-    `/customer-portal/subscriptions/cancel`,
-    {
-      method: "POST",
+  if (cancelAtNextBillingDate !== undefined) {
+    options = {
+      method: "PATCH",
       body: JSON.stringify({
-        business_id: selectedId,
-        subscription_id,
-        cancel_at_next_billing_date: nextBillingDate,
-        revoke,
+        cancel_at_next_billing_date: !!cancelAtNextBillingDate,
       }),
-    },
-  );
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to cancel subscription: ${error}`);
+    };
+  } else if (revokeCancelation) {
+    options = {
+      method: "PATCH",
+      body: JSON.stringify({ cancel_at_next_billing_date: false }),
+    };
+  } else {
+    url += "/cancel";
+    options = {
+      method: "POST",
+      body: JSON.stringify({}),
+    };
   }
 
-  return response.json();
-}
-
-export async function cancelSubscriptionLegacy(subscriptionId: string) {
-  const response = await makeAuthenticatedRequest(
-    `/customer-portal/subscriptions/${subscriptionId}/cancel`,
-    {
-      method: "POST",
-    },
-  );
+  const response = await makeAuthenticatedRequest(url, options);
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to cancel subscription: ${error}`);
+    const errorText = await response.text();
+    let operation = "cancel subscription";
+    if (cancelAtNextBillingDate) {
+      operation = "set cancel at next billing date";
+    } else if (revokeCancelation) {
+      operation = "revoke cancelation";
+    } else {
+      operation = "cancel subscription immediately";
+    }
+    throw new Error(`Failed to ${operation}: ${errorText}`);
   }
 
   return response.json();
 }
 
 export async function fetchSubscription(
-  id: string,
+  id: string
 ): Promise<SubscriptionDetailsData | null> {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions/${id}`,
+      `/customer-portal/subscriptions/${id}`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch subscription: ${response.status}`);
@@ -109,7 +109,7 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
     {
       method: "PATCH",
       body: JSON.stringify(patchData),
-    },
+    }
   );
 
   if (!response.ok) {
@@ -133,7 +133,7 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 export async function fetchInvoiceHistory(subscriptionId: string) {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/payments?subscription_id=${subscriptionId}`,
+      `/customer-portal/payments?subscription_id=${subscriptionId}`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch invoice history: ${response.status}`);
@@ -150,7 +150,7 @@ export async function fetchInvoiceHistory(subscriptionId: string) {
 export async function fetchUsageHistory(subscriptionId: string) {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions/${subscriptionId}/usage-history`,
+      `/customer-portal/subscriptions/${subscriptionId}/usage-history`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch usage history: ${response.status}`);

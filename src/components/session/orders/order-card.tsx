@@ -56,14 +56,14 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
         <div className="flex flex-row justify-between gap-4 w-full">
           <div className="flex flex-col gap-2">
             <p className="text-sm text-text-secondary">Order ID</p>
-            <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">
+            <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
               {item.payment_id}
             </CardTitle>
           </div>
-          <div className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">
+          <div className="font-display font-semibold text-base leading-5 flex-none">
             {formatCurrency(
               decodeCurrency(item.total_amount, item.currency as CurrencyCode),
-              item.currency as CurrencyCode,
+              item.currency as CurrencyCode
             )}
           </div>
         </div>
@@ -88,7 +88,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             onClick={() =>
               window.open(
                 `${api_url}/invoices/payments/${item.payment_id}`,
-                "_blank",
+                "_blank"
               )
             }
           >
@@ -99,16 +99,9 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             variant="secondary"
             className="w-full"
             onClick={onToggleDetails}
-            disabled={loading}
+            loading={loading}
           >
-            {loading ? (
-              <span className="inline-flex items-center gap-2">
-                <span className="animate-spin rounded-full h-4 w-4 border-2 border-current border-b-transparent"></span>
-                Loading...
-              </span>
-            ) : (
-              <>{showDetails ? "Hide Details" : "View Details"}</>
-            )}
+            {showDetails ? "Hide Details" : "View Details"}
           </Button>
         </div>
       </CardFooter>

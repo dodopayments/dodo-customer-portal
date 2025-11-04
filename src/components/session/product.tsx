@@ -19,8 +19,9 @@ import { CurrencyCode } from "@/lib/currency-helper";
 import { AttachmentsSheet } from "./orders/attachment-sheets";
 import { Separator } from "../ui/separator";
 import { LicenseSheets } from "./orders/license-sheets";
-import { Badge } from "../ui/badge";
 import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
+import { renderSubscriptionBadges } from "./subscription-utils";
+import ProductMarkdownDescription from "../common/product-markdown-description";
 
 export interface DigitalProductResponse {
   product_id: string;
@@ -106,7 +107,7 @@ export const Product = ({
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        },
+        }
       );
 
       if (response.ok) {
@@ -134,7 +135,7 @@ export const Product = ({
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        },
+        }
       );
       if (response.ok) {
         const data = await response.json();
@@ -160,18 +161,20 @@ export const Product = ({
             />
           )}
           <div className="flex flex-col gap-2">
-            <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">
+            <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
               {product.product_name}
             </CardTitle>
-            <CardDescription className="font-['Inter'] font-normal text-sm leading-[21px] text-text-secondary self-stretch">
-              {product.product_description}
+            <CardDescription className="font-body font-normal text-sm leading-[21px] text-text-secondary self-stretch">
+              <ProductMarkdownDescription
+                description={product.product_description}
+              />
             </CardDescription>
           </div>
         </div>
-        <div className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">
+        <div className="font-display font-semibold text-base leading-5 flex-none">
           {formatCurrency(
             decodeCurrency(product.price, product.currency as CurrencyCode),
-            product.currency as CurrencyCode,
+            product.currency as CurrencyCode
           )}
         </div>
       </CardContent>
@@ -184,40 +187,7 @@ export const Product = ({
             </p>
           </div>
         )}
-        {subscription && (
-          <div className="flex flex-row gap-2">
-            <Badge
-              variant="default"
-              dot={false}
-              className="rounded-sm border-sm"
-            >
-              renews on{" "}
-              {new Date(subscription.next_billing_date).toLocaleDateString(
-                "en-GB",
-                {
-                  day: "numeric",
-                  month: "short",
-                  year: "2-digit",
-                },
-              )}
-            </Badge>
-            <Badge
-              variant="default"
-              dot={false}
-              className="rounded-sm border-sm"
-            >
-              valid until{" "}
-              {new Date(subscription.next_billing_date).toLocaleDateString(
-                "en-GB",
-                {
-                  day: "numeric",
-                  month: "short",
-                  year: "2-digit",
-                },
-              )}
-            </Badge>
-          </div>
-        )}
+        {subscription && renderSubscriptionBadges(subscription)}
         <div className="flex flex-row gap-2">
           {product.license_keys.length > 0 && (
             <LicenseSheets

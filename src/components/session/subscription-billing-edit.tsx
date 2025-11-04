@@ -23,6 +23,7 @@ import { Checkbox } from "../ui/checkbox";
 import { BillingDetailsFormValues } from "./subscription-form-schema";
 import { updateBillingDetails } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface SubscriptionBillingEditProps {
   subscription: SubscriptionDetailsData;
@@ -36,7 +37,7 @@ export default function SubscriptionBillingEdit({
   const [countries, setCountries] = useState<CountriesListType[]>([]);
   const [isLoadingCountry, setIsLoadingCountry] = useState(false);
   const [open, setOpen] = useState(false);
-
+  const router = useRouter();
   const [fullName, setFullName] = useState<string>(
     subscription.customer.name || "",
   );
@@ -99,13 +100,14 @@ export default function SubscriptionBillingEdit({
       });
       console.log("response", response);
       toast.success("Billing details updated successfully");
+      router.refresh();
     } catch (error) {
       console.error("Failed to update billing details:", error);
       toast.error("Failed to update billing details. Please try again.");
     }
     if (onClose) onClose();
     setOpen(false);
-  };
+  };  
 
   const form = (
     <div className="flex flex-col gap-6">
@@ -119,7 +121,7 @@ export default function SubscriptionBillingEdit({
         />
       </div>
 
-      <div className="flex flex-col gap-2">
+      {/* <div className="flex flex-col gap-2">
         <Label htmlFor="email">Email</Label>
         <Input
           disabled={true}
@@ -139,7 +141,7 @@ export default function SubscriptionBillingEdit({
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-      </div>
+      </div> */}
 
       <div className="flex flex-col gap-2">
         <Label> Billing Address </Label>
@@ -250,7 +252,7 @@ export default function SubscriptionBillingEdit({
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4">
         <SheetHeader>
-          <SheetTitle className="text-left font-['Hanken_Grotesk'] font-semibold text-base leading-tight tracking-normal">
+          <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             Edit Billing Details
           </SheetTitle>
         </SheetHeader>
