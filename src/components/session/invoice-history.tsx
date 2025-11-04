@@ -29,6 +29,17 @@ import InvoiceFillDetails from "./invoice-fill-details";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const InvoiceColumn: ColumnDef<any>[] = [
   {
+    accessorKey: "payment_id",
+    header: "Payment ID",
+    cell: ({ row }) => {
+      return (
+        <div className="text-left text-text-secondary">
+          {row.original.payment_id}
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: "date",
     header: "Date",
     cell: ({ row }) => {
@@ -51,7 +62,7 @@ const InvoiceColumn: ColumnDef<any>[] = [
         <div className="text-left text-text-secondary">
           {formatCurrency(
             decodeCurrency(row.original.amount, row.original.currency),
-            row.original.currency,
+            row.original.currency
           )}
         </div>
       );
@@ -109,7 +120,7 @@ function DownloadButton({ url }: { url: string }) {
       <SheetContent className="flex flex-col gap-4">
         <SheetHeader>
           <SheetTitle
-            className="text-left font-['Hanken_Grotesk'] font-semibold text-base leading-tight tracking-normal"
+            className="text-left font-display font-semibold text-base leading-tight tracking-normal"
             style={{ leadingTrim: "cap-height" } as React.CSSProperties}
           >
             {isFillDetailsOpen ? "Fill Details" : "Generate Invoice"}
@@ -123,7 +134,7 @@ function DownloadButton({ url }: { url: string }) {
             <Card className="p-5">
               <CardContent className="p-0">
                 <CardTitle
-                  className="font-['Hanken_Grotesk'] font-medium text-sm tracking-normal"
+                  className="font-display font-medium text-sm tracking-normal"
                   style={{ leadingTrim: "cap-height" } as React.CSSProperties}
                 >
                   Download with existing address details
@@ -145,10 +156,10 @@ function DownloadButton({ url }: { url: string }) {
                 </Button>
               </CardFooter>
             </Card>
-            <Card className="p-5">
+            {/* <Card className="p-5">
               <CardContent className="p-0">
                 <CardTitle
-                  className="font-['Hanken_Grotesk'] font-medium text-sm tracking-normal"
+                  className="font-display font-medium text-sm tracking-normal"
                   style={{ leadingTrim: "cap-height" } as React.CSSProperties}
                 >
                   Download with full address details
@@ -169,7 +180,7 @@ function DownloadButton({ url }: { url: string }) {
                   Fill Details
                 </Button>
               </CardFooter>
-            </Card>
+            </Card> */}
           </>
         )}
       </SheetContent>

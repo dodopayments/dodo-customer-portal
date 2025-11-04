@@ -20,7 +20,7 @@ export function Wallet({
   wallets: WalletItem[];
   allWallets: { value: string; label: string; link: string }[];
   tab: string;
-  walletLedger: WalletLedgerItem[];
+  walletLedger: { items: WalletLedgerItem[] };
 }) {
   if (allWallets.length === 0) {
     return <p className="text-text-secondary text-sm">No wallets found</p>;
@@ -29,7 +29,7 @@ export function Wallet({
   const currentWallet: WalletItem | undefined = wallets.find(
     (wallet: WalletItem) => wallet.currency?.toUpperCase() === selectedCurrency,
   );
-  const currentWalletLedger: WalletLedgerItem[] = walletLedger.find(
+  const currentWalletLedger: WalletLedgerItem | undefined = walletLedger.items.find(
     (ledger: WalletLedgerItem) =>
       ledger.currency?.toUpperCase() === selectedCurrency,
   );

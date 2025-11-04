@@ -7,6 +7,8 @@ import Link from "next/link";
 import { SubscriptionDetails } from "@/components/session/subscription-details";
 import { SubscriptionBillingInfo } from "@/components/session/subscription-billing-info";
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
+import { CancelSubscriptionSheet } from "@/components/session/cancel-subscription-sheet";
+import { SubscriptionDetailsData } from "./types";
 
 export interface PageProps {
   params: Promise<{ id: string }>;
@@ -25,7 +27,7 @@ export default async function SubscriptionPage({
 
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
-      <TopButtons />
+      <TopButtons subscription={subscription} subscriptionId={id} />
       <SubscriptionDetails subscription={subscription} />
       <SubscriptionBillingInfo subscription={subscription} />
       <SubscriptionTabsTable
@@ -37,7 +39,13 @@ export default async function SubscriptionPage({
   );
 }
 
-function TopButtons() {
+function TopButtons({
+  subscription,
+  subscriptionId,
+}: {
+  subscription: SubscriptionDetailsData;
+  subscriptionId: string;
+}) {
   return (
     <PageHeader showSeparator={false}>
       <Link href="/session/orders?orderType=subscriptions">
@@ -46,8 +54,13 @@ function TopButtons() {
         </Button>
       </Link>
       <div className="flex flex-row gap-2">
-        <Button variant="secondary">Change Plan</Button>
-        <Button variant="destructive">Cancel Subscription</Button>
+        {/* <Button variant="secondary">Change Plan</Button> */}
+        {subscription.status != "cancelled" && (
+          <CancelSubscriptionSheet
+            subscription={subscription}
+            subscriptionId={subscriptionId}
+          />
+        )}
       </div>
     </PageHeader>
   );

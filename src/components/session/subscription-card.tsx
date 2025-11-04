@@ -15,6 +15,8 @@ import { Badge, type BadgeVariant } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { useRouter } from "next/navigation";
 import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
+import { renderSubscriptionBadges } from "./subscription-utils";
+import ProductMarkdownDescription from "../common/product-markdown-description";
 
 interface SubscriptionCardProps {
   item: SubscriptionData;
@@ -28,18 +30,18 @@ export const SubscriptionCard = ({
   const router = useRouter();
   return (
     <Card className={cardClassName}>
-      <CardContent className="flex flex-row items-center px-0 gap-2">
+      <CardContent className="flex flex-row items-start px-0 gap-4">
         <Image
           src={item.product.image}
           alt={item.product.name}
-          width={56}
-          height={56}
+          width={64}
+          height={64}
           className="rounded-lg flex-none aspect-square object-cover"
         />
         <div className="flex flex-col gap-2 flex-1">
           <div className="flex flex-row justify-between items-start gap-4">
             <div className="flex flex-row gap-2">
-              <CardTitle className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">
+              <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
                 {item.product.name}
               </CardTitle>
               <Badge
@@ -50,15 +52,15 @@ export const SubscriptionCard = ({
                 {getBadge(item.status).message}
               </Badge>
             </div>
-            <div className="font-['Hanken_Grotesk'] font-semibold text-base leading-5 flex-none">
+            <div className="font-display font-semibold text-base leading-5 flex-none">
               {formatCurrency(
                 item.recurring_pre_tax_amount,
                 item.currency as CurrencyCode,
               )}
             </div>
           </div>
-          <CardDescription className="font-['Inter'] font-normal text-sm leading-[21px] text-text-secondary self-stretch">
-            {item.product.description}
+          <CardDescription className="font-body font-normal text-sm leading-[21px] text-text-secondary self-stretch">
+            <ProductMarkdownDescription description={item.product.description} />
           </CardDescription>
         </div>
       </CardContent>
@@ -73,22 +75,7 @@ export const SubscriptionCard = ({
           View details
         </Button>
         <div className="flex flex-row gap-2">
-          <Badge variant="default" dot={false} className="rounded-sm border-sm">
-            renews on{" "}
-            {new Date(item.next_billing_date).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "short",
-              year: "2-digit",
-            })}
-          </Badge>
-          <Badge variant="default" dot={false} className="rounded-sm border-sm">
-            valid until{" "}
-            {new Date(item.next_billing_date).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "short",
-              year: "2-digit",
-            })}
-          </Badge>
+          {renderSubscriptionBadges(item, "rounded-sm border-sm")}
         </div>
       </CardFooter>
     </Card>
