@@ -108,6 +108,7 @@ export function InvoiceHistory({
 
 function DownloadButton({ url }: { url: string }) {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
 
   return (

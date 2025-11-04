@@ -41,10 +41,6 @@ export default function SubscriptionBillingEdit({
   const [fullName, setFullName] = useState<string>(
     subscription.customer.name || "",
   );
-  const [email, setEmail] = useState<string>(subscription.customer.email || "");
-  const [phoneNumber, setPhoneNumber] = useState<string>(
-    subscription.customer.phone_number || "",
-  );
   const [country, setCountry] = useState<string>(
     subscription.billing.country || "",
   );
@@ -85,8 +81,6 @@ export default function SubscriptionBillingEdit({
         data: {
           customer: {
             name: data.fullName,
-            email: data.email,
-            phone_number: data.phoneNumber,
           },
           billing: {
             city: data.city,
@@ -120,28 +114,6 @@ export default function SubscriptionBillingEdit({
           onChange={(e) => setFullName(e.target.value)}
         />
       </div>
-
-      {/* <div className="flex flex-col gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          disabled={true}
-          id="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="phoneNumber">Phone Number</Label>
-        <Input
-          disabled={true}
-          id="phoneNumber"
-          placeholder="Phone Number"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      </div> */}
 
       <div className="flex flex-col gap-2">
         <Label> Billing Address </Label>
@@ -227,8 +199,6 @@ export default function SubscriptionBillingEdit({
           onClick={() =>
             onSave({
               fullName,
-              email,
-              phoneNumber,
               country,
               addressLine,
               state,
