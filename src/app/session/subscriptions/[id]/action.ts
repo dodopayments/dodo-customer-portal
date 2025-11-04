@@ -14,8 +14,6 @@ export interface UpdateBillingDetailsParams {
   data: {
     customer: {
       name: string;
-      email: string;
-      phone_number: string;
     };
     billing: {
       city: string;
@@ -99,8 +97,6 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   const patchData = {
     billing: data.billing,
     customer_name: data.customer.name,
-    customer_email: data.customer.email,
-    phone_number: data.customer.phone_number,
     tax_id: data.tax_id === "" ? null : data.tax_id,
   };
 
