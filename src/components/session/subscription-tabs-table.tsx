@@ -5,7 +5,7 @@ import {
   fetchInvoiceHistory,
   fetchUsageHistory,
 } from "@/app/session/subscriptions/[id]/action";
-import { api_url } from "@/lib/http";
+import { getServerApiUrl } from "@/lib/server-http";
 import { UsageSummary } from "./usage-summary";
 import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 import { CurrencyCode } from "@/lib/currency-helper";
@@ -85,6 +85,7 @@ export async function SubscriptionTabsTable({
       ? tabParam
       : "invoice-history";
 
+  const api_url = await getServerApiUrl();
   const invoiceHistoryData: InvoiceHistoryResponse[] =
     invoiceHistory?.data?.map((item: InvoiceHistoryResponse) => ({
       payment_id: item.payment_id,
