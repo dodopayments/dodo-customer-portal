@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/currency-helper";
+import { decodeCurrency, formatCurrency } from "@/lib/currency-helper";
 import { CurrencyCode } from "@/lib/currency-helper";
 import { WalletTable } from "./wallet-table";
 
@@ -53,7 +53,10 @@ export function Wallet({
         <CardHeader className="flex flex-col gap-1 p-3 items-center">
           <CardTitle className="text-text-primary text-lg md:text-2xl text-green-500 font-medium text-center">
             {formatCurrency(
-              currentWallet?.balance || 0,
+              decodeCurrency(
+                currentWallet?.balance || 0,
+                selectedCurrency as CurrencyCode
+              ),
               selectedCurrency as CurrencyCode
             )}
           </CardTitle>

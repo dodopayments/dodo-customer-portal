@@ -14,7 +14,11 @@ import { SubscriptionData } from "./subscriptions/subscriptions";
 import { Badge, type BadgeVariant } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { useRouter } from "next/navigation";
-import { CurrencyCode, formatCurrency } from "@/lib/currency-helper";
+import {
+  CurrencyCode,
+  decodeCurrency,
+  formatCurrency,
+} from "@/lib/currency-helper";
 import { renderSubscriptionBadges } from "./subscription-utils";
 import ProductMarkdownDescription from "../common/product-markdown-description";
 
@@ -56,7 +60,10 @@ export const SubscriptionCard = ({
             </div>
             <div className="font-display font-semibold text-base leading-5 flex-none">
               {formatCurrency(
-                item.recurring_pre_tax_amount,
+                decodeCurrency(
+                  item.recurring_pre_tax_amount,
+                  item.currency as CurrencyCode
+                ),
                 item.currency as CurrencyCode
               )}
             </div>
