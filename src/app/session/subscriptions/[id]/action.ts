@@ -34,17 +34,17 @@ export async function cancelSubscription({
   let url = `/customer-portal/subscriptions/${subscription_id}`;
   let options: RequestInit;
 
-  if (cancelAtNextBillingDate !== undefined) {
-    options = {
-      method: "PATCH",
-      body: JSON.stringify({
-        cancel_at_next_billing_date: !!cancelAtNextBillingDate,
-      }),
-    };
-  } else if (revokeCancelation) {
+  if (revokeCancelation) {
     options = {
       method: "PATCH",
       body: JSON.stringify({ cancel_at_next_billing_date: false }),
+    };
+  } else if (cancelAtNextBillingDate === true) {
+    options = {
+      method: "PATCH",
+      body: JSON.stringify({
+        cancel_at_next_billing_date: true,
+      }),
     };
   } else {
     url += "/cancel";
