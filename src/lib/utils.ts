@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -18,7 +19,7 @@ interface TableState {
   columnSizing: Record<string, number>;
   filters?: Array<{
     id: string;
-    value: any /* eslint-disable-line @typescript-eslint/no-explicit-any */;
+    value: any
   }>;
 }
 
@@ -67,7 +68,6 @@ class TableLocalStorage {
     this.setStorage(updated);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static deepMerge<T extends Record<string, any>>(
     target: T,
     source: DeepPartial<T>,
@@ -81,13 +81,14 @@ class TableLocalStorage {
           !Array.isArray(source[key])
         ) {
           result[key] = this.deepMerge(
+
             (result[key] as any) || {},
             source[key] as any,
-          ) as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
+          ) as any; 
         } else {
           result[key] = source[
             key
-          ] as any; /* eslint-disable-line @typescript-eslint/no-explicit-any */
+          ] as any;
         }
       }
     }

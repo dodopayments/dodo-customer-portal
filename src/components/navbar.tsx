@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -39,7 +39,7 @@ const BusinessName = ({
       <span
         className={cn(
           "text-text-primary font-display text-xl font-semibold",
-          hide && "md:block hidden",
+          hide && "md:block hidden"
         )}
       >
         {name}
@@ -159,28 +159,31 @@ const Pills = () => {
     href: string;
   };
 
-  const ITEMS: Props[] = [
-    {
-      id: 1,
-      tile: "Billing history",
-      href: "/billing-history",
-    },
-    {
-      id: 2,
-      tile: "Subscriptions",
-      href: "/subscriptions",
-    },
-    {
-      id: 3,
-      tile: "License Keys",
-      href: "/license-keys",
-    },
-    {
-      id: 4,
-      tile: "Profile",
-      href: "/profile",
-    },
-  ];
+  const ITEMS: Props[] = useMemo(
+    () => [
+      {
+        id: 1,
+        tile: "Billing history",
+        href: "/billing-history",
+      },
+      {
+        id: 2,
+        tile: "Subscriptions",
+        href: "/subscriptions",
+      },
+      {
+        id: 3,
+        tile: "License Keys",
+        href: "/license-keys",
+      },
+      {
+        id: 4,
+        tile: "Profile",
+        href: "/profile",
+      },
+    ],
+    []
+  );
 
   const [active, setActive] = useState<Props>(ITEMS[0]);
   const pathname = usePathname();
@@ -190,7 +193,7 @@ const Pills = () => {
       return pathname.includes(item.href);
     };
     setActive(ITEMS.find((item) => isActive(item)) || ITEMS[0]);
-  }, [pathname]);
+  }, [pathname, ITEMS]);
 
   const [isHover, setIsHover] = useState<Props | null>(null);
 
@@ -204,7 +207,7 @@ const Pills = () => {
             "py-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors",
             active.id === item.id
               ? "text-button-secondary-text"
-              : "text-text-tertiary hover:text-button-secondary-text",
+              : "text-text-tertiary hover:text-button-secondary-text"
           )}
           onClick={() => setActive(item)}
           onMouseEnter={() => setIsHover(item)}
@@ -237,28 +240,31 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
     href: string;
   };
 
-  const ITEMS: Props[] = [
-    {
-      id: 1,
-      tile: "Billing history",
-      href: "/billing-history",
-    },
-    {
-      id: 2,
-      tile: "Subscriptions",
-      href: "/subscriptions",
-    },
-    {
-      id: 3,
-      tile: "License Keys",
-      href: "/license-keys",
-    },
-    {
-      id: 4,
-      tile: "Profile",
-      href: "/profile",
-    },
-  ];
+  const ITEMS: Props[] = useMemo(
+    () => [
+      {
+        id: 1,
+        tile: "Billing history",
+        href: "/billing-history",
+      },
+      {
+        id: 2,
+        tile: "Subscriptions",
+        href: "/subscriptions",
+      },
+      {
+        id: 3,
+        tile: "License Keys",
+        href: "/license-keys",
+      },
+      {
+        id: 4,
+        tile: "Profile",
+        href: "/profile",
+      },
+    ],
+    []
+  );
 
   const [active, setActive] = useState<Props>(ITEMS[0]);
   const params = useParams();
@@ -270,7 +276,7 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
       return pathname.includes(item.href);
     };
     setActive(ITEMS.find((item) => isActive(item)) || ITEMS[0]);
-  }, [pathname]);
+  }, [pathname, ITEMS]);
 
   return (
     <div className="flex flex-col gap-2 px-4">
@@ -284,7 +290,7 @@ const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
             "p-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors rounded-md",
             active.id === item.id
               ? "bg-button-secondary-bg text-button-secondary-text"
-              : "text-text-tertiary hover:text-button-secondary-text hover:bg-button-secondary-bg/50",
+              : "text-text-tertiary hover:text-button-secondary-text hover:bg-button-secondary-bg/50"
           )}
           onClick={() => {
             setActive(item);

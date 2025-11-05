@@ -31,13 +31,15 @@ export const SubscriptionCard = ({
   return (
     <Card className={cardClassName}>
       <CardContent className="flex flex-row items-start px-0 gap-4">
-        <Image
-          src={item.product.image}
-          alt={item.product.name}
-          width={64}
-          height={64}
-          className="rounded-lg flex-none aspect-square object-cover"
-        />
+        {item.product.image && (
+          <Image
+            src={item.product.image}
+            alt={item.product.name}
+            width={64}
+            height={64}
+            className="rounded-lg flex-none aspect-square object-cover"
+          />
+        )}
         <div className="flex flex-col gap-2 flex-1">
           <div className="flex flex-row justify-between items-start gap-4">
             <div className="flex flex-row gap-2">
@@ -55,12 +57,14 @@ export const SubscriptionCard = ({
             <div className="font-display font-semibold text-base leading-5 flex-none">
               {formatCurrency(
                 item.recurring_pre_tax_amount,
-                item.currency as CurrencyCode,
+                item.currency as CurrencyCode
               )}
             </div>
           </div>
           <CardDescription className="font-body font-normal text-sm pt-4 leading-[21px] text-text-secondary self-stretch">
-            <ProductMarkdownDescription description={item.product.description} />
+            <ProductMarkdownDescription
+              description={item.product.description}
+            />
           </CardDescription>
         </div>
       </CardContent>

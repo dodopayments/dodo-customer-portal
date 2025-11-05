@@ -39,22 +39,22 @@ export default function SubscriptionBillingEdit({
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [fullName, setFullName] = useState<string>(
-    subscription.customer.name || "",
+    subscription.customer.name || ""
   );
   const [country, setCountry] = useState<string>(
-    subscription.billing.country || "",
+    subscription.billing.country || ""
   );
   const [addressLine, setAddressLine] = useState<string>(
-    subscription.billing.street || "",
+    subscription.billing.street || ""
   );
   const [state, setState] = useState<string>(subscription.billing.state || "");
   const [city, setCity] = useState<string>(subscription.billing.city || "");
   const [postalCode, setPostalCode] = useState<string>(
-    subscription.billing.zipcode || "",
+    subscription.billing.zipcode || ""
   );
   const [taxId, setTaxId] = useState<string>(subscription.tax_id || "");
   const [isBusiness, setIsBusiness] = useState<boolean>(
-    subscription.tax_id ? true : false,
+    subscription.tax_id ? true : false
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -65,7 +65,7 @@ export default function SubscriptionBillingEdit({
       const countryCodes = await fetchSupportedCountries();
       const matchedCountries = await getMatchedCountries(
         countryCodes,
-        CountriesList,
+        CountriesList
       );
       setCountries(matchedCountries);
       setIsLoadingCountry(false);
@@ -76,7 +76,7 @@ export default function SubscriptionBillingEdit({
 
   const onSave = async (data: BillingDetailsFormValues) => {
     try {
-      const response = await updateBillingDetails({
+      await updateBillingDetails({
         subscription_id: subscription.subscription_id,
         data: {
           customer: {
@@ -92,7 +92,7 @@ export default function SubscriptionBillingEdit({
           tax_id: data.taxId || null,
         },
       });
-      console.log("response", response);
+
       toast.success("Billing details updated successfully");
       router.refresh();
     } catch (error) {
@@ -101,7 +101,7 @@ export default function SubscriptionBillingEdit({
     }
     if (onClose) onClose();
     setOpen(false);
-  };  
+  };
 
   const form = (
     <div className="flex flex-col gap-6">

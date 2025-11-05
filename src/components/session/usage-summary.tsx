@@ -69,9 +69,7 @@ export function UsageSummary({
                 <UsageHistoryDetails
                   sub_id={subscriptionId || ""}
                   usageHistory={usage.meters}
-                  setUsageHistoryPageNumber={() => {}}
                   pageSize={pageSize}
-                  setPageSize={() => {}}
                   isLoading={false}
                 />
               </CollapsibleContent>

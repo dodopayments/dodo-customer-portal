@@ -6,23 +6,19 @@ import { UsageHistoryColumns } from "./usage-history-columns";
 import Loading from "../loading";
 
 interface UsageHistoryDetailsProps {
-  usageHistory: UsageHistoryMeter[];
-  setUsageHistoryPageNumber: (page: number) => void;
-  pageSize: number;
-  setPageSize: (size: number) => void;
-  isLoading: boolean;
   sub_id: string;
+  usageHistory: UsageHistoryMeter[];
+  pageSize: number;
+  isLoading: boolean;
 }
 
 export function UsageHistoryDetails({
+  sub_id,
   usageHistory,
-  setUsageHistoryPageNumber,
   pageSize,
-  setPageSize,
   isLoading,
 }: UsageHistoryDetailsProps) {
-  const columns = UsageHistoryColumns();
-
+  const columns = UsageHistoryColumns({ sub_id });
   if (isLoading) {
     return (
       <div className="flex flex-col gap-4 mt-8">
@@ -57,4 +53,3 @@ export function UsageHistoryDetails({
     </div>
   );
 }
-

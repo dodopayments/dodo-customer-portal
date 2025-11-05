@@ -92,7 +92,6 @@ export async function fetchSubscription(
 
 export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   const { subscription_id, data } = params;
-  console.log("dataaaaaaa", data);
 
   const patchData = {
     billing: data.billing,
@@ -129,7 +128,7 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 export async function fetchInvoiceHistory(
   subscriptionId: string,
   pageNumber: number = 0,
-  pageSize: number = 50,
+  pageSize: number = 50
 ) {
   try {
     const params = new URLSearchParams();
@@ -158,7 +157,7 @@ export async function fetchInvoiceHistory(
 export async function fetchUsageHistory(
   subscriptionId: string,
   pageNumber: number = 0,
-  pageSize: number = 50,
+  pageSize: number = 50
 ) {
   try {
     const params = new URLSearchParams();

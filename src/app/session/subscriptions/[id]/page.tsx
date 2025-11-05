@@ -1,15 +1,13 @@
 import PageHeader from "@/components/page-header";
 import { fetchSubscription } from "./action";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { SubscriptionDetails } from "@/components/session/subscription-details";
 import { SubscriptionBillingInfo } from "@/components/session/subscription-billing-info";
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
 import { CancelSubscriptionSheet } from "@/components/session/cancel-subscription-sheet";
 import { SubscriptionDetailsData } from "./types";
 import { extractPaginationParams } from "@/lib/pagination-utils";
+import { BackButton } from "../../../../components/custom/back-button";
 
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
@@ -33,13 +31,13 @@ export default async function SubscriptionPage({
   const invoiceParams = await extractPaginationParams(
     searchParams,
     DEFAULT_PAGE_SIZE,
-    INVOICE_PAGE_PARAM_KEY,
+    INVOICE_PAGE_PARAM_KEY
   );
 
   const usageParams = await extractPaginationParams(
     searchParams,
     DEFAULT_PAGE_SIZE,
-    USAGE_PAGE_PARAM_KEY,
+    USAGE_PAGE_PARAM_KEY
   );
 
   return (
@@ -77,11 +75,7 @@ function TopButtons({
 }) {
   return (
     <PageHeader showSeparator={false}>
-      <Link href="/session/subscriptions">
-        <Button variant="secondary">
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
-      </Link>
+      <BackButton fallbackUrl={`/session/subscriptions`} />
       <div className="flex flex-row gap-2">
         {/* <Button variant="secondary">Change Plan</Button> */}
         {subscription.status != "cancelled" && (

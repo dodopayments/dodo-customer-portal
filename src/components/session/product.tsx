@@ -139,7 +139,6 @@ export const Product = ({
       );
       if (response.ok) {
         const data = await response.json();
-        console.log("subscription data", data);
         setSubscription(data);
       }
     } catch (error) {
@@ -187,7 +186,11 @@ export const Product = ({
             </p>
           </div>
         )}
-        {subscription && renderSubscriptionBadges(subscription)}
+        {subscription && (
+          <div className="flex flex-row gap-2">
+            {renderSubscriptionBadges(subscription)}
+          </div>
+        )}
         <div className="flex flex-row gap-2">
           {product.license_keys.length > 0 && (
             <LicenseSheets
