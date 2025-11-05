@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Pagination,
   PaginationContent,
@@ -7,13 +9,16 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { buildPageUrl } from "@/lib/pagination-utils";
+import { useMemo } from "react";
 
-interface ServerPaginationProps {
+export interface ServerPaginationProps {
   currentPage: number;
   pageSize: number;
   currentPageItems: number;
   hasNextPage: boolean;
   baseUrl: string;
+  pageParamKey?: string;
 }
 
 export default function ServerPagination({
@@ -22,19 +27,19 @@ export default function ServerPagination({
   currentPageItems,
   hasNextPage,
   baseUrl,
+  pageParamKey = "page",
 }: ServerPaginationProps) {
-  const displayPage = currentPage + 1;
-  const canPreviousPage = currentPage > 0;
-  const canNextPage = hasNextPage && currentPageItems === pageSize;
+  const normalizedPage = Math.max(0, Math.floor(currentPage));
+  const displayPage = normalizedPage + 1;
+  const canPreviousPage = normalizedPage > 0;
+  const canNextPage = currentPageItems === pageSize;
 
-  const calculateTotalPages = () => {
+  const totalPages = useMemo(() => {
     return hasNextPage ? displayPage + 1 : displayPage;
-  };
+  }, [hasNextPage, displayPage]);
 
-  const totalPages = calculateTotalPages();
-
-  const generatePageNumbers = () => {
-    const pages = [];
+  const pageNumbers = useMemo(() => {
+    const pages: (number | string)[] = [];
     const maxVisiblePages = 5;
     const currentPageIndex = displayPage;
 
@@ -48,6 +53,7 @@ export default function ServerPagination({
       if (currentPageIndex > 3) {
         pages.push("...");
       }
+
       for (
         let i = Math.max(2, currentPageIndex - 1);
         i <= Math.min(totalPages - 1, currentPageIndex + 1);
@@ -59,39 +65,55 @@ export default function ServerPagination({
       if (currentPageIndex < totalPages - 2) {
         pages.push("...");
       }
+
       if (currentPageIndex !== totalPages) {
         pages.push(totalPages);
       }
     }
 
-    return [...new Set(pages)];
-  };
+    return Array.from(new Set(pages));
+  }, [totalPages, displayPage]);
+
+  const previousPageUrl = useMemo(
+    () => buildPageUrl(baseUrl, normalizedPage - 1, pageParamKey),
+    [baseUrl, normalizedPage, pageParamKey],
+  );
+
+  const nextPageUrl = useMemo(
+    () => buildPageUrl(baseUrl, normalizedPage + 1, pageParamKey),
+    [baseUrl, normalizedPage, pageParamKey],
+  );
 
   return (
-    <div className="flex items-center w-full p-4 border border-border-secondary shadow-sm border-t-0 rounded-b-xl">
+    <div className="flex items-center w-full p-4">
       <Pagination>
         <PaginationContent className="w-full flex items-center justify-between">
           <PaginationItem>
             {canPreviousPage ? (
               <PaginationPrevious
-                href={`${baseUrl}&page=${currentPage - 1}`}
+                href={previousPageUrl}
                 className="hover:text-text-primary transition-opacity"
               />
             ) : (
               <PaginationPrevious
+                href="#"
                 className="opacity-50 cursor-not-allowed pointer-events-none"
                 aria-disabled={true}
               />
             )}
           </PaginationItem>
           <div className="flex items-center gap-2 w-fit">
-            {generatePageNumbers().map((page, index) => (
-              <PaginationItem key={index}>
+            {pageNumbers.map((page, index) => (
+              <PaginationItem key={`${page}-${index}`}>
                 {page === "..." ? (
                   <PaginationEllipsis />
                 ) : (
                   <PaginationLink
-                    href={`${baseUrl}&page=${Number(page) - 1}`}
+                    href={buildPageUrl(
+                      baseUrl,
+                      Number(page) - 1,
+                      pageParamKey,
+                    )}
                     isActive={displayPage === page}
                     className="transition-colors"
                   >
@@ -104,11 +126,12 @@ export default function ServerPagination({
           <PaginationItem>
             {canNextPage ? (
               <PaginationNext
-                href={`${baseUrl}&page=${currentPage + 1}`}
+                href={nextPageUrl}
                 className="hover:text-text-primary transition-opacity"
               />
             ) : (
               <PaginationNext
+                href="#"
                 className="opacity-50 cursor-not-allowed pointer-events-none"
                 aria-disabled={true}
               />

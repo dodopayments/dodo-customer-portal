@@ -38,20 +38,33 @@ export async function fetchWallets() {
 
 export async function fetchWalletLedger({
   currency,
+  pageNumber = 0,
+  pageSize = 50,
 }: {
   currency: string;
-}): Promise<{ items: WalletLedgerItem[] } | null> {
+  pageNumber?: number;
+  pageSize?: number;
+}) {
   try {
+    const params = new URLSearchParams();
+    params.set("currency", currency);
+    params.set("page_size", pageSize.toString());
+    params.set("page_number", pageNumber.toString());
+
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/wallets/ledger-entries?currency=${currency}`
+      `/customer-portal/wallets/ledger-entries?${params}`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch wallet ledger: ${response.status}`);
     }
     const data = await response.json();
-    return data;
+    return {
+      data: data.items || [],
+      totalCount: data.total_count || 0,
+      hasNext: data.has_next || false,
+    };
   } catch (error) {
     console.error("Error fetching wallet ledger:", error);
-    return null;
+    return { data: [], totalCount: 0, hasNext: false };
   }
 }

@@ -32,11 +32,6 @@ export async function makeAuthenticatedRequest(
   });
 }
 
-export interface PaginatedResponse<T> {
-  data: T[];
-  totalCount: number;
-  hasNext: boolean;
-}
 
 export interface FilterParams {
   pageSize?: number;

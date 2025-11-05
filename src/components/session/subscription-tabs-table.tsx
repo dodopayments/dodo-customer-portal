@@ -42,29 +42,51 @@ export async function SubscriptionTabsTable({
   subscriptionId,
   subscription,
   searchParams,
+  invoicePagination,
+  usagePagination,
 }: {
   subscriptionId: string;
   subscription: SubscriptionDetailsData;
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  invoicePagination: {
+    currentPage: number;
+    pageSize: number;
+    baseUrl: string;
+    pageParamKey: string;
+  };
+  usagePagination: {
+    currentPage: number;
+    pageSize: number;
+    baseUrl: string;
+    pageParamKey: string;
+  };
 }) {
   const params = await searchParams;
-  const invoiceHistory = await fetchInvoiceHistory(subscriptionId);
-  const usageHistory = await fetchUsageHistory(subscriptionId);
-  console.log("usageHistory", usageHistory);
+  const tabParam = Array.isArray(params?.tab) ? params.tab[0] : params?.tab;
+  
+  const invoiceHistory = await fetchInvoiceHistory(
+    subscriptionId,
+    invoicePagination.currentPage,
+    invoicePagination.pageSize,
+  );
+  const usageHistory = await fetchUsageHistory(
+    subscriptionId,
+    usagePagination.currentPage,
+    usagePagination.pageSize,
+  );
 
-  const hasUsage =
-    Array.isArray(usageHistory?.items) && usageHistory.items.length > 0;
+  const hasUsage = Array.isArray(usageHistory?.data) && usageHistory.data.length > 0;
 
   const isUsageBased = subscription.meters.length > 0;
 
   const tab = !isUsageBased
     ? "invoice-history"
-    : params?.tab === "usage-summary" || params?.tab === "invoice-history"
-      ? params.tab
+    : tabParam === "usage-summary" || tabParam === "invoice-history"
+      ? tabParam
       : "invoice-history";
 
   const invoiceHistoryData: InvoiceHistoryResponse[] =
-    invoiceHistory?.items?.map((item: InvoiceHistoryResponse) => ({
+    invoiceHistory?.data?.map((item: InvoiceHistoryResponse) => ({
       payment_id: item.payment_id,
       subscription_id: subscriptionId,
       date: item.created_at,
@@ -73,10 +95,10 @@ export async function SubscriptionTabsTable({
       status: item.status,
       digital_products_delivered: item.digital_products_delivered,
       download_url: `${api_url}/invoices/payments/${item.payment_id}`,
-    }));
+    })) || [];
 
   const usageHistoryData: UsageHistoryItem[] = hasUsage
-    ? usageHistory.items.map((item: UsageHistoryItem) => ({
+    ? usageHistory.data.map((item: UsageHistoryItem) => ({
         start_date: item.start_date,
         end_date: item.end_date,
         meters: item.meters.map((meter: UsageHistoryMeter) => ({
@@ -116,10 +138,27 @@ export async function SubscriptionTabsTable({
         </div>
       )}
       {tab === "invoice-history" && (
-        <InvoiceHistory invoiceHistory={invoiceHistoryData} />
+        <InvoiceHistory
+          invoiceHistory={invoiceHistoryData}
+          currentPage={invoicePagination.currentPage}
+          pageSize={invoicePagination.pageSize}
+          currentPageItems={invoiceHistoryData.length}
+          hasNextPage={invoiceHistory.hasNext}
+          baseUrl={invoicePagination.baseUrl}
+          pageParamKey={invoicePagination.pageParamKey}
+        />
       )}
       {isUsageBased && tab === "usage-summary" && (
-        <UsageSummary usageHistory={usageHistoryData} subscriptionId={subscriptionId} />
+        <UsageSummary
+          usageHistory={usageHistoryData}
+          subscriptionId={subscriptionId}
+          currentPage={usagePagination.currentPage}
+          pageSize={usagePagination.pageSize}
+          currentPageItems={usageHistoryData.length}
+          hasNextPage={usageHistory.hasNext}
+          baseUrl={usagePagination.baseUrl}
+          pageParamKey={usagePagination.pageParamKey}
+        />
       )}
     </div>
   );

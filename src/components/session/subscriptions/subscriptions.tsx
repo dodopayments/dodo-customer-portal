@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { RefreshCcw } from "lucide-react";
 import { SubscriptionCard } from "../subscription-card";
+import ServerPagination from "@/components/common/server-pagination";
 
 export interface SubscriptionData {
   billing: {
@@ -50,35 +51,58 @@ interface ItemCardProps {
   cardClassName?: string;
   subscriptionData: SubscriptionData[];
   dataIndex?: number;
+  currentPage: number;
+  pageSize: number;
+  currentPageItems: number;
+  hasNextPage: boolean;
+  baseUrl: string;
+  pageParamKey?: string;
 }
 
 export const Subscriptions = ({
   cardClassName,
   subscriptionData,
+  currentPage,
+  pageSize,
+  currentPageItems,
+  hasNextPage,
+  baseUrl,
+  pageParamKey,
 }: ItemCardProps) => {
-
-  if (subscriptionData.length === 0) {
-    return (
-      <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)]">
-        <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
-          <RefreshCcw />
-        </span>
-        <span className="text-sm font-display text-center tracking-wide text-text-secondary">
-          No active subscriptions at the moment
-        </span>
-      </div>
-    );
-  }
+  const isEmpty = subscriptionData.length === 0;
+  const emptyMessage =
+    currentPage > 0
+      ? "No subscriptions found on this page"
+      : "No active subscriptions at the moment";
 
   return (
     <div className="flex flex-col gap-4">
-      {subscriptionData.map((item: SubscriptionData, index: number) => (
-        <SubscriptionCard
-          key={index}
-          item={item}
-          cardClassName={cn("border-b", cardClassName)}
-        />
-      ))}
+      {isEmpty ? (
+        <div className="flex flex-col justify-center items-center min-h-[calc(100vh-20rem)] my-auto">
+          <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
+            <RefreshCcw />
+          </span>
+          <span className="text-sm font-display text-center tracking-wide text-text-secondary">
+            {emptyMessage}
+          </span>
+        </div>
+      ) : (
+        subscriptionData.map((item: SubscriptionData, index: number) => (
+          <SubscriptionCard
+            key={index}
+            item={item}
+            cardClassName={cn("border-b", cardClassName)}
+          />
+        ))
+      )}
+      <ServerPagination
+        currentPage={currentPage}
+        pageSize={pageSize}
+        currentPageItems={currentPageItems}
+        hasNextPage={hasNextPage}
+        baseUrl={baseUrl}
+        pageParamKey={pageParamKey}
+      />
     </div>
   );
 };

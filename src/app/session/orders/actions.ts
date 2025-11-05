@@ -1,6 +1,9 @@
 "use server";
 
-import { makeAuthenticatedRequest, FilterParams } from "@/lib/server-actions";
+import {
+  makeAuthenticatedRequest,
+  FilterParams,
+} from "@/lib/server-actions";
 
 export async function fetchSubscriptions(filters: FilterParams = {}) {
   try {
@@ -47,13 +50,14 @@ export async function fetchBusiness() {
   }
 }
 
-export async function fetchPayments(filters: FilterParams = {}) {
+export async function fetchPayments(
+  pageNumber: number = 0,
+  pageSize: number = 50,
+) {
   try {
     const params = new URLSearchParams();
-    if (filters.created_at_gte)
-      params.set("created_at_gte", filters.created_at_gte);
-    if (filters.created_at_lte)
-      params.set("created_at_lte", filters.created_at_lte);
+    params.set("page_size", pageSize.toString());
+    params.set("page_number", pageNumber.toString());
 
     const response = await makeAuthenticatedRequest(
       `/customer-portal/payments?${params}`
@@ -66,7 +70,7 @@ export async function fetchPayments(filters: FilterParams = {}) {
     const data = await response.json();
     return {
       data: data.items || [],
-      totalCount: data.items.length || 0,
+      totalCount: data.total_count || 0,
       hasNext: data.has_next || false,
     };
   } catch (error) {

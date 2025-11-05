@@ -40,9 +40,10 @@ export function UsageHistoryDetails({
           tableId="subscription-usage-history-table"
           columns={columns}
           data={usageHistory}
-          manualPagination={false}
+          manualPagination={true}
           manualSorting={false}
           disablePagination={true}
+          initialPageSize={Math.max(pageSize, usageHistory.length)}
           recordCount={usageHistory.length}
           tableLayout={{
             autoWidth: true,
