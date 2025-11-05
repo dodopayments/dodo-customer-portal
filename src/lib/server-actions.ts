@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { api_url } from "./http";
+import { getServerApiUrl } from "./server-http";
 
 export async function getToken(): Promise<string | null> {
   try {
@@ -21,6 +21,7 @@ export async function makeAuthenticatedRequest(
     throw new Error("No authentication token found");
   }
 
+  const api_url = await getServerApiUrl();
   const headers = new Headers(options.headers);
   headers.set("Authorization", `Bearer ${token}`);
   headers.set("Content-Type", "application/json");

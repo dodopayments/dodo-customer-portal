@@ -1,6 +1,7 @@
 import axios from "axios";
 import { tokenHelper } from "./token-helper";
 
+// Client-side initialization
 let API_URL: string;
 let MODE: string;
 
@@ -24,6 +25,10 @@ function initializeApi() {
     case "http://localhost:3000":
       API_URL = process.env.NEXT_PUBLIC_TEST_URL!;
       MODE = "test";
+      break;
+    case "http://localhost:3001":
+      API_URL = process.env.NEXT_PUBLIC_LIVE_URL!;
+      MODE = "live";
       break;
 
     default:

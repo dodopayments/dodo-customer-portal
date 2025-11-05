@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { api_url } from "@/lib/http";
+import { getServerApiUrl } from "@/lib/server-http";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
+    const api_url = await getServerApiUrl();
 
     const response = await fetch(`${api_url}/customer-portal/business`, {
       headers: {
