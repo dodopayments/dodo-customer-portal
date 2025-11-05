@@ -4,11 +4,8 @@ import { fetchUser, fetchWalletLedger, fetchWallets } from "./actions";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { WalletItem, WalletLedgerItem } from "./types";
+import { WalletItem } from "./types";
 import { Wallet } from "@/components/session/profile/wallets";
 
 export default async function ProfilePage({
@@ -18,13 +15,15 @@ export default async function ProfilePage({
 }) {
   const user = await fetchUser();
   const wallets = await fetchWallets();
-  const walletLedger = await fetchWalletLedger();
-  console.log("walletLedger", walletLedger);
   const params = await searchParams;
   const tab =
     params?.tab ||
     `${wallets?.items?.[0]?.currency?.toLowerCase()}-wallet` ||
     "usd-wallet";
+  
+  // Extract currency from tab (format: "usd-wallet" -> "USD")
+  const selectedCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
+  const walletLedger = await fetchWalletLedger({ currency: selectedCurrency });
 
   const allWallets = wallets.items.map((wallet: WalletItem) => ({
     value: `${wallet.currency.toLowerCase()}-wallet`,
@@ -60,7 +59,7 @@ export default async function ProfilePage({
               wallets={wallets?.items}
               allWallets={allWallets}
               tab={tab}
-              walletLedger={walletLedger}
+              walletLedger={walletLedger || { items: [] }}
             />
           </div>
         </div>

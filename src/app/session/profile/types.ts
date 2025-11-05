@@ -12,16 +12,16 @@ export interface Wallet {
 }
 
 export interface WalletLedgerItem {
-  after_balance: number;
+  after_balance?: number;
   amount: number;
-  before_balance: number;
+  before_balance?: number;
   business_id: string;
   created_at: string;
   currency: string;
-  customer_id: string;
+  description?: string;
   event_type: string;
   id: string;
   is_credit: boolean;
-  reason: string;
-  reference_object_id: string;
+  reference_object_id?: string;
+  usd_equivalent_amount: number;
 }

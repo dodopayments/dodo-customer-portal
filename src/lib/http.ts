@@ -17,18 +17,18 @@ function initializeApi() {
       break;
 
     case process.env.NEXT_PUBLIC_TEST_HOST_URL:
-      API_URL = process.env.NEXT_PUBLIC_TEST_URL!;
-      MODE = "test";
+      API_URL = process.env.NEXT_PUBLIC_LIVE_URL!;
+      MODE = "live";
       break;
 
     case "http://localhost:3000":
-      API_URL = process.env.NEXT_PUBLIC_TEST_URL!;
-      MODE = "test";
+      API_URL = process.env.NEXT_PUBLIC_LIVE_URL!;
+      MODE = "live";
       break;
 
     default:
-      API_URL = process.env.NEXT_PUBLIC_TEST_URL!;
-      MODE = "test";
+      API_URL = process.env.NEXT_PUBLIC_LIVE_URL!;
+      MODE = "live";
       break;
   }
 

@@ -1,6 +1,7 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
+import { WalletLedgerItem } from "./types";
 
 export interface UserResponse {
   business_id: string;
@@ -35,10 +36,14 @@ export async function fetchWallets() {
   }
 }
 
-export async function fetchWalletLedger() {
+export async function fetchWalletLedger({
+  currency,
+}: {
+  currency: string;
+}): Promise<{ items: WalletLedgerItem[] } | null> {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/wallets/ledger-entries`,
+      `/customer-portal/wallets/ledger-entries?currency=${currency}`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch wallet ledger: ${response.status}`);

@@ -4,6 +4,7 @@ import { WalletLedgerItem } from "@/app/session/profile/types";
 import { BaseDataGrid } from "@/components/table/BaseDataGrid";
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
+import { formatCurrency, decodeCurrency, CurrencyCode } from "@/lib/currency-helper";
 
 export function WalletTable({
   walletLedger,
@@ -13,25 +14,33 @@ export function WalletTable({
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const WalletColumn: ColumnDef<any>[] = [
     {
-      accessorKey: "type",
+      accessorKey: "event_type",
       header: "Type",
       cell: ({ row }) => {
-        return <div className="text-left text-text-secondary"></div>;
+        const eventType = row.original.event_type;
+        return <div className="text-left text-text-secondary">{eventType || "-"}</div>;
       },
     },
     {
-      accessorKey: "Reason",
+      accessorKey: "description",
       header: "Reason",
       cell: ({ row }) => {
-        return <div className="text-left text-text-secondary"></div>;
+        const description = row.original.description;
+        return <div className="text-left text-text-secondary">{description || "-"}</div>;
       },
     },
     {
       accessorKey: "amount",
       header: "Amount",
       cell: ({ row }) => {
-        /* eslint-disable @typescript-eslint/no-explicit-any */
-        return;
+        const amount = row.original.amount;
+        const currency = row.original.currency as CurrencyCode;
+        const decodedAmount = decodeCurrency(amount, currency);
+        return (
+          <div className="text-left text-text-secondary">
+            {formatCurrency(decodedAmount, currency)}
+          </div>
+        );
       },
     },
   ];

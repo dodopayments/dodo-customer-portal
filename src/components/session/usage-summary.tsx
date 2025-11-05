@@ -1,111 +1,81 @@
 "use client";
 
-import { BaseDataGrid } from "../table/BaseDataGrid";
-import { ColumnDef } from "@tanstack/react-table";
-import { UsageHistoryResponse } from "./subscription-tabs-table";
-import { useMemo } from "react";
+import { useState } from "react";
 import {
-  CurrencyCode,
-  decodeCurrency,
-  formatCurrency,
-} from "@/lib/currency-helper";
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { CaretDown } from "@phosphor-icons/react";
+import { UsageHistoryItem } from "./subscription-tabs-table";
+import { TimeTooltip } from "../custom/time-tooltip";
+import { UsageHistoryDetails } from "./usage-history-details";
+import TablePagination from "@/components/ui/dodo/TablePagination";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const UsageSummaryColumn: ColumnDef<any>[] = [
-  {
-    accessorKey: "start_date",
-    header: "Date",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left text-text-secondary">
-          {new Date(row.original.date).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "short",
-            year: "2-digit",
-          })}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "meter",
-    header: "Meter",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left text-text-secondary">{row.original.name}</div>
-      );
-    },
-  },
-  {
-    accessorKey: "threshold_units",
-    header: "Threshold Units",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left text-text-secondary">
-          {row.original.free_threshold}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "unit_price",
-    header: "Unit Price",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left text-text-secondary">
-          {row.original.price_per_unit}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "fixed_fee",
-    header: "Fixed Fee",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left text-text-secondary">
-          {row.original.chargeable_units}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "usage",
-    header: "Usage (units & $)",
-    cell: ({ row }) => {
-      return (
-        <div className="flex flex-col text-left text-text-secondary">
-          <div className="text-left text-text-primary">
-            {formatCurrency(
-              decodeCurrency(
-                row.original.total_price,
-                row.original.currency as CurrencyCode | null | undefined,
-              ),
-              row.original.currency as CurrencyCode | null | undefined,
-            )}
-          </div>
-          <div className="text-left text-text-secondary">
-            {row.original.consumed_units} units
-          </div>
-        </div>
-      );
-    },
-  },
-];
+interface UsageSummaryProps {
+  usageHistory: UsageHistoryItem[];
+  subscriptionId?: string;
+}
 
 export function UsageSummary({
   usageHistory,
-}: {
-  usageHistory: UsageHistoryResponse[];
-}) {
-  const data = useMemo(() => {
-    return usageHistory;
-  }, [usageHistory]);
+  subscriptionId,
+}: UsageSummaryProps) {
+  const [usageHistoryPageNumber, setUsageHistoryPageNumber] = useState(0);
+  const [usageHistoryPageSize, setUsageHistoryPageSize] = useState(10);
+
+  const paginatedUsageHistory = usageHistory.slice(
+    usageHistoryPageNumber * usageHistoryPageSize,
+    (usageHistoryPageNumber + 1) * usageHistoryPageSize
+  );
+
   return (
-    <BaseDataGrid
-      tableId="usage-summary"
-      data={data}
-      columns={UsageSummaryColumn}
-    />
+    <div className="flex flex-col gap-4">
+      {usageHistory.length > 0 ? (
+        <>
+          {paginatedUsageHistory.map((usage) => (
+            <Collapsible key={usage.start_date} defaultOpen>
+              <CollapsibleTrigger className="w-full border-b border-border-secondary py-2 flex items-center justify-between">
+                <span className="text-text-primary flex items-center gap-4 w-full font-display font-medium text-base">
+                  <TimeTooltip
+                    className="w-fit min-w-0"
+                    timeStamp={usage.start_date}
+                  />{" "}
+                  -
+                  <TimeTooltip className="w-fit" timeStamp={usage.end_date} />
+                </span>
+                <CaretDown className="h-4 w-4 data-[state=open]:rotate-180 transition-transform" />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <UsageHistoryDetails
+                  sub_id={subscriptionId || ""}
+                  usageHistory={usage.meters}
+                  setUsageHistoryPageNumber={setUsageHistoryPageNumber}
+                  pageSize={usageHistoryPageSize}
+                  setPageSize={setUsageHistoryPageSize}
+                  isLoading={false}
+                />
+              </CollapsibleContent>
+            </Collapsible>
+          ))}
+          <TablePagination
+            currentPage={usageHistoryPageNumber}
+            pageSize={usageHistoryPageSize}
+            currentPageItems={paginatedUsageHistory.length}
+            hasNextPage={
+              usageHistory.length >
+              (usageHistoryPageNumber + 1) * usageHistoryPageSize
+            }
+            onPageChange={setUsageHistoryPageNumber}
+          />
+        </>
+      ) : (
+        <div className="h-40 flex items-center justify-center">
+          <span className="text-text-secondary text-base">
+            No usage history found
+          </span>
+        </div>
+      )}
+    </div>
   );
 }

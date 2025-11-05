@@ -44,7 +44,7 @@ export function renderSubscriptionBadges(
 
   if (subscription.cancel_at_next_billing_date) {
     return (
-      <Badge variant="default" dot={false} className={badgeClassName}>
+      <Badge variant="red" dot={false} className={badgeClassName}>
         subscription ends on {nextBillingDate}
       </Badge>
     );

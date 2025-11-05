@@ -8,6 +8,7 @@ import {
 import { api_url } from "@/lib/http";
 import { UsageSummary } from "./usage-summary";
 import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
+import { CurrencyCode } from "@/lib/currency-helper";
 
 export interface InvoiceHistoryResponse {
   payment_id: string;
@@ -22,24 +23,24 @@ export interface InvoiceHistoryResponse {
 
 export interface UsageHistoryMeter {
   id: string;
-  date: string; // date
-  name: string; // meter name
-  free_threshold: number; // threshold units
-  price_per_unit: string; // unit price
-  chargeable_units: string; // fixed fee
-  consumed_units: string; // consumed units
-  currency: string; // currency
-  total_price: number; // total price
+  name: string;
+  consumed_units: string;
+  chargeable_units: string;
+  currency: CurrencyCode;
+  free_threshold: number;
+  price_per_unit: string;
+  total_price: number;
 }
 
-export interface UsageHistoryResponse {
+export interface UsageHistoryItem {
+  start_date: string;
   end_date: string;
   meters: UsageHistoryMeter[];
-  start_date: string;
 }
 
 export async function SubscriptionTabsTable({
   subscriptionId,
+  subscription,
   searchParams,
 }: {
   subscriptionId: string;
@@ -49,10 +50,14 @@ export async function SubscriptionTabsTable({
   const params = await searchParams;
   const invoiceHistory = await fetchInvoiceHistory(subscriptionId);
   const usageHistory = await fetchUsageHistory(subscriptionId);
+  console.log("usageHistory", usageHistory);
 
   const hasUsage =
     Array.isArray(usageHistory?.items) && usageHistory.items.length > 0;
-  const tab = !hasUsage
+
+  const isUsageBased = subscription.meters.length > 0;
+
+  const tab = !isUsageBased
     ? "invoice-history"
     : params?.tab === "usage-summary" || params?.tab === "invoice-history"
       ? params.tab
@@ -70,15 +75,14 @@ export async function SubscriptionTabsTable({
       download_url: `${api_url}/invoices/payments/${item.payment_id}`,
     }));
 
-  const usageHistoryData: UsageHistoryResponse[] = hasUsage
-    ? usageHistory.items.map((item: UsageHistoryResponse) => ({
+  const usageHistoryData: UsageHistoryItem[] = hasUsage
+    ? usageHistory.items.map((item: UsageHistoryItem) => ({
         start_date: item.start_date,
         end_date: item.end_date,
         meters: item.meters.map((meter: UsageHistoryMeter) => ({
-          date: item.start_date,
           chargeable_units: meter.chargeable_units,
           consumed_units: meter.consumed_units,
-          currency: meter.currency,
+          currency: meter.currency as CurrencyCode,
           free_threshold: meter.free_threshold,
           id: meter.id,
           name: meter.name,
@@ -90,7 +94,7 @@ export async function SubscriptionTabsTable({
 
   return (
     <div className="flex flex-col gap-8">
-      {hasUsage && (
+      {isUsageBased && (
         <div className="flex flex-col">
           <SessionTabs
             className="w-full"
@@ -114,8 +118,8 @@ export async function SubscriptionTabsTable({
       {tab === "invoice-history" && (
         <InvoiceHistory invoiceHistory={invoiceHistoryData} />
       )}
-      {hasUsage && tab === "usage-summary" && (
-        <UsageSummary usageHistory={usageHistoryData} />
+      {isUsageBased && tab === "usage-summary" && (
+        <UsageSummary usageHistory={usageHistoryData} subscriptionId={subscriptionId} />
       )}
     </div>
   );
