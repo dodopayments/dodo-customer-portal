@@ -1,15 +1,8 @@
 "use server";
 
-import {
-  makeAuthenticatedRequest,
-  PaginatedResponse,
-  FilterParams,
-} from "@/lib/server-actions";
+import { makeAuthenticatedRequest, FilterParams } from "@/lib/server-actions";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function fetchSubscriptions(
-  filters: FilterParams = {},
-): Promise<PaginatedResponse<any>> {
+export async function fetchSubscriptions(filters: FilterParams = {}) {
   try {
     const params = new URLSearchParams();
     if (filters.created_at_gte)
@@ -18,7 +11,7 @@ export async function fetchSubscriptions(
       params.set("created_at_lte", filters.created_at_lte);
 
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions?${params}`,
+      `/customer-portal/subscriptions?${params}`
     );
 
     if (!response.ok) {
@@ -40,7 +33,7 @@ export async function fetchSubscriptions(
 export async function fetchBusiness() {
   try {
     const response = await makeAuthenticatedRequest(
-      "/customer-portal/business",
+      "/customer-portal/business"
     );
 
     if (!response.ok) {
@@ -54,10 +47,7 @@ export async function fetchBusiness() {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function fetchOrders(
-  filters: FilterParams = {},
-): Promise<PaginatedResponse<any>> {
+export async function fetchPayments(filters: FilterParams = {}) {
   try {
     const params = new URLSearchParams();
     if (filters.created_at_gte)
@@ -66,7 +56,7 @@ export async function fetchOrders(
       params.set("created_at_lte", filters.created_at_lte);
 
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/payments?${params}`,
+      `/customer-portal/payments?${params}`
     );
 
     if (!response.ok) {
@@ -88,7 +78,7 @@ export async function fetchOrders(
 export async function getProductCart(payment_id: string) {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/payments/${payment_id}/product-cart`,
+      `/customer-portal/payments/${payment_id}/product-cart`
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch product cart: ${response.status}`);

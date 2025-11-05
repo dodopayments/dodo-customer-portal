@@ -48,7 +48,7 @@ function TopButtons({
 }) {
   return (
     <PageHeader showSeparator={false}>
-      <Link href="/session/orders?orderType=subscriptions">
+      <Link href="/session/subscriptions">
         <Button variant="secondary">
           <ArrowLeft className="w-4 h-4" />
         </Button>

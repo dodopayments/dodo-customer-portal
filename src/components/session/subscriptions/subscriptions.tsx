@@ -1,9 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { RefreshCcw, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { RefreshCcw } from "lucide-react";
 import { SubscriptionCard } from "../subscription-card";
 
 export interface SubscriptionData {
@@ -50,17 +48,14 @@ export interface SubscriptionData {
 
 interface ItemCardProps {
   cardClassName?: string;
-  searchPlaceholder?: string;
   subscriptionData: SubscriptionData[];
   dataIndex?: number;
 }
 
 export const Subscriptions = ({
   cardClassName,
-  searchPlaceholder,
   subscriptionData,
 }: ItemCardProps) => {
-  const [search, setSearch] = useState("");
 
   if (subscriptionData.length === 0) {
     return (
@@ -76,28 +71,14 @@ export const Subscriptions = ({
   }
 
   return (
-    <>
-      <div className="flex flex-col gap-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-tertiary border-border-secondary" />
-          <Input
-            type="text"
-            placeholder={searchPlaceholder}
-            className="pl-10 border-border-secondary"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="mt-6 flex flex-col gap-4">
-        {subscriptionData.map((item: SubscriptionData, index: number) => (
-          <SubscriptionCard
-            key={index}
-            item={item}
-            cardClassName={cn("border-b", cardClassName)}
-          />
-        ))}
-      </div>
-    </>
+    <div className="flex flex-col gap-4">
+      {subscriptionData.map((item: SubscriptionData, index: number) => (
+        <SubscriptionCard
+          key={index}
+          item={item}
+          cardClassName={cn("border-b", cardClassName)}
+        />
+      ))}
+    </div>
   );
 };

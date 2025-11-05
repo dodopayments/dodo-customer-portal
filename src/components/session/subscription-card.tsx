@@ -59,7 +59,7 @@ export const SubscriptionCard = ({
               )}
             </div>
           </div>
-          <CardDescription className="font-body font-normal text-sm leading-[21px] text-text-secondary self-stretch">
+          <CardDescription className="font-body font-normal text-sm pt-4 leading-[21px] text-text-secondary self-stretch">
             <ProductMarkdownDescription description={item.product.description} />
           </CardDescription>
         </div>

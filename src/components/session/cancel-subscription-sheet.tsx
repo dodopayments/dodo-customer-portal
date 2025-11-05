@@ -24,6 +24,7 @@ import {
   formatCurrency,
   decodeCurrency,
 } from "@/lib/currency-helper";
+import ProductMarkdownDescription from "../common/product-markdown-description";
 
 interface CancelSubscriptionSheetProps {
   subscription: SubscriptionDetailsData;
@@ -102,9 +103,19 @@ export function CancelSubscriptionSheet({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="destructive">Cancel Subscription</Button>
+        <Button
+          variant={
+            subscription.cancel_at_next_billing_date
+              ? "default"
+              : "destructive"
+          }
+        >
+          {subscription.cancel_at_next_billing_date
+            ? "Cancel/Revoke Subscription"
+            : "Cancel Subscription"}
+        </Button>
       </SheetTrigger>
-      <SheetContent  className="flex flex-col gap-6 overflow-y-auto">
+      <SheetContent className="flex flex-col gap-6 overflow-y-auto">
         <SheetHeader className="border-b border-border-secondary pb-4">
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             We&apos;re sorry to see you go...
@@ -128,9 +139,9 @@ export function CancelSubscriptionSheet({
                 </p>
               </div>
 
-              <p className="font-normal text-[13px] text-text-secondary">
-                {subscription.product.description}
-              </p>
+              <ProductMarkdownDescription
+                description={subscription.product.description}
+              />
 
               {subscription.addons.length > 0 && (
                 <Collapsible open={addonsOpen} onOpenChange={setAddonsOpen}>
@@ -186,6 +197,16 @@ export function CancelSubscriptionSheet({
                 disabled={isLoading}
               >
                 {isLoading ? "Revoking..." : "Revoke Cancellation"}
+              </Button>
+              <Button
+                variant="destructive"
+                className="w-full h-10"
+                onClick={() => handleCancelSubscription(false)}
+                disabled={isLoading}
+              >
+                {isLoading && !isCancellingAtNextBilling
+                  ? "Cancelling..."
+                  : "Cancel Immediately"}
               </Button>
             </>
           ) : (

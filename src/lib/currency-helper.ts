@@ -221,3 +221,29 @@ export const formatCurrency = (
       : { minimumFractionDigits: precision, maximumFractionDigits: precision }),
   }).format(value);
 };
+
+export const getCurrencySymbol = (
+  currency: CurrencyCode | undefined | null,
+): string => {
+  const effectiveCurrency = currency ?? "USD";
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: effectiveCurrency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  return formatter.format(0).replace(/\d/g, "").trim();
+};
+
+export const decodeFloatCurrency = ({
+  value,
+  currency,
+}: {
+  value: number;
+  currency: CurrencyCode | undefined | null;
+}): string => {
+  const precision = getCurrencyPrecision(currency);
+  const divisor = Math.pow(10, precision);
+  const decodedValue = value / divisor;
+  return decodedValue.toFixed(precision);
+};
