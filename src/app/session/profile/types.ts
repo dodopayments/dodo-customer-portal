@@ -10,6 +10,14 @@ export interface Wallet {
   items: WalletItem[];
   total_balance_usd: number;
 }
+export interface UserResponse {
+  business_id: string;
+  created_at: string;
+  customer_id: string;
+  email: string;
+  name: string;
+  phone_number: string;
+}
 
 export interface WalletLedgerItem {
   after_balance?: number;

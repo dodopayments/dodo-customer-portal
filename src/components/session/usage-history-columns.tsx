@@ -4,8 +4,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataGridColumnHeader } from "@/components/ui/data-grid-column-header";
 import { UsageHistoryMeter } from "./subscription-tabs-table";
 import { getCurrencySymbol, decodeFloatCurrency } from "@/lib/currency-helper";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
-export function UsageHistoryColumns(): ColumnDef<UsageHistoryMeter>[] {
+export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<UsageHistoryMeter>[] {
+  const router = useRouter();
   return [
     {
       id: "name",
@@ -20,6 +23,26 @@ export function UsageHistoryColumns(): ColumnDef<UsageHistoryMeter>[] {
         return (
           <div className="text-sm font-medium text-text-primary">
             {row.original.name}
+          </div>
+        );
+      },
+      enableSorting: true,
+      enableColumnFilter: true,
+      size: 200,
+    },
+    {
+      id: "id",
+      header: ({ column }) => (
+        <DataGridColumnHeader
+          title="Meter ID"
+          visibility={true}
+          column={column}
+        />
+      ),
+      cell: ({ row }) => {
+        return (
+          <div className="text-sm font-medium text-text-primary">
+            {row.original.id}
           </div>
         );
       },
@@ -134,6 +157,27 @@ export function UsageHistoryColumns(): ColumnDef<UsageHistoryMeter>[] {
       enableSorting: false,
       enableColumnFilter: false,
       size: 120,
+    },
+    {
+      id: "actions",
+      header: ({ column }) => (
+        <DataGridColumnHeader
+          title="Actions"
+          visibility={true}
+          column={column}
+        />
+      ),
+      cell: ({ row }) => {
+        return (
+          <div className="text-sm font-medium text-text-primary">
+            <Button variant="secondary" onClick={() => {
+              router.push(`/session/subscriptions/${sub_id}/${row.original.id}`);
+            }}>
+              View
+            </Button>
+          </div>
+        );
+      },
     },
   ];
 }

@@ -118,7 +118,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
               />
             ))}
           {productCart.length === 0 && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-text-secondary">
               No products in this order.
             </p>
           )}

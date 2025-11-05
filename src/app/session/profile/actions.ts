@@ -1,16 +1,7 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
-import { WalletLedgerItem } from "./types";
-
-export interface UserResponse {
-  business_id: string;
-  created_at: string;
-  customer_id: string;
-  email: string;
-  name: string;
-  phone_number: string;
-}
+import { UserResponse } from "./types";
 
 export async function fetchUser(): Promise<UserResponse> {
   const response = await makeAuthenticatedRequest("/customer-portal/profile");
