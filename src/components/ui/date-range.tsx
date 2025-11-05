@@ -87,7 +87,7 @@ export default function DatePickerWithRange({
             variant={"secondary"}
             className={cn(
               "w-[250px] justify-start text-left font-normal",
-              !date && "text-muted-foreground",
+              !date && "text-text-secondary",
             )}
           >
             <CalendarDots className="mr-2 h-4 w-4" />
@@ -145,7 +145,7 @@ export default function DatePickerWithRange({
                 />
               </div>
               {selectedPreset && (
-                <div className="px-3 py-2 text-center text-sm text-muted-foreground">
+                <div className="px-3 py-2 text-center text-sm text-text-secondary">
                   {selectedPreset} selected
                 </div>
               )}

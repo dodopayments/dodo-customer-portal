@@ -120,7 +120,7 @@ export function AddPaymentMethodSheet() {
           </div>
           <div className="flex items-center gap-4 my-2">
             <Separator className="flex-1" />
-            <span className="text-sm text-muted-foreground">OR</span>
+            <span className="text-sm text-text-secondary">OR</span>
             <Separator className="flex-1" />
           </div>
           <div className="flex flex-row gap-2 w-full">

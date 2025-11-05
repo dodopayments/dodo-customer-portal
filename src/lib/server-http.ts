@@ -10,7 +10,7 @@ export function resolveModeFromHost(h: HeaderLike): Mode {
   
   // Check for localhost ports
   if (host.includes("localhost:3000")) {
-    return "live";
+    return "test";
   }
   if (host.includes("localhost:3001")) {
     return "live";
