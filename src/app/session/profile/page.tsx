@@ -7,23 +7,38 @@ import {
 } from "@/components/ui/card";
 import { WalletItem } from "./types";
 import { Wallet } from "@/components/session/profile/wallets";
+import { extractPaginationParams } from "@/lib/pagination-utils";
+
+const DEFAULT_PAGE_SIZE = 50;
+const PAGE_PARAM_KEY = "wallet_page";
 
 export default async function ProfilePage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const user = await fetchUser();
   const wallets = await fetchWallets();
   const params = await searchParams;
   const tab =
-    params?.tab ||
+    (Array.isArray(params?.tab) ? params.tab[0] : params?.tab) ||
     `${wallets?.items?.[0]?.currency?.toLowerCase()}-wallet` ||
     "usd-wallet";
   
   // Extract currency from tab (format: "usd-wallet" -> "USD")
   const selectedCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
-  const walletLedger = await fetchWalletLedger({ currency: selectedCurrency });
+  
+  const { currentPage, pageSize, baseUrl } = await extractPaginationParams(
+    searchParams,
+    DEFAULT_PAGE_SIZE,
+    PAGE_PARAM_KEY,
+  );
+  
+  const walletLedger = await fetchWalletLedger({
+    currency: selectedCurrency,
+    pageNumber: currentPage,
+    pageSize,
+  });
 
   const allWallets = wallets.items.map((wallet: WalletItem) => ({
     value: `${wallet.currency.toLowerCase()}-wallet`,
@@ -59,7 +74,13 @@ export default async function ProfilePage({
               wallets={wallets?.items}
               allWallets={allWallets}
               tab={tab}
-              walletLedger={walletLedger || { items: [] }}
+              walletLedger={walletLedger.data}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              currentPageItems={walletLedger.data.length}
+              hasNextPage={walletLedger.hasNext}
+              baseUrl={baseUrl}
+              pageParamKey={PAGE_PARAM_KEY}
             />
           </div>
         </div>

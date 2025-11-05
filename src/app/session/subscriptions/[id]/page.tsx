@@ -9,10 +9,15 @@ import { SubscriptionBillingInfo } from "@/components/session/subscription-billi
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
 import { CancelSubscriptionSheet } from "@/components/session/cancel-subscription-sheet";
 import { SubscriptionDetailsData } from "./types";
+import { extractPaginationParams } from "@/lib/pagination-utils";
+
+const DEFAULT_PAGE_SIZE = 50;
+const INVOICE_PAGE_PARAM_KEY = "invoice_page";
+const USAGE_PAGE_PARAM_KEY = "usage_page";
 
 export interface PageProps {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default async function SubscriptionPage({
@@ -25,6 +30,18 @@ export default async function SubscriptionPage({
     return notFound();
   }
 
+  const invoiceParams = await extractPaginationParams(
+    searchParams,
+    DEFAULT_PAGE_SIZE,
+    INVOICE_PAGE_PARAM_KEY,
+  );
+
+  const usageParams = await extractPaginationParams(
+    searchParams,
+    DEFAULT_PAGE_SIZE,
+    USAGE_PAGE_PARAM_KEY,
+  );
+
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
       <TopButtons subscription={subscription} subscriptionId={id} />
@@ -34,6 +51,18 @@ export default async function SubscriptionPage({
         subscriptionId={id}
         subscription={subscription}
         searchParams={searchParams}
+        invoicePagination={{
+          currentPage: invoiceParams.currentPage,
+          pageSize: invoiceParams.pageSize,
+          baseUrl: invoiceParams.baseUrl,
+          pageParamKey: INVOICE_PAGE_PARAM_KEY,
+        }}
+        usagePagination={{
+          currentPage: usageParams.currentPage,
+          pageSize: usageParams.pageSize,
+          baseUrl: usageParams.baseUrl,
+          pageParamKey: USAGE_PAGE_PARAM_KEY,
+        }}
       />
     </div>
   );

@@ -1,28 +1,18 @@
 "use server";
 
-import {
-  makeAuthenticatedRequest,
-  PaginatedResponse,
-  FilterParams,
-} from "@/lib/server-actions";
+import { makeAuthenticatedRequest } from "@/lib/server-actions";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchSubscriptions(
-  filters: FilterParams = {},
-): Promise<PaginatedResponse<any>> {
+  pageNumber: number = 0,
+  pageSize: number = 50
+) {
   try {
     const params = new URLSearchParams();
-    if (filters.pageSize) params.set("page_size", filters.pageSize.toString());
-    if (filters.pageNumber !== undefined)
-      params.set("page_number", filters.pageNumber.toString());
-    if (filters.created_at_gte)
-      params.set("created_at_gte", filters.created_at_gte);
-    if (filters.created_at_lte)
-      params.set("created_at_lte", filters.created_at_lte);
-    if (filters.status) params.set("status", filters.status);
+    params.set("page_size", pageSize.toString());
+    params.set("page_number", pageNumber.toString());
 
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions?${params}`,
+      `/customer-portal/subscriptions?${params}`
     );
 
     if (!response.ok) {

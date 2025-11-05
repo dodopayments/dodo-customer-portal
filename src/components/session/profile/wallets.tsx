@@ -17,11 +17,23 @@ export function Wallet({
   allWallets,
   tab,
   walletLedger,
+  currentPage,
+  pageSize,
+  currentPageItems,
+  hasNextPage,
+  baseUrl,
+  pageParamKey,
 }: {
   wallets: WalletItem[];
   allWallets: { value: string; label: string; link: string }[];
   tab: string;
-  walletLedger: { items: WalletLedgerItem[] } | null;
+  walletLedger: WalletLedgerItem[];
+  currentPage: number;
+  pageSize: number;
+  currentPageItems: number;
+  hasNextPage: boolean;
+  baseUrl: string;
+  pageParamKey?: string;
 }) {
   if (allWallets.length === 0) {
     return <p className="text-text-secondary text-sm">No wallets found</p>;
@@ -30,8 +42,7 @@ export function Wallet({
   const currentWallet: WalletItem | undefined = wallets.find(
     (wallet: WalletItem) => wallet.currency?.toUpperCase() === selectedCurrency
   );
-  // walletLedger.items already contains entries for the selected currency
-  const ledgerItems = walletLedger?.items || [];
+  const ledgerItems = walletLedger || [];
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
@@ -54,7 +65,15 @@ export function Wallet({
         <CardContent className="flex flex-col gap-4 p-0">
           <div className="flex flex-col gap-2">
             <p className="text-sm">Recent Transactions</p>
-            <WalletTable walletLedger={ledgerItems} />
+            <WalletTable
+              walletLedger={ledgerItems}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              currentPageItems={currentPageItems}
+              hasNextPage={hasNextPage}
+              baseUrl={baseUrl}
+              pageParamKey={pageParamKey}
+            />
           </div>
         </CardContent>
       </Card>

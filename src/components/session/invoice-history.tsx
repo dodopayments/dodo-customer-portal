@@ -8,7 +8,8 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { formatCurrency, decodeCurrency } from "@/lib/currency-helper";
-import { Download } from "lucide-react";
+import { Download, CircleSlash } from "lucide-react";
+import ServerPagination from "@/components/common/server-pagination";
 import {
   Sheet,
   SheetContent,
@@ -91,18 +92,61 @@ const InvoiceColumn: ColumnDef<any>[] = [
 
 export function InvoiceHistory({
   invoiceHistory,
+  currentPage,
+  pageSize,
+  currentPageItems,
+  hasNextPage,
+  baseUrl,
+  pageParamKey,
 }: {
   invoiceHistory: InvoiceHistoryResponse[];
+  currentPage: number;
+  pageSize: number;
+  currentPageItems: number;
+  hasNextPage: boolean;
+  baseUrl: string;
+  pageParamKey?: string;
 }) {
   const data = useMemo(() => {
     return invoiceHistory;
   }, [invoiceHistory]);
+
+  const isEmpty = invoiceHistory.length === 0;
+  const emptyMessage =
+    currentPage > 0
+      ? "No invoices found on this page"
+      : "No invoices at the moment";
+
   return (
-    <BaseDataGrid
-      tableId="invoice-history"
-      data={data}
-      columns={InvoiceColumn}
-    />
+    <div className="flex flex-col gap-4">
+      {isEmpty ? (
+        <div className="flex flex-col justify-center items-center min-h-[200px] my-auto">
+          <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
+            <CircleSlash />
+          </span>
+          <span className="text-sm font-display text-center tracking-wide text-text-secondary">
+            {emptyMessage}
+          </span>
+        </div>
+      ) : (
+        <BaseDataGrid
+          tableId="invoice-history"
+          data={data}
+          columns={InvoiceColumn}
+          disablePagination
+          manualPagination
+          initialPageSize={pageSize}
+        />
+      )}
+      <ServerPagination
+        currentPage={currentPage}
+        pageSize={pageSize}
+        currentPageItems={currentPageItems}
+        hasNextPage={hasNextPage}
+        baseUrl={baseUrl}
+        pageParamKey={pageParamKey}
+      />
+    </div>
   );
 }
 
