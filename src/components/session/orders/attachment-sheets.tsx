@@ -52,7 +52,7 @@ export const AttachmentsSheet = ({
               <div className="flex items-center justify-center py-8">
                 <div className="flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-text-secondary">
                     Loading digital products...
                   </span>
                 </div>
@@ -70,7 +70,7 @@ export const AttachmentsSheet = ({
                   (!hasFiles && !externalUrl && !instructions)
                 ) {
                   return (
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-text-secondary">
                       No digital products available.
                     </p>
                   );
@@ -121,7 +121,7 @@ export const AttachmentsSheet = ({
                     {instructions && (
                       <div>
                         <h4 className="font-medium mb-2">Instructions</h4>
-                        <p className="text-sm text-muted-foreground whitespace-pre-line">
+                        <p className="text-sm text-text-secondary whitespace-pre-line">
                           {instructions}
                         </p>
                       </div>

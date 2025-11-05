@@ -51,11 +51,14 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
   };
 
   return (
-    <Card className={cardClassName}>
+    <Card 
+      className={`${cardClassName} cursor-pointer hover:bg-accent/50 transition-colors`}
+      onClick={onToggleDetails}
+    >
       <CardContent className="flex flex-col px-0 gap-2">
         <div className="flex flex-row justify-between gap-4 w-full">
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-text-secondary">Order ID</p>
+            <p className="text-sm text-text-secondary">Payment ID</p>
             <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
               {item.payment_id}
             </CardTitle>
@@ -81,7 +84,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             Purchased: {parseIsoDate(item.created_at)}
           </p>
         </div>
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2" onClick={(e) => e.stopPropagation()}>
           <Button
             variant="secondary"
             className="w-full"

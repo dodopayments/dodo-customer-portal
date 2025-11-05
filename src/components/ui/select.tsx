@@ -29,7 +29,7 @@ const SelectTrigger = React.forwardRef<
       <ChevronDown
         size={16}
         strokeWidth={2}
-        className="shrink-0 text-muted-foreground/80"
+        className="shrink-0 text-text-secondary/80"
       />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
@@ -60,7 +60,7 @@ const SelectScrollDownButton = React.forwardRef<
   <SelectPrimitive.ScrollDownButton
     ref={ref}
     className={cn(
-      "flex cursor-default items-center justify-center py-1 text-muted-foreground/80",
+      "flex cursor-default items-center justify-center py-1 text-text-secondary/80",
       className,
     )}
     {...props}
@@ -109,7 +109,7 @@ const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     ref={ref}
     className={cn(
-      "py-1.5 pe-2 ps-8 text-xs font-medium text-muted-foreground",
+      "py-1.5 pe-2 ps-8 text-xs font-medium text-text-secondary",
       className,
     )}
     {...props}
