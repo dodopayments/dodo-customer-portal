@@ -1,40 +1,21 @@
-export interface DummyPaymentMethod {
-  id: string;
-  type: "card" | "other";
-  brand?:
-    | "mastercard"
-    | "visa"
-    | "amex"
-    | "discover"
-    | "google"
-    | "apple"
-    | "other";
-  last4?: string;
-  name?: string;
-}
+import { makeAuthenticatedRequest } from "@/lib/server-actions";
+import { PaymentMethodItem } from "./type";
 
-const dummyPaymentMethods: DummyPaymentMethod[] = [
-  {
-    id: "1",
-    type: "card",
-    last4: "1234",
-    brand: "mastercard",
-    name: "Mastercard",
-  },
-  {
-    id: "2",
-    type: "other",
-    name: "Google Pay",
-    brand: "google",
-  },
-  {
-    id: "3",
-    type: "other",
-    name: "Apple Pay",
-    brand: "apple",
-  },
-];
-
-export async function fetchPaymentMethods() {
-  return dummyPaymentMethods;
+export async function fetchPaymentMethods(): Promise<
+  PaymentMethodItem[] | null
+> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      "/customer-portal/payment-methods"
+    );
+    if (!response.ok) {
+      console.error("Failed to fetch wallets:", JSON.stringify(response));
+      throw new Error(`Failed to fetch wallets: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.items;
+  } catch (error) {
+    console.error("Error fetching wallets:", error);
+    return null;
+  }
 }

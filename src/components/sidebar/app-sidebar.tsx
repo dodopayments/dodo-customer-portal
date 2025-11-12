@@ -51,6 +51,21 @@ const BusinessName = ({
   );
 };
 
+export const navigation = [
+  {
+    label: "Orders",
+    path: "/session/orders",
+    activeCheck: ["/session/orders"],
+  },
+  {
+    label: "Manage Subscriptions",
+    path: "/session/subscriptions",
+    activeCheck: ["/session/subscriptions"],
+  },
+  { label: "Payment Methods", path: "/session/payment-methods" },
+  { label: "Profile & Wallets", path: "/session/profile" },
+];
+
 export function AppSidebar() {
   const { business: businessData } = useBusiness();
   const pathname = usePathname();
@@ -71,21 +86,6 @@ export function AppSidebar() {
       console.error("Logout failed:", error);
     }
   };
-
-  const navigation = [
-    {
-      label: "Orders",
-      path: "/session/orders",
-      activeCheck: ["/session/orders"],
-    },
-    {
-      label: "Manage Subscriptions",
-      path: "/session/subscriptions",
-      activeCheck: ["/session/subscriptions"],
-    },
-    // { label: "Payment Methods", path: "/session/payment-methods" },
-    { label: "Profile & Wallets", path: "/session/profile" },
-  ];
 
   return (
     <Sidebar className="p-6 px-4 border-none">

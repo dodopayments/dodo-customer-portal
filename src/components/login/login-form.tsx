@@ -199,6 +199,9 @@ export const LoginForm = ({ className }: { className?: string }) => {
                   onError={(error) =>
                     handleTurnstileError(error, turnstileHandlers)
                   }
+                  options={{
+                    size: "flexible",
+                  }}
                   onExpire={() => handleTurnstileExpired(turnstileHandlers)}
                 />
                 {turnstileState.error && (

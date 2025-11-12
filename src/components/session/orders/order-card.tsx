@@ -52,7 +52,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
 
   return (
     <Card 
-      className={`${cardClassName} cursor-pointer hover:bg-accent/50 transition-colors`}
+      className={`${cardClassName} cursor-pointer transition-colors`}
       onClick={onToggleDetails}
     >
       <CardContent className="flex flex-col px-0 gap-2">

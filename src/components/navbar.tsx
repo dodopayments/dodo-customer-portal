@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -14,8 +13,7 @@ import { tokenHelper } from "@/lib/token-helper";
 import { useBusiness } from "@/hooks/use-business";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Head from "next/head";
-import { Banner, MobileBanner } from "./ui/dodo/banner";
-import { Mode } from "@/lib/http";
+import { navigation } from "./sidebar/app-sidebar";
 
 const BusinessName = ({
   image,
@@ -79,15 +77,10 @@ export default function Navbar() {
         </title>
       </Head>
       <nav
-        className={`sticky top-0 z-50 bg-bg-primary  border-border-secondary ${
-          Mode == "live" ? "border-b" : ""
-        }`}
+        className={`md:hidden sticky top-0 z-50 bg-bg-primary  border-border-secondary border-b`}
       >
-        <Banner />
         <div
-          className={`relative flex items-center  gap-6 justify-between py-4 pb-3 md:px-12 px-4 ${
-            Mode == "test" ? "mt-2" : ""
-          }`}
+          className={`relative flex items-center  gap-6 justify-between py-4 pb-3 md:px-12 px-4 mt-2`}
         >
           <div className="flex items-center gap-6">
             <BusinessName
@@ -95,18 +88,10 @@ export default function Navbar() {
               hide
               name={businessData?.name ?? ""}
             />
-            <div className="hidden lg:block">
-              <Pills />
-            </div>
           </div>
           <div className="flex items-center gap-3">
             <ThemeSwitch />
-            <div className="lg:block hidden">
-              <Button variant="secondary" onClick={handleLogout}>
-                Logout
-              </Button>
-            </div>
-            <div className="lg:hidden">
+            <div>
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="secondary" size="icon">
@@ -130,14 +115,14 @@ export default function Navbar() {
                     <MobilePills closeSheet={() => setIsOpen(false)} />
                     <div className="mt-auto p-4">
                       <Button
-                        variant="secondary"
-                        className="w-full"
+                        variant={"secondary"}
+                        className="text-left w-full"
                         onClick={() => {
                           handleLogout();
                           setIsOpen(false);
                         }}
                       >
-                        Logout
+                        Log out
                       </Button>
                     </div>
                   </div>
@@ -146,160 +131,53 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-        <MobileBanner />
       </nav>
     </>
   );
 }
 
-const Pills = () => {
-  type Props = {
-    id: number;
-    tile: string;
-    href: string;
-  };
-
-  const ITEMS: Props[] = useMemo(
-    () => [
-      {
-        id: 1,
-        tile: "Billing history",
-        href: "/billing-history",
-      },
-      {
-        id: 2,
-        tile: "Subscriptions",
-        href: "/subscriptions",
-      },
-      {
-        id: 3,
-        tile: "License Keys",
-        href: "/license-keys",
-      },
-      {
-        id: 4,
-        tile: "Profile",
-        href: "/profile",
-      },
-    ],
-    []
-  );
-
-  const [active, setActive] = useState<Props>(ITEMS[0]);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    const isActive = (item: Props) => {
-      return pathname.includes(item.href);
-    };
-    setActive(ITEMS.find((item) => isActive(item)) || ITEMS[0]);
-  }, [pathname, ITEMS]);
-
-  const [isHover, setIsHover] = useState<Props | null>(null);
-
-  return (
-    <ul className="md:flex hidden items-center justify-center">
-      {ITEMS.map((item) => (
-        <Link
-          key={item.id}
-          href={`/session${item.href}`}
-          className={cn(
-            "py-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors",
-            active.id === item.id
-              ? "text-button-secondary-text"
-              : "text-text-tertiary hover:text-button-secondary-text"
-          )}
-          onClick={() => setActive(item)}
-          onMouseEnter={() => setIsHover(item)}
-          onMouseLeave={() => setIsHover(null)}
-        >
-          <div className="px-5 py-2 relative z-10">
-            {item.tile}
-            {(isHover?.id === item.id || active.id === item.id) && (
-              <motion.div
-                layoutId="hover-bg"
-                className="absolute bottom-0 left-0 right-0 w-full h-full bg-button-secondary-bg z-[-1]"
-                style={{
-                  borderRadius: 6,
-                }}
-                initial={false}
-                transition={{ duration: 0.3 }}
-              />
-            )}
-          </div>
-        </Link>
-      ))}
-    </ul>
-  );
-};
-
 const MobilePills = ({ closeSheet }: { closeSheet: () => void }) => {
-  type Props = {
-    id: number;
-    tile: string;
-    href: string;
-  };
-
-  const ITEMS: Props[] = useMemo(
-    () => [
-      {
-        id: 1,
-        tile: "Billing history",
-        href: "/billing-history",
-      },
-      {
-        id: 2,
-        tile: "Subscriptions",
-        href: "/subscriptions",
-      },
-      {
-        id: 3,
-        tile: "License Keys",
-        href: "/license-keys",
-      },
-      {
-        id: 4,
-        tile: "Profile",
-        href: "/profile",
-      },
-    ],
-    []
-  );
-
-  const [active, setActive] = useState<Props>(ITEMS[0]);
   const params = useParams();
   const token = params.token;
   const pathname = usePathname();
 
-  useEffect(() => {
-    const isActive = (item: Props) => {
-      return pathname.includes(item.href);
-    };
-    setActive(ITEMS.find((item) => isActive(item)) || ITEMS[0]);
-  }, [pathname, ITEMS]);
+  const getActiveItem = () => {
+    return navigation.find((item) => {
+      if (item.activeCheck) {
+        return item.activeCheck.some((check) => pathname.includes(check));
+      }
+      return pathname.includes(item.path);
+    });
+  };
+
+  const activeItem = getActiveItem();
 
   return (
     <div className="flex flex-col gap-2 px-4">
-      {ITEMS.map((item) => (
-        <Link
-          key={item.id}
-          href={
-            token ? `/session/${token}${item.href}` : `/session${item.href}`
-          }
-          className={cn(
-            "p-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors rounded-md",
-            active.id === item.id
-              ? "bg-button-secondary-bg text-button-secondary-text"
-              : "text-text-tertiary hover:text-button-secondary-text hover:bg-button-secondary-bg/50"
-          )}
-          onClick={() => {
-            setActive(item);
-            closeSheet();
-          }}
-        >
-          {item.tile}
-        </Link>
-      ))}
+      {navigation.map((item) => {
+        const isActive = activeItem?.path === item.path;
+        const href = token
+          ? `/session/${token}${item.path.replace("/session", "")}`
+          : item.path;
+
+        return (
+          <Link
+            key={item.path}
+            href={href}
+            className={cn(
+              "p-2 relative duration-300 font-display text-sm font-normal tracking-wide transition-colors rounded-md",
+              isActive
+                ? "bg-button-secondary-bg text-button-secondary-text"
+                : "text-text-tertiary hover:text-button-secondary-text hover:bg-button-secondary-bg/50"
+            )}
+            onClick={() => {
+              closeSheet();
+            }}
+          >
+            {item.label}
+          </Link>
+        );
+      })}
     </div>
   );
 };
