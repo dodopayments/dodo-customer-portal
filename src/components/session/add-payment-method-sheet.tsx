@@ -39,7 +39,7 @@ export function AddPaymentMethodSheet() {
   };
 
   const handleExpiryDateKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     // Allow backspace, delete, tab, escape, enter
     if (
@@ -59,7 +59,7 @@ export function AddPaymentMethodSheet() {
   };
 
   const handleCardNumberKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     // Handle backspace when cursor is right after a space
     if (e.key === "Backspace" && cardNumber.length > 0) {
@@ -89,7 +89,7 @@ export function AddPaymentMethodSheet() {
       cardNumberDigits,
       expiryParsed?.month,
       expiryParsed?.year,
-      securityCode,
+      securityCode
     );
   };
 
@@ -127,8 +127,7 @@ export function AddPaymentMethodSheet() {
             <Card
               className={cn(
                 "flex flex-col p-3 w-full h-full gap-2 justify-between cursor-pointer transition-colors",
-                "hover:bg-accent/50",
-                selected === "card" && "border-border-brand",
+                selected === "card" && "border-border-brand"
               )}
               onClick={() => setSelected("card")}
               role="button"
@@ -146,8 +145,7 @@ export function AddPaymentMethodSheet() {
             <Card
               className={cn(
                 "flex flex-col p-3 w-full h-full gap-2 justify-between cursor-pointer transition-colors",
-                "hover:bg-accent/50",
-                selected === "affirm" && "border-border-brand",
+                selected === "affirm" && "border-border-brand"
               )}
               onClick={() => setSelected("affirm")}
               role="button"
@@ -171,8 +169,7 @@ export function AddPaymentMethodSheet() {
             <Card
               className={cn(
                 "flex flex-col p-3 w-full h-full gap-2 justify-between cursor-pointer transition-colors",
-                "hover:bg-accent/50",
-                selected === "klarna" && "border-border-brand",
+                selected === "klarna" && "border-border-brand"
               )}
               onClick={() => setSelected("klarna")}
               role="button"

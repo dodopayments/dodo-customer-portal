@@ -2,6 +2,7 @@ import React from "react";
 import NextTopLoader from "nextjs-toploader";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import Navbar from "@/components/navbar";
 
 const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -21,9 +22,10 @@ const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
           showAtBottom={false}
         />
         <AppSidebar />
-        {/* <Navbar /> */}
-        <main className="flex-1 overflow-y-auto pt-6 p-3">
-          <div className="h-full border-t border-border-secondary rounded-t-2xl shadow-[0px_-3px_20px_0px_var(--bg-secondary),-3px_0px_20px_0px_var(--bg-secondary),3px_0px_20px_0px_var(--bg-secondary)]">
+
+        <main className="flex-1 overflow-y-auto ">
+          <Navbar />
+          <div className="h-full border-t mt-6 m-3 border-border-secondary rounded-t-2xl shadow-[0px_-3px_20px_0px_var(--bg-secondary),-3px_0px_20px_0px_var(--bg-secondary),3px_0px_20px_0px_var(--bg-secondary)]">
             {children}
           </div>
         </main>

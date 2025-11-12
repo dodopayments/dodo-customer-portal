@@ -94,7 +94,7 @@ function TimeDisplay({
       <Button
         variant="ghost"
         size="icon"
-        className="h-8 w-8 hover:bg-accent/50"
+        className="h-8 w-8"
         onClick={onCopy}
         aria-label={`Copy ${title.toLowerCase()} time`}
       >
