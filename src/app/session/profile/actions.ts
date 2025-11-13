@@ -2,6 +2,7 @@
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { UserResponse } from "./types";
+import parseError from "@/lib/parseError";
 
 export async function fetchUser(): Promise<UserResponse> {
   const response = await makeAuthenticatedRequest("/customer-portal/profile");
@@ -22,7 +23,7 @@ export async function fetchWallets() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching wallets:", error);
+    parseError(error, "Failed to fetch wallets");
     return null;
   }
 }
@@ -55,7 +56,7 @@ export async function fetchWalletLedger({
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching wallet ledger:", error);
+    parseError(error, "Failed to fetch wallet ledger");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }

@@ -2,6 +2,7 @@
 
 import { internalApi } from "@/lib/http";
 import LoginCard from "../../../components/login/login-card";
+import parseError from "@/lib/parseError";
 
 export async function generateMetadata({
   params,
@@ -20,7 +21,7 @@ export async function generateMetadata({
       description: `Login or signup to access your ${business.name} - DodoPayments customer portal`,
     };
   } catch (error: any) {
-    console.error("Error fetching business metadata:", error);
+    parseError(error, "Failed to fetch business metadata");
     return {
       title: "Dodo Payments",
       description:

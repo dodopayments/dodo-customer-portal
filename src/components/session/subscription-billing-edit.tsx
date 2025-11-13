@@ -24,6 +24,7 @@ import { BillingDetailsFormValues } from "./subscription-form-schema";
 import { updateBillingDetails } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import parseError from "@/lib/parseError";
 
 interface SubscriptionBillingEditProps {
   subscription: SubscriptionDetailsData;
@@ -62,14 +63,19 @@ export default function SubscriptionBillingEdit({
     const fetchData = async () => {
       setIsLoading(true);
       setIsLoadingCountry(true);
-      const countryCodes = await fetchSupportedCountries();
-      const matchedCountries = await getMatchedCountries(
-        countryCodes,
-        CountriesList
-      );
-      setCountries(matchedCountries);
-      setIsLoadingCountry(false);
-      setIsLoading(false);
+      try {
+        const countryCodes = await fetchSupportedCountries();
+        const matchedCountries = await getMatchedCountries(
+          countryCodes,
+          CountriesList
+        );
+        setCountries(matchedCountries);
+      } catch (error) {
+        parseError(error, "Failed to load countries. Please try again.");
+      } finally {
+        setIsLoadingCountry(false);
+        setIsLoading(false);
+      }
     };
     fetchData();
   }, []);
@@ -96,8 +102,7 @@ export default function SubscriptionBillingEdit({
       toast.success("Billing details updated successfully");
       router.refresh();
     } catch (error) {
-      console.error("Failed to update billing details:", error);
-      toast.error("Failed to update billing details. Please try again.");
+      parseError(error, "Failed to update billing details. Please try again.");
     }
     if (onClose) onClose();
     setOpen(false);

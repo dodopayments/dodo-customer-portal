@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerApiUrl } from "@/lib/server-http";
+import parseError from "@/lib/parseError";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -47,7 +48,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(new URL("/session/orders", request.url));
   } catch (error) {
-    console.error("Token validation failed:", error);
+    parseError(error, "Token validation failed");
     return NextResponse.redirect(new URL("/expired", request.url));
   }
 }

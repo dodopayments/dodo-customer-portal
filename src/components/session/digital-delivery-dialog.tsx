@@ -29,6 +29,7 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { getToken } from "@/lib/server-actions";
+import parseError from "@/lib/parseError";
 
 interface DigitalDeliveryDialogProps {
   payment_id: string;
@@ -78,7 +79,7 @@ export function DigitalDeliveryDialog({
         setProducts(data.items || []);
         setOpen(true);
       } catch (error) {
-        console.error("Failed to load digital products:", error);
+        parseError(error, "Failed to load digital products. Please try again.");
       } finally {
         setIsPreloading(false);
       }

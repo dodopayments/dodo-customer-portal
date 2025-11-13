@@ -1,4 +1,5 @@
 import { getCookie, setCookie, deleteCookie } from "cookies-next/client";
+import parseError from "./parseError";
 
 export interface TokenData {
   token: string;
@@ -35,7 +36,7 @@ export const tokenHelper = {
 
       return { token, expiresAt };
     } catch (error) {
-      console.error("Failed to store token:", error);
+      parseError(error, "Failed to store token");
       tokenHelper.clear();
       return null;
     }
@@ -61,7 +62,7 @@ export const tokenHelper = {
         expiresAt: expiryTime,
       };
     } catch (error) {
-      console.error("Failed to get token:", error);
+      parseError(error, "Failed to get token");
       return null;
     }
   },
@@ -74,7 +75,7 @@ export const tokenHelper = {
       // Add buffer time to prevent edge cases
       return Date.now() < tokenData.expiresAt - EXPIRY_BUFFER;
     } catch (error) {
-      console.error("Failed to validate token:", error);
+      parseError(error, "Failed to validate token");
       return false;
     }
   },
@@ -84,7 +85,7 @@ export const tokenHelper = {
       deleteCookie(TOKEN_COOKIE_NAME);
       deleteCookie(TOKEN_EXPIRY_COOKIE_NAME);
     } catch (error) {
-      console.error("Failed to clear token:", error);
+      parseError(error, "Failed to clear token");
     }
   },
 
@@ -100,7 +101,7 @@ export const tokenHelper = {
 
       return tokenHelper.store(newToken, remainingTime);
     } catch (error) {
-      console.error("Failed to refresh token:", error);
+      parseError(error, "Failed to refresh token");
       return null;
     }
   },
@@ -121,7 +122,7 @@ export const tokenHelper = {
 
       return true;
     } catch (error) {
-      console.error("Logout failed:", error);
+      parseError(error, "Logout failed");
       return false;
     }
   },

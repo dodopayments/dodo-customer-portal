@@ -4,6 +4,7 @@ import {
   makeAuthenticatedRequest,
   FilterParams,
 } from "@/lib/server-actions";
+import parseError from "@/lib/parseError";
 
 export async function fetchSubscriptions(filters: FilterParams = {}) {
   try {
@@ -28,7 +29,7 @@ export async function fetchSubscriptions(filters: FilterParams = {}) {
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching subscriptions:", error);
+    parseError(error, "Failed to fetch subscriptions");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }
@@ -45,7 +46,7 @@ export async function fetchBusiness() {
 
     return response.json();
   } catch (error) {
-    console.error("Error fetching business:", error);
+    parseError(error, "Failed to fetch business");
     return null;
   }
 }
@@ -74,7 +75,7 @@ export async function fetchPayments(
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching one-time:", error);
+    parseError(error, "Failed to fetch payments");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }
@@ -90,7 +91,7 @@ export async function getProductCart(payment_id: string) {
     const data = await response.json();
     return data.items || [];
   } catch (error) {
-    console.error("Error fetching product cart:", error);
+    parseError(error, "Failed to fetch product cart");
     return null;
   }
 }

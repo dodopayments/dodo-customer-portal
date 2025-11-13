@@ -1,5 +1,6 @@
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { PaymentMethodItem } from "./type";
+import parseError from "@/lib/parseError";
 
 export async function fetchPaymentMethods(): Promise<
   PaymentMethodItem[] | null
@@ -9,13 +10,12 @@ export async function fetchPaymentMethods(): Promise<
       "/customer-portal/payment-methods"
     );
     if (!response.ok) {
-      console.error("Failed to fetch wallets:", JSON.stringify(response));
-      throw new Error(`Failed to fetch wallets: ${response.status}`);
+      throw new Error(`Failed to fetch payment methods: ${response.status}`);
     }
     const data = await response.json();
     return data.items;
   } catch (error) {
-    console.error("Error fetching wallets:", error);
+    parseError(error, "Failed to fetch payment methods");
     return null;
   }
 }

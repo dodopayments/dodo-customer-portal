@@ -22,6 +22,7 @@ import { LicenseSheets } from "./orders/license-sheets";
 import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 import { renderSubscriptionBadges } from "./subscription-utils";
 import ProductMarkdownDescription from "../common/product-markdown-description";
+import parseError from "@/lib/parseError";
 
 export interface DigitalProductResponse {
   product_id: string;
@@ -118,7 +119,7 @@ export const Product = ({
         setDigitalProductsError("Failed to load digital products.");
       }
     } catch (error) {
-      console.error("Failed to fetch digital products:", error);
+      parseError(error, "Failed to fetch digital products. Please try again.");
       setDigitalProductsError("Failed to load digital products.");
     } finally {
       setDigitalProductsLoading(false);
@@ -142,7 +143,7 @@ export const Product = ({
         setSubscription(data);
       }
     } catch (error) {
-      console.error("Failed to fetch subscription:", error);
+      parseError(error, "Failed to fetch subscription. Please try again.");
     }
   }
 
