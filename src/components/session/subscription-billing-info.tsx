@@ -37,10 +37,30 @@ export function SubscriptionBillingInfo({
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-text-secondary text-sm">Billing Address </p>
-              <p className="text-text-primary text-sm">
-                {subscription.billing.street}, {subscription.billing.city},{" "}
-                {subscription.billing.state}, {subscription.billing.zipcode}
-              </p>
+              <div className="text-text-primary text-sm whitespace-pre-line">
+                {subscription.billing.street && (
+                  <span>
+                    {subscription.billing.street}
+                    <br />
+                  </span>
+                )}
+                {(subscription.billing.city ||
+                  subscription.billing.state ||
+                  subscription.billing.zipcode) && (
+                  <span>
+                    {subscription.billing.city}
+                    {subscription.billing.city && subscription.billing.state
+                      ? ", "
+                      : ""}
+                    {subscription.billing.state}
+                    {subscription.billing.zipcode
+                      ? ` ${subscription.billing.zipcode}`
+                      : ""}
+                    <br />
+                  </span>
+                )}
+                {subscription.billing.country}
+              </div>
             </div>
           </div>
         </CardContent>
