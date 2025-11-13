@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 
 import { FlagImage } from "react-international-phone";
 import { CountriesList } from "@/constants/Countries";
+import parseError from "@/lib/parseError";
 
 interface CountrySelectProps {
   control: any;
@@ -55,7 +56,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
         const fetchedCountries = await CountriesList;
         setCountries(fetchedCountries);
       } catch (error) {
-        console.error("Failed to load countries:", error);
+        parseError(error, "Failed to load countries. Please try again.");
       } finally {
         setIsLoading(false);
       }

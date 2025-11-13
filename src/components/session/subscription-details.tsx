@@ -23,12 +23,40 @@ import ProductMarkdownDescription from "../common/product-markdown-description";
 import { Gauge } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { UpdatePaymentMethodSheet } from "./subscriptions/update-payment-method-sheet";
+import { fetchPaymentMethods } from "@/app/session/payment-methods/action";
+import { PaymentMethodItem } from "@/app/session/payment-methods/type";
+import { getPaymentMethodLogoUrl } from "./payment-methods/payment-method-logo";
+import Image from "next/image";
 
-export function SubscriptionDetails({
+function formatPaymentMethodType(type: string): string {
+  return type
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function getPaymentMethodDisplayName(paymentMethod: PaymentMethodItem): string {
+  const connectorMethods = Object.values(
+    paymentMethod.connector_payment_methods
+  );
+  for (const method of connectorMethods) {
+    if (method.payment_method_type === "apple_pay") return "Apple Pay";
+    if (method.payment_method_type === "google_pay") return "Google Pay";
+  }
+  return formatPaymentMethodType(paymentMethod.payment_method);
+}
+
+export async function SubscriptionDetails({
   subscription,
 }: {
   subscription: SubscriptionDetailsData;
 }) {
+  const paymentMethods = await fetchPaymentMethods();
+  const currentPaymentMethod = subscription.payment_method_id
+    ? paymentMethods?.find(
+        (pm) => pm.payment_method_id === subscription.payment_method_id
+      )
+    : null;
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-4">
@@ -67,9 +95,14 @@ export function SubscriptionDetails({
             </CardContent>
           </section>
           {subscription.status !== "on_hold" && (
-            <UpdatePaymentMethodSheet
-              subscription_id={subscription.subscription_id}
-            />
+            <div className="flex border border-border-secondary rounded-lg p-4 items-end gap-6 my-auto">
+              {currentPaymentMethod && (
+                <CurrentPaymentMethod paymentMethod={currentPaymentMethod} />
+              )}
+              <UpdatePaymentMethodSheet
+                subscription_id={subscription.subscription_id}
+              />
+            </div>
           )}
         </Card>
       </div>
@@ -179,5 +212,83 @@ function MetersCart({
         </section>
       </CardContent>
     </Card>
+  );
+}
+
+function CurrentPaymentMethod({
+  paymentMethod,
+}: {
+  paymentMethod: PaymentMethodItem;
+}) {
+  const connectorMethods = Object.values(
+    paymentMethod.connector_payment_methods
+  );
+  const paymentMethodType =
+    connectorMethods.length > 0
+      ? connectorMethods[0].payment_method_type
+      : undefined;
+
+  const logo = getPaymentMethodLogoUrl(
+    paymentMethodType,
+    paymentMethod.payment_method,
+    paymentMethod.card?.card_network,
+    paymentMethod.card?.card_type
+  );
+
+  const displayName = getPaymentMethodDisplayName(paymentMethod);
+  const isCard = paymentMethod.payment_method === "card";
+  const card = paymentMethod.card;
+
+  return (
+    <div className="flex flex-row items-center gap-3">
+      <div className="border border-border-secondary rounded-md p-2 py-1 flex-shrink-0 flex items-center justify-center w-12 h-9">
+        {logo?.type === "url" && logo.url ? (
+          <Image
+            src={logo.url}
+            alt={displayName}
+            width={32}
+            height={32}
+            className="object-contain"
+            unoptimized
+          />
+        ) : logo?.type === "icon" && logo.Icon ? (
+          <logo.Icon
+            size={32}
+            className="text-text-primary"
+            weight="regular"
+          />
+        ) : (
+          <div className="w-8 h-8 bg-muted rounded flex items-center justify-center">
+            <span className="text-xs font-medium text-muted-foreground">
+              {displayName.charAt(0)}
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="flex flex-col gap-1">
+        <p className="text-text-primary text-sm font-display font-medium leading-tight">
+          {displayName}
+        </p>
+        {isCard && card && (
+          <div className="flex flex-row items-center gap-2 flex-wrap">
+            {card.card_network && (
+              <span className="text-text-secondary text-xs">
+                {card.card_network}
+              </span>
+            )}
+            {card.last4_digits && (
+              <>
+                {card.card_network && (
+                  <span className="text-text-secondary text-xs">|</span>
+                )}
+                <span className="text-text-secondary text-xs">
+                  •••• {card.last4_digits}
+                </span>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

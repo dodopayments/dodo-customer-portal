@@ -1,6 +1,7 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
+import parseError from "@/lib/parseError";
 
 export async function fetchSubscriptions(
   pageNumber: number = 0,
@@ -26,7 +27,7 @@ export async function fetchSubscriptions(
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching subscriptions:", error);
+    parseError(error, "Failed to fetch subscriptions");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }

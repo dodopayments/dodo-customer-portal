@@ -46,6 +46,7 @@ export interface SubscriptionDetailsData {
   discount_cycles_remaining: number;
   discount_id: string;
   expires_at: string;
+  payment_method_id?: string;
   metadata: Record<string, string>;
   meters: Meter[];
   next_billing_date: string;

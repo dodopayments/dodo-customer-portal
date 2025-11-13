@@ -14,6 +14,7 @@ import { useBusiness } from "@/hooks/use-business";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Head from "next/head";
 import { navigation } from "./sidebar/app-sidebar";
+import parseError from "@/lib/parseError";
 
 const BusinessName = ({
   image,
@@ -63,7 +64,7 @@ export default function Navbar() {
       tokenHelper.logout();
       router.push(`/login/${businessId}`);
     } catch (error) {
-      console.error("Logout failed:", error);
+      parseError(error, "Logout failed. Please try again.");
     }
   };
 

@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { getServerApiUrl } from "./server-http";
+import parseError from "./parseError";
 
 export async function getToken(): Promise<string | null> {
   try {
@@ -54,7 +55,7 @@ export async function fetchBusiness() {
 
     return response.json();
   } catch (error) {
-    console.error("Error fetching business:", error);
+    parseError(error, "Failed to fetch business");
     return null;
   }
 }

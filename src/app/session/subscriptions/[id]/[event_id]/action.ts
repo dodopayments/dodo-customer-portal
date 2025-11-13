@@ -1,4 +1,5 @@
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
+import parseError from "@/lib/parseError";
 
 export async function fetchMeterEvents(
   meter_id: string,
@@ -27,7 +28,7 @@ export async function fetchMeterEvents(
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching events:", error);
+    parseError(error, "Failed to fetch events");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }

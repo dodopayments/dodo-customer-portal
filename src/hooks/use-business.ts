@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { fetchBusiness } from "@/lib/server-actions";
+import parseError from "@/lib/parseError";
 
 export function useBusiness() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,7 +18,7 @@ export function useBusiness() {
         setBusiness(businessData);
         setError(null);
       } catch (err) {
-        console.error("Failed to fetch business:", err);
+        parseError(err, "Failed to fetch business");
         setError("Failed to load business data");
       } finally {
         setLoading(false);

@@ -19,6 +19,7 @@ import { cancelSubscription } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
+import parseError from "@/lib/parseError";
 import {
   CurrencyCode,
   formatCurrency,
@@ -58,12 +59,7 @@ export function CancelSubscriptionSheet({
       router.refresh();
       setOpen(false);
     } catch (error) {
-      console.error("Failed to cancel subscription:", error);
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Failed to cancel subscription. Please try again."
-      );
+      parseError(error, "Failed to cancel subscription. Please try again.");
     } finally {
       setIsLoading(false);
       setIsCancellingAtNextBilling(false);
@@ -81,12 +77,7 @@ export function CancelSubscriptionSheet({
       router.refresh();
       setOpen(false);
     } catch (error) {
-      console.error("Failed to revoke cancellation:", error);
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Failed to revoke cancellation. Please try again."
-      );
+      parseError(error, "Failed to revoke cancellation. Please try again.");
     } finally {
       setIsLoading(false);
     }

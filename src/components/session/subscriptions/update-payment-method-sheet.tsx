@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import parseError from "@/lib/parseError";
 
 // TypeScript Interfaces
 interface UpdatePaymentMethodSheetProps {
@@ -176,8 +177,7 @@ export function UpdatePaymentMethodSheet({
       setEligiblePaymentMethods(data.items);
       setOpen(true);
     } catch (error) {
-      console.error("Error fetching eligible payment methods:", error);
-      toast.error("Failed to load payment methods. Please try again.");
+      parseError(error, "Failed to load payment methods. Please try again.");
       setEligiblePaymentMethods(null);
     } finally {
       setLoadingData(false);
@@ -234,12 +234,7 @@ export function UpdatePaymentMethodSheet({
         router.refresh();
         setOpen(false);
       } catch (error) {
-        console.error("Failed to update payment method:", error);
-        const errorMessage =
-          error instanceof Error
-            ? error.message
-            : "Failed to update payment method. Please try again.";
-        toast.error(errorMessage);
+        parseError(error, "Failed to update payment method. Please try again.");
       } finally {
         setIsSubmitting(false);
       }
@@ -270,12 +265,7 @@ export function UpdatePaymentMethodSheet({
       router.refresh();
       setOpen(false);
     } catch (error) {
-      console.error("Failed to add new payment method:", error);
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Failed to add new payment method. Please try again.";
-      toast.error(errorMessage);
+      parseError(error, "Failed to add new payment method. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -298,7 +288,7 @@ export function UpdatePaymentMethodSheet({
         variant={variant}
         className="my-auto"
       >
-        Update Payment Method
+        Edit
       </Button>
       <SheetContent className="flex flex-col p-0 overflow-y-auto">
         <SheetHeader className="border-b p-6 border-border-secondary pb-4">

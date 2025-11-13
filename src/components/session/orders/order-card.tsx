@@ -18,6 +18,7 @@ import { parseIsoDate } from "@/lib/date-helper";
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { getProductCart } from "@/app/session/orders/actions";
 import { Product, ProductCartItem } from "../product";
+import parseError from "@/lib/parseError";
 
 interface OrderCardProps {
   item: OrderData;
@@ -35,7 +36,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
       const productCart = await getProductCart(item.payment_id);
       setProductCart(productCart);
     } catch (error) {
-      console.error("Failed to fetch product cart:", error);
+      parseError(error, "Failed to fetch product cart. Please try again.");
     }
   };
 

@@ -11,6 +11,7 @@ import {
   fetchSupportedCountries,
   getMatchedCountries,
 } from "@/components/session/subscription-utils";
+import parseError from "@/lib/parseError";
 
 interface InvoiceFillDetailsProps {
   url: string;
@@ -28,13 +29,18 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoadingCountry(true);
-      const countryCodes = await fetchSupportedCountries();
-      const matchedCountries = await getMatchedCountries(
-        countryCodes,
-        CountriesList,
-      );
-      setCountries(matchedCountries);
-      setIsLoadingCountry(false);
+      try {
+        const countryCodes = await fetchSupportedCountries();
+        const matchedCountries = await getMatchedCountries(
+          countryCodes,
+          CountriesList,
+        );
+        setCountries(matchedCountries);
+      } catch (error) {
+        parseError(error, "Failed to load countries. Please try again.");
+      } finally {
+        setIsLoadingCountry(false);
+      }
     };
     fetchData();
   }, []);

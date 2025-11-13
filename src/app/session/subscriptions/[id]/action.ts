@@ -9,6 +9,7 @@ import {
   UpdatePaymentMethodResponse,
 } from "./types";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
+import parseError from "@/lib/parseError";
 
 export async function cancelSubscription({
   subscription_id,
@@ -69,7 +70,7 @@ export async function fetchSubscription(
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching subscription:", error);
+    parseError(error, "Failed to fetch subscription");
     return null;
   }
 }
@@ -133,7 +134,7 @@ export async function fetchInvoiceHistory(
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching invoice history:", error);
+    parseError(error, "Failed to fetch invoice history");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }
@@ -161,7 +162,7 @@ export async function fetchUsageHistory(
       hasNext: data.has_next || false,
     };
   } catch (error) {
-    console.error("Error fetching usage history:", error);
+    parseError(error, "Failed to fetch usage history");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }
@@ -186,7 +187,7 @@ export async function fetchEligiblePaymentMethods(
     const data = await response.json();
     return { items: data.items as PaymentMethodItem[] };
   } catch (error) {
-    console.error("Error fetching eligible payment methods:", error);
+    parseError(error, "Failed to fetch eligible payment methods");
     throw error;
   }
 }

@@ -28,6 +28,7 @@ import { toast } from "sonner";
 import LoadingOverlay from "../loading-overlay";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
+import parseError from "@/lib/parseError";
 
 const emailSchema = z.object({
   email: z
@@ -97,7 +98,7 @@ export const LoginForm = ({ className }: { className?: string }) => {
         );
         setBusiness(response.data);
       } catch (error) {
-        console.error(error);
+        parseError(error, "Failed to fetch business information. Please try again.");
       } finally {
         setPageLoading(false);
       }
@@ -141,8 +142,7 @@ export const LoginForm = ({ className }: { className?: string }) => {
       toast.success("Login link sent to email");
       setSuccess(true);
     } catch (error) {
-      toast.error("Failed to send login link");
-      console.error(error);
+      parseError(error, "Failed to send login link. Please try again.");
     } finally {
       setIsLoading(false);
     }

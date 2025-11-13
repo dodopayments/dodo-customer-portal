@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // lib/turnstile.ts
 import { MutableRefObject } from "react";
+import parseError from "./parseError";
 
 export interface TurnstileState {
   token?: string;
@@ -50,7 +51,7 @@ export const handleTurnstileError = (
   handlers: TurnstileHandlers,
 ) => {
   handlers.setError(TURNSTILE_ERROR_MESSAGES.ERROR);
-  console.error("Turnstile error:", error);
+  parseError(error, "Turnstile verification failed");
 };
 
 export const handleTurnstileExpired = (handlers: TurnstileHandlers) => {
