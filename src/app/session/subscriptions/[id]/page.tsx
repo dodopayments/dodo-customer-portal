@@ -8,6 +8,7 @@ import { CancelSubscriptionSheet } from "@/components/session/cancel-subscriptio
 import { SubscriptionDetailsData } from "./types";
 import { extractPaginationParams } from "@/lib/pagination-utils";
 import { BackButton } from "../../../../components/custom/back-button";
+import SubscriptionInfo from "@/components/session/subscriptions/subscription-info";
 
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
@@ -43,6 +44,7 @@ export default async function SubscriptionPage({
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
       <TopButtons subscription={subscription} subscriptionId={id} />
+      <SubscriptionInfo subscription={subscription} />
       <SubscriptionDetails subscription={subscription} />
       <SubscriptionBillingInfo subscription={subscription} />
       <SubscriptionTabsTable

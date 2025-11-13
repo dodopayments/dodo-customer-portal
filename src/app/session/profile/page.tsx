@@ -1,10 +1,7 @@
 import PageHeader from "@/components/page-header";
 import { Separator } from "@/components/ui/separator";
 import { fetchUser, fetchWalletLedger, fetchWallets } from "./actions";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { WalletItem } from "./types";
 import { Wallet } from "@/components/session/profile/wallets";
 import { extractPaginationParams } from "@/lib/pagination-utils";
@@ -24,16 +21,16 @@ export default async function ProfilePage({
     (Array.isArray(params?.tab) ? params.tab[0] : params?.tab) ||
     `${wallets?.items?.[0]?.currency?.toLowerCase()}-wallet` ||
     "usd-wallet";
-  
+
   // Extract currency from tab (format: "usd-wallet" -> "USD")
   const selectedCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
-  
+
   const { currentPage, pageSize, baseUrl } = await extractPaginationParams(
     searchParams,
     DEFAULT_PAGE_SIZE,
-    PAGE_PARAM_KEY,
+    PAGE_PARAM_KEY
   );
-  
+
   const walletLedger = await fetchWalletLedger({
     currency: selectedCurrency,
     pageNumber: currentPage,
@@ -67,23 +64,25 @@ export default async function ProfilePage({
             </div>
           </CardContent>
         </Card>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-0">
-            <p className="text-text-primary text-lg font-medium">Wallets</p>
-            <Wallet
-              wallets={wallets?.items}
-              allWallets={allWallets}
-              tab={tab}
-              walletLedger={walletLedger.data}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              currentPageItems={walletLedger.data.length}
-              hasNextPage={walletLedger.hasNext}
-              baseUrl={baseUrl}
-              pageParamKey={PAGE_PARAM_KEY}
-            />
+        {wallets?.items?.length > 0 && (
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-0">
+              <p className="text-text-primary text-lg font-medium">Wallets</p>
+              <Wallet
+                wallets={wallets?.items}
+                allWallets={allWallets}
+                tab={tab}
+                walletLedger={walletLedger.data}
+                currentPage={currentPage}
+                pageSize={pageSize}
+                currentPageItems={walletLedger.data.length}
+                hasNextPage={walletLedger.hasNext}
+                baseUrl={baseUrl}
+                pageParamKey={PAGE_PARAM_KEY}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

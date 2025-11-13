@@ -1,30 +1,14 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
-import { SubscriptionDetailsData } from "./types";
-
-export interface CancelSubscriptionParams {
-  subscription_id: string;
-  cancelAtNextBillingDate?: boolean;
-  revokeCancelation?: boolean;
-}
-
-export interface UpdateBillingDetailsParams {
-  subscription_id: string;
-  data: {
-    customer: {
-      name: string;
-    };
-    billing: {
-      city: string;
-      country: string;
-      state: string;
-      street: string;
-      zipcode: string;
-    };
-    tax_id?: string | null;
-  };
-}
+import {
+  SubscriptionDetailsData,
+  CancelSubscriptionParams,
+  UpdateBillingDetailsParams,
+  UpdatePaymentMethodParams,
+  UpdatePaymentMethodResponse,
+} from "./types";
+import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 
 export async function cancelSubscription({
   subscription_id,
@@ -180,4 +164,70 @@ export async function fetchUsageHistory(
     console.error("Error fetching usage history:", error);
     return { data: [], totalCount: 0, hasNext: false };
   }
+}
+
+export async function fetchEligiblePaymentMethods(
+  subscriptionId: string
+): Promise<{ items: PaymentMethodItem[] }> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscriptionId}/eligible-payment-methods`,
+      {
+        method: "GET",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch eligible payment methods: ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+    return { items: data.items as PaymentMethodItem[] };
+  } catch (error) {
+    console.error("Error fetching eligible payment methods:", error);
+    throw error;
+  }
+}
+
+export async function updatePaymentMethod(
+  params: UpdatePaymentMethodParams
+): Promise<UpdatePaymentMethodResponse> {
+  const { subscription_id, type, payment_method_id, return_url } = params;
+
+  let requestBody: { type: string; payment_method_id?: string; return_url?: string | null };
+
+  if (type === "new") {
+    requestBody = {
+      type: "new",
+      ...(return_url !== undefined && { return_url }),
+    };
+  } else {
+    if (!payment_method_id) {
+      throw new Error("payment_method_id is required for existing payment method");
+    }
+    requestBody = {
+      type: "existing",
+      payment_method_id,
+    };
+  }
+
+  const response = await makeAuthenticatedRequest(
+    `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
+    {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    const errorMessage =
+      errorData.message ||
+      `Failed to update payment method: ${response.status}`;
+    throw new Error(errorMessage);
+  }
+
+  return response.json() as Promise<UpdatePaymentMethodResponse>;
 }

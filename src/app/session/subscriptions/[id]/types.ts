@@ -64,3 +64,40 @@ export interface SubscriptionDetailsData {
   tax_inclusive: boolean;
   trial_period_days: number;
 }
+
+export interface CancelSubscriptionParams {
+  subscription_id: string;
+  cancelAtNextBillingDate?: boolean;
+  revokeCancelation?: boolean;
+}
+
+export interface UpdateBillingDetailsParams {
+  subscription_id: string;
+  data: {
+    customer: {
+      name: string;
+    };
+    billing: {
+      city: string;
+      country: string;
+      state: string;
+      street: string;
+      zipcode: string;
+    };
+    tax_id?: string | null;
+  };
+}
+
+export interface UpdatePaymentMethodParams {
+  subscription_id: string;
+  type: "new" | "existing";
+  payment_method_id?: string;
+  return_url?: string | null;
+}
+
+export interface UpdatePaymentMethodResponse {
+  client_secret: string | null;
+  expires_on: string | null;
+  payment_id: string | null;
+  payment_link: string | null;
+}

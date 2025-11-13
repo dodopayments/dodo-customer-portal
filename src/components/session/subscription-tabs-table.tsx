@@ -63,27 +63,28 @@ export async function SubscriptionTabsTable({
 }) {
   const params = await searchParams;
   const tabParam = Array.isArray(params?.tab) ? params.tab[0] : params?.tab;
-  
+
   const invoiceHistory = await fetchInvoiceHistory(
     subscriptionId,
     invoicePagination.currentPage,
-    invoicePagination.pageSize,
+    invoicePagination.pageSize
   );
   const usageHistory = await fetchUsageHistory(
     subscriptionId,
     usagePagination.currentPage,
-    usagePagination.pageSize,
+    usagePagination.pageSize
   );
 
-  const hasUsage = Array.isArray(usageHistory?.data) && usageHistory.data.length > 0;
+  const hasUsage =
+    Array.isArray(usageHistory?.data) && usageHistory.data.length > 0;
 
   const isUsageBased = subscription.meters.length > 0;
 
   const tab = !isUsageBased
     ? "invoice-history"
     : tabParam === "usage-summary" || tabParam === "invoice-history"
-      ? tabParam
-      : "invoice-history";
+    ? tabParam
+    : "invoice-history";
 
   const api_url = await getServerApiUrl();
   const invoiceHistoryData: InvoiceHistoryResponse[] =
@@ -117,27 +118,28 @@ export async function SubscriptionTabsTable({
 
   return (
     <div className="flex flex-col gap-8">
-      {isUsageBased && (
-        <div className="flex flex-col">
-          <SessionTabs
-            className="w-full"
-            items={[
-              {
-                value: "invoice-history",
-                label: "Invoice History",
-                link: `/session/subscriptions/${subscriptionId}?tab=invoice-history`,
-              },
+      <div className="flex flex-col">
+        <SessionTabs
+          className="w-full"
+          items={[
+            {
+              value: "invoice-history",
+              label: "Invoice History",
+              link: `/session/subscriptions/${subscriptionId}?tab=invoice-history`,
+            },
+            ...(isUsageBased ? [
               {
                 value: "usage-summary",
                 label: "Usage Summary",
                 link: `/session/subscriptions/${subscriptionId}?tab=usage-summary`,
               },
-            ]}
-            currentTab={tab}
-          />
-          <Separator className="my-0" />
-        </div>
-      )}
+            ] : []),
+          ]}
+          currentTab={tab}
+        />
+        <Separator className="my-0" />
+      </div>
+
       {tab === "invoice-history" && (
         <InvoiceHistory
           invoiceHistory={invoiceHistoryData}

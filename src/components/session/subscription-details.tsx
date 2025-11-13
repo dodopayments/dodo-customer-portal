@@ -22,6 +22,7 @@ import {
 import ProductMarkdownDescription from "../common/product-markdown-description";
 import { Gauge } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
+import { UpdatePaymentMethodSheet } from "./subscriptions/update-payment-method-sheet";
 
 export function SubscriptionDetails({
   subscription,
@@ -31,45 +32,46 @@ export function SubscriptionDetails({
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-4">
-        <Card className="w-full p-6 flex flex-col gap-4">
-          <CardHeader className="flex flex-col gap-2 p-0">
-            <p className="text-text-secondary text-sm">
-              {subscription.product.name}
-            </p>
-            <CardTitle>
-              {formatCurrency(
-                decodeCurrency(
-                  subscription.recurring_pre_tax_amount,
+        <Card className="w-full p-6 flex justify-between gap-4">
+          <section className="flex flex-col gap-4">
+            <CardHeader className="flex flex-col gap-2 p-0">
+              <p className="text-text-secondary text-sm">
+                {subscription.product.name}
+              </p>
+              <CardTitle>
+                {formatCurrency(
+                  decodeCurrency(
+                    subscription.recurring_pre_tax_amount,
+                    subscription.currency as CurrencyCode
+                  ),
                   subscription.currency as CurrencyCode
-                ),
-                subscription.currency as CurrencyCode
+                )}
+                /{subscription.payment_frequency_interval.toLowerCase()}
+              </CardTitle>
+              <CardDescription className="text-text-secondary text-sm">
+                <ProductMarkdownDescription
+                  description={subscription.product.description}
+                />
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 p-0">
+              <div className="flex flex-row gap-2">
+                {renderSubscriptionBadges(subscription)}
+              </div>
+              {subscription.addons.length > 0 && (
+                <AddOns addons={subscription.addons} />
               )}
-              /{subscription.payment_frequency_interval.toLowerCase()}
-            </CardTitle>
-            <CardDescription className="text-text-secondary text-sm">
-              <ProductMarkdownDescription
-                description={subscription.product.description}
-              />
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-4 p-0">
-            <div className="flex flex-row gap-2">
-              {renderSubscriptionBadges(subscription)}
-            </div>
-            {subscription.addons.length > 0 && (
-              <AddOns addons={subscription.addons} />
-            )}
-            {subscription.meters.length > 0 && (
-              <MetersCart meters={subscription.meters} />
-            )}
-          </CardContent>
+              {subscription.meters.length > 0 && (
+                <MetersCart meters={subscription.meters} />
+              )}
+            </CardContent>
+          </section>
+          {subscription.status !== "on_hold" && (
+            <UpdatePaymentMethodSheet
+              subscription_id={subscription.subscription_id}
+            />
+          )}
         </Card>
-        {/* <Card className="col-span-1 p-6 flex flex-col gap-4">
-          <CardHeader className="flex flex-col gap-2 p-0">
-            <p className="text-sm">Payment Method</p>
-            <Separator />
-          </CardHeader>
-        </Card> */}
       </div>
     </div>
   );
