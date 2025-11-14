@@ -16,45 +16,50 @@ export async function cancelSubscription({
   cancelAtNextBillingDate,
   revokeCancelation,
 }: CancelSubscriptionParams) {
-  let url = `/customer-portal/subscriptions/${subscription_id}`;
-  let options: RequestInit;
+  try {
+    let url = `/customer-portal/subscriptions/${subscription_id}`;
+    let options: RequestInit;
 
-  if (revokeCancelation) {
-    options = {
-      method: "PATCH",
-      body: JSON.stringify({ cancel_at_next_billing_date: false }),
-    };
-  } else if (cancelAtNextBillingDate === true) {
-    options = {
-      method: "PATCH",
-      body: JSON.stringify({
-        cancel_at_next_billing_date: true,
-      }),
-    };
-  } else {
-    url += "/cancel";
-    options = {
-      method: "POST",
-      body: JSON.stringify({}),
-    };
-  }
-
-  const response = await makeAuthenticatedRequest(url, options);
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    let operation = "cancel subscription";
-    if (cancelAtNextBillingDate) {
-      operation = "set cancel at next billing date";
-    } else if (revokeCancelation) {
-      operation = "revoke cancelation";
+    if (revokeCancelation) {
+      options = {
+        method: "PATCH",
+        body: JSON.stringify({ cancel_at_next_billing_date: false }),
+      };
+    } else if (cancelAtNextBillingDate === true) {
+      options = {
+        method: "PATCH",
+        body: JSON.stringify({
+          cancel_at_next_billing_date: true,
+        }),
+      };
     } else {
-      operation = "cancel subscription immediately";
+      url += "/cancel";
+      options = {
+        method: "POST",
+        body: JSON.stringify({}),
+      };
     }
-    throw new Error(`Failed to ${operation}: ${errorText}`);
-  }
 
-  return response.json();
+    const response = await makeAuthenticatedRequest(url, options);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      let operation = "cancel subscription";
+      if (cancelAtNextBillingDate) {
+        operation = "set cancel at next billing date";
+      } else if (revokeCancelation) {
+        operation = "revoke cancelation";
+      } else {
+        operation = "cancel subscription immediately";
+      }
+      throw new Error(`Failed to ${operation}: ${errorText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Error will be caught and handled by client component
+    throw error;
+  }
 }
 
 export async function fetchSubscription(
@@ -76,38 +81,43 @@ export async function fetchSubscription(
 }
 
 export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
-  const { subscription_id, data } = params;
+  try {
+    const { subscription_id, data } = params;
 
-  const patchData = {
-    billing: data.billing,
-    customer_name: data.customer.name,
-    tax_id: data.tax_id === "" ? null : data.tax_id,
-  };
+    const patchData = {
+      billing: data.billing,
+      customer_name: data.customer.name,
+      tax_id: data.tax_id === "" ? null : data.tax_id,
+    };
 
-  const response = await makeAuthenticatedRequest(
-    `/customer-portal/subscriptions/${subscription_id}`,
-    {
-      method: "PATCH",
-      body: JSON.stringify(patchData),
-    }
-  );
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscription_id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(patchData),
+      }
+    );
 
-  if (!response.ok) {
-    let errorMessage = `HTTP ${response.status}`;
-    try {
-      const errorText = await response.text();
-      if (errorText && errorText.trim()) {
-        errorMessage += `: ${errorText}`;
-      } else {
+    if (!response.ok) {
+      let errorMessage = `HTTP ${response.status}`;
+      try {
+        const errorText = await response.text();
+        if (errorText && errorText.trim()) {
+          errorMessage += `: ${errorText}`;
+        } else {
+          errorMessage += ` (${response.statusText || "Unknown error"})`;
+        }
+      } catch {
         errorMessage += ` (${response.statusText || "Unknown error"})`;
       }
-    } catch {
-      errorMessage += ` (${response.statusText || "Unknown error"})`;
+      throw new Error(`Failed to update billing details: ${errorMessage}`);
     }
-    throw new Error(`Failed to update billing details: ${errorMessage}`);
-  }
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    // Error will be caught and handled by client component
+    throw error;
+  }
 }
 
 export async function fetchInvoiceHistory(
@@ -187,7 +197,7 @@ export async function fetchEligiblePaymentMethods(
     const data = await response.json();
     return { items: data.items as PaymentMethodItem[] };
   } catch (error) {
-    parseError(error, "Failed to fetch eligible payment methods");
+    // Error will be caught and handled by client component
     throw error;
   }
 }
@@ -195,40 +205,45 @@ export async function fetchEligiblePaymentMethods(
 export async function updatePaymentMethod(
   params: UpdatePaymentMethodParams
 ): Promise<UpdatePaymentMethodResponse> {
-  const { subscription_id, type, payment_method_id, return_url } = params;
+  try {
+    const { subscription_id, type, payment_method_id, return_url } = params;
 
-  let requestBody: { type: string; payment_method_id?: string; return_url?: string | null };
+    let requestBody: { type: string; payment_method_id?: string; return_url?: string | null };
 
-  if (type === "new") {
-    requestBody = {
-      type: "new",
-      ...(return_url !== undefined && { return_url }),
-    };
-  } else {
-    if (!payment_method_id) {
-      throw new Error("payment_method_id is required for existing payment method");
+    if (type === "new") {
+      requestBody = {
+        type: "new",
+        ...(return_url !== undefined && { return_url }),
+      };
+    } else {
+      if (!payment_method_id) {
+        throw new Error("payment_method_id is required for existing payment method");
+      }
+      requestBody = {
+        type: "existing",
+        payment_method_id,
+      };
     }
-    requestBody = {
-      type: "existing",
-      payment_method_id,
-    };
-  }
 
-  const response = await makeAuthenticatedRequest(
-    `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
-    {
-      method: "POST",
-      body: JSON.stringify(requestBody),
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
+      {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage =
+        errorData.message ||
+        `Failed to update payment method: ${response.status}`;
+      throw new Error(errorMessage);
     }
-  );
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const errorMessage =
-      errorData.message ||
-      `Failed to update payment method: ${response.status}`;
-    throw new Error(errorMessage);
+    return response.json() as Promise<UpdatePaymentMethodResponse>;
+  } catch (error) {
+    // Error will be caught and handled by client component
+    throw error;
   }
-
-  return response.json() as Promise<UpdatePaymentMethodResponse>;
 }
