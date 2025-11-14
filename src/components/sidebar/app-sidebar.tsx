@@ -42,7 +42,7 @@ const BusinessName = ({
       <span
         className={cn(
           "text-text-primary font-display font-semibold text-[22.22px] leading-[29.92px] tracking-normal",
-          hide && "md:block hidden",
+          hide && "md:block hidden"
         )}
         style={{ leadingTrim: "cap-height" } as React.CSSProperties}
       >
@@ -54,14 +54,14 @@ const BusinessName = ({
 
 export const navigation = [
   {
-    label: "Orders",
-    path: "/session/orders",
-    activeCheck: ["/session/orders"],
-  },
-  {
     label: "Manage Subscriptions",
     path: "/session/subscriptions",
     activeCheck: ["/session/subscriptions"],
+  },
+  {
+    label: "Orders",
+    path: "/session/orders",
+    activeCheck: ["/session/orders"],
   },
   { label: "Payment Methods", path: "/session/payment-methods" },
   { label: "Profile & Wallets", path: "/session/profile" },
