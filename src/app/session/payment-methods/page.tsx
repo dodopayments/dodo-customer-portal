@@ -3,6 +3,7 @@ import { fetchPaymentMethods } from "./action";
 import { PaymentMethodItem } from "./type";
 import Image from "next/image";
 import { getPaymentMethodLogoUrl } from "../../../components/session/payment-methods/payment-method-logo";
+import { CircleSlash } from "lucide-react";
 
 function formatPaymentMethodType(type: string): string {
   return type
@@ -24,6 +25,9 @@ function getPaymentMethodDisplayName(paymentMethod: PaymentMethodItem): string {
 
 export default async function PaymentMethodsPage() {
   const paymentMethods = await fetchPaymentMethods();
+  const isEmpty = !paymentMethods || paymentMethods.length === 0;
+  const emptyMessage = "No payment methods found";
+
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
       <div className="flex flex-col gap-3">
@@ -31,14 +35,25 @@ export default async function PaymentMethodsPage() {
           Your payment methods
         </h4>
         <Card className="p-6 flex flex-col items-start gap-4 flex-none order-1 self-stretch flex-grow-0">
-          <div className="flex flex-col gap-4 w-full">
-            {paymentMethods?.map((paymentMethod) => (
-              <PaymentMethodCard
-                key={paymentMethod.payment_method_id}
-                paymentMethod={paymentMethod}
-              />
-            ))}
-          </div>
+          {isEmpty ? (
+            <div className="flex flex-col justify-center items-center min-h-[200px] my-auto w-full">
+              <span className="text-text-primary p-3 mb-3 bg-bg-secondary rounded-full text-2xl">
+                <CircleSlash />
+              </span>
+              <span className="text-sm font-display text-center tracking-wide text-text-secondary">
+                {emptyMessage}
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4 w-full">
+              {paymentMethods.map((paymentMethod) => (
+                <PaymentMethodCard
+                  key={paymentMethod.payment_method_id}
+                  paymentMethod={paymentMethod}
+                />
+              ))}
+            </div>
+          )}
           {/* <div className="flex">
             <AddPaymentMethodSheet />
           </div> */}
