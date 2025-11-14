@@ -274,7 +274,7 @@ export function UpdatePaymentMethodSheet({
 
         // If the API returns a payment_link, redirect to it
         if (type === "new" && result.payment_link) {
-          window.location.href = result.payment_link;
+          window.open(result.payment_link, "_blank", "noopener,noreferrer");
           return;
         }
 
