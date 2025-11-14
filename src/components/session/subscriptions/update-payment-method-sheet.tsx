@@ -15,13 +15,18 @@ import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { getPaymentMethodLogoUrl } from "../payment-methods/payment-method-logo";
 import {
   fetchEligiblePaymentMethods,
-  updatePaymentMethod,
+  getSessionToken,
 } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import parseError from "@/lib/parseError";
+import { api } from "@/lib/http";
+import {
+  UpdatePaymentMethodParams,
+  UpdatePaymentMethodResponse,
+} from "@/app/session/subscriptions/[id]/types";
 
 // TypeScript Interfaces
 interface UpdatePaymentMethodSheetProps {
@@ -37,6 +42,53 @@ interface PaymentMethodOptionProps {
 }
 
 type SelectedPaymentMethod = string | "new" | null;
+
+// Client-side API function
+async function updatePaymentMethod(
+  params: UpdatePaymentMethodParams
+): Promise<UpdatePaymentMethodResponse> {
+  const { subscription_id, type, payment_method_id, return_url } = params;
+
+  let requestBody: {
+    type: string;
+    payment_method_id?: string;
+    return_url?: string | null;
+  };
+
+  if (type === "new") {
+    requestBody = {
+      type: "new",
+      ...(return_url !== undefined && { return_url }),
+    };
+  } else {
+    if (!payment_method_id) {
+      throw new Error(
+        "payment_method_id is required for existing payment method"
+      );
+    }
+    requestBody = {
+      type: "existing",
+      payment_method_id,
+    };
+  }
+
+  const token = await getSessionToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
+  const response = await api.post<UpdatePaymentMethodResponse>(
+    `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
+    requestBody,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return response.data;
+}
 
 // Helper Functions
 function formatPaymentMethodType(type: string): string {

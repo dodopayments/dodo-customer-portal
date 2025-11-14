@@ -94,7 +94,7 @@ export async function SubscriptionDetails({
               )}
             </CardContent>
           </section>
-          {subscription.status !== "on_hold" && (
+          {subscription.status === "active" && (
             <div className="flex border border-border-secondary rounded-lg p-4 items-end gap-6 my-auto">
               {currentPaymentMethod && (
                 <CurrentPaymentMethod paymentMethod={currentPaymentMethod} />
@@ -252,11 +252,7 @@ function CurrentPaymentMethod({
             unoptimized
           />
         ) : logo?.type === "icon" && logo.Icon ? (
-          <logo.Icon
-            size={32}
-            className="text-text-primary"
-            weight="regular"
-          />
+          <logo.Icon size={32} className="text-text-primary" weight="regular" />
         ) : (
           <div className="w-8 h-8 bg-muted rounded flex items-center justify-center">
             <span className="text-xs font-medium text-muted-foreground">

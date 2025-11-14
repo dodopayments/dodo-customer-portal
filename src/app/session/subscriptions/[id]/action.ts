@@ -1,15 +1,17 @@
 "use server";
 
-import { makeAuthenticatedRequest } from "@/lib/server-actions";
+import { makeAuthenticatedRequest, getToken } from "@/lib/server-actions";
 import {
   SubscriptionDetailsData,
   CancelSubscriptionParams,
   UpdateBillingDetailsParams,
-  UpdatePaymentMethodParams,
-  UpdatePaymentMethodResponse,
 } from "./types";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import parseError from "@/lib/parseError";
+
+export async function getSessionToken(): Promise<string | null> {
+  return await getToken();
+}
 
 export async function cancelSubscription({
   subscription_id,
@@ -202,48 +204,5 @@ export async function fetchEligiblePaymentMethods(
   }
 }
 
-export async function updatePaymentMethod(
-  params: UpdatePaymentMethodParams
-): Promise<UpdatePaymentMethodResponse> {
-  try {
-    const { subscription_id, type, payment_method_id, return_url } = params;
-
-    let requestBody: { type: string; payment_method_id?: string; return_url?: string | null };
-
-    if (type === "new") {
-      requestBody = {
-        type: "new",
-        ...(return_url !== undefined && { return_url }),
-      };
-    } else {
-      if (!payment_method_id) {
-        throw new Error("payment_method_id is required for existing payment method");
-      }
-      requestBody = {
-        type: "existing",
-        payment_method_id,
-      };
-    }
-
-    const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
-      {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-      }
-    );
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      const errorMessage =
-        errorData.message ||
-        `Failed to update payment method: ${response.status}`;
-      throw new Error(errorMessage);
-    }
-
-    return response.json() as Promise<UpdatePaymentMethodResponse>;
-  } catch (error) {
-    // Error will be caught and handled by client component
-    throw error;
-  }
-}
+// updatePaymentMethod has been moved to client-side
+// See: src/components/session/subscriptions/update-payment-method-sheet.tsx
