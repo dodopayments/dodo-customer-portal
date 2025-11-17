@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 interface ErrorPayload {
   message?: string;
   errors?: Array<{ message?: string }>;
@@ -44,32 +42,73 @@ function sanitizeMessage(message: string | undefined, fallback: string): string 
   return trimmedMessage.length > 0 ? trimmedMessage : fallback;
 }
 
+function getToast() {
+  // Only use toast in client context
+  if (typeof window === "undefined") {
+    return null;
+  }
+  
+  try {
+    // Use dynamic require to avoid SSR issues
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { toast } = require("sonner");
+    // Verify toast has the methods we need
+    if (toast && typeof toast.error === "function" && typeof toast.warning === "function") {
+      return toast;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function parseError(
   error: unknown,
   customMessage?: string,
   storeFront?: boolean
 ) {
   const defaultMessage = customMessage || "Something went wrong";
+  const toast = getToast();
 
   if (!isErrorDetails(error)) {
     const fallback = error instanceof Error ? error.message : undefined;
-    return toast.error(sanitizeMessage(fallback, defaultMessage));
+    const message = sanitizeMessage(fallback, defaultMessage);
+    if (toast) {
+      return toast.error(message);
+    }
+    // Server-side: log error instead
+    console.error(message);
+    return;
   }
 
   const status = error.status ?? error.response?.status;
 
   if (status === 401 || status === 403) {
-    return toast.warning("You are not authorized to perform this action");
+    const message = "You are not authorized to perform this action";
+    if (toast) {
+      return toast.warning(message);
+    }
+    console.error(message);
+    return;
   }
 
   if (storeFront && status === 409) {
-    return toast.warning("Slug is already taken, please try another one");
+    const message = "Slug is already taken, please try another one";
+    if (toast) {
+      return toast.warning(message);
+    }
+    console.error(message);
+    return;
   }
 
   const responseMessage = extractResponseMessage(error.response?.data);
-  const message = responseMessage || error.message;
-
-  return toast.error(sanitizeMessage(message, defaultMessage));
+  const message = sanitizeMessage(responseMessage || error.message, defaultMessage);
+  
+  if (toast) {
+    return toast.error(message);
+  }
+  // Server-side: log error instead
+  console.error(message);
 }
 
 export default parseError;

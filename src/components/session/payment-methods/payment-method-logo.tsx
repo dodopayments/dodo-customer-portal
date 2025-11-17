@@ -149,7 +149,6 @@ function getLogoFromPaymentMethodType(
     ideal: `${PAYMENT_LOGOS_BASE_URL}/apm/ideal.svg`,
     przelewy24: `${PAYMENT_LOGOS_BASE_URL}/apm/przelewy24.svg`,
     sepa: `${PAYMENT_LOGOS_BASE_URL}/apm/sepa.svg`,
-    multibanco: `${PAYMENT_LOGOS_BASE_URL}/apm/multibanco.svg`,
   };
 
   if (datatransLogos[type]) {
