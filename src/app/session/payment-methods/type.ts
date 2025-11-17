@@ -45,19 +45,11 @@ export interface Card {
   last4_digits?: string;
 }
 
-export interface ConnectorPaymentMethod {
-  connector_mandate_id: string;
-  original_payment_authorized_amount: number;
-  original_payment_authorized_currency: string;
-  payment_method_type: PaymentMethodType;
-}
-
 export interface PaymentMethodItem {
   card?: Card;
-  connector_payment_methods: Record<string, ConnectorPaymentMethod>;
   last_used_at?: string;
   payment_method: PaymentMethod;
+  payment_method_type: PaymentMethodType;
   payment_method_id: string;
-  profile_map: Record<string, unknown>;
   recurring_enabled?: boolean;
 }

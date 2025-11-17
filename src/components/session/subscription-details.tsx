@@ -36,13 +36,8 @@ function formatPaymentMethodType(type: string): string {
 }
 
 function getPaymentMethodDisplayName(paymentMethod: PaymentMethodItem): string {
-  const connectorMethods = Object.values(
-    paymentMethod.connector_payment_methods
-  );
-  for (const method of connectorMethods) {
-    if (method.payment_method_type === "apple_pay") return "Apple Pay";
-    if (method.payment_method_type === "google_pay") return "Google Pay";
-  }
+  if (paymentMethod.payment_method_type === "apple_pay") return "Apple Pay";
+  if (paymentMethod.payment_method_type === "google_pay") return "Google Pay";
   return formatPaymentMethodType(paymentMethod.payment_method);
 }
 
@@ -220,16 +215,8 @@ function CurrentPaymentMethod({
 }: {
   paymentMethod: PaymentMethodItem;
 }) {
-  const connectorMethods = Object.values(
-    paymentMethod.connector_payment_methods
-  );
-  const paymentMethodType =
-    connectorMethods.length > 0
-      ? connectorMethods[0].payment_method_type
-      : undefined;
-
   const logo = getPaymentMethodLogoUrl(
-    paymentMethodType,
+    paymentMethod.payment_method_type,
     paymentMethod.payment_method,
     paymentMethod.card?.card_network,
     paymentMethod.card?.card_type
