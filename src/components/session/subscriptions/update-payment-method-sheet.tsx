@@ -77,17 +77,22 @@ async function updatePaymentMethod(
     throw new Error("No authentication token found");
   }
 
-  const response = await api.post<UpdatePaymentMethodResponse>(
-    `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
-    requestBody,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  try {
+    const response = await api.post<UpdatePaymentMethodResponse>(
+      `/customer-portal/subscriptions/${subscription_id}/update-payment-method`,
+      requestBody,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    // Re-throw to allow callers to handle with parseError
+    throw error;
+  }
 }
 
 // Helper Functions
