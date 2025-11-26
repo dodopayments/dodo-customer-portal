@@ -1,6 +1,7 @@
 import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { withBotId } from "botid/next/config";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -92,7 +93,7 @@ const sentryConfig = {
 
 const config =
   process.env.NODE_ENV === "production"
-    ? withSentryConfig(withNextIntl(nextConfig), sentryConfig)
-    : withNextIntl(nextConfig);
+    ? withBotId(withSentryConfig(withNextIntl(nextConfig), sentryConfig))
+    : withBotId(withNextIntl(nextConfig));
 
 export default config;
