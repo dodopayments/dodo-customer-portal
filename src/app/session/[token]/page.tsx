@@ -1,15 +1,84 @@
-import { redirect } from "next/navigation";
+'use client';
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ token: string }>;
-}) {
-  const { token } = await params;
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import LoadingOverlay from '@/components/loading-overlay';
 
-  if (!token) {
-    redirect("/expired");
+export default function Page() {
+  const params = useParams();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const token = params?.token as string;
+
+  useEffect(() => {
+    async function validateToken() {
+      if (!token) {
+        router.push('/expired');
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const response = await fetch('/api/auth/validate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          if (data.redirect) {
+            router.push(data.redirect);
+            return;
+          }
+          throw new Error(data.error || 'Validation failed');
+        }
+
+        const data = await response.json();
+        
+        if (data.success && data.redirect) {
+          router.push(data.redirect);
+        } else if (data.redirect) {
+          router.push(data.redirect);
+        } else {
+          setError('Validation failed. Please try again.');
+        }
+      } catch (err) {
+        console.error('Token validation error:', err);
+        setError('An error occurred. Please try again.');
+        router.push('/expired');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    validateToken();
+  }, [token, router]);
+
+  if (isLoading) {
+    return <LoadingOverlay />;
   }
 
-  redirect(`/api/auth/validate?token=${encodeURIComponent(token)}`);
+  if (error) {
+    return (
+      <div className="fixed inset-0 bg-bg-primary flex items-center justify-center z-[100]">
+        <div className="text-center">
+          <p className="text-text-primary mb-4">{error}</p>
+          <button
+            onClick={() => router.push('/expired')}
+            className="px-4 py-2 bg-primary text-white rounded"
+          >
+            Go to Expired Page
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return <LoadingOverlay />;
 }
