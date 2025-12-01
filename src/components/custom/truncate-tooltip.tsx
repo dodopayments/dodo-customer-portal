@@ -32,7 +32,7 @@ const IDTooltip: React.FC<IDTooltipProps> = ({ idValue }) => {
             <span>{idValue}</span>
           </TooltipTrigger>
 
-          <TooltipContent className="bg-bg-primary max-w-md flex items-center w-fit px-2 py-1 rounded-lg border-border-secondaru shadow-md">
+          <TooltipContent className="bg-bg-primary max-w-md flex items-center w-fit px-2 py-1 rounded-lg border-border-secondary shadow-md">
             {idValue}
             <Button
               variant="ghost"
@@ -53,3 +53,5 @@ const IDTooltip: React.FC<IDTooltipProps> = ({ idValue }) => {
 };
 
 export default IDTooltip;
+
+
