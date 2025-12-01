@@ -52,28 +52,28 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
   };
 
   return (
-    <Card 
+    <Card
       className={`${cardClassName} cursor-pointer transition-colors`}
       onClick={onToggleDetails}
     >
       <CardContent className="flex flex-col px-0 gap-2">
-        <div className="flex flex-row justify-between gap-4 w-full">
-          <div className="flex flex-col gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 w-full">
+          <div className="flex flex-col gap-2 min-w-0">
             <p className="text-sm text-text-secondary">Payment ID</p>
-            <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
+            <CardTitle className="font-display font-semibold text-base leading-5 break-all">
               {item.payment_id}
             </CardTitle>
           </div>
-          <div className="font-display font-semibold text-base leading-5 flex-none">
+          <div className="font-display font-semibold text-base leading-5 text-right sm:text-left shrink-0">
             {formatCurrency(
               decodeCurrency(item.total_amount, item.currency as CurrencyCode),
-              item.currency as CurrencyCode
+              item.currency as CurrencyCode,
             )}
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-row justify-between p-0">
-        <div className="flex flex-row gap-2">
+      <CardFooter className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 p-0">
+        <div className="flex flex-wrap items-center gap-2">
           <Badge
             variant={getBadge(item.status).color as BadgeVariant}
             dot={false}
@@ -85,14 +85,17 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             Purchased: {parseIsoDate(item.created_at)}
           </p>
         </div>
-        <div className="flex flex-row gap-2" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="flex flex-col sm:flex-row gap-2 w-full md:w-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
           <Button
             variant="secondary"
             className="w-full"
             onClick={() =>
               window.open(
                 `${api_url}/invoices/payments/${item.payment_id}`,
-                "_blank"
+                "_blank",
               )
             }
           >

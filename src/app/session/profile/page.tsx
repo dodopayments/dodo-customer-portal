@@ -53,14 +53,18 @@ export default async function ProfilePage({
       <Separator className="my-4" />
       <div className="flex flex-col gap-6">
         <Card className="p-6 flex flex-col gap-4">
-          <CardContent className="flex flex-row gap-8 p-0">
-            <div className="flex flex-col gap-2">
+          <CardContent className="flex flex-col md:flex-row gap-4 md:gap-8 p-0">
+            <div className="flex flex-col gap-2 min-w-0">
               <p className="text-text-secondary text-sm">Name</p>
-              <p className="text-text-primary text-sm">{user?.name}</p>
+              <p className="text-text-primary text-sm break-words">
+                {user?.name}
+              </p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 min-w-0">
               <p className="text-text-secondary text-sm">Email</p>
-              <p className="text-text-primary text-sm">{user?.email}</p>
+              <p className="text-text-primary text-sm break-all">
+                {user?.email}
+              </p>
             </div>
           </CardContent>
         </Card>
