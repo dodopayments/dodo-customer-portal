@@ -95,14 +95,16 @@ export const Subscriptions = ({
           />
         ))
       )}
-      <ServerPagination
-        currentPage={currentPage}
-        pageSize={pageSize}
-        currentPageItems={currentPageItems}
-        hasNextPage={hasNextPage}
-        baseUrl={baseUrl}
-        pageParamKey={pageParamKey}
-      />
+      {!isEmpty && (
+        <ServerPagination
+          currentPage={currentPage}
+          pageSize={pageSize}
+          currentPageItems={currentPageItems}
+          hasNextPage={hasNextPage}
+          baseUrl={baseUrl}
+          pageParamKey={pageParamKey}
+        />
+      )}
     </div>
   );
 };
