@@ -2,7 +2,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import IDTooltip from "../custom/turnacate-tooltip";
+import IDTooltip from "../custom/truncate-tooltip";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import parseIso from "@/lib/date-helper";
