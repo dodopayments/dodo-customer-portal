@@ -13,31 +13,31 @@ export function SubscriptionBillingInfo({
         Billing Information
       </h4>
       <Card className="p-6 flex flex-col items-start gap-4 flex-none order-1 self-stretch flex-grow-0">
-        <CardContent className="flex flex-row gap-8 px-0">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+        <CardContent className="flex flex-col md:flex-row gap-6 md:gap-8 px-0 w-full">
+          <div className="flex flex-col gap-4 min-w-0">
+            <div className="flex flex-col gap-2 min-w-0">
               <p className="text-text-secondary text-sm">Name</p>
-              <p className="text-text-primary text-sm">
+              <p className="text-text-primary text-sm break-words">
                 {subscription.customer.name}
               </p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 min-w-0">
               <p className="text-text-secondary text-sm">Phone number</p>
-              <p className="text-text-primary text-sm">
+              <p className="text-text-primary text-sm break-words">
                 {subscription.customer.phone_number || "N/A"}
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4 min-w-0">
+            <div className="flex flex-col gap-2 min-w-0">
               <p className="text-text-secondary text-sm">Email</p>
-              <p className="text-text-primary text-sm">
+              <p className="text-text-primary text-sm break-all">
                 {subscription.customer.email}
               </p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 min-w-0">
               <p className="text-text-secondary text-sm">Billing Address </p>
-              <div className="text-text-primary text-sm whitespace-pre-line">
+              <div className="text-text-primary text-sm whitespace-pre-line break-words">
                 {subscription.billing.street && (
                   <span>
                     {subscription.billing.street}
@@ -64,7 +64,7 @@ export function SubscriptionBillingInfo({
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-row gap-2 p-0">
+        <CardFooter className="flex flex-col sm:flex-row gap-2 p-0 w-full">
           <SubscriptionBillingEdit subscription={subscription} />
         </CardFooter>
       </Card>

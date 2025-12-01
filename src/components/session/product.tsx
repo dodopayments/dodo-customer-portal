@@ -149,8 +149,8 @@ export const Product = ({
 
   return (
     <Card className="p-6">
-      <CardContent className="flex flex-row justify-between px-0 gap-2">
-        <div className="flex flex-row items-start gap-2">
+      <CardContent className="flex flex-col sm:flex-row justify-between px-0 gap-4">
+        <div className="flex flex-row items-start gap-3 min-w-0">
           {product.product_image && (
             <Image
               src={product.product_image}
@@ -160,8 +160,8 @@ export const Product = ({
               className="rounded-lg flex-none aspect-square object-cover"
             />
           )}
-          <div className="flex flex-col gap-2">
-            <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
+          <div className="flex flex-col gap-2 min-w-0">
+            <CardTitle className="font-display font-semibold text-base leading-5 break-words">
               {product.product_name}
             </CardTitle>
             <CardDescription className="font-body font-normal text-sm leading-[21px] text-text-secondary self-stretch">
@@ -171,28 +171,28 @@ export const Product = ({
             </CardDescription>
           </div>
         </div>
-        <div className="font-display font-semibold text-base leading-5 flex-none">
+        <div className="font-display font-semibold text-base leading-5 text-right sm:text-left shrink-0">
           {formatCurrency(
             decodeCurrency(product.price, product.currency as CurrencyCode),
-            product.currency as CurrencyCode
+            product.currency as CurrencyCode,
           )}
         </div>
       </CardContent>
       <Separator className="my-4" />
-      <CardFooter className="flex flex-row justify-between p-0">
-        {!product.is_subscription && product.quantity > 0 && (
-          <div className="flex flex-row gap-2">
+      <CardFooter className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 p-0">
+        <div className="flex flex-wrap items-center gap-2">
+          {!product.is_subscription && product.quantity > 0 && (
             <p className="text-sm text-text-secondary">
               QTY: {product.quantity}
             </p>
-          </div>
-        )}
-        {subscription && (
-          <div className="flex flex-row gap-2">
-            {renderSubscriptionBadges(subscription)}
-          </div>
-        )}
-        <div className="flex flex-row gap-2">
+          )}
+          {subscription && (
+            <div className="flex flex-wrap gap-2">
+              {renderSubscriptionBadges(subscription)}
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
           {product.license_keys.length > 0 && (
             <LicenseSheets
               isLicenseSheetOpen={isLicenseSheetOpen}

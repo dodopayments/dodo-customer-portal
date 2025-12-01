@@ -55,8 +55,8 @@ export async function SubscriptionDetails({
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-4">
-        <Card className="w-full p-6 flex justify-between gap-4">
-          <section className="flex flex-col gap-4">
+        <Card className="w-full p-6 flex flex-col lg:flex-row justify-between gap-4">
+          <section className="flex flex-col gap-4 flex-1 min-w-0">
             <CardHeader className="flex flex-col gap-2 p-0">
               <p className="text-text-secondary text-sm">
                 {subscription.product.name}
@@ -90,7 +90,7 @@ export async function SubscriptionDetails({
             </CardContent>
           </section>
           {subscription.status === "active" && (
-            <div className="flex border border-border-secondary rounded-lg p-4 items-end gap-6 my-auto">
+            <div className="flex flex-col sm:flex-row border border-border-secondary rounded-lg p-4 items-start sm:items-end gap-4 sm:gap-6 my-auto w-full lg:w-auto">
               {currentPaymentMethod && (
                 <CurrentPaymentMethod paymentMethod={currentPaymentMethod} />
               )}

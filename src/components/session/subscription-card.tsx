@@ -34,7 +34,7 @@ export const SubscriptionCard = ({
   const router = useRouter();
   return (
     <Card className={cardClassName}>
-      <CardContent className="flex flex-row items-start px-0 gap-4">
+      <CardContent className="flex flex-col sm:flex-row items-start px-0 gap-4 pb-0 sm:pb-6">
         {item.product.image && (
           <Image
             src={item.product.image}
@@ -44,10 +44,10 @@ export const SubscriptionCard = ({
             className="rounded-lg flex-none aspect-square object-cover"
           />
         )}
-        <div className="flex flex-col gap-2 flex-1">
-          <div className="flex flex-row justify-between items-start gap-4">
-            <div className="flex flex-row gap-2">
-              <CardTitle className="font-display font-semibold text-base leading-5 flex-none">
+        <div className="flex flex-col gap-2 flex-1 min-w-0">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-4 w-full">
+            <div className="flex flex-row flex-wrap gap-2 min-w-0">
+              <CardTitle className="font-display font-semibold text-base leading-5 break-words">
                 {item.product.name}
               </CardTitle>
               <Badge
@@ -58,13 +58,13 @@ export const SubscriptionCard = ({
                 {getBadge(item.status).message}
               </Badge>
             </div>
-            <div className="font-display font-semibold text-base leading-5 flex-none">
+            <div className="font-display font-semibold text-base leading-5 text-right sm:text-left shrink-0">
               {formatCurrency(
                 decodeCurrency(
                   item.recurring_pre_tax_amount,
                   item.currency as CurrencyCode
                 ),
-                item.currency as CurrencyCode
+                item.currency as CurrencyCode,
               )}
             </div>
           </div>
@@ -76,16 +76,17 @@ export const SubscriptionCard = ({
         </div>
       </CardContent>
       <Separator className="mb-4" />
-      <CardFooter className="flex flex-row justify-between p-0">
+      <CardFooter className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 p-0">
         <Button
           variant="secondary"
+          className="w-full md:w-auto"
           onClick={() =>
             router.push(`/session/subscriptions/${item.subscription_id}`)
           }
         >
           View details
         </Button>
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-wrap gap-2">
           {renderSubscriptionBadges(item, "rounded-sm border-sm")}
         </div>
       </CardFooter>
