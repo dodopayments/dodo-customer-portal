@@ -65,6 +65,7 @@ export default async function EventPage({ params, searchParams }: PageProps) {
             initialPageSize={paginationParams.pageSize}
           />
         )}
+        {(!isEmpty || paginationParams.currentPage !== 0) && (
         <ServerPagination
           currentPage={paginationParams.currentPage}
           pageSize={paginationParams.pageSize}
@@ -73,6 +74,7 @@ export default async function EventPage({ params, searchParams }: PageProps) {
           baseUrl={paginationParams.baseUrl}
           pageParamKey={METER_EVENTS_PAGE_PARAM_KEY}
         />
+        )}
       </div>
     </div>
   );

@@ -71,7 +71,7 @@ export const Orders = ({
           />
         ))
       )}
-      {!isEmpty && (
+      {(!isEmpty || currentPage !== 0) && (
         <ServerPagination
           currentPage={currentPage}
           pageSize={pageSize}

@@ -138,14 +138,16 @@ export function InvoiceHistory({
           initialPageSize={pageSize}
         />
       )}
-      <ServerPagination
-        currentPage={currentPage}
-        pageSize={pageSize}
-        currentPageItems={currentPageItems}
-        hasNextPage={hasNextPage}
-        baseUrl={baseUrl}
-        pageParamKey={pageParamKey}
-      />
+      {(!isEmpty || currentPage !== 0) && (
+        <ServerPagination
+          currentPage={currentPage}
+          pageSize={pageSize}
+          currentPageItems={currentPageItems}
+          hasNextPage={hasNextPage}
+          baseUrl={baseUrl}
+          pageParamKey={pageParamKey}
+        />
+      )}
     </div>
   );
 }
