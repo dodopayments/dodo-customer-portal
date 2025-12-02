@@ -92,7 +92,7 @@ export async function extractPaginationParams(
   defaultPageSize: number = 50,
   pageParamKey: string = "page",
 ): Promise<PaginationResult> {
-  const resolvedParams = await searchParams;
+  const resolvedParams = (await searchParams) ?? {};
   const page = parsePageNumber(
     Array.isArray(resolvedParams[pageParamKey])
       ? resolvedParams[pageParamKey][0]
