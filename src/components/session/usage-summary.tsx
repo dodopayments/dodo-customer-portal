@@ -75,6 +75,7 @@ export function UsageSummary({
               </CollapsibleContent>
             </Collapsible>
           ))}
+          {(!isEmpty || currentPage !== 0) && (
           <ServerPagination
             currentPage={currentPage}
             pageSize={pageSize}
@@ -83,6 +84,7 @@ export function UsageSummary({
             baseUrl={baseUrl}
             pageParamKey={pageParamKey}
           />
+          )}
         </>
       )}
     </div>

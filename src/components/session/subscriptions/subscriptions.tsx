@@ -95,7 +95,7 @@ export const Subscriptions = ({
           />
         ))
       )}
-      {!isEmpty && (
+      {(!isEmpty || currentPage !== 0) && (
         <ServerPagination
           currentPage={currentPage}
           pageSize={pageSize}

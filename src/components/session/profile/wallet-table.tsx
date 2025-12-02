@@ -102,6 +102,7 @@ export function WalletTable({
           initialPageSize={pageSize}
         />
       )}
+      {(!isEmpty || currentPage !== 0) && (
       <ServerPagination
         currentPage={currentPage}
         pageSize={pageSize}
@@ -110,6 +111,7 @@ export function WalletTable({
         baseUrl={baseUrl}
         pageParamKey={pageParamKey}
       />
+      )}
     </div>
   );
 }
