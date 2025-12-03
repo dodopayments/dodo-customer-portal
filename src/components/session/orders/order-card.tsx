@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge, type BadgeVariant } from "@/components/ui/badge";
@@ -19,6 +25,14 @@ import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { getProductCart } from "@/app/session/orders/actions";
 import { Product, ProductCartItem } from "../product";
 import parseError from "@/lib/parseError";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import InvoiceFillDetails from "../invoice-fill-details";
 
 interface OrderCardProps {
   item: OrderData;
@@ -29,6 +43,8 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
   const [loading, setLoading] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [productCart, setProductCart] = useState<ProductCartItem[]>([]);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
 
   // Fetch product cart for this order
   const fetchProductCart = async () => {
@@ -49,6 +65,13 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
     await fetchProductCart();
     setLoading(false);
     setShowDetails(true);
+  };
+
+  const handleSheetOpenChange = (open: boolean) => {
+    setIsSheetOpen(open);
+    if (!open) {
+      setIsFillDetailsOpen(false);
+    }
   };
 
   return (
@@ -89,19 +112,99 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
           className="flex flex-col sm:flex-row gap-2 w-full md:w-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          <Button
-            variant="secondary"
-            className="w-full"
-            onClick={() =>
-              window.open(
-                `${api_url}/invoices/payments/${item.payment_id}`,
-                "_blank",
-              )
-            }
-          >
-            <Download />
-            Invoice
-          </Button>
+          <Sheet open={isSheetOpen} onOpenChange={handleSheetOpenChange}>
+            <SheetTrigger asChild>
+              <Button variant="secondary" className="w-full">
+                <Download />
+                Invoice
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="flex flex-col gap-4">
+              <SheetHeader>
+                <SheetTitle
+                  className="text-left font-display font-semibold text-base leading-tight tracking-normal"
+                  style={{ leadingTrim: "cap-height" } as React.CSSProperties}
+                >
+                  {isFillDetailsOpen
+                    ? "Enter full address of customer"
+                    : "Generate Invoice"}
+                </SheetTitle>
+              </SheetHeader>
+              <Separator className="my-3" />
+              {isFillDetailsOpen ? (
+                <InvoiceFillDetails
+                  url={`${api_url}/invoices/payments/${item.payment_id}`}
+                />
+              ) : (
+                <>
+                  <Card className="p-5">
+                    <CardContent className="p-0">
+                      <CardTitle
+                        className="font-display font-medium text-sm tracking-normal"
+                        style={
+                          { leadingTrim: "cap-height" } as React.CSSProperties
+                        }
+                      >
+                        Download with existing address details
+                      </CardTitle>
+                      <CardDescription
+                        className="font-body font-normal text-xs leading-5 tracking-normal"
+                        style={
+                          { leadingTrim: "cap-height" } as React.CSSProperties
+                        }
+                      >
+                        This invoice will include only your zip code and country
+                        as provided during the checkout process.
+                      </CardDescription>
+                    </CardContent>
+                    <CardFooter className="p-0 mt-4">
+                      <Button
+                        variant="secondary"
+                        onClick={() =>
+                          window.open(
+                            `${api_url}/invoices/payments/${item.payment_id}`,
+                            "_blank",
+                          )
+                        }
+                      >
+                        <Download className="w-4 h-4 mr-2" /> Download Invoice
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                  <Card className="p-5">
+                    <CardContent className="p-0">
+                      <CardTitle
+                        className="font-display font-medium text-sm tracking-normal"
+                        style={
+                          { leadingTrim: "cap-height" } as React.CSSProperties
+                        }
+                      >
+                        Download with full address details
+                      </CardTitle>
+                      <CardDescription
+                        className="font-body font-normal text-xs leading-5 tracking-normal"
+                        style={
+                          { leadingTrim: "cap-height" } as React.CSSProperties
+                        }
+                      >
+                        This invoice will include the complete address of the
+                        customer. Please ensure you fill in all the details
+                        before downloading.
+                      </CardDescription>
+                    </CardContent>
+                    <CardFooter className="p-0 mt-4">
+                      <Button
+                        variant="secondary"
+                        onClick={() => setIsFillDetailsOpen(true)}
+                      >
+                        Fill Details
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </>
+              )}
+            </SheetContent>
+          </Sheet>
           <Button
             variant="secondary"
             className="w-full"
