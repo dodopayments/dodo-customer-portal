@@ -4,6 +4,10 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import { api_url } from "@/lib/http";
+import { getToken } from "@/lib/server-actions";
+import parseError from "@/lib/parseError";
+import { toast } from "sonner";
 
 interface InvoiceFillDetailsProps {
   url: string;
@@ -14,6 +18,47 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
   const [state, setState] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
+
+  const handleDownload = async () => {
+    try {
+      const token = await getToken();
+      if (!token) {
+        toast.error("Authentication failed. Please log in again.");
+        return;
+      }
+
+      const payload = {
+        street: address.trim() === "" ? null : address.trim(),
+        state: state.trim() === "" ? null : state.trim(),
+        city: city.trim() === "" ? null : city.trim(),
+        zipcode: postalCode.trim() === "" ? null : postalCode.trim(),
+      };
+
+      const response = await fetch(
+        `${api_url}/customer-portal/payments/${url}/invoices`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        const errorMessage = errorData?.message || `Failed to update invoice details (Status: ${response.status})`;
+        toast.error(errorMessage);
+        return;
+      }
+
+      const invoiceUrl = `${api_url}/invoices/payments/${url}`;
+      window.open(invoiceUrl, "_blank");
+    } catch (error) {
+      parseError(error, "Failed to update invoice details. Please try again.");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -62,7 +107,7 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
         <Button
           className="w-full"
           variant="default"
-          onClick={() => window.open(url, "_blank")}
+          onClick={handleDownload}
         >
           <Download className="w-4 h-4 mr-2" />
           Download

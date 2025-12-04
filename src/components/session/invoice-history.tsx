@@ -85,7 +85,12 @@ const InvoiceColumn: ColumnDef<any>[] = [
     accessorKey: "download",
     header: "Download",
     cell: ({ row }) => {
-      return <DownloadButton url={row.original.download_url} />;
+      return (
+        <DownloadButton
+          paymentId={row.original.payment_id}
+          downloadUrl={row.original.download_url}
+        />
+      );
     },
   },
 ];
@@ -152,7 +157,13 @@ export function InvoiceHistory({
   );
 }
 
-function DownloadButton({ url }: { url: string }) {
+function DownloadButton({
+  paymentId,
+  downloadUrl,
+}: {
+  paymentId: string;
+  downloadUrl: string;
+}) {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
@@ -182,7 +193,7 @@ function DownloadButton({ url }: { url: string }) {
         </SheetHeader>
         <Separator className="my-3" />
         {isFillDetailsOpen ? (
-          <InvoiceFillDetails url={url} />
+          <InvoiceFillDetails url={paymentId} />
         ) : (
           <>
             <Card className="p-5">
@@ -204,7 +215,7 @@ function DownloadButton({ url }: { url: string }) {
               <CardFooter className="p-0 mt-4">
                 <Button
                   variant="secondary"
-                  onClick={() => window.open(url, "_blank")}
+                  onClick={() => window.open(downloadUrl, "_blank")}
                 >
                   <Download className="w-4 h-4 mr-2" /> Download Invoice
                 </Button>

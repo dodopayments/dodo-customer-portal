@@ -132,9 +132,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
               </SheetHeader>
               <Separator className="my-3" />
               {isFillDetailsOpen ? (
-                <InvoiceFillDetails
-                  url={`${api_url}/invoices/payments/${item.payment_id}`}
-                />
+                <InvoiceFillDetails url={item.payment_id} />
               ) : (
                 <>
                   <Card className="p-5">
