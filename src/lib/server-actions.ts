@@ -35,6 +35,39 @@ export async function makeAuthenticatedRequest(
 }
 
 
+interface InvoiceDetailsPayload {
+  street: string | null;
+  state: string | null;
+  city: string | null;
+  zipcode: string | null;
+}
+
+export async function updateInvoiceDetails(
+  paymentId: string,
+  payload: InvoiceDetailsPayload,
+): Promise<void> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/payments/${paymentId}/invoices`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      },
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      const errorMessage =
+        errorData?.message ||
+        `Failed to update invoice details (Status: ${response.status})`;
+      throw new Error(errorMessage);
+    }
+  } catch (error) {
+    parseError(error, "Failed to update invoice details. Please try again.");
+    throw error;
+  }
+}
+
 export interface FilterParams {
   pageSize?: number;
   pageNumber?: number;
