@@ -85,7 +85,12 @@ const InvoiceColumn: ColumnDef<any>[] = [
     accessorKey: "download",
     header: "Download",
     cell: ({ row }) => {
-      return <DownloadButton url={row.original.download_url} />;
+      return (
+        <DownloadButton
+          paymentId={row.original.payment_id}
+          downloadUrl={row.original.download_url}
+        />
+      );
     },
   },
 ];
@@ -152,13 +157,25 @@ export function InvoiceHistory({
   );
 }
 
-function DownloadButton({ url }: { url: string }) {
+function DownloadButton({
+  paymentId,
+  downloadUrl,
+}: {
+  paymentId: string;
+  downloadUrl: string;
+}) {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
 
+  const handleSheetOpenChange = (open: boolean) => {
+    setIsSheetOpen(open);
+    if (!open) {
+      setIsFillDetailsOpen(false);
+    }
+  };
+
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+    <Sheet open={isSheetOpen} onOpenChange={handleSheetOpenChange}>
       <SheetTrigger asChild>
         <Button variant="secondary">
           <Download className="w-4 h-4 mr-2" /> Invoice
@@ -170,12 +187,12 @@ function DownloadButton({ url }: { url: string }) {
             className="text-left font-display font-semibold text-base leading-tight tracking-normal"
             style={{ leadingTrim: "cap-height" } as React.CSSProperties}
           >
-            {isFillDetailsOpen ? "Fill Details" : "Generate Invoice"}
+            {isFillDetailsOpen ? "Enter full address of customer" : "Generate Invoice"}
           </SheetTitle>
         </SheetHeader>
         <Separator className="my-3" />
         {isFillDetailsOpen ? (
-          <InvoiceFillDetails url={url} />
+          <InvoiceFillDetails url={paymentId} />
         ) : (
           <>
             <Card className="p-5">
@@ -197,13 +214,13 @@ function DownloadButton({ url }: { url: string }) {
               <CardFooter className="p-0 mt-4">
                 <Button
                   variant="secondary"
-                  onClick={() => window.open(url, "_blank")}
+                  onClick={() => window.open(downloadUrl, "_blank")}
                 >
                   <Download className="w-4 h-4 mr-2" /> Download Invoice
                 </Button>
               </CardFooter>
             </Card>
-            {/* <Card className="p-5">
+            <Card className="p-5">
               <CardContent className="p-0">
                 <CardTitle
                   className="font-display font-medium text-sm tracking-normal"
@@ -215,8 +232,9 @@ function DownloadButton({ url }: { url: string }) {
                   className="font-body font-normal text-xs leading-5 tracking-normal"
                   style={{ leadingTrim: "cap-height" } as React.CSSProperties}
                 >
-                  This invoice will include your complete address. Please ensure
-                  you fill in all the details before downloading.
+                  This invoice will include the complete address of the
+                  customer. Please ensure you fill in all the details before
+                  downloading.
                 </CardDescription>
               </CardContent>
               <CardFooter className="p-0 mt-4">
@@ -227,7 +245,7 @@ function DownloadButton({ url }: { url: string }) {
                   Fill Details
                 </Button>
               </CardFooter>
-            </Card> */}
+            </Card>
           </>
         )}
       </SheetContent>
