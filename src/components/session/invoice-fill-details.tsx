@@ -62,6 +62,7 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
       toast.success("Invoice downloaded successfully");
     } catch (error) {
       toast.error("Failed to update invoice details. Please try again.");
+      parseError(error, "Failed to update invoice details. Please try again.");
     }
   };
 
