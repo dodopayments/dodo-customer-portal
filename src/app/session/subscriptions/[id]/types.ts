@@ -102,3 +102,10 @@ export interface UpdatePaymentMethodResponse {
   payment_id: string | null;
   payment_link: string | null;
 }
+
+export interface InvoiceDetailsPayload {
+  street: string | null;
+  state: string | null;
+  city: string | null;
+  zipcode: string | null;
+}

@@ -4,10 +4,36 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
-import { api_url } from "@/lib/http";
-import { updateInvoiceDetails } from "@/lib/server-actions";
+import { api, api_url } from "@/lib/http";
+import { getSessionToken } from "@/app/session/subscriptions/[id]/action";
 import parseError from "@/lib/parseError";
 import { toast } from "sonner";
+import { InvoiceDetailsPayload } from "@/app/session/subscriptions/[id]/types";
+
+async function updateInvoiceDetails(
+  paymentId: string,
+  payload: InvoiceDetailsPayload,
+): Promise<void> {
+  const token = await getSessionToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
+  try {
+    await api.patch<InvoiceDetailsPayload>(
+      `/customer-portal/payments/${paymentId}/invoices`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+  } catch (error) {
+    // Re-throw to allow callers to handle with parseError 
+    throw error;
+  }
+}
 
 interface InvoiceFillDetailsProps {
   url: string;
@@ -21,7 +47,7 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
 
   const handleDownload = async () => {
     try {
-      const payload = {
+      const payload: InvoiceDetailsPayload = {
         street: address.trim() === "" ? null : address.trim(),
         state: state.trim() === "" ? null : state.trim(),
         city: city.trim() === "" ? null : city.trim(),
@@ -32,6 +58,8 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
 
       const invoiceUrl = `${api_url}/invoices/payments/${url}`;
       window.open(invoiceUrl, "_blank");
+
+      toast.success("Invoice downloaded successfully");
     } catch (error) {
       parseError(error, "Failed to update invoice details. Please try again.");
     }
