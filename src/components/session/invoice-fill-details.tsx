@@ -37,9 +37,13 @@ async function updateInvoiceDetails(
 
 interface InvoiceFillDetailsProps {
   url: string;
+  onDownloadComplete?: () => void;
 }
 
-export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
+export function InvoiceFillDetails({
+  url,
+  onDownloadComplete,
+}: InvoiceFillDetailsProps) {
   const [address, setAddress] = useState<string>("");
   const [state, setState] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -55,6 +59,8 @@ export function InvoiceFillDetails({ url }: InvoiceFillDetailsProps) {
       };
 
       await updateInvoiceDetails(url, payload);
+
+      onDownloadComplete?.();
 
       const invoiceUrl = `${api_url}/invoices/payments/${url}`;
       window.open(invoiceUrl, "_blank");

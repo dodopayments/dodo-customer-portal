@@ -74,6 +74,11 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
     }
   };
 
+  const handleDownloadComplete = () => {
+    setIsSheetOpen(false);
+    setIsFillDetailsOpen(false);
+  };
+
   return (
     <Card
       className={`${cardClassName} cursor-pointer transition-colors`}
@@ -137,7 +142,10 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
               </SheetHeader>
               <Separator className="my-3" />
               {isFillDetailsOpen ? (
-                <InvoiceFillDetails url={item.payment_id} />
+                <InvoiceFillDetails
+                  url={item.payment_id}
+                  onDownloadComplete={handleDownloadComplete}
+                />
               ) : (
                 <>
                   <Card className="p-5">
@@ -169,12 +177,13 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
                     <CardFooter className="p-0 mt-4">
                       <Button
                         variant="secondary"
-                        onClick={() =>
+                        onClick={() => {
                           window.open(
                             `${api_url}/invoices/payments/${item.payment_id}`,
                             "_blank",
-                          )
-                        }
+                          );
+                          handleDownloadComplete();
+                        }}
                       >
                         <Download className="w-4 h-4 mr-2" /> Download Invoice
                       </Button>
