@@ -167,6 +167,11 @@ function DownloadButton({
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
 
+  const handleDownloadComplete = () => {
+    setIsSheetOpen(false);
+    setIsFillDetailsOpen(false);
+  };
+
   const handleSheetOpenChange = (open: boolean) => {
     setIsSheetOpen(open);
     if (!open) {
@@ -192,7 +197,10 @@ function DownloadButton({
         </SheetHeader>
         <Separator className="my-3" />
         {isFillDetailsOpen ? (
-          <InvoiceFillDetails url={paymentId} />
+          <InvoiceFillDetails
+            url={paymentId}
+            onDownloadComplete={handleDownloadComplete}
+          />
         ) : (
           <>
             <Card className="p-5">
@@ -214,7 +222,10 @@ function DownloadButton({
               <CardFooter className="p-0 mt-4">
                 <Button
                   variant="secondary"
-                  onClick={() => window.open(downloadUrl, "_blank")}
+                  onClick={() => {
+                    window.open(downloadUrl, "_blank");
+                    handleDownloadComplete();
+                  }}
                 >
                   <Download className="w-4 h-4 mr-2" /> Download Invoice
                 </Button>
