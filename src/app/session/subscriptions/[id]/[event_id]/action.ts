@@ -1,5 +1,5 @@
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/serverParseError";
 
 export async function fetchMeterEvents(
   meter_id: string,

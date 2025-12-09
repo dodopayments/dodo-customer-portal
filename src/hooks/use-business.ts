@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { fetchBusiness } from "@/lib/server-actions";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/clientParseError";
 
 export function useBusiness() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

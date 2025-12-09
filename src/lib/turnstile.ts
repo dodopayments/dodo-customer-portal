@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // lib/turnstile.ts
 import { MutableRefObject } from "react";
-import parseError from "./parseError";
+import parseError from "./serverParseError";
 
 export interface TurnstileState {
   token?: string;

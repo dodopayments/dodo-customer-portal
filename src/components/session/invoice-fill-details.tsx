@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { api, api_url } from "@/lib/http";
 import { getSessionToken } from "@/app/session/subscriptions/[id]/action";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/clientParseError";
 import { toast } from "sonner";
 import { InvoiceDetailsPayload } from "@/app/session/subscriptions/[id]/types";
 
@@ -67,7 +67,6 @@ export function InvoiceFillDetails({
 
       toast.success("Invoice downloaded successfully");
     } catch (error) {
-      toast.error("Failed to update invoice details. Please try again.");
       parseError(error, "Failed to update invoice details. Please try again.");
     }
   };

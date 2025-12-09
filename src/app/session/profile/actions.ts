@@ -2,7 +2,7 @@
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { UserResponse } from "./types";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/serverParseError";
 
 export async function fetchUser(): Promise<UserResponse> {
   const response = await makeAuthenticatedRequest("/customer-portal/profile");

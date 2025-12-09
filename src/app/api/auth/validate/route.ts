@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerApiUrl } from "@/lib/server-http";
-import parseError from "@/lib/parseError";
-import { checkBotId } from 'botid/server';
+import parseError from "@/lib/serverParseError";
+import { checkBotId } from "botid/server";
 
 async function validateToken(token: string) {
   const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
