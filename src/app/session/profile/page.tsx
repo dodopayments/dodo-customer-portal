@@ -6,6 +6,8 @@ import { WalletItem } from "./types";
 import { Wallet } from "@/components/session/profile/wallets";
 import { extractPaginationParams } from "@/lib/pagination-utils";
 
+export const dynamic = "force-dynamic";
+
 const DEFAULT_PAGE_SIZE = 50;
 const PAGE_PARAM_KEY = "wallet_page";
 
