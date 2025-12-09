@@ -3,29 +3,13 @@
 import { BaseDataGrid } from "../table/BaseDataGrid";
 import { ColumnDef } from "@tanstack/react-table";
 import { InvoiceHistoryResponse } from "./subscription-tabs-table";
-import { useMemo, useState } from "react";
-import { Button } from "../ui/button";
+import { useMemo } from "react";
 import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { formatCurrency, decodeCurrency } from "@/lib/currency-helper";
-import { Download, CircleSlash } from "lucide-react";
+import { CircleSlash } from "lucide-react";
 import ServerPagination from "@/components/common/server-pagination";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Separator } from "../ui/separator";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-} from "../ui/card";
-import InvoiceFillDetails from "./invoice-fill-details";
+import InvoiceDownloadSheet from "./invoice-download-sheet";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const InvoiceColumn: ColumnDef<any>[] = [
@@ -86,7 +70,7 @@ const InvoiceColumn: ColumnDef<any>[] = [
     header: "Download",
     cell: ({ row }) => {
       return (
-        <DownloadButton
+        <InvoiceDownloadSheet
           key={row.original.payment_id}
           paymentId={row.original.payment_id}
           downloadUrl={row.original.download_url}
@@ -155,112 +139,5 @@ export function InvoiceHistory({
         />
       )}
     </div>
-  );
-}
-
-function DownloadButton({
-  paymentId,
-  downloadUrl,
-}: {
-  paymentId: string;
-  downloadUrl: string;
-}) {
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
-
-  const handleDownloadComplete = () => {
-    setIsSheetOpen(false);
-    setIsFillDetailsOpen(false);
-  };
-
-  const handleSheetOpenChange = (open: boolean) => {
-    setIsSheetOpen(open);
-    if (!open) {
-      setIsFillDetailsOpen(false);
-    }
-  };
-
-  return (
-    <Sheet open={isSheetOpen} onOpenChange={handleSheetOpenChange}>
-      <SheetTrigger asChild>
-        <Button variant="secondary">
-          <Download className="w-4 h-4 mr-2" /> Invoice
-        </Button>
-      </SheetTrigger>
-      <SheetContent className="flex flex-col gap-4">
-        <SheetHeader>
-          <SheetTitle
-            className="text-left font-display font-semibold text-base leading-tight tracking-normal"
-            style={{ leadingTrim: "cap-height" } as React.CSSProperties}
-          >
-            {isFillDetailsOpen ? "Enter full address of customer" : "Generate Invoice"}
-          </SheetTitle>
-        </SheetHeader>
-        <Separator className="my-3" />
-        {isFillDetailsOpen ? (
-          <InvoiceFillDetails
-            url={paymentId}
-            onDownloadComplete={handleDownloadComplete}
-          />
-        ) : (
-          <>
-            <Card className="p-5">
-              <CardContent className="p-0">
-                <CardTitle
-                  className="font-display font-medium text-sm tracking-normal"
-                  style={{ leadingTrim: "cap-height" } as React.CSSProperties}
-                >
-                  Download with existing address details
-                </CardTitle>
-                <CardDescription
-                  className="font-body font-normal text-xs leading-5 tracking-normal"
-                  style={{ leadingTrim: "cap-height" } as React.CSSProperties}
-                >
-                  This invoice will include only your zip code and country as
-                  provided during the checkout process.
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="p-0 mt-4">
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    window.open(downloadUrl, "_blank");
-                    handleDownloadComplete();
-                  }}
-                >
-                  <Download className="w-4 h-4 mr-2" /> Download Invoice
-                </Button>
-              </CardFooter>
-            </Card>
-            <Card className="p-5">
-              <CardContent className="p-0">
-                <CardTitle
-                  className="font-display font-medium text-sm tracking-normal"
-                  style={{ leadingTrim: "cap-height" } as React.CSSProperties}
-                >
-                  Download with full address details
-                </CardTitle>
-                <CardDescription
-                  className="font-body font-normal text-xs leading-5 tracking-normal"
-                  style={{ leadingTrim: "cap-height" } as React.CSSProperties}
-                >
-                  This invoice will include the complete address of the
-                  customer. Please ensure you fill in all the details before
-                  downloading.
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="p-0 mt-4">
-                <Button
-                  variant="secondary"
-                  onClick={() => setIsFillDetailsOpen(true)}
-                >
-                  Fill Details
-                </Button>
-              </CardFooter>
-            </Card>
-          </>
-        )}
-      </SheetContent>
-    </Sheet>
   );
 }

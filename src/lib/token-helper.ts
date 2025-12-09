@@ -1,5 +1,5 @@
 import { getCookie, setCookie, deleteCookie } from "cookies-next/client";
-import parseError from "./serverParseError";
+import parseError from "./serverErrorHelper";
 
 export interface TokenData {
   token: string;

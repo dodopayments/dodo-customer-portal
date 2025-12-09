@@ -22,7 +22,7 @@ import { LicenseSheets } from "./orders/license-sheets";
 import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 import { renderSubscriptionBadges } from "./subscription-utils";
 import ProductMarkdownDescription from "../common/product-markdown-description";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 
 export interface DigitalProductResponse {
   product_id: string;

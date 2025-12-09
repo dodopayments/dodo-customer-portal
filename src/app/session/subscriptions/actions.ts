@@ -1,7 +1,7 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
-import parseError from "@/lib/serverParseError";
+import parseError from "@/lib/serverErrorHelper";
 
 export async function fetchSubscriptions(
   pageNumber: number = 0,

@@ -2,7 +2,7 @@
 
 import { internalApi } from "@/lib/http";
 import LoginCard from "../../../components/login/login-card";
-import parseError from "@/lib/serverParseError";
+import parseError from "@/lib/serverErrorHelper";
 
 export async function generateMetadata({
   params,

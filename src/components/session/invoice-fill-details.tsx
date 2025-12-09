@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { api, api_url } from "@/lib/http";
 import { getSessionToken } from "@/app/session/subscriptions/[id]/action";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 import { toast } from "sonner";
 import { InvoiceDetailsPayload } from "@/app/session/subscriptions/[id]/types";
 

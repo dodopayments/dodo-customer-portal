@@ -29,7 +29,7 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { getToken } from "@/lib/server-actions";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 
 interface DigitalDeliveryDialogProps {
   payment_id: string;

@@ -1,6 +1,6 @@
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { PaymentMethodItem } from "./type";
-import parseError from "@/lib/serverParseError";
+import parseError from "@/lib/serverErrorHelper";
 
 export async function fetchPaymentMethods(): Promise<
   PaymentMethodItem[] | null

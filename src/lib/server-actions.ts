@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { getServerApiUrl } from "./server-http";
-import parseError from "./serverParseError";
+import parseError from "./serverErrorHelper";
 
 export async function getToken(): Promise<string | null> {
   try {

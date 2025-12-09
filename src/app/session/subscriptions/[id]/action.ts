@@ -7,7 +7,7 @@ import {
   UpdateBillingDetailsParams,
 } from "./types";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
-import parseError from "@/lib/serverParseError";
+import parseError from "@/lib/serverErrorHelper";
 
 export async function getSessionToken(): Promise<string | null> {
   return await getToken();
