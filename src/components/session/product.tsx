@@ -148,7 +148,7 @@ export const Product = ({
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-6" onClick={(event) => event.stopPropagation()}>
       <CardContent className="flex flex-col sm:flex-row justify-between px-0 gap-4">
         <div className="flex flex-row items-start gap-3 min-w-0">
           {product.product_image && (
