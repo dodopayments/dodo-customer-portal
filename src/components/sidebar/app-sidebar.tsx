@@ -18,7 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 import ThemeSwitch from "../ui/dodo/ThemeSwitch";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 
 const BusinessName = ({
   image,

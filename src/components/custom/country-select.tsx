@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 import { FlagImage } from "react-international-phone";
 import { CountriesList } from "@/constants/Countries";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 
 interface CountrySelectProps {
   control: any;

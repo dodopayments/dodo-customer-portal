@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerApiUrl } from "@/lib/server-http";
-import parseError from "@/lib/serverParseError";
+import parseError from "@/lib/serverErrorHelper";
 import { checkBotId } from "botid/server";
 
 async function validateToken(token: string) {

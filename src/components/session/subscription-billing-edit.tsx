@@ -24,7 +24,7 @@ import { BillingDetailsFormValues } from "./subscription-form-schema";
 import { updateBillingDetails } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 
 interface SubscriptionBillingEditProps {
   subscription: SubscriptionDetailsData;

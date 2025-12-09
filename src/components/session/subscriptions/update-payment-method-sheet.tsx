@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 import { api } from "@/lib/http";
 import {
   UpdatePaymentMethodParams,

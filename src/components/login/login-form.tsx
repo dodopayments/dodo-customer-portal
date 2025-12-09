@@ -28,7 +28,7 @@ import { toast } from "sonner";
 import LoadingOverlay from "../loading-overlay";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
-import parseError from "@/lib/clientParseError";
+import parseError from "@/lib/clientErrorHelper";
 
 const emailSchema = z.object({
   email: z
