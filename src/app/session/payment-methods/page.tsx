@@ -4,6 +4,7 @@ import { PaymentMethodItem } from "./type";
 import Image from "next/image";
 import { getPaymentMethodLogoUrl } from "../../../components/session/payment-methods/payment-method-logo";
 import { CircleSlash } from "lucide-react";
+export const dynamic = "force-dynamic";
 
 function formatPaymentMethodType(type: string): string {
   return type
