@@ -24,7 +24,7 @@ import { parseIsoDate } from "@/lib/date-helper";
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { getProductCart } from "@/app/session/orders/actions";
 import { Product, ProductCartItem } from "../product";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/clientParseError";
 import {
   Sheet,
   SheetContent,
@@ -143,6 +143,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
               <Separator className="my-3" />
               {isFillDetailsOpen ? (
                 <InvoiceFillDetails
+                  key={item.payment_id}
                   url={item.payment_id}
                   onDownloadComplete={handleDownloadComplete}
                 />

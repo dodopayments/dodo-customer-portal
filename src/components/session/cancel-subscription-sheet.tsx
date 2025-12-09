@@ -19,7 +19,7 @@ import { cancelSubscription } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/clientParseError";
 import {
   CurrencyCode,
   formatCurrency,

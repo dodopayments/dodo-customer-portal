@@ -14,7 +14,7 @@ import { useBusiness } from "@/hooks/use-business";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Head from "next/head";
 import { navigation } from "./sidebar/app-sidebar";
-import parseError from "@/lib/parseError";
+import parseError from "@/lib/clientParseError";
 
 const BusinessName = ({
   image,
