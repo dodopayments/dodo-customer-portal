@@ -14,6 +14,12 @@ interface ErrorDetails {
   message?: string;
 }
 
+export interface ParsedServerError {
+  message: string;
+  originalError: unknown;
+  status?: number;
+}
+
 function isErrorDetails(value: unknown): value is ErrorDetails {
   return typeof value === "object" && value !== null;
 }
@@ -52,7 +58,7 @@ function parseError(
   error: unknown,
   customMessage?: string,
   storeFront?: boolean,
-): string {
+): ParsedServerError {
   const defaultMessage = customMessage || "Something went wrong";
 
   if (!isErrorDetails(error)) {
@@ -60,7 +66,11 @@ function parseError(
     const message = sanitizeMessage(fallback, defaultMessage);
     // Server-side: log error
     console.error(message, { error });
-    return message;
+    return {
+      message,
+      originalError: error,
+      status: undefined,
+    };
   }
 
   const status = error.status ?? error.response?.status;
@@ -68,13 +78,21 @@ function parseError(
   if (status === 401 || status === 403) {
     const message = "You are not authorized to perform this action";
     console.error(message, { error });
-    return message;
+    return {
+      message,
+      originalError: error,
+      status,
+    };
   }
 
   if (storeFront && status === 409) {
     const message = "Slug is already taken, please try another one";
     console.error(message, { error });
-    return message;
+    return {
+      message,
+      originalError: error,
+      status,
+    };
   }
 
   const responseMessage = extractResponseMessage(error.response?.data);
@@ -84,7 +102,11 @@ function parseError(
   );
 
   console.error(message, { error });
-  return message;
+  return {
+    message,
+    originalError: error,
+    status,
+  };
 }
 
 export default parseError;
