@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
 import { useBusiness } from "@/hooks/use-business";
 import { useEffect } from "react";
-import { tokenHelper } from "@/lib/token-helper";
+import { logout } from "@/lib/server-actions";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -78,11 +78,13 @@ export function AppSidebar() {
     }
   }, [businessData?.name]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
       const businessId = businessData?.business_id;
-      tokenHelper.logout();
-      router.push(`/login/${businessId}`);
+      const result = await logout();
+      if (result.success) {
+        router.push(`/login/${businessId}`);
+      }
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
     }
