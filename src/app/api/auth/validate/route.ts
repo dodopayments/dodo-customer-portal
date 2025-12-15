@@ -12,6 +12,9 @@ async function validateToken(token: string) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      ...(process.env.VERCEL_SERVER_SECRET && {
+        "X-Vercel-Server": process.env.VERCEL_SERVER_SECRET,
+      }),
     },
   });
 

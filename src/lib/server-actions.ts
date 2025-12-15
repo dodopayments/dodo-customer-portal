@@ -27,6 +27,11 @@ export async function makeAuthenticatedRequest(
   headers.set("Authorization", `Bearer ${token}`);
   headers.set("Content-Type", "application/json");
 
+  // Add Cloudflare verification header for Vercel server-side requests
+  if (process.env.VERCEL_SERVER_SECRET) {
+    headers.set("X-Vercel-Server", process.env.VERCEL_SERVER_SECRET);
+  }
+
   return fetch(`${api_url}${endpoint}`, {
     ...options,
     cache: "no-store",
