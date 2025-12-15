@@ -8,6 +8,8 @@ export interface TokenData {
 
 export const TOKEN_COOKIE_NAME = "session_token";
 export const TOKEN_EXPIRY_COOKIE_NAME = "session_expiry";
+export const BUSINESS_TOKEN_COOKIE_NAME = "business_token";
+export const BUSINESS_TOKEN_EXPIRY_COOKIE_NAME = "business_expiry";
 
 // Add a small buffer to prevent edge cases with expiry
 const EXPIRY_BUFFER = 5000; // 5 seconds
@@ -84,6 +86,8 @@ export const tokenHelper = {
     try {
       deleteCookie(TOKEN_COOKIE_NAME);
       deleteCookie(TOKEN_EXPIRY_COOKIE_NAME);
+      deleteCookie(BUSINESS_TOKEN_COOKIE_NAME);
+      deleteCookie(BUSINESS_TOKEN_EXPIRY_COOKIE_NAME);
     } catch (error) {
       parseError(error, "Failed to clear token");
     }
