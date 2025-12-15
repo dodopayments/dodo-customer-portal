@@ -8,7 +8,7 @@ let MODE: string;
 function initializeApi() {
   const currentHost =
     typeof window !== "undefined"
-      ? `${window.location.protocol}//${window.location.hostname}`
+      ? `${window.location.protocol}//${window.location.host}`
       : "";
 
   switch (currentHost) {
