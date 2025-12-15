@@ -13,6 +13,15 @@ export async function getToken(): Promise<string | null> {
   }
 }
 
+export async function getBusinessToken(): Promise<string | null> {
+  try {
+    const cookieStore = await cookies();
+    return cookieStore.get("business_token")?.value || null;
+  } catch {
+    return null;
+  }
+}
+
 export async function makeAuthenticatedRequest(
   endpoint: string,
   options: RequestInit = {},
@@ -33,6 +42,28 @@ export async function makeAuthenticatedRequest(
     headers,
   });
 }
+
+export async function makeAuthenticatedBusinessRequest(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<Response> {
+  const token = await getBusinessToken();
+  if (!token) {
+    throw new Error("No business authentication token found");
+  }
+
+  const api_url = await getServerApiUrl();
+  const headers = new Headers(options.headers);
+  headers.set("Authorization", `Bearer ${token}`);
+  headers.set("Content-Type", "application/json");
+
+  return fetch(`${api_url}${endpoint}`, {
+    ...options,
+    cache: "no-store",
+    headers,
+  });
+}
+
 
 export interface FilterParams {
   pageSize?: number;
