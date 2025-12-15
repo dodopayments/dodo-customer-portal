@@ -13,7 +13,11 @@ export default function NavbarTwo() {
     return (
     <div className="flex flex-row justify-between">
     <div className="flex flex-row items-center justify-center gap-2">
-      <Image src={resolvedTheme === "dark" ? "/images/brand-assets/logo/logo-name-dark.svg" : "/images/brand-assets/logo/logo-name-light.svg"} alt="logo" width={150} height={150} />
+      {resolvedTheme === "light" ? (
+        <Image src="/images/brand-assets/logo/logo-name-light.svg" alt="logo" width={150} height={150} suppressHydrationWarning />
+      ) : (
+        <Image src="/images/brand-assets/logo/logo-name-dark.svg" alt="logo" width={150} height={150} suppressHydrationWarning />
+      )}
     </div>
     <div className="flex flex-row gap-2">
       <div className="flex flex-row items-center justify-center gap-2">
