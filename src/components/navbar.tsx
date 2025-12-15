@@ -9,7 +9,7 @@ import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
-import { tokenHelper } from "@/lib/token-helper";
+import { logout } from "@/lib/server-actions";
 import { useBusiness } from "@/hooks/use-business";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Head from "next/head";
@@ -58,11 +58,13 @@ export default function Navbar() {
     }
   }, [businessData?.name]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
       const businessId = businessData?.business_id;
-      tokenHelper.logout();
-      router.push(`/login/${businessId}`);
+      const result = await logout();
+      if (result.success) {
+        router.push(`/login/${businessId}`);
+      }
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
     }

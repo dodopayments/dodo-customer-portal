@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { tokenHelper } from "@/lib/token-helper";
+import { logout } from "@/lib/server-actions";
 import { redirect } from "next/navigation";
 
 export default function NavbarTwo() {
@@ -25,15 +25,12 @@ export default function NavbarTwo() {
         <Button
           variant={"secondary"}
           className="text-left w-full"
-          onClick={() => {
-            async function logout() {
-              const success = await tokenHelper.logout();
-              if (success) {
-                redirect("/");
-              }
+          onClick={async () => {
+            const result = await logout();
+            if (result.success) {
+              redirect("/");
             }
-            logout();
-          }} 
+          }}
         >
           Log out
         </Button>
