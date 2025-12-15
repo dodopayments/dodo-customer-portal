@@ -1,8 +1,16 @@
 import Image from "next/image";
 import { LandingCard } from "@/components/landing/landing-card";
 import { LandingInfoCard } from "@/components/landing/landing-info-card";
+import { getBusinessToken } from "@/lib/server-actions";
+import { redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+  const token = await getBusinessToken();
+
+  if (token) {
+    redirect("/businesses");
+  }
+  
   return (
     <div
       className="flex flex-col min-h-screen min-w-screen p-2 sm:p-3 bg-background overflow-hidden bg-cover bg-center bg-no-repeat"
