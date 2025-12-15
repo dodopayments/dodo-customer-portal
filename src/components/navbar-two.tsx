@@ -4,14 +4,11 @@ import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect } from "react";
+import { tokenHelper } from "@/lib/token-helper";
+import { redirect } from "next/navigation";
 
 export default function NavbarTwo() {
     const { resolvedTheme } = useTheme();
-
-    useEffect(() => {
-        console.log(resolvedTheme);
-    }, [resolvedTheme]);
   
     return (
     <div className="flex flex-row justify-between">
@@ -24,7 +21,15 @@ export default function NavbarTwo() {
         <Button
           variant={"secondary"}
           className="text-left w-full"
-          
+          onClick={() => {
+            async function logout() {
+              const success = await tokenHelper.logout();
+              if (success) {
+                redirect("/");
+              }
+            }
+            logout();
+          }} 
         >
           Log out
         </Button>
