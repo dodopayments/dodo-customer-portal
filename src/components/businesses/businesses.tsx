@@ -38,7 +38,7 @@ export const Businesses = ({
   const emptyMessage =
     currentPage > 0
       ? "No businesses found on this page"
-      : "No active businesses at the moment";
+      : "No businesses found";
 
   return (
     <div className="flex flex-col gap-4 mt-4">
