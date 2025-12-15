@@ -23,15 +23,13 @@ export default function Page() {
         setIsLoading(true);
         setError(null);
 
-        const response = await api.post(
-          "/api/auth/business-validate",
-          { token },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch("/api/auth/business-validate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        });
 
         if (response.status !== 200) {
           throw new Error(
@@ -39,7 +37,7 @@ export default function Page() {
           );
         }
 
-        const data = response.data;
+        const data = await response.json();
 
         if (data.success && data.redirect) {
           router.push(data.redirect);
