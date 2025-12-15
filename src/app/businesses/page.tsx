@@ -19,7 +19,6 @@ export default async function BusinessesPage({
     PAGE_PARAM_KEY
   );
   const businessesData = await fetchBusinesses(currentPage, pageSize);
-  console.log(businessesData);
 
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-ful container mx-auto">
