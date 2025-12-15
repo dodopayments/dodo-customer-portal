@@ -53,7 +53,10 @@ export const viewport: Viewport = {
   ],
 };
 
-const protectedRoutes = [{ path: "/api/auth/validate", method: "POST" }];
+const protectedRoutes = [
+  { path: "/api/auth/session-validate", method: "POST" },
+  { path: "/api/auth/business-validate", method: "POST" },
+];
 
 export default async function RootLayout({
   children,

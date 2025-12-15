@@ -22,7 +22,7 @@ export default function Page() {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('/api/auth/validate', {
+        const response = await fetch('/api/auth/session-validate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
