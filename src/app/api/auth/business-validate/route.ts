@@ -15,8 +15,6 @@ async function validateBusinessToken(token: string) {
     },
   });
 
-  console.log(response);
-
   if (!response.ok) {
     if (response.status === 401) {
       return { success: false, redirect: "/expired" };

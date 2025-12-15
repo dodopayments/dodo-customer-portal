@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import LoadingOverlay from '@/components/loading-overlay';
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import LoadingOverlay from "@/components/loading-overlay";
+import { api } from "@/lib/http";
 
 export default function Page() {
   const params = useParams();
@@ -10,12 +11,11 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = params?.token as string;
-  console.log(token);
 
   useEffect(() => {
     async function validateBusinessToken() {
       if (!token) {
-        router.push('/expired');
+        router.push("/expired");
         return;
       }
 
@@ -23,36 +23,35 @@ export default function Page() {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('/api/auth/business-validate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        });
-
-        if (!response.ok) {
-          const data = await response.json();
-          if (data.redirect) {
-            router.push(data.redirect);
-            return;
+        const response = await api.post(
+          "/api/auth/business-validate",
+          { token },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-          throw new Error(data.error || 'Validation failed');
+        );
+
+        if (response.status !== 200) {
+          throw new Error(
+            `Failed to validate business token: ${response.status}`
+          );
         }
 
-        const data = await response.json();
-        
+        const data = response.data;
+
         if (data.success && data.redirect) {
           router.push(data.redirect);
         } else if (data.redirect) {
           router.push(data.redirect);
         } else {
-          setError('Validation failed. Please try again.');
+          setError("Validation failed. Please try again.");
         }
       } catch (err) {
-        console.error('Token validation error:', err);
-        setError('An error occurred. Please try again.');
-        router.push('/expired');
+        console.error("Token validation error:", err);
+        setError("An error occurred. Please try again.");
+        router.push("/expired");
       } finally {
         setIsLoading(false);
       }
@@ -71,7 +70,7 @@ export default function Page() {
         <div className="text-center">
           <p className="text-text-primary mb-4">{error}</p>
           <button
-            onClick={() => router.push('/expired')}
+            onClick={() => router.push("/expired")}
             className="px-4 py-2 bg-primary text-white rounded"
           >
             Go to Expired Page
