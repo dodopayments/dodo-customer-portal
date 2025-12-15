@@ -30,7 +30,7 @@ const BusinessName = ({
   hide?: boolean;
 }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 cursor-pointer rounded-lg p-2 border border-border-secondary" onClick={() => window.location.href = "/"}>
       {image ? (
         <Avatar className="w-7 h-7 aspect-square">
           <AvatarImage src={image} />
