@@ -1,7 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardTitle } from "../ui/card";
 import { BusinessData } from "./businesses";
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "../ui/button";
 import { api } from "@/lib/http";
 import { getBusinessToken } from "@/lib/server-actions";
