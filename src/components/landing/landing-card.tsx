@@ -69,7 +69,7 @@ export const LandingCard = ({ className }: { className?: string }) => {
     token: undefined,
     error: null,
   });
-  const turnstileRef = useRef<any>(null);
+  const turnstileRef = useRef(null);
   const turnstileHandlers = createTurnstileHandlers(
     turnstileRef,
     setTurnstileState

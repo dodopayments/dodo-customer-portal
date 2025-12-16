@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import LoadingOverlay from "@/components/loading-overlay";
-import { api } from "@/lib/http";
 
 export default function Page() {
   const params = useParams();
