@@ -2,12 +2,12 @@
 
 import { Card, CardTitle } from "@/components/ui/card";
 import { BusinessData } from "./businesses";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/http";
 import { getBusinessToken } from "@/lib/server-actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export function BusinessCard({ business }: { business: BusinessData }) {
   const router = useRouter();
@@ -38,12 +38,10 @@ export function BusinessCard({ business }: { business: BusinessData }) {
     <Card className="w-full">
       <div className="flex flex-row items-center justify-between p-4">
         <div className="flex flex-row items-center justify-center gap-2">
-          <Image
-            src={business.logo}
-            alt={business.name}
-            width={32}
-            height={32}
-          />
+          <Avatar className="w-8 h-8 aspect-square">
+            <AvatarImage src={business.logo} />
+            <AvatarFallback name={business.name} />
+          </Avatar>
           <CardTitle className="text-lg font-display">
             {business.name}
           </CardTitle>

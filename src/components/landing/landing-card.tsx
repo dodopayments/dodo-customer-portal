@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ArrowCounterClockwise,
   DownloadSimple,
   Question,
   Eye,
   ReceiptX,
   Envelope,
+  CreditCard,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -40,8 +40,8 @@ interface Action {
 export const LandingCard = ({ className }: { className?: string }) => {
   const actions: Action[] = [
     {
-      name: "Request Refund",
-      icon: <ArrowCounterClockwise />,
+      name: "Change Payment Method",
+      icon: <CreditCard />,
     },
     {
       name: "Cancel subscription",
@@ -132,14 +132,14 @@ export const LandingCard = ({ className }: { className?: string }) => {
                     You can do the following actions:
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 flex-wrap">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 flex-wrap">
                   {actions.map((action) => (
                     <div
                       key={action.name}
                       className="flex flex-row gap-2 items-center text-text-secondary w-fit"
                     >
                       {action.icon}
-                      <p className="text-sm sm:text-base">{action.name}</p>
+                      <p className="text-sm">{action.name}</p>
                     </div>
                   ))}
                 </div>

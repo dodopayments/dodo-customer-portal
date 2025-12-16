@@ -10,7 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
 import { useBusiness } from "@/hooks/use-business";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { logout } from "@/lib/server-actions";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
@@ -30,7 +30,10 @@ const BusinessName = ({
   hide?: boolean;
 }) => {
   return (
-    <div className="flex items-center gap-2 cursor-pointer rounded-lg p-2 border border-border-secondary" onClick={() => window.location.href = "/"}>
+    <div
+      className="flex items-center gap-2 cursor-pointer rounded-lg p-2 border border-border-secondary"
+      onClick={() => (window.location.href = "/")}
+    >
       {image ? (
         <Avatar className="w-7 h-7 aspect-square">
           <AvatarImage src={image} />
@@ -41,7 +44,7 @@ const BusinessName = ({
       )}
       <span
         className={cn(
-          "text-text-primary font-display font-semibold text-[22.22px] leading-[29.92px] tracking-normal",
+          "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal",
           hide && "md:block hidden"
         )}
         style={{ leadingTrim: "cap-height" } as React.CSSProperties}
@@ -71,6 +74,14 @@ export function AppSidebar() {
   const { business: businessData } = useBusiness();
   const pathname = usePathname();
   const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const businessIdRef = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (businessData?.business_id) {
+      businessIdRef.current = businessData.business_id;
+    }
+  }, [businessData?.business_id]);
 
   useEffect(() => {
     if (businessData?.name) {
@@ -79,14 +90,25 @@ export function AppSidebar() {
   }, [businessData?.name]);
 
   const handleLogout = async () => {
+    if (isLoggingOut) {
+      return;
+    }
+
     try {
-      const businessId = businessData?.business_id;
+      setIsLoggingOut(true);
+      const businessId = businessData?.business_id || businessIdRef.current;
+
       const result = await logout();
       if (result.success) {
-        router.push(`/login/${businessId}`);
+        if (businessId) {
+          router.push(`/login/${businessId}`);
+        } else {
+          router.push("/businesses");
+        }
       }
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
+      setIsLoggingOut(false);
     }
   };
 
@@ -144,8 +166,9 @@ export function AppSidebar() {
             variant={"secondary"}
             className="text-left w-full"
             onClick={handleLogout}
+            disabled={isLoggingOut}
           >
-            Log out
+            {isLoggingOut ? "Logging out..." : "Log out"}
           </Button>
         </div>
       </SidebarFooter>
