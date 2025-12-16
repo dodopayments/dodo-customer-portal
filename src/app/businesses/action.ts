@@ -17,7 +17,7 @@ export async function fetchBusinesses(
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch subscriptions: ${response.status}`);
+      throw new Error(`Failed to fetch businesses: ${response.status}`);
     }
 
     const data = await response.json();

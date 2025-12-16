@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { BUSINESS_TOKEN_COOKIE_NAME, BUSINESS_TOKEN_EXPIRY_COOKIE_NAME } from "@/lib/token-helper";
 import { getServerApiUrl } from "@/lib/server-http";
 import parseError from "@/lib/serverErrorHelper";
 import { checkBotId } from "botid/server";
@@ -23,7 +24,7 @@ async function validateBusinessToken(token: string) {
   }
 
   const cookieStore = await cookies();
-  cookieStore.set("business_token", token, {
+  cookieStore.set(BUSINESS_TOKEN_COOKIE_NAME, token, {
     expires: new Date(expiresAt),
     path: "/",
     sameSite: "strict",
@@ -31,7 +32,7 @@ async function validateBusinessToken(token: string) {
     httpOnly: true,
   });
 
-  cookieStore.set("business_expiry", expiresAt.toString(), {
+  cookieStore.set(BUSINESS_TOKEN_EXPIRY_COOKIE_NAME, expiresAt.toString(), {
     expires: new Date(expiresAt),
     path: "/",
     sameSite: "strict",
