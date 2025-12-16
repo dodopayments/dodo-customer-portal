@@ -28,7 +28,7 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
         <AppSidebar hasBusinessToken={hasBusinessToken} />
 
         <main className="flex-1 overflow-y-auto ">
-          <Navbar />
+          <Navbar hasBusinessToken={hasBusinessToken} />
           <div className="h-full border-t mt-6 m-3 border-border-secondary rounded-t-2xl shadow-[0px_-3px_20px_0px_var(--bg-secondary),-3px_0px_20px_0px_var(--bg-secondary),3px_0px_20px_0px_var(--bg-secondary)]">
             {children}
           </div>
