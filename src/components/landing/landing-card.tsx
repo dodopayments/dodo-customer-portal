@@ -64,7 +64,7 @@ export const LandingCard = ({ className }: { className?: string }) => {
   const [emailError, setEmailError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(true);
   const [turnstileState, setTurnstileState] = useState<TurnstileState>({
     token: undefined,
     error: null,
