@@ -82,8 +82,9 @@ export const LandingCard = ({ className }: { className?: string }) => {
       return;
     }
 
-    if (!email.includes("@") || email.length === 0 || !email.includes(".")) {
-      setEmailError("Please enter a valid email address");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Invalid email address");
       return;
     }
     setEmailError("");
