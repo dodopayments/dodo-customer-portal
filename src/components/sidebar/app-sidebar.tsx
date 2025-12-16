@@ -47,11 +47,11 @@ const BusinessName = ({
             <AvatarFallback className="text-xs" name={name} />
           </Avatar>
         ) : (
-          <div className="object-cover object-center bg-bg-secondary w-8 h-8 aspect-square" />
+          <div className="object-cover object-center bg-bg-secondary w-8 h-8 aspect-square overflow-hidden" />
         )}
         <span
           className={cn(
-            "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal",
+            "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal truncate",
             hide && "md:block hidden",
           )}
           style={{ leadingTrim: "cap-height" } as React.CSSProperties}
@@ -71,7 +71,7 @@ const BusinessName = ({
             "flex items-center gap-2 rounded-lg p-2 border border-border-secondary w-full justify-between",
           )}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 overflow-hidden">
             {image ? (
               <Avatar className="w-7 h-7 aspect-square">
                 <AvatarImage src={image} />
@@ -82,7 +82,7 @@ const BusinessName = ({
             )}
             <span
               className={cn(
-                "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal",
+                "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal truncate",
                 hide && "md:block hidden",
               )}
               style={{ leadingTrim: "cap-height" } as React.CSSProperties}
@@ -132,7 +132,7 @@ const getPostLogoutRedirect = (options: {
   const { hasBusinessToken, businessId } = options;
 
   if (hasBusinessToken) {
-    return "/businesses";
+    return "/";
   }
   if (businessId) {
     return `/login/${businessId}`;

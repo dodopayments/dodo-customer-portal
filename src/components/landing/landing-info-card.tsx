@@ -10,7 +10,7 @@ export const LandingInfoCard = ({ className }: { className?: string }) => {
       </CardHeader>
       <CardContent className="text-text-secondary leading-relaxed">
         <p className="mb-1 text-xs sm:text-sm">
-          Dodo Payments is a software reseller who partners with thousands of software companies worldwide to resell their digital products.
+          Dodo Payments is a Merchant of Record (MoR) platform that manages payments, tax compliance, and billing infrastructure for a growing number of digital businesses, including software products, tools, and services. When you make a purchase or subscribe to a product sold by one of these businesses, it&apos;s Dodo Payments that handles the transaction, billing, customer support, refunds and disputes.
           <br className="hidden sm:block" />
           Visit <Link href="https://dodopayments.com" target="_blank" rel="noopener noreferrer" className="hover:underline">dodopayments.com</Link> to learn more.
         </p>

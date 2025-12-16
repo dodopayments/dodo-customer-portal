@@ -102,7 +102,7 @@ const getPostLogoutRedirect = (options: {
   const { hasBusinessToken, businessId } = options;
 
   if (hasBusinessToken) {
-    return "/businesses";
+    return "/";
   }
   if (businessId) {
     return `/login/${businessId}`;
