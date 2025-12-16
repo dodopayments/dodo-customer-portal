@@ -25,16 +25,16 @@ export default async function BusinessesPage({
       <NavbarTwo />
 
       <div className="w-full flex flex-col gap-4 mt-4">
-      <Businesses
-        businessData={businessesData.data}
-        currentPage={currentPage}
-        pageSize={pageSize}
-        currentPageItems={businessesData.data.length}
-        hasNextPage={businessesData.hasNext}
-        baseUrl={baseUrl}
-        pageParamKey={PAGE_PARAM_KEY}
+        <Businesses
+          businessData={businessesData.data}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          currentPageItems={businessesData.data.length}
+          hasNextPage={businessesData.hasNext}
+          baseUrl={baseUrl}
+          pageParamKey={PAGE_PARAM_KEY}
         />
-        </div>
+      </div>
     </div>
   );
 }

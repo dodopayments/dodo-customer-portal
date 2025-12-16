@@ -22,9 +22,9 @@ export default async function Page() {
         <Image
           src="/images/brand-assets/logo/logo-name-dark.svg"
           alt="Dodo Payments"
-          width={140}
-          height={182}
-          className="w-[100px] sm:w-[140px] h-auto"
+          width={268}
+          height={27}
+          className="w-[168px] h-[27px] sm:w-[268px] sm:h-[27px]"
           priority
         />
         <LandingCard className="w-full" />

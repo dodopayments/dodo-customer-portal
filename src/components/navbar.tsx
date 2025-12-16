@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -49,8 +49,16 @@ const BusinessName = ({
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { business: businessData } = useBusiness();
   const router = useRouter();
+  const businessIdRef = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (businessData?.business_id) {
+      businessIdRef.current = businessData.business_id;
+    }
+  }, [businessData?.business_id]);
 
   useEffect(() => {
     if (businessData?.name) {
@@ -59,14 +67,25 @@ export default function Navbar() {
   }, [businessData?.name]);
 
   const handleLogout = async () => {
+    if (isLoggingOut) {
+      return;
+    }
+
     try {
-      const businessId = businessData?.business_id;
+      setIsLoggingOut(true);
+      const businessId = businessData?.business_id || businessIdRef.current;
+
       const result = await logout();
       if (result.success) {
-        router.push(`/login/${businessId}`);
+        if (businessId) {
+          router.push(`/login/${businessId}`);
+        } else {
+          router.push("/businesses");
+        }
       }
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
+      setIsLoggingOut(false);
     }
   };
 
@@ -120,12 +139,13 @@ export default function Navbar() {
                       <Button
                         variant={"secondary"}
                         className="text-left w-full"
+                        disabled={isLoggingOut}
                         onClick={() => {
                           handleLogout();
                           setIsOpen(false);
                         }}
                       >
-                        Log out
+                        {isLoggingOut ? "Logging out..." : "Log out"}
                       </Button>
                     </div>
                   </div>
