@@ -3,8 +3,12 @@ import NextTopLoader from "nextjs-toploader";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import Navbar from "@/components/navbar";
+import { getBusinessToken } from "@/lib/server-actions";
 
-const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
+const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
+  const businessToken = await getBusinessToken();
+  const hasBusinessToken = !!businessToken;
+
   return (
     <div className="flex flex-col min-h-screen w-full">
       <SidebarProvider>
@@ -21,7 +25,7 @@ const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
           zIndex={1600}
           showAtBottom={false}
         />
-        <AppSidebar />
+        <AppSidebar hasBusinessToken={hasBusinessToken} />
 
         <main className="flex-1 overflow-y-auto ">
           <Navbar />
