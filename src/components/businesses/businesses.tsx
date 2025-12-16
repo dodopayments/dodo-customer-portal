@@ -65,8 +65,8 @@ export const Businesses = ({
           .filter((item: BusinessData) =>
             item.name.toLowerCase().includes(searchTerm.toLowerCase())
           )
-          .map((item: BusinessData, index: number) => (
-            <BusinessCard key={index} business={item} />
+          .map((item: BusinessData) => (
+            <BusinessCard key={item.business_id} business={item} />
           ))
       )}
       {(!isEmpty || currentPage !== 0 || pageSize !== 50) && (
