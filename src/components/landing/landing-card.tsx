@@ -100,14 +100,12 @@ export const LandingCard = ({ className }: { className?: string }) => {
         { email },
         { headers: { "cf-turnstile-response": turnstileState.token || "" } }
       );
-      console.log(response);
       if (response.status === 200) {
         setIsDone(true);
       } else {
         setEmailError("Failed to send login link. Please try again.");
       }
     } catch (error) {
-      console.log(error);
       parseError(error, "Failed to send login link. Please try again.");
     } finally {
       setIsLoading(false);

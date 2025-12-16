@@ -3,12 +3,12 @@
 import { RefreshCcw } from "lucide-react";
 import ServerPagination from "@/components/common/server-pagination";
 import { BusinessCard } from "./business-card";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 export interface BusinessData {
   business_id: string;
-  contry: string;
+  country: string;
   logo: string;
   name: string;
 }

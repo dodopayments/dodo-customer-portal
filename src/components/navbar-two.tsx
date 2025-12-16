@@ -5,10 +5,11 @@ import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { logout } from "@/lib/server-actions";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function NavbarTwo() {
     const { resolvedTheme } = useTheme();
+    const router = useRouter();
   
     return (
     <div className="flex flex-row justify-between">
@@ -28,7 +29,7 @@ export default function NavbarTwo() {
           onClick={async () => {
             const result = await logout();
             if (result.success) {
-              redirect("/");
+              router.push("/");
             }
           }}
         >

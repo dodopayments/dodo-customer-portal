@@ -12,7 +12,7 @@ export const LandingInfoCard = ({ className }: { className?: string }) => {
         <p className="mb-1 text-xs sm:text-sm">
           Dodo Payments is a software reseller who partners with thousands of software companies worldwide to resell their digital products.
           <br className="hidden sm:block" />
-          Visit <Link href="https://dodopayments.com" target="_blank" className="hover:underline">dodopayments.com</Link> to learn more.
+          Visit <Link href="https://dodopayments.com" target="_blank" rel="noopener noreferrer" className="hover:underline">dodopayments.com</Link> to learn more.
         </p>
       </CardContent>
     </Card>

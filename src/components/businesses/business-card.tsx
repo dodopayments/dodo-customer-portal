@@ -1,7 +1,9 @@
-import { Card, CardTitle } from "../ui/card";
+"use client";
+
+import { Card, CardTitle } from "@/components/ui/card";
 import { BusinessData } from "./businesses";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { api } from "@/lib/http";
 import { getBusinessToken } from "@/lib/server-actions";
 import { useRouter } from "next/navigation";
