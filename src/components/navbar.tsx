@@ -8,46 +8,113 @@ import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
-import { Menu } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { logout } from "@/lib/server-actions";
 import { useBusiness } from "@/hooks/use-business";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Head from "next/head";
 import { navigation } from "./sidebar/app-sidebar";
 import parseError from "@/lib/clientErrorHelper";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const BusinessName = ({
   image,
   name,
   hide,
+  interactive = false,
 }: {
   image?: string;
   name: string;
   hide?: boolean;
+  interactive?: boolean;
 }) => {
-  return (
-    <div className="flex items-center justify-center gap-2">
-      {image ? (
-        <Avatar className="w-7 h-7">
-          <AvatarImage src={image} />
-          <AvatarFallback className="text-xs" name={name} />
-        </Avatar>
-      ) : (
-        <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />
-      )}
-      <span
-        className={cn(
-          "text-text-primary font-display text-xl font-semibold",
-          hide && "md:block hidden"
+  if (!interactive) {
+    return (
+      <div className="flex items-center justify-center gap-2">
+        {image ? (
+          <Avatar className="w-7 h-7">
+            <AvatarImage src={image} />
+            <AvatarFallback className="text-xs" name={name} />
+          </Avatar>
+        ) : (
+          <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />
         )}
-      >
-        {name}
-      </span>
-    </div>
+        <span
+          className={cn(
+            "text-text-primary font-display text-xl font-semibold",
+            hide && "md:block hidden"
+          )}
+        >
+          {name}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          className="flex items-center justify-center gap-2 rounded-lg border border-border-secondary px-3 py-2"
+        >
+          {image ? (
+            <Avatar className="w-7 h-7">
+              <AvatarImage src={image} />
+              <AvatarFallback className="text-xs" name={name} />
+            </Avatar>
+          ) : (
+            <div className="rounded-full object-cover object-center bg-bg-secondary w-8 h-8" />
+          )}
+          <span
+            className={cn(
+              "text-text-primary font-display text-xl font-semibold",
+              hide && "md:block hidden"
+            )}
+          >
+            {name}
+          </span>
+          <ChevronDown className="w-4 h-4 text-text-secondary" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
+        <DropdownMenuItem
+          onClick={() => {
+            window.location.href = "/businesses";
+          }}
+        >
+          View all businesses
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
-export default function Navbar() {
+const getPostLogoutRedirect = (options: {
+  hasBusinessToken?: boolean;
+  businessId?: string;
+}) => {
+  const { hasBusinessToken, businessId } = options;
+
+  if (hasBusinessToken) {
+    return "/businesses";
+  }
+  if (businessId) {
+    return `/login/${businessId}`;
+  }
+  return "/";
+};
+
+export default function Navbar({
+  hasBusinessToken = false,
+}: {
+  hasBusinessToken?: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { business: businessData } = useBusiness();
@@ -77,11 +144,11 @@ export default function Navbar() {
 
       const result = await logout();
       if (result.success) {
-        if (businessId) {
-          router.push(`/login/${businessId}`);
-        } else {
-          router.push("/businesses");
-        }
+        const redirectTo = getPostLogoutRedirect({
+          hasBusinessToken,
+          businessId,
+        });
+        router.push(redirectTo);
       }
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
@@ -109,6 +176,7 @@ export default function Navbar() {
               image={businessData?.logo}
               hide
               name={businessData?.name ?? ""}
+              interactive={hasBusinessToken}
             />
           </div>
           <div className="flex items-center gap-3">
@@ -132,6 +200,7 @@ export default function Navbar() {
                       <BusinessName
                         image={businessData?.logo}
                         name={businessData?.name ?? ""}
+                        interactive={hasBusinessToken}
                       />
                     </div>
                     <MobilePills closeSheet={() => setIsOpen(false)} />
