@@ -19,39 +19,90 @@ import Link from "next/link";
 import { Separator } from "../ui/separator";
 import ThemeSwitch from "../ui/dodo/ThemeSwitch";
 import parseError from "@/lib/clientErrorHelper";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 const BusinessName = ({
   image,
   name,
   hide,
+  interactive = false,
 }: {
   image?: string;
   name: string;
   hide?: boolean;
+  interactive?: boolean;
 }) => {
-  return (
-    <div
-      className="flex items-center gap-2 cursor-pointer rounded-lg p-2 border border-border-secondary"
-      onClick={() => (window.location.href = "/")}
-    >
-      {image ? (
-        <Avatar className="w-7 h-7 aspect-square">
-          <AvatarImage src={image} />
-          <AvatarFallback className="text-xs" name={name} />
-        </Avatar>
-      ) : (
-        <div className="object-cover object-center bg-bg-secondary w-8 h-8 aspect-square" />
-      )}
-      <span
-        className={cn(
-          "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal",
-          hide && "md:block hidden"
+  if (!interactive) {
+    return (
+      <div className="flex items-center gap-2 rounded-lg p-2">
+        {image ? (
+          <Avatar className="w-7 h-7 aspect-square">
+            <AvatarImage src={image} />
+            <AvatarFallback className="text-xs" name={name} />
+          </Avatar>
+        ) : (
+          <div className="object-cover object-center bg-bg-secondary w-8 h-8 aspect-square" />
         )}
-        style={{ leadingTrim: "cap-height" } as React.CSSProperties}
-      >
-        {name}
-      </span>
-    </div>
+        <span
+          className={cn(
+            "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal",
+            hide && "md:block hidden",
+          )}
+          style={{ leadingTrim: "cap-height" } as React.CSSProperties}
+        >
+          {name}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          className={cn(
+            "flex items-center gap-2 rounded-lg p-2 border border-border-secondary w-full justify-between",
+          )}
+        >
+          <div className="flex items-center gap-2">
+            {image ? (
+              <Avatar className="w-7 h-7 aspect-square">
+                <AvatarImage src={image} />
+                <AvatarFallback className="text-xs" name={name} />
+              </Avatar>
+            ) : (
+              <div className="object-cover object-center bg-bg-secondary w-8 h-8 aspect-square" />
+            )}
+            <span
+              className={cn(
+                "text-text-primary font-display font-semibold text-xl leading-5 tracking-normal",
+                hide && "md:block hidden",
+              )}
+              style={{ leadingTrim: "cap-height" } as React.CSSProperties}
+            >
+              {name}
+            </span>
+          </div>
+          <ChevronDown className="w-4 h-4 text-text-secondary" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
+        <DropdownMenuItem
+          onClick={() => {
+            window.location.href = "/businesses";
+          }}
+        >
+          View all businesses
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
@@ -70,7 +121,26 @@ export const navigation = [
   { label: "Profile & Wallets", path: "/session/profile" },
 ];
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  hasBusinessToken?: boolean;
+}
+
+const getPostLogoutRedirect = (options: {
+  hasBusinessToken?: boolean;
+  businessId?: string;
+}) => {
+  const { hasBusinessToken, businessId } = options;
+
+  if (hasBusinessToken) {
+    return "/businesses";
+  }
+  if (businessId) {
+    return `/login/${businessId}`;
+  }
+  return "/";
+};
+
+export function AppSidebar({ hasBusinessToken }: AppSidebarProps) {
   const { business: businessData } = useBusiness();
   const pathname = usePathname();
   const router = useRouter();
@@ -100,11 +170,11 @@ export function AppSidebar() {
 
       const result = await logout();
       if (result.success) {
-        if (businessId) {
-          router.push(`/login/${businessId}`);
-        } else {
-          router.push("/businesses");
-        }
+        const redirectTo = getPostLogoutRedirect({
+          hasBusinessToken,
+          businessId,
+        });
+        router.push(redirectTo);
       }
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
@@ -119,6 +189,7 @@ export function AppSidebar() {
           image={businessData?.logo}
           name={businessData?.name ?? ""}
           hide={false}
+          interactive={!!hasBusinessToken}
         />
       </SidebarHeader>
       <SidebarContent className="text-left mt-5">
