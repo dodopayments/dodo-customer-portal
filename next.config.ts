@@ -9,6 +9,11 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   crossOrigin: "anonymous",
   images: {
+    loader: process.env.NODE_ENV === "production" ? "custom" : undefined,
+    loaderFile:
+      process.env.NODE_ENV === "production"
+        ? "./src/lib/cloudflare-image-loader.ts"
+        : undefined,
     remotePatterns: [
       {
         protocol: "https",
