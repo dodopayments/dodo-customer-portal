@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { BUSINESS_TOKEN_COOKIE_NAME, BUSINESS_TOKEN_EXPIRY_COOKIE_NAME } from "@/lib/token-helper";
 import { getServerApiUrl } from "@/lib/server-http";
 import parseError from "@/lib/serverErrorHelper";
-import { checkBotId } from "botid/server";
 
 async function validateBusinessToken(token: string) {
   const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
@@ -44,12 +43,6 @@ async function validateBusinessToken(token: string) {
 }
 
 export async function POST(request: NextRequest) {
-  const verification = await checkBotId();
- 
-  if (verification.isBot) {
-    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-  }
-
   try {
     const body = await request.json();
     const token = body.token;
@@ -76,12 +69,6 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token = searchParams.get("token");
-
-  const verification = await checkBotId();
- 
-  if (verification.isBot) {
-    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-  }
 
   if (!token) {
     return NextResponse.redirect(new URL("/expired", request.url));

@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
 import { CSPostHogProvider } from "@/hooks/posthogProvider";
-import { BotIdClient } from "botid/client";
 
 // Load fonts
 const inter = Inter({
@@ -53,11 +52,6 @@ export const viewport: Viewport = {
   ],
 };
 
-const protectedRoutes = [
-  { path: "/api/auth/session-validate", method: "POST" },
-  { path: "/api/auth/business-validate", method: "POST" },
-];
-
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -72,9 +66,7 @@ export default async function RootLayout({
         className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
         suppressHydrationWarning
       >
-        <head>
-          <BotIdClient protect={protectedRoutes} />
-        </head>
+        <head />
         <body className="font-body w-full h-full overflow-x-hidden">
           <ThemeProvider
             attribute="class"
