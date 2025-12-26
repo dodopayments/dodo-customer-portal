@@ -20,15 +20,14 @@ export default function cloudflareImageLoader({
     return src.startsWith("/") ? src : `/${src}`;
   }
 
-  const params = [`width=${width}`, `quality=${quality || 75}`, "format=auto"];
-
-  // External URLs - use Cloudflare Image Resizing
+  // External URLs - serve directly (S3 buckets may block CF Image Resizing)
   if (src.startsWith("http://") || src.startsWith("https://")) {
-    return `/cdn-cgi/image/${params.join(",")}/${src}`;
+    return src;
   }
 
   // Local images - use Cloudflare Image Resizing
   if (src.startsWith("/")) {
+    const params = [`width=${width}`, `quality=${quality || 75}`, "format=auto"];
     return `/cdn-cgi/image/${params.join(",")}${src}`;
   }
 
