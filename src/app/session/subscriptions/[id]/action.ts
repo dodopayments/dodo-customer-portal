@@ -5,6 +5,8 @@ import {
   SubscriptionDetailsData,
   CancelSubscriptionParams,
   UpdateBillingDetailsParams,
+  ChangeSubscriptionPlanParams,
+  ProductCollectionData,
 } from "./types";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import parseError from "@/lib/serverErrorHelper";
@@ -122,6 +124,45 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
   }
 }
 
+export async function changeSubscriptionPlan(
+  params: ChangeSubscriptionPlanParams
+) {
+  try {
+    const { subscription_id, data } = params;
+
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscription_id}/change-plan`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => "");
+      let details = "";
+
+      if (response.status === 403) {
+        details = "Products not in the same collection";
+      } else if (response.status === 404) {
+        details = "Subscription not found";
+      } else if (response.status === 422) {
+        details = "Invalid request - subscription cannot be changed";
+      } else {
+        details = `HTTP ${response.status}`;
+      }
+
+      const suffix = errorText && errorText.trim() ? `: ${errorText}` : "";
+      throw new Error(`Failed to change subscription plan (${details})${suffix}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Error will be caught and handled by client component
+    throw error;
+  }
+}
+
 export async function fetchInvoiceHistory(
   subscriptionId: string,
   pageNumber: number = 0,
@@ -204,5 +245,43 @@ export async function fetchEligiblePaymentMethods(
   }
 }
 
-// updatePaymentMethod has been moved to client-side
-// See: src/components/session/subscriptions/update-payment-method-sheet.tsx
+export async function fetchProductCollection(
+  id: string
+): Promise<ProductCollectionData | null> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/product-collections/${id}`
+    );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product collection: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    parseError(error, "Failed to fetch product collection");
+    return null;
+  }
+}
+
+export async function fetchProductCollectionByProductId(
+  productId: string
+): Promise<ProductCollectionData | null> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/products/${productId}/collection`
+    );
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("No collection found for this product");
+      }
+      throw new Error(
+        `Failed to fetch product collection by product ID: ${response.status}`
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    parseError(error, "Failed to fetch product collection by product ID");
+    return null;
+  }
+}

@@ -10,8 +10,8 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
   const hasBusinessToken = !!businessToken;
 
   return (
-    <div className="flex flex-col min-h-screen w-full">
-      <SidebarProvider>
+    <div className="flex flex-col h-full w-full overflow-hidden">
+      <SidebarProvider className="h-full min-h-0">
         <NextTopLoader
           color="#0a4ceb"
           initialPosition={0.25}
@@ -27,9 +27,9 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
         />
         <AppSidebar hasBusinessToken={hasBusinessToken} />
 
-        <main className="flex-1 overflow-y-auto ">
+        <main className="flex-1 min-h-0 overflow-y-auto">
           <Navbar hasBusinessToken={hasBusinessToken} />
-          <div className="h-full border-t mt-6 m-3 border-border-secondary rounded-t-2xl shadow-[0px_-3px_20px_0px_var(--bg-secondary),-3px_0px_20px_0px_var(--bg-secondary),3px_0px_20px_0px_var(--bg-secondary)]">
+          <div className="border-t mt-6 m-3 border-border-secondary rounded-t-2xl shadow-[0px_-3px_20px_0px_var(--bg-secondary),-3px_0px_20px_0px_var(--bg-secondary),3px_0px_20px_0px_var(--bg-secondary)] min-h-[calc(100vh-3rem)]">
             {children}
           </div>
         </main>

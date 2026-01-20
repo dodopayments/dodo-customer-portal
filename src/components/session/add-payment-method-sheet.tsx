@@ -102,7 +102,8 @@ export function AddPaymentMethodSheet() {
       >
         Add payment method
       </Button>
-      <SheetContent className="flex flex-col gap-4">
+      <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" side="right"
+        floating>
         <SheetHeader>
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             Add payment method

@@ -190,7 +190,8 @@ export default function Navbar({
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="w-[300px] px-2 sm:w-[400px]"
+                  floating
+                  className="w-[300px] px-2 sm:w-[400px] border-border-secondary rounded-xl border m-6"
                 >
                   <SheetTitle className="hidden">
                     Navigation Side Panel for Mobile

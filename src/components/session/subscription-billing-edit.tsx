@@ -225,7 +225,7 @@ export default function SubscriptionBillingEdit({
       <SheetTrigger asChild>
         <Button variant="secondary">Edit</Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col gap-4">
+      <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader>
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             Edit Billing Details

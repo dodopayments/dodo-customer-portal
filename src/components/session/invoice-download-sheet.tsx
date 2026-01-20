@@ -53,7 +53,7 @@ export function InvoiceDownloadSheet({
           <Download className="w-4 h-4 mr-2" /> Invoice
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col gap-4">
+      <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader>
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             {isFillDetailsOpen

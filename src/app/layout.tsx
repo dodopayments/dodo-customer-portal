@@ -67,7 +67,7 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <head />
-        <body className="font-body w-full h-full overflow-x-hidden">
+        <body className="font-body w-full h-full overflow-hidden">
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -75,7 +75,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <NextIntlClientProvider messages={messages}>
-              <main className="mx-auto max-w-[1920px]">
+              <main className="mx-auto max-w-[1920px] h-full">
                 <ThemeToaster />
                 {children}
               </main>

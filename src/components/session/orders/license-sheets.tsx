@@ -45,7 +45,7 @@ export const LicenseSheets = ({
             License Keys
           </Button>
         </SheetTrigger>
-        <SheetContent className="sm:max-w-md mx-auto">
+        <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
           <SheetHeader>
             <SheetTitle>Migrate - License Key</SheetTitle>
           </SheetHeader>
