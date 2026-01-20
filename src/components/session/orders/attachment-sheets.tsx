@@ -38,7 +38,7 @@ export const AttachmentsSheet = ({
             Attachments
           </Button>
         </SheetTrigger>
-        <SheetContent className="sm:max-w-md mx-auto">
+        <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
           <SheetHeader>
             <SheetTitle>Digital Products</SheetTitle>
             <SheetDescription>

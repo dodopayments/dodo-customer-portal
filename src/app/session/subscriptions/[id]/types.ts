@@ -10,6 +10,8 @@ export interface AddOn {
   quantity: number;
 }
 
+export type ProrationBillingMode = "prorated_immediately";
+
 export interface Billing {
   city: string;
   country: string;
@@ -89,6 +91,17 @@ export interface UpdateBillingDetailsParams {
   };
 }
 
+export interface ChangeSubscriptionPlanParams {
+  subscription_id: string;
+  data: {
+    addons: AddOn[];
+    metadata: Record<string, string> | null;
+    product_id: string;
+    proration_billing_mode: ProrationBillingMode;
+    quantity: number;
+  };
+}
+
 export interface UpdatePaymentMethodParams {
   subscription_id: string;
   type: "new" | "existing";
@@ -108,4 +121,40 @@ export interface InvoiceDetailsPayload {
   state: string | null;
   city: string | null;
   zipcode: string | null;
+}
+
+export interface ProductCollectionProduct {
+  addons_count: number;
+  currency: string | null;
+  description: string;
+  files_count: number;
+  id: string;
+  is_recurring: boolean;
+  license_key_enabled: boolean;
+  meters_count: number;
+  name: string;
+  price: number;
+  price_detail: unknown | null;
+  product_id: string;
+  status: boolean;
+  tax_category: unknown | null;
+  tax_inclusive: boolean;
+}
+
+export interface ProductCollectionGroup {
+  group_id: string;
+  group_name: string;
+  products: ProductCollectionProduct[];
+  status: boolean;
+}
+
+export interface ProductCollectionData {
+  brand_id: string;
+  created_at: string;
+  description: string;
+  groups: ProductCollectionGroup[];
+  id: string;
+  image: string;
+  name: string;
+  updated_at: string;
 }

@@ -9,6 +9,7 @@ import { SubscriptionDetailsData } from "./types";
 import { extractPaginationParams } from "@/lib/pagination-utils";
 import { BackButton } from "../../../../components/custom/back-button";
 import SubscriptionInfo from "@/components/session/subscriptions/subscription-info";
+import { ChangePlanSheet } from "@/components/session/subscriptions/change-plan-sheet";
 
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
@@ -79,7 +80,7 @@ function TopButtons({
     <PageHeader showSeparator={false}>
       <BackButton fallbackUrl={`/session/subscriptions`} />
       <div className="flex flex-row gap-2">
-        {/* <Button variant="secondary">Change Plan</Button> */}
+        <ChangePlanSheet />
         {subscription.status != "cancelled" && (
           <CancelSubscriptionSheet
             subscription={subscription}

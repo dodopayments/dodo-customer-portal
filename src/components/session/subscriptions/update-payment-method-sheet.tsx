@@ -335,7 +335,7 @@ export function UpdatePaymentMethodSheet({
       >
         Edit
       </Button>
-      <SheetContent className="flex flex-col p-0 overflow-y-auto">
+      <SheetContent className="flex flex-col p-0 overflow-y-auto border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader className="border-b p-6 border-border-secondary pb-4">
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             Edit Payment Method

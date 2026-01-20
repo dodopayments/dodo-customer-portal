@@ -106,7 +106,8 @@ export function CancelSubscriptionSheet({
             : "Cancel Subscription"}
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col gap-6 overflow-y-auto">
+      <SheetContent className="flex flex-col gap-6 overflow-y-auto border-border-secondary rounded-xl border m-6" side="right"
+        floating>
         <SheetHeader className="border-b border-border-secondary pb-4">
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
             We&apos;re sorry to see you go...
@@ -130,9 +131,11 @@ export function CancelSubscriptionSheet({
                 </p>
               </div>
 
-              <ProductMarkdownDescription
-                description={subscription.product.description}
-              />
+              {subscription.product.description && (
+                <ProductMarkdownDescription
+                  description={subscription.product.description}
+                />
+              )}
 
               {subscription.addons.length > 0 && (
                 <Collapsible open={addonsOpen} onOpenChange={setAddonsOpen}>
@@ -143,9 +146,8 @@ export function CancelSubscriptionSheet({
                         {subscription.addons.length !== 1 ? "s" : ""}
                       </p>
                       <ChevronDown
-                        className={`h-4 w-4 text-text-secondary transition-transform ${
-                          addonsOpen ? "transform rotate-180" : ""
-                        }`}
+                        className={`h-4 w-4 text-text-secondary transition-transform ${addonsOpen ? "transform rotate-180" : ""
+                          }`}
                       />
                     </button>
                   </CollapsibleTrigger>
