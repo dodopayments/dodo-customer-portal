@@ -132,26 +132,28 @@ export function ChangePlanSheet({
     (g.products ?? []).filter((p) => p.status !== false),
   );
 
-  const [activeTab, setActiveTab] = useState<string>(
-    availableGroups[0]?.group_id || "",
-  );
-
-  React.useEffect(() => {
-    if (availableGroups.length > 0 && !activeTab) {
-      setActiveTab(availableGroups[0].group_id);
+  // Find the group that contains the current product
+  const tabWithCurrentProduct = React.useMemo(() => {
+    if (!currentProductId || availableGroups.length === 0) {
+      return availableGroups[0]?.group_id || "";
     }
-  }, [availableGroups, activeTab]);
+    const groupWithCurrent = availableGroups.find((group) =>
+      group.products?.some((p) => p.product_id === currentProductId),
+    );
+    return groupWithCurrent?.group_id || availableGroups[0]?.group_id || "";
+  }, [availableGroups, currentProductId]);
+
+  const [activeTab, setActiveTab] = useState<string>(tabWithCurrentProduct);
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
-    if (!nextOpen) {
+    if (nextOpen) {
+      setActiveTab(tabWithCurrentProduct);
+    } else {
       setCurrentView("select");
       setSelectedProduct(null);
       setCurrentProduct(null);
       setSelectedQuantity(1);
-      if (availableGroups.length > 0) {
-        setActiveTab(availableGroups[0].group_id);
-      }
     }
   };
 
