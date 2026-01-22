@@ -168,21 +168,12 @@ function LineItemRow({
     return formatted.replace(/\.?0+$/, "");
   };
 
-  // Calculate values based on proration factor
-  // Quantity = quantity * sign of proration_factor
-  const displayQuantity = item.quantity * Math.sign(item.proration_factor);
-
-  // Tax = tax * proration_factor
-  const displayTax = item.tax * item.proration_factor;
-
-  // Unit price = abs(unit_price * proration_factor)
-  const displayUnitPrice = Math.abs(item.unit_price * item.proration_factor);
-
-  // Calculate total: (unit_price * quantity) + tax
-  const lineTotal = displayUnitPrice * displayQuantity + displayTax;
-
-  // Handle meter type items
+  // Handle meter type items (they don't use proration_factor)
   if (item.type === "meter") {
+    const meterTax = item.tax ?? 0;
+    const meterSubtotal = item.subtotal ?? 0;
+    const meterTotal = meterSubtotal + meterTax;
+
     return (
       <>
         <div className="grid grid-cols-5 gap-4 py-3">
@@ -208,14 +199,12 @@ function LineItemRow({
           </div>
           <div className="flex items-center justify-end">
             <span className="text-text-primary text-sm whitespace-nowrap">
-              {formatAmount(displayTax)}
+              {formatAmount(meterTax)}
             </span>
           </div>
           <div className="flex items-center justify-end">
             <span className="text-text-primary text-sm whitespace-nowrap">
-              {item.subtotal !== undefined
-                ? formatAmount(item.subtotal + item.tax)
-                : formatAmount(lineTotal)}
+              {formatAmount(meterTotal)}
             </span>
           </div>
         </div>
@@ -223,6 +212,19 @@ function LineItemRow({
       </>
     );
   }
+
+  // Calculate values based on proration factor for non-meter items
+  // Quantity = quantity * sign of proration_factor
+  const displayQuantity = item.quantity * Math.sign(item.proration_factor ?? 1);
+
+  // Tax = tax * proration_factor
+  const displayTax = item.tax * (item.proration_factor ?? 1);
+
+  // Unit price = abs(unit_price * proration_factor)
+  const displayUnitPrice = Math.abs(item.unit_price * (item.proration_factor ?? 1));
+
+  // Calculate total: (unit_price * quantity) + tax
+  const lineTotal = displayUnitPrice * displayQuantity + displayTax;
 
   return (
     <>
@@ -428,6 +430,8 @@ export function PlanPreview({
     useState<ChangeSubscriptionPlanPreviewResponse | null>(null);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
   const router = useRouter();
+
+  console.log(previewData);
 
   useEffect(() => {
     setIsConfirming(false);
