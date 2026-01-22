@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -75,10 +75,12 @@ interface ChangePlanSheetProps {
 
 function QuantitySelector({
   quantity,
+  minQuantity = 0,
   onDecrease,
   onIncrease,
 }: {
   quantity: number;
+  minQuantity?: number;
   onDecrease: () => void;
   onIncrease: () => void;
 }) {
@@ -89,7 +91,7 @@ function QuantitySelector({
         size="icon"
         className="h-6 w-6 rounded-md"
         onClick={onDecrease}
-        disabled={quantity < 1}
+        disabled={quantity <= minQuantity}
       >
         <Minus className="h-2 w-2" />
       </Button>
@@ -145,6 +147,13 @@ export function ChangePlanSheet({
 
   const [activeTab, setActiveTab] = useState<string>(tabWithCurrentProduct);
 
+  useEffect(() => {
+    if (!open) return;
+    if (tabWithCurrentProduct) {
+      setActiveTab(tabWithCurrentProduct);
+    }
+  }, [open, tabWithCurrentProduct]);
+
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
     if (nextOpen) {
@@ -173,12 +182,11 @@ export function ChangePlanSheet({
   };
 
   const handleQuantityChange = (productId: string, value: number) => {
-    if (value < 0) {
-      return;
-    }
+    const minQuantity = productId === selectedPlan ? 1 : 0;
+    const nextValue = Math.max(value, minQuantity);
     setQuantities((prev) => ({
       ...prev,
-      [productId]: value,
+      [productId]: nextValue,
     }));
   };
 
@@ -260,6 +268,7 @@ export function ChangePlanSheet({
                       {!isCurrent && (
                         <QuantitySelector
                           quantity={quantities[product.product_id] || 0}
+                          minQuantity={product.product_id === selectedPlan ? 1 : 0}
                           onDecrease={() =>
                             handleQuantityChange(
                               product.product_id,
