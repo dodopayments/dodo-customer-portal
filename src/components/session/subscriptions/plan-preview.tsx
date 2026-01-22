@@ -431,8 +431,6 @@ export function PlanPreview({
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
   const router = useRouter();
 
-  console.log(previewData);
-
   useEffect(() => {
     setIsConfirming(false);
   }, [selectedProduct?.product_id]);
