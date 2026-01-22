@@ -1,5 +1,5 @@
 import PageHeader from "@/components/page-header";
-import { fetchSubscription } from "./action";
+import { fetchProductCollectionByProductId, fetchSubscription } from "./action";
 import { notFound } from "next/navigation";
 import { SubscriptionDetails } from "@/components/session/subscription-details";
 import { SubscriptionBillingInfo } from "@/components/session/subscription-billing-info";
@@ -10,6 +10,7 @@ import { extractPaginationParams } from "@/lib/pagination-utils";
 import { BackButton } from "../../../../components/custom/back-button";
 import SubscriptionInfo from "@/components/session/subscriptions/subscription-info";
 import { ChangePlanSheet } from "@/components/session/subscriptions/change-plan-sheet";
+import { ProductCollectionData } from "./types";
 
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
@@ -30,6 +31,8 @@ export default async function SubscriptionPage({
     return notFound();
   }
 
+  const productCollection = await fetchProductCollectionByProductId(subscription.product.id);
+
   const invoiceParams = await extractPaginationParams(
     searchParams,
     DEFAULT_PAGE_SIZE,
@@ -44,7 +47,11 @@ export default async function SubscriptionPage({
 
   return (
     <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
-      <TopButtons subscription={subscription} subscriptionId={id} />
+      <TopButtons
+        subscription={subscription}
+        subscriptionId={id}
+        productCollection={productCollection}
+      />
       <SubscriptionInfo subscription={subscription} />
       <SubscriptionDetails subscription={subscription} />
       <SubscriptionBillingInfo subscription={subscription} />
@@ -72,15 +79,26 @@ export default async function SubscriptionPage({
 function TopButtons({
   subscription,
   subscriptionId,
+  productCollection,
 }: {
   subscription: SubscriptionDetailsData;
   subscriptionId: string;
+  productCollection: ProductCollectionData | null;
 }) {
+
   return (
     <PageHeader showSeparator={false}>
       <BackButton fallbackUrl={`/session/subscriptions`} />
       <div className="flex flex-row gap-2">
-        <ChangePlanSheet />
+        {productCollection && (
+          <ChangePlanSheet
+            currentProductId={subscription.product.id}
+            subscriptionId={subscriptionId}
+            currentAddons={subscription.addons ?? []}
+            currentQuantity={subscription.quantity ?? 1}
+            productCollection={productCollection ?? null}
+          />
+        )}
         {subscription.status != "cancelled" && (
           <CancelSubscriptionSheet
             subscription={subscription}

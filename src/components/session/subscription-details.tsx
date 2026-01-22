@@ -52,6 +52,7 @@ export async function SubscriptionDetails({
         (pm) => pm.payment_method_id === subscription.payment_method_id
       )
     : null;
+
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-4">

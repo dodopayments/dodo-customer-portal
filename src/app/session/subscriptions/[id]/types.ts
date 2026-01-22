@@ -10,7 +10,10 @@ export interface AddOn {
   quantity: number;
 }
 
-export type ProrationBillingMode = "prorated_immediately";
+export type ProrationBillingMode =
+  | "prorated_immediately"
+  | "full_immediately"
+  | "difference_immediately";
 
 export interface Billing {
   city: string;
@@ -94,7 +97,7 @@ export interface UpdateBillingDetailsParams {
 export interface ChangeSubscriptionPlanParams {
   subscription_id: string;
   data: {
-    addons: AddOn[];
+    addons: AddOn[] | null;
     metadata: Record<string, string> | null;
     product_id: string;
     proration_billing_mode: ProrationBillingMode;
@@ -143,7 +146,7 @@ export interface ProductCollectionProduct {
 
 export interface ProductCollectionGroup {
   group_id: string;
-  group_name: string;
+  group_name: string | null;
   products: ProductCollectionProduct[];
   status: boolean;
 }
@@ -157,4 +160,95 @@ export interface ProductCollectionData {
   image: string;
   name: string;
   updated_at: string;
+}
+
+export interface ChangeSubscriptionPlanPreviewParams {
+  subscription_id: string;
+  data: {
+    addons: AddOn[] | null;
+    metadata: Record<string, string> | null;
+    product_id: string;
+    proration_billing_mode: ProrationBillingMode;
+    quantity: number;
+  };
+}
+
+export interface LineItem {
+  currency: string;
+  description: string;
+  id: string;
+  name: string;
+  product_id?: string;
+  proration_factor: number;
+  quantity: number;
+  tax: number;
+  tax_inclusive: boolean;
+  tax_rate: number;
+  type: "subscription" | "addon" | "meter";
+  unit_price: number;
+  tax_category?: string;
+  chargeable_units?: string;
+  free_threshold?: number;
+  price_per_unit?: string;
+  subtotal?: number;
+  units_consumed?: string;
+}
+
+export interface ChargeSummary {
+  currency: string;
+  customer_credits: number;
+  settlement_amount: number;
+  settlement_currency: string;
+  settlement_tax: number;
+  tax: number;
+  total_amount: number;
+}
+
+export interface ImmediateCharge {
+  line_items: LineItem[];
+  summary: ChargeSummary;
+}
+
+export interface CustomFieldResponse {
+  key: string;
+  value: string;
+}
+
+export interface NewPlan {
+  addons: AddOn[];
+  billing: Billing;
+  cancel_at_next_billing_date: boolean;
+  cancelled_at: string;
+  created_at: string;
+  currency: string;
+  custom_field_responses: CustomFieldResponse[];
+  customer: Customer & {
+    metadata?: Record<string, string>;
+  };
+  discount_cycles_remaining: number;
+  discount_id: string;
+  expires_at: string;
+  metadata: Record<string, string>;
+  meters: Meter[];
+  next_billing_date: string;
+  on_demand: boolean;
+  payment_frequency_count: number;
+  payment_frequency_interval: string;
+  payment_method_id: string;
+  previous_billing_date: string;
+  product_id: string;
+  quantity: number;
+  recurring_pre_tax_amount: number;
+  status: string;
+  subscription_id: string;
+  subscription_period_count: number;
+  subscription_period_interval: string;
+  tax_id: string;
+  tax_inclusive: boolean;
+  trial_period_days: number;
+}
+
+export interface ChangeSubscriptionPlanPreviewResponse {
+  immediate_charge: ImmediateCharge;
+  new_plan: NewPlan;
 }
