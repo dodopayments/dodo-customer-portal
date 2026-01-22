@@ -6,6 +6,8 @@ import {
   CancelSubscriptionParams,
   UpdateBillingDetailsParams,
   ChangeSubscriptionPlanParams,
+  ChangeSubscriptionPlanPreviewParams,
+  ChangeSubscriptionPlanPreviewResponse,
   ProductCollectionData,
 } from "./types";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
@@ -138,6 +140,7 @@ export async function changeSubscriptionPlan(
       }
     );
 
+
     if (!response.ok) {
       const errorText = await response.text().catch(() => "");
       let details = "";
@@ -154,6 +157,50 @@ export async function changeSubscriptionPlan(
 
       const suffix = errorText && errorText.trim() ? `: ${errorText}` : "";
       throw new Error(`Failed to change subscription plan (${details})${suffix}`);
+    }
+
+    try {
+      const text = await response.text();
+      return text && text.trim() ? JSON.parse(text) : null;
+    } catch {
+      return null;
+    }
+  } catch (error) {
+    // Error will be caught and handled by client component
+    throw error;
+  }
+}
+
+export async function changeSubscriptionPlanPreview(
+  params: ChangeSubscriptionPlanPreviewParams
+): Promise<ChangeSubscriptionPlanPreviewResponse> {
+  try {
+    const { subscription_id, data } = params;
+
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscription_id}/change-plan/preview`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => "");
+      let details = "";
+
+      if (response.status === 403) {
+        details = "Products not in the same collection";
+      } else if (response.status === 404) {
+        details = "Subscription not found";
+      } else if (response.status === 422) {
+        details = "Invalid request - subscription cannot be changed";
+      } else {
+        details = `HTTP ${response.status}`;
+      }
+
+      const suffix = errorText && errorText.trim() ? `: ${errorText}` : "";
+      throw new Error(`Failed to preview subscription plan change (${details})${suffix}`);
     }
 
     return response.json();
