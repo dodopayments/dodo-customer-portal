@@ -69,11 +69,11 @@ export async function cancelSubscription({
 }
 
 export async function fetchSubscription(
-  id: string
+  id: string,
 ): Promise<SubscriptionDetailsData | null> {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions/${id}`
+      `/customer-portal/subscriptions/${id}`,
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch subscription: ${response.status}`);
@@ -101,7 +101,7 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
       {
         method: "PATCH",
         body: JSON.stringify(patchData),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -127,7 +127,7 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
 }
 
 export async function changeSubscriptionPlan(
-  params: ChangeSubscriptionPlanParams
+  params: ChangeSubscriptionPlanParams,
 ) {
   try {
     const { subscription_id, data } = params;
@@ -137,9 +137,8 @@ export async function changeSubscriptionPlan(
       {
         method: "POST",
         body: JSON.stringify(data),
-      }
+      },
     );
-
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => "");
@@ -156,7 +155,9 @@ export async function changeSubscriptionPlan(
       }
 
       const suffix = errorText && errorText.trim() ? `: ${errorText}` : "";
-      throw new Error(`Failed to change subscription plan (${details})${suffix}`);
+      throw new Error(
+        `Failed to change subscription plan (${details})${suffix}`,
+      );
     }
 
     try {
@@ -172,7 +173,7 @@ export async function changeSubscriptionPlan(
 }
 
 export async function changeSubscriptionPlanPreview(
-  params: ChangeSubscriptionPlanPreviewParams
+  params: ChangeSubscriptionPlanPreviewParams,
 ): Promise<ChangeSubscriptionPlanPreviewResponse> {
   try {
     const { subscription_id, data } = params;
@@ -182,28 +183,34 @@ export async function changeSubscriptionPlanPreview(
       {
         method: "POST",
         body: JSON.stringify(data),
-      }
+      },
     );
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => "");
-      let details = "";
+      let errorMessage = "";
 
-      if (response.status === 403) {
-        details = "Products not in the same collection";
-      } else if (response.status === 404) {
-        details = "Subscription not found";
-      } else if (response.status === 422) {
-        details = "Invalid request - subscription cannot be changed";
-      } else {
-        details = `HTTP ${response.status}`;
+      // Try to parse JSON error response
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorText;
+      } catch {
+        errorMessage = errorText;
       }
 
-      const suffix = errorText && errorText.trim() ? `: ${errorText}` : "";
-      throw new Error(`Failed to preview subscription plan change (${details})${suffix}`);
+      if (response.status === 403) {
+        errorMessage = errorMessage || "Products not in the same collection";
+      } else if (response.status === 404) {
+        errorMessage = errorMessage || "Subscription not found";
+      } else if (response.status === 422) {
+        errorMessage = errorMessage || "Invalid request - subscription cannot be changed";
+      }
+
+      throw new Error(errorMessage || `HTTP ${response.status}`);
     }
 
-    return response.json();
+    return await response.json();
+
   } catch (error) {
     // Error will be caught and handled by client component
     throw error;
@@ -213,7 +220,7 @@ export async function changeSubscriptionPlanPreview(
 export async function fetchInvoiceHistory(
   subscriptionId: string,
   pageNumber: number = 0,
-  pageSize: number = 50
+  pageSize: number = 50,
 ) {
   try {
     const params = new URLSearchParams();
@@ -222,7 +229,7 @@ export async function fetchInvoiceHistory(
     params.set("page_number", pageNumber.toString());
 
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/payments?${params}`
+      `/customer-portal/payments?${params}`,
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch invoice history: ${response.status}`);
@@ -242,7 +249,7 @@ export async function fetchInvoiceHistory(
 export async function fetchUsageHistory(
   subscriptionId: string,
   pageNumber: number = 0,
-  pageSize: number = 50
+  pageSize: number = 50,
 ) {
   try {
     const params = new URLSearchParams();
@@ -250,7 +257,7 @@ export async function fetchUsageHistory(
     params.set("page_number", pageNumber.toString());
 
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/subscriptions/${subscriptionId}/usage-history?${params}`
+      `/customer-portal/subscriptions/${subscriptionId}/usage-history?${params}`,
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch usage history: ${response.status}`);
@@ -268,19 +275,19 @@ export async function fetchUsageHistory(
 }
 
 export async function fetchEligiblePaymentMethods(
-  subscriptionId: string
+  subscriptionId: string,
 ): Promise<{ items: PaymentMethodItem[] }> {
   try {
     const response = await makeAuthenticatedRequest(
       `/customer-portal/subscriptions/${subscriptionId}/eligible-payment-methods`,
       {
         method: "GET",
-      }
+      },
     );
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch eligible payment methods: ${response.status}`
+        `Failed to fetch eligible payment methods: ${response.status}`,
       );
     }
 
@@ -293,11 +300,11 @@ export async function fetchEligiblePaymentMethods(
 }
 
 export async function fetchProductCollection(
-  id: string
+  id: string,
 ): Promise<ProductCollectionData | null> {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/product-collections/${id}`
+      `/customer-portal/product-collections/${id}`,
     );
     if (!response.ok) {
       throw new Error(`Failed to fetch product collection: ${response.status}`);
@@ -311,18 +318,18 @@ export async function fetchProductCollection(
 }
 
 export async function fetchProductCollectionByProductId(
-  productId: string
+  productId: string,
 ): Promise<ProductCollectionData | null> {
   try {
     const response = await makeAuthenticatedRequest(
-      `/customer-portal/products/${productId}/collection`
+      `/customer-portal/products/${productId}/collection`,
     );
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error("No collection found for this product");
       }
       throw new Error(
-        `Failed to fetch product collection by product ID: ${response.status}`
+        `Failed to fetch product collection by product ID: ${response.status}`,
       );
     }
     const data = await response.json();
@@ -332,3 +339,4 @@ export async function fetchProductCollectionByProductId(
     return null;
   }
 }
+

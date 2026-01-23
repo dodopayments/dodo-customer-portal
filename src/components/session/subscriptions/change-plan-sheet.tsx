@@ -308,7 +308,7 @@ export function ChangePlanSheet({
       <SheetContent
         side="right"
         floating
-        className="m-6 gap-0 rounded-xl border p-0 border-border-secondary sm:max-w-4xl flex flex-col overflow-hidden"
+        className="m-6 gap-0 rounded-xl border p-0 border-border-secondary sm:max-w-3xl flex flex-col overflow-hidden"
       >
         {currentView === "select" ? (
           <div className="flex flex-col h-full min-h-0">
