@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { ArrowLeft, Info, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -102,11 +102,13 @@ function PlanAddons({
   addons,
   isOpen,
   onOpenChange,
+  addonNamesMap,
 }: {
   title: string;
   addons: AddOn[];
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  addonNamesMap?: Record<string, string>;
 }) {
   return (
     <Collapsible open={isOpen} onOpenChange={onOpenChange}>
@@ -128,7 +130,7 @@ function PlanAddons({
                 className="flex items-center justify-between gap-2 text-sm"
               >
                 <span className="text-text-secondary break-words">
-                  {addon.addon_id}
+                  {addonNamesMap?.[addon.addon_id] || addon.addon_id}
                 </span>
                 <span className="text-text-primary whitespace-nowrap">
                   Qty: {addon.quantity}
@@ -148,12 +150,14 @@ function EditableAddons({
   isOpen,
   onOpenChange,
   onQuantityChange,
+  addonNamesMap,
 }: {
   title: string;
   addons: AddOn[];
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   onQuantityChange: (addonId: string, quantity: number) => void;
+  addonNamesMap?: Record<string, string>;
 }) {
   return (
     <Collapsible open={isOpen} onOpenChange={onOpenChange}>
@@ -175,7 +179,7 @@ function EditableAddons({
                 className="flex items-center justify-between gap-2 text-sm"
               >
                 <span className="text-text-secondary break-words flex-1">
-                  {addon.addon_id}
+                  {addonNamesMap?.[addon.addon_id] || addon.addon_id}
                 </span>
                 <div className="border border-border-secondary rounded-lg p-1 flex items-center gap-2">
                   <Button
@@ -504,6 +508,17 @@ export function PlanPreview({
   const [editableAddons, setEditableAddons] = useState<AddOn[]>([]);
   const router = useRouter();
 
+  // Create a map of addon IDs to names from line items
+  const addonNamesMap = useMemo(() => {
+    if (!previewData?.immediate_charge?.line_items) return {};
+    return previewData.immediate_charge.line_items
+      .filter((item) => item.type === "addon")
+      .reduce((acc, item) => {
+        acc[item.id] = item.name;
+        return acc;
+      }, {} as Record<string, string>);
+  }, [previewData]);
+
   // Initialize editable addons when component mounts or currentAddons change
   useEffect(() => {
     if (selectedProduct && selectedProduct.addons_count > 0 && currentAddons.length > 0) {
@@ -707,6 +722,7 @@ export function PlanPreview({
                           addons={currentAddons}
                           isOpen={isCurrentAddonsOpen}
                           onOpenChange={setIsCurrentAddonsOpen}
+                          addonNamesMap={addonNamesMap}
                         />
                       </>
                     ) : (
@@ -748,6 +764,7 @@ export function PlanPreview({
                         isOpen={isNewAddonsOpen}
                         onOpenChange={setIsNewAddonsOpen}
                         onQuantityChange={handleAddonQuantityChange}
+                        addonNamesMap={addonNamesMap}
                       />
                     ) : (
                       <PlanAddons
@@ -758,6 +775,7 @@ export function PlanPreview({
                         }
                         isOpen={isNewAddonsOpen}
                         onOpenChange={setIsNewAddonsOpen}
+                        addonNamesMap={addonNamesMap}
                       />
                     )}
                   </CardContent>

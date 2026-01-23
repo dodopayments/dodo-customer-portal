@@ -78,7 +78,7 @@ export async function fetchSubscription(
     if (!response.ok) {
       throw new Error(`Failed to fetch subscription: ${response.status}`);
     }
-    const data = await response.json();
+    const data = await response.json(); 
     return data;
   } catch (error) {
     parseError(error, "Failed to fetch subscription");
@@ -142,22 +142,28 @@ export async function changeSubscriptionPlan(
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => "");
-      let details = "";
+      let errorMessage = "";
 
-      if (response.status === 403) {
-        details = "Products not in the same collection";
-      } else if (response.status === 404) {
-        details = "Subscription not found";
-      } else if (response.status === 422) {
-        details = "Invalid request - subscription cannot be changed";
-      } else {
-        details = `HTTP ${response.status}`;
+      // Try to parse JSON error response
+      try {
+        const errorJson = JSON.parse(errorText);
+        console.log("errorJson", errorJson);
+        errorMessage = errorJson.message || errorText;
+      } catch {
+        errorMessage = errorText;
       }
 
-      const suffix = errorText && errorText.trim() ? `: ${errorText}` : "";
-      throw new Error(
-        `Failed to change subscription plan (${details})${suffix}`,
-      );
+      if (response.status === 403) {
+        errorMessage = errorMessage || "Products not in the same collection";
+      } else if (response.status === 404) {
+        errorMessage = errorMessage || "Subscription not found";
+      } else if (response.status === 422) {
+        errorMessage = errorMessage || "Invalid request - subscription cannot be changed";
+      } else {
+        errorMessage =  `HTTP ${response.status}`;
+      }
+
+      throw new Error(errorMessage);
     }
 
     try {
