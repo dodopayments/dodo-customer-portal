@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ArrowLeft, Info } from "lucide-react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { ArrowLeft, Info, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SheetHeader } from "@/components/ui/sheet";
@@ -133,6 +133,78 @@ function PlanAddons({
                 <span className="text-text-primary whitespace-nowrap">
                   Qty: {addon.quantity}
                 </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+
+function EditableAddons({
+  title,
+  addons,
+  isOpen,
+  onOpenChange,
+  onQuantityChange,
+}: {
+  title: string;
+  addons: AddOn[];
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  onQuantityChange: (addonId: string, quantity: number) => void;
+}) {
+  return (
+    <Collapsible open={isOpen} onOpenChange={onOpenChange}>
+      <CollapsibleTrigger className="flex w-full items-center justify-between bg-button-secondary-bg px-4 py-2 rounded-lg">
+        <span className="text-text-secondary text-sm">{title}</span>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        />
+      </CollapsibleTrigger>
+
+      <CollapsibleContent className="mt-3">
+        {addons.length === 0 ? (
+          <p className="text-text-secondary text-sm">No addons</p>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {addons.map((addon) => (
+              <div
+                key={addon.addon_id}
+                className="flex items-center justify-between gap-2 text-sm"
+              >
+                <span className="text-text-secondary break-words flex-1">
+                  {addon.addon_id}
+                </span>
+                <div className="border border-border-secondary rounded-lg p-1 flex items-center gap-2">
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="h-6 w-6 rounded-md"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onQuantityChange(addon.addon_id, addon.quantity - 1);
+                    }}
+                    disabled={addon.quantity <= 0}
+                  >
+                    <Minus className="h-2 w-2" />
+                  </Button>
+                  <span className="text-xs text-text-secondary min-w-[1.5rem] text-center">
+                    {addon.quantity}
+                  </span>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="h-6 w-6 rounded-md"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onQuantityChange(addon.addon_id, addon.quantity + 1);
+                    }}
+                  >
+                    <Plus className="h-2 w-2" />
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -429,11 +501,36 @@ export function PlanPreview({
   const [previewData, setPreviewData] =
     useState<ChangeSubscriptionPlanPreviewResponse | null>(null);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+  const [editableAddons, setEditableAddons] = useState<AddOn[]>([]);
   const router = useRouter();
+
+  // Initialize editable addons when component mounts or currentAddons change
+  useEffect(() => {
+    if (selectedProduct && selectedProduct.addons_count > 0 && currentAddons.length > 0) {
+      setEditableAddons(currentAddons.map(addon => ({ ...addon })));
+    } else {
+      setEditableAddons([]);
+    }
+  }, [currentAddons, selectedProduct]);
+
+  const handleAddonQuantityChange = useCallback((addonId: string, newQuantity: number) => {
+    if (newQuantity < 0) return;
+    setEditableAddons(prev => 
+      prev.map(addon => 
+        addon.addon_id === addonId 
+          ? { ...addon, quantity: newQuantity }
+          : addon
+      )
+    );
+  }, []);
 
   useEffect(() => {
     setIsConfirming(false);
   }, [selectedProduct?.product_id]);
+
+  // Track if this is the initial load or an addon quantity change
+  const isInitialLoad = useRef(true);
+  const prevAddonsRef = useRef<AddOn[]>(editableAddons);
 
   useEffect(() => {
     const fetchPreview = async () => {
@@ -442,7 +539,17 @@ export function PlanPreview({
         return;
       }
 
-      setIsLoadingPreview(true);
+      // Only show loading spinner on initial load, not on addon quantity changes
+      const isAddonChange = !isInitialLoad.current && 
+        JSON.stringify(prevAddonsRef.current) !== JSON.stringify(editableAddons);
+      
+      if (!isAddonChange) {
+        setIsLoadingPreview(true);
+      }
+      
+      prevAddonsRef.current = editableAddons;
+      isInitialLoad.current = false;
+
       try {
         const preview = await changeSubscriptionPlanPreview({
           subscription_id: subscriptionId,
@@ -450,29 +557,32 @@ export function PlanPreview({
             product_id: selectedProduct.product_id,
             quantity: Math.max(quantity, 1),
             proration_billing_mode: billingMode,
-            addons: selectedProduct.addons_count > 0 ? currentAddons : null,
+            addons: editableAddons.length > 0 ? editableAddons : null,
             metadata: null,
           },
         });
         setPreviewData(preview);
       } catch (error) {
-        parseError(error, "Failed to load preview");
+        parseError(error, "Failed to load preview. Please try again.");
         onBackClick(); // Close the screen on error
       } finally {
         setIsLoadingPreview(false);
       }
     };
 
-    fetchPreview();
+    // Debounce addon changes to avoid too many API calls
+    const timeoutId = setTimeout(fetchPreview, 300);
+    return () => clearTimeout(timeoutId);
   }, [
     subscriptionId,
     selectedProduct,
     quantity,
     billingMode,
-    currentAddons,
+    editableAddons,
     onBackClick,
   ]);
 
+  
   if (!selectedProduct) {
     return (
       <>
@@ -522,7 +632,7 @@ export function PlanPreview({
           product_id: selectedProduct.product_id,
           quantity: Math.max(quantity, 1),
           proration_billing_mode: billingMode,
-          addons: selectedProduct.addons_count > 0 ? currentAddons : [],
+          addons: selectedProduct.addons_count > 0 ? editableAddons : [],
           metadata: null,
         },
       });
@@ -566,7 +676,7 @@ export function PlanPreview({
           <div className="p-4 flex flex-col gap-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
-                <span className="text-text-primary font-normal text-sm">
+                <span className="text-text-primary font-bold text-sm">
                   Current
                 </span>
                 <Card className="border-border-secondary">
@@ -607,7 +717,7 @@ export function PlanPreview({
               </div>
 
               <div className="flex flex-col gap-3">
-                <span className="text-text-primary font-normal text-sm">
+                <span className="text-text-primary font-bold text-sm">
                   Updated
                 </span>
                 <Card className="border-border-secondary">
@@ -631,15 +741,25 @@ export function PlanPreview({
                       </p>
                     )}
                     <div className="h-px w-full bg-border-secondary" />
-                    <PlanAddons
-                      title="View add-ons"
-                      addons={
-                        previewData?.new_plan.addons ||
-                        (selectedProduct.addons_count > 0 ? currentAddons : [])
-                      }
-                      isOpen={isNewAddonsOpen}
-                      onOpenChange={setIsNewAddonsOpen}
-                    />
+                    {selectedProduct.addons_count > 0 && editableAddons.length > 0 ? (
+                      <EditableAddons
+                        title="Manage add-ons"
+                        addons={editableAddons}
+                        isOpen={isNewAddonsOpen}
+                        onOpenChange={setIsNewAddonsOpen}
+                        onQuantityChange={handleAddonQuantityChange}
+                      />
+                    ) : (
+                      <PlanAddons
+                        title="View add-ons"
+                        addons={
+                          previewData?.new_plan.addons ||
+                          (selectedProduct.addons_count > 0 ? currentAddons : [])
+                        }
+                        isOpen={isNewAddonsOpen}
+                        onOpenChange={setIsNewAddonsOpen}
+                      />
+                    )}
                   </CardContent>
                 </Card>
               </div>
