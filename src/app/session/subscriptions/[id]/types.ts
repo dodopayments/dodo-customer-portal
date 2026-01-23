@@ -8,6 +8,7 @@ export interface Customer {
 export interface AddOn {
   addon_id: string;
   quantity: number;
+  name?: string;
 }
 
 export type ProrationBillingMode =

@@ -159,7 +159,7 @@ export function CancelSubscriptionSheet({
                           className="flex flex-col gap-1 p-2 rounded"
                         >
                           <p className="font-display font-medium text-sm text-text-primary">
-                            {addon.addon_id}
+                            {addon.name || addon.addon_id}
                           </p>
                           <p className="font-body font-normal text-sm text-text-secondary">
                             Quantity: {addon.quantity}

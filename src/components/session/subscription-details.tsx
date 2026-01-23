@@ -126,7 +126,7 @@ function AddOns({ addons }: { addons: AddOn[] }) {
           <Card key={addon.addon_id} className="p-4 flex flex-col gap-2">
             <div className="flex flex-row gap-2">
               <CardTitle className="font-display font-medium my-auto text-md leading-5 tracking-normal">
-                {addon.addon_id}
+                {addon.name || addon.addon_id}
               </CardTitle>
             </div>
             <div className="flex flex-row gap-2">
