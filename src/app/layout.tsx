@@ -5,7 +5,8 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
-import { CSPostHogProvider } from "@/hooks/posthogProvider";
+import { CSPlausibleProvider } from "@/hooks/plausible-provider";
+import { CSOpenReplayProvider } from "@/hooks/openreplay-provider";
 
 // Load fonts
 const inter = Inter({
@@ -60,29 +61,31 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
-    <CSPostHogProvider>
-      <html
-        lang="en"
-        className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
-        suppressHydrationWarning
-      >
-        <head />
-        <body className="font-body w-full h-full overflow-hidden">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextIntlClientProvider messages={messages}>
-              <main className="mx-auto max-w-[1920px] h-full">
-                <ThemeToaster />
-                {children}
-              </main>
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </body>
-      </html>
-    </CSPostHogProvider>
+    <CSPlausibleProvider>
+      <CSOpenReplayProvider>
+        <html
+          lang="en"
+          className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
+          suppressHydrationWarning
+        >
+          <head />
+          <body className="font-body w-full h-full overflow-hidden">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NextIntlClientProvider messages={messages}>
+                <main className="mx-auto max-w-[1920px] h-full">
+                  <ThemeToaster />
+                  {children}
+                </main>
+              </NextIntlClientProvider>
+            </ThemeProvider>
+          </body>
+        </html>
+      </CSOpenReplayProvider>
+    </CSPlausibleProvider>
   );
 }
