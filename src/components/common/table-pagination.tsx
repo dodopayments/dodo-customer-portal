@@ -43,14 +43,13 @@ export function TablePagination({
 
     const handlePageSizeChange = (value: string) => {
         const newSize = parseInt(value, 10);
-        onPageSizeChange(newSize); // This callback should handle page reset
+        onPageSizeChange(newSize);
     };
 
     return (
-        <div className="flex items-center justify-between px-6 py-4 border-t border-border-secondary">
-            {/* Rows per page */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4">
             <div className="flex items-center gap-2">
-                <span className="text-sm text-text-secondary">Rows per page:</span>
+                <span className="text-xs sm:text-sm text-text-secondary">Rows per page:</span>
                 <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
                     <SelectTrigger className="h-8 w-[70px]">
                         <SelectValue placeholder={pageSize.toString()} />
@@ -65,58 +64,55 @@ export function TablePagination({
                 </Select>
             </div>
 
-            {/* Page info and navigation */}
-            <div className="flex items-center gap-4">
-                {/* Page info */}
-                <span className="text-sm text-text-secondary">
+            <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6">
+                <span className="text-xs sm:text-sm text-text-secondary">
                     {totalCount > 0
                         ? `${startItem}-${endItem} of ${totalCount}`
                         : `Page ${displayPage}`
                     }
                 </span>
 
-                {/* Navigation buttons */}
-                <div className="flex items-center gap-1">
-                    {/* First page */}
+                <div className="flex items-center gap-1 sm:gap-2">
                     <Button
-                        variant="ghost"
+                        variant="secondary"
                         size="icon"
-                        className="h-8 w-8"
+                        className="hidden sm:inline-flex h-9 w-9"
                         onClick={() => onPageChange(0)}
                         disabled={!canPreviousPage}
+                        aria-label="First page"
                     >
                         <ChevronsLeft className="w-4 h-4" />
                     </Button>
 
-                    {/* Previous page */}
                     <Button
-                        variant="ghost"
+                        variant="secondary"
                         size="icon"
-                        className="h-8 w-8"
+                        className="h-8 w-8 sm:h-9 sm:w-9"
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={!canPreviousPage}
+                        aria-label="Previous page"
                     >
                         <ChevronLeft className="w-4 h-4" />
                     </Button>
 
-                    {/* Next page */}
                     <Button
-                        variant="ghost"
+                        variant="secondary"
                         size="icon"
-                        className="h-8 w-8"
+                        className="h-8 w-8 sm:h-9 sm:w-9"
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={!canNextPage}
+                        aria-label="Next page"
                     >
                         <ChevronRight className="w-4 h-4" />
                     </Button>
 
-                    {/* Last page */}
                     <Button
-                        variant="ghost"
+                        variant="secondary"
                         size="icon"
-                        className="h-8 w-8"
+                        className="hidden sm:inline-flex h-9 w-9"
                         onClick={() => onPageChange(totalPages - 1)}
                         disabled={!canNextPage}
+                        aria-label="Last page"
                     >
                         <ChevronsRight className="w-4 h-4" />
                     </Button>

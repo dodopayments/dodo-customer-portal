@@ -49,8 +49,8 @@ export async function SubscriptionDetails({
   const paymentMethods = await fetchPaymentMethods();
   const currentPaymentMethod = subscription.payment_method_id
     ? paymentMethods?.find(
-        (pm) => pm.payment_method_id === subscription.payment_method_id
-      )
+      (pm) => pm.payment_method_id === subscription.payment_method_id
+    )
     : null;
 
   return (
@@ -116,23 +116,43 @@ function AddOns({ addons }: { addons: AddOn[] }) {
         >
           Addons
         </CardTitle>
-        {/* <Button variant="secondary" className="w-fit my-auto">
-          Update
-        </Button> */}
       </CardHeader>
       <Separator />
       <CardContent className="flex flex-col gap-2 p-0">
         {addons.map((addon) => (
-          <Card key={addon.addon_id} className="p-4 flex flex-col gap-2">
-            <div className="flex flex-row gap-2">
-              <CardTitle className="font-display font-medium my-auto text-md leading-5 tracking-normal">
-                {addon.name || addon.addon_id}
-              </CardTitle>
+          <Card key={addon.addon_id} className="p-4 flex flex-row gap-4 items-start">
+            {/* Addon Image */}
+            <div className="w-12 h-12 rounded-lg bg-button-secondary-bg flex items-center justify-center flex-shrink-0 overflow-hidden">
+              {addon.image ? (
+                <Image
+                  src={addon.image}
+                  alt={addon.name || addon.addon_id}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover"
+                  unoptimized
+                />
+              ) : (
+                <span className="text-text-tertiary text-lg font-medium">
+                  {(addon.name || addon.addon_id).charAt(0).toUpperCase()}
+                </span>
+              )}
             </div>
-            <div className="flex flex-row gap-2">
-              <CardDescription className="font-body font-normal text-sm leading-[21px] text-text-secondary self-stretch">
-                {addon.quantity}
-              </CardDescription>
+            {/* Addon Details */}
+            <div className="flex flex-col gap-1 flex-1 min-w-0">
+              <div className="flex flex-row items-center justify-between gap-2">
+                <CardTitle className="font-display font-medium text-sm leading-5 tracking-normal truncate">
+                  {addon.name || addon.addon_id}
+                </CardTitle>
+                <span className="text-text-secondary text-sm whitespace-nowrap">
+                  Qty: {addon.quantity}
+                </span>
+              </div>
+              {addon.description && (
+                <CardDescription className="font-body font-normal text-sm leading-[21px] text-text-secondary line-clamp-2">
+                  {addon.description}
+                </CardDescription>
+              )}
             </div>
           </Card>
         ))}
