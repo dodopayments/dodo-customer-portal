@@ -1,6 +1,7 @@
 import { fetchSubscriptions } from "./actions";
 import { Subscriptions } from "@/components/session/subscriptions/subscriptions";
 import { extractPaginationParams } from "@/lib/pagination-utils";
+import { SessionPageLayout } from "@/components/session/session-page-layout";
 
 interface SubscriptionsPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -21,7 +22,7 @@ export default async function SubscriptionsPage({
   const subscriptionsData = await fetchSubscriptions(currentPage, pageSize);
 
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col">
+    <SessionPageLayout title="Manage Subscriptions" backHref="/session/overview">
       <Subscriptions
         cardClassName="w-full p-4 gap-4"
         subscriptionData={subscriptionsData.data}
@@ -32,6 +33,6 @@ export default async function SubscriptionsPage({
         baseUrl={baseUrl}
         pageParamKey={PAGE_PARAM_KEY}
       />
-    </div>
+    </SessionPageLayout>
   );
 }
