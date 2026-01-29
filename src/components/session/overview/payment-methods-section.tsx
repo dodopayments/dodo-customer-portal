@@ -1,10 +1,9 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { getPaymentMethodLogoUrl } from "../payment-methods/payment-method-logo";
-import { CircleSlash, Plus } from "lucide-react";
+import { CircleSlash } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -49,13 +48,6 @@ export function PaymentMethodsSection({
                             <p className="text-text-secondary text-sm mb-4">
                                 No payment methods added
                             </p>
-                            <Button
-                                variant="secondary"
-                                onClick={() => router.push("/session/payment-methods")}
-                            >
-                                <Plus className="w-4 h-4 mr-2" />
-                                Add payment method
-                            </Button>
                         </div>
                     ) : (
                         <div className="divide-y divide-border-secondary">
@@ -73,9 +65,9 @@ export function PaymentMethodsSection({
                                 return (
                                     <div
                                         key={paymentMethod.payment_method_id}
-                                        className="flex items-center justify-between px-6 py-4 hover:bg-bg-secondary/30 transition-colors group"
+                                        className="flex items-center justify-between px-4 sm:px-6 py-4 hover:bg-bg-secondary/30 transition-colors group"
                                     >
-                                        <div className="flex items-center gap-4">
+                                        <div className="flex items-center gap-3 sm:gap-4">
                                             {/* Logo */}
                                             <div className="border border-border-secondary rounded-md p-2 flex items-center justify-center w-12 h-9 bg-bg-primary">
                                                 {logo?.type === "url" && logo.url ? (
@@ -126,20 +118,6 @@ export function PaymentMethodsSection({
                     )}
                 </CardContent>
             </Card>
-
-            {!isEmpty && (
-                <div className="flex justify-end mt-3">
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-text-secondary hover:text-text-primary"
-                        onClick={() => router.push("/session/payment-methods")}
-                    >
-                        <Plus className="w-4 h-4 mr-1" />
-                        Add payment method
-                    </Button>
-                </div>
-            )}
         </section>
     );
 }

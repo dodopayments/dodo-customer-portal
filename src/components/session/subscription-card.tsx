@@ -80,15 +80,13 @@ export const SubscriptionCard = ({
     return (
       <div>
         <Card className={`relative z-10 ${cardClassName}`}>
-          <CardContent className="p-5 md:p-6">
-            {/* Row 1: Product info (name + price) on left, Payment method on right */}
-            <div className="flex items-center justify-between mb-6">
-              {/* Left: Product Name + Price stacked */}
+          <CardContent className="p-4 sm:p-5 md:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
               <div>
                 <p className="text-sm text-text-secondary mb-0.5">
                   {item.product.name}
                 </p>
-                <p className="text-xl font-display font-semibold text-text-primary">
+                <p className="text-lg sm:text-xl font-display font-semibold text-text-primary">
                   {formatCurrency(
                     decodeCurrency(
                       item.recurring_pre_tax_amount,
@@ -96,42 +94,40 @@ export const SubscriptionCard = ({
                     ),
                     item.currency as CurrencyCode
                   )}
-                  <span className="text-base font-normal text-text-primary">
+                  <span className="text-sm sm:text-base font-normal text-text-primary">
                     /{item.payment_frequency_interval}
                   </span>
                 </p>
               </div>
 
-              {/* Right: Payment Method Badge */}
               {paymentDisplay && (
-                <div className="flex items-center gap-2.5 px-4 py-2 border border-border-secondary rounded-lg">
+                <div className="flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 border border-border-secondary rounded-lg self-start sm:self-auto">
                   {paymentDisplay.logo?.type === "url" && paymentDisplay.logo.url ? (
                     <Image
                       src={paymentDisplay.logo.url}
                       alt="Payment method"
                       width={36}
                       height={24}
-                      className="object-contain"
+                      className="object-contain w-7 sm:w-9"
                       unoptimized
                     />
                   ) : paymentDisplay.logo?.type === "icon" && paymentDisplay.logo.Icon ? (
                     <paymentDisplay.logo.Icon size={24} className="text-text-primary" weight="regular" />
                   ) : (
-                    <CreditCard className="w-6 h-6 text-text-secondary" />
+                    <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-text-secondary" />
                   )}
-                  <span className="text-base text-text-primary font-medium">
+                  <span className="text-sm sm:text-base text-text-primary font-medium">
                     {paymentMethod?.card?.card_network} {paymentDisplay.label}
                   </span>
                 </div>
               )}
             </div>
 
-            {/* Row 2: Manage button on left, Dates on right */}
-            <div className="flex items-center justify-between">
-              {/* Manage Button */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <Button
                 variant="outline"
                 size="sm"
+                className="w-full sm:w-auto"
                 onClick={() =>
                   router.push(`/session/subscriptions/${item.subscription_id}`)
                 }
@@ -139,14 +135,13 @@ export const SubscriptionCard = ({
                 Manage subscription
               </Button>
 
-              {/* Dates */}
-              <div className="flex items-center gap-3 text-sm">
-                <span className="px-3 py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                  renews on {item.next_billing_date
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
+                  renews {item.next_billing_date
                     ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
                     : "N/A"}
                 </span>
-                <span className="px-3 py-1.5 bg-bg-secondary rounded-md text-text-secondary">
+                <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
                   valid till {item.next_billing_date
                     ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
                     : "N/A"}
