@@ -4,6 +4,8 @@ import { PaymentMethodItem } from "./type";
 import Image from "next/image";
 import { getPaymentMethodLogoUrl } from "../../../components/session/payment-methods/payment-method-logo";
 import { CircleSlash } from "lucide-react";
+import { SessionPageLayout } from "@/components/session/session-page-layout";
+
 export const dynamic = "force-dynamic";
 
 function formatPaymentMethodType(type: string): string {
@@ -25,7 +27,7 @@ export default async function PaymentMethodsPage() {
   const emptyMessage = "No payment methods found";
 
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
+    <SessionPageLayout title="Payment Methods" backHref="/session/overview">
       <div className="flex flex-col gap-3">
         <h4 className="text-text-primary text-lg font-medium">
           Your payment methods
@@ -50,12 +52,9 @@ export default async function PaymentMethodsPage() {
               ))}
             </div>
           )}
-          {/* <div className="flex">
-            <AddPaymentMethodSheet />
-          </div> */}
         </Card>
       </div>
-    </div>
+    </SessionPageLayout>
   );
 }
 

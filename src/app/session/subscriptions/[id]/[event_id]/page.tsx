@@ -1,5 +1,4 @@
-import PageHeader from "@/components/page-header";
-import { BackButton } from "../../../../../components/custom/back-button";
+import { SessionPageLayout } from "@/components/session/session-page-layout";
 import { BaseDataGrid } from "@/components/table/BaseDataGrid";
 import { fetchMeterEvents } from "./action";
 import { EventsColumn } from "@/components/session/subscriptions/events-coloumn";
@@ -17,7 +16,7 @@ export interface PageProps {
 
 export default async function EventPage({ params, searchParams }: PageProps) {
   const { id, event_id } = await params;
-  
+
   const paginationParams = await extractPaginationParams(
     searchParams,
     DEFAULT_PAGE_SIZE,
@@ -38,13 +37,10 @@ export default async function EventPage({ params, searchParams }: PageProps) {
       : "No meter events at the moment";
 
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
-      <PageHeader showSeparator={false}>
-        <div className="flex flex-row gap-2 w-fit items-center">
-          <BackButton fallbackUrl={`/session/subscriptions/${id}`} />
-          <p className="text-text-primary text-lg font-medium">Meter Events</p>
-        </div>
-      </PageHeader>
+    <SessionPageLayout
+      title="Meter Events"
+      backHref={`/session/subscriptions/${id}`}
+    >
       <div className="flex flex-col gap-4">
         {isEmpty ? (
           <div className="flex flex-col justify-center items-center min-h-[200px] my-auto">
@@ -66,16 +62,17 @@ export default async function EventPage({ params, searchParams }: PageProps) {
           />
         )}
         {(!isEmpty || paginationParams.currentPage !== 0) && (
-        <ServerPagination
-          currentPage={paginationParams.currentPage}
-          pageSize={paginationParams.pageSize}
-          currentPageItems={meterEvents.data.length}
-          hasNextPage={meterEvents.hasNext}
-          baseUrl={paginationParams.baseUrl}
-          pageParamKey={METER_EVENTS_PAGE_PARAM_KEY}
-        />
+          <ServerPagination
+            currentPage={paginationParams.currentPage}
+            pageSize={paginationParams.pageSize}
+            currentPageItems={meterEvents.data.length}
+            hasNextPage={meterEvents.hasNext}
+            baseUrl={paginationParams.baseUrl}
+            pageParamKey={METER_EVENTS_PAGE_PARAM_KEY}
+          />
         )}
       </div>
-    </div>
+    </SessionPageLayout>
   );
 }
+
