@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const token = await getBusinessToken();
-
+ 
   if (token) {
     redirect("/businesses");
   }
