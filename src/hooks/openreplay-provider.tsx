@@ -14,6 +14,7 @@ export function CSOpenReplayProvider({ children }: { children: ReactNode }) {
         if (typeof window !== "undefined" && !tracker && isOpenReplayConfigured) {
             tracker = new OpenReplay({
                 projectKey: projectKey,
+                inlineCss: 3,
                 ...(ingestPoint && { ingestPoint }),
                 capturePerformance: true,
             });
