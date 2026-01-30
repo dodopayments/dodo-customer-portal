@@ -15,21 +15,6 @@ export function LeftPanel({
 
     return (
         <aside className="hidden lg:flex flex-col w-80 xl:w-96 bg-bg-secondary/30 border-r border-border-secondary p-8 sticky top-0 h-screen">
-            <Link
-                href={business?.support_url || "/"}
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors mb-8 flex items-center gap-1.5 group"
-            >
-                <svg
-                    className="w-4 h-4 transition-transform group-hover:-translate-x-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span>Go back to {displayName}</span>
-            </Link>
-
             <div className="flex-1">
                 <h1 className="text-2xl font-display font-semibold text-text-primary leading-tight mb-4">
                     Manage your subscription and billing settings
@@ -56,10 +41,10 @@ export function LeftPanel({
                     </Link>
                 </span>
                 <span className="text-text-tertiary">|</span>
-                <Link href="https://dodopayments.com/privacy" target="_blank" className="hover:text-text-primary transition-colors">
+                <Link href="https://dodopayments.com/privacy-policy" target="_blank" className="hover:text-text-primary transition-colors">
                     Privacy
                 </Link>
-                <Link href="https://dodopayments.com/terms" target="_blank" className="hover:text-text-primary transition-colors">
+                <Link href="https://dodopayments.com/terms-of-use" target="_blank" className="hover:text-text-primary transition-colors">
                     Terms
                 </Link>
             </div>
