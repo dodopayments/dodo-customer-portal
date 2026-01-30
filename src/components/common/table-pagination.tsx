@@ -8,7 +8,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 
 export interface TablePaginationProps {
     currentPage: number;
@@ -81,7 +81,7 @@ export function TablePagination({
                         disabled={!canPreviousPage}
                         aria-label="First page"
                     >
-                        <ChevronsLeft className="w-4 h-4" />
+                        <ChevronFirst className="w-4 h-4" />
                     </Button>
 
                     <Button
@@ -114,7 +114,7 @@ export function TablePagination({
                         disabled={!canNextPage}
                         aria-label="Last page"
                     >
-                        <ChevronsRight className="w-4 h-4" />
+                        <ChevronLast className="w-4 h-4" />
                     </Button>
                 </div>
             </div>
