@@ -2,27 +2,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { fetchPaymentMethods } from "./action";
 import { PaymentMethodItem } from "./type";
 import Image from "next/image";
-import { getPaymentMethodLogoUrl } from "../../../components/session/payment-methods/payment-method-logo";
+import { getPaymentMethodLogoUrl, getPaymentMethodDisplayName } from "../../../components/session/payment-methods/payment-method-logo";
 import { CircleSlash } from "lucide-react";
 import { SessionPageLayout } from "@/components/session/session-page-layout";
 
 export const dynamic = "force-dynamic";
 
-function formatPaymentMethodType(type: string): string {
-  return type
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-function getPaymentMethodDisplayName(paymentMethod: PaymentMethodItem): string {
-  if (paymentMethod.payment_method_type === "apple_pay") return "Apple Pay";
-  if (paymentMethod.payment_method_type === "google_pay") return "Google Pay";
-  return formatPaymentMethodType(paymentMethod.payment_method);
-}
-
 export default async function PaymentMethodsPage() {
-  const paymentMethods = await fetchPaymentMethods();
+  let paymentMethods: PaymentMethodItem[] | null = null;
+  try {
+    paymentMethods = await fetchPaymentMethods();
+  } catch (error) {
+    console.error("Failed to fetch payment methods:", error);
+  }
+  
   const isEmpty = !paymentMethods || paymentMethods.length === 0;
   const emptyMessage = "No payment methods found";
 

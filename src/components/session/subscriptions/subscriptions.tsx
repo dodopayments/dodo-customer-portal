@@ -148,9 +148,9 @@ export const Subscriptions = ({
                     </span>
                 </div>
             ) : (
-                subscriptionData.map((item: SubscriptionData, index: number) => (
+                subscriptionData.map((item: SubscriptionData) => (
                     <SubscriptionCard
-                        key={index}
+                        key={item.subscription_id}
                         item={item}
                         variant="detail"
                         cardClassName={cn("border-b", cardClassName)}

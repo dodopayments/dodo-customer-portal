@@ -4,14 +4,19 @@ import { makeAuthenticatedRequest } from "@/lib/server-actions";
 import { UserResponse } from "./types";
 import parseError from "@/lib/serverErrorHelper";
 
-export async function fetchUser(): Promise<UserResponse> {
-  const response = await makeAuthenticatedRequest("/customer-portal/profile");
+export async function fetchUser(): Promise<UserResponse | null> {
+  try {
+    const response = await makeAuthenticatedRequest("/customer-portal/profile");
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch user: ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    parseError(error, "Failed to fetch user");
+    return null;
   }
-
-  return response.json();
 }
 
 export async function fetchWallets() {

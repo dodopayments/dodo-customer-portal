@@ -217,7 +217,7 @@ export const Orders = ({
           </CardContent>
         </Card>
 
-        {shouldShowPagination && !isEmpty && (
+        {shouldShowPagination && (totalCount > 0 || currentPage > 0) && (
           <TablePagination
             currentPage={currentPage}
             pageSize={pageSize}
@@ -252,7 +252,7 @@ export const Orders = ({
           />
         ))
       )}
-      {shouldShowPagination && !isEmpty && (
+      {shouldShowPagination && (totalCount > 0 || currentPage > 0) && (
         <Card>
           <CardContent className="p-0">
             <TablePagination
