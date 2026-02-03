@@ -8,8 +8,8 @@ import { LeftPanel } from "./left-panel";
 import { PaymentMethodsSection } from "./payment-methods-section";
 import { WalletsSection } from "./wallets-section";
 import { UserNav } from "./user-nav";
-import { useRouter, useSearchParams } from "next/navigation";
-import { startTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 interface BillingHistoryPagination {
     currentPage: number;
@@ -41,28 +41,22 @@ export function OverviewContent({
     walletLedger,
 }: OverviewContentProps) {
     const router = useRouter();
-    const searchParams = useSearchParams();
 
-    const handleBillingPageChange = (newPage: number) => {
-        startTransition(() => {
-            const params = new URLSearchParams(searchParams.toString());
-            params.set(BILLING_PAGE_PARAM, newPage.toString());
-            params.delete('pageSize');
-            const url = `/session/overview?${params.toString()}`;
-            router.push(url);
-        });
-    };
+    const handleBillingPageChange = useCallback((newPage: number) => {
+        const params = new URLSearchParams();
+        params.set(BILLING_PAGE_PARAM, newPage.toString());
+        if (billingHistoryPagination.pageSize !== 10) {
+            params.set(BILLING_SIZE_PARAM, billingHistoryPagination.pageSize.toString());
+        }
+        router.push(`/session/overview?${params.toString()}`);
+    }, [router, billingHistoryPagination.pageSize]);
 
-    const handleBillingPageSizeChange = (newSize: number) => {
-        startTransition(() => {
-            const params = new URLSearchParams(searchParams.toString());
-            params.set(BILLING_PAGE_PARAM, "0");
-            params.set(BILLING_SIZE_PARAM, newSize.toString());
-            params.delete('pageSize');
-            const url = `/session/overview?${params.toString()}`;
-            router.push(url);
-        });
-    };
+    const handleBillingPageSizeChange = useCallback((newSize: number) => {
+        const params = new URLSearchParams();
+        params.set(BILLING_PAGE_PARAM, "0");
+        params.set(BILLING_SIZE_PARAM, newSize.toString());
+        router.push(`/session/overview?${params.toString()}`);
+    }, [router]);
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-bg-primary">

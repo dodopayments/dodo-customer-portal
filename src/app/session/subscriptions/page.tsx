@@ -19,7 +19,12 @@ export default async function SubscriptionsPage({
     PAGE_PARAM_KEY,
   );
 
-  const subscriptionsData = await fetchSubscriptions(currentPage, pageSize);
+  let subscriptionsData = { data: [], totalCount: 0, hasNext: false };
+  try {
+    subscriptionsData = await fetchSubscriptions(currentPage, pageSize);
+  } catch (error) {
+    console.error("Failed to fetch subscriptions:", error);
+  }
 
   return (
     <SessionPageLayout title="Manage Subscriptions" backHref="/session/overview">

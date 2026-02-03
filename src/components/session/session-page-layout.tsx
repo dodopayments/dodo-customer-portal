@@ -86,7 +86,7 @@ export function SessionPageLayout({
                 size="icon"
                 onClick={toggleTheme}
                 className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-                title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+                title={mounted ? (isDark ? "Switch to light mode" : "Switch to dark mode") : undefined}
               >
                 {mounted && isDark ? (
                   <Sun className="w-5 h-5 text-text-primary" />

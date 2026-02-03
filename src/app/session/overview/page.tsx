@@ -22,40 +22,62 @@ interface OverviewPageProps {
 export default async function OverviewPage({ searchParams }: OverviewPageProps) {
     const params = await searchParams;
 
-    const billingPage = parseInt(params[BILLING_PAGE_PARAM] as string || "0", 10);
-    const billingPageSize = parseInt(params[BILLING_SIZE_PARAM] as string || DEFAULT_BILLING_PAGE_SIZE.toString(), 10);
+    const parsedBillingPage = parseInt(params[BILLING_PAGE_PARAM] as string || "0", 10);
+    const parsedBillingPageSize = parseInt(params[BILLING_SIZE_PARAM] as string || DEFAULT_BILLING_PAGE_SIZE.toString(), 10);
+    const billingPage = isNaN(parsedBillingPage) || parsedBillingPage < 0 ? 0 : parsedBillingPage;
+    const billingPageSize = isNaN(parsedBillingPageSize) || parsedBillingPageSize < 1 ? DEFAULT_BILLING_PAGE_SIZE : parsedBillingPageSize;
 
-    const [
-        subscriptionsData,
-        paymentMethods,
-        billingHistoryData,
-        user,
-        wallets
-    ] = await Promise.all([
-        fetchSubscriptions(0, 5),
-        fetchPaymentMethods(),
-        fetchPayments(billingPage, billingPageSize),
-        fetchUser(),
-        fetchWallets(),
-    ]);
+    let subscriptionsData, paymentMethods, billingHistoryData, user, wallets;
+
+    try {
+        [
+            subscriptionsData,
+            paymentMethods,
+            billingHistoryData,
+            user,
+            wallets
+        ] = await Promise.all([
+            fetchSubscriptions(0, 5),
+            fetchPaymentMethods(),
+            fetchPayments(billingPage, billingPageSize),
+            fetchUser(),
+            fetchWallets(),
+        ]);
+    } catch (error) {
+        console.error("Failed to fetch overview data:", error);
+        // Provide safe defaults if fetch fails
+        subscriptionsData = { data: [], totalCount: 0, hasNext: false };
+        paymentMethods = null;
+        billingHistoryData = { data: [], totalCount: 0, hasNext: false };
+        user = null;
+        wallets = { items: [] };
+    }
+
+    // Ensure paymentMethods is always an array
+    const safePaymentMethods = (paymentMethods || []) as PaymentMethodItem[];
 
     const walletItems = (wallets?.items || []) as WalletItem[];
     let walletLedger: WalletLedgerItem[] = [];
 
     if (walletItems.length > 0) {
-        const firstCurrency = walletItems[0].currency;
-        const ledgerData = await fetchWalletLedger({
-            currency: firstCurrency,
-            pageNumber: 0,
-            pageSize: WALLET_TRANSACTIONS_SIZE,
-        });
-        walletLedger = ledgerData.data as WalletLedgerItem[];
+        try {
+            const firstCurrency = walletItems[0].currency;
+            const ledgerData = await fetchWalletLedger({
+                currency: firstCurrency,
+                pageNumber: 0,
+                pageSize: WALLET_TRANSACTIONS_SIZE,
+            });
+            walletLedger = ledgerData.data as WalletLedgerItem[];
+        } catch (error) {
+            console.error("Failed to fetch wallet ledger:", error);
+            walletLedger = [];
+        }
     }
 
     return (
         <OverviewContent
             subscriptions={subscriptionsData.data as SubscriptionData[]}
-            paymentMethods={(paymentMethods || []) as PaymentMethodItem[]}
+            paymentMethods={safePaymentMethods}
             billingHistory={billingHistoryData.data as OrderData[]}
             billingHistoryPagination={{
                 currentPage: billingPage,

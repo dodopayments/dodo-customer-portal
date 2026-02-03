@@ -30,6 +30,7 @@ export function LeftPanel({
                     <Link
                         href="https://dodopayments.com"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors font-medium"
                     >
                         <img
@@ -41,10 +42,10 @@ export function LeftPanel({
                     </Link>
                 </span>
                 <span className="text-text-tertiary">|</span>
-                <Link href="https://dodopayments.com/privacy-policy" target="_blank" className="hover:text-text-primary transition-colors">
+                <Link href="https://dodopayments.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">
                     Privacy
                 </Link>
-                <Link href="https://dodopayments.com/terms-of-use" target="_blank" className="hover:text-text-primary transition-colors">
+                <Link href="https://dodopayments.com/terms-of-use" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">
                     Terms
                 </Link>
             </div>

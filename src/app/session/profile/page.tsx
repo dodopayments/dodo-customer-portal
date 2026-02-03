@@ -16,12 +16,23 @@ export default async function ProfilePage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const user = await fetchUser();
-  const wallets = await fetchWallets();
+  let user = null;
+  let wallets = null;
+  
+  try {
+    [user, wallets] = await Promise.all([
+      fetchUser(),
+      fetchWallets(),
+    ]);
+  } catch (error) {
+    console.error("Failed to fetch profile data:", error);
+  }
+
   const params = await searchParams;
+  const walletItems = wallets?.items || [];
   const tab =
     (Array.isArray(params?.tab) ? params.tab[0] : params?.tab) ||
-    `${wallets?.items?.[0]?.currency?.toLowerCase()}-wallet` ||
+    `${walletItems[0]?.currency?.toLowerCase()}-wallet` ||
     "usd-wallet";
 
   // Extract currency from tab (format: "usd-wallet" -> "USD")
@@ -33,13 +44,18 @@ export default async function ProfilePage({
     PAGE_PARAM_KEY
   );
 
-  const walletLedger = await fetchWalletLedger({
-    currency: selectedCurrency,
-    pageNumber: currentPage,
-    pageSize,
-  });
+  let walletLedger = { data: [], totalCount: 0, hasNext: false };
+  try {
+    walletLedger = await fetchWalletLedger({
+      currency: selectedCurrency,
+      pageNumber: currentPage,
+      pageSize,
+    });
+  } catch (error) {
+    console.error("Failed to fetch wallet ledger:", error);
+  }
 
-  const allWallets = wallets.items.map((wallet: WalletItem) => ({
+  const allWallets = walletItems.map((wallet: WalletItem) => ({
     value: `${wallet.currency.toLowerCase()}-wallet`,
     label: `${wallet.currency} Wallet`,
     link: `/session/profile?tab=${wallet.currency.toLowerCase()}-wallet`,
@@ -70,11 +86,11 @@ export default async function ProfilePage({
           </Card>
         </div>
 
-        {wallets?.items?.length > 0 && (
+        {walletItems.length > 0 && (
           <div className="flex flex-col gap-4">
             <p className="text-text-primary text-lg font-medium">Wallets</p>
             <Wallet
-              wallets={wallets?.items}
+              wallets={walletItems}
               allWallets={allWallets}
               tab={tab}
               walletLedger={walletLedger.data}
