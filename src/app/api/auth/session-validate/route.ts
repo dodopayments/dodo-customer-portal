@@ -38,7 +38,7 @@ async function validateToken(token: string) {
     httpOnly: true,
   });
 
-  return { success: true, redirect: "/session/subscriptions" };
+  return { success: true, redirect: "/session/overview" };
 }
 
 export async function POST(request: NextRequest) {
