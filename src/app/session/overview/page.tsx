@@ -37,7 +37,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             user,
             wallets
         ] = await Promise.all([
-            fetchSubscriptions(0, 5),
+            fetchSubscriptions(0, 2),
             fetchPaymentMethods(),
             fetchPayments(billingPage, billingPageSize),
             fetchUser(),
@@ -77,6 +77,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
     return (
         <OverviewContent
             subscriptions={subscriptionsData.data as SubscriptionData[]}
+            subscriptionsTotalCount={subscriptionsData.totalCount}
             paymentMethods={safePaymentMethods}
             billingHistory={billingHistoryData.data as OrderData[]}
             billingHistoryPagination={{

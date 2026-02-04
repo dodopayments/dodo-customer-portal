@@ -8,7 +8,7 @@ import { LeftPanel } from "./left-panel";
 import { PaymentMethodsSection } from "./payment-methods-section";
 import { WalletsSection } from "./wallets-section";
 import { UserNav } from "./user-nav";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 interface BillingHistoryPagination {
@@ -20,6 +20,7 @@ interface BillingHistoryPagination {
 
 interface OverviewContentProps {
     subscriptions: SubscriptionData[];
+    subscriptionsTotalCount?: number;
     paymentMethods: PaymentMethodItem[];
     billingHistory: OrderData[];
     billingHistoryPagination: BillingHistoryPagination;
@@ -33,6 +34,7 @@ const BILLING_SIZE_PARAM = "billingPageSize";
 
 export function OverviewContent({
     subscriptions,
+    subscriptionsTotalCount,
     paymentMethods,
     billingHistory,
     billingHistoryPagination,
@@ -41,22 +43,25 @@ export function OverviewContent({
     walletLedger,
 }: OverviewContentProps) {
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const handleBillingPageChange = useCallback((newPage: number) => {
-        const params = new URLSearchParams();
+        const params = new URLSearchParams(searchParams.toString());
         params.set(BILLING_PAGE_PARAM, newPage.toString());
         if (billingHistoryPagination.pageSize !== 10) {
             params.set(BILLING_SIZE_PARAM, billingHistoryPagination.pageSize.toString());
+        } else {
+            params.delete(BILLING_SIZE_PARAM);
         }
         router.push(`/session/overview?${params.toString()}`);
-    }, [router, billingHistoryPagination.pageSize]);
+    }, [router, searchParams, billingHistoryPagination.pageSize]);
 
     const handleBillingPageSizeChange = useCallback((newSize: number) => {
-        const params = new URLSearchParams();
+        const params = new URLSearchParams(searchParams.toString());
         params.set(BILLING_PAGE_PARAM, "0");
         params.set(BILLING_SIZE_PARAM, newSize.toString());
         router.push(`/session/overview?${params.toString()}`);
-    }, [router]);
+    }, [router, searchParams]);
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-bg-primary">
@@ -71,6 +76,7 @@ export function OverviewContent({
                             subscriptionData={subscriptions}
                             variant="overview"
                             paymentMethods={paymentMethods}
+                            totalCount={subscriptionsTotalCount}
                         />
 
                         <Orders

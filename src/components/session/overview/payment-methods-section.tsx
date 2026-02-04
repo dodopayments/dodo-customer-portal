@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import {
   getPaymentMethodLogoUrl,
-  formatPaymentMethodType,
   getPaymentMethodDisplayName,
 } from "../payment-methods/payment-method-logo";
 import { CircleSlash } from "lucide-react";

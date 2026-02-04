@@ -61,6 +61,8 @@ interface SubscriptionsProps {
     variant?: "detail" | "overview";
     /** Payment methods for overview variant */
     paymentMethods?: PaymentMethodItem[];
+    /** Total subscriptions count for overview CTA */
+    totalCount?: number;
     /** Pagination props - required for detail variant */
     currentPage?: number;
     pageSize?: number;
@@ -81,6 +83,7 @@ export const Subscriptions = ({
     pageParamKey,
     variant = "detail",
     paymentMethods = [],
+    totalCount,
 }: SubscriptionsProps) => {
     const router = useRouter();
     const isEmpty = subscriptionData.length === 0;
@@ -91,6 +94,7 @@ export const Subscriptions = ({
 
     // Overview variant with section header
     if (variant === "overview") {
+    const totalCountToShow = totalCount && totalCount > 0 ? totalCount : subscriptionData.length;
         return (
             <section id="active-subscriptions">
                 <div className="mb-4">
@@ -126,7 +130,7 @@ export const Subscriptions = ({
                                 onClick={() => router.push("/session/subscriptions")}
                                 className="text-sm font-medium font-display text-text-secondary hover:text-text-primary transition-colors"
                             >
-                                View all subscriptions({subscriptionData.length})
+                                View all subscriptions({totalCountToShow})
                             </button>
                         </div>
                     </div>
