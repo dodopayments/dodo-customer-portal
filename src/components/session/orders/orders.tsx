@@ -1,19 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CircleSlash, FileText } from "lucide-react";
+import { CircleSlash } from "lucide-react";
 import { OrderCard } from "./order-card";
 import TablePagination from "@/components/common/table-pagination";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge, type BadgeVariant } from "@/components/ui/badge";
-import { getBadge } from "@/lib/badge-helper";
-import {
-  CurrencyCode,
-  decodeCurrency,
-  formatCurrency,
-} from "@/lib/currency-helper";
-import InvoiceDownloadSheet from "../invoice-download-sheet";
-import { api_url } from "@/lib/http";
+import { BaseDataGrid } from "@/components/table/BaseDataGrid";
+import { BillingHistoryColumns } from "./billing-history-columns";
 
 export interface OrderData {
   brand_id: string;
@@ -64,6 +57,8 @@ export const Orders = ({
   showPagination = true,
 }: OrdersProps) => {
 
+  const OVERVIEW_PAGE_SIZE = 25;
+
   const totalCount = externalTotalCount ?? ordersData.length;
   const isEmpty = ordersData.length === 0;
   const emptyMessage =
@@ -73,8 +68,9 @@ export const Orders = ({
 
   const shouldShowPagination = showPagination;
 
-  // Overview variant - table view for billing history
   if (variant === "overview") {
+    const shouldShowOverviewPagination = showPagination && totalCount > OVERVIEW_PAGE_SIZE;
+
     return (
       <section id="billing-history">
         <div className="flex items-center justify-between mb-4">
@@ -83,9 +79,9 @@ export const Orders = ({
           </h2>
         </div>
 
-        <Card>
-          <CardContent className="p-0">
-            {isEmpty ? (
+        {isEmpty ? (
+          <Card>
+            <CardContent className="p-0">
               <div className="flex flex-col items-center justify-center py-12 text-center">
                 <div className="p-4 bg-bg-secondary rounded-full mb-4">
                   <CircleSlash className="w-6 h-6 text-text-secondary" />
@@ -94,137 +90,34 @@ export const Orders = ({
                   No billing history available
                 </p>
               </div>
-            ) : (
-              <>
-                <div className="hidden md:grid grid-cols-12 gap-6 px-6 py-4 bg-bg-secondary/50 border-b border-border-secondary text-xs font-medium text-text-secondary uppercase tracking-wider">
-                  <div className="col-span-2">Date</div>
-                  <div className="col-span-2">Status</div>
-                  <div className="col-span-3">Items</div>
-                  <div className="col-span-2">Entitlements</div>
-                  <div className="col-span-2 text-right">Amount</div>
-                  <div className="col-span-1 text-right">Invoice</div>
-                </div>
-
-                <div className="divide-y divide-border-secondary">
-                  {ordersData.map((order) => {
-                    const badge = getBadge(order.status);
-
-                    return (
-                      <div
-                        key={order.payment_id}
-                        className="px-4 sm:px-6 py-4 hover:bg-bg-secondary/30 transition-colors"
-                      >
-                        <div className="flex flex-col gap-2 md:hidden">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-text-primary font-medium">
-                              {new Date(order.created_at).toLocaleDateString("en-US", {
-                                day: "2-digit",
-                                month: "short",
-                                year: "2-digit",
-                              })}
-                            </span>
-                            <span className="text-sm font-medium text-text-primary">
-                              {formatCurrency(
-                                decodeCurrency(order.total_amount, order.currency as CurrencyCode),
-                                order.currency as CurrencyCode
-                              )}
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <Badge
-                                variant={badge.color as BadgeVariant}
-                                dot={false}
-                                className="rounded-sm text-xs"
-                              >
-                                {badge.message}
-                              </Badge>
-                              <span className="text-xs text-text-secondary">
-                                {order.subscription_id ? "Subscription" : "One-time"}
-                              </span>
-                            </div>
-                            <InvoiceDownloadSheet
-                              paymentId={order.payment_id}
-                              downloadUrl={`${api_url}/invoices/payments/${order.payment_id}`}
-                              variant="icon"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="hidden md:grid md:grid-cols-12 gap-6 items-center">
-                          <div className="col-span-2">
-                            <span className="text-sm text-text-primary font-medium">
-                              {new Date(order.created_at).toLocaleDateString("en-US", {
-                                day: "2-digit",
-                                month: "short",
-                                year: "2-digit",
-                              })}
-                            </span>
-                          </div>
-
-                          <div className="col-span-2">
-                            <Badge
-                              variant={badge.color as BadgeVariant}
-                              dot={false}
-                              className="rounded-sm text-xs"
-                            >
-                              {badge.message}
-                            </Badge>
-                          </div>
-
-                          <div className="col-span-3 flex items-center gap-2">
-                            <span className="text-sm text-text-primary truncate">
-                              {order.subscription_id
-                                ? "Subscription Payment"
-                                : "One-time Purchase"}
-                            </span>
-                          </div>
-
-                          <div className="col-span-2 flex items-center gap-2">
-                            {order.digital_products_delivered ? (
-                              <div className="flex items-center gap-1 text-xs text-text-success-primary">
-                                <FileText className="w-3.5 h-3.5" />
-                                <span>Delivered</span>
-                              </div>
-                            ) : (
-                              <span className="text-xs text-text-tertiary">-</span>
-                            )}
-                          </div>
-
-                          <div className="col-span-2 text-right">
-                            <span className="text-sm font-medium text-text-primary">
-                              {formatCurrency(
-                                decodeCurrency(order.total_amount, order.currency as CurrencyCode),
-                                order.currency as CurrencyCode
-                              )}
-                            </span>
-                          </div>
-
-                          <div className="col-span-1 flex justify-end">
-                            <InvoiceDownloadSheet
-                              paymentId={order.payment_id}
-                              downloadUrl={`${api_url}/invoices/payments/${order.payment_id}`}
-                              variant="icon"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
-
-        {shouldShowPagination && (totalCount > 0 || currentPage > 0) && (
-          <TablePagination
-            currentPage={currentPage}
-            pageSize={pageSize}
-            totalCount={totalCount}
-            hasNextPage={hasNextPage}
-            onPageChange={onPageChange}
-            onPageSizeChange={onPageSizeChange}
+            </CardContent>
+          </Card>
+        ) : (
+          <BaseDataGrid
+            tableId="billing-history-overview"
+            data={ordersData}
+            columns={BillingHistoryColumns}
+            recordCount={totalCount}
+            manualPagination
+            initialPageSize={OVERVIEW_PAGE_SIZE}
+            onPaginationChange={(pagination) => {
+              if (pagination.pageIndex !== currentPage) {
+                onPageChange(pagination.pageIndex);
+              }
+              if (pagination.pageSize !== pageSize) {
+                onPageSizeChange(pagination.pageSize);
+              }
+            }}
+            tableLayout={{
+              autoWidth: false,
+              columnsPinnable: false,
+              columnsResizable: false,
+              columnsMovable: false,
+              columnsVisibility: false,
+              disableRowPerPage: false,
+            }}
+            disablePagination={!shouldShowOverviewPagination}
+            emptyStateMessage="No billing history available"
           />
         )}
       </section>

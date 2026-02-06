@@ -11,6 +11,7 @@ import { WalletItem, WalletLedgerItem } from "../profile/types";
 export const dynamic = "force-dynamic";
 
 const WALLET_TRANSACTIONS_SIZE = 10;
+const OVERVIEW_SUBSCRIPTIONS_SIZE = 3;
 const DEFAULT_BILLING_PAGE_SIZE = 10;
 const BILLING_PAGE_PARAM = "billingPage";
 const BILLING_SIZE_PARAM = "billingPageSize";
@@ -37,7 +38,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             user,
             wallets
         ] = await Promise.all([
-            fetchSubscriptions(0, 2),
+            fetchSubscriptions(0, OVERVIEW_SUBSCRIPTIONS_SIZE),
             fetchPaymentMethods(),
             fetchPayments(billingPage, billingPageSize),
             fetchUser(),

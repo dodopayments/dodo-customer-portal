@@ -79,7 +79,7 @@ export const SubscriptionCard = ({
 
     return (
       <div>
-        <Card className={`relative z-10 ${cardClassName}`}>
+        <Card className={`relative z-10 shadow-[0px_2px_12px_0px_rgba(68,81,104,0.1)] ${cardClassName}`}>
           <CardContent className="p-4 sm:p-5 md:p-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
               <div>
@@ -125,7 +125,7 @@ export const SubscriptionCard = ({
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <Button
-                variant="outline"
+                variant="secondary"
                 size="sm"
                 className="w-full sm:w-auto"
                 onClick={() =>
@@ -135,9 +135,9 @@ export const SubscriptionCard = ({
                 Manage subscription
               </Button>
 
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-xs font-medium">
                 <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                  renews {item.next_billing_date
+                  renews on {item.next_billing_date
                     ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
                     : "N/A"}
                 </span>

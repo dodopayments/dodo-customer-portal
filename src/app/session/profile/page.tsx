@@ -18,7 +18,7 @@ export default async function ProfilePage({
 }) {
   let user = null;
   let wallets = null;
-  
+
   try {
     [user, wallets] = await Promise.all([
       fetchUser(),

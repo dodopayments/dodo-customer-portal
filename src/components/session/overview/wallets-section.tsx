@@ -30,6 +30,11 @@ export function WalletsSection({ wallets, walletLedger }: WalletsSectionProps) {
         return null;
     }
 
+    const selectedBalance = selectedWallet?.balance ?? 0;
+    if (selectedBalance <= 0 && walletLedger.length === 0) {
+        return null;
+    }
+
     return (
         <section id="wallets">
             <div className="flex items-center justify-between mb-4">

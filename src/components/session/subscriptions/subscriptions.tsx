@@ -87,6 +87,7 @@ export const Subscriptions = ({
 }: SubscriptionsProps) => {
     const router = useRouter();
     const isEmpty = subscriptionData.length === 0;
+    const overviewSubscriptions = subscriptionData.slice(0, 3);
     const emptyMessage =
         currentPage > 0
             ? "No subscriptions found on this page"
@@ -116,7 +117,7 @@ export const Subscriptions = ({
                     </Card>
                 ) : (
                     <div className="space-y-3">
-                        {subscriptionData.map((item: SubscriptionData) => (
+                        {overviewSubscriptions.map((item: SubscriptionData) => (
                             <SubscriptionCard
                                 key={item.subscription_id}
                                 item={item}
