@@ -1,4 +1,3 @@
-import PageHeader from "@/components/page-header";
 import { fetchProductCollectionByProductId, fetchSubscription } from "./action";
 import { notFound } from "next/navigation";
 import { SubscriptionDetails } from "@/components/session/subscription-details";
@@ -7,10 +6,10 @@ import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-ta
 import { CancelSubscriptionSheet } from "@/components/session/cancel-subscription-sheet";
 import { SubscriptionDetailsData } from "./types";
 import { extractPaginationParams } from "@/lib/pagination-utils";
-import { BackButton } from "../../../../components/custom/back-button";
 import SubscriptionInfo from "@/components/session/subscriptions/subscription-info";
 import { ChangePlanSheet } from "@/components/session/subscriptions/change-plan-sheet";
 import { ProductCollectionData } from "./types";
+import { SessionPageLayout } from "@/components/session/session-page-layout";
 
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
@@ -45,38 +44,48 @@ export default async function SubscriptionPage({
     USAGE_PAGE_PARAM_KEY
   );
 
+  // Header actions for the page
+  const headerActions = (
+    <HeaderActions
+      subscription={subscription}
+      subscriptionId={id}
+      productCollection={productCollection}
+    />
+  );
+
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full gap-8">
-      <TopButtons
-        subscription={subscription}
-        subscriptionId={id}
-        productCollection={productCollection}
-      />
-      <SubscriptionInfo subscription={subscription} />
-      <SubscriptionDetails subscription={subscription} />
-      <SubscriptionBillingInfo subscription={subscription} />
-      <SubscriptionTabsTable
-        subscriptionId={id}
-        subscription={subscription}
-        searchParams={searchParams}
-        invoicePagination={{
-          currentPage: invoiceParams.currentPage,
-          pageSize: invoiceParams.pageSize,
-          baseUrl: invoiceParams.baseUrl,
-          pageParamKey: INVOICE_PAGE_PARAM_KEY,
-        }}
-        usagePagination={{
-          currentPage: usageParams.currentPage,
-          pageSize: usageParams.pageSize,
-          baseUrl: usageParams.baseUrl,
-          pageParamKey: USAGE_PAGE_PARAM_KEY,
-        }}
-      />
-    </div>
+    <SessionPageLayout
+      title=""
+      backHref="/session/subscriptions"
+      headerActions={headerActions}
+    >
+      <div className="flex flex-col gap-8">
+        <SubscriptionInfo subscription={subscription} />
+        <SubscriptionDetails subscription={subscription} />
+        <SubscriptionBillingInfo subscription={subscription} />
+        <SubscriptionTabsTable
+          subscriptionId={id}
+          subscription={subscription}
+          searchParams={searchParams}
+          invoicePagination={{
+            currentPage: invoiceParams.currentPage,
+            pageSize: invoiceParams.pageSize,
+            baseUrl: invoiceParams.baseUrl,
+            pageParamKey: INVOICE_PAGE_PARAM_KEY,
+          }}
+          usagePagination={{
+            currentPage: usageParams.currentPage,
+            pageSize: usageParams.pageSize,
+            baseUrl: usageParams.baseUrl,
+            pageParamKey: USAGE_PAGE_PARAM_KEY,
+          }}
+        />
+      </div>
+    </SessionPageLayout>
   );
 }
 
-function TopButtons({
+function HeaderActions({
   subscription,
   subscriptionId,
   productCollection,
@@ -85,27 +94,23 @@ function TopButtons({
   subscriptionId: string;
   productCollection: ProductCollectionData | null;
 }) {
-
   return (
-    <PageHeader showSeparator={false}>
-      <BackButton fallbackUrl={`/session/subscriptions`} />
-      <div className="flex flex-row gap-2">
-        {productCollection && (
-          <ChangePlanSheet
-            currentProductId={subscription.product.id}
-            subscriptionId={subscriptionId}
-            currentAddons={subscription.addons ?? []}
-            currentQuantity={subscription.quantity ?? 1}
-            productCollection={productCollection ?? null}
-          />
-        )}
-        {subscription.status != "cancelled" && (
-          <CancelSubscriptionSheet
-            subscription={subscription}
-            subscriptionId={subscriptionId}
-          />
-        )}
-      </div>
-    </PageHeader>
+    <>
+      {productCollection && (
+        <ChangePlanSheet
+          currentProductId={subscription.product.id}
+          subscriptionId={subscriptionId}
+          currentAddons={subscription.addons ?? []}
+          currentQuantity={subscription.quantity ?? 1}
+          productCollection={productCollection ?? null}
+        />
+      )}
+      {subscription.status != "cancelled" && (
+        <CancelSubscriptionSheet
+          subscription={subscription}
+          subscriptionId={subscriptionId}
+        />
+      )}
+    </>
   );
 }

@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 interface TimeTooltipProps {
   timeStamp: string; // ISO string
   className?: string;
+  triggerFormat?: "default" | "shortDate";
 }
 
 function getDeviceTimezoneOffset(): string {
@@ -42,9 +43,21 @@ function formatDateTime(dateString: string, timeZone: string): string {
   });
 }
 
-function TimeTriggerFormat(dateString: string): string {
+function TimeTriggerFormat(
+  dateString: string,
+  format: "default" | "shortDate",
+): string {
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleString("en-GB", {
+  if (format === "shortDate") {
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      timeZone: "UTC",
+    });
+  }
+
+  return date.toLocaleString("en-GB", {
     day: "numeric",
     month: "short",
     hour: "numeric",
@@ -52,7 +65,6 @@ function TimeTriggerFormat(dateString: string): string {
     hour12: false,
     timeZone: "UTC",
   });
-  return formattedDate;
 }
 
 interface TimeDisplayProps {
@@ -108,12 +120,16 @@ function TimeDisplay({
   );
 }
 
-export function TimeTooltip({ timeStamp, className }: TimeTooltipProps) {
+export function TimeTooltip({
+  timeStamp,
+  className,
+  triggerFormat = "default",
+}: TimeTooltipProps) {
   const [copied, setCopied] = useState<"device" | "project" | null>(null);
   const deviceTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const deviceOffset = getDeviceTimezoneOffset();
   const deviceTime = formatDateTime(timeStamp, deviceTz);
-  const displayTime = TimeTriggerFormat(timeStamp);
+  const displayTime = TimeTriggerFormat(timeStamp, triggerFormat);
   const utcTime = formatDateTime(timeStamp, "UTC");
 
   function handleCopy(value: string, type: "device" | "project") {

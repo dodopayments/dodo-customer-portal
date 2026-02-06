@@ -47,7 +47,7 @@ export function WalletTable({
       accessorKey: "description",
       header: "Reason",
       cell: ({ row }) => {
-        const description = row.original.description;
+        const description = row.original.reason || row.original.description;
         return (
           <div className="text-left text-text-secondary">
             {description || "-"}

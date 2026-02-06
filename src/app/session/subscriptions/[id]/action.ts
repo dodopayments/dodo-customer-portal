@@ -78,7 +78,7 @@ export async function fetchSubscription(
     if (!response.ok) {
       throw new Error(`Failed to fetch subscription: ${response.status}`);
     }
-    const data = await response.json(); 
+    const data = await response.json();
     return data;
   } catch (error) {
     parseError(error, "Failed to fetch subscription");
@@ -147,7 +147,6 @@ export async function changeSubscriptionPlan(
       // Try to parse JSON error response
       try {
         const errorJson = JSON.parse(errorText);
-        console.log("errorJson", errorJson);
         errorMessage = errorJson.message || errorText;
       } catch {
         errorMessage = errorText;
@@ -158,9 +157,10 @@ export async function changeSubscriptionPlan(
       } else if (response.status === 404) {
         errorMessage = errorMessage || "Subscription not found";
       } else if (response.status === 422) {
-        errorMessage = errorMessage || "Invalid request - subscription cannot be changed";
+        errorMessage =
+          errorMessage || "Invalid request - subscription cannot be changed";
       } else {
-        errorMessage =  `HTTP ${response.status}`;
+        errorMessage = `HTTP ${response.status}`;
       }
 
       throw new Error(errorMessage);
@@ -209,14 +209,14 @@ export async function changeSubscriptionPlanPreview(
       } else if (response.status === 404) {
         errorMessage = errorMessage || "Subscription not found";
       } else if (response.status === 422) {
-        errorMessage = errorMessage || "Invalid request - subscription cannot be changed";
+        errorMessage =
+          errorMessage || "Invalid request - subscription cannot be changed";
       }
 
       throw new Error(errorMessage || `HTTP ${response.status}`);
     }
 
     return await response.json();
-
   } catch (error) {
     // Error will be caught and handled by client component
     throw error;
@@ -345,4 +345,3 @@ export async function fetchProductCollectionByProductId(
     return null;
   }
 }
-

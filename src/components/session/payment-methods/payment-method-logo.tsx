@@ -213,3 +213,26 @@ function getLogoFromPaymentMethod(method: PaymentMethod): LogoResult {
     Icon: CreditCard,
   };
 }
+
+/**
+ * Format a payment method type string for display
+ * Converts snake_case to Title Case
+ */
+export function formatPaymentMethodType(type: string): string {
+  return type
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/**
+ * Get human-readable display name for a payment method
+ */
+export function getPaymentMethodDisplayName(paymentMethod: {
+  payment_method_type?: string;
+  payment_method?: string;
+}): string {
+  if (paymentMethod.payment_method_type === "apple_pay") return "Apple Pay";
+  if (paymentMethod.payment_method_type === "google_pay") return "Google Pay";
+  return formatPaymentMethodType(paymentMethod.payment_method || "Unknown");
+}

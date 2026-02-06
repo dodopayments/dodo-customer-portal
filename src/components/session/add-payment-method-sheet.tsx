@@ -85,12 +85,8 @@ export function AddPaymentMethodSheet() {
   const handleAddCard = () => {
     const cardNumberDigits = unformatCardNumber(cardNumber);
     const expiryParsed = parseExpiryDate(expiryDate);
-    console.log(
-      cardNumberDigits,
-      expiryParsed?.month,
-      expiryParsed?.year,
-      securityCode
-    );
+    // TODO: Implement add card functionality
+    // cardNumberDigits, expiryParsed?.month, expiryParsed?.year, securityCode
   };
 
   return (
