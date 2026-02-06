@@ -19,6 +19,7 @@ export interface OrderData {
     phone_number: string;
   };
   digital_products_delivered: boolean;
+  license_key_delivered: boolean;
   payment_id: string;
   payment_method: string;
   payment_method_type: string;
@@ -97,7 +98,7 @@ export const Orders = ({
             tableId="billing-history-overview"
             data={ordersData}
             columns={BillingHistoryColumns}
-            recordCount={totalCount}
+            // recordCount={totalCount}
             manualPagination
             initialPageSize={OVERVIEW_PAGE_SIZE}
             onPaginationChange={(pagination) => {
@@ -114,7 +115,7 @@ export const Orders = ({
               columnsResizable: false,
               columnsMovable: false,
               columnsVisibility: false,
-              disableRowPerPage: false,
+              disableRowPerPage: true,
             }}
             disablePagination={!shouldShowOverviewPagination}
             emptyStateMessage="No billing history available"

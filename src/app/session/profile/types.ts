@@ -30,6 +30,7 @@ export interface WalletLedgerItem {
   event_type: string;
   id: string;
   is_credit: boolean;
+  reason?: string;
   reference_object_id?: string;
   usd_equivalent_amount: number;
 }

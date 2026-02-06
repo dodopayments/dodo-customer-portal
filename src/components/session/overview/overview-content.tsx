@@ -26,11 +26,11 @@ interface OverviewContentProps {
     billingHistoryPagination: BillingHistoryPagination;
     user: { name: string; email: string } | null;
     wallets: WalletItem[];
-    walletLedger: WalletLedgerItem[];
+    walletLedgerByCurrency: Record<string, WalletLedgerItem[]>;
 }
 
 const BILLING_PAGE_PARAM = "billingPage";
-const BILLING_SIZE_PARAM = "billingPageSize";
+const OVERVIEW_PAGE_SIZE = 25;
 
 export function OverviewContent({
     subscriptions,
@@ -40,26 +40,13 @@ export function OverviewContent({
     billingHistoryPagination,
     user,
     wallets,
-    walletLedger,
+    walletLedgerByCurrency,
 }: OverviewContentProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
-
     const handleBillingPageChange = useCallback((newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(BILLING_PAGE_PARAM, newPage.toString());
-        if (billingHistoryPagination.pageSize !== 10) {
-            params.set(BILLING_SIZE_PARAM, billingHistoryPagination.pageSize.toString());
-        } else {
-            params.delete(BILLING_SIZE_PARAM);
-        }
-        router.push(`/session/overview?${params.toString()}`);
-    }, [router, searchParams, billingHistoryPagination.pageSize]);
-
-    const handleBillingPageSizeChange = useCallback((newSize: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set(BILLING_PAGE_PARAM, "0");
-        params.set(BILLING_SIZE_PARAM, newSize.toString());
         router.push(`/session/overview?${params.toString()}`);
     }, [router, searchParams]);
 
@@ -83,11 +70,11 @@ export function OverviewContent({
                             ordersData={billingHistory}
                             variant="overview"
                             currentPage={billingHistoryPagination.currentPage}
-                            pageSize={billingHistoryPagination.pageSize}
+                            pageSize={OVERVIEW_PAGE_SIZE}
                             hasNextPage={billingHistoryPagination.hasNextPage}
                             totalCount={billingHistoryPagination.totalCount}
                             onPageChange={handleBillingPageChange}
-                            onPageSizeChange={handleBillingPageSizeChange}
+                            onPageSizeChange={() => {}}
                             showPagination={true}
                         />
 
@@ -96,7 +83,7 @@ export function OverviewContent({
                         {wallets.length > 0 && (
                             <WalletsSection
                                 wallets={wallets}
-                                walletLedger={walletLedger}
+                                walletLedgerByCurrency={walletLedgerByCurrency}
                             />
                         )}
                     </div>

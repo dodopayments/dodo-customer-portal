@@ -14,7 +14,7 @@ export function LeftPanel({
     const displayName = businessName || business?.name || "website";
 
     return (
-        <aside className="hidden lg:flex flex-col w-80 xl:w-96 bg-bg-secondary/30 border-r border-border-secondary p-8 sticky top-0 h-screen">
+        <aside className="hidden lg:flex flex-col w-80 xl:w-96 bg-bg-secondary border-r border-border-secondary p-8 sticky top-0 h-screen">
             <div className="flex-1">
                 <h1 className="text-2xl font-display font-semibold text-text-primary leading-tight mb-4">
                     Manage your subscription and billing settings
