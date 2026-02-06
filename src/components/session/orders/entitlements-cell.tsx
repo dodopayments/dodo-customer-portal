@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Key, File, Loader2, Download, Eye, EyeOff } from "lucide-react";
+import { KeyRound, FileMinus, Loader2, Download, Eye, EyeOff } from "lucide-react";
 import { getProductCart } from "@/app/session/orders/actions";
 import { ProductCartItem, LicenseKeyResponse, DigitalProductResponse } from "../product";
 import { getToken } from "@/lib/server-actions";
@@ -31,11 +31,13 @@ import { parseIsoDate } from "@/lib/date-helper";
 interface EntitlementsCellProps {
     paymentId: string;
     hasDigitalProducts: boolean;
+    hasLicenseKeys: boolean;
 }
 
 export const EntitlementsCell = ({
     paymentId,
     hasDigitalProducts,
+    hasLicenseKeys,
 }: EntitlementsCellProps) => {
     const [productCartLoading, setProductCartLoading] = useState(false);
     const [productCart, setProductCart] = useState<ProductCartItem[] | null>(null);
@@ -49,41 +51,49 @@ export const EntitlementsCell = ({
     const toggleVisibility = (id: string) =>
         setVisibleById((prev) => ({ ...prev, [id]: !prev[id] }));
 
-    useEffect(() => {
-        if (hasDigitalProducts && !productCart && !productCartLoading) {
-            fetchProductCartData();
+    const fetchProductCartData = async (): Promise<ProductCartItem[]> => {
+        if (productCart) {
+            return productCart;
         }
-    }, [hasDigitalProducts, paymentId, productCart, productCartLoading]);
 
-    useEffect(() => {
-        if (isLicenseSheetOpen && !productCart && !productCartLoading) {
-            fetchProductCartData();
+        if (productCartLoading) {
+            return [];
         }
-    }, [isLicenseSheetOpen]);
 
-    useEffect(() => {
-        if (isAttachmentsSheetOpen) {
-            if (!productCart && !productCartLoading) {
-                fetchProductCartData();
-            }
-            if (!digitalProducts && !digitalProductsLoading) {
-                fetchDigitalProducts();
-            }
-        }
-    }, [isAttachmentsSheetOpen]);
-
-    const fetchProductCartData = async () => {
         setProductCartLoading(true);
         try {
             const cart = await getProductCart(paymentId);
-            setProductCart(cart || []);
+            const safeCart = cart || [];
+            setProductCart(safeCart);
+            return safeCart;
         } catch (error) {
             parseError(error, "Failed to fetch product cart");
             setProductCart([]);
+            return [];
         } finally {
             setProductCartLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (!hasLicenseKeys) {
+            return;
+        }
+
+        if (!isLicenseSheetOpen) {
+            return;
+        }
+
+        if (!productCart && !productCartLoading) {
+            fetchProductCartData();
+        }
+    }, [
+        hasLicenseKeys,
+        isLicenseSheetOpen,
+        paymentId,
+        productCart,
+        productCartLoading,
+    ]);
 
     const fetchDigitalProducts = async () => {
         try {
@@ -117,29 +127,25 @@ export const EntitlementsCell = ({
         }
     };
 
-    if (!hasDigitalProducts) {
-        return <span className="text-xs text-text-tertiary">-</span>;
-    }
-
     const allLicenseKeys: LicenseKeyResponse[] =
         productCart?.flatMap((p) => p.license_keys || []) || [];
-    const hasLicenseKeys = allLicenseKeys.length > 0;
-    const hasAttachments = (productCart || []).some((item) => {
-        const deliverable =
-            (item as ProductCartItem & { digital_product_deliverable?: unknown | null })
-                .digital_product_deliverable;
-        return deliverable !== null && deliverable !== undefined;
-    });
 
-    if (!productCart && productCartLoading) {
-        return <span className="text-xs text-text-tertiary">-</span>;
-    }
+    useEffect(() => {
+        if (!isAttachmentsSheetOpen) {
+            return;
+        }
 
-    if (!productCart) {
-        return <span className="text-xs text-text-tertiary">-</span>;
-    }
+        if (hasDigitalProducts && !digitalProducts && !digitalProductsLoading) {
+            fetchDigitalProducts();
+        }
+    }, [
+        isAttachmentsSheetOpen,
+        hasDigitalProducts,
+        digitalProducts,
+        digitalProductsLoading,
+    ]);
 
-    if (!hasLicenseKeys && !hasAttachments) {
+    if (!hasLicenseKeys && !hasDigitalProducts) {
         return <span className="text-xs text-text-tertiary">-</span>;
     }
 
@@ -154,7 +160,7 @@ export const EntitlementsCell = ({
                             size="sm"
                             className="h-auto py-1.5 px-3 text-xs"
                         >
-                            <Key className="w-3.5 h-3.5" />
+                            <KeyRound className="w-3.5 h-3.5" />
                             License key
                         </Button>
                     </SheetTrigger>
@@ -228,7 +234,7 @@ export const EntitlementsCell = ({
                 </Sheet>
             )}
 
-            {hasAttachments && (
+            {hasDigitalProducts && (
                 <Sheet open={isAttachmentsSheetOpen} onOpenChange={setIsAttachmentsSheetOpen}>
                     <SheetTrigger asChild>
                         <Button
@@ -236,7 +242,7 @@ export const EntitlementsCell = ({
                             size="sm"
                             className="h-auto py-1.5 px-3 text-xs"
                         >
-                            <File className="w-3.5 h-3.5" />
+                            <FileMinus className="w-3.5 h-3.5" />
                             Attachment
                         </Button>
                     </SheetTrigger>
@@ -289,7 +295,7 @@ export const EntitlementsCell = ({
                                                                 className="flex items-center justify-between p-2 border rounded"
                                                             >
                                                                 <div className="flex items-center gap-2">
-                                                                    <File className="w-4 h-4" />
+                                                                    <FileMinus className="w-4 h-4" />
                                                                     <span className="text-sm">{file.file_name}</span>
                                                                 </div>
                                                                 <Button

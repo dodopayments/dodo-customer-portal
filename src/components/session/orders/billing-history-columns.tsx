@@ -3,11 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge, type BadgeVariant } from "@/components/ui/badge";
 import { getBadge } from "@/lib/badge-helper";
-import {
-    CurrencyCode,
-    decodeCurrency,
-    formatCurrency,
-} from "@/lib/currency-helper";
 import InvoiceDownloadSheet from "../invoice-download-sheet";
 import { api_url } from "@/lib/http";
 import { OrderData } from "./orders";
@@ -24,6 +19,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
                 <TimeTooltip
                     timeStamp={row.original.created_at}
                     className="text-sm text-text-primary font-medium"
+                    triggerFormat="shortDate"
                 />
             );
         },
@@ -46,16 +42,23 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
         },
     },
     {
-        id: "items",
+        id: "pricing-type",
         accessorKey: "subscription_id",
-        header: "Items",
+        header: "Pricing Type",
         cell: ({ row }) => {
+            const pricingType = row.original.subscription_id
+                ? "Subscription"
+                : "One_time";
+            const badge = getBadge(pricingType, false, true);
+
             return (
-                <span className="text-sm text-text-primary truncate">
-                    {row.original.subscription_id
-                        ? "Subscription Payment"
-                        : "One-time Purchase"}
-                </span>
+                <Badge
+                    variant={badge.color as BadgeVariant}
+                    dot={false}
+                    className="rounded-sm text-xs"
+                >
+                    {badge.message}
+                </Badge>
             );
         },
     },
@@ -68,6 +71,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
                 <EntitlementsCell
                     paymentId={row.original.payment_id}
                     hasDigitalProducts={row.original.digital_products_delivered}
+                    hasLicenseKeys={row.original.license_key_delivered}
                 />
             );
         },

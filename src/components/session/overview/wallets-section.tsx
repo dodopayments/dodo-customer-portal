@@ -9,15 +9,24 @@ import {
     decodeCurrency,
     formatCurrency,
 } from "@/lib/currency-helper";
-import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 interface WalletsSectionProps {
     wallets: WalletItem[];
-    walletLedger: WalletLedgerItem[];
+    walletLedgerByCurrency: Record<string, WalletLedgerItem[]>;
 }
 
-export function WalletsSection({ wallets, walletLedger }: WalletsSectionProps) {
+export function WalletsSection({
+    wallets,
+    walletLedgerByCurrency,
+}: WalletsSectionProps) {
     const [selectedCurrency, setSelectedCurrency] = useState<string>(
         wallets[0]?.currency || "USD"
     );
@@ -25,6 +34,7 @@ export function WalletsSection({ wallets, walletLedger }: WalletsSectionProps) {
     const selectedWallet = wallets.find(
         (w) => w.currency === selectedCurrency
     );
+    const walletLedger = walletLedgerByCurrency[selectedCurrency] || [];
 
     if (!wallets || wallets.length === 0) {
         return null;
@@ -45,20 +55,21 @@ export function WalletsSection({ wallets, walletLedger }: WalletsSectionProps) {
 
             {wallets.length > 1 && (
                 <div className="mb-6">
-                    <div className="relative inline-block">
-                        <select
-                            value={selectedCurrency}
-                            onChange={(e) => setSelectedCurrency(e.target.value)}
-                            className="appearance-none bg-bg-secondary border border-border-secondary rounded-lg px-4 py-2 pr-10 text-sm font-medium text-text-primary cursor-pointer hover:bg-bg-focused transition-colors"
-                        >
+                    <Select
+                        value={selectedCurrency}
+                        onValueChange={setSelectedCurrency}
+                    >
+                        <SelectTrigger className="w-fit min-w-[140px]">
+                            <SelectValue placeholder="Select wallet" />
+                        </SelectTrigger>
+                        <SelectContent>
                             {wallets.map((wallet) => (
-                                <option key={wallet.currency} value={wallet.currency}>
+                                <SelectItem key={wallet.currency} value={wallet.currency}>
                                     {wallet.currency} wallet
-                                </option>
+                                </SelectItem>
                             ))}
-                        </select>
-                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary pointer-events-none" />
-                    </div>
+                        </SelectContent>
+                    </Select>
                 </div>
             )}
 
@@ -133,7 +144,9 @@ export function WalletsSection({ wallets, walletLedger }: WalletsSectionProps) {
 
                                         <div className="sm:hidden">
                                             <span className="text-sm text-text-primary">
-                                                {ledgerItem.description || ledgerItem.event_type}
+                                                {ledgerItem.reason ||
+                                                    ledgerItem.description ||
+                                                    ledgerItem.event_type}
                                             </span>
                                         </div>
 
@@ -148,7 +161,9 @@ export function WalletsSection({ wallets, walletLedger }: WalletsSectionProps) {
 
                                         <div className="hidden sm:block sm:col-span-7">
                                             <span className="text-sm text-text-primary">
-                                                {ledgerItem.description || ledgerItem.event_type}
+                                                {ledgerItem.reason ||
+                                                    ledgerItem.description ||
+                                                    ledgerItem.event_type}
                                             </span>
                                         </div>
 

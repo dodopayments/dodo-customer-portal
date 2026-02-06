@@ -73,9 +73,9 @@ export function UserNav({ user }: UserNavProps) {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
-                            variant="ghost"
+                            variant="secondary"
                             size="icon"
-                            className="w-10 h-10 rounded-full hover:bg-bg-secondary transition-colors"
+                            className="w-10 h-10 hover:bg-bg-secondary transition-colors"
                         >
                             <User className="w-5 h-5 text-text-secondary" />
                         </Button>

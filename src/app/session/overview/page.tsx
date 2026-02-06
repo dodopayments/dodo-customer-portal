@@ -12,9 +12,8 @@ export const dynamic = "force-dynamic";
 
 const WALLET_TRANSACTIONS_SIZE = 10;
 const OVERVIEW_SUBSCRIPTIONS_SIZE = 3;
-const DEFAULT_BILLING_PAGE_SIZE = 10;
 const BILLING_PAGE_PARAM = "billingPage";
-const BILLING_SIZE_PARAM = "billingPageSize";
+const OVERVIEW_BILLING_PAGE_SIZE = 25;
 
 interface OverviewPageProps {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -24,9 +23,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
     const params = await searchParams;
 
     const parsedBillingPage = parseInt(params[BILLING_PAGE_PARAM] as string || "0", 10);
-    const parsedBillingPageSize = parseInt(params[BILLING_SIZE_PARAM] as string || DEFAULT_BILLING_PAGE_SIZE.toString(), 10);
     const billingPage = isNaN(parsedBillingPage) || parsedBillingPage < 0 ? 0 : parsedBillingPage;
-    const billingPageSize = isNaN(parsedBillingPageSize) || parsedBillingPageSize < 1 ? DEFAULT_BILLING_PAGE_SIZE : parsedBillingPageSize;
 
     let subscriptionsData, paymentMethods, billingHistoryData, user, wallets;
 
@@ -40,7 +37,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         ] = await Promise.all([
             fetchSubscriptions(0, OVERVIEW_SUBSCRIPTIONS_SIZE),
             fetchPaymentMethods(),
-            fetchPayments(billingPage, billingPageSize),
+            fetchPayments(billingPage, OVERVIEW_BILLING_PAGE_SIZE),
             fetchUser(),
             fetchWallets(),
         ]);
@@ -58,21 +55,28 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
     const safePaymentMethods = (paymentMethods || []) as PaymentMethodItem[];
 
     const walletItems = (wallets?.items || []) as WalletItem[];
-    let walletLedger: WalletLedgerItem[] = [];
+    const walletLedgerByCurrency: Record<string, WalletLedgerItem[]> = {};
 
     if (walletItems.length > 0) {
-        try {
-            const firstCurrency = walletItems[0].currency;
-            const ledgerData = await fetchWalletLedger({
-                currency: firstCurrency,
-                pageNumber: 0,
-                pageSize: WALLET_TRANSACTIONS_SIZE,
-            });
-            walletLedger = ledgerData.data as WalletLedgerItem[];
-        } catch (error) {
-            console.error("Failed to fetch wallet ledger:", error);
-            walletLedger = [];
-        }
+        await Promise.all(
+            walletItems.map(async (wallet) => {
+                try {
+                    const ledgerData = await fetchWalletLedger({
+                        currency: wallet.currency,
+                        pageNumber: 0,
+                        pageSize: WALLET_TRANSACTIONS_SIZE,
+                    });
+                    walletLedgerByCurrency[wallet.currency] =
+                        ledgerData.data as WalletLedgerItem[];
+                } catch (error) {
+                    console.error(
+                        `Failed to fetch wallet ledger for ${wallet.currency}:`,
+                        error
+                    );
+                    walletLedgerByCurrency[wallet.currency] = [];
+                }
+            })
+        );
     }
 
     return (
@@ -83,13 +87,13 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             billingHistory={billingHistoryData.data as OrderData[]}
             billingHistoryPagination={{
                 currentPage: billingPage,
-                pageSize: billingPageSize,
+                pageSize: OVERVIEW_BILLING_PAGE_SIZE,
                 hasNextPage: billingHistoryData.hasNext,
                 totalCount: billingHistoryData.totalCount,
             }}
             user={user}
             wallets={walletItems}
-            walletLedger={walletLedger}
+            walletLedgerByCurrency={walletLedgerByCurrency}
         />
     );
 }
