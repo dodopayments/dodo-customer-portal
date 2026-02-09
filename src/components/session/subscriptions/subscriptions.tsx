@@ -48,6 +48,7 @@ export interface SubscriptionData {
     tax_id: string;
     tax_inclusive: boolean;
     trial_period_days: number;
+    payment_method_id?: string;
 }
 
 interface SubscriptionsProps {
@@ -117,15 +118,20 @@ export const Subscriptions = ({
                     </Card>
                 ) : (
                     <div className="space-y-3">
-                        {overviewSubscriptions.map((item: SubscriptionData) => (
-                            <SubscriptionCard
-                                key={item.subscription_id}
-                                item={item}
-                                variant="compact"
-                                paymentMethod={paymentMethods[0]}
-                                cardClassName={cardClassName}
-                            />
-                        ))}
+                        {overviewSubscriptions.map((item: SubscriptionData) => {
+                            const matchedPaymentMethod = item.payment_method_id
+                                ? paymentMethods.find(pm => pm.payment_method_id === item.payment_method_id)
+                                : undefined;
+                            return (
+                                <SubscriptionCard
+                                    key={item.subscription_id}
+                                    item={item}
+                                    variant="compact"
+                                    paymentMethod={matchedPaymentMethod}
+                                    cardClassName={cardClassName}
+                                />
+                            );
+                        })}
                         <div className="flex justify-end mt-4">
                             <button
                                 onClick={() => router.push("/session/subscriptions")}

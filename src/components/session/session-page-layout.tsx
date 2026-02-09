@@ -39,6 +39,14 @@ export function SessionPageLayout({
     setMounted(true);
   }, []);
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push(backHref);
+    }
+  };
+
 
   const toggleTheme = () => {
     if (!(document as any).startViewTransition) {
@@ -117,7 +125,7 @@ export function SessionPageLayout({
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => router.push(backHref)}
+                  onClick={handleBack}
                   className="h-10 w-10 rounded-md bg-bg-secondary"
                 >
                   <ArrowLeft className="w-5 h-5 text-text-secondary" />

@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { CircleSlash } from "lucide-react";
 import { OrderCard } from "./order-card";
-import TablePagination from "@/components/common/table-pagination";
+import ServerPagination from "@/components/common/server-pagination";
 import { Card, CardContent } from "@/components/ui/card";
 import { BaseDataGrid } from "@/components/table/BaseDataGrid";
 import { BillingHistoryColumns } from "./billing-history-columns";
@@ -39,9 +39,14 @@ interface OrdersProps {
   currentPage: number;
   pageSize: number;
   hasNextPage: boolean;
+  currentPageItems?: number;
   totalCount?: number;
-  onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  // For detail variant (link-based pagination)
+  baseUrl?: string;
+  pageParamKey?: string;
+  // For overview variant (callback-based pagination)
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
   showPagination?: boolean;
 }
 
@@ -51,7 +56,10 @@ export const Orders = ({
   currentPage,
   pageSize,
   hasNextPage,
+  currentPageItems,
   totalCount: externalTotalCount,
+  baseUrl,
+  pageParamKey,
   onPageChange,
   onPageSizeChange,
   variant = "detail",
@@ -102,10 +110,10 @@ export const Orders = ({
             manualPagination
             initialPageSize={OVERVIEW_PAGE_SIZE}
             onPaginationChange={(pagination) => {
-              if (pagination.pageIndex !== currentPage) {
+              if (pagination.pageIndex !== currentPage && onPageChange) {
                 onPageChange(pagination.pageIndex);
               }
-              if (pagination.pageSize !== pageSize) {
+              if (pagination.pageSize !== pageSize && onPageSizeChange) {
                 onPageSizeChange(pagination.pageSize);
               }
             }}
@@ -146,19 +154,15 @@ export const Orders = ({
           />
         ))
       )}
-      {shouldShowPagination && (totalCount > 0 || currentPage > 0) && (
-        <Card>
-          <CardContent className="p-0">
-            <TablePagination
-              currentPage={currentPage}
-              pageSize={pageSize}
-              totalCount={totalCount}
-              hasNextPage={hasNextPage}
-              onPageChange={onPageChange}
-              onPageSizeChange={onPageSizeChange}
-            />
-          </CardContent>
-        </Card>
+      {shouldShowPagination && (totalCount > 0 || currentPage > 0) && baseUrl && pageParamKey && (
+        <ServerPagination
+          currentPage={currentPage}
+          pageSize={pageSize}
+          currentPageItems={currentPageItems ?? ordersData.length}
+          hasNextPage={hasNextPage}
+          baseUrl={baseUrl}
+          pageParamKey={pageParamKey}
+        />
       )}
     </div>
   );

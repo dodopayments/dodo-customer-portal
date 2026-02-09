@@ -117,7 +117,7 @@ export const SubscriptionCard = ({
                     <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-text-secondary" />
                   )}
                   <span className="text-sm sm:text-base text-text-primary font-medium">
-                    {paymentMethod?.card?.card_network} {paymentDisplay.label}
+                    {paymentMethod?.card?.card_network ? `${paymentMethod.card.card_network} ` : ""}{paymentDisplay.label}
                   </span>
                 </div>
               )}

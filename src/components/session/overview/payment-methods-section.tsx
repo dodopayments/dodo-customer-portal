@@ -26,9 +26,9 @@ export function PaymentMethodsSection({
         </h2>
       </div>
 
-      <Card>
-        <CardContent className="p-0">
-          {isEmpty ? (
+      {isEmpty ? (
+        <Card>
+          <CardContent className="p-0">
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <div className="p-4 bg-bg-secondary rounded-full mb-4">
                 <CircleSlash className="w-6 h-6 text-text-secondary" />
@@ -37,24 +37,25 @@ export function PaymentMethodsSection({
                 No payment methods added
               </p>
             </div>
-          ) : (
-            <div className="divide-y divide-border-secondary">
-              {paymentMethods.map((paymentMethod) => {
-                const logo = getPaymentMethodLogoUrl(
-                  paymentMethod.payment_method_type,
-                  paymentMethod.payment_method,
-                  paymentMethod.card?.card_network,
-                  paymentMethod.card?.card_type,
-                );
-                const displayName = getPaymentMethodDisplayName(paymentMethod);
-                const isCard = paymentMethod.payment_method === "card";
-                const card = paymentMethod.card;
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {paymentMethods.map((paymentMethod) => {
+            const logo = getPaymentMethodLogoUrl(
+              paymentMethod.payment_method_type,
+              paymentMethod.payment_method,
+              paymentMethod.card?.card_network,
+              paymentMethod.card?.card_type,
+            );
+            const displayName = getPaymentMethodDisplayName(paymentMethod);
+            const isCard = paymentMethod.payment_method === "card";
+            const card = paymentMethod.card;
 
-                return (
-                  <div
-                    key={paymentMethod.payment_method_id}
-                    className="flex items-center justify-between px-4 sm:px-6 py-4 hover:bg-bg-secondary/30 transition-colors group"
-                  >
+            return (
+              <Card key={paymentMethod.payment_method_id}>
+                <CardContent className="p-0">
+                  <div className="flex items-center justify-between px-4 sm:px-6 py-4 hover:bg-bg-secondary/30 transition-colors group">
                     <div className="flex items-center gap-3 sm:gap-4">
                       {/* Logo */}
                       <div className="border border-border-secondary rounded-md p-2 flex items-center justify-center w-12 h-9 bg-bg-primary">
@@ -100,12 +101,12 @@ export function PaymentMethodsSection({
                       </div>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }
