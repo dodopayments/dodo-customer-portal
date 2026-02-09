@@ -59,12 +59,14 @@ export function OverviewContent({
 
                 <div className="flex-1 px-4 md:px-8 lg:px-12 py-6 md:py-8 overflow-y-auto">
                     <div className="max-w-5xl space-y-8">
-                        <Subscriptions
-                            subscriptionData={subscriptions}
-                            variant="overview"
-                            paymentMethods={paymentMethods}
-                            totalCount={subscriptionsTotalCount}
-                        />
+                        {subscriptions.length > 0 && (
+                            <Subscriptions
+                                subscriptionData={subscriptions}
+                                variant="overview"
+                                paymentMethods={paymentMethods}
+                                totalCount={subscriptionsTotalCount}
+                            />
+                        )}
 
                         <Orders
                             ordersData={billingHistory}
@@ -78,7 +80,9 @@ export function OverviewContent({
                             showPagination={true}
                         />
 
-                        <PaymentMethodsSection paymentMethods={paymentMethods} />
+                        {paymentMethods.length > 0 && (
+                            <PaymentMethodsSection paymentMethods={paymentMethods} />
+                        )}
 
                         {wallets.length > 0 && (
                             <WalletsSection

@@ -10,6 +10,7 @@ interface UseLogoutOptions {
   /**
    * Whether the user logged in via a business-specific token.
    * Influences the post-logout redirect strategy.
+   * If not provided, will be read from BusinessContext.
    */
   hasBusinessToken?: boolean;
 }
@@ -18,9 +19,11 @@ interface UseLogoutOptions {
  * Handle logout logic and redirection.
  */
 export function useLogout(options: UseLogoutOptions = {}) {
-  const { hasBusinessToken = false } = options;
   const router = useRouter();
-  const { business } = useBusiness();
+  const businessContext = useBusiness();
+  // Use option if provided, otherwise fall back to context value
+  const hasBusinessToken = options.hasBusinessToken ?? businessContext.hasBusinessToken ?? false;
+  const { business } = businessContext;
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const businessIdRef = useRef<string | undefined>(undefined);
 

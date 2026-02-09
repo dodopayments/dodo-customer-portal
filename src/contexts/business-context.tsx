@@ -14,6 +14,7 @@ interface BusinessContextValue {
     business: Business | null;
     loading: boolean;
     error: string | null;
+    hasBusinessToken: boolean;
 }
 
 const BusinessContext = createContext<BusinessContextValue | undefined>(undefined);
@@ -21,16 +22,18 @@ const BusinessContext = createContext<BusinessContextValue | undefined>(undefine
 interface BusinessProviderProps {
     children: React.ReactNode;
     initialBusiness: Business | null;
+    hasBusinessToken?: boolean;
 }
 
 /**
  * Provides business-related data and state through context.
  */
-export function BusinessProvider({ children, initialBusiness }: BusinessProviderProps) {
+export function BusinessProvider({ children, initialBusiness, hasBusinessToken = false }: BusinessProviderProps) {
     const value: BusinessContextValue = {
         business: initialBusiness,
         loading: false,
         error: initialBusiness === null ? "Failed to load business data" : null,
+        hasBusinessToken,
     };
 
     return (

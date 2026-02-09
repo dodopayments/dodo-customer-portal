@@ -76,26 +76,6 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
             );
         },
     },
-    // {
-    //     id: "amount",
-    //     accessorKey: "total_amount",
-    //     header: () => <div className="text-right">Amount</div>,
-    //     cell: ({ row }) => {
-    //         return (
-    //             <div className="text-right">
-    //                 <span className="text-sm font-medium text-text-primary">
-    //                     {formatCurrency(
-    //                         decodeCurrency(
-    //                             row.original.total_amount,
-    //                             row.original.currency as CurrencyCode
-    //                         ),
-    //                         row.original.currency as CurrencyCode
-    //                     )}
-    //                 </span>
-    //             </div>
-    //         );
-    //     },
-    // },
     {
         id: "invoice",
         header: () => <div className="text-right">Invoice</div>,
