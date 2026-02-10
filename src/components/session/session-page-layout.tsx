@@ -40,6 +40,7 @@ export function SessionPageLayout({
   }, []);
 
   const handleBack = () => {
+    console.log("title", title)
     if (typeof window !== "undefined" && window.history.length > 1) {
       router.back();
     } else {
@@ -49,12 +50,12 @@ export function SessionPageLayout({
 
 
   const toggleTheme = () => {
-    if (!(document as any).startViewTransition) {
+    if (!(document as Document).startViewTransition) {
       setTheme(resolvedTheme === "dark" ? "light" : "dark");
       return;
     }
 
-    (document as any).startViewTransition(() => {
+    (document as Document).startViewTransition(() => {
       setTheme(resolvedTheme === "dark" ? "light" : "dark");
     });
   };

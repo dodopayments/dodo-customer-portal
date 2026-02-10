@@ -1,4 +1,3 @@
-import { Separator } from "@/components/ui/separator";
 import { fetchUser, fetchWalletLedger, fetchWallets } from "./actions";
 import { Card, CardContent } from "@/components/ui/card";
 import { WalletItem } from "./types";

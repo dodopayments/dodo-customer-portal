@@ -1,13 +1,25 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
-
-interface Business {
+export interface CustomerBusinessTrackingDetails {
+    /** Google Analytics 4 Measurement ID (G-XXXXXXXXXX) */
+    google_analytics_id?: string | null;
+    /** Google Tag Manager container ID (GTM-XXXXXXX) */
+    google_tag_manager_id?: string | null;
+    /** Meta (Facebook) Pixel ID */
+    meta_pixel_id?: string | null;
+}
+export interface Business {
+    /** if null assume false */
+    allow_customer_portal_sub_change_plan?: boolean | null;
     business_id: string;
-    name: string;
-    logo?: string;
-    support_url?: string;
-    [key: string]: any;
+    country?: null | string;
+    description?: string | null;
+    logo: string;
+    name?: string | null;
+    support_email?: string | null;
+    /** Tracking configuration for analytics integration */
+    tracking?: null | CustomerBusinessTrackingDetails;
 }
 
 interface BusinessContextValue {

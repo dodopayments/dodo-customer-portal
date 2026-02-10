@@ -21,7 +21,7 @@ import {
   formatCardNumber,
   formatExpiryDate,
   unformatCardNumber,
-  parseExpiryDate,
+  // parseExpiryDate, 
 } from "@/lib/payment-helper";
 
 export function AddPaymentMethodSheet() {
@@ -82,12 +82,12 @@ export function AddPaymentMethodSheet() {
     }
   };
 
-  const handleAddCard = () => {
-    const cardNumberDigits = unformatCardNumber(cardNumber);
-    const expiryParsed = parseExpiryDate(expiryDate);
-    // TODO: Implement add card functionality
-    // cardNumberDigits, expiryParsed?.month, expiryParsed?.year, securityCode
-  };
+  // const handleAddCard = () => {
+  //   const cardNumberDigits = unformatCardNumber(cardNumber);
+  //   const expiryParsed = parseExpiryDate(expiryDate);
+  //   // TODO: Implement add card functionality
+  //   // cardNumberDigits, expiryParsed?.month, expiryParsed?.year, securityCode
+  // };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -234,9 +234,9 @@ export function AddPaymentMethodSheet() {
               <Separator className="my-3" />
             </div>
           )}
-          <Button className="w-full" onClick={handleAddCard}>
+          {/* <Button className="w-full" onClick={handleAddCard}>
             Add
-          </Button>
+          </Button> */}
         </div>
       </SheetContent>
     </Sheet>

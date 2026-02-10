@@ -37,7 +37,7 @@ export default async function PaymentMethodsPage() {
             </div>
           ) : (
             <div className="flex flex-col gap-4 w-full">
-              {paymentMethods.map((paymentMethod) => (
+              {paymentMethods && paymentMethods.map((paymentMethod) => (
                 <PaymentMethodCard
                   key={paymentMethod.payment_method_id}
                   paymentMethod={paymentMethod}

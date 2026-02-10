@@ -37,12 +37,12 @@ export function UserNav({ user }: UserNavProps) {
 
 
     const toggleTheme = () => {
-        if (!(document as any).startViewTransition) {
+        if (!(document as Document).startViewTransition) {
             setTheme(resolvedTheme === "dark" ? "light" : "dark");
             return;
         }
 
-        (document as any).startViewTransition(() => {
+        (document as Document).startViewTransition(() => {
             setTheme(resolvedTheme === "dark" ? "light" : "dark");
         });
     };
@@ -53,7 +53,7 @@ export function UserNav({ user }: UserNavProps) {
         <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
             <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
                 <div className="flex items-center gap-3">
-                    {business?.logo ? (
+                    {business?.logo && business.name ? (
                         <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
                             <AvatarImage src={business.logo} alt={business.name || "Business"} className="object-contain" />
                             <AvatarFallback className="text-sm bg-[#0a4ceb] text-white" name={business.name} singleInitials />

@@ -1,17 +1,9 @@
 "use client";
 
-import { useBusiness } from "@/hooks/use-business";
 import Link from "next/link";
 
-interface LeftPanelProps {
-    businessName?: string;
-}
 
-export function LeftPanel({
-    businessName,
-}: LeftPanelProps) {
-    const { business } = useBusiness();
-    const displayName = businessName || business?.name || "website";
+export function LeftPanel() {
 
     return (
         <aside className="hidden lg:flex flex-col w-80 xl:w-96 bg-bg-secondary border-r border-border-secondary p-8 sticky top-0 h-screen">
