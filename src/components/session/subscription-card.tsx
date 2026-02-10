@@ -164,6 +164,7 @@ export const SubscriptionCard = ({
           businessName={business?.name || undefined}
           className="-mt-3 relative z-0"
           maxNotes={1}
+          infoStyleOverride
         />
       </div>
     );
@@ -234,6 +235,7 @@ export const SubscriptionCard = ({
         subscription={item}
         businessName={business?.name || undefined}
         className="-mt-3 relative z-0"
+        infoStyleOverride
       />
     </div>
   );

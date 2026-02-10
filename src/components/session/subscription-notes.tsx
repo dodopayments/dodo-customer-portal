@@ -118,7 +118,8 @@ export function getSubscriptionNotes(
     return notes;
 }
 
-const INFO_STYLE_OVERRIDE = "bg-bg-secondary text-text-primary border-t border-border-secondary";
+const INFO_STYLE_OVERRIDE =
+    "!bg-bg-secondary dark:!bg-bg-secondary text-text-primary dark:!text-text-primary border-t border-border-secondary";
 
 interface SubscriptionNoteDisplayProps {
     note: SubscriptionNote;
@@ -150,7 +151,14 @@ export function SubscriptionNoteDisplay({
                 !useOverride && "border-t"
             )}
         >
-            <p className="text-sm">{note.message}</p>
+            <p
+                className={cn(
+                    "text-sm",
+                    useOverride && "text-text-primary dark:text-text-primary"
+                )}
+            >
+                {note.message}
+            </p>
         </div>
     );
 }
