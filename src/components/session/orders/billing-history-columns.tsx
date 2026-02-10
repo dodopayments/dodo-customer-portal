@@ -71,7 +71,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
                 <EntitlementsCell
                     paymentId={row.original.payment_id}
                     hasDigitalProducts={row.original.digital_products_delivered}
-                    hasLicenseKeys={row.original.license_key_delivered}
+                    hasLicenseKeys={row.original.has_license_key}
                 />
             );
         },

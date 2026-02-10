@@ -19,7 +19,7 @@ export interface OrderData {
     phone_number: string;
   };
   digital_products_delivered: boolean;
-  license_key_delivered: boolean;
+  has_license_key: boolean;
   payment_id: string;
   payment_method: string;
   payment_method_type: string;
