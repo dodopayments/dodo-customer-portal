@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 import { Download } from "lucide-react";
 import {
   Sheet,
@@ -24,12 +25,14 @@ interface InvoiceDownloadSheetProps {
   paymentId: string;
   downloadUrl: string;
   buttonClassName?: string;
+  variant?: "default" | "icon";
 }
 
 export function InvoiceDownloadSheet({
   paymentId,
   downloadUrl,
   buttonClassName,
+  variant = "default",
 }: InvoiceDownloadSheetProps) {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
@@ -49,9 +52,20 @@ export function InvoiceDownloadSheet({
   return (
     <Sheet open={isSheetOpen} onOpenChange={handleSheetOpenChange}>
       <SheetTrigger asChild>
-        <Button variant="secondary" className={buttonClassName}>
-          <Download className="w-4 h-4 mr-2" /> Invoice
-        </Button>
+        {variant === "icon" ? (
+          <Button
+            variant="secondary"
+            size="icon"
+            className={cn("h-8 w-8", buttonClassName)}
+            title="Download Invoice"
+          >
+            <Download className="w-4 h-4" />
+          </Button>
+        ) : (
+          <Button variant="secondary" className={buttonClassName}>
+            <Download className="w-4 h-4 mr-2" /> Invoice
+          </Button>
+        )}
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader>

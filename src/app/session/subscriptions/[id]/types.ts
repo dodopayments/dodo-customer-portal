@@ -9,6 +9,8 @@ export interface AddOn {
   addon_id: string;
   quantity: number;
   name?: string;
+  description?: string | null;
+  image?: string | null;
 }
 
 export type ProrationBillingMode =

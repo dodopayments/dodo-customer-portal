@@ -4,6 +4,9 @@ import { cn } from "@/lib/utils";
 import { CircleSlash } from "lucide-react";
 import { OrderCard } from "./order-card";
 import ServerPagination from "@/components/common/server-pagination";
+import { Card, CardContent } from "@/components/ui/card";
+import { BaseDataGrid } from "@/components/table/BaseDataGrid";
+import { BillingHistoryColumns } from "./billing-history-columns";
 
 export interface OrderData {
   brand_id: string;
@@ -16,6 +19,7 @@ export interface OrderData {
     phone_number: string;
   };
   digital_products_delivered: boolean;
+  has_license_key: boolean;
   payment_id: string;
   payment_method: string;
   payment_method_type: string;
@@ -24,15 +28,26 @@ export interface OrderData {
   total_amount: number;
 }
 
-interface ItemCardProps {
+interface OrdersProps {
   cardClassName?: string;
   ordersData: OrderData[];
+  /**
+   * "detail" - Card list with expandable details (for /orders page)
+   * "overview" - Table view for billing history section
+   */
+  variant?: "detail" | "overview";
   currentPage: number;
   pageSize: number;
-  currentPageItems: number;
   hasNextPage: boolean;
-  baseUrl: string;
+  currentPageItems?: number;
+  totalCount?: number;
+  // For detail variant (link-based pagination)
+  baseUrl?: string;
   pageParamKey?: string;
+  // For overview variant (callback-based pagination)
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
+  showPagination?: boolean;
 }
 
 export const Orders = ({
@@ -40,17 +55,85 @@ export const Orders = ({
   ordersData,
   currentPage,
   pageSize,
-  currentPageItems,
   hasNextPage,
+  currentPageItems,
+  totalCount: externalTotalCount,
   baseUrl,
   pageParamKey,
-}: ItemCardProps) => {
+  onPageChange,
+  onPageSizeChange,
+  variant = "detail",
+  showPagination = true,
+}: OrdersProps) => {
+
+  const OVERVIEW_PAGE_SIZE = 25;
+
+  const totalCount = externalTotalCount ?? ordersData.length;
   const isEmpty = ordersData.length === 0;
   const emptyMessage =
     currentPage > 0
       ? "No purchases found on this page"
       : "No purchases at the moment";
 
+  const shouldShowPagination = showPagination;
+
+  if (variant === "overview") {
+    const shouldShowOverviewPagination = showPagination && totalCount > OVERVIEW_PAGE_SIZE;
+
+    return (
+      <section id="billing-history">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-display font-medium text-text-primary">
+            Billing History
+          </h2>
+        </div>
+
+        {isEmpty ? (
+          <Card>
+            <CardContent className="p-0">
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="p-4 bg-bg-secondary rounded-full mb-4">
+                  <CircleSlash className="w-6 h-6 text-text-secondary" />
+                </div>
+                <p className="text-text-secondary text-sm">
+                  No billing history available
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <BaseDataGrid
+            tableId="billing-history-overview"
+            data={ordersData}
+            columns={BillingHistoryColumns}
+            // recordCount={totalCount}
+            manualPagination
+            initialPageSize={OVERVIEW_PAGE_SIZE}
+            onPaginationChange={(pagination) => {
+              if (pagination.pageIndex !== currentPage && onPageChange) {
+                onPageChange(pagination.pageIndex);
+              }
+              if (pagination.pageSize !== pageSize && onPageSizeChange) {
+                onPageSizeChange(pagination.pageSize);
+              }
+            }}
+            tableLayout={{
+              autoWidth: false,
+              columnsPinnable: false,
+              columnsResizable: false,
+              columnsMovable: false,
+              columnsVisibility: false,
+              disableRowPerPage: true,
+            }}
+            disablePagination={!shouldShowOverviewPagination}
+            emptyStateMessage="No billing history available"
+          />
+        )}
+      </section>
+    );
+  }
+
+  // Detail variant - original card list view
   return (
     <div className="flex flex-col gap-4">
       {isEmpty ? (
@@ -71,11 +154,11 @@ export const Orders = ({
           />
         ))
       )}
-      {(!isEmpty || currentPage !== 0) && (
+      {shouldShowPagination && (totalCount > 0 || currentPage > 0) && baseUrl && pageParamKey && (
         <ServerPagination
           currentPage={currentPage}
           pageSize={pageSize}
-          currentPageItems={currentPageItems}
+          currentPageItems={currentPageItems ?? ordersData.length}
           hasNextPage={hasNextPage}
           baseUrl={baseUrl}
           pageParamKey={pageParamKey}

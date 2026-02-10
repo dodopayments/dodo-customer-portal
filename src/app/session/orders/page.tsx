@@ -2,6 +2,7 @@ import { fetchPayments } from "@/app/session/orders/actions";
 import { OrderData } from "@/components/session/orders/orders";
 import { Orders } from "@/components/session/orders/orders";
 import { extractPaginationParams } from "@/lib/pagination-utils";
+import { SessionPageLayout } from "@/components/session/session-page-layout";
 
 interface OrdersPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -20,7 +21,7 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
   const ordersData = await fetchPayments(currentPage, pageSize);
 
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full">
+    <SessionPageLayout title="Orders" backHref="/session/overview">
       <Orders
         cardClassName="w-full p-4 gap-4"
         ordersData={ordersData.data as OrderData[]}
@@ -28,9 +29,10 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
         pageSize={pageSize}
         currentPageItems={ordersData.data.length}
         hasNextPage={ordersData.hasNext}
+        totalCount={ordersData.totalCount}
         baseUrl={baseUrl}
         pageParamKey={PAGE_PARAM_KEY}
       />
-    </div>
+    </SessionPageLayout>
   );
 }
