@@ -1,6 +1,9 @@
 "use client";
 
 import { AlertCircle, Clock, Zap, Info } from "lucide-react";
+import type { BadgeVariant } from "@/components/ui/badge";
+import { badgeVariants } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import { SubscriptionData } from "./subscriptions/subscriptions";
 
 export type SubscriptionNoteType = "warning" | "error" | "info";
@@ -36,8 +39,20 @@ export function getSubscriptionNotes(
         notes.push({
             type: "error",
             message:
-                "This subscription has failed. Please contact support for assistance.",
+                "This subscription has failed. Please try again.",
             icon: <AlertCircle className="w-4 h-4 flex-shrink-0" />,
+        });
+    }
+
+    // Pending - payment not completed (incomplete checkout)
+    if (
+        subscription.status === "pending"
+    ) {
+        notes.push({
+            type: "info",
+            message:
+                "Your payment wasn't completed and checkout was left unfinished. If you'd like to subscribe, please try again.",
+            icon: <Info className="w-4 h-4 flex-shrink-0" />,
         });
     }
 
@@ -80,14 +95,6 @@ export function getSubscriptionNotes(
         });
     }
 
-    // Trial period info
-    if (subscription.trial_period_days > 0 && subscription.status === "pending") {
-        notes.push({
-            type: "info",
-            message: `You're currently in a ${subscription.trial_period_days}-day trial period.`,
-            icon: <Info className="w-4 h-4 flex-shrink-0" />,
-        });
-    }
 
     // Cancellation date info
     if (subscription.status === "cancelled" && subscription.cancelled_at) {
@@ -111,34 +118,39 @@ export function getSubscriptionNotes(
     return notes;
 }
 
+const INFO_STYLE_OVERRIDE = "bg-bg-secondary text-text-primary border-t border-border-secondary";
+
 interface SubscriptionNoteDisplayProps {
     note: SubscriptionNote;
+    /** When true, info notes use bg-bg-secondary and text-text-primary instead of the badge default. */
+    infoStyleOverride?: boolean;
 }
+
+const noteTypeToBadgeVariant: Record<SubscriptionNoteType, BadgeVariant> = {
+    warning: "yellow",
+    error: "red",
+    info: "default",
+};
 
 /**
  * Renders a single subscription note with appropriate styling based on type.
  */
-export function SubscriptionNoteDisplay({ note }: SubscriptionNoteDisplayProps) {
-    const styles = {
-        warning: {
-            container: "bg-amber-50 dark:bg-amber-900/20 border-t border-amber-200 dark:border-amber-700",
-            text: "text-amber-800 dark:text-amber-200",
-        },
-        error: {
-            container: "bg-red-50 dark:bg-red-900/20 border-t border-red-200 dark:border-red-700",
-            text: "text-red-800 dark:text-red-200",
-        },
-        info: {
-            container: "bg-slate-100 dark:bg-slate-800/40 border-t border-slate-200 dark:border-slate-600",
-            text: "text-slate-700 dark:text-slate-300",
-        },
-    };
-
-    const style = styles[note.type];
+export function SubscriptionNoteDisplay({
+    note,
+    infoStyleOverride = false,
+}: SubscriptionNoteDisplayProps) {
+    const variant = noteTypeToBadgeVariant[note.type];
+    const useOverride = note.type === "info" && infoStyleOverride;
 
     return (
-        <div className={`px-4 pt-6 pb-3 rounded-b-xl ${style.container}`}>
-            <p className={`text-sm ${style.text}`}>{note.message}</p>
+        <div
+            className={cn(
+                "px-4 pt-6 pb-3 rounded-b-xl",
+                useOverride ? INFO_STYLE_OVERRIDE : badgeVariants[variant],
+                !useOverride && "border-t"
+            )}
+        >
+            <p className="text-sm">{note.message}</p>
         </div>
     );
 }
@@ -148,6 +160,8 @@ interface SubscriptionNotesProps {
     businessName?: string;
     className?: string;
     maxNotes?: number;
+    /** When true, info notes use bg-bg-secondary and text-text-primary instead of the badge default. */
+    infoStyleOverride?: boolean;
 }
 
 /**
@@ -158,6 +172,7 @@ export function SubscriptionNotes({
     businessName,
     className = "",
     maxNotes,
+    infoStyleOverride = false,
 }: SubscriptionNotesProps) {
     const notes = getSubscriptionNotes(subscription, businessName);
 
@@ -168,7 +183,11 @@ export function SubscriptionNotes({
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
             {displayNotes.map((note, index) => (
-                <SubscriptionNoteDisplay key={index} note={note} />
+                <SubscriptionNoteDisplay
+                    key={index}
+                    note={note}
+                    infoStyleOverride={infoStyleOverride}
+                />
             ))}
         </div>
     );

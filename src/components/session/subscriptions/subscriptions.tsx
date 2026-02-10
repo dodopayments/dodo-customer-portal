@@ -8,6 +8,13 @@ import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 
+const ACTIVE_OR_ON_HOLD = ["active", "on_hold"];
+const CANCELLED_FAILED_EXPIRED = ["cancelled", "failed", "expired"];
+const PENDING = ["pending"];
+const OVERVIEW_MAX = 5;
+
+export type SubscriptionStatus = "active" | "inactive" | "pending" | "cancelled" | "failed" | "expired" | "on_hold";
+
 export interface SubscriptionData {
     billing: {
         city: string;
@@ -41,7 +48,7 @@ export interface SubscriptionData {
     };
     quantity: number;
     recurring_pre_tax_amount: number;
-    status: string;
+    status: SubscriptionStatus;
     subscription_id: string;
     subscription_period_count: number;
     subscription_period_interval: string;
@@ -88,7 +95,13 @@ export const Subscriptions = ({
 }: SubscriptionsProps) => {
     const router = useRouter();
     const isEmpty = subscriptionData.length === 0;
-    const overviewSubscriptions = subscriptionData.slice(0, 3);
+
+    const tier1 = subscriptionData.filter((s) => ACTIVE_OR_ON_HOLD.includes(s.status));
+    const tier2 = subscriptionData.filter((s) => CANCELLED_FAILED_EXPIRED.includes(s.status));
+    const tier3 = subscriptionData.filter((s) => PENDING.includes(s.status));
+    const prioritized = tier1.length ? tier1 : tier2.length ? tier2 : tier3;
+    const overviewSubscriptions = prioritized.slice(0, OVERVIEW_MAX);
+
     const emptyMessage =
         currentPage > 0
             ? "No subscriptions found on this page"
@@ -96,16 +109,24 @@ export const Subscriptions = ({
 
     // Overview variant with section header
     if (variant === "overview") {
-    const totalCountToShow = totalCount && totalCount > 0 ? totalCount : subscriptionData.length;
+        const totalCountToShow = totalCount && totalCount > 0 ? totalCount : subscriptionData.length;
+        const overviewEmpty = overviewSubscriptions.length === 0;
+        const sectionHeading =
+            tier1.length > 0
+                ? "Active subscriptions"
+                : tier2.length > 0
+                    ? "Subscriptions"
+                    : "Subscriptions";
+
         return (
             <section id="active-subscriptions">
                 <div className="mb-4">
                     <h2 className="text-lg font-display font-medium text-text-primary">
-                        Active subscriptions
+                        {sectionHeading}
                     </h2>
                 </div>
 
-                {isEmpty ? (
+                {overviewEmpty ? (
                     <Card className="p-12">
                         <div className="flex flex-col items-center justify-center text-center">
                             <div className="p-4 bg-bg-secondary rounded-full mb-4">
@@ -132,14 +153,16 @@ export const Subscriptions = ({
                                 />
                             );
                         })}
-                        <div className="flex justify-end mt-4">
-                            <button
-                                onClick={() => router.push("/session/subscriptions")}
-                                className="text-sm font-medium font-display text-text-secondary hover:text-text-primary transition-colors"
-                            >
-                                View all subscriptions({totalCountToShow})
-                            </button>
-                        </div>
+                    </div>
+                )}
+                {!isEmpty && (totalCountToShow > overviewSubscriptions.length) && (
+                    <div className="flex justify-end mt-4">
+                        <button
+                            onClick={() => router.push("/session/subscriptions")}
+                            className="text-sm font-medium font-display text-text-secondary hover:text-text-primary transition-colors"
+                        >
+                            View all subscriptions
+                        </button>
                     </div>
                 )}
             </section>

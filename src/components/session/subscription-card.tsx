@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { SubscriptionData } from "./subscriptions/subscriptions";
+import { SubscriptionData, SubscriptionStatus } from "./subscriptions/subscriptions";
 import { Badge, type BadgeVariant } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { useRouter } from "next/navigation";
@@ -63,7 +63,16 @@ const getPaymentMethodDisplay = (paymentMethod?: PaymentMethodItem) => {
           : paymentMethod.payment_method,
   };
 };
-
+const getButtonText = (status: SubscriptionStatus) => {
+  switch (status) {
+    case "active":
+      return "Manage subscription";
+    case "on_hold":
+      return "Update payment method";
+    default:
+      return "View details";
+  }
+};
 export const SubscriptionCard = ({
   item,
   cardClassName,
@@ -132,21 +141,21 @@ export const SubscriptionCard = ({
                   router.push(`/session/subscriptions/${item.subscription_id}`)
                 }
               >
-                Manage subscription
+                {getButtonText(item.status)}
               </Button>
-
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-xs font-medium">
-                <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                  renews on {item.next_billing_date
-                    ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
-                    : "N/A"}
-                </span>
-                <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                  valid till {item.next_billing_date
-                    ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
-                    : "N/A"}
-                </span>
-              </div>
+              {item.status === "active" && (
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-xs font-medium">
+                  <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
+                    renews on {item.next_billing_date
+                      ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
+                      : "N/A"}
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
+                    valid till {item.next_billing_date
+                      ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
+                      : "N/A"}
+                  </span>
+                </div>)}
             </div>
           </CardContent>
         </Card>

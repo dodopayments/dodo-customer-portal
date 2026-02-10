@@ -54,9 +54,9 @@ export function InvoiceDownloadSheet({
       <SheetTrigger asChild>
         {variant === "icon" ? (
           <Button
-            variant="ghost"
+            variant="secondary"
             size="icon"
-            className={cn("h-8 w-8 text-text-secondary hover:text-text-primary", buttonClassName)}
+            className={cn("h-8 w-8", buttonClassName)}
             title="Download Invoice"
           >
             <Download className="w-4 h-4" />

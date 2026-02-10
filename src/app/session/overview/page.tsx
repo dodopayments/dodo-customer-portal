@@ -11,7 +11,7 @@ import { WalletItem, WalletLedgerItem } from "../profile/types";
 export const dynamic = "force-dynamic";
 
 const WALLET_TRANSACTIONS_SIZE = 10;
-const OVERVIEW_SUBSCRIPTIONS_SIZE = 3;
+const OVERVIEW_SUBSCRIPTIONS_SIZE = 100;
 const BILLING_PAGE_PARAM = "billingPage";
 const OVERVIEW_BILLING_PAGE_SIZE = 25;
 

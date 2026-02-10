@@ -10,6 +10,7 @@ import { Download, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-separator";
 import { DigitalProductResponse } from "../product";
+import Loading from "@/components/loading";
 
 interface AttachmentsSheetProps {
   isAttachmentsSheetOpen: boolean;
@@ -40,9 +41,9 @@ export const AttachmentsSheet = ({
         </SheetTrigger>
         <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
           <SheetHeader>
-            <SheetTitle>Digital Products</SheetTitle>
+            <SheetTitle>Your Digital Products</SheetTitle>
             <SheetDescription>
-              Download your digital products for
+              Access and download your available digital products and files here.
             </SheetDescription>
           </SheetHeader>
           <Separator className="mt-4" />
@@ -50,12 +51,7 @@ export const AttachmentsSheet = ({
             {error && <p className="text-sm text-destructive mb-3">{error}</p>}
             {digitalProductsLoading ? (
               <div className="flex items-center justify-center py-8">
-                <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                  <span className="text-sm text-text-secondary">
-                    Loading digital products...
-                  </span>
-                </div>
+                <Loading />
               </div>
             ) : (
               (() => {

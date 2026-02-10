@@ -27,6 +27,8 @@ import {
 import { getBadge } from "@/lib/badge-helper";
 import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { parseIsoDate } from "@/lib/date-helper";
+import Loading from "@/components/loading";
+import { FileTextIcon } from "@phosphor-icons/react";
 
 interface EntitlementsCellProps {
     paymentId: string;
@@ -242,7 +244,7 @@ export const EntitlementsCell = ({
                             size="sm"
                             className="h-auto py-1.5 px-3 text-xs"
                         >
-                            <FileMinus className="w-3.5 h-3.5" />
+                            <FileTextIcon className="w-3.5 h-3.5" />
                             Attachment
                         </Button>
                     </SheetTrigger>
@@ -260,12 +262,7 @@ export const EntitlementsCell = ({
                             )}
                             {digitalProductsLoading ? (
                                 <div className="flex items-center justify-center py-8">
-                                    <div className="flex items-center space-x-2">
-                                        <Loader2 className="w-6 h-6 animate-spin" />
-                                        <span className="text-sm text-text-secondary">
-                                            Loading digital products...
-                                        </span>
-                                    </div>
+                                  <Loading />
                                 </div>
                             ) : (
                                 (() => {
