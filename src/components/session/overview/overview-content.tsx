@@ -7,7 +7,7 @@ import { WalletItem, WalletLedgerItem } from "@/app/session/profile/types";
 import { LeftPanel } from "./left-panel";
 import { PaymentMethodsSection } from "./payment-methods-section";
 import { WalletsSection } from "./wallets-section";
-import { UserNav } from "./user-nav";
+import { SessionHeader } from "../session-header";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -55,7 +55,7 @@ export function OverviewContent({
             <LeftPanel />
 
             <div className="flex-1 flex flex-col overflow-hidden">
-                <UserNav user={user} />
+                <SessionHeader user={user} showUserMenu={true} showBusinessSwitcher={true} />
 
                 <div className="flex-1 px-4 md:px-8 lg:px-12 py-6 md:py-8 overflow-y-auto">
                     <div className="max-w-5xl space-y-8">
