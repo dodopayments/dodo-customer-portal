@@ -18,7 +18,7 @@ const SubscriptionInfo = ({
     <div
       className={cn(
         "flex items-center justify-start p-4 rounded-xl gap-4",
-        badgeVariants["orange"]
+        badgeVariants["orange2"]
       )}
     >
       <IconColors color="orange" icon={<Info size={14} />} />

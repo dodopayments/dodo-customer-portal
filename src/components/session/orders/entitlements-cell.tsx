@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { KeyRound, FileMinus, Loader2, Download, Eye, EyeOff } from "lucide-react";
 import { getProductCart } from "@/app/session/orders/actions";
@@ -53,7 +53,7 @@ export const EntitlementsCell = ({
     const toggleVisibility = (id: string) =>
         setVisibleById((prev) => ({ ...prev, [id]: !prev[id] }));
 
-    const fetchProductCartData = async (): Promise<ProductCartItem[]> => {
+    const fetchProductCartData = useCallback(async (): Promise<ProductCartItem[]> => {
         if (productCart) {
             return productCart;
         }
@@ -75,7 +75,7 @@ export const EntitlementsCell = ({
         } finally {
             setProductCartLoading(false);
         }
-    };
+    }, [productCart, productCartLoading, paymentId]);
 
     useEffect(() => {
         if (!hasLicenseKeys) {
@@ -95,9 +95,10 @@ export const EntitlementsCell = ({
         paymentId,
         productCart,
         productCartLoading,
+        fetchProductCartData,
     ]);
 
-    const fetchDigitalProducts = async () => {
+    const fetchDigitalProducts = useCallback(async () => {
         try {
             const token = await getToken();
             if (!token) {
@@ -127,7 +128,7 @@ export const EntitlementsCell = ({
         } finally {
             setDigitalProductsLoading(false);
         }
-    };
+    }, [paymentId]);
 
     const allLicenseKeys: LicenseKeyResponse[] =
         productCart?.flatMap((p) => p.license_keys || []) || [];
@@ -145,6 +146,7 @@ export const EntitlementsCell = ({
         hasDigitalProducts,
         digitalProducts,
         digitalProductsLoading,
+        fetchDigitalProducts,
     ]);
 
     if (!hasLicenseKeys && !hasDigitalProducts) {

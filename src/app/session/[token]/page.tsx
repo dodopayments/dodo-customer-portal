@@ -1,30 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import LoadingOverlay from '@/components/loading-overlay';
 
 export default function Page() {
   const params = useParams();
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = params?.token as string;
 
   useEffect(() => {
     async function validateToken() {
       if (!token) {
-        router.replace('/expired');
-        router.refresh();
+        window.location.replace('/expired');
         return;
       }
 
-      let isRedirecting = false;
-
       try {
-        setIsLoading(true);
-        setError(null);
-
         const response = await fetch('/api/auth/session-validate', {
           method: 'POST',
           headers: {
@@ -36,9 +28,7 @@ export default function Page() {
         if (!response.ok) {
           const data = await response.json();
           if (data.redirect) {
-            isRedirecting = true;
-            router.replace(data.redirect);
-            router.refresh();
+            window.location.replace(data.redirect);
             return;
           }
           throw new Error(data.error || 'Validation failed');
@@ -46,35 +36,19 @@ export default function Page() {
 
         const data = await response.json();
 
-        if (data.success && data.redirect) {
-          isRedirecting = true;
-          router.replace(data.redirect);
-          router.refresh();
-        } else if (data.redirect) {
-          isRedirecting = true;
-          router.replace(data.redirect);
-          router.refresh();
+        if (data.redirect) {
+          window.location.replace(data.redirect);
         } else {
           setError('Validation failed. Please try again.');
         }
       } catch (err) {
         console.error('Token validation error:', err);
-        isRedirecting = true;
-        router.replace('/expired');
-        router.refresh();
-      } finally {
-        if (!isRedirecting) {
-          setIsLoading(false);
-        }
+        window.location.replace('/expired');
       }
     }
 
     validateToken();
-  }, [token, router]);
-
-  if (isLoading) {
-    return <LoadingOverlay />;
-  }
+  }, [token]);
 
   if (error) {
     return (
@@ -82,10 +56,7 @@ export default function Page() {
         <div className="text-center">
           <p className="text-text-primary mb-4">{error}</p>
           <button
-            onClick={() => {
-              router.replace('/expired');
-              router.refresh();
-            }}
+            onClick={() => window.location.replace('/expired')}
             className="px-4 py-2 bg-primary text-white rounded"
           >
             Go to Expired Page

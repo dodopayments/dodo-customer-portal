@@ -124,7 +124,7 @@ export async function SubscriptionTabsTable({
           items={[
             {
               value: "invoice-history",
-              label: "Invoice History",
+              label: "Billing History",
               link: `/session/subscriptions/${subscriptionId}?tab=invoice-history`,
             },
             ...(isUsageBased ? [

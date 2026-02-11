@@ -1,27 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import LoadingOverlay from "@/components/loading-overlay";
 
 export default function Page() {
   const params = useParams();
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = params?.token as string;
 
   useEffect(() => {
     async function validateBusinessToken() {
       if (!token) {
-        router.push("/expired");
+        window.location.replace("/expired");
         return;
       }
 
       try {
-        setIsLoading(true);
-        setError(null);
-
         const response = await fetch("/api/auth/business-validate", {
           method: "POST",
           headers: {
@@ -38,28 +33,19 @@ export default function Page() {
 
         const data = await response.json();
 
-        if (data.success && data.redirect) {
-          router.push(data.redirect);
-        } else if (data.redirect) {
-          router.push(data.redirect);
+        if (data.redirect) {
+          window.location.replace(data.redirect);
         } else {
           setError("Validation failed. Please try again.");
         }
       } catch (err) {
         console.error("Token validation error:", err);
-        setError("An error occurred. Please try again.");
-        router.push("/expired");
-      } finally {
-        setIsLoading(false);
+        window.location.replace("/expired");
       }
     }
 
     validateBusinessToken();
-  }, [token, router]);
-
-  if (isLoading) {
-    return <LoadingOverlay />;
-  }
+  }, [token]);
 
   if (error) {
     return (
@@ -67,7 +53,7 @@ export default function Page() {
         <div className="text-center">
           <p className="text-text-primary mb-4">{error}</p>
           <button
-            onClick={() => router.push("/expired")}
+            onClick={() => window.location.replace("/expired")}
             className="px-4 py-2 bg-primary text-white rounded"
           >
             Go to Expired Page

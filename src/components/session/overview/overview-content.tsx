@@ -67,19 +67,6 @@ export function OverviewContent({
                                 totalCount={subscriptionsTotalCount}
                             />
                         )}
-
-                        <Orders
-                            ordersData={billingHistory}
-                            variant="overview"
-                            currentPage={billingHistoryPagination.currentPage}
-                            pageSize={OVERVIEW_PAGE_SIZE}
-                            hasNextPage={billingHistoryPagination.hasNextPage}
-                            totalCount={billingHistoryPagination.totalCount}
-                            onPageChange={handleBillingPageChange}
-                            onPageSizeChange={() => {}}
-                            showPagination={true}
-                        />
-
                         {paymentMethods.length > 0 && (
                             <PaymentMethodsSection paymentMethods={paymentMethods} />
                         )}
@@ -90,6 +77,17 @@ export function OverviewContent({
                                 walletLedgerByCurrency={walletLedgerByCurrency}
                             />
                         )}
+                        <Orders
+                            ordersData={billingHistory}
+                            variant="overview"
+                            currentPage={billingHistoryPagination.currentPage}
+                            pageSize={OVERVIEW_PAGE_SIZE}
+                            hasNextPage={billingHistoryPagination.hasNextPage}
+                            totalCount={billingHistoryPagination.totalCount}
+                            onPageChange={handleBillingPageChange}
+                            onPageSizeChange={() => { }}
+                            showPagination={true}
+                        />
                     </div>
                 </div>
             </div>

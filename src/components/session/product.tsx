@@ -10,7 +10,7 @@ import {
 } from "../ui/card";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getToken } from "@/lib/server-actions";
 import { api_url } from "@/lib/http";
 import { formatCurrency } from "@/lib/currency-helper";
@@ -82,19 +82,28 @@ export const Product = ({
   const [subscription, setSubscription] =
     useState<SubscriptionDetailsData | null>(null);
 
-  useEffect(() => {
-    if (subscription_id) {
-      getSubscription();
+  const getSubscription = useCallback(async () => {
+    try {
+      const token = await getToken();
+      const response = await fetch(
+        `${api_url}/customer-portal/subscriptions/${subscription_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setSubscription(data);
+      }
+    } catch (error) {
+      parseError(error, "Failed to fetch subscription. Please try again.");
     }
   }, [subscription_id]);
 
-  useEffect(() => {
-    if (isAttachmentsSheetOpen && !digitalProducts && !digitalProductsLoading) {
-      setDigitalProductsError(null);
-      fetchDigitalProducts();
-    }
-  }, [isAttachmentsSheetOpen, product.product_id]);
-  const fetchDigitalProducts = async () => {
+  const fetchDigitalProducts = useCallback(async () => {
     try {
       const token = await getToken();
       if (!token) {
@@ -124,28 +133,20 @@ export const Product = ({
     } finally {
       setDigitalProductsLoading(false);
     }
-  };
+  }, [payment_id]);
 
-  async function getSubscription() {
-    try {
-      const token = await getToken();
-      const response = await fetch(
-        `${api_url}/customer-portal/subscriptions/${subscription_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setSubscription(data);
-      }
-    } catch (error) {
-      parseError(error, "Failed to fetch subscription. Please try again.");
+  useEffect(() => {
+    if (subscription_id) {
+      getSubscription();
     }
-  }
+  }, [subscription_id, getSubscription]);
+
+  useEffect(() => {
+    if (isAttachmentsSheetOpen && !digitalProducts && !digitalProductsLoading) {
+      setDigitalProductsError(null);
+      fetchDigitalProducts();
+    }
+  }, [isAttachmentsSheetOpen, digitalProducts, digitalProductsLoading, fetchDigitalProducts]);
 
   return (
     <Card className="p-6" onClick={(event) => event.stopPropagation()}>

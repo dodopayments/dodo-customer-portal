@@ -5,8 +5,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
-import { CSPlausibleProvider } from "@/hooks/plausible-provider";
-import { CSOpenReplayProvider } from "@/hooks/openreplay-provider";
+import { DeferredProviders } from "@/hooks/deferred-providers";
 
 // Load fonts
 const inter = Inter({
@@ -61,31 +60,28 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
-    <CSPlausibleProvider>
-      <CSOpenReplayProvider>
-        <html
-          lang="en"
-          className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
-          suppressHydrationWarning
+    <html
+      lang="en"
+      className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <head />
+      <body className="font-body w-full h-full overflow-hidden">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
         >
-          <head />
-          <body className="font-body w-full h-full overflow-hidden">
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="dark"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <NextIntlClientProvider messages={messages}>
-                <main className="mx-auto max-w-[1920px] h-full">
-                  <ThemeToaster />
-                  {children}
-                </main>
-              </NextIntlClientProvider>
-            </ThemeProvider>
-          </body>
-        </html>
-      </CSOpenReplayProvider>
-    </CSPlausibleProvider>
+          <NextIntlClientProvider messages={messages}>
+            <main className="mx-auto max-w-[1920px] h-full">
+              <ThemeToaster />
+              {children}
+            </main>
+          </NextIntlClientProvider>
+        </ThemeProvider>
+        <DeferredProviders />
+      </body>
+    </html>
   );
 }

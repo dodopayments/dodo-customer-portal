@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 
 export function LeftPanel() {
@@ -25,9 +26,11 @@ export function LeftPanel() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors font-medium"
                     >
-                        <img
+                        <Image
                             src="/images/brand-assets/logo/logo.svg"
                             alt="Dodo Payments"
+                            width={16}
+                            height={16}
                             className="w-4 h-4"
                         />
                         <span>Dodo Payments</span>

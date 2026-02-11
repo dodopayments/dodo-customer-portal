@@ -1,22 +1,19 @@
 "use client";
 
-import { ReactNode } from "react";
 import PlausibleProvider from "next-plausible";
 
-export function CSPlausibleProvider({ children }: { children: ReactNode }) {
+export function CSPlausibleProvider() {
     const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
     const plausibleApiHost = process.env.NEXT_PUBLIC_PLAUSIBLE_API_HOST;
 
     if (!plausibleDomain) {
-        return <>{children}</>;
+        return null;
     }
 
     return (
         <PlausibleProvider
             domain={plausibleDomain}
             customDomain={plausibleApiHost}
-        >
-            {children}
-        </PlausibleProvider>
+        />
     );
 }

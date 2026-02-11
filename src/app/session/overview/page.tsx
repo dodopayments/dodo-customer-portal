@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { fetchSubscriptions } from "../subscriptions/actions";
 import { fetchPaymentMethods } from "../payment-methods/action";
 import { fetchPayments } from "../orders/actions";
@@ -7,6 +8,12 @@ import { SubscriptionData } from "@/components/session/subscriptions/subscriptio
 import { OrderData } from "@/components/session/orders/orders";
 import { PaymentMethodItem } from "../payment-methods/type";
 import { WalletItem, WalletLedgerItem } from "../profile/types";
+
+const getCachedSubscriptions = cache(fetchSubscriptions);
+const getCachedPaymentMethods = cache(fetchPaymentMethods);
+const getCachedPayments = cache(fetchPayments);
+const getCachedUser = cache(fetchUser);
+const getCachedWallets = cache(fetchWallets);
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +32,37 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
     const parsedBillingPage = parseInt(params[BILLING_PAGE_PARAM] as string || "0", 10);
     const billingPage = isNaN(parsedBillingPage) || parsedBillingPage < 0 ? 0 : parsedBillingPage;
 
-    let subscriptionsData, paymentMethods, billingHistoryData, user, wallets;
+    async function fetchWalletsWithLedger() {
+        const walletsData = await getCachedWallets();
+        const items = (walletsData?.items || []) as WalletItem[];
+        const ledger: Record<string, WalletLedgerItem[]> = {};
+
+        if (items.length > 0) {
+            await Promise.all(
+                items.map(async (wallet) => {
+                    try {
+                        const ledgerData = await fetchWalletLedger({
+                            currency: wallet.currency,
+                            pageNumber: 0,
+                            pageSize: WALLET_TRANSACTIONS_SIZE,
+                        });
+                        ledger[wallet.currency] =
+                            ledgerData.data as WalletLedgerItem[];
+                    } catch (error) {
+                        console.error(
+                            `Failed to fetch wallet ledger for ${wallet.currency}:`,
+                            error
+                        );
+                        ledger[wallet.currency] = [];
+                    }
+                })
+            );
+        }
+
+        return { walletItems: items, walletLedgerByCurrency: ledger };
+    }
+
+    let subscriptionsData, paymentMethods, billingHistoryData, user, walletsResult;
 
     try {
         [
@@ -33,51 +70,26 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             paymentMethods,
             billingHistoryData,
             user,
-            wallets
+            walletsResult
         ] = await Promise.all([
-            fetchSubscriptions(0, OVERVIEW_SUBSCRIPTIONS_SIZE),
-            fetchPaymentMethods(),
-            fetchPayments(billingPage, OVERVIEW_BILLING_PAGE_SIZE),
-            fetchUser(),
-            fetchWallets(),
+            getCachedSubscriptions(0, OVERVIEW_SUBSCRIPTIONS_SIZE),
+            getCachedPaymentMethods(),
+            getCachedPayments(billingPage, OVERVIEW_BILLING_PAGE_SIZE),
+            getCachedUser(),
+            fetchWalletsWithLedger(),
         ]);
     } catch (error) {
         console.error("Failed to fetch overview data:", error);
-        // Provide safe defaults if fetch fails
         subscriptionsData = { data: [], totalCount: 0, hasNext: false };
         paymentMethods = null;
         billingHistoryData = { data: [], totalCount: 0, hasNext: false };
         user = null;
-        wallets = { items: [] };
+        walletsResult = { walletItems: [] as WalletItem[], walletLedgerByCurrency: {} as Record<string, WalletLedgerItem[]> };
     }
 
-    // Ensure paymentMethods is always an array
     const safePaymentMethods = (paymentMethods || []) as PaymentMethodItem[];
-
-    const walletItems = (wallets?.items || []) as WalletItem[];
-    const walletLedgerByCurrency: Record<string, WalletLedgerItem[]> = {};
-
-    if (walletItems.length > 0) {
-        await Promise.all(
-            walletItems.map(async (wallet) => {
-                try {
-                    const ledgerData = await fetchWalletLedger({
-                        currency: wallet.currency,
-                        pageNumber: 0,
-                        pageSize: WALLET_TRANSACTIONS_SIZE,
-                    });
-                    walletLedgerByCurrency[wallet.currency] =
-                        ledgerData.data as WalletLedgerItem[];
-                } catch (error) {
-                    console.error(
-                        `Failed to fetch wallet ledger for ${wallet.currency}:`,
-                        error
-                    );
-                    walletLedgerByCurrency[wallet.currency] = [];
-                }
-            })
-        );
-    }
+    const walletItems = walletsResult.walletItems;
+    const walletLedgerByCurrency = walletsResult.walletLedgerByCurrency;
 
     return (
         <OverviewContent
@@ -91,7 +103,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
                 hasNextPage: billingHistoryData.hasNext,
                 totalCount: billingHistoryData.totalCount,
             }}
-            user={user}
+            user={user ? { name: user.name, email: user.email } : null}
             wallets={walletItems}
             walletLedgerByCurrency={walletLedgerByCurrency}
         />

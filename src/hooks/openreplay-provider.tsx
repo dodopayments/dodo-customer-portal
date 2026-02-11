@@ -1,11 +1,11 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import OpenReplay from '@openreplay/tracker';
 
 let tracker: OpenReplay | null = null;
 
-export function CSOpenReplayProvider({ children }: { children: ReactNode }) {
+export function CSOpenReplayProvider() {
     const projectKey = process.env.NEXT_PUBLIC_OPENREPLAY_PROJECT_KEY;
     const ingestPoint = process.env.NEXT_PUBLIC_OPENREPLAY_INGEST_POINT;
     const isOpenReplayConfigured = !!projectKey;
@@ -23,5 +23,5 @@ export function CSOpenReplayProvider({ children }: { children: ReactNode }) {
         }
     }, [isOpenReplayConfigured, projectKey, ingestPoint]);
 
-    return <>{children}</>;
+    return null;
 }

@@ -23,11 +23,6 @@ function DataGridColumnVisibilityStandalone<TData>({
   columnVisibility,
   trigger,
 }: DataGridColumnVisibilityStandaloneProps<TData>) {
-  // Use the columnVisibility prop if provided, otherwise get from table state
-  const currentColumnVisibility =
-    columnVisibility || table.getState().columnVisibility;
-
-  // Memoize the columns to ensure proper re-rendering
   const columns = useMemo(() => {
     return table
       .getAllColumns()
@@ -35,7 +30,8 @@ function DataGridColumnVisibilityStandalone<TData>({
         (column) =>
           typeof column.accessorFn !== "undefined" && column.getCanHide(),
       );
-  }, [table, currentColumnVisibility]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [table, columnVisibility]);
 
   const defaultTrigger = (
     <Button
