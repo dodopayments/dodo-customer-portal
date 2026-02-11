@@ -19,6 +19,8 @@ export default function Page() {
         return;
       }
 
+      let isRedirecting = false;
+
       try {
         setIsLoading(true);
         setError(null);
@@ -34,6 +36,7 @@ export default function Page() {
         if (!response.ok) {
           const data = await response.json();
           if (data.redirect) {
+            isRedirecting = true;
             router.replace(data.redirect);
             router.refresh();
             return;
@@ -42,11 +45,13 @@ export default function Page() {
         }
 
         const data = await response.json();
-        
+
         if (data.success && data.redirect) {
+          isRedirecting = true;
           router.replace(data.redirect);
           router.refresh();
         } else if (data.redirect) {
+          isRedirecting = true;
           router.replace(data.redirect);
           router.refresh();
         } else {
@@ -54,11 +59,13 @@ export default function Page() {
         }
       } catch (err) {
         console.error('Token validation error:', err);
-        setError('An error occurred. Please try again.');
+        isRedirecting = true;
         router.replace('/expired');
         router.refresh();
       } finally {
-        setIsLoading(false);
+        if (!isRedirecting) {
+          setIsLoading(false);
+        }
       }
     }
 
