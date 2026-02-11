@@ -12,15 +12,17 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, Moon, Sun, User } from "lucide-react";
+import { Building2, LogOut, Moon, Sun, User } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 interface UserNavProps {
     user: { name: string; email: string } | null;
 }
 
 export function UserNav({ user }: UserNavProps) {
-    const { business } = useBusiness();
+    const router = useRouter();
+    const { business, hasBusinessToken } = useBusiness();
     const { handleLogout, isLoggingOut } = useLogout();
     const { setTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -53,10 +55,10 @@ export function UserNav({ user }: UserNavProps) {
         <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
             <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
                 <div className="flex items-center gap-3">
-                    {business?.logo && business.name ? (
+                    {business?.logo ? (
                         <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
-                            <AvatarImage src={business.logo} alt={business.name || "Business"} className="object-contain" />
-                            <AvatarFallback className="text-sm bg-[#0a4ceb] text-white" name={business.name} singleInitials />
+                            <AvatarImage src={business.logo} alt={business?.name || "Business"} className="object-contain" />
+                            <AvatarFallback className="text-sm bg-[#0a4ceb] text-white" name={business?.name || "Business"} singleInitials />
                         </Avatar>
                     ) : (
                         <div className="w-8 h-8 rounded-full bg-[#0a4ceb] flex items-center justify-center">
@@ -86,6 +88,19 @@ export function UserNav({ user }: UserNavProps) {
                             <p className="text-xs text-text-secondary">{user?.email}</p>
                         </div>
                         <DropdownMenuSeparator />
+
+                        {hasBusinessToken && (
+                            <>
+                                <DropdownMenuItem
+                                    onClick={() => router.push('/businesses')}
+                                    className="cursor-pointer py-3"
+                                >
+                                    <Building2 className="w-4 h-4 mr-2" />
+                                    View all businesses
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                            </>
+                        )}
 
                         <DropdownMenuItem
                             onClick={toggleTheme}

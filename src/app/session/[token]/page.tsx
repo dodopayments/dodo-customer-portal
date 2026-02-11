@@ -14,7 +14,8 @@ export default function Page() {
   useEffect(() => {
     async function validateToken() {
       if (!token) {
-        router.push('/expired');
+        router.replace('/expired');
+        router.refresh();
         return;
       }
 
@@ -33,7 +34,8 @@ export default function Page() {
         if (!response.ok) {
           const data = await response.json();
           if (data.redirect) {
-            router.push(data.redirect);
+            router.replace(data.redirect);
+            router.refresh();
             return;
           }
           throw new Error(data.error || 'Validation failed');
@@ -42,16 +44,19 @@ export default function Page() {
         const data = await response.json();
         
         if (data.success && data.redirect) {
-          router.push(data.redirect);
+          router.replace(data.redirect);
+          router.refresh();
         } else if (data.redirect) {
-          router.push(data.redirect);
+          router.replace(data.redirect);
+          router.refresh();
         } else {
           setError('Validation failed. Please try again.');
         }
       } catch (err) {
         console.error('Token validation error:', err);
         setError('An error occurred. Please try again.');
-        router.push('/expired');
+        router.replace('/expired');
+        router.refresh();
       } finally {
         setIsLoading(false);
       }
@@ -70,7 +75,10 @@ export default function Page() {
         <div className="text-center">
           <p className="text-text-primary mb-4">{error}</p>
           <button
-            onClick={() => router.push('/expired')}
+            onClick={() => {
+              router.replace('/expired');
+              router.refresh();
+            }}
             className="px-4 py-2 bg-primary text-white rounded"
           >
             Go to Expired Page
