@@ -38,7 +38,6 @@ export default async function EventPage({ params, searchParams }: PageProps) {
 
   return (
     <SessionPageLayout
-      title="Meter Events"
       backHref={`/session/subscriptions/${id}`}
     >
       <div className="flex flex-col gap-4">

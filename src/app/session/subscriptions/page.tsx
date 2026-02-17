@@ -27,7 +27,7 @@ export default async function SubscriptionsPage({
   }
 
   return (
-    <SessionPageLayout title="Manage Subscriptions" backHref="/session/overview">
+    <SessionPageLayout backHref="/session/overview">
       <Subscriptions
         cardClassName="w-full p-4 gap-4"
         subscriptionData={subscriptionsData.data}

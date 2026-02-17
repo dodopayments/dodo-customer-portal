@@ -55,7 +55,6 @@ export default async function SubscriptionPage({
 
   return (
     <SessionPageLayout
-      title=""
       backHref="/session/subscriptions"
       headerActions={headerActions}
     >
