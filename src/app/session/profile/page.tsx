@@ -1,14 +1,16 @@
-import { fetchUser, fetchWalletLedger, fetchWallets } from "./actions";
+import { fetchUser, fetchWalletLedger, fetchWallets, fetchCreditEntitlements, fetchCreditEntitlementLedger } from "./actions";
 import { Card, CardContent } from "@/components/ui/card";
-import { WalletItem } from "./types";
+import { WalletItem, CreditEntitlementItem, CreditLedgerItem } from "./types";
 import { Wallet } from "@/components/session/profile/wallets";
+import { Credits } from "@/components/session/profile/credits";
 import { extractPaginationParams } from "@/lib/pagination-utils";
 import { SessionPageLayout } from "@/components/session/session-page-layout";
 
 export const dynamic = "force-dynamic";
 
 const DEFAULT_PAGE_SIZE = 50;
-const PAGE_PARAM_KEY = "wallet_page";
+const WALLET_PAGE_PARAM_KEY = "wallet_page";
+const CREDITS_PAGE_PARAM_KEY = "credits_page";
 
 export default async function ProfilePage({
   searchParams,
@@ -17,17 +19,21 @@ export default async function ProfilePage({
 }) {
   let user = null;
   let wallets = null;
+  let creditEntitlements = null;
 
   try {
-    [user, wallets] = await Promise.all([
+    [user, wallets, creditEntitlements] = await Promise.all([
       fetchUser(),
       fetchWallets(),
+      fetchCreditEntitlements(),
     ]);
   } catch (error) {
     console.error("Failed to fetch profile data:", error);
   }
 
   const params = await searchParams;
+
+  // --- Wallets ---
   const walletItems = wallets?.items || [];
   const tab =
     (Array.isArray(params?.tab) ? params.tab[0] : params?.tab) ||
@@ -35,20 +41,20 @@ export default async function ProfilePage({
     "usd-wallet";
 
   // Extract currency from tab (format: "usd-wallet" -> "USD")
-  const selectedCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
+  const selectedWalletCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
 
-  const { currentPage, pageSize, baseUrl } = await extractPaginationParams(
+  const { currentPage: walletCurrentPage, pageSize: walletPageSize, baseUrl: walletBaseUrl } = await extractPaginationParams(
     searchParams,
     DEFAULT_PAGE_SIZE,
-    PAGE_PARAM_KEY
+    WALLET_PAGE_PARAM_KEY
   );
 
   let walletLedger = { data: [], totalCount: 0, hasNext: false };
   try {
     walletLedger = await fetchWalletLedger({
-      currency: selectedCurrency,
-      pageNumber: currentPage,
-      pageSize,
+      currency: selectedWalletCurrency,
+      pageNumber: walletCurrentPage,
+      pageSize: walletPageSize,
     });
   } catch (error) {
     console.error("Failed to fetch wallet ledger:", error);
@@ -58,6 +64,39 @@ export default async function ProfilePage({
     value: `${wallet.currency.toLowerCase()}-wallet`,
     label: `${wallet.currency} Wallet`,
     link: `/session/profile?tab=${wallet.currency.toLowerCase()}-wallet`,
+  }));
+
+  // --- Credit Entitlements ---
+  const entitlementItems = creditEntitlements?.items || [];
+
+  const creditsTab =
+    (Array.isArray(params?.credits_tab) ? params.credits_tab[0] : params?.credits_tab) ||
+    entitlementItems[0]?.credit_entitlement_id ||
+    "";
+
+  const { currentPage: creditsCurrentPage, pageSize: creditsPageSize, baseUrl: creditsBaseUrl } = await extractPaginationParams(
+    searchParams,
+    DEFAULT_PAGE_SIZE,
+    CREDITS_PAGE_PARAM_KEY
+  );
+
+  let creditLedger: { data: CreditLedgerItem[]; totalCount: number; hasNext: boolean } = { data: [], totalCount: 0, hasNext: false };
+  if (creditsTab) {
+    try {
+      creditLedger = await fetchCreditEntitlementLedger({
+        creditEntitlementId: creditsTab,
+        pageNumber: creditsCurrentPage,
+        pageSize: creditsPageSize,
+      });
+    } catch (error) {
+      console.error("Failed to fetch credit entitlement ledger:", error);
+    }
+  }
+
+  const allEntitlements = entitlementItems.map((entitlement: CreditEntitlementItem) => ({
+    value: entitlement.credit_entitlement_id,
+    label: entitlement.name,
+    link: `/session/profile?credits_tab=${entitlement.credit_entitlement_id}`,
   }));
 
   return (
@@ -93,12 +132,30 @@ export default async function ProfilePage({
               allWallets={allWallets}
               tab={tab}
               walletLedger={walletLedger.data}
-              currentPage={currentPage}
-              pageSize={pageSize}
+              currentPage={walletCurrentPage}
+              pageSize={walletPageSize}
               currentPageItems={walletLedger.data.length}
               hasNextPage={walletLedger.hasNext}
-              baseUrl={baseUrl}
-              pageParamKey={PAGE_PARAM_KEY}
+              baseUrl={walletBaseUrl}
+              pageParamKey={WALLET_PAGE_PARAM_KEY}
+            />
+          </div>
+        )}
+
+        {entitlementItems.length > 0 && (
+          <div className="flex flex-col gap-4">
+            <p className="text-text-primary text-lg font-medium">Credits</p>
+            <Credits
+              entitlements={entitlementItems}
+              allEntitlements={allEntitlements}
+              tab={creditsTab}
+              creditLedger={creditLedger.data}
+              currentPage={creditsCurrentPage}
+              pageSize={creditsPageSize}
+              currentPageItems={creditLedger.data.length}
+              hasNextPage={creditLedger.hasNext}
+              baseUrl={creditsBaseUrl}
+              pageParamKey={CREDITS_PAGE_PARAM_KEY}
             />
           </div>
         )}
