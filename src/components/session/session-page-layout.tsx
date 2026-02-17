@@ -9,8 +9,6 @@ import { SessionHeader } from "./session-header";
 
 interface SessionPageLayoutProps {
   children: React.ReactNode;
-  /** Optional page title */
-  title?: string;
   /** Destination for the back button */
   backHref?: string;
   /** Whether to display the back button */
@@ -21,7 +19,6 @@ interface SessionPageLayoutProps {
 
 export function SessionPageLayout({
   children,
-  title,
   backHref = "/session/overview",
   showBack = true,
   headerActions,
