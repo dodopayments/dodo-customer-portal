@@ -2,22 +2,24 @@ import { cache } from "react";
 import { fetchSubscriptions } from "../subscriptions/actions";
 import { fetchPaymentMethods } from "../payment-methods/action";
 import { fetchPayments } from "../orders/actions";
-import { fetchUser, fetchWallets, fetchWalletLedger } from "../profile/actions";
+import { fetchUser, fetchWallets, fetchWalletLedger, fetchCreditEntitlements, fetchCreditEntitlementLedger } from "../profile/actions";
 import { OverviewContent } from "@/components/session/overview/overview-content";
 import { SubscriptionData } from "@/components/session/subscriptions/subscriptions";
 import { OrderData } from "@/components/session/orders/orders";
 import { PaymentMethodItem } from "../payment-methods/type";
-import { WalletItem, WalletLedgerItem } from "../profile/types";
+import { WalletItem, WalletLedgerItem, CreditEntitlementItem, CreditLedgerItem } from "../profile/types";
 
 const getCachedSubscriptions = cache(fetchSubscriptions);
 const getCachedPaymentMethods = cache(fetchPaymentMethods);
 const getCachedPayments = cache(fetchPayments);
 const getCachedUser = cache(fetchUser);
 const getCachedWallets = cache(fetchWallets);
+const getCachedCreditEntitlements = cache(fetchCreditEntitlements);
 
 export const dynamic = "force-dynamic";
 
 const WALLET_TRANSACTIONS_SIZE = 10;
+const CREDIT_TRANSACTIONS_SIZE = 10;
 const OVERVIEW_SUBSCRIPTIONS_SIZE = 100;
 const BILLING_PAGE_PARAM = "billingPage";
 const OVERVIEW_BILLING_PAGE_SIZE = 25;
@@ -62,7 +64,37 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         return { walletItems: items, walletLedgerByCurrency: ledger };
     }
 
-    let subscriptionsData, paymentMethods, billingHistoryData, user, walletsResult;
+    async function fetchCreditsWithLedger() {
+        const creditsData = await getCachedCreditEntitlements();
+        const items = (creditsData?.items || []) as CreditEntitlementItem[];
+        const ledger: Record<string, CreditLedgerItem[]> = {};
+
+        if (items.length > 0) {
+            await Promise.all(
+                items.map(async (entitlement) => {
+                    try {
+                        const ledgerData = await fetchCreditEntitlementLedger({
+                            creditEntitlementId: entitlement.credit_entitlement_id,
+                            pageNumber: 0,
+                            pageSize: CREDIT_TRANSACTIONS_SIZE,
+                        });
+                        ledger[entitlement.credit_entitlement_id] =
+                            ledgerData.data as CreditLedgerItem[];
+                    } catch (error) {
+                        console.error(
+                            `Failed to fetch credit ledger for ${entitlement.name}:`,
+                            error
+                        );
+                        ledger[entitlement.credit_entitlement_id] = [];
+                    }
+                })
+            );
+        }
+
+        return { creditEntitlements: items, creditLedgerByEntitlement: ledger };
+    }
+
+    let subscriptionsData, paymentMethods, billingHistoryData, user, walletsResult, creditsResult;
 
     try {
         [
@@ -70,13 +102,15 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             paymentMethods,
             billingHistoryData,
             user,
-            walletsResult
+            walletsResult,
+            creditsResult
         ] = await Promise.all([
             getCachedSubscriptions(0, OVERVIEW_SUBSCRIPTIONS_SIZE),
             getCachedPaymentMethods(),
             getCachedPayments(billingPage, OVERVIEW_BILLING_PAGE_SIZE),
             getCachedUser(),
             fetchWalletsWithLedger(),
+            fetchCreditsWithLedger(),
         ]);
     } catch (error) {
         console.error("Failed to fetch overview data:", error);
@@ -85,11 +119,14 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         billingHistoryData = { data: [], totalCount: 0, hasNext: false };
         user = null;
         walletsResult = { walletItems: [] as WalletItem[], walletLedgerByCurrency: {} as Record<string, WalletLedgerItem[]> };
+        creditsResult = { creditEntitlements: [] as CreditEntitlementItem[], creditLedgerByEntitlement: {} as Record<string, CreditLedgerItem[]> };
     }
 
     const safePaymentMethods = (paymentMethods || []) as PaymentMethodItem[];
     const walletItems = walletsResult.walletItems;
     const walletLedgerByCurrency = walletsResult.walletLedgerByCurrency;
+    const creditEntitlements = creditsResult.creditEntitlements;
+    const creditLedgerByEntitlement = creditsResult.creditLedgerByEntitlement;
 
     return (
         <OverviewContent
@@ -106,6 +143,8 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             user={user ? { name: user.name, email: user.email } : null}
             wallets={walletItems}
             walletLedgerByCurrency={walletLedgerByCurrency}
+            creditEntitlements={creditEntitlements}
+            creditLedgerByEntitlement={creditLedgerByEntitlement}
         />
     );
 }

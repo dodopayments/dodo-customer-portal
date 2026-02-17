@@ -1,7 +1,7 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
-import { UserResponse } from "./types";
+import { UserResponse, CreditEntitlementItem, CreditLedgerItem } from "./types";
 import parseError from "@/lib/serverErrorHelper";
 
 export async function fetchUser(): Promise<UserResponse | null> {
@@ -62,6 +62,66 @@ export async function fetchWalletLedger({
     };
   } catch (error) {
     parseError(error, "Failed to fetch wallet ledger");
+    return { data: [], totalCount: 0, hasNext: false };
+  }
+}
+
+
+export async function fetchCreditEntitlements(): Promise<{
+  items: CreditEntitlementItem[];
+} | null> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      "/customer-portal/credit-entitlements"
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch credit entitlements: ${response.status}`
+      );
+    }
+    const data = await response.json();
+    return { items: data.items || [] };
+  } catch (error) {
+    parseError(error, "Failed to fetch credit entitlements");
+    return null;
+  }
+}
+
+export async function fetchCreditEntitlementLedger({
+  creditEntitlementId,
+  pageNumber = 0,
+  pageSize = 50,
+}: {
+  creditEntitlementId: string;
+  pageNumber?: number;
+  pageSize?: number;
+}): Promise<{
+  data: CreditLedgerItem[];
+  totalCount: number;
+  hasNext: boolean;
+}> {
+  try {
+    const params = new URLSearchParams();
+    params.set("page_size", pageSize.toString());
+    params.set("page_number", pageNumber.toString());
+
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/credit-entitlements/${creditEntitlementId}/ledger?${params}`
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch credit entitlement ledger: ${response.status}`
+      );
+    }
+    const data = await response.json();
+    const items = data.items || [];
+    return {
+      data: items,
+      totalCount: items.length,
+      hasNext: items.length === pageSize,
+    };
+  } catch (error) {
+    parseError(error, "Failed to fetch credit entitlement ledger");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }
