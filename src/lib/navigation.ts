@@ -17,7 +17,7 @@ export const navigation = [
     path: "/session/payment-methods",
   },
   {
-    label: "Profile & Wallets",
+    label: "Profile, Wallets & Credits",
     path: "/session/profile",
   },
 ];

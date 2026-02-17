@@ -3,11 +3,12 @@
 import { SubscriptionData, Subscriptions } from "../subscriptions/subscriptions";
 import { OrderData, Orders } from "../orders/orders";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
-import { WalletItem, WalletLedgerItem } from "@/app/session/profile/types";
+import { WalletItem, WalletLedgerItem, CreditEntitlementItem, CreditLedgerItem } from "@/app/session/profile/types";
 import { LeftPanel } from "./left-panel";
 import { PaymentMethodsSection } from "./payment-methods-section";
 import { WalletsSection } from "./wallets-section";
 import { SessionHeader } from "../session-header";
+import { CreditsSection } from "./credits-section";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { RefundResponse } from "../refunds-column";
@@ -40,6 +41,8 @@ interface OverviewContentProps {
     user: { name: string; email: string } | null;
     wallets: WalletItem[];
     walletLedgerByCurrency: Record<string, WalletLedgerItem[]>;
+    creditEntitlements: CreditEntitlementItem[];
+    creditLedgerByEntitlement: Record<string, CreditLedgerItem[]>;
 }
 
 const BILLING_PAGE_PARAM = "billingPage";
@@ -57,6 +60,8 @@ export function OverviewContent({
     user,
     wallets,
     walletLedgerByCurrency,
+    creditEntitlements,
+    creditLedgerByEntitlement,
 }: OverviewContentProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -97,6 +102,12 @@ export function OverviewContent({
                             <WalletsSection
                                 wallets={wallets}
                                 walletLedgerByCurrency={walletLedgerByCurrency}
+                            />
+                        )}
+                        {creditEntitlements.length > 0 && (
+                            <CreditsSection
+                                entitlements={creditEntitlements}
+                                creditLedgerByEntitlement={creditLedgerByEntitlement}
                             />
                         )}
                         <Orders

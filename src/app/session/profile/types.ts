@@ -34,3 +34,31 @@ export interface WalletLedgerItem {
   reference_object_id?: string;
   usd_equivalent_amount: number;
 }
+
+export interface CreditEntitlementItem {
+  credit_entitlement_id: string;
+  name: string;
+  unit: string;
+  balance: string;
+  overage: string;
+  description?: string | null;
+}
+
+export interface CreditLedgerItem {
+  id: string;
+  business_id: string;
+  customer_id: string;
+  credit_entitlement_id: string;
+  transaction_type: string;
+  amount: string;
+  is_credit: boolean;
+  balance_before: string;
+  balance_after: string;
+  overage_before: string;
+  overage_after: string;
+  created_at: string;
+  description?: string | null;
+  grant_id?: string | null;
+  reference_id?: string | null;
+  reference_type?: string | null;
+}
