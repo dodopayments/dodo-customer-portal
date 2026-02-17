@@ -10,7 +10,10 @@ import {
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { SubscriptionData, SubscriptionStatus } from "./subscriptions/subscriptions";
+import {
+  SubscriptionData,
+  SubscriptionStatus,
+} from "./subscriptions/subscriptions";
 import { Badge, type BadgeVariant } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { useRouter } from "next/navigation";
@@ -49,7 +52,7 @@ const getPaymentMethodDisplay = (paymentMethod?: PaymentMethodItem) => {
     paymentMethod.payment_method_type,
     paymentMethod.payment_method,
     paymentMethod.card?.card_network,
-    paymentMethod.card?.card_type
+    paymentMethod.card?.card_type,
   );
 
   return {
@@ -88,30 +91,45 @@ export const SubscriptionCard = ({
 
     return (
       <div>
-        <Card className={`relative z-10 shadow-[0px_2px_12px_0px_rgba(68,81,104,0.1)] ${cardClassName}`}>
+        <Card
+          className={`relative z-10 shadow-[0px_2px_12px_0px_rgba(68,81,104,0.1)] ${cardClassName}`}
+        >
           <CardContent className="p-4 sm:p-5 md:p-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
-              <div>
-                <p className="text-sm text-text-secondary mb-0.5">
-                  {item.product.name}
-                </p>
-                <p className="text-lg sm:text-xl font-display font-semibold text-text-primary">
-                  {formatCurrency(
-                    decodeCurrency(
-                      item.recurring_pre_tax_amount,
-                      item.currency as CurrencyCode
-                    ),
-                    item.currency as CurrencyCode
-                  )}
-                  <span className="text-sm sm:text-base font-normal text-text-primary">
-                    /{item.payment_frequency_interval}
-                  </span>
-                </p>
+              <div className="flex gap-4">
+                {item.product.image && (
+                  <Image
+                    src={item.product.image}
+                    alt={item.product.name}
+                    width={50}
+                    height={50}
+                    className="object-contain size-12 rounded-md"
+                    unoptimized
+                  />
+                )}
+                <div>
+                  <p className="text-sm text-text-secondary mb-0.5">
+                    {item.product.name}
+                  </p>
+                  <p className="text-lg sm:text-xl font-display font-semibold text-text-primary">
+                    {formatCurrency(
+                      decodeCurrency(
+                        item.recurring_pre_tax_amount,
+                        item.currency as CurrencyCode,
+                      ),
+                      item.currency as CurrencyCode,
+                    )}
+                    <span className="text-sm sm:text-base font-normal text-text-primary">
+                      /{item.payment_frequency_interval}
+                    </span>
+                  </p>
+                </div>
               </div>
 
               {paymentDisplay && (
                 <div className="flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 border border-border-secondary rounded-lg self-start sm:self-auto">
-                  {paymentDisplay.logo?.type === "url" && paymentDisplay.logo.url ? (
+                  {paymentDisplay.logo?.type === "url" &&
+                  paymentDisplay.logo.url ? (
                     <Image
                       src={paymentDisplay.logo.url}
                       alt="Payment method"
@@ -120,13 +138,21 @@ export const SubscriptionCard = ({
                       className="object-contain w-7 sm:w-9"
                       unoptimized
                     />
-                  ) : paymentDisplay.logo?.type === "icon" && paymentDisplay.logo.Icon ? (
-                    <paymentDisplay.logo.Icon size={24} className="text-text-primary" weight="regular" />
+                  ) : paymentDisplay.logo?.type === "icon" &&
+                    paymentDisplay.logo.Icon ? (
+                    <paymentDisplay.logo.Icon
+                      size={24}
+                      className="text-text-primary"
+                      weight="regular"
+                    />
                   ) : (
                     <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-text-secondary" />
                   )}
                   <span className="text-sm sm:text-base text-text-primary font-medium">
-                    {paymentMethod?.card?.card_network ? `${paymentMethod.card.card_network} ` : ""}{paymentDisplay.label}
+                    {paymentMethod?.card?.card_network
+                      ? `${paymentMethod.card.card_network} `
+                      : ""}
+                    {paymentDisplay.label}
                   </span>
                 </div>
               )}
@@ -146,16 +172,23 @@ export const SubscriptionCard = ({
               {item.status === "active" && (
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-xs font-medium">
                   <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                    renews on {item.next_billing_date
-                      ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
+                    renews on{" "}
+                    {item.next_billing_date
+                      ? new Date(item.next_billing_date).toLocaleDateString(
+                          "en-GB",
+                        )
                       : "N/A"}
                   </span>
                   <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                    valid till {item.next_billing_date
-                      ? new Date(item.next_billing_date).toLocaleDateString("en-GB")
+                    valid till{" "}
+                    {item.next_billing_date
+                      ? new Date(item.next_billing_date).toLocaleDateString(
+                          "en-GB",
+                        )
                       : "N/A"}
                   </span>
-                </div>)}
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -202,7 +235,7 @@ export const SubscriptionCard = ({
                 {formatCurrency(
                   decodeCurrency(
                     item.recurring_pre_tax_amount,
-                    item.currency as CurrencyCode
+                    item.currency as CurrencyCode,
                   ),
                   item.currency as CurrencyCode,
                 )}
