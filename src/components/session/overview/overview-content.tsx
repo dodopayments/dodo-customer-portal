@@ -70,6 +70,15 @@ export function OverviewContent({
 }: OverviewContentProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pushPage = useCallback((paramKey: string, newPage: number) => {
+        const currentBaseQuery = refundHistoryPagination.baseUrl || "?";
+        const params = new URLSearchParams(
+            currentBaseQuery.startsWith("?") ? currentBaseQuery.slice(1) : currentBaseQuery
+        );
+        params.set(paramKey, newPage.toString());
+        router.push(`${paginationBasePath}?${params.toString()}`);
+    }, [paginationBasePath, refundHistoryPagination.baseUrl, router]);
+
     const handleBillingPageChange = useCallback((newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(BILLING_PAGE_PARAM, newPage.toString());
@@ -77,10 +86,8 @@ export function OverviewContent({
     }, [router, searchParams, paginationBasePath]);
 
     const handleRefundPageChange = useCallback((newPage: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set(REFUND_PAGE_PARAM, newPage.toString());
-        router.push(`/session/overview?${params.toString()}`);
-    }, [router, searchParams]);
+        pushPage(REFUND_PAGE_PARAM, newPage);
+    }, [pushPage]);
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen w-full bg-bg-primary">
