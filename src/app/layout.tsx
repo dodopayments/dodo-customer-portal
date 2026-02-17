@@ -74,7 +74,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <main className="mx-auto max-w-[1920px] h-full">
+            <main className="h-full w-full">
               <ThemeToaster />
               {children}
             </main>
