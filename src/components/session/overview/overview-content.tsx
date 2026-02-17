@@ -51,7 +51,7 @@ export function OverviewContent({
     }, [router, searchParams]);
 
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen bg-bg-primary">
+        <div className="flex flex-col lg:flex-row min-h-screen w-full bg-bg-primary">
             <LeftPanel />
 
             <div className="flex-1 flex flex-col overflow-hidden">
