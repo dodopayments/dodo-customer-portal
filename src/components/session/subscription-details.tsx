@@ -49,8 +49,8 @@ export async function SubscriptionDetails({
   const paymentMethods = await fetchPaymentMethods();
   const currentPaymentMethod = subscription.payment_method_id
     ? paymentMethods?.find(
-      (pm) => pm.payment_method_id === subscription.payment_method_id
-    )
+        (pm) => pm.payment_method_id === subscription.payment_method_id,
+      )
     : null;
 
   return (
@@ -59,24 +59,38 @@ export async function SubscriptionDetails({
         <Card className="w-full p-6 flex flex-col lg:flex-row justify-between gap-4">
           <section className="flex flex-col gap-4 flex-1 min-w-0">
             <CardHeader className="flex flex-col gap-2 p-0">
-              <p className="text-text-secondary text-sm">
-                {subscription.product.name}
-              </p>
-              <CardTitle>
-                {formatCurrency(
-                  decodeCurrency(
-                    subscription.recurring_pre_tax_amount,
-                    subscription.currency as CurrencyCode
-                  ),
-                  subscription.currency as CurrencyCode
+              <div className="flex gap-4">
+                {subscription.product.image && (
+                  <Image
+                    src={subscription.product.image}
+                    alt={subscription.product.name}
+                    width={100}
+                    height={100}
+                    className="object-contain size-14 rounded-md"
+                    unoptimized
+                  />
                 )}
-                /{subscription.payment_frequency_interval.toLowerCase()}
-              </CardTitle>
-              <CardDescription className="text-text-secondary text-sm">
-                <ProductMarkdownDescription
-                  description={subscription.product.description}
-                />
-              </CardDescription>
+                <div className="flex flex-col gap-2 p-0">
+                  <p className="text-text-secondary text-sm">
+                    {subscription.product.name}
+                  </p>
+                  <CardTitle>
+                    {formatCurrency(
+                      decodeCurrency(
+                        subscription.recurring_pre_tax_amount,
+                        subscription.currency as CurrencyCode,
+                      ),
+                      subscription.currency as CurrencyCode,
+                    )}
+                    /{subscription.payment_frequency_interval.toLowerCase()}
+                  </CardTitle>
+                  <CardDescription className="text-text-secondary text-sm">
+                    <ProductMarkdownDescription
+                      description={subscription.product.description}
+                    />
+                  </CardDescription>
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="flex flex-col gap-4 p-0">
               <div className="flex flex-row gap-2">
@@ -120,7 +134,10 @@ function AddOns({ addons }: { addons: AddOn[] }) {
       <Separator />
       <CardContent className="flex flex-col gap-2 p-0">
         {addons.map((addon) => (
-          <Card key={addon.addon_id} className="p-4 flex flex-row gap-4 items-start">
+          <Card
+            key={addon.addon_id}
+            className="p-4 flex flex-row gap-4 items-start"
+          >
             {/* Addon Image */}
             <div className="w-12 h-12 rounded-lg bg-button-secondary-bg flex items-center justify-center flex-shrink-0 overflow-hidden">
               {addon.image ? (
@@ -240,7 +257,7 @@ function CurrentPaymentMethod({
     paymentMethod.payment_method_type,
     paymentMethod.payment_method,
     paymentMethod.card?.card_network,
-    paymentMethod.card?.card_type
+    paymentMethod.card?.card_type,
   );
 
   const displayName = getPaymentMethodDisplayName(paymentMethod);
