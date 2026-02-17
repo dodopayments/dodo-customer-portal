@@ -10,6 +10,7 @@ import SubscriptionInfo from "@/components/session/subscriptions/subscription-in
 import { ChangePlanSheet } from "@/components/session/subscriptions/change-plan-sheet";
 import { ProductCollectionData } from "./types";
 import { SessionPageLayout } from "@/components/session/session-page-layout";
+import { fetchBusiness } from "@/lib/server-actions";
 
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
@@ -31,6 +32,8 @@ export default async function SubscriptionPage({
   }
 
   const productCollection = await fetchProductCollectionByProductId(subscription.product.id);
+  const business = await fetchBusiness();
+  const canChangePlan = business?.allow_customer_portal_sub_change_plan ?? false;
 
   const invoiceParams = await extractPaginationParams(
     searchParams,
@@ -44,12 +47,13 @@ export default async function SubscriptionPage({
     USAGE_PAGE_PARAM_KEY
   );
 
-  // Header actions for the page
+// Header actions for the page
   const headerActions = (
     <HeaderActions
       subscription={subscription}
       subscriptionId={id}
       productCollection={productCollection}
+      canChangePlan={canChangePlan}
     />
   );
 
@@ -88,14 +92,16 @@ function HeaderActions({
   subscription,
   subscriptionId,
   productCollection,
+  canChangePlan,
 }: {
   subscription: SubscriptionDetailsData;
   subscriptionId: string;
   productCollection: ProductCollectionData | null;
+  canChangePlan: boolean;
 }) {
   return (
     <>
-      {productCollection && (
+      {productCollection && canChangePlan && (
         <ChangePlanSheet
           currentProductId={subscription.product.id}
           subscriptionId={subscriptionId}
