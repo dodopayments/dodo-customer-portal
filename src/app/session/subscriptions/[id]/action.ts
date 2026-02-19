@@ -331,9 +331,7 @@ export async function fetchProductCollectionByProductId(
       `/customer-portal/products/${productId}/collection`,
     );
     if (!response.ok) {
-      if (response.status === 404) {
-        throw new Error("No collection found for this product");
-      }
+      if (response.status === 404) return null;
       throw new Error(
         `Failed to fetch product collection by product ID: ${response.status}`,
       );
