@@ -15,6 +15,7 @@ import { fetchBusiness } from "@/lib/server-actions";
 const DEFAULT_PAGE_SIZE = 50;
 const INVOICE_PAGE_PARAM_KEY = "invoice_page";
 const USAGE_PAGE_PARAM_KEY = "usage_page";
+const REFUND_PAGE_PARAM_KEY = "refund_page";
 
 export interface PageProps {
   params: Promise<{ id: string }>;
@@ -45,6 +46,12 @@ export default async function SubscriptionPage({
     searchParams,
     DEFAULT_PAGE_SIZE,
     USAGE_PAGE_PARAM_KEY
+  );
+
+  const refundParams = await extractPaginationParams(
+    searchParams,
+    DEFAULT_PAGE_SIZE,
+    REFUND_PAGE_PARAM_KEY
   );
 
 // Header actions for the page
@@ -81,6 +88,12 @@ export default async function SubscriptionPage({
             pageSize: usageParams.pageSize,
             baseUrl: usageParams.baseUrl,
             pageParamKey: USAGE_PAGE_PARAM_KEY,
+          }}
+          refundPagination={{
+            currentPage: refundParams.currentPage,
+            pageSize: refundParams.pageSize,
+            baseUrl: refundParams.baseUrl,
+            pageParamKey: REFUND_PAGE_PARAM_KEY,
           }}
         />
       </div>
