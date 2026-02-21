@@ -9,34 +9,33 @@ import {
   decodeCurrency,
   formatCurrency,
 } from "@/lib/currency-helper";
-import parseIso from "@/lib/date-helper";
 import { getBadge } from "@/lib/badge-helper";
+import { TimeTooltip } from "../custom/time-tooltip";
 
-interface RefundResponse {
-  amount: number;
+export interface RefundResponse {
+  amount: number | null;
   business_id: string;
   created_at: string;
-  currency: string;
+  currency: string | null;
   payment_id: string;
-  reason: string;
+  reason: string | null;
   refund_id: string;
   status: string;
 }
 
 export const RefundColumn: ColumnDef<RefundResponse>[] = [
   {
-    accessorKey: "refund_id",
-    header: "Refund Id",
-    cell: ({ row }) => <IDTooltip idValue={row.getValue("refund_id")} />,
-  },
-  {
-    accessorKey: "payment_id",
-    header: "Associated Payment",
-    cell: ({ row }) => (
-      <div className="flex gap-2 items-center">
-        <IDTooltip idValue={row.getValue("payment_id")} />
-      </div>
-    ),
+    accessorKey: "created_at",
+    header: "Date",
+    cell: ({ row }) => {
+      return (
+        <TimeTooltip
+          timeStamp={row.original.created_at}
+          className="text-sm text-text-primary font-medium"
+          triggerFormat="shortDate"
+        />
+      );
+    },
   },
   {
     accessorKey: "status",
@@ -51,26 +50,35 @@ export const RefundColumn: ColumnDef<RefundResponse>[] = [
       );
     },
   },
-
-  {
-    accessorKey: "created_at",
-    header: "Date",
-    cell: (info) => {
-      const dateStr = info.getValue<string>();
-      return parseIso(dateStr);
-    },
-  },
   {
     accessorKey: "amount",
     header: "Amount",
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const currency = row.original.currency as CurrencyCode;
+      const amount = row.original.amount;
+      const currency = row.original.currency;
+      if (amount === null || currency === null) {
+        return <div className="text-left">-</div>;
+      }
+      const currencyCode = currency as CurrencyCode;
       const formatted = formatCurrency(
-        decodeCurrency(amount, currency),
-        currency,
+        decodeCurrency(amount, currencyCode),
+        currencyCode,
       );
       return <div className="text-left">{formatted}</div>;
     },
+  },
+  {
+    accessorKey: "refund_id",
+    header: "Refund Id",
+    cell: ({ row }) => <IDTooltip idValue={row.getValue("refund_id")} />,
+  },
+  {
+    accessorKey: "payment_id",
+    header: "Associated Payment",
+    cell: ({ row }) => (
+      <div className="flex gap-2 items-center">
+        <IDTooltip idValue={row.getValue("payment_id")} />
+      </div>
+    ),
   },
 ];

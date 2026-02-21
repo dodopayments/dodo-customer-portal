@@ -25,6 +25,8 @@ export function getBadge(
     cancelled: { color: "red", message: "Cancelled" },
     expired: { color: "red", message: "Expired" },
     processing: { color: "yellow", message: "In Progress" },
+    pending: { color: "yellow", message: "Pending" },
+    review: { color: "yellow", message: "In Review" },
     requires_customer_action: { color: "yellow", message: "Pending" },
     requires_payment_method: { color: "default", message: "Not initated" },
     requires_merchant_action: { color: "orange", message: "On Hold" },
