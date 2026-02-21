@@ -11,6 +11,8 @@ import { SessionHeader } from "../session-header";
 import { CreditsSection } from "./credits-section";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { RefundResponse } from "../refunds-column";
+import { RefundsTable } from "../refunds-table";
 
 interface BillingHistoryPagination {
     currentPage: number;
@@ -19,12 +21,23 @@ interface BillingHistoryPagination {
     totalCount: number;
 }
 
+interface RefundHistoryPagination {
+    currentPage: number;
+    pageSize: number;
+    hasNextPage: boolean;
+    totalCount: number;
+    baseUrl: string;
+    pageParamKey: string;
+}
+
 interface OverviewContentProps {
     subscriptions: SubscriptionData[];
     subscriptionsTotalCount?: number;
     paymentMethods: PaymentMethodItem[];
     billingHistory: OrderData[];
     billingHistoryPagination: BillingHistoryPagination;
+    refundHistory: RefundResponse[];
+    refundHistoryPagination: RefundHistoryPagination;
     user: { name: string; email: string } | null;
     wallets: WalletItem[];
     walletLedgerByCurrency: Record<string, WalletLedgerItem[]>;
@@ -33,6 +46,7 @@ interface OverviewContentProps {
 }
 
 const BILLING_PAGE_PARAM = "billingPage";
+const REFUND_PAGE_PARAM = "refundPage";
 const OVERVIEW_PAGE_SIZE = 25;
 
 export function OverviewContent({
@@ -41,6 +55,8 @@ export function OverviewContent({
     paymentMethods,
     billingHistory,
     billingHistoryPagination,
+    refundHistory,
+    refundHistoryPagination,
     user,
     wallets,
     walletLedgerByCurrency,
@@ -52,6 +68,12 @@ export function OverviewContent({
     const handleBillingPageChange = useCallback((newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(BILLING_PAGE_PARAM, newPage.toString());
+        router.push(`/session/overview?${params.toString()}`);
+    }, [router, searchParams]);
+
+    const handleRefundPageChange = useCallback((newPage: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set(REFUND_PAGE_PARAM, newPage.toString());
         router.push(`/session/overview?${params.toString()}`);
     }, [router, searchParams]);
 
@@ -99,6 +121,23 @@ export function OverviewContent({
                             onPageSizeChange={() => { }}
                             showPagination={true}
                         />
+                        {(refundHistoryPagination.totalCount > 0 || refundHistory.length > 0) && (
+                            <RefundsTable
+                                refundsData={refundHistory}
+                                tableId="refund-history-overview"
+                                currentPage={refundHistoryPagination.currentPage}
+                                pageSize={refundHistoryPagination.pageSize}
+                                currentPageItems={refundHistory.length}
+                                hasNextPage={refundHistoryPagination.hasNextPage}
+                                totalCount={refundHistoryPagination.totalCount}
+                                baseUrl={refundHistoryPagination.baseUrl}
+                                pageParamKey={refundHistoryPagination.pageParamKey}
+                                showPagination={true}
+                                paginationMode="grid"
+                                onPageChange={handleRefundPageChange}
+                                onPageSizeChange={() => { }}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

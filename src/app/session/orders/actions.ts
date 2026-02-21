@@ -71,11 +71,40 @@ export async function fetchPayments(
     const data = await response.json();
     return {
       data: data.items || [],
-      totalCount: data.total_count || 0,
+      totalCount: data.total_count ?? data.items?.length ?? 0,
       hasNext: data.has_next || false,
     };
   } catch (error) {
     parseError(error, "Failed to fetch payments");
+    return { data: [], totalCount: 0, hasNext: false };
+  }
+}
+
+export async function fetchRefunds(
+  pageNumber: number = 0,
+  pageSize: number = 50,
+) {
+  try {
+    const params = new URLSearchParams();
+    params.set("page_size", pageSize.toString());
+    params.set("page_number", pageNumber.toString());
+
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/refunds?${params}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch refunds: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return {
+      data: data.items || [],
+      totalCount: data.total_count ?? data.items?.length ?? 0,
+      hasNext: data.has_next || false,
+    };
+  } catch (error) {
+    parseError(error, "Failed to fetch refunds");
     return { data: [], totalCount: 0, hasNext: false };
   }
 }
