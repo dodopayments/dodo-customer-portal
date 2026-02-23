@@ -76,10 +76,12 @@ export async function SubscriptionTabsTable({
   const normalizedTabParam = typeof tabParam === "string" ? tabParam : "";
   const isUsageBased = subscription.meters.length > 0;
 
+  const PAGINATION_SAFETY_LIMIT = 20;
+
   const subscriptionPaymentIds = new Set<string>();
   let invoicePage = 0;
   let hasNextInvoicePage = true;
-  while (hasNextInvoicePage) {
+  while (hasNextInvoicePage && invoicePage < PAGINATION_SAFETY_LIMIT) {
     const invoicePageData = await fetchInvoiceHistory(subscriptionId, invoicePage, 100);
     for (const payment of invoicePageData.data as InvoiceHistoryResponse[]) {
       subscriptionPaymentIds.add(payment.payment_id);
@@ -88,19 +90,21 @@ export async function SubscriptionTabsTable({
     invoicePage += 1;
   }
 
-  let hasRefunds = false;
+  let allRefunds: RefundResponse[] = [];
   if (subscriptionPaymentIds.size > 0) {
     let page = 0;
     let hasNext = true;
-    while (hasNext && !hasRefunds) {
+    while (hasNext && page < PAGINATION_SAFETY_LIMIT) {
       const refundsPage = await fetchRefunds(page, 100);
-      hasRefunds = (refundsPage.data as RefundResponse[]).some((refund) =>
-        subscriptionPaymentIds.has(refund.payment_id)
-      );
+      allRefunds = allRefunds.concat(refundsPage.data as RefundResponse[]);
       hasNext = refundsPage.hasNext;
       page += 1;
     }
   }
+  const allSubscriptionRefunds = allRefunds.filter((refund) =>
+    subscriptionPaymentIds.has(refund.payment_id)
+  );
+  const hasRefunds = allSubscriptionRefunds.length > 0;
 
   const isValidTab =
     normalizedTabParam === "invoice-history" ||
@@ -158,25 +162,9 @@ export async function SubscriptionTabsTable({
   }
 
   let subscriptionRefundsData: RefundResponse[] = [];
-  let allSubscriptionRefundsCount = 0;
+  let allSubscriptionRefundsCount = allSubscriptionRefunds.length;
   let hasNextRefundPage = false;
   if (tab === "refund-history") {
-    let allRefunds: RefundResponse[] = [];
-    if (subscriptionPaymentIds.size > 0) {
-      let page = 0;
-      let hasNext = true;
-      while (hasNext) {
-        const refundsPage = await fetchRefunds(page, 100);
-        allRefunds = allRefunds.concat(refundsPage.data as RefundResponse[]);
-        hasNext = refundsPage.hasNext;
-        page += 1;
-      }
-    }
-
-    const allSubscriptionRefunds = allRefunds.filter((refund) =>
-      subscriptionPaymentIds.has(refund.payment_id)
-    );
-    allSubscriptionRefundsCount = allSubscriptionRefunds.length;
     const refundStartIndex =
       refundPagination.currentPage * refundPagination.pageSize;
     subscriptionRefundsData = allSubscriptionRefunds.slice(
