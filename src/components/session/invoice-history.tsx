@@ -74,6 +74,7 @@ const InvoiceColumn: ColumnDef<any>[] = [
           key={row.original.payment_id}
           paymentId={row.original.payment_id}
           downloadUrl={row.original.download_url}
+          disabled={!(row.original.amount > 0)}
         />
       );
     },
