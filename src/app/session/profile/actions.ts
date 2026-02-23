@@ -74,6 +74,9 @@ export async function fetchCreditEntitlements(): Promise<{
     const response = await makeAuthenticatedRequest(
       "/customer-portal/credit-entitlements"
     );
+    if (response.status === 404) {
+      return { items: [] };
+    }
     if (!response.ok) {
       throw new Error(
         `Failed to fetch credit entitlements: ${response.status}`
@@ -108,6 +111,9 @@ export async function fetchCreditEntitlementLedger({
     const response = await makeAuthenticatedRequest(
       `/customer-portal/credit-entitlements/${creditEntitlementId}/ledger?${params}`
     );
+    if (response.status === 404) {
+      return { data: [], totalCount: 0, hasNext: false };
+    }
     if (!response.ok) {
       throw new Error(
         `Failed to fetch credit entitlement ledger: ${response.status}`
