@@ -34,7 +34,7 @@ interface BusinessContextValue {
     hasBusinessToken: boolean;
 }
 
-const BusinessContext = createContext<BusinessContextValue | undefined>(undefined);
+export const BusinessContext = createContext<BusinessContextValue | undefined>(undefined);
 
 interface BusinessProviderProps {
     children: React.ReactNode;
