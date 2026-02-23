@@ -71,7 +71,7 @@ export async function fetchPayments(
     const data = await response.json();
     return {
       data: data.items || [],
-      totalCount: data.total_count ?? data.items?.length ?? 0,
+      totalCount: data.total_count ?? 0,
       hasNext: data.has_next || false,
     };
   } catch (error) {
@@ -100,7 +100,7 @@ export async function fetchRefunds(
     const data = await response.json();
     return {
       data: data.items || [],
-      totalCount: data.total_count ?? data.items?.length ?? 0,
+      totalCount: data.total_count ?? 0,
       hasNext: data.has_next || false,
     };
   } catch (error) {
