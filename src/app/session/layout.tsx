@@ -1,19 +1,23 @@
 import React from "react";
 import NextTopLoader from "nextjs-toploader";
 import { BusinessProvider } from "@/contexts/business-context";
-import { fetchBusiness, getBusinessToken } from "@/lib/server-actions";
+import { fetchBusiness, getBusinessToken, getToken } from "@/lib/server-actions";
 import { CustomerPortalAnalyticsWrapper } from "@/components/analytics/customer-portal-analytics-wrapper";
 import ThemeWrapper from "@/components/providers/theme-wrapper";
 
 const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
   let businessData = null;
   let hasBusinessToken = false;
-  try {
-    businessData = await fetchBusiness();
-    const businessToken = await getBusinessToken();
-    hasBusinessToken = !!businessToken;
-  } catch (error) {
-    console.error("Failed to fetch business data:", error);
+
+  const token = await getToken();
+  if (token) {
+    try {
+      businessData = await fetchBusiness();
+      const businessToken = await getBusinessToken();
+      hasBusinessToken = !!businessToken;
+    } catch (error) {
+      console.error("Failed to fetch business data:", error);
+    }
   }
 
   return (
