@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { useBusiness } from "@/hooks/use-business";
+import { useState, useRef, useEffect, useCallback, useContext } from "react";
+import { BusinessContext } from "@/contexts/business-context";
 import parseError from "@/lib/clientErrorHelper";
 
 interface UseLogoutOptions {
@@ -17,10 +17,9 @@ interface UseLogoutOptions {
  * Handle logout logic and redirection.
  */
 export function useLogout(options: UseLogoutOptions = {}) {
-  const businessContext = useBusiness();
-  // Use option if provided, otherwise fall back to context value
-  const hasBusinessToken = options.hasBusinessToken ?? businessContext.hasBusinessToken ?? false;
-  const { business } = businessContext;
+  const businessContext = useContext(BusinessContext);
+  const hasBusinessToken = options.hasBusinessToken ?? businessContext?.hasBusinessToken ?? false;
+  const business = businessContext?.business;
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const businessIdRef = useRef<string | undefined>(undefined);
 
