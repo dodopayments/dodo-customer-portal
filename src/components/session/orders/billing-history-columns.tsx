@@ -8,6 +8,7 @@ import { api_url } from "@/lib/http";
 import { OrderData } from "./orders";
 import { EntitlementsCell } from "./entitlements-cell";
 import { TimeTooltip } from "@/components/custom/time-tooltip";
+import { CurrencyCode, decodeCurrency, formatCurrency } from "@/lib/currency-helper";
 
 export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
     {
@@ -39,6 +40,19 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
                     {badge.message}
                 </Badge>
             );
+        },
+    },
+    {
+        id: "amount",
+        accessorKey: "total_amount",
+        header: "Amount",
+        cell: ({ row }) => {
+            const currency = row.original.currency as CurrencyCode;
+            const formatted = formatCurrency(
+                decodeCurrency(row.original.total_amount, currency),
+                currency,
+            );
+            return <div className="text-left">{formatted}</div>;
         },
     },
     {
@@ -80,12 +94,14 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
         id: "invoice",
         header: () => <div className="text-right">Invoice</div>,
         cell: ({ row }) => {
+            const invoiceAvailable = row.original.total_amount > 0;
             return (
                 <div className="flex justify-end">
                     <InvoiceDownloadSheet
                         paymentId={row.original.payment_id}
                         downloadUrl={`${api_url}/invoices/payments/${row.original.payment_id}`}
                         variant="icon"
+                        disabled={!invoiceAvailable}
                     />
                 </div>
             );
