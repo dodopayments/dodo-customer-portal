@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { useBusiness } from "@/hooks/use-business";
-import { logout } from "@/lib/server-actions";
+import { useState, useRef, useEffect, useCallback, useContext } from "react";
+import { BusinessContext } from "@/contexts/business-context";
 import parseError from "@/lib/clientErrorHelper";
 
 interface UseLogoutOptions {
@@ -19,11 +17,9 @@ interface UseLogoutOptions {
  * Handle logout logic and redirection.
  */
 export function useLogout(options: UseLogoutOptions = {}) {
-  const router = useRouter();
-  const businessContext = useBusiness();
-  // Use option if provided, otherwise fall back to context value
-  const hasBusinessToken = options.hasBusinessToken ?? businessContext.hasBusinessToken ?? false;
-  const { business } = businessContext;
+  const businessContext = useContext(BusinessContext);
+  const hasBusinessToken = options.hasBusinessToken ?? businessContext?.hasBusinessToken ?? false;
+  const business = businessContext?.business;
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const businessIdRef = useRef<string | undefined>(undefined);
 
@@ -40,19 +36,18 @@ export function useLogout(options: UseLogoutOptions = {}) {
     try {
       setIsLoggingOut(true);
       const businessId = business?.business_id || businessIdRef.current;
-      const result = await logout();
 
-      if (result.success) {
-        // Redirect to business login if applicable, otherwise root
-        const redirectTo =
-          !hasBusinessToken && businessId ? `/login/${businessId}` : "/";
-        router.push(redirectTo);
-      }
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      if (!response.ok) throw new Error("Logout failed");
+
+      const redirectTo =
+        !hasBusinessToken && businessId ? `/login/${businessId}` : "/";
+      window.location.replace(redirectTo);
     } catch (error) {
       parseError(error, "Logout failed. Please try again.");
       setIsLoggingOut(false);
     }
-  }, [isLoggingOut, business?.business_id, hasBusinessToken, router]);
+  }, [isLoggingOut, business?.business_id, hasBusinessToken]);
 
   return {
     handleLogout,

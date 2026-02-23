@@ -89,19 +89,3 @@ export async function fetchBusiness() {
     return null;
   }
 }
-
-export async function logout() {
-  try {
-    const cookieStore = await cookies();
-
-    cookieStore.delete("session_token");
-    cookieStore.delete("session_expiry");
-    cookieStore.delete("business_token");
-    cookieStore.delete("business_expiry");
-
-    return { success: true };
-  } catch (error) {
-    parseError(error, "Server logout failed");
-    return { success: false, error: "Failed to logout" };
-  }
-}

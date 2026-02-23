@@ -26,6 +26,7 @@ interface InvoiceDownloadSheetProps {
   downloadUrl: string;
   buttonClassName?: string;
   variant?: "default" | "icon";
+  disabled?: boolean;
 }
 
 export function InvoiceDownloadSheet({
@@ -33,6 +34,7 @@ export function InvoiceDownloadSheet({
   downloadUrl,
   buttonClassName,
   variant = "default",
+  disabled = false,
 }: InvoiceDownloadSheetProps) {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
@@ -57,12 +59,13 @@ export function InvoiceDownloadSheet({
             variant="secondary"
             size="icon"
             className={cn("h-8 w-8", buttonClassName)}
-            title="Download Invoice"
+            title={disabled ? "Invoice not available" : "Download Invoice"}
+            disabled={disabled}
           >
             <Download className="w-4 h-4" />
           </Button>
         ) : (
-          <Button variant="secondary" className={buttonClassName}>
+          <Button variant="secondary" className={buttonClassName} disabled={disabled}>
             <Download className="w-4 h-4 mr-2" /> Invoice
           </Button>
         )}
