@@ -4,12 +4,11 @@ import { Button } from "./ui/button";
 import ThemeSwitch from "./ui/dodo/ThemeSwitch";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { logout } from "@/lib/server-actions";
-import { useRouter } from "next/navigation";
+import { useLogout } from "@/hooks/use-logout";
 
 export default function NavbarTwo() {
     const { resolvedTheme } = useTheme();
-    const router = useRouter();
+    const { handleLogout, isLoggingOut } = useLogout({ hasBusinessToken: true });
   
     return (
     <div className="flex flex-row justify-between">
@@ -26,12 +25,8 @@ export default function NavbarTwo() {
         <Button
           variant={"secondary"}
           className="text-left w-full"
-          onClick={async () => {
-            const result = await logout();
-            if (result.success) {
-              router.push("/");
-            }
-          }}
+          onClick={handleLogout}
+          loading={isLoggingOut}
         >
           Log out
         </Button>
