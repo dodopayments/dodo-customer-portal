@@ -25,6 +25,10 @@
     --ring: var(--accent);
     --radius: 0.5rem;
 
+    /* Theme system defaults — overridden at runtime by SessionThemeWrapper */
+    --base-font-size: 14px;
+    --font-weight-body: 500;
+
     /* Chart Colors */
     --chart-1: 219 100% 54%;
     --chart-2: 208 100% 77%;
@@ -146,7 +150,7 @@
     /* Button colors - Dark mode */
     --button-primary-bg: #ffffff;
     --button-primary-bg-hover: #c6fe1e;
-    --button-primary-text: #ffffff;
+    --button-primary-text: #0d0d0d;
     --button-primary-fg-hover: #0d0d0d;
     --button-secondary-bg: #1b1b1b;
     --button-secondary-bg-hover: #141414;
@@ -254,5 +258,7 @@ input[type="number"] {
   }
   body {
     @apply bg-background text-foreground;
+    font-size: var(--base-font-size);
+    font-weight: var(--font-weight-body);
   }
 }
