@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
+import type { ThemeConfig, ThemeMode } from "@/types/theme";
 export interface CustomerBusinessTrackingDetails {
     /** Google Analytics 4 Measurement ID (G-XXXXXXXXXX) */
     google_analytics_id?: string | null;
@@ -20,6 +21,10 @@ export interface Business {
     support_email?: string | null;
     /** Tracking configuration for analytics integration */
     tracking?: null | CustomerBusinessTrackingDetails;
+    /** Resolved theme configuration for this business */
+    theme_config?: ThemeConfig | null;
+    /** Preferred color scheme for this business (dark/light/system) */
+    theme_mode?: ThemeMode | null;
 }
 
 interface BusinessContextValue {

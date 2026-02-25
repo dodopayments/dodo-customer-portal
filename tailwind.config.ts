@@ -20,6 +20,23 @@ const config = {
       },
     },
     extend: {
+      fontSize: {
+        xs:    "calc(var(--base-font-size) - 2px)",
+        sm:    "calc(var(--base-font-size) - 1px)",
+        base:  "var(--base-font-size)",
+        md:    "calc(var(--base-font-size) + 2px)",
+        lg:    "calc(var(--base-font-size) + 4px)",
+        xl:    "calc(var(--base-font-size) + 8px)",
+        "2xl": "calc(var(--base-font-size) + 12px)",
+      },
+      fontWeight: {
+        normal:    "400",
+        medium:    "500",
+        semibold:  "600",
+        bold:      "700",
+        extraBold: "900",
+        body:      "var(--font-weight-body)",
+      },
       fontFamily: {
         display: ["var(--font-display-grotesk)", ...fontFamily.sans],
         body: ["var(--font-inter)", ...fontFamily.sans],

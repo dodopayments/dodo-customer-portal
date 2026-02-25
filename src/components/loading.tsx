@@ -3,7 +3,7 @@ const Loading = () => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className="w-6 h-6 text-border-primary will-change-transform animate-spin fill-[#1264FF]"
+        className="w-6 h-6 text-border-primary will-change-transform animate-spin fill-button-primary-bg"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
