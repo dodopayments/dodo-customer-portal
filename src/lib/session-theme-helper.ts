@@ -112,6 +112,59 @@ export const extractFontUrls = (
 });
 
 // ---------------------------------------------------------------------------
+// Font helpers (used by SessionThemeWrapper and demo postMessage bridge)
+// ---------------------------------------------------------------------------
+
+/**
+ * Parse a Google Fonts URL and return the CSS font-family string.
+ * e.g. "https://fonts.googleapis.com/css2?family=Inter:wght@400;700"
+ *   → "'Inter', sans-serif"
+ */
+export function parseFontFamily(url: string): string | null {
+  try {
+    const familyParam = new URL(url).searchParams.get("family");
+    if (!familyParam) return null;
+    const name = familyParam.split(":")[0].replace(/\+/g, " ");
+    return `'${name}', sans-serif`;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Generate CSS for overriding the app font variables.
+ *
+ * primaryUrl   → replaces --font-display-grotesk (display / headings)
+ * secondaryUrl → replaces --font-inter            (body text)
+ *
+ * Both also write to generic --font-primary / --font-secondary vars.
+ */
+export function generateFontVarsCSS(
+  primaryUrl: string | null,
+  secondaryUrl: string | null,
+): string {
+  const vars: string[] = [];
+
+  if (primaryUrl) {
+    const family = parseFontFamily(primaryUrl);
+    if (family) {
+      vars.push(`--font-display-grotesk: ${family}`);
+      vars.push(`--font-primary: ${family}`);
+    }
+  }
+
+  if (secondaryUrl) {
+    const family = parseFontFamily(secondaryUrl);
+    if (family) {
+      vars.push(`--font-inter: ${family}`);
+      vars.push(`--font-secondary: ${family}`);
+    }
+  }
+
+  return vars.length > 0 ? `:root { ${vars.join("; ")} }` : "";
+}
+
+// ---------------------------------------------------------------------------
 // CSS generation
 // ---------------------------------------------------------------------------
 
@@ -171,9 +224,22 @@ export const generateSessionThemeCSS = (
   const flatConfig = flatThemeConfig(themeConfig);
   if (!flatConfig) return "";
 
-  const sharedCSS = generateSharedCSS(flatConfig);
-  const lightCSS  = generateColorCSSForMode(flatConfig, "light");
-  const darkCSS   = generateColorCSSForMode(flatConfig, "dark");
+  return generateSessionThemeCSSFromFlat(flatConfig);
+};
+
+/**
+ * Generate the same theme CSS from a flat Record (e.g. from postMessage themeConfig).
+ * Used by the demo page to apply parent-driven theme updates at runtime.
+ * All values are sanitized via sanitizeCSS.
+ */
+export function generateSessionThemeCSSFromFlat(
+  flat: Record<string, string>,
+): string {
+  if (!flat || Object.keys(flat).length === 0) return "";
+
+  const sharedCSS = generateSharedCSS(flat);
+  const lightCSS  = generateColorCSSForMode(flat, "light");
+  const darkCSS   = generateColorCSSForMode(flat, "dark");
 
   let css = "";
   if (sharedCSS) css += `:root { ${sharedCSS} }`;
@@ -181,4 +247,4 @@ export const generateSessionThemeCSS = (
   if (darkCSS)   css += ` .dark { ${darkCSS} }`;
 
   return css;
-};
+}
