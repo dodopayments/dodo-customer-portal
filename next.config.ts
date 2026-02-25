@@ -73,8 +73,15 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value:
-              "frame-ancestors 'self' dodopayments.com https://dodopayments.com *.dodopayments.com https://*.dodopayments.com;",
+            value: [
+              "frame-ancestors 'self'",
+              "dodopayments.com https://dodopayments.com",
+              "*.dodopayments.com https://*.dodopayments.com",
+              "*.dodopayments.tech https://*.dodopayments.tech",
+              ...(process.env.NODE_ENV === "development"
+                ? ["http://localhost:*"]
+                : []),
+            ].join(" ") + ";",
           },
           {
             key: "X-Frame-Options",
