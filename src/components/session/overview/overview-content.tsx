@@ -43,11 +43,15 @@ interface OverviewContentProps {
     walletLedgerByCurrency: Record<string, WalletLedgerItem[]>;
     creditEntitlements: CreditEntitlementItem[];
     creditLedgerByEntitlement: Record<string, CreditLedgerItem[]>;
+    /** Base path for billing history pagination (default: /session/overview) */
+    paginationBasePath?: string;
 }
 
 const BILLING_PAGE_PARAM = "billingPage";
 const REFUND_PAGE_PARAM = "refundPage";
 const OVERVIEW_PAGE_SIZE = 25;
+
+const DEFAULT_PAGINATION_BASE_PATH = "/session/overview";
 
 export function OverviewContent({
     subscriptions,
@@ -62,14 +66,15 @@ export function OverviewContent({
     walletLedgerByCurrency,
     creditEntitlements,
     creditLedgerByEntitlement,
+    paginationBasePath = DEFAULT_PAGINATION_BASE_PATH,
 }: OverviewContentProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const handleBillingPageChange = useCallback((newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(BILLING_PAGE_PARAM, newPage.toString());
-        router.push(`/session/overview?${params.toString()}`);
-    }, [router, searchParams]);
+        router.push(`${paginationBasePath}?${params.toString()}`);
+    }, [router, searchParams, paginationBasePath]);
 
     const handleRefundPageChange = useCallback((newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
