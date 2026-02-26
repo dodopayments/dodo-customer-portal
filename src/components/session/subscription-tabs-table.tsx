@@ -95,7 +95,7 @@ export async function SubscriptionTabsTable({
     let page = 0;
     let hasNext = true;
     while (hasNext && page < PAGINATION_SAFETY_LIMIT) {
-      const refundsPage = await fetchRefunds(page, 100);
+      const refundsPage = await fetchRefunds(page, 100, subscriptionId);
       allRefunds = allRefunds.concat(refundsPage.data as RefundResponse[]);
       hasNext = refundsPage.hasNext;
       page += 1;
@@ -162,7 +162,7 @@ export async function SubscriptionTabsTable({
   }
 
   let subscriptionRefundsData: RefundResponse[] = [];
-  let allSubscriptionRefundsCount = allSubscriptionRefunds.length;
+  const allSubscriptionRefundsCount = allSubscriptionRefunds.length;
   let hasNextRefundPage = false;
   if (tab === "refund-history") {
     const refundStartIndex =
