@@ -18,7 +18,7 @@ const InvoiceColumn: ColumnDef<any>[] = [
     header: "Payment ID",
     cell: ({ row }) => {
       return (
-        <div className="text-left text-text-secondary">
+        <div className="text-left">
           {row.original.payment_id}
         </div>
       );
@@ -29,7 +29,7 @@ const InvoiceColumn: ColumnDef<any>[] = [
     header: "Date",
     cell: ({ row }) => {
       return (
-        <div className="text-left text-text-secondary">
+        <div className="text-left">
           {new Date(row.original.date).toLocaleDateString("en-GB", {
             day: "numeric",
             month: "short",
@@ -44,7 +44,7 @@ const InvoiceColumn: ColumnDef<any>[] = [
     header: "Amount",
     cell: ({ row }) => {
       return (
-        <div className="text-left text-text-secondary">
+        <div className="text-left">
           {formatCurrency(
             decodeCurrency(row.original.amount, row.original.currency),
             row.original.currency

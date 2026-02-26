@@ -83,12 +83,15 @@ export async function fetchPayments(
 export async function fetchRefunds(
   pageNumber: number = 0,
   pageSize: number = 50,
+  subscriptionId?: string,
 ) {
   try {
     const params = new URLSearchParams();
     params.set("page_size", pageSize.toString());
     params.set("page_number", pageNumber.toString());
-
+    if (subscriptionId) {
+      params.set("subscription_id", subscriptionId);
+    }
     const response = await makeAuthenticatedRequest(
       `/customer-portal/refunds?${params}`
     );
