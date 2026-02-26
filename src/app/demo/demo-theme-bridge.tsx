@@ -10,6 +10,24 @@ import type { DodoThemeUpdateMessage } from "./types";
 
 const DODO_THEME_UPDATE_TYPE = "dodo-theme-update";
 
+const ALLOWED_ORIGIN_HOST_SUFFIXES = [
+  ".dodopayments.com",
+  ".dodopayments.tech",
+  "dodopayments.com",
+  "dodopayments.tech",
+];
+
+function isAllowedOrigin(origin: string): boolean {
+  try {
+    const host = new URL(origin).hostname.toLowerCase();
+    return ALLOWED_ORIGIN_HOST_SUFFIXES.some(
+      (suffix) => host === suffix || host.endsWith(suffix),
+    );
+  } catch {
+    return false;
+  }
+}
+
 function isSafeFontUrl(url: unknown): url is string {
   return typeof url === "string" && url.startsWith("https://");
 }
@@ -24,7 +42,8 @@ export function DemoThemeBridge() {
 
   const handleMessage = useCallback(
     (event: MessageEvent) => {
-      // Optionally validate event.origin for production (e.g. same-origin or allowlist).
+      if (!isAllowedOrigin(event.origin)) return;
+
       const data = event.data as DodoThemeUpdateMessage | undefined;
 
       if (!data || typeof data !== "object" || data.type !== DODO_THEME_UPDATE_TYPE)
