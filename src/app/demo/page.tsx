@@ -10,8 +10,11 @@ import {
   DEMO_CREDIT_LEDGER,
   DEMO_BILLING_PAGE_SIZE,
 } from "./dummy-data";
+import { buildPaginationBaseUrl } from "@/lib/pagination-utils";
 
 const BILLING_PAGE_PARAM = "billingPage";
+const REFUND_PAGE_PARAM = "refundPage";
+const DEMO_REFUND_PAGE_SIZE = 25;
 
 interface DemoPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -34,6 +37,8 @@ export default async function DemoPage({ searchParams }: DemoPageProps) {
   );
   const hasNextPage = start + DEMO_BILLING_PAGE_SIZE < totalCount;
 
+  const refundBaseUrl = buildPaginationBaseUrl(params, REFUND_PAGE_PARAM);
+
   return (
     <OverviewContent
       subscriptions={DEMO_SUBSCRIPTIONS}
@@ -45,6 +50,15 @@ export default async function DemoPage({ searchParams }: DemoPageProps) {
         pageSize: DEMO_BILLING_PAGE_SIZE,
         hasNextPage,
         totalCount,
+      }}
+      refundHistory={[]}
+      refundHistoryPagination={{
+        currentPage: 0,
+        pageSize: DEMO_REFUND_PAGE_SIZE,
+        hasNextPage: false,
+        totalCount: 0,
+        baseUrl: refundBaseUrl,
+        pageParamKey: REFUND_PAGE_PARAM,
       }}
       user={DEMO_USER}
       wallets={DEMO_WALLETS}
