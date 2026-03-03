@@ -21,7 +21,7 @@ export default async function BusinessesPage({
   const businessesData = await fetchBusinesses(currentPage, pageSize);
 
   return (
-    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-ful container mx-auto">
+    <div className="w-full px-4 md:px-12 py-4 md:py-6 mb-16 flex flex-col h-full overflow-y-auto container mx-auto">
       <NavbarTwo />
 
       <div className="w-full flex flex-col gap-4 mt-4">
