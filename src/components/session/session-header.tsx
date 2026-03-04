@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  ArrowLeft,
   ChevronDown,
   ChevronUp,
   LogOut,
@@ -105,9 +106,13 @@ export function SessionHeader({
   const { handleLogout, isLoggingOut } = useLogout();
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [showBackButton, setShowBackButton] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
+    const isDynamicSession = sessionStorage.getItem('portal_entry') === 'dynamic';
+    setShowBackButton(window.history.length > 1 || isDynamicSession);
   }, []);
 
   useEffect(() => {
@@ -134,84 +139,98 @@ export function SessionHeader({
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
         <BusinessIdentity showBusinessSwitcher={showBusinessSwitcher} />
 
-        {showUserMenu ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+        <div className="flex items-center gap-2">
+          {showBackButton && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => router.back()}
+              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+              title="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-text-primary" />
+            </Button>
+          )}
+
+          {showUserMenu ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="w-10 h-10 hover:bg-bg-secondary transition-colors"
+                >
+                  <User className="w-5 h-5 text-text-secondary" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <div className="px-3 py-3">
+                  <p className="text-sm font-medium text-text-primary">
+                    {user?.name || "User"}
+                  </p>
+                  <p className="text-xs text-text-secondary">{user?.email}</p>
+                </div>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer py-3">
+                  {mounted && isDark ? (
+                    <>
+                      <Sun className="w-4 h-4 mr-2" />
+                      Switch to light mode
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="w-4 h-4 mr-2" />
+                      Switch to dark mode
+                    </>
+                  )}
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="cursor-pointer py-3"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  {isLoggingOut ? "Logging out..." : "Log Out"}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <>
               <Button
-                variant="secondary"
+                variant="ghost"
                 size="icon"
-                className="w-10 h-10 hover:bg-bg-secondary transition-colors"
+                onClick={toggleTheme}
+                className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+                title={
+                  mounted
+                    ? isDark
+                      ? "Switch to light mode"
+                      : "Switch to dark mode"
+                    : undefined
+                }
               >
-                <User className="w-5 h-5 text-text-secondary" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <div className="px-3 py-3">
-                <p className="text-sm font-medium text-text-primary">
-                  {user?.name || "User"}
-                </p>
-                <p className="text-xs text-text-secondary">{user?.email}</p>
-              </div>
-              <DropdownMenuSeparator />
-
-              <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer py-3">
                 {mounted && isDark ? (
-                  <>
-                    <Sun className="w-4 h-4 mr-2" />
-                    Switch to light mode
-                  </>
+                  <Sun className="w-5 h-5 text-text-primary" />
                 ) : (
-                  <>
-                    <Moon className="w-4 h-4 mr-2" />
-                    Switch to dark mode
-                  </>
+                  <Moon className="w-5 h-5 text-text-primary" />
                 )}
-              </DropdownMenuItem>
+              </Button>
 
-              <DropdownMenuItem
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="cursor-pointer py-3"
+                className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+                title="Log out"
               >
-                <LogOut className="w-4 h-4 mr-2" />
-                {isLoggingOut ? "Logging out..." : "Log Out"}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-              title={
-                mounted
-                  ? isDark
-                    ? "Switch to light mode"
-                    : "Switch to dark mode"
-                  : undefined
-              }
-            >
-              {mounted && isDark ? (
-                <Sun className="w-5 h-5 text-text-primary" />
-              ) : (
-                <Moon className="w-5 h-5 text-text-primary" />
-              )}
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleLogout}
-              disabled={isLoggingOut}
-              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-              title="Log out"
-            >
-              <LogOut className="w-5 h-5 text-text-primary" />
-            </Button>
-          </div>
-        )}
+                <LogOut className="w-5 h-5 text-text-primary" />
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );

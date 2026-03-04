@@ -34,6 +34,7 @@ export default function Page() {
         const data = await response.json();
 
         if (data.redirect) {
+          sessionStorage.setItem('portal_entry', 'dynamic');
           window.location.replace(data.redirect);
         } else {
           setError("Validation failed. Please try again.");
