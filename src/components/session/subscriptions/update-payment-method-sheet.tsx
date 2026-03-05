@@ -218,8 +218,13 @@ export function UpdatePaymentMethodSheet({
   const handleOpenSheet = useCallback(async () => {
     setLoadingData(true);
     try {
-      const data = await fetchEligiblePaymentMethods(subscription_id);
-      setEligiblePaymentMethods(data.items);
+      const result = await fetchEligiblePaymentMethods(subscription_id);
+      if (!result.success) {
+        toast.error(result.error || "Failed to load payment methods. Please try again.");
+        setEligiblePaymentMethods(null);
+        return;
+      }
+      setEligiblePaymentMethods(result.data.items);
       setOpen(true);
     } catch (error) {
       parseError(error, "Failed to load payment methods. Please try again.");
