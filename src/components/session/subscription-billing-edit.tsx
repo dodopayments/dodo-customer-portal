@@ -82,7 +82,7 @@ export default function SubscriptionBillingEdit({
 
   const onSave = async (data: BillingDetailsFormValues) => {
     try {
-      await updateBillingDetails({
+      const result = await updateBillingDetails({
         subscription_id: subscription.subscription_id,
         data: {
           customer: {
@@ -99,8 +99,12 @@ export default function SubscriptionBillingEdit({
         },
       });
 
-      toast.success("Billing details updated successfully");
-      router.refresh();
+      if (!result.success) {
+        toast.error(result.error || "Failed to update billing details. Please try again.");
+      } else {
+        toast.success("Billing details updated successfully");
+        router.refresh();
+      }
     } catch (error) {
       parseError(error, "Failed to update billing details. Please try again.");
     }

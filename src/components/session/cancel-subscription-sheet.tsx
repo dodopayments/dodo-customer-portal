@@ -47,10 +47,14 @@ export function CancelSubscriptionSheet({
     try {
       setIsLoading(true);
       setIsCancellingAtNextBilling(cancelAtNextBillingDate);
-      await cancelSubscription({
+      const result = await cancelSubscription({
         subscription_id: subscriptionId,
         cancelAtNextBillingDate,
       });
+      if (!result.success) {
+        toast.error(result.error || "Failed to cancel subscription. Please try again.");
+        return;
+      }
       toast.success(
         cancelAtNextBillingDate
           ? "Subscription will be cancelled at next billing date"
@@ -69,10 +73,14 @@ export function CancelSubscriptionSheet({
   const handleRevokeCancellation = async () => {
     try {
       setIsLoading(true);
-      await cancelSubscription({
+      const result = await cancelSubscription({
         subscription_id: subscriptionId,
         revokeCancelation: true,
       });
+      if (!result.success) {
+        toast.error(result.error || "Failed to revoke cancellation. Please try again.");
+        return;
+      }
       toast.success("Subscription cancellation revoked successfully");
       router.refresh();
       setOpen(false);
