@@ -63,6 +63,16 @@ function formatPlanPrice(
   return `${formatted}${getIntervalSuffix(product.price_detail)}`;
 }
 
+function getProductTypeBadge(product: ProductCollectionProduct) {
+  if (!product.is_recurring) {
+    return { label: "One time", variant: "blue" as const };
+  }
+  if (product.meters_count > 0) {
+    return { label: "Usage based", variant: "pink" as const };
+  }
+  return { label: "Subscription", variant: "purple" as const };
+}
+
 type ViewState = "select" | "preview";
 
 interface ChangePlanSheetProps {
@@ -71,16 +81,19 @@ interface ChangePlanSheetProps {
   currentAddons: AddOn[];
   currentQuantity: number;
   productCollection?: ProductCollectionData | null;
+  allowMultipleSubscriptions?: boolean;
 }
 
 function QuantitySelector({
   quantity,
   minQuantity = 0,
+  disableIncrease = false,
   onDecrease,
   onIncrease,
 }: {
   quantity: number;
   minQuantity?: number;
+  disableIncrease?: boolean;
   onDecrease: () => void;
   onIncrease: () => void;
 }) {
@@ -101,6 +114,7 @@ function QuantitySelector({
         size="icon"
         className="h-6 w-6 rounded-md"
         onClick={onIncrease}
+        disabled={disableIncrease}
       >
         <Plus className="h-2 w-2" />
       </Button>
@@ -114,6 +128,7 @@ export function ChangePlanSheet({
   currentAddons,
   currentQuantity,
   productCollection,
+  allowMultipleSubscriptions = true,
 }: ChangePlanSheetProps) {
   const [open, setOpen] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>("select");
@@ -222,6 +237,7 @@ export function ChangePlanSheet({
           ?.filter((p) => p.status !== false)
           .map((product) => {
             const isCurrent = product.product_id === currentProductId;
+            const productType = getProductTypeBadge(product);
             return (
               <Card key={product.product_id} className="border-border-secondary">
                 <CardContent className="p-4">
@@ -247,6 +263,9 @@ export function ChangePlanSheet({
                               </label>
                             </div>
                           )}
+                          <Badge className="hidden" variant={productType.variant} type="default">
+                            {productType.label}
+                          </Badge>
                           {isCurrent && (
                             <Badge variant="green" type="default">
                               Current plan
@@ -269,6 +288,7 @@ export function ChangePlanSheet({
                         <QuantitySelector
                           quantity={quantities[product.product_id] || 0}
                           minQuantity={product.product_id === selectedPlan ? 1 : 0}
+                          disableIncrease={!allowMultipleSubscriptions && product.is_recurring && (quantities[product.product_id] || 0) >= 1}
                           onDecrease={() =>
                             handleQuantityChange(
                               product.product_id,
