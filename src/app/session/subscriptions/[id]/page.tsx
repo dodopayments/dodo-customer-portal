@@ -34,7 +34,9 @@ export default async function SubscriptionPage({
 
   const productCollection = await fetchProductCollectionByProductId(subscription.product.id);
   const business = await fetchBusiness();
+  console.log("business", business);
   const canChangePlan = business?.allow_customer_portal_sub_change_plan ?? false;
+  const allowMultipleSubscriptions = business?.allow_multiple_sub_per_customer ?? false;
 
   const invoiceParams = await extractPaginationParams(
     searchParams,
@@ -61,6 +63,7 @@ export default async function SubscriptionPage({
       subscriptionId={id}
       productCollection={productCollection}
       canChangePlan={canChangePlan}
+      allowMultipleSubscriptions={allowMultipleSubscriptions}
     />
   );
 
@@ -106,11 +109,13 @@ function HeaderActions({
   subscriptionId,
   productCollection,
   canChangePlan,
+  allowMultipleSubscriptions,
 }: {
   subscription: SubscriptionDetailsData;
   subscriptionId: string;
   productCollection: ProductCollectionData | null;
   canChangePlan: boolean;
+  allowMultipleSubscriptions: boolean;
 }) {
   return (
     <>
@@ -121,6 +126,7 @@ function HeaderActions({
           currentAddons={subscription.addons ?? []}
           currentQuantity={subscription.quantity ?? 1}
           productCollection={productCollection ?? null}
+          allowMultipleSubscriptions={allowMultipleSubscriptions}
         />
       )}
       {subscription.status != "cancelled" && (
