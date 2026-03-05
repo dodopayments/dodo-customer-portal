@@ -1,13 +1,14 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getServerApiUrl } from "@/lib/server-http";
 import parseError from "@/lib/serverErrorHelper";
+import { ssrProxyFetch } from "@/lib/ssr-proxy";
 
 async function validateToken(token: string) {
   const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
-  const api_url = await getServerApiUrl();
 
-  const response = await fetch(`${api_url}/customer-portal/business`, {
+  const response = await ssrProxyFetch({
+    path: "/customer-portal/business",
+    method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",

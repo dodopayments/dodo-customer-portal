@@ -3,6 +3,7 @@
 import {
   makeAuthenticatedRequest,
   FilterParams,
+  fetchBusiness as fetchCachedBusiness,
 } from "@/lib/server-actions";
 import parseError from "@/lib/serverErrorHelper";
 
@@ -35,20 +36,7 @@ export async function fetchSubscriptions(filters: FilterParams = {}) {
 }
 
 export async function fetchBusiness() {
-  try {
-    const response = await makeAuthenticatedRequest(
-      "/customer-portal/business"
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch business: ${response.status}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    parseError(error, "Failed to fetch business");
-    return null;
-  }
+  return fetchCachedBusiness();
 }
 
 export async function fetchPayments(
