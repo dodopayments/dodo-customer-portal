@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { z } from "zod";
 
@@ -22,10 +22,9 @@ import {
   handleTurnstileExpired,
   validateTurnstileToken,
 } from "@/lib/turnstile";
-import { api, internalApi } from "@/lib/http";
+import { api } from "@/lib/http";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
-import LoadingOverlay from "../loading-overlay";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
 import parseError from "@/lib/clientErrorHelper";
@@ -37,18 +36,23 @@ const emailSchema = z.object({
     .min(1, "Email is required"),
 });
 
+export interface LoginBusiness {
+  name: string;
+  image?: string | null;
+}
+
 const MagicLinkStatus = ({
   email,
   business,
   setSuccess,
 }: {
   email: string;
-  business: any;
+  business: LoginBusiness;
   setSuccess: (success: boolean) => void;
 }) => (
   <CardHeader className="flex px-7 pb-4 pt-12 flex-col items-center gap-2">
     <Avatar className="mb-6">
-      <AvatarImage src={business.image} />
+      <AvatarImage src={business.image || undefined} />
       <AvatarFallback name={business.name} />
     </Avatar>
     <CardTitle>Almost there!</CardTitle>
@@ -67,15 +71,20 @@ const MagicLinkStatus = ({
   </CardHeader>
 );
 
-export const LoginForm = ({ className }: { className?: string }) => {
+export const LoginForm = ({
+  className,
+  initialBusiness,
+}: {
+  className?: string;
+  initialBusiness: LoginBusiness | null;
+}) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const params = useParams();
   const business_id = params.business_id as string;
-  const [pageLoading, setPageLoading] = useState(true);
-  const [business, setBusiness] = useState<any>({
-    name: "",
-    image: "",
+  const [business] = useState<LoginBusiness>({
+    name: initialBusiness?.name || "",
+    image: initialBusiness?.image || "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -88,23 +97,6 @@ export const LoginForm = ({ className }: { className?: string }) => {
     turnstileRef,
     setTurnstileState
   );
-
-  useEffect(() => {
-    const fetchBusiness = async () => {
-      try {
-        setPageLoading(true);
-        const response = await internalApi.get(
-          `/checkout/businesses/${business_id}`
-        );
-        setBusiness(response.data);
-      } catch (error) {
-        parseError(error, "Failed to fetch business information. Please try again.");
-      } finally {
-        setPageLoading(false);
-      }
-    };
-    fetchBusiness();
-  }, [business_id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,17 +140,13 @@ export const LoginForm = ({ className }: { className?: string }) => {
     }
   };
 
-  if (pageLoading) {
-    return <LoadingOverlay />;
-  }
-
   return (
     <div className={cn("relative z-10", className)}>
       {!success ? (
         <>
           <CardHeader className="flex px-8 pt-12 flex-col items-center">
             <Avatar className="mb-6">
-              <AvatarImage src={business.image} />
+              <AvatarImage src={business.image || undefined} />
               <AvatarFallback name={business.name} />
             </Avatar>
             <CardTitle className="text-center text-[22px]">
