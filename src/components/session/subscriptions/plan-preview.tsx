@@ -19,10 +19,12 @@ import type {
   ProductCollectionProduct,
   ChangeSubscriptionPlanPreviewResponse,
   LineItem,
+  CustomerPortalAddonDetail,
 } from "@/app/session/subscriptions/[id]/types";
 import {
   changeSubscriptionPlan,
   changeSubscriptionPlanPreview,
+  fetchProduct,
 } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -151,6 +153,7 @@ function EditableAddons({
   onOpenChange,
   onQuantityChange,
   addonNamesMap,
+  getMinQuantity,
 }: {
   title: string;
   addons: AddOn[];
@@ -158,6 +161,7 @@ function EditableAddons({
   onOpenChange: (open: boolean) => void;
   onQuantityChange: (addonId: string, quantity: number) => void;
   addonNamesMap?: Record<string, string>;
+  getMinQuantity: (addonId: string) => number;
 }) {
   return (
     <Collapsible open={isOpen} onOpenChange={onOpenChange}>
@@ -173,44 +177,47 @@ function EditableAddons({
           <p className="text-text-secondary text-sm">No addons</p>
         ) : (
           <div className="flex flex-col gap-3">
-            {addons.map((addon) => (
-              <div
-                key={addon.addon_id}
-                className="flex items-center justify-between gap-2 text-sm"
-              >
-                <span className="text-text-secondary break-words flex-1">
-                  {addonNamesMap?.[addon.addon_id] || addon.addon_id}
-                </span>
-                <div className="border border-border-secondary rounded-lg p-1 flex items-center gap-2">
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    className="h-6 w-6 rounded-md"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onQuantityChange(addon.addon_id, addon.quantity - 1);
-                    }}
-                    disabled={addon.quantity <= 0}
-                  >
-                    <Minus className="h-2 w-2" />
-                  </Button>
-                  <span className="text-xs text-text-secondary min-w-[1.5rem] text-center">
-                    {addon.quantity}
+            {addons.map((addon) => {
+              const minQty = getMinQuantity(addon.addon_id);
+              return (
+                <div
+                  key={addon.addon_id}
+                  className="flex items-center justify-between gap-2 text-sm"
+                >
+                  <span className="text-text-secondary break-words flex-1">
+                    {addonNamesMap?.[addon.addon_id] || addon.addon_id}
                   </span>
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    className="h-6 w-6 rounded-md"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onQuantityChange(addon.addon_id, addon.quantity + 1);
-                    }}
-                  >
-                    <Plus className="h-2 w-2" />
-                  </Button>
+                  <div className="border border-border-secondary rounded-lg p-1 flex items-center gap-2">
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      className="h-6 w-6 rounded-md"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onQuantityChange(addon.addon_id, addon.quantity - 1);
+                      }}
+                      disabled={addon.quantity <= minQty}
+                    >
+                      <Minus className="h-2 w-2" />
+                    </Button>
+                    <span className="text-xs text-text-secondary min-w-[1.5rem] text-center">
+                      {addon.quantity}
+                    </span>
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      className="h-6 w-6 rounded-md"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onQuantityChange(addon.addon_id, addon.quantity + 1);
+                      }}
+                    >
+                      <Plus className="h-2 w-2" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </CollapsibleContent>
@@ -358,42 +365,30 @@ function CustomerCreditRow({
     return formatDecodedCurrency(amount, currency);
   };
 
-  const formatQuantity = (qty: number) => {
-    const rounded = Math.round(qty * 10000) / 10000;
-    const formatted = rounded.toFixed(4);
-    return formatted.replace(/\.?0+$/, "");
-  };
-
   return (
     <>
       <div className="grid grid-cols-5 gap-4 py-3">
-        {/* Item Name with Description */}
-        <div className="flex flex-col gap-1">
-          <span className="text-text-primary text-sm font-medium break-words">
+        {/* Item Name */}
+        <div className="flex items-center gap-1">
+          <span className="text-text-primary text-sm font-medium whitespace-nowrap">
             Credit to Balance
           </span>
-          <div className="flex items-center gap-1">
-            <TooltipProvider>
-              <Tooltip delayDuration={100}>
-                <TooltipTrigger asChild>
-                  <Info className="w-4 h-4 cursor-help text-text-secondary flex-shrink-0" />
-                </TooltipTrigger>
-                <TooltipContent className="max-w-md">
-                  <p className="text-xs">
-                    Credit will be used to pay off future payments
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
+          <TooltipProvider>
+            <Tooltip delayDuration={100}>
+              <TooltipTrigger asChild>
+                <Info className="w-4 h-4 cursor-help text-text-secondary flex-shrink-0" />
+              </TooltipTrigger>
+              <TooltipContent className="max-w-md">
+                <p className="text-xs">
+                  Credit will be used to pay off future payments
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
 
-        {/* Quantity */}
-        <div className="flex items-center justify-end">
-          <span className="text-text-primary text-sm whitespace-nowrap">
-            {formatQuantity(1)}
-          </span>
-        </div>
+        {/* Quantity - empty for credit */}
+        <div />
 
         {/* Unit Price */}
         <div className="flex items-center justify-end">
@@ -506,27 +501,73 @@ export function PlanPreview({
     useState<ChangeSubscriptionPlanPreviewResponse | null>(null);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
   const [editableAddons, setEditableAddons] = useState<AddOn[]>([]);
+  const [productAddons, setProductAddons] = useState<CustomerPortalAddonDetail[]>([]);
   const router = useRouter();
 
-  // Create a map of addon IDs to names from line items
-  const addonNamesMap = useMemo(() => {
-    if (!previewData?.immediate_charge?.line_items) return {};
-    return previewData.immediate_charge.line_items
-      .filter((item) => item.type === "addon")
-      .reduce((acc, item) => {
-        acc[item.id] = item.name;
-        return acc;
-      }, {} as Record<string, string>);
-  }, [previewData]);
+  const isUsageBasedProduct = (selectedProduct?.meters_count ?? 0) > 0;
+  const requiresAtLeastOneAddon = currentAddons.length > 0 && !isUsageBasedProduct;
 
-  // Initialize editable addons when component mounts or currentAddons change
+  const hasAtLeastOneAddon = useMemo(
+    () => editableAddons.some(addon => addon.quantity >= 1),
+    [editableAddons]
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getMinQuantityForAddon = useCallback((_addonId: string) => 0, []);
+
   useEffect(() => {
-    if (selectedProduct && selectedProduct.addons_count > 0 && currentAddons.length > 0) {
-      setEditableAddons(currentAddons.map(addon => ({ ...addon })));
-    } else {
-      setEditableAddons([]);
+    const loadProductAddons = async () => {
+      if (!selectedProduct || selectedProduct.addons_count === 0 || isUsageBasedProduct) {
+        setProductAddons([]);
+        return;
+      }
+
+      const result = await fetchProduct(selectedProduct.product_id);
+      if (result.success && result.data.addons) {
+        setProductAddons(result.data.addons);
+      } else {
+        setProductAddons([]);
+      }
+    };
+
+    loadProductAddons();
+  }, [selectedProduct?.product_id, selectedProduct?.addons_count, isUsageBasedProduct]);
+
+  const addonNamesMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const addon of productAddons) {
+      map[addon.id] = addon.name;
     }
-  }, [currentAddons, selectedProduct]);
+    if (previewData?.immediate_charge?.line_items) {
+      for (const item of previewData.immediate_charge.line_items) {
+        if (item.type === "addon") {
+          map[item.id] = item.name;
+        }
+      }
+    }
+    return map;
+  }, [productAddons, previewData]);
+
+  useEffect(() => {
+    if (!selectedProduct || selectedProduct.addons_count === 0 || productAddons.length === 0) {
+      setEditableAddons([]);
+      return;
+    }
+
+    const currentQtyMap = new Map(
+      currentAddons.map(a => [a.addon_id, a.quantity])
+    );
+
+    setEditableAddons(
+      productAddons.map(addon => ({
+        addon_id: addon.id,
+        quantity: currentQtyMap.get(addon.id) ?? 0,
+        name: addon.name,
+        description: addon.description,
+        image: addon.image,
+      }))
+    );
+  }, [selectedProduct, productAddons, currentAddons]);
 
   const handleAddonQuantityChange = useCallback((addonId: string, newQuantity: number) => {
     if (newQuantity < 0) return;
@@ -566,13 +607,17 @@ export function PlanPreview({
       isInitialLoad.current = false;
 
       try {
+        const addonsToSend = isUsageBasedProduct 
+          ? null 
+          : editableAddons.filter(a => a.quantity > 0);
+        
         const result = await changeSubscriptionPlanPreview({
           subscription_id: subscriptionId,
           data: {
             product_id: selectedProduct.product_id,
             quantity: Math.max(quantity, 1),
             proration_billing_mode: billingMode,
-            addons: editableAddons.length > 0 ? editableAddons : null,
+            addons: addonsToSend && addonsToSend.length > 0 ? addonsToSend : null,
             metadata: null,
           },
         });
@@ -600,6 +645,7 @@ export function PlanPreview({
     billingMode,
     editableAddons,
     onBackClick,
+    isUsageBasedProduct,
   ]);
 
   
@@ -644,15 +690,24 @@ export function PlanPreview({
   };
 
   const handleConfirmChangePlan = async () => {
+    if (requiresAtLeastOneAddon && !hasAtLeastOneAddon) {
+      toast.error("Please select at least one add-on with quantity 1 or more.");
+      return;
+    }
+
     try {
       setIsConfirming(true);
+      const addonsToSend = isUsageBasedProduct 
+        ? [] 
+        : editableAddons.filter(a => a.quantity > 0);
+      
       const result = await changeSubscriptionPlan({
         subscription_id: subscriptionId,
         data: {
           product_id: selectedProduct.product_id,
           quantity: Math.max(quantity, 1),
           proration_billing_mode: billingMode,
-          addons: selectedProduct.addons_count > 0 ? editableAddons : [],
+          addons: addonsToSend,
           metadata: null,
         },
       });
@@ -725,14 +780,18 @@ export function PlanPreview({
                             {currentProduct.description}
                           </p>
                         )}
-                        <div className="h-px w-full bg-border-secondary" />
-                        <PlanAddons
-                          title="View add-ons"
-                          addons={currentAddons}
-                          isOpen={isCurrentAddonsOpen}
-                          onOpenChange={setIsCurrentAddonsOpen}
-                          addonNamesMap={addonNamesMap}
-                        />
+                        {currentAddons.length > 0 && (
+                          <>
+                            <div className="h-px w-full bg-border-secondary" />
+                            <PlanAddons
+                              title="View add-ons"
+                              addons={currentAddons}
+                              isOpen={isCurrentAddonsOpen}
+                              onOpenChange={setIsCurrentAddonsOpen}
+                              addonNamesMap={addonNamesMap}
+                            />
+                          </>
+                        )}
                       </>
                     ) : (
                       <p className="text-text-secondary text-sm">—</p>
@@ -765,27 +824,19 @@ export function PlanPreview({
                         {selectedProduct.description}
                       </p>
                     )}
-                    <div className="h-px w-full bg-border-secondary" />
-                    {selectedProduct.addons_count > 0 && editableAddons.length > 0 ? (
-                      <EditableAddons
-                        title="Manage add-ons"
-                        addons={editableAddons}
-                        isOpen={isNewAddonsOpen}
-                        onOpenChange={setIsNewAddonsOpen}
-                        onQuantityChange={handleAddonQuantityChange}
-                        addonNamesMap={addonNamesMap}
-                      />
-                    ) : (
-                      <PlanAddons
-                        title="View add-ons"
-                        addons={
-                          previewData?.new_plan.addons ||
-                          (selectedProduct.addons_count > 0 ? currentAddons : [])
-                        }
-                        isOpen={isNewAddonsOpen}
-                        onOpenChange={setIsNewAddonsOpen}
-                        addonNamesMap={addonNamesMap}
-                      />
+                    {selectedProduct.addons_count > 0 && editableAddons.length > 0 && (
+                      <>
+                        <div className="h-px w-full bg-border-secondary" />
+                        <EditableAddons
+                          title="Manage add-ons"
+                          addons={editableAddons}
+                          isOpen={isNewAddonsOpen}
+                          onOpenChange={setIsNewAddonsOpen}
+                          onQuantityChange={handleAddonQuantityChange}
+                          addonNamesMap={addonNamesMap}
+                          getMinQuantity={getMinQuantityForAddon}
+                        />
+                      </>
                     )}
                   </CardContent>
                 </Card>
