@@ -566,7 +566,7 @@ export function PlanPreview({
       isInitialLoad.current = false;
 
       try {
-        const preview = await changeSubscriptionPlanPreview({
+        const result = await changeSubscriptionPlanPreview({
           subscription_id: subscriptionId,
           data: {
             product_id: selectedProduct.product_id,
@@ -576,10 +576,15 @@ export function PlanPreview({
             metadata: null,
           },
         });
-        setPreviewData(preview);
+        if (!result.success) {
+          toast.error(result.error || "Failed to load preview. Please try again.");
+          onBackClick();
+          return;
+        }
+        setPreviewData(result.data);
       } catch (error) {
         parseError(error, "Failed to load preview. Please try again.");
-        onBackClick(); // Close the screen on error
+        onBackClick();
       } finally {
         setIsLoadingPreview(false);
       }
@@ -641,7 +646,7 @@ export function PlanPreview({
   const handleConfirmChangePlan = async () => {
     try {
       setIsConfirming(true);
-      await changeSubscriptionPlan({
+      const result = await changeSubscriptionPlan({
         subscription_id: subscriptionId,
         data: {
           product_id: selectedProduct.product_id,
@@ -651,6 +656,10 @@ export function PlanPreview({
           metadata: null,
         },
       });
+      if (!result.success) {
+        toast.error(result.error || "Failed to change plan. Please try again.");
+        return;
+      }
       toast.success("Plan changed successfully");
       router.refresh();
       onConfirm();

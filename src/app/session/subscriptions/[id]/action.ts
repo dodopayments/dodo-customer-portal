@@ -13,6 +13,10 @@ import {
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import parseError from "@/lib/serverErrorHelper";
 
+export type ActionResult<T> =
+  | { success: true; data: T }
+  | { success: false; error: string };
+
 export async function getSessionToken(): Promise<string | null> {
   return await getToken();
 }
@@ -21,7 +25,7 @@ export async function cancelSubscription({
   subscription_id,
   cancelAtNextBillingDate,
   revokeCancelation,
-}: CancelSubscriptionParams) {
+}: CancelSubscriptionParams): Promise<ActionResult<unknown>> {
   try {
     let url = `/customer-portal/subscriptions/${subscription_id}`;
     let options: RequestInit;
@@ -58,13 +62,15 @@ export async function cancelSubscription({
       } else {
         operation = "cancel subscription immediately";
       }
-      throw new Error(`Failed to ${operation}: ${errorText}`);
+      return { success: false, error: `Failed to ${operation}: ${errorText}` };
     }
 
-    return response.json();
+    return { success: true, data: await response.json() };
   } catch (error) {
-    // Error will be caught and handled by client component
-    throw error;
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
 
@@ -86,7 +92,7 @@ export async function fetchSubscription(
   }
 }
 
-export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
+export async function updateBillingDetails(params: UpdateBillingDetailsParams): Promise<ActionResult<unknown>> {
   try {
     const { subscription_id, data } = params;
 
@@ -116,19 +122,21 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams) {
       } catch {
         errorMessage += ` (${response.statusText || "Unknown error"})`;
       }
-      throw new Error(`Failed to update billing details: ${errorMessage}`);
+      return { success: false, error: `Failed to update billing details: ${errorMessage}` };
     }
 
-    return response.json();
+    return { success: true, data: await response.json() };
   } catch (error) {
-    // Error will be caught and handled by client component
-    throw error;
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
 
 export async function changeSubscriptionPlan(
   params: ChangeSubscriptionPlanParams,
-) {
+): Promise<ActionResult<unknown>> {
   try {
     const { subscription_id, data } = params;
 
@@ -160,27 +168,29 @@ export async function changeSubscriptionPlan(
         errorMessage =
           errorMessage || "Invalid request - subscription cannot be changed";
       } else {
-        errorMessage = `HTTP ${response.status}`;
+        errorMessage = errorMessage || `HTTP ${response.status}`;
       }
 
-      throw new Error(errorMessage);
+      return { success: false, error: errorMessage };
     }
 
     try {
       const text = await response.text();
-      return text && text.trim() ? JSON.parse(text) : null;
+      return { success: true, data: text && text.trim() ? JSON.parse(text) : null };
     } catch {
-      return null;
+      return { success: true, data: null };
     }
   } catch (error) {
-    // Error will be caught and handled by client component
-    throw error;
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
 
 export async function changeSubscriptionPlanPreview(
   params: ChangeSubscriptionPlanPreviewParams,
-): Promise<ChangeSubscriptionPlanPreviewResponse> {
+): Promise<ActionResult<ChangeSubscriptionPlanPreviewResponse>> {
   try {
     const { subscription_id, data } = params;
 
@@ -213,13 +223,15 @@ export async function changeSubscriptionPlanPreview(
           errorMessage || "Invalid request - subscription cannot be changed";
       }
 
-      throw new Error(errorMessage || `HTTP ${response.status}`);
+      return { success: false, error: errorMessage || `HTTP ${response.status}` };
     }
 
-    return await response.json();
+    return { success: true, data: await response.json() };
   } catch (error) {
-    // Error will be caught and handled by client component
-    throw error;
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
 
@@ -282,7 +294,7 @@ export async function fetchUsageHistory(
 
 export async function fetchEligiblePaymentMethods(
   subscriptionId: string,
-): Promise<{ items: PaymentMethodItem[] }> {
+): Promise<ActionResult<{ items: PaymentMethodItem[] }>> {
   try {
     const response = await makeAuthenticatedRequest(
       `/customer-portal/subscriptions/${subscriptionId}/eligible-payment-methods`,
@@ -292,16 +304,19 @@ export async function fetchEligiblePaymentMethods(
     );
 
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch eligible payment methods: ${response.status}`,
-      );
+      return {
+        success: false,
+        error: `Failed to fetch eligible payment methods: ${response.status}`,
+      };
     }
 
     const data = await response.json();
-    return { items: data.items as PaymentMethodItem[] };
+    return { success: true, data: { items: data.items as PaymentMethodItem[] } };
   } catch (error) {
-    // Error will be caught and handled by client component
-    throw error;
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
 
