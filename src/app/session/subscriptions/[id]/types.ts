@@ -255,3 +255,24 @@ export interface ChangeSubscriptionPlanPreviewResponse {
   immediate_charge: ImmediateCharge;
   new_plan: NewPlan;
 }
+
+export interface CustomerPortalAddonDetail {
+  id: string;
+  name: string;
+  description: string | null;
+  image: string | null;
+  price: number;
+  currency: string;
+  tax_category: string;
+}
+
+export interface CustomerPortalProductResponse {
+  product_id: string;
+  business_id: string;
+  name?: string;
+  description?: string | null;
+  image?: string | null;
+  is_recurring: boolean;
+  addons: CustomerPortalAddonDetail[] | null;
+  // Other fields exist but we only need the above for addon management
+}

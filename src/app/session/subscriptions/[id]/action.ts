@@ -9,6 +9,7 @@ import {
   ChangeSubscriptionPlanPreviewParams,
   ChangeSubscriptionPlanPreviewResponse,
   ProductCollectionData,
+  CustomerPortalProductResponse,
 } from "./types";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import parseError from "@/lib/serverErrorHelper";
@@ -356,5 +357,28 @@ export async function fetchProductCollectionByProductId(
   } catch (error) {
     parseError(error, "Failed to fetch product collection by product ID");
     return null;
+  }
+}
+
+export async function fetchProduct(
+  productId: string,
+): Promise<ActionResult<CustomerPortalProductResponse>> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/products/${productId}`,
+    );
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `Failed to fetch product: ${response.status}`,
+      };
+    }
+    const data = await response.json();
+    return { success: true, data };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
