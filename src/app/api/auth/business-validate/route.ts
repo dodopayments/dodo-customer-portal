@@ -1,14 +1,15 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { BUSINESS_TOKEN_COOKIE_NAME, BUSINESS_TOKEN_EXPIRY_COOKIE_NAME } from "@/lib/token-helper";
-import { getServerApiUrl } from "@/lib/server-http";
 import parseError from "@/lib/serverErrorHelper";
+import { ssrProxyFetch } from "@/lib/ssr-proxy";
 
 async function validateBusinessToken(token: string) {
   const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
-  const api_url = await getServerApiUrl();
 
-  const response = await fetch(`${api_url}/unified-customer-portal/businesses`, {
+  const response = await ssrProxyFetch({
+    path: "/unified-customer-portal/businesses",
+    method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",

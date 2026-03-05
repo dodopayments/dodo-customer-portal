@@ -1,8 +1,25 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { getServerApiUrl } from "./server-http";
+import { cache } from "react";
 import parseError from "./serverErrorHelper";
+import { ssrProxyFetch } from "./ssr-proxy";
+
+type ProxyMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+
+function resolveMethod(method: string | undefined): ProxyMethod {
+  const normalized = method?.toUpperCase();
+  if (
+    normalized === "GET" ||
+    normalized === "POST" ||
+    normalized === "PUT" ||
+    normalized === "PATCH" ||
+    normalized === "DELETE"
+  ) {
+    return normalized;
+  }
+  return "GET";
+}
 
 export async function getToken(): Promise<string | null> {
   try {
@@ -31,13 +48,14 @@ export async function makeAuthenticatedRequest(
     throw new Error("No authentication token found");
   }
 
-  const api_url = await getServerApiUrl();
   const headers = new Headers(options.headers);
   headers.set("Authorization", `Bearer ${token}`);
   headers.set("Content-Type", "application/json");
 
-  return fetch(`${api_url}${endpoint}`, {
-    ...options,
+  return ssrProxyFetch({
+    path: endpoint,
+    method: resolveMethod(options.method),
+    body: options.body,
     cache: "no-store",
     headers,
   });
@@ -52,13 +70,14 @@ export async function makeAuthenticatedBusinessRequest(
     throw new Error("No business authentication token found");
   }
 
-  const api_url = await getServerApiUrl();
   const headers = new Headers(options.headers);
   headers.set("Authorization", `Bearer ${token}`);
   headers.set("Content-Type", "application/json");
 
-  return fetch(`${api_url}${endpoint}`, {
-    ...options,
+  return ssrProxyFetch({
+    path: endpoint,
+    method: resolveMethod(options.method),
+    body: options.body,
     cache: "no-store",
     headers,
   });
@@ -73,7 +92,7 @@ export interface FilterParams {
   status?: string;
 }
 
-export async function fetchBusiness() {
+const fetchBusinessUncached = async () => {
   try {
     const response = await makeAuthenticatedRequest(
       "/customer-portal/business",
@@ -88,7 +107,9 @@ export async function fetchBusiness() {
     parseError(error, "Failed to fetch business");
     return null;
   }
-}
+};
+
+export const fetchBusiness = cache(fetchBusinessUncached);
 
 export async function logout() {
   try {
