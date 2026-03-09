@@ -17,7 +17,7 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <SessionThemeWrapper sessionThemeConfig={businessData?.theme_config}>
+    <SessionThemeWrapper sessionThemeConfig={businessData?.theme_config} themeMode={businessData?.theme_mode}>
       <BusinessProvider initialBusiness={businessData} hasBusinessToken={hasBusinessToken}>
         <CustomerPortalAnalyticsWrapper>
           <div className="flex flex-col h-screen w-full bg-bg-primary">
