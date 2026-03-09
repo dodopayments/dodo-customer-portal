@@ -1,13 +1,15 @@
-import { ThemeConfig } from "@/types/theme";
+import { ThemeConfig, ThemeMode } from "@/types/theme";
 import {
   generateSessionThemeCSS,
   extractFontUrls,
   generateFontVarsCSS,
 } from "@/lib/session-theme-helper";
+import ThemeModeSync from "./theme-mode-sync";
 
 interface SessionThemeWrapperProps {
   children: React.ReactNode;
   sessionThemeConfig?: ThemeConfig | null;
+  themeMode?: ThemeMode | null;
 }
 
 /**
@@ -23,9 +25,15 @@ interface SessionThemeWrapperProps {
 export default function SessionThemeWrapper({
   children,
   sessionThemeConfig,
+  themeMode,
 }: SessionThemeWrapperProps) {
   if (!sessionThemeConfig) {
-    return <>{children}</>;
+    return (
+      <>
+        <ThemeModeSync themeMode={themeMode} />
+        {children}
+      </>
+    );
   }
 
   const { primaryUrl, secondaryUrl } = extractFontUrls(sessionThemeConfig);
@@ -35,6 +43,7 @@ export default function SessionThemeWrapper({
 
   return (
     <>
+      <ThemeModeSync themeMode={themeMode} />
       {/* Preload fonts to prevent flash of unstyled text */}
       {primaryUrl && <link rel="preload" href={primaryUrl} as="style" />}
       {secondaryUrl && <link rel="preload" href={secondaryUrl} as="style" />}
