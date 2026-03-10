@@ -4,9 +4,8 @@ import {
   extractFontUrls,
   generateFontVarsCSS,
 } from "@/lib/session-theme-helper";
-import ThemeModeSync from "./theme-mode-sync";
 
-interface SessionThemeWrapperProps {
+interface ThemeWrapperProps {
   children: React.ReactNode;
   sessionThemeConfig?: ThemeConfig | null;
   themeMode?: ThemeMode | null;
@@ -21,19 +20,17 @@ interface SessionThemeWrapperProps {
  *
  * When there is no theme_config the component renders children unchanged,
  * leaving all default CSS variable values in globals.css intact.
+ *
+ * Theme mode (light/dark/system) is handled by ThemeProvider via next-themes'
+ * forcedTheme prop — no client-side sync component needed.
  */
-export default function SessionThemeWrapper({
+export default function ThemeWrapper({
   children,
   sessionThemeConfig,
   themeMode,
-}: SessionThemeWrapperProps) {
+}: ThemeWrapperProps) {
   if (!sessionThemeConfig) {
-    return (
-      <>
-        <ThemeModeSync themeMode={themeMode} />
-        {children}
-      </>
-    );
+    return <>{children}</>;
   }
 
   const { primaryUrl, secondaryUrl } = extractFontUrls(sessionThemeConfig);
@@ -43,7 +40,6 @@ export default function SessionThemeWrapper({
 
   return (
     <>
-      <ThemeModeSync themeMode={themeMode} />
       {/* Preload fonts to prevent flash of unstyled text */}
       {primaryUrl && <link rel="preload" href={primaryUrl} as="style" />}
       {secondaryUrl && <link rel="preload" href={secondaryUrl} as="style" />}
