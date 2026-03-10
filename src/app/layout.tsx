@@ -6,6 +6,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
 import { DeferredProviders } from "@/hooks/deferred-providers";
+import { fetchBusiness } from "@/lib/server-actions";
+import ThemeWrapper from "@/components/providers/theme-wrapper";
 
 // Load fonts
 const inter = Inter({
@@ -59,6 +61,12 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
+  let businessData = null;
+  try {
+    businessData = await fetchBusiness();
+  } catch (error) {
+    console.error("Failed to fetch business data:", error);
+  }
   return (
     <html
       lang="en"
@@ -67,19 +75,25 @@ export default async function RootLayout({
     >
       <head />
       <body className="font-body w-full h-full overflow-hidden">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+        <ThemeWrapper
+          sessionThemeConfig={businessData?.theme_config}
+          themeMode={businessData?.theme_mode}
         >
-          <NextIntlClientProvider messages={messages}>
-            <main className="h-full w-full">
-              <ThemeToaster />
-              {children}
-            </main>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+            themeMode={businessData?.theme_mode}
+          >
+            <NextIntlClientProvider messages={messages}>
+              <main className="h-full w-full">
+                <ThemeToaster />
+                {children}
+              </main>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </ThemeWrapper>
         <DeferredProviders />
       </body>
     </html>

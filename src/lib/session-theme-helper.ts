@@ -112,7 +112,7 @@ export const extractFontUrls = (
 });
 
 // ---------------------------------------------------------------------------
-// Font helpers (used by SessionThemeWrapper and demo postMessage bridge)
+// Font helpers (used by ThemeWrapper and demo postMessage bridge)
 // ---------------------------------------------------------------------------
 
 /**

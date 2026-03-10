@@ -1,7 +1,7 @@
 import React from "react";
 import NextTopLoader from "nextjs-toploader";
 import { BusinessProvider } from "@/contexts/business-context";
-import SessionThemeWrapper from "@/components/providers/session-theme-wrapper";
+import ThemeWrapper from "@/components/providers/theme-wrapper";
 import { DemoThemeBridge } from "./demo-theme-bridge";
 
 const DEMO_BUSINESS = {
@@ -12,7 +12,7 @@ const DEMO_BUSINESS = {
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   return (
-    <SessionThemeWrapper>
+    <ThemeWrapper>
       <BusinessProvider initialBusiness={DEMO_BUSINESS} hasBusinessToken={false}>
         <div className="flex flex-col h-screen w-full bg-bg-primary">
           <DemoThemeBridge />
@@ -32,6 +32,6 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1 min-h-0 overflow-y-auto">{children}</main>
         </div>
       </BusinessProvider>
-    </SessionThemeWrapper>
+    </ThemeWrapper>
   );
 }
