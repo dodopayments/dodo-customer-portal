@@ -12,6 +12,7 @@ export default function Page() {
   useEffect(() => {
     async function validateToken() {
       if (!token) {
+        console.error('No token provided');
         window.location.replace('/expired');
         return;
       }

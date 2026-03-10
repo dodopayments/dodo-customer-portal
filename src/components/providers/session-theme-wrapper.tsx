@@ -37,7 +37,7 @@ export default function SessionThemeWrapper({
   }
 
   const { primaryUrl, secondaryUrl } = extractFontUrls(sessionThemeConfig);
-  const themeCss = generateSessionThemeCSS(sessionThemeConfig);
+  const themeCss = generateSessionThemeCSS(sessionThemeConfig, themeMode);
   const fontVarsCss = generateFontVarsCSS(primaryUrl, secondaryUrl);
   const inlineCSS = [fontVarsCss, themeCss].filter(Boolean).join(" ");
 
