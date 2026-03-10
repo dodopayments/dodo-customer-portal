@@ -6,19 +6,30 @@ import {
   ThemeProviderProps,
 } from "next-themes";
 import { usePathname } from "next/navigation";
+import type { ThemeMode } from "@/types/theme";
 
 const routes = ["/login"];
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+interface ExtendedThemeProvider extends ThemeProviderProps {
+  themeMode?: ThemeMode | null;
+}
+
+export function ThemeProvider({
+  children,
+  themeMode,
+  ...props
+}: ExtendedThemeProvider) {
   const pathname = usePathname();
-  const forcedThemeFromPathname = routes.some((route) =>
-    pathname.startsWith(route),
-  )
-    ? "dark"
-    : undefined;
+
+  let forcedTheme: string | undefined;
+  if (themeMode === "light" || themeMode === "dark") {
+    forcedTheme = themeMode;
+  } else if (routes.some((route) => pathname.startsWith(route))) {
+    forcedTheme = "system";
+  }
 
   return (
-    <NextThemesProvider forcedTheme={forcedThemeFromPathname} {...props}>
+    <NextThemesProvider forcedTheme={forcedTheme} {...props}>
       {children}
     </NextThemesProvider>
   );

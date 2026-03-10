@@ -105,6 +105,8 @@ export function SessionHeader({
   const { handleLogout, isLoggingOut } = useLogout();
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const isThemeForced =
+    business?.theme_mode === "light" || business?.theme_mode === "dark";
 
   useEffect(() => {
     setMounted(true);
@@ -154,19 +156,21 @@ export function SessionHeader({
               </div>
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer py-3">
-                {mounted && isDark ? (
-                  <>
-                    <Sun className="w-4 h-4 mr-2" />
-                    Switch to light mode
-                  </>
-                ) : (
-                  <>
-                    <Moon className="w-4 h-4 mr-2" />
-                    Switch to dark mode
-                  </>
-                )}
-              </DropdownMenuItem>
+              {!isThemeForced && (
+                <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer py-3">
+                  {mounted && isDark ? (
+                    <>
+                      <Sun className="w-4 h-4 mr-2" />
+                      Switch to light mode
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="w-4 h-4 mr-2" />
+                      Switch to dark mode
+                    </>
+                  )}
+                </DropdownMenuItem>
+              )}
 
               <DropdownMenuItem
                 onClick={handleLogout}
@@ -180,25 +184,27 @@ export function SessionHeader({
           </DropdownMenu>
         ) : (
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-              title={
-                mounted
-                  ? isDark
-                    ? "Switch to light mode"
-                    : "Switch to dark mode"
-                  : undefined
-              }
-            >
-              {mounted && isDark ? (
-                <Sun className="w-5 h-5 text-text-primary" />
-              ) : (
-                <Moon className="w-5 h-5 text-text-primary" />
-              )}
-            </Button>
+            {!isThemeForced && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+                title={
+                  mounted
+                    ? isDark
+                      ? "Switch to light mode"
+                      : "Switch to dark mode"
+                    : undefined
+                }
+              >
+                {mounted && isDark ? (
+                  <Sun className="w-5 h-5 text-text-primary" />
+                ) : (
+                  <Moon className="w-5 h-5 text-text-primary" />
+                )}
+              </Button>
+            )}
 
             <Button
               variant="ghost"

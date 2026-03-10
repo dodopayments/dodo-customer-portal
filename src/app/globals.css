@@ -25,7 +25,7 @@
     --ring: var(--accent);
     --radius: 0.5rem;
 
-    /* Theme system defaults — overridden at runtime by SessionThemeWrapper */
+    /* Theme system defaults — overridden at runtime by ThemeWrapper */
     --base-font-size: 14px;
     --font-weight-body: 500;
 
