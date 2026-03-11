@@ -119,6 +119,7 @@ export async function logout() {
     cookieStore.delete("session_expiry");
     cookieStore.delete("business_token");
     cookieStore.delete("business_expiry");
+    cookieStore.delete("theme_mode");
 
     return { success: true };
   } catch (error) {

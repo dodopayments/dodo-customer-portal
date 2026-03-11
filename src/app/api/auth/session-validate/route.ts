@@ -22,6 +22,15 @@ async function validateToken(token: string) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
+  // Parse business data to extract theme_mode
+  let themeMode: string | undefined;
+  try {
+    const businessData = await response.json();
+    themeMode = businessData?.theme_mode;
+  } catch {
+    // If body parsing fails, proceed without theme_mode cookie
+  }
+
   const cookieStore = await cookies();
   cookieStore.set("session_token", token, {
     expires: new Date(expiresAt),
@@ -38,6 +47,17 @@ async function validateToken(token: string) {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
   });
+
+  // Store theme_mode so the root layout can set forcedTheme without an API call
+  if (themeMode === "light" || themeMode === "dark" || themeMode === "system") {
+    cookieStore.set("theme_mode", themeMode, {
+      expires: new Date(expiresAt),
+      path: "/",
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+    });
+  }
 
   return { success: true, redirect: "/session/overview" };
 }
