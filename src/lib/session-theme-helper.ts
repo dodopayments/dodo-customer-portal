@@ -1,4 +1,4 @@
-import { ThemeConfig, ThemeModeConfig, ThemeMode } from "@/types/theme";
+import { ThemeConfig, ThemeModeConfig } from "@/types/theme";
 import { validateThemeConfig, validateFontUrl, sanitizeCSS } from "@/lib/theme-validators";
 
 /**
