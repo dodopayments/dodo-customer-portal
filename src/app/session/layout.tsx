@@ -3,6 +3,7 @@ import NextTopLoader from "nextjs-toploader";
 import { BusinessProvider } from "@/contexts/business-context";
 import { fetchBusiness, getBusinessToken } from "@/lib/server-actions";
 import { CustomerPortalAnalyticsWrapper } from "@/components/analytics/customer-portal-analytics-wrapper";
+import ThemeWrapper from "@/components/providers/theme-wrapper";
 
 const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
   let businessData = null;
@@ -16,7 +17,9 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-
+    <ThemeWrapper
+      sessionThemeConfig={businessData?.theme_config}
+    >
       <BusinessProvider initialBusiness={businessData} hasBusinessToken={hasBusinessToken}>
         <CustomerPortalAnalyticsWrapper>
           <div className="flex flex-col h-screen w-full bg-bg-primary">
@@ -39,6 +42,7 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
           </div>
         </CustomerPortalAnalyticsWrapper>
       </BusinessProvider>
+    </ThemeWrapper>
   );
 };
 

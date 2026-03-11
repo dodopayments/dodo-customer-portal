@@ -6,8 +6,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import ThemeToaster from "@/hooks/theme-toaster";
 import { DeferredProviders } from "@/hooks/deferred-providers";
-import { fetchBusiness } from "@/lib/server-actions";
-import ThemeWrapper from "@/components/providers/theme-wrapper";
+import { cookies } from "next/headers";
+import type { ThemeMode } from "@/types/theme";
 
 // Load fonts
 const inter = Inter({
@@ -61,12 +61,15 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  let businessData = null;
-  try {
-    businessData = await fetchBusiness();
-  } catch (error) {
-    console.error("Failed to fetch business data:", error);
-  }
+
+  // Read theme_mode from cookie (set during session validation) — no API call
+  const cookieStore = await cookies();
+  const rawThemeMode = cookieStore.get("theme_mode")?.value;
+  const themeMode: ThemeMode | undefined =
+    rawThemeMode === "light" || rawThemeMode === "dark" || rawThemeMode === "system"
+      ? rawThemeMode
+      : undefined;
+
   return (
     <html
       lang="en"
@@ -75,25 +78,20 @@ export default async function RootLayout({
     >
       <head />
       <body className="font-body w-full h-full overflow-hidden">
-        <ThemeWrapper
-          sessionThemeConfig={businessData?.theme_config}
-          themeMode={businessData?.theme_mode}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          themeMode={themeMode}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-            themeMode={businessData?.theme_mode}
-          >
-            <NextIntlClientProvider messages={messages}>
-              <main className="h-full w-full">
-                <ThemeToaster />
-                {children}
-              </main>
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </ThemeWrapper>
+          <NextIntlClientProvider messages={messages}>
+            <main className="h-full w-full">
+              <ThemeToaster />
+              {children}
+            </main>
+          </NextIntlClientProvider>
+        </ThemeProvider>
         <DeferredProviders />
       </body>
     </html>

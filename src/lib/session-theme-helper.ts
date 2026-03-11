@@ -222,14 +222,13 @@ const generateSharedCSS = (flatConfig: Record<string, string>): string => {
  */
 export const generateSessionThemeCSS = (
   themeConfig: ThemeConfig | null | undefined,
-  themeMode?: ThemeMode | null,
 ): string => {
   if (!themeConfig) return "";
 
   const flatConfig = flatThemeConfig(themeConfig);
   if (!flatConfig) return "";
 
-  return generateSessionThemeCSSFromFlat(flatConfig, themeMode);
+  return generateSessionThemeCSSFromFlat(flatConfig);
 };
 
 /**
@@ -239,21 +238,17 @@ export const generateSessionThemeCSS = (
  */
 export function generateSessionThemeCSSFromFlat(
   flat: Record<string, string>,
-  themeMode?: ThemeMode | null,
 ): string {
   if (!flat || Object.keys(flat).length === 0) return "";
 
   const sharedCSS = generateSharedCSS(flat);
   const lightCSS  = generateColorCSSForMode(flat, "light");
   const darkCSS   = generateColorCSSForMode(flat, "dark");
-  const forcedLight = themeMode === "light" || themeMode === "dark" ? themeMode : null;
-  const lightSelectorCSS = forcedLight ? generateColorCSSForMode(flat, forcedLight) : lightCSS;
-  const darkSelectorCSS  = forcedLight ? generateColorCSSForMode(flat, forcedLight) : darkCSS;
 
   let css = "";
   if (sharedCSS)       css += `:root { ${sharedCSS} }`;
-  if (lightSelectorCSS) css += ` :root:not(.dark) { ${lightSelectorCSS} }`;
-  if (darkSelectorCSS)  css += ` .dark { ${darkSelectorCSS} }`;
+  if (lightCSS) css += ` :root:not(.dark) { ${lightCSS} }`;
+  if (darkCSS)  css += ` .dark { ${darkCSS} }`;
 
   return css;
 }

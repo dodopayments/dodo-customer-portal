@@ -20,21 +20,17 @@ interface ThemeWrapperProps {
  *
  * When there is no theme_config the component renders children unchanged,
  * leaving all default CSS variable values in globals.css intact.
- *
- * Theme mode (light/dark/system) is handled by ThemeProvider via next-themes'
- * forcedTheme prop — no client-side sync component needed.
  */
 export default function ThemeWrapper({
   children,
   sessionThemeConfig,
-  themeMode,
 }: ThemeWrapperProps) {
   if (!sessionThemeConfig) {
     return <>{children}</>;
   }
 
   const { primaryUrl, secondaryUrl } = extractFontUrls(sessionThemeConfig);
-  const themeCss = generateSessionThemeCSS(sessionThemeConfig, themeMode);
+  const themeCss = generateSessionThemeCSS(sessionThemeConfig);
   const fontVarsCss = generateFontVarsCSS(primaryUrl, secondaryUrl);
   const inlineCSS = [fontVarsCss, themeCss].filter(Boolean).join(" ");
 
