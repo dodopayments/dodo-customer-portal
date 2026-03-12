@@ -1,7 +1,29 @@
 "use server";
 
 import { makeAuthenticatedRequest } from "@/lib/server-actions";
+import { ssrProxyFetch } from "@/lib/ssr-proxy";
 import parseError from "@/lib/serverErrorHelper";
+
+export async function fetchSupportedCountries(): Promise<string[]> {
+  try {
+    const response = await ssrProxyFetch({
+      path: "/checkout/supported_countries",
+      method: "GET",
+      targetBackend: "internal",
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch supported countries: ${response.status}`,
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    parseError(error, "Failed to fetch supported countries");
+    return [];
+  }
+}
 
 export async function fetchSubscriptions(
   pageNumber: number = 0,

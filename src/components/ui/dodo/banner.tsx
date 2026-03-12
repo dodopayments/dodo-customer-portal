@@ -1,8 +1,9 @@
-import { Mode } from "@/lib/http";
+import { getServerMode } from "@/lib/server-http";
 import Link from "next/link";
 
-export const Banner = () => {
-  if (Mode == "live") return null;
+export async function Banner() {
+  const mode = await getServerMode();
+  if (mode === "live") return null;
 
   return (
     <div className="w-[100vw] max-w-[1920px] hidden absolute z-20 top-0 lg:flex flex-col items-center">
@@ -19,10 +20,11 @@ export const Banner = () => {
       </div>
     </div>
   );
-};
+}
 
-export const MobileBanner = () => {
-  if (Mode == "live") return null;
+export async function MobileBanner() {
+  const mode = await getServerMode();
+  if (mode === "live") return null;
 
   return (
     <div className="w-[100vw] lg:hidden  max-w-[1920px] z-20 flex flex-col items-center">
@@ -38,4 +40,4 @@ export const MobileBanner = () => {
       </div>
     </div>
   );
-};
+}
