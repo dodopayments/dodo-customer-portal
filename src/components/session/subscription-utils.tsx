@@ -1,14 +1,6 @@
-import { internalApi } from "@/lib/http";
 import { CountriesListType } from "@/constants/Countries";
 import { Badge } from "@/components/ui/badge";
 import { parseIsoDateDMY } from "@/lib/date-helper";
-
-export async function fetchSupportedCountries(): Promise<string[]> {
-  const response = await internalApi.get<string[]>(
-    `/checkout/supported_countries`,
-  );
-  return response.data;
-}
 
 export async function getMatchedCountries(
   countryValues: string[],

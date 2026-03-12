@@ -7,10 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SelectNative } from "@/components/ui/select-native";
 import { CountriesList, CountriesListType } from "@/constants/Countries";
-import {
-  fetchSupportedCountries,
-  getMatchedCountries,
-} from "@/components/session/subscription-utils";
+import { getMatchedCountries } from "@/components/session/subscription-utils";
+import { fetchSupportedCountries } from "@/app/session/subscriptions/actions";
 import {
   Sheet,
   SheetContent,
