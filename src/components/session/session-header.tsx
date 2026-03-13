@@ -45,36 +45,36 @@ function BusinessIdentity({
   const content = (
     <div className="flex items-center gap-3">
       <div className="flex items-center gap-1">
-      {returnUrl && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => window.location.assign(returnUrl)}
-              title="Go back"
-            >
-              <ArrowLeft className="w-5 h-5 text-text-primary" />
-            </Button>
-          )}
-      {business?.logo ? (
-        <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
-          <AvatarImage
-            src={business.logo}
-            alt={business?.name || "Business"}
-            className="object-contain"
+        {returnUrl && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => window.location.assign(returnUrl)}
+            title="Go back"
+          >
+            <ArrowLeft className="w-5 h-5 text-text-primary" />
+          </Button>
+        )}
+        {business?.logo ? (
+          <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
+            <AvatarImage
+              src={business.logo}
+              alt={business?.name || "Business"}
+              className="object-contain"
             />
-          <AvatarFallback
-            className="text-sm bg-[#0a4ceb] text-white"
-            name={business?.name || "Business"}
-            singleInitials
+            <AvatarFallback
+              className="text-sm bg-[#0a4ceb] text-white"
+              name={business?.name || "Business"}
+              singleInitials
             />
-        </Avatar>
-      ) : (
-        <div className="w-8 h-8 rounded-full bg-[#0a4ceb] flex items-center justify-center">
-          <span className="text-sm font-semibold text-white">
-            {business?.name?.charAt(0) || "B"}
-          </span>
-        </div>
-      )}
+          </Avatar>
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-[#0a4ceb] flex items-center justify-center">
+            <span className="text-sm font-semibold text-white">
+              {business?.name?.charAt(0) || "B"}
+            </span>
+          </div>
+        )}
       </div>
       <span className="text-lg font-display font-semibold text-text-primary">
         {business?.name || "Business"}
@@ -127,7 +127,7 @@ export function SessionHeader({
 
   useEffect(() => {
     setMounted(true);
-    setReturnUrl(sessionStorage.getItem('return_url'));
+    setReturnUrl(sessionStorage.getItem("return_url"));
   }, []);
 
   useEffect(() => {
@@ -152,31 +152,36 @@ export function SessionHeader({
   return (
     <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
-        <BusinessIdentity showBusinessSwitcher={showBusinessSwitcher} returnUrl={returnUrl} />
+        <BusinessIdentity
+          showBusinessSwitcher={showBusinessSwitcher}
+          returnUrl={returnUrl}
+        />
 
-        <div className="flex items-center gap-2">
-          {showUserMenu ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="w-10 h-10 hover:bg-bg-secondary transition-colors"
-                >
-                  <User className="w-5 h-5 text-text-secondary" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <div className="px-3 py-3">
-                  <p className="text-sm font-medium text-text-primary">
-                    {user?.name || "User"}
-                  </p>
-                  <p className="text-xs text-text-secondary">{user?.email}</p>
-                </div>
-                <DropdownMenuSeparator />
+        {showUserMenu ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="w-10 h-10 hover:bg-bg-secondary transition-colors"
+              >
+                <User className="w-5 h-5 text-text-secondary" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <div className="px-3 py-3">
+                <p className="text-sm font-medium text-text-primary">
+                  {user?.name || "User"}
+                </p>
+                <p className="text-xs text-text-secondary">{user?.email}</p>
+              </div>
+              <DropdownMenuSeparator />
 
               {!isThemeForced && (
-                <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer py-3">
+                <DropdownMenuItem
+                  onClick={toggleTheme}
+                  className="cursor-pointer py-3"
+                >
                   {mounted && isDark ? (
                     <>
                       <Sun className="w-4 h-4 mr-2" />
@@ -225,19 +230,18 @@ export function SessionHeader({
               </Button>
             )}
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleLogout}
-                disabled={isLoggingOut}
-                className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-                title="Log out"
-              >
-                <LogOut className="w-5 h-5 text-text-primary" />
-              </Button>
-            </div>
-          )}
-        </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+              title="Log out"
+            >
+              <LogOut className="w-5 h-5 text-text-primary" />
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );
