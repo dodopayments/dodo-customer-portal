@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import LoadingOverlay from "@/components/loading-overlay";
 
 export default function Page() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const token = params?.token as string;
 
@@ -34,6 +35,10 @@ export default function Page() {
         const data = await response.json();
 
         if (data.redirect) {
+          const returnUrl = searchParams.get("return_url");
+          if (returnUrl) {
+            sessionStorage.setItem("return_url", returnUrl);
+          }
           window.location.replace(data.redirect);
         } else {
           setError("Validation failed. Please try again.");

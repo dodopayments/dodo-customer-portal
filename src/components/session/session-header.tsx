@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  ArrowLeft,
   ChevronDown,
   ChevronUp,
   LogOut,
@@ -107,9 +108,15 @@ export function SessionHeader({
   const [mounted, setMounted] = useState(false);
   const isThemeForced =
     business?.theme_mode === "light" || business?.theme_mode === "dark";
+  const [showBackButton, setShowBackButton] = useState(false);
+  const [returnUrl, setReturnUrl] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
+    const storedReturnUrl = sessionStorage.getItem('return_url');
+    setReturnUrl(storedReturnUrl);
+    setShowBackButton(window.history.length > 1 || !!storedReturnUrl);
   }, []);
 
   useEffect(() => {
@@ -136,25 +143,38 @@ export function SessionHeader({
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
         <BusinessIdentity showBusinessSwitcher={showBusinessSwitcher} />
 
-        {showUserMenu ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="secondary"
-                size="icon"
-                className="w-10 h-10 hover:bg-bg-secondary transition-colors"
-              >
-                <User className="w-5 h-5 text-text-secondary" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <div className="px-3 py-3">
-                <p className="text-sm font-medium text-text-primary">
-                  {user?.name || "User"}
-                </p>
-                <p className="text-xs text-text-secondary">{user?.email}</p>
-              </div>
-              <DropdownMenuSeparator />
+        <div className="flex items-center gap-2">
+          {showBackButton && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => returnUrl ? window.location.assign(returnUrl) : router.back()}
+              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+              title="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-text-primary" />
+            </Button>
+          )}
+
+          {showUserMenu ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="w-10 h-10 hover:bg-bg-secondary transition-colors"
+                >
+                  <User className="w-5 h-5 text-text-secondary" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <div className="px-3 py-3">
+                  <p className="text-sm font-medium text-text-primary">
+                    {user?.name || "User"}
+                  </p>
+                  <p className="text-xs text-text-secondary">{user?.email}</p>
+                </div>
+                <DropdownMenuSeparator />
 
               {!isThemeForced && (
                 <DropdownMenuItem onClick={toggleTheme} className="cursor-pointer py-3">
@@ -206,18 +226,19 @@ export function SessionHeader({
               </Button>
             )}
 
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleLogout}
-              disabled={isLoggingOut}
-              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-              title="Log out"
-            >
-              <LogOut className="w-5 h-5 text-text-primary" />
-            </Button>
-          </div>
-        )}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
+                title="Log out"
+              >
+                <LogOut className="w-5 h-5 text-text-primary" />
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
