@@ -30,29 +30,43 @@ interface SessionHeaderProps {
   showBusinessSwitcher?: boolean;
 }
 
+interface BusinessIdentityProps {
+  showBusinessSwitcher: boolean;
+  returnUrl: string | null;
+}
 function BusinessIdentity({
   showBusinessSwitcher,
-}: {
-  showBusinessSwitcher: boolean;
-}) {
+  returnUrl,
+}: BusinessIdentityProps) {
   const router = useRouter();
   const { business, hasBusinessToken } = useBusiness();
   const [isBusinessMenuOpen, setIsBusinessMenuOpen] = useState(false);
 
   const content = (
     <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1">
+      {returnUrl && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => window.location.assign(returnUrl)}
+              title="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-text-primary" />
+            </Button>
+          )}
       {business?.logo ? (
         <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
           <AvatarImage
             src={business.logo}
             alt={business?.name || "Business"}
             className="object-contain"
-          />
+            />
           <AvatarFallback
             className="text-sm bg-[#0a4ceb] text-white"
             name={business?.name || "Business"}
             singleInitials
-          />
+            />
         </Avatar>
       ) : (
         <div className="w-8 h-8 rounded-full bg-[#0a4ceb] flex items-center justify-center">
@@ -61,6 +75,7 @@ function BusinessIdentity({
           </span>
         </div>
       )}
+      </div>
       <span className="text-lg font-display font-semibold text-text-primary">
         {business?.name || "Business"}
       </span>
@@ -108,15 +123,11 @@ export function SessionHeader({
   const [mounted, setMounted] = useState(false);
   const isThemeForced =
     business?.theme_mode === "light" || business?.theme_mode === "dark";
-  const [showBackButton, setShowBackButton] = useState(false);
   const [returnUrl, setReturnUrl] = useState<string | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
-    const storedReturnUrl = sessionStorage.getItem('return_url');
-    setReturnUrl(storedReturnUrl);
-    setShowBackButton(window.history.length > 1 || !!storedReturnUrl);
+    setReturnUrl(sessionStorage.getItem('return_url'));
   }, []);
 
   useEffect(() => {
@@ -141,21 +152,9 @@ export function SessionHeader({
   return (
     <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
-        <BusinessIdentity showBusinessSwitcher={showBusinessSwitcher} />
+        <BusinessIdentity showBusinessSwitcher={showBusinessSwitcher} returnUrl={returnUrl} />
 
         <div className="flex items-center gap-2">
-          {showBackButton && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => returnUrl ? window.location.assign(returnUrl) : router.back()}
-              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-              title="Go back"
-            >
-              <ArrowLeft className="w-5 h-5 text-text-primary" />
-            </Button>
-          )}
-
           {showUserMenu ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
