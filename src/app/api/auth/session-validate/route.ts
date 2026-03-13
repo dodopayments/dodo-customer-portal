@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import parseError from "@/lib/serverErrorHelper";
 import { ssrProxyFetch } from "@/lib/ssr-proxy";
+import * as jwt from "jsonwebtoken";
 
 async function validateToken(token: string) {
   const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
@@ -59,7 +60,17 @@ async function validateToken(token: string) {
     });
   }
 
-  return { success: true, redirect: "/session/overview" };
+  let returnUrl: string | undefined;
+  try {
+    const decoded = jwt.decode(token);
+    if (decoded && typeof decoded === "object" && "return_url" in decoded) {
+      returnUrl = decoded.return_url;
+    }
+  } catch {
+    // If JWT decoding fails, proceed without return_url
+  }
+
+  return { success: true, redirect: "/session/overview", returnUrl };
 }
 
 export async function POST(request: NextRequest) {
