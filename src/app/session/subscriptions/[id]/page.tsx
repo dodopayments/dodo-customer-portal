@@ -68,7 +68,6 @@ export default async function SubscriptionPage({
 
   return (
     <SessionPageLayout
-      backHref="/session/subscriptions"
       headerActions={headerActions}
     >
       <div className="flex flex-col gap-8">

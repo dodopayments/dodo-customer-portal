@@ -22,7 +22,7 @@ import {
   User,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface SessionHeaderProps {
   showUserMenu?: boolean;
@@ -32,11 +32,13 @@ interface SessionHeaderProps {
 
 interface BusinessIdentityProps {
   showBusinessSwitcher: boolean;
-  returnUrl: string | null;
+  showBackButton: boolean;
+  onBack: () => void;
 }
 function BusinessIdentity({
   showBusinessSwitcher,
-  returnUrl,
+  showBackButton,
+  onBack,
 }: BusinessIdentityProps) {
   const router = useRouter();
   const { business, hasBusinessToken } = useBusiness();
@@ -44,11 +46,11 @@ function BusinessIdentity({
 
   const content = (
     <div className="flex items-center gap-3">
-      {returnUrl && (
+      {showBackButton && (
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => window.location.assign(returnUrl)}
+          onClick={onBack}
           title="Go back"
         >
           <ArrowLeft className="w-5 h-5 text-text-primary" />
@@ -115,6 +117,8 @@ export function SessionHeader({
   user,
   showBusinessSwitcher = false,
 }: SessionHeaderProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const { business } = useBusiness();
   const { handleLogout, isLoggingOut } = useLogout();
   const { setTheme, resolvedTheme } = useTheme();
@@ -151,12 +155,34 @@ export function SessionHeader({
 
   const isDark = resolvedTheme === "dark";
 
+  const isOverview = pathname === "/session/overview";
+  const showBackButton = isOverview ? !!returnUrl : true;
+
+  const getParentPath = (path: string) => {
+    const segments = path.split("/").filter(Boolean);
+    if (segments.length <= 2) return "/session/overview";
+    return "/" + segments.slice(0, -1).join("/");
+  };
+
+  const handleBack = () => {
+    if (isOverview) {
+      if (returnUrl) window.location.assign(returnUrl);
+    } else {
+      if (typeof window !== "undefined" && window.history.length > 1) {
+        router.back();
+      } else {
+        router.push(getParentPath(pathname));
+      }
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
         <BusinessIdentity
           showBusinessSwitcher={showBusinessSwitcher}
-          returnUrl={returnUrl}
+          showBackButton={showBackButton}
+          onBack={handleBack}
         />
 
         {showUserMenu ? (

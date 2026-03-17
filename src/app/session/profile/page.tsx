@@ -100,7 +100,7 @@ export default async function ProfilePage({
   }));
 
   return (
-    <SessionPageLayout backHref="/session/overview">
+    <SessionPageLayout>
       <div className="flex flex-col gap-6">
         <div>
           <p className="text-text-primary text-lg font-medium mb-4">
