@@ -44,38 +44,36 @@ function BusinessIdentity({
 
   const content = (
     <div className="flex items-center gap-3">
-      <div className="flex items-center gap-1">
-        {returnUrl && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => window.location.assign(returnUrl)}
-            title="Go back"
-          >
-            <ArrowLeft className="w-5 h-5 text-text-primary" />
-          </Button>
-        )}
-        {business?.logo ? (
-          <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
-            <AvatarImage
-              src={business.logo}
-              alt={business?.name || "Business"}
-              className="object-contain"
-            />
-            <AvatarFallback
-              className="text-sm bg-[#0a4ceb] text-white"
-              name={business?.name || "Business"}
-              singleInitials
-            />
-          </Avatar>
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-[#0a4ceb] flex items-center justify-center">
-            <span className="text-sm font-semibold text-white">
-              {business?.name?.charAt(0) || "B"}
-            </span>
-          </div>
-        )}
-      </div>
+      {returnUrl && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => window.location.assign(returnUrl)}
+          title="Go back"
+        >
+          <ArrowLeft className="w-5 h-5 text-text-primary" />
+        </Button>
+      )}
+      {business?.logo ? (
+        <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
+          <AvatarImage
+            src={business.logo}
+            alt={business?.name || "Business"}
+            className="object-contain"
+          />
+          <AvatarFallback
+            className="text-sm bg-[#0a4ceb] text-white"
+            name={business?.name || "Business"}
+            singleInitials
+          />
+        </Avatar>
+      ) : (
+        <div className="w-8 h-8 rounded-full bg-[#0a4ceb] flex items-center justify-center">
+          <span className="text-sm font-semibold text-white">
+            {business?.name?.charAt(0) || "B"}
+          </span>
+        </div>
+      )}
       <span className="text-lg font-display font-semibold text-text-primary">
         {business?.name || "Business"}
       </span>
@@ -127,7 +125,11 @@ export function SessionHeader({
 
   useEffect(() => {
     setMounted(true);
-    setReturnUrl(sessionStorage.getItem("return_url"));
+    try {
+      setReturnUrl(sessionStorage.getItem("return_url"));
+    } catch {
+      // sessionStorage unavailable (SSR, sandboxed iframe, privacy mode)
+    }
   }, []);
 
   useEffect(() => {
