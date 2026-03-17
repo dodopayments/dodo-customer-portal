@@ -37,9 +37,7 @@ export default async function EventPage({ params, searchParams }: PageProps) {
       : "No meter events at the moment";
 
   return (
-    <SessionPageLayout
-      backHref={`/session/subscriptions/${id}`}
-    >
+    <SessionPageLayout>
       <div className="flex flex-col gap-4">
         {isEmpty ? (
           <div className="flex flex-col justify-center items-center min-h-[200px] my-auto">

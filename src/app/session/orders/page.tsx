@@ -21,7 +21,7 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
   const ordersData = await fetchPayments(currentPage, pageSize);
 
   return (
-    <SessionPageLayout backHref="/session/overview">
+    <SessionPageLayout>
       <Orders
         cardClassName="w-full p-4 gap-4"
         ordersData={ordersData.data as OrderData[]}

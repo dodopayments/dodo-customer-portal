@@ -20,7 +20,7 @@ export default async function PaymentMethodsPage() {
   const emptyMessage = "No payment methods found";
 
   return (
-    <SessionPageLayout backHref="/session/overview">
+    <SessionPageLayout>
       <div className="flex flex-col gap-3">
         <h4 className="text-text-primary text-lg font-medium">
           Your payment methods
