@@ -40,6 +40,8 @@ export default function Page() {
         if (data.redirect) {
           if (data.returnUrl) {
             sessionStorage.setItem('return_url', data.returnUrl);
+          } else {
+            sessionStorage.removeItem('return_url');
           }
           window.location.replace(data.redirect);
         } else {
