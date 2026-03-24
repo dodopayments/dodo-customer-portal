@@ -26,6 +26,7 @@ import {
   decodeCurrency,
 } from "@/lib/currency-helper";
 import ProductMarkdownDescription from "../common/product-markdown-description";
+import { cn } from "@/lib/utils";
 
 interface CancelSubscriptionSheetProps {
   subscription: SubscriptionDetailsData;
@@ -106,11 +107,11 @@ export function CancelSubscriptionSheet({
           variant={
             subscription.cancel_at_next_billing_date
               ? "default"
-              : "destructive"
+              : "secondary"
           }
         >
           {subscription.cancel_at_next_billing_date
-            ? "Cancel/Revoke Subscription"
+            ? "Revoke Cancellation"
             : "Cancel Subscription"}
         </Button>
       </SheetTrigger>
@@ -129,7 +130,7 @@ export function CancelSubscriptionSheet({
             </p>
 
             <div className="border border-border-secondary rounded-lg p-4 flex flex-col gap-4">
-              <div className="flex items-center justify-between border-b border-border-secondary pb-3">
+              <div className={cn("flex items-center justify-between", subscription.product.description && "border-b border-border-secondary pb-3")}>
                 <p className="font-display font-medium text-[13px] leading-[20px] text-text-primary">
                   {subscription.product.name}
                 </p>
@@ -199,7 +200,7 @@ export function CancelSubscriptionSheet({
               >
                 {isLoading ? "Revoking..." : "Revoke Cancellation"}
               </Button>
-              <Button
+              {/* <Button
                 variant="destructive"
                 className="w-full h-10"
                 onClick={() => handleCancelSubscription(false)}
@@ -208,7 +209,7 @@ export function CancelSubscriptionSheet({
                 {isLoading && !isCancellingAtNextBilling
                   ? "Cancelling..."
                   : "Cancel Immediately"}
-              </Button>
+              </Button> */}
             </>
           ) : (
             <>
@@ -222,7 +223,7 @@ export function CancelSubscriptionSheet({
                   ? "Cancelling..."
                   : "Cancel at next billing date"}
               </Button>
-              <Button
+              {/* <Button
                 variant="destructive"
                 className="w-full h-10"
                 onClick={() => handleCancelSubscription(false)}
@@ -231,7 +232,7 @@ export function CancelSubscriptionSheet({
                 {isLoading && !isCancellingAtNextBilling
                   ? "Cancelling..."
                   : "Cancel now"}
-              </Button>
+              </Button> */}
             </>
           )}
         </div>

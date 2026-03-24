@@ -117,7 +117,7 @@ function HeaderActions({
 }) {
   return (
     <>
-      {productCollection && canChangePlan && (
+      {productCollection && canChangePlan && subscription.status !== "cancelled" && (
         <ChangePlanSheet
           currentProductId={subscription.product.id}
           subscriptionId={subscriptionId}
