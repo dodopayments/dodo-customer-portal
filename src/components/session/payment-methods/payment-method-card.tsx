@@ -112,6 +112,7 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
               variant="ghost"
               size="icon"
               onClick={() => setOpen(true)}
+              aria-label="Remove payment method"
               title="Remove payment method"
               className="flex-shrink-0 h-7 w-7 text-text-tertiary hover:text-text-primary hover:bg-transparent"
             >
