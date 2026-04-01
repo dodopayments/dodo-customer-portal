@@ -25,8 +25,16 @@ export async function fetchPaymentMethods(): Promise<
 export async function deletePaymentMethod(
   paymentMethodId: string
 ): Promise<void> {
+  const normalizedPaymentMethodId = paymentMethodId?.trim();
+
+  if (!normalizedPaymentMethodId) {
+    throw new Error("Missing payment method id");
+  }
+
+  const encodedPaymentMethodId = encodeURIComponent(normalizedPaymentMethodId);
+
   const response = await makeAuthenticatedRequest(
-    `/customer-portal/payment-methods/${paymentMethodId}`,
+    `/customer-portal/payment-methods/${encodedPaymentMethodId}`,
     { method: "DELETE" }
   );
 
