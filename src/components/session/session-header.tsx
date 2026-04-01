@@ -13,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  ArrowLeft,
   ChevronDown,
   ChevronUp,
   LogOut,
@@ -22,23 +21,18 @@ import {
   User,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { fetchUser } from "@/app/session/profile/actions";
 
 interface SessionHeaderProps {
-  showUserMenu?: boolean;
-  user?: { name: string; email: string } | null;
   showBusinessSwitcher?: boolean;
 }
 
 interface BusinessIdentityProps {
   showBusinessSwitcher: boolean;
-  showBackButton: boolean;
-  onBack: () => void;
 }
 function BusinessIdentity({
   showBusinessSwitcher,
-  showBackButton,
-  onBack,
 }: BusinessIdentityProps) {
   const router = useRouter();
   const { business, hasBusinessToken } = useBusiness();
@@ -46,16 +40,6 @@ function BusinessIdentity({
 
   const content = (
     <div className="flex items-center gap-3">
-      {showBackButton && (
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onBack}
-          title="Go back"
-        >
-          <ArrowLeft className="w-5 h-5 text-text-primary" />
-        </Button>
-      )}
       {business?.logo ? (
         <Avatar className="w-8 h-8 border border-border-secondary bg-bg-secondary">
           <AvatarImage
@@ -113,27 +97,24 @@ function BusinessIdentity({
 }
 
 export function SessionHeader({
-  showUserMenu = false,
-  user,
   showBusinessSwitcher = false,
 }: SessionHeaderProps) {
-  const router = useRouter();
-  const pathname = usePathname();
   const { business } = useBusiness();
   const { handleLogout, isLoggingOut } = useLogout();
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const isThemeForced =
     business?.theme_mode === "light" || business?.theme_mode === "dark";
-  const [returnUrl, setReturnUrl] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
-    try {
-      setReturnUrl(sessionStorage.getItem("return_url"));
-    } catch {
-      // sessionStorage unavailable (SSR, sandboxed iframe, privacy mode)
-    }
+  }, []);
+
+  useEffect(() => {
+    fetchUser().then((u) => {
+      if (u) setUser({ name: u.name, email: u.email });
+    });
   }, []);
 
   useEffect(() => {
@@ -155,121 +136,61 @@ export function SessionHeader({
 
   const isDark = resolvedTheme === "dark";
 
-  const isOverview = pathname === "/session/overview";
-  const showBackButton = isOverview ? !!returnUrl : true;
-
-  const getParentPath = (path: string) => {
-    const segments = path.split("/").filter(Boolean);
-    if (segments.length <= 2) return "/session/overview";
-    return "/" + segments.slice(0, -1).join("/");
-  };
-
-  const handleBack = () => {
-    if (isOverview) {
-      if (returnUrl) window.location.assign(returnUrl);
-    } else {
-      if (typeof window !== "undefined" && window.history.length > 1) {
-        router.back();
-      } else {
-        router.push(getParentPath(pathname));
-      }
-    }
-  };
-
   return (
     <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
         <BusinessIdentity
           showBusinessSwitcher={showBusinessSwitcher}
-          showBackButton={showBackButton}
-          onBack={handleBack}
         />
 
-        {showUserMenu ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="secondary"
-                size="icon"
-                className="w-10 h-10 hover:bg-bg-secondary transition-colors"
-              >
-                <User className="w-5 h-5 text-text-secondary" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <div className="px-3 py-3">
-                <p className="text-sm font-medium text-text-primary">
-                  {user?.name || "User"}
-                </p>
-                <p className="text-xs text-text-secondary">{user?.email}</p>
-              </div>
-              <DropdownMenuSeparator />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="secondary"
+              size="icon"
+              className="w-10 h-10 hover:bg-bg-secondary transition-colors"
+            >
+              <User className="w-5 h-5 text-text-secondary" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            <div className="px-3 py-3">
+              <p className="text-sm font-medium text-text-primary">
+                {user?.name || "User"}
+              </p>
+              <p className="text-xs text-text-secondary">{user?.email}</p>
+            </div>
+            <DropdownMenuSeparator />
 
-              {!isThemeForced && (
-                <DropdownMenuItem
-                  onClick={toggleTheme}
-                  className="cursor-pointer py-3"
-                >
-                  {mounted && isDark ? (
-                    <>
-                      <Sun className="w-4 h-4 mr-2" />
-                      Switch to light mode
-                    </>
-                  ) : (
-                    <>
-                      <Moon className="w-4 h-4 mr-2" />
-                      Switch to dark mode
-                    </>
-                  )}
-                </DropdownMenuItem>
-              )}
-
+            {!isThemeForced && (
               <DropdownMenuItem
-                onClick={handleLogout}
-                disabled={isLoggingOut}
+                onClick={toggleTheme}
                 className="cursor-pointer py-3"
               >
-                <LogOut className="w-4 h-4 mr-2" />
-                {isLoggingOut ? "Logging out..." : "Log Out"}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <div className="flex items-center gap-2">
-            {!isThemeForced && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-                title={
-                  mounted
-                    ? isDark
-                      ? "Switch to light mode"
-                      : "Switch to dark mode"
-                    : undefined
-                }
-              >
                 {mounted && isDark ? (
-                  <Sun className="w-5 h-5 text-text-primary" />
+                  <>
+                    <Sun className="w-4 h-4 mr-2" />
+                    Switch to light mode
+                  </>
                 ) : (
-                  <Moon className="w-5 h-5 text-text-primary" />
+                  <>
+                    <Moon className="w-4 h-4 mr-2" />
+                    Switch to dark mode
+                  </>
                 )}
-              </Button>
+              </DropdownMenuItem>
             )}
 
-            <Button
-              variant="ghost"
-              size="icon"
+            <DropdownMenuItem
               onClick={handleLogout}
               disabled={isLoggingOut}
-              className="h-9 w-9 border border-border-secondary rounded-lg hover:bg-bg-secondary"
-              title="Log out"
+              className="cursor-pointer py-3"
             >
-              <LogOut className="w-5 h-5 text-text-primary" />
-            </Button>
-          </div>
-        )}
+              <LogOut className="w-4 h-4 mr-2" />
+              {isLoggingOut ? "Logging out..." : "Log Out"}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
