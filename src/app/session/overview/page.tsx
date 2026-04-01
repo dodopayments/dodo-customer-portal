@@ -2,7 +2,7 @@ import { cache } from "react";
 import { fetchSubscriptions } from "../subscriptions/actions";
 import { fetchPaymentMethods } from "../payment-methods/action";
 import { fetchPayments, fetchRefunds } from "../orders/actions";
-import { fetchUser, fetchWallets, fetchWalletLedger, fetchCreditEntitlements, fetchCreditEntitlementLedger } from "../profile/actions";
+import { fetchWallets, fetchWalletLedger, fetchCreditEntitlements, fetchCreditEntitlementLedger } from "../profile/actions";
 import { OverviewContent } from "@/components/session/overview/overview-content";
 import { SubscriptionData } from "@/components/session/subscriptions/subscriptions";
 import { OrderData } from "@/components/session/orders/orders";
@@ -15,7 +15,6 @@ const getCachedSubscriptions = cache(fetchSubscriptions);
 const getCachedPaymentMethods = cache(fetchPaymentMethods);
 const getCachedPayments = cache(fetchPayments);
 const getCachedRefunds = cache(fetchRefunds);
-const getCachedUser = cache(fetchUser);
 const getCachedWallets = cache(fetchWallets);
 const getCachedCreditEntitlements = cache(fetchCreditEntitlements);
 
@@ -101,7 +100,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         return { creditEntitlements: items, creditLedgerByEntitlement: ledger };
     }
 
-    let subscriptionsData, paymentMethods, billingHistoryData, refundHistoryData, user, walletsResult, creditsResult;
+    let subscriptionsData, paymentMethods, billingHistoryData, refundHistoryData, walletsResult, creditsResult;
 
     try {
         [
@@ -109,7 +108,6 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             paymentMethods,
             billingHistoryData,
             refundHistoryData,
-            user,
             walletsResult,
             creditsResult
         ] = await Promise.all([
@@ -117,7 +115,6 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             getCachedPaymentMethods(),
             getCachedPayments(billingPage, OVERVIEW_BILLING_PAGE_SIZE),
             getCachedRefunds(refundPage, OVERVIEW_REFUND_PAGE_SIZE),
-            getCachedUser(),
             fetchWalletsWithLedger(),
             fetchCreditsWithLedger(),
         ]);
@@ -127,7 +124,6 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         paymentMethods = null;
         billingHistoryData = { data: [], totalCount: 0, hasNext: false };
         refundHistoryData = { data: [], totalCount: 0, hasNext: false };
-        user = null;
         walletsResult = { walletItems: [] as WalletItem[], walletLedgerByCurrency: {} as Record<string, WalletLedgerItem[]> };
         creditsResult = { creditEntitlements: [] as CreditEntitlementItem[], creditLedgerByEntitlement: {} as Record<string, CreditLedgerItem[]> };
     }
@@ -159,7 +155,6 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
                 baseUrl: buildPaginationBaseUrl(params, REFUND_PAGE_PARAM),
                 pageParamKey: REFUND_PAGE_PARAM,
             }}
-            user={user ? { name: user.name, email: user.email } : null}
             wallets={walletItems}
             walletLedgerByCurrency={walletLedgerByCurrency}
             creditEntitlements={creditEntitlements}

@@ -20,7 +20,7 @@ export function SessionPageLayout({
       <LeftPanel />
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <SessionHeader showBusinessSwitcher showUserMenu={false} />
+        <SessionHeader showBusinessSwitcher />
 
         {/* Content Area */}
          <div className="flex-1 px-4 md:px-8 lg:px-12 py-6 md:py-8 overflow-y-auto">
