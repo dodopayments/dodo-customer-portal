@@ -11,7 +11,8 @@ import { usePathname } from "next/navigation";
 export function LeftPanel() {
     const { business } = useBusiness();
     const pathname = usePathname();
-    const isOverview = pathname === "/session/overview";
+    const normalizedPathname = (pathname || "").replace(/\/+$/, "") || "/";
+    const isOverview = /\/session\/overview$/.test(normalizedPathname);
     const [returnUrl, setReturnUrl] = useState<string | null>(null);
 
     useEffect(() => {

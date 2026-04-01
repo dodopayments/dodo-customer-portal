@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useBusiness } from "@/hooks/use-business";
 import { useLogout } from "@/hooks/use-logout";
+import { fetchUser } from "@/app/session/profile/actions";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -13,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  ArrowLeft,
   ChevronDown,
   ChevronUp,
   LogOut,
@@ -21,8 +23,8 @@ import {
   User,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import { fetchUser } from "@/app/session/profile/actions";
+import { usePathname, useRouter } from "next/navigation";
+import type { UserResponse } from "@/app/session/profile/types";
 
 interface SessionHeaderProps {
   showBusinessSwitcher?: boolean;
@@ -102,8 +104,13 @@ export function SessionHeader({
   const { business } = useBusiness();
   const { handleLogout, isLoggingOut } = useLogout();
   const { setTheme, resolvedTheme } = useTheme();
+  const router = useRouter();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [returnUrl, setReturnUrl] = useState<string | null>(null);
+  const [user, setUser] = useState<Pick<UserResponse, "name" | "email"> | null>(null);
+  const normalizedPathname = (pathname || "").replace(/\/+$/, "") || "/";
+  const isOverview = /\/session\/overview$/.test(normalizedPathname);
   const isThemeForced =
     business?.theme_mode === "light" || business?.theme_mode === "dark";
 
@@ -112,9 +119,29 @@ export function SessionHeader({
   }, []);
 
   useEffect(() => {
-    fetchUser().then((u) => {
-      if (u) setUser({ name: u.name, email: u.email });
-    });
+    let isActive = true;
+
+    fetchUser()
+      .then((u) => {
+        if (isActive && u) {
+          setUser({ name: u.name, email: u.email });
+        }
+      })
+      .catch(() => {
+        // keep user menu resilient on fetch failures
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    try {
+      setReturnUrl(sessionStorage.getItem("return_url"));
+    } catch {
+      // sessionStorage unavailable (SSR, sandboxed iframe, privacy mode)
+    }
   }, []);
 
   useEffect(() => {
@@ -135,13 +162,37 @@ export function SessionHeader({
   };
 
   const isDark = resolvedTheme === "dark";
+  const showMobileBackAction = !isOverview || !!returnUrl;
+
+  const handleMobileBack = () => {
+    if (isOverview && returnUrl) {
+      window.location.assign(returnUrl);
+      return;
+    }
+
+    router.push("/session/overview");
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-bg-primary/80 backdrop-blur-lg border-b border-border-secondary">
       <div className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4">
-        <BusinessIdentity
-          showBusinessSwitcher={showBusinessSwitcher}
-        />
+        <div className="flex items-center gap-2 min-w-0">
+          {showMobileBackAction && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleMobileBack}
+              aria-label={isOverview ? "Go back to business" : "Go to overview"}
+              className="lg:hidden w-9 h-9"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+          )}
+
+          <BusinessIdentity
+            showBusinessSwitcher={showBusinessSwitcher}
+          />
+        </div>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
