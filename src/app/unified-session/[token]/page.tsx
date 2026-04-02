@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import LoadingOverlay from "@/components/loading-overlay";
 
 export default function Page() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const token = params?.token as string;
+  const nextUrl = searchParams?.get("next");
 
   useEffect(() => {
     async function validateBusinessToken() {
@@ -22,7 +24,7 @@ export default function Page() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ token }),
+          body: JSON.stringify({ token, next: nextUrl }),
         });
 
         if (response.status !== 200) {
