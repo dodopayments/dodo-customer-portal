@@ -56,7 +56,7 @@ export default function Page() {
     }
 
     validateToken();
-  }, [token]);
+  }, [token, nextUrl]);
 
   if (error) {
     return (
