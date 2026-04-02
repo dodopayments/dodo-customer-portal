@@ -1,6 +1,5 @@
 import { OverviewContent } from "@/components/session/overview/overview-content";
 import {
-  DEMO_USER,
   DEMO_SUBSCRIPTIONS,
   DEMO_PAYMENT_METHODS,
   DEMO_BILLING_HISTORY,
@@ -60,7 +59,6 @@ export default async function DemoPage({ searchParams }: DemoPageProps) {
         baseUrl: refundBaseUrl,
         pageParamKey: REFUND_PAGE_PARAM,
       }}
-      user={DEMO_USER}
       wallets={DEMO_WALLETS}
       walletLedgerByCurrency={DEMO_WALLET_LEDGER}
       creditEntitlements={DEMO_CREDIT_ENTITLEMENTS}

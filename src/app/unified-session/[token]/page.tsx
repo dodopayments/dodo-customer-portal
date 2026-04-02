@@ -47,7 +47,7 @@ export default function Page() {
     }
 
     validateBusinessToken();
-  }, [token]);
+  }, [token, nextUrl]);
 
   if (error) {
     return (
