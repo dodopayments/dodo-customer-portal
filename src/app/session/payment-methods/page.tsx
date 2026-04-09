@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { fetchPaymentMethods } from "./action";
 import { PaymentMethodItem } from "./type";
 import { CircleSlash } from "lucide-react";
