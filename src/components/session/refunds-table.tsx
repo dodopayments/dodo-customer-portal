@@ -4,12 +4,14 @@ import { CircleSlash } from "lucide-react";
 import { BaseDataGrid } from "@/components/table/BaseDataGrid";
 import { Card, CardContent } from "@/components/ui/card";
 import ServerPagination from "@/components/common/server-pagination";
-import { RefundColumn, RefundResponse } from "@/components/session/refunds-column";
+import { getRefundColumns, RefundResponse } from "@/components/session/refunds-column";
+import { useTranslations } from "next-intl";
+import { useMemo } from "react";
 
 interface RefundsTableProps {
   refundsData: RefundResponse[];
   tableId?: string;
-  title?: string;
+  title?: string | undefined;
   titleClassName?: string;
   showTitle?: boolean;
   currentPage?: number;
@@ -28,7 +30,7 @@ interface RefundsTableProps {
 export function RefundsTable({
   refundsData,
   tableId = "refund-history",
-  title = "Refund History",
+  title,
   titleClassName = "text-lg font-display font-medium text-text-primary",
   showTitle = true,
   currentPage = 0,
@@ -43,6 +45,10 @@ export function RefundsTable({
   onPageChange,
   onPageSizeChange,
 }: RefundsTableProps) {
+  const t = useTranslations("RefundsTable");
+  const tColumns = useTranslations("RefundColumns");
+  const columns = useMemo(() => getRefundColumns(tColumns), [tColumns]);
+  const resolvedTitle = title ?? t("title");
   const isEmpty = refundsData.length === 0;
   const shouldShowGridPagination = showPagination && totalCount > pageSize;
 
@@ -50,7 +56,7 @@ export function RefundsTable({
     <section id="refund-history">
       {showTitle && (
         <div className="flex items-center justify-between mb-4">
-          <h2 className={titleClassName}>{title}</h2>
+          <h2 className={titleClassName}>{resolvedTitle}</h2>
         </div>
       )}
 
@@ -61,7 +67,7 @@ export function RefundsTable({
               <div className="p-4 bg-bg-secondary rounded-full mb-4">
                 <CircleSlash className="w-6 h-6 text-text-secondary" />
               </div>
-              <p className="text-text-secondary text-sm">No refunds available</p>
+              <p className="text-text-secondary text-sm">{t("empty")}</p>
             </div>
           </CardContent>
         </Card>
@@ -69,7 +75,7 @@ export function RefundsTable({
         <BaseDataGrid
           tableId={tableId}
           data={refundsData}
-          columns={RefundColumn}
+          columns={columns}
           disablePagination={paginationMode === "server" || !shouldShowGridPagination}
           manualPagination
           initialPageSize={pageSize}

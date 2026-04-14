@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export function Credits({
   entitlements,
@@ -43,10 +44,11 @@ export function Credits({
   baseUrl: string;
   pageParamKey?: string;
 }) {
+  const t = useTranslations("ProfileCredits");
   const router = useRouter();
 
   if (allEntitlements.length === 0) {
-    return <p className="text-text-secondary text-sm">No credits found</p>;
+    return <p className="text-text-secondary text-sm">{t("noCreditsFound")}</p>;
   }
 
   const selectedEntitlement = entitlements.find(
@@ -71,7 +73,7 @@ export function Credits({
         <div>
           <Select value={tab} onValueChange={handleEntitlementChange}>
             <SelectTrigger className="w-fit min-w-[160px]">
-              <SelectValue placeholder="Select credit entitlement" />
+              <SelectValue placeholder={t("selectPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
               {allEntitlements.map((entitlement) => (
@@ -96,13 +98,13 @@ export function Credits({
               : `${balance} ${selectedEntitlement?.unit || ""}`}
           </CardTitle>
           <CardDescription className="text-text-secondary text-sm text-center">
-            {isOverage ? "Overage balance" : "Available credit balance"}
+            {isOverage ? t("overageBalance") : t("availableCreditBalance")}
           </CardDescription>
         </CardHeader>
         <Separator className="my-0" />
         <CardContent className="flex flex-col gap-4 p-0">
           <div className="flex flex-col gap-2">
-            <p className="text-sm">Recent Transactions</p>
+            <p className="text-sm">{t("recentTransactions")}</p>
             <CreditsTable
               creditLedger={ledgerItems}
               unit={selectedEntitlement?.unit || "credits"}

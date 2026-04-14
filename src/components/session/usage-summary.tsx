@@ -11,6 +11,7 @@ import { TimeTooltip } from "../custom/time-tooltip";
 import { UsageHistoryDetails } from "./usage-history-details";
 import ServerPagination from "@/components/common/server-pagination";
 import { CircleSlash } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface UsageSummaryProps {
   usageHistory: UsageHistoryItem[];
@@ -33,11 +34,9 @@ export function UsageSummary({
   baseUrl,
   pageParamKey,
 }: UsageSummaryProps) {
+  const t = useTranslations("UsageSummary");
   const isEmpty = usageHistory.length === 0;
-  const emptyMessage =
-    currentPage > 0
-      ? "No usage history found on this page"
-      : "No usage history at the moment";
+  const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyAll");
 
   return (
     <div className="flex flex-col gap-4">

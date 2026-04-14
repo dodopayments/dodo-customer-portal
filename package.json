@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf .next node_modules && bun install",
-    "check-payment-logos": "bun run scripts/check-payment-method-logos.ts"
+    "check-payment-logos": "bun run scripts/check-payment-method-logos.ts",
+    "translate": "npx lingo.dev@latest run"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

@@ -5,15 +5,19 @@ import { cn } from "@/lib/utils";
 import { Info } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import { UpdatePaymentMethodSheet } from "./update-payment-method-sheet";
+import { getTranslations } from "next-intl/server";
 
-const SubscriptionInfo = ({
+const SubscriptionInfo = async ({
   subscription,
 }: {
   subscription: SubscriptionDetailsData;
 }) => {
-  if (subscription.status != "on_hold") {
+  if (subscription.status !== "on_hold") {
     return null;
   }
+
+  const t = await getTranslations("SubscriptionInfo");
+
   return (
     <div
       className={cn(
@@ -23,12 +27,8 @@ const SubscriptionInfo = ({
     >
       <IconColors color="orange" icon={<Info size={14} />} />
       <div className="flex w-full flex-col gap-1">
-        <p className="text-text-primary text-sm font-medium">
-          Your subscription is currently on hold
-        </p>
-        <p className="text-text-primary font-[200] text-sm">
-          Please update your payment method to resume this subscription
-        </p>
+        <p className="text-text-primary text-sm font-medium">{t("title")}</p>
+        <p className="text-text-primary font-[200] text-sm">{t("description")}</p>
       </div>
       <UpdatePaymentMethodSheet
         variant="default"

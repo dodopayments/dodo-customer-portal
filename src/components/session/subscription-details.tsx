@@ -27,6 +27,7 @@ import { fetchPaymentMethods } from "@/app/session/payment-methods/action";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { getPaymentMethodLogoUrl } from "./payment-methods/payment-method-logo";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 function formatPaymentMethodType(type: string): string {
   return type
@@ -46,6 +47,7 @@ export async function SubscriptionDetails({
 }: {
   subscription: SubscriptionDetailsData;
 }) {
+  const t = await getTranslations("SubscriptionDetails");
   const paymentMethods = await fetchPaymentMethods();
   const currentPaymentMethod = subscription.payment_method_id
     ? paymentMethods?.find(
@@ -120,7 +122,8 @@ export async function SubscriptionDetails({
   );
 }
 
-function AddOns({ addons }: { addons: AddOn[] }) {
+async function AddOns({ addons }: { addons: AddOn[] }) {
+  const t = await getTranslations("SubscriptionDetails");
   return (
     <Card className="p-6 flex flex-col gap-4">
       <CardHeader className="flex flex-row gap-2 p-0 justify-between">
@@ -128,7 +131,7 @@ function AddOns({ addons }: { addons: AddOn[] }) {
           className="font-display font-medium my-auto text-md leading-5 tracking-normal"
           style={{ leadingTrim: "cap-height" } as React.CSSProperties}
         >
-          Addons
+          {t("addons")}
         </CardTitle>
       </CardHeader>
       <Separator />
@@ -162,7 +165,7 @@ function AddOns({ addons }: { addons: AddOn[] }) {
                   {addon.name || addon.addon_id}
                 </CardTitle>
                 <span className="text-text-secondary text-sm whitespace-nowrap">
-                  Qty: {addon.quantity}
+                  {t("qty", { value: addon.quantity })}
                 </span>
               </div>
               {addon.description && (
@@ -178,7 +181,7 @@ function AddOns({ addons }: { addons: AddOn[] }) {
   );
 }
 
-function MetersCart({
+async function MetersCart({
   meters,
   className,
 }: {
@@ -186,6 +189,7 @@ function MetersCart({
   className?: string;
 }) {
   if (!meters || meters.length === 0) return null;
+  const t = await getTranslations("SubscriptionDetails");
 
   return (
     <Card className={cn("p-6 flex flex-col gap-4", className)}>
@@ -194,7 +198,7 @@ function MetersCart({
           className="font-display font-medium my-auto text-md leading-5 tracking-normal"
           style={{ leadingTrim: "cap-height" } as React.CSSProperties}
         >
-          Meters
+          {t("meters")}
         </CardTitle>
       </CardHeader>
       <Separator />
@@ -229,11 +233,11 @@ function MetersCart({
                         value: Number(meter.price_per_unit || "0"),
                         currency,
                       })}{" "}
-                      per {meter.measurement_unit}
+                      {t("per")} {meter.measurement_unit}
                     </span>
                     {meter.free_threshold && (
                       <span className="text-sm break-words truncate max-w-full">
-                        Free Threshold : {meter.free_threshold}{" "}
+                        {t("freeThreshold")} : {meter.free_threshold}{" "}
                         {meter.measurement_unit}
                       </span>
                     )}

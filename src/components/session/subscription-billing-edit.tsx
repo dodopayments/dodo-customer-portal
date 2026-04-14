@@ -23,6 +23,7 @@ import { updateBillingDetails } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import parseError from "@/lib/clientErrorHelper";
+import { useTranslations } from "next-intl";
 
 interface SubscriptionBillingEditProps {
   subscription: SubscriptionDetailsData;
@@ -33,6 +34,7 @@ export default function SubscriptionBillingEdit({
   subscription,
   onClose,
 }: SubscriptionBillingEditProps) {
+  const t = useTranslations("SubscriptionBillingEdit");
   const [countries, setCountries] = useState<CountriesListType[]>([]);
   const [isLoadingCountry, setIsLoadingCountry] = useState(false);
   const [open, setOpen] = useState(false);
@@ -69,7 +71,7 @@ export default function SubscriptionBillingEdit({
         );
         setCountries(matchedCountries);
       } catch (error) {
-        parseError(error, "Failed to load countries. Please try again.");
+        parseError(error, t("countriesLoadFailed"));
       } finally {
         setIsLoadingCountry(false);
         setIsLoading(false);
@@ -98,13 +100,13 @@ export default function SubscriptionBillingEdit({
       });
 
       if (!result.success) {
-        toast.error(result.error || "Failed to update billing details. Please try again.");
+        toast.error(result.error || t("updateFailed"));
       } else {
-        toast.success("Billing details updated successfully");
+        toast.success(t("updateSuccess"));
         router.refresh();
       }
     } catch (error) {
-      parseError(error, "Failed to update billing details. Please try again.");
+      parseError(error, t("updateFailed"));
     }
     if (onClose) onClose();
     setOpen(false);
@@ -113,17 +115,17 @@ export default function SubscriptionBillingEdit({
   const form = (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <Label htmlFor="fullName">Customer Name</Label>
+        <Label htmlFor="fullName">{t("customerName")}</Label>
         <Input
           id="fullName"
-          placeholder="Full Name"
+          placeholder={t("fullNamePlaceholder")}
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label> Billing Address </Label>
+        <Label>{t("billingAddress")}</Label>
         <div className="space-y-0 rounded-xl border border-border-secondary">
           <SelectNative
             className="rounded-b-none shadow-none focus-visible:relative focus-visible:z-20"
@@ -132,7 +134,7 @@ export default function SubscriptionBillingEdit({
             onChange={(e) => setCountry(e.target.value)}
           >
             {isLoadingCountry ? (
-              <option value="">Loading...</option>
+              <option value="">{t("loadingCountries")}</option>
             ) : (
               countries.map((c) => (
                 <option key={c.code} value={c.code}>
@@ -145,7 +147,7 @@ export default function SubscriptionBillingEdit({
           <div className="border-t border-border-secondary">
             <Input
               className="rounded-t-none rounded-b-none border-t-0 focus-visible:relative focus-visible:border-t focus-visible:z-20"
-              placeholder="Address line 1"
+              placeholder={t("addressLine")}
               value={addressLine}
               onChange={(e) => setAddressLine(e.target.value)}
             />
@@ -154,7 +156,7 @@ export default function SubscriptionBillingEdit({
           <div className="border-t border-border-secondary">
             <Input
               className="rounded-t-none border-y-0 rounded-b-none focus-visible:relative focus-visible:border-t focus-visible:z-20"
-              placeholder="State"
+              placeholder={t("state")}
               value={state}
               onChange={(e) => setState(e.target.value)}
             />
@@ -163,14 +165,14 @@ export default function SubscriptionBillingEdit({
           <div className="grid grid-cols-2 gap-0 border-t border-border-secondary">
             <Input
               className="rounded-none rounded-bl-lg focus-visible:relative focus-visible:border-y focus-visible:z-20"
-              placeholder="City"
+              placeholder={t("city")}
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
 
             <Input
               className="rounded-none rounded-br-lg border-l-0  focus-visible:relative focus-visible:border-y focus-visible:border-l focus-visible:z-20"
-              placeholder="Postal code"
+              placeholder={t("postalCode")}
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
             />
@@ -184,15 +186,15 @@ export default function SubscriptionBillingEdit({
           checked={isBusiness}
           onCheckedChange={(checked) => setIsBusiness(checked === true)}
         />
-        <Label htmlFor="isBusiness">Purchasing as a business</Label>
+        <Label htmlFor="isBusiness">{t("purchasingAsBusiness")}</Label>
       </div>
 
       {isBusiness && (
         <div className="flex flex-col gap-2">
-          <Label htmlFor="taxId">Tax ID</Label>
+          <Label htmlFor="taxId">{t("taxId")}</Label>
           <Input
             id="taxId"
-            placeholder="Tax ID"
+            placeholder={t("taxIdPlaceholder")}
             value={taxId}
             onChange={(e) => setTaxId(e.target.value)}
           />
@@ -216,7 +218,7 @@ export default function SubscriptionBillingEdit({
           }
           disabled={isLoading}
         >
-          Save Details
+          {t("saveDetails")}
         </Button>
       </div>
     </div>
@@ -225,12 +227,12 @@ export default function SubscriptionBillingEdit({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="secondary">Edit</Button>
+        <Button variant="secondary">{t("editButton")}</Button>
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader>
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
-            Edit Billing Details
+            {t("sheetTitle")}
           </SheetTitle>
         </SheetHeader>
         <Separator className="my-3" />

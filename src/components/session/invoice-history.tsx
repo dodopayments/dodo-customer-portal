@@ -10,76 +10,7 @@ import { formatCurrency, decodeCurrency } from "@/lib/currency-helper";
 import { CircleSlash } from "lucide-react";
 import ServerPagination from "@/components/common/server-pagination";
 import InvoiceDownloadSheet from "./invoice-download-sheet";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const InvoiceColumn: ColumnDef<any>[] = [
-  {
-    accessorKey: "payment_id",
-    header: "Payment ID",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left">
-          {row.original.payment_id}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "date",
-    header: "Date",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left">
-          {new Date(row.original.date).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "short",
-            year: "2-digit",
-          })}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      return (
-        <div className="text-left">
-          {formatCurrency(
-            decodeCurrency(row.original.amount, row.original.currency),
-            row.original.currency
-          )}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      return (
-        <Badge variant={getBadge(row.original.status).color as any}>
-          {getBadge(row.original.status).message}
-        </Badge>
-      );
-    },
-  },
-  {
-    accessorKey: "download",
-    header: "Download",
-    cell: ({ row }) => {
-      return (
-        <InvoiceDownloadSheet
-          key={row.original.payment_id}
-          paymentId={row.original.payment_id}
-          downloadUrl={row.original.download_url}
-          disabled={!(row.original.amount > 0)}
-        />
-      );
-    },
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function InvoiceHistory({
   invoiceHistory,
@@ -98,15 +29,69 @@ export function InvoiceHistory({
   baseUrl: string;
   pageParamKey?: string;
 }) {
-  const data = useMemo(() => {
-    return invoiceHistory;
-  }, [invoiceHistory]);
+  const t = useTranslations("InvoiceHistory");
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const InvoiceColumn: ColumnDef<any>[] = useMemo(() => [
+    {
+      accessorKey: "payment_id",
+      header: t("paymentId"),
+      cell: ({ row }: { row: any }) => (
+        <div className="text-left">{row.original.payment_id}</div>
+      ),
+    },
+    {
+      accessorKey: "date",
+      header: t("date"),
+      cell: ({ row }: { row: any }) => (
+        <div className="text-left">
+          {new Date(row.original.date).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "2-digit",
+          })}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "amount",
+      header: t("amount"),
+      cell: ({ row }: { row: any }) => (
+        <div className="text-left">
+          {formatCurrency(
+            decodeCurrency(row.original.amount, row.original.currency),
+            row.original.currency
+          )}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "status",
+      header: t("status"),
+      cell: ({ row }: { row: any }) => (
+        <Badge variant={getBadge(row.original.status).color as any}>
+          {getBadge(row.original.status).message}
+        </Badge>
+      ),
+    },
+    {
+      accessorKey: "download",
+      header: t("download"),
+      cell: ({ row }: { row: any }) => (
+        <InvoiceDownloadSheet
+          key={row.original.payment_id}
+          paymentId={row.original.payment_id}
+          downloadUrl={row.original.download_url}
+          disabled={!(row.original.amount > 0)}
+        />
+      ),
+    },
+  ], [t]);
+
+  const data = useMemo(() => invoiceHistory, [invoiceHistory]);
 
   const isEmpty = invoiceHistory.length === 0;
-  const emptyMessage =
-    currentPage > 0
-      ? "No invoices found on this page"
-      : "No invoices at the moment";
+  const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyAll");
 
   return (
     <div className="flex flex-col gap-4">

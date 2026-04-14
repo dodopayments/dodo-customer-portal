@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import ServerPagination from "@/components/common/server-pagination";
 import { CircleSlash } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function CreditsTable({
   creditLedger,
@@ -26,11 +27,13 @@ export function CreditsTable({
   baseUrl: string;
   pageParamKey?: string;
 }) {
+  const t = useTranslations("ProfileCredits");
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const CreditColumn: ColumnDef<any>[] = [
+  const CreditColumn: ColumnDef<any>[] = useMemo(() => [
     {
       accessorKey: "transaction_type",
-      header: "Type",
+      header: t("tableType"),
       cell: ({ row }) => {
         const transactionType = row.original.transaction_type;
         const formatted = transactionType
@@ -45,7 +48,7 @@ export function CreditsTable({
     },
     {
       accessorKey: "description",
-      header: "Description",
+      header: t("tableDescription"),
       cell: ({ row }) => {
         const description = row.original.description;
         return (
@@ -57,7 +60,7 @@ export function CreditsTable({
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("tableAmount"),
       cell: ({ row }) => {
         const amount = row.original.amount;
         const isCredit = row.original.is_credit;
@@ -73,17 +76,15 @@ export function CreditsTable({
         );
       },
     },
-  ];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ], [t, unit]);
 
   const data = useMemo(() => {
     return creditLedger;
   }, [creditLedger]);
 
   const isEmpty = creditLedger.length === 0;
-  const emptyMessage =
-    currentPage > 0
-      ? "No transactions found on this page"
-      : "No transactions at the moment";
+  const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyAll");
 
   return (
     <div className="flex flex-col gap-4">

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-separator";
 import { DigitalProductResponse } from "../product";
 import Loading from "@/components/loading";
+import { useTranslations } from "next-intl";
 
 interface AttachmentsSheetProps {
   isAttachmentsSheetOpen: boolean;
@@ -27,6 +28,8 @@ export const AttachmentsSheet = ({
   digitalProducts,
   error,
 }: AttachmentsSheetProps) => {
+  const t = useTranslations("Entitlements");
+
   return (
     <div className="flex flex-col gap-4">
       <Sheet
@@ -36,14 +39,14 @@ export const AttachmentsSheet = ({
         <SheetTrigger asChild>
           <Button variant="secondary" className="w-fit">
             <File />
-            Attachments
+            {t("attachmentsButton")}
           </Button>
         </SheetTrigger>
         <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
           <SheetHeader>
-            <SheetTitle>Your Digital Products</SheetTitle>
+            <SheetTitle>{t("attachmentsTitle")}</SheetTitle>
             <SheetDescription>
-              Access and download your available digital products and files here.
+              {t("attachmentsDescription")}
             </SheetDescription>
           </SheetHeader>
           <Separator className="mt-4" />
@@ -67,7 +70,7 @@ export const AttachmentsSheet = ({
                 ) {
                   return (
                     <p className="text-sm text-text-secondary">
-                      No digital products available.
+                      {t("noDigitalProducts")}
                     </p>
                   );
                 }
@@ -76,7 +79,7 @@ export const AttachmentsSheet = ({
                   <div className="space-y-6">
                     {hasFiles && (
                       <div>
-                        <h4 className="font-medium mb-2">Files</h4>
+                        <h4 className="font-medium mb-2">{t("filesSection")}</h4>
                         <div className="space-y-2">
                           {files.map((file) => (
                             <div
@@ -104,19 +107,19 @@ export const AttachmentsSheet = ({
 
                     {externalUrl && (
                       <div>
-                        <h4 className="font-medium mb-2">External link</h4>
+                        <h4 className="font-medium mb-2">{t("externalLink")}</h4>
                         <Button
                           variant="secondary"
                           onClick={() => window.open(externalUrl, "_blank")}
                         >
-                          Open
+                          {t("open")}
                         </Button>
                       </div>
                     )}
 
                     {instructions && (
                       <div>
-                        <h4 className="font-medium mb-2">Instructions</h4>
+                        <h4 className="font-medium mb-2">{t("instructionsSection")}</h4>
                         <p className="text-sm text-text-secondary whitespace-pre-line">
                           {instructions}
                         </p>

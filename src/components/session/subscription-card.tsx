@@ -29,6 +29,7 @@ import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { getPaymentMethodLogoUrl } from "./payment-methods/payment-method-logo";
 import { SubscriptionNotes } from "./subscription-notes";
 import { useBusiness } from "@/hooks/use-business";
+import { useTranslations } from "next-intl";
 
 interface SubscriptionCardProps {
   item: SubscriptionData;
@@ -66,24 +67,26 @@ const getPaymentMethodDisplay = (paymentMethod?: PaymentMethodItem) => {
           : paymentMethod.payment_method,
   };
 };
-const getButtonText = (status: SubscriptionStatus) => {
-  switch (status) {
-    case "active":
-      return "Manage subscription";
-    case "on_hold":
-      return "Update payment method";
-    default:
-      return "View details";
-  }
-};
 export const SubscriptionCard = ({
   item,
   cardClassName,
   variant = "detail",
   paymentMethod,
 }: SubscriptionCardProps) => {
+  const t = useTranslations("SubscriptionCard");
   const router = useRouter();
   const { business } = useBusiness();
+
+  const getButtonText = (status: SubscriptionStatus) => {
+    switch (status) {
+      case "active":
+        return t("manageSubscription");
+      case "on_hold":
+        return t("updatePaymentMethod");
+      default:
+        return t("viewDetails");
+    }
+  };
 
   // Compact variant - minimal design for overview
   if (variant === "compact") {
@@ -172,7 +175,7 @@ export const SubscriptionCard = ({
               {item.status === "active" && (
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-xs font-medium">
                   <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                    renews on{" "}
+                    {t("renewsOn")}{" "}
                     {item.next_billing_date
                       ? new Date(item.next_billing_date).toLocaleDateString(
                           "en-GB",
@@ -180,7 +183,7 @@ export const SubscriptionCard = ({
                       : "N/A"}
                   </span>
                   <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-bg-secondary rounded-md text-text-secondary">
-                    valid till{" "}
+                    {t("validTill")}{" "}
                     {item.next_billing_date
                       ? new Date(item.next_billing_date).toLocaleDateString(
                           "en-GB",
@@ -257,7 +260,7 @@ export const SubscriptionCard = ({
               router.push(`/session/subscriptions/${item.subscription_id}`)
             }
           >
-            View details
+            {t("viewDetails")}
           </Button>
           <div className="flex flex-wrap gap-2">
             {renderSubscriptionBadges(item, "rounded-sm border-sm")}

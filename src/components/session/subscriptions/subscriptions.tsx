@@ -7,6 +7,7 @@ import ServerPagination from "@/components/common/server-pagination";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const ACTIVE_OR_ON_HOLD = ["active", "on_hold"];
 const CANCELLED_FAILED_EXPIRED = ["cancelled", "failed", "expired"];
@@ -93,6 +94,7 @@ export const Subscriptions = ({
     paymentMethods = [],
     totalCount,
 }: SubscriptionsProps) => {
+    const t = useTranslations("Subscriptions");
     const router = useRouter();
     const isEmpty = subscriptionData.length === 0;
 
@@ -102,21 +104,13 @@ export const Subscriptions = ({
     const prioritized = tier1.length ? tier1 : tier2.length ? tier2 : tier3;
     const overviewSubscriptions = prioritized.slice(0, OVERVIEW_MAX);
 
-    const emptyMessage =
-        currentPage > 0
-            ? "No subscriptions found on this page"
-            : "No active subscriptions at the moment";
+    const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyActive");
 
     // Overview variant with section header
     if (variant === "overview") {
         const totalCountToShow = totalCount && totalCount > 0 ? totalCount : subscriptionData.length;
         const overviewEmpty = overviewSubscriptions.length === 0;
-        const sectionHeading =
-            tier1.length > 0
-                ? "Active subscriptions"
-                : tier2.length > 0
-                    ? "Subscriptions"
-                    : "Subscriptions";
+        const sectionHeading = tier1.length > 0 ? t("headingActive") : t("headingAll");
 
         return (
             <section id="active-subscriptions">
@@ -161,7 +155,7 @@ export const Subscriptions = ({
                             onClick={() => router.push("/session/subscriptions")}
                             className="text-sm font-medium font-display text-text-secondary hover:text-text-primary transition-colors"
                         >
-                            View all subscriptions
+                            {t("viewAll")}
                         </button>
                     </div>
                 )}

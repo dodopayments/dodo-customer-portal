@@ -23,62 +23,66 @@ export interface RefundResponse {
   status: string;
 }
 
-export const RefundColumn: ColumnDef<RefundResponse>[] = [
-  {
-    accessorKey: "created_at",
-    header: "Date",
-    cell: ({ row }) => {
-      return (
-        <TimeTooltip
-          timeStamp={row.original.created_at}
-          className="text-sm text-text-primary font-medium"
-          triggerFormat="shortDate"
-        />
-      );
+type TFunction = (key: string) => string;
+
+export function getRefundColumns(t: TFunction): ColumnDef<RefundResponse>[] {
+  return [
+    {
+      accessorKey: "created_at",
+      header: t("date"),
+      cell: ({ row }) => {
+        return (
+          <TimeTooltip
+            timeStamp={row.original.created_at}
+            className="text-sm text-text-primary font-medium"
+            triggerFormat="shortDate"
+          />
+        );
+      },
     },
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      const { color, message } = getBadge(status);
-      return (
-        <Badge dot={false} variant={color as any}>
-          {message}
-        </Badge>
-      );
+    {
+      accessorKey: "status",
+      header: t("status"),
+      cell: ({ row }) => {
+        const status = row.getValue("status") as string;
+        const { color, message } = getBadge(status);
+        return (
+          <Badge dot={false} variant={color as any}>
+            {message}
+          </Badge>
+        );
+      },
     },
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      const amount = row.original.amount;
-      const currency = row.original.currency;
-      if (amount === null || currency === null) {
-        return <div className="text-left">-</div>;
-      }
-      const currencyCode = currency as CurrencyCode;
-      const formatted = formatCurrency(
-        decodeCurrency(amount, currencyCode),
-        currencyCode,
-      );
-      return <div className="text-left">{formatted}</div>;
+    {
+      accessorKey: "amount",
+      header: t("amount"),
+      cell: ({ row }) => {
+        const amount = row.original.amount;
+        const currency = row.original.currency;
+        if (amount === null || currency === null) {
+          return <div className="text-left">-</div>;
+        }
+        const currencyCode = currency as CurrencyCode;
+        const formatted = formatCurrency(
+          decodeCurrency(amount, currencyCode),
+          currencyCode,
+        );
+        return <div className="text-left">{formatted}</div>;
+      },
     },
-  },
-  {
-    accessorKey: "refund_id",
-    header: "Refund Id",
-    cell: ({ row }) => <IDTooltip idValue={row.getValue("refund_id")} />,
-  },
-  {
-    accessorKey: "payment_id",
-    header: "Associated Payment",
-    cell: ({ row }) => (
-      <div className="flex gap-2 items-center">
-        <IDTooltip idValue={row.getValue("payment_id")} />
-      </div>
-    ),
-  },
-];
+    {
+      accessorKey: "refund_id",
+      header: t("refundId"),
+      cell: ({ row }) => <IDTooltip idValue={row.getValue("refund_id")} />,
+    },
+    {
+      accessorKey: "payment_id",
+      header: t("associatedPayment"),
+      cell: ({ row }) => (
+        <div className="flex gap-2 items-center">
+          <IDTooltip idValue={row.getValue("payment_id")} />
+        </div>
+      ),
+    },
+  ];
+}

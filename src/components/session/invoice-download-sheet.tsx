@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import InvoiceFillDetails from "./invoice-fill-details";
+import { useTranslations } from "next-intl";
 
 interface InvoiceDownloadSheetProps {
   paymentId: string;
@@ -36,6 +37,7 @@ export function InvoiceDownloadSheet({
   variant = "default",
   disabled = false,
 }: InvoiceDownloadSheetProps) {
+  const t = useTranslations("InvoiceDownloadSheet");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isFillDetailsOpen, setIsFillDetailsOpen] = useState(false);
 
@@ -59,23 +61,21 @@ export function InvoiceDownloadSheet({
             variant="secondary"
             size="icon"
             className={cn("h-8 w-8", buttonClassName)}
-            title={disabled ? "Invoice not available" : "Download Invoice"}
+            title={disabled ? t("notAvailable") : t("downloadInvoice")}
             disabled={disabled}
           >
             <Download className="w-4 h-4" />
           </Button>
         ) : (
           <Button variant="secondary" className={buttonClassName} disabled={disabled}>
-            <Download className="w-4 h-4 mr-2" /> Invoice
+            <Download className="w-4 h-4 mr-2" /> {t("invoice")}
           </Button>
         )}
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader>
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
-            {isFillDetailsOpen
-              ? "Enter full address of customer"
-              : "Generate Invoice"}
+            {isFillDetailsOpen ? t("fillDetailsTitle") : t("generateInvoice")}
           </SheetTitle>
         </SheetHeader>
         <Separator className="my-3" />
@@ -89,11 +89,10 @@ export function InvoiceDownloadSheet({
             <Card className="p-5">
               <CardContent className="p-0">
                 <CardTitle className="font-display font-medium text-sm tracking-normal">
-                  Download with existing address details
+                  {t("existingAddressTitle")}
                 </CardTitle>
                 <CardDescription className="font-body font-normal text-xs leading-5 tracking-normal">
-                  This invoice will include only your zip code and country as
-                  provided during the checkout process.
+                  {t("existingAddressDescription")}
                 </CardDescription>
               </CardContent>
               <CardFooter className="p-0 mt-4">
@@ -104,19 +103,17 @@ export function InvoiceDownloadSheet({
                     handleDownloadComplete();
                   }}
                 >
-                  <Download className="w-4 h-4 mr-2" /> Download Invoice
+                  <Download className="w-4 h-4 mr-2" /> {t("downloadInvoice")}
                 </Button>
               </CardFooter>
             </Card>
             <Card className="p-5">
               <CardContent className="p-0">
                 <CardTitle className="font-display font-medium text-sm tracking-normal">
-                  Download with full address details
+                  {t("fullAddressTitle")}
                 </CardTitle>
                 <CardDescription className="font-body font-normal text-xs leading-5 tracking-normal">
-                  This invoice will include the complete address of the
-                  customer. Please ensure you fill in all the details before
-                  downloading.
+                  {t("fullAddressDescription")}
                 </CardDescription>
               </CardContent>
               <CardFooter className="p-0 mt-4">
@@ -124,7 +121,7 @@ export function InvoiceDownloadSheet({
                   variant="secondary"
                   onClick={() => setIsFillDetailsOpen(true)}
                 >
-                  Fill Details
+                  {t("fillDetails")}
                 </Button>
               </CardFooter>
             </Card>

@@ -6,7 +6,8 @@ import { OrderCard } from "./order-card";
 import ServerPagination from "@/components/common/server-pagination";
 import { Card, CardContent } from "@/components/ui/card";
 import { BaseDataGrid } from "@/components/table/BaseDataGrid";
-import { BillingHistoryColumns } from "./billing-history-columns";
+import { getBillingHistoryColumns } from "./billing-history-columns";
+import { useTranslations } from "next-intl";
 
 export interface OrderData {
   brand_id: string;
@@ -65,15 +66,15 @@ export const Orders = ({
   variant = "detail",
   showPagination = true,
 }: OrdersProps) => {
+  const t = useTranslations("Orders");
+  const tColumns = useTranslations("BillingHistoryColumns");
 
   const OVERVIEW_PAGE_SIZE = 25;
 
   const totalCount = externalTotalCount ?? ordersData.length;
   const isEmpty = ordersData.length === 0;
-  const emptyMessage =
-    currentPage > 0
-      ? "No purchases found on this page"
-      : "No purchases at the moment";
+  const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyAll");
+  const billingHistoryColumns = getBillingHistoryColumns(tColumns);
 
   const shouldShowPagination = showPagination;
 
@@ -84,7 +85,7 @@ export const Orders = ({
       <section id="billing-history">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-display font-medium text-text-primary">
-            Billing History
+            {t("billingHistory")}
           </h2>
         </div>
 
@@ -96,7 +97,7 @@ export const Orders = ({
                   <CircleSlash className="w-6 h-6 text-text-secondary" />
                 </div>
                 <p className="text-text-secondary text-sm">
-                  No billing history available
+                  {t("noBillingHistory")}
                 </p>
               </div>
             </CardContent>
@@ -105,7 +106,7 @@ export const Orders = ({
           <BaseDataGrid
             tableId="billing-history-overview"
             data={ordersData}
-            columns={BillingHistoryColumns}
+            columns={billingHistoryColumns}
             // recordCount={totalCount}
             manualPagination
             initialPageSize={OVERVIEW_PAGE_SIZE}
@@ -126,7 +127,7 @@ export const Orders = ({
               disableRowPerPage: true,
             }}
             disablePagination={!shouldShowOverviewPagination}
-            emptyStateMessage="No billing history available"
+            emptyStateMessage={t("noBillingHistory")}
           />
         )}
       </section>

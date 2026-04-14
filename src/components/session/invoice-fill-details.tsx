@@ -8,6 +8,7 @@ import { api, api_url } from "@/lib/http";
 import { getSessionToken } from "@/app/session/subscriptions/[id]/action";
 import parseError from "@/lib/clientErrorHelper";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import { InvoiceDetailsPayload } from "@/app/session/subscriptions/[id]/types";
 
 async function updateInvoiceDetails(
@@ -44,6 +45,7 @@ export function InvoiceFillDetails({
   url,
   onDownloadComplete,
 }: InvoiceFillDetailsProps) {
+  const t = useTranslations("InvoiceFillDetails");
   const [address, setAddress] = useState<string>("");
   const [state, setState] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -65,9 +67,9 @@ export function InvoiceFillDetails({
       const invoiceUrl = `${api_url}/invoices/payments/${url}`;
       window.open(invoiceUrl, "_blank");
 
-      toast.success("Invoice downloaded successfully");
+      toast.success(t("downloadSuccess"));
     } catch (error) {
-      parseError(error, "Failed to update invoice details. Please try again.");
+      parseError(error, t("updateFailed"));
     }
   };
 
@@ -78,7 +80,7 @@ export function InvoiceFillDetails({
           <Input
             className="rounded-b-none focus-visible:relative focus-visible:z-20"
             type="text"
-            placeholder="Address line 1"
+            placeholder={t("addressLine")}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -87,7 +89,7 @@ export function InvoiceFillDetails({
           <Input
             className="rounded-none border-y-0 focus-visible:relative focus-visible:border-t focus-visible:z-20"
             type="text"
-            placeholder="State"
+            placeholder={t("state")}
             value={state}
             onChange={(e) => setState(e.target.value)}
           />
@@ -97,7 +99,7 @@ export function InvoiceFillDetails({
             <Input
               className="rounded-none rounded-bl-lg focus-visible:relative focus-visible:border-y focus-visible:z-20"
               type="text"
-              placeholder="City"
+              placeholder={t("city")}
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
@@ -106,7 +108,7 @@ export function InvoiceFillDetails({
             <Input
               className="rounded-none rounded-br-lg border-l-0 focus-visible:relative focus-visible:border-y focus-visible:border-l focus-visible:z-20"
               type="text"
-              placeholder="Postal code"
+              placeholder={t("postalCode")}
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
             />
@@ -121,7 +123,7 @@ export function InvoiceFillDetails({
           onClick={handleDownload}
         >
           <Download className="w-4 h-4 mr-2" />
-          Download
+          {t("download")}
         </Button>
       </div>
     </div>

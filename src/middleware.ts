@@ -1,8 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
+import { locales } from "@/i18n/config";
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, searchParams } = request.nextUrl;
+  const response = NextResponse.next();
 
+  // Persist forceLanguage query param as a cookie (used in iframes / Safari fallback)
+  const forceLanguage = searchParams.get("forceLanguage")?.toLowerCase();
+  if (forceLanguage && locales.includes(forceLanguage as (typeof locales)[number])) {
+    response.cookies.set("NEXT_LOCALE", forceLanguage, {
+      sameSite: "none",
+      secure: true,
+      maxAge: 60 * 60 * 24 * 365,
+      path: "/",
+    });
+  }
+
+  // Session token guards
   if (pathname.startsWith("/session/")) {
     const sessionToken = request.cookies.get("session_token");
     if (!sessionToken?.value) {
@@ -17,7 +31,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
@@ -30,4 +44,3 @@ export const config = {
     "/businesses/:path*",
   ],
 };
-

@@ -1,5 +1,388 @@
 {
-  "HomePage": {
-    "title": "Dodo Payments Starter!"
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "You might be having a network connection problem, the link might be expired, or the link/product might be invalid."
+  },
+  "ExpiredPage": {
+    "title": "For security reasons, this page has expired."
+  },
+  "LandingCard": {
+    "heading": "What can we help you with today?",
+    "actionsIntro": "You can do the following actions:",
+    "actions": {
+      "changePaymentMethod": "Change Payment Method",
+      "cancelSubscription": "Cancel subscription",
+      "downloadInvoices": "Download invoices",
+      "viewOrders": "View orders processed through Dodo Payments",
+      "otherQueries": "Other queries"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailInvalid": "Invalid email address",
+    "emailFailed": "Failed to send login link. Please try again.",
+    "lookUpPurchase": "Look up my purchase",
+    "sendEmail": "Send email",
+    "sending": "Sending...",
+    "sentTitle": "We've sent you an email!",
+    "sentDescription": "Use the link in the email to login to the Dodo Payments self serve portal"
+  },
+  "LoginForm": {
+    "billingPortalTitle": "{businessName}'s Billing portal",
+    "enterEmailDescription": "Enter your email to receive the access link",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailInvalid": "Please enter a valid email address",
+    "emailRequired": "Email is required",
+    "getAccessLink": "Get Access Link",
+    "sending": "Sending...",
+    "successTitle": "Almost there!",
+    "successDescription": "Access link sent to email {email}. Make sure you check your spam folder!",
+    "goBack": "Go back",
+    "loginLinkSent": "Login link sent to email",
+    "loginLinkFailed": "Failed to send login link. Please try again."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Search businesses",
+    "emptyPage": "No businesses found on this page",
+    "emptyAll": "No businesses found",
+    "fetchError": "Failed to fetch business details",
+    "viewDetails": "View Details"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "View all businesses",
+    "switchToLightMode": "Switch to light mode",
+    "switchToDarkMode": "Switch to dark mode",
+    "loggingOut": "Logging out...",
+    "logOut": "Log Out",
+    "goBackToBusiness": "Go back to business",
+    "goToOverview": "Go to overview"
+  },
+  "LeftPanel": {
+    "goBackTo": "Go back to {businessName}",
+    "heading": "Manage your subscription and billing settings",
+    "description": "View payment history, download invoices, and manage subscriptions and payment methods.",
+    "poweredBy": "Powered by",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "Subscriptions": {
+    "headingActive": "Active subscriptions",
+    "headingAll": "Subscriptions",
+    "emptyPage": "No subscriptions found on this page",
+    "emptyActive": "No active subscriptions at the moment",
+    "viewAll": "View all subscriptions"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Manage subscription",
+    "updatePaymentMethod": "Update payment method",
+    "viewDetails": "View details",
+    "renewsOn": "renews on",
+    "validTill": "valid till"
+  },
+  "SubscriptionDetails": {
+    "addons": "Addons",
+    "meters": "Meters",
+    "freeThreshold": "Free Threshold",
+    "per": "per",
+    "qty": "Qty: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Billing Information",
+    "name": "Name",
+    "phoneNumber": "Phone number",
+    "email": "Email",
+    "billingAddress": "Billing Address"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Edit",
+    "sheetTitle": "Edit Billing Details",
+    "customerName": "Customer Name",
+    "fullNamePlaceholder": "Full Name",
+    "billingAddress": "Billing Address",
+    "loadingCountries": "Loading...",
+    "addressLine": "Address line 1",
+    "state": "State",
+    "city": "City",
+    "postalCode": "Postal code",
+    "purchasingAsBusiness": "Purchasing as a business",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax ID",
+    "saveDetails": "Save Details",
+    "updateSuccess": "Billing details updated successfully",
+    "updateFailed": "Failed to update billing details. Please try again.",
+    "countriesLoadFailed": "Failed to load countries. Please try again."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Are you certain you want to cancel your subscription to this service?",
+    "description": "Once you proceed, you will lose access to all associated benefits and this action cannot be reversed.",
+    "close": "Close",
+    "cancel": "Cancel",
+    "cancelling": "Cancelling..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Cancel Subscription",
+    "triggerRevoke": "Revoke Cancellation",
+    "sheetTitle": "We're sorry to see you go...",
+    "currentPlan": "Current plan",
+    "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
+    "quantity": "Quantity: {value}",
+    "scheduledCancellationWarning": "This subscription is scheduled to be cancelled at the next billing date.",
+    "revokeCancellation": "Revoke Cancellation",
+    "revoking": "Revoking...",
+    "cancelAtNextBilling": "Cancel at next billing date",
+    "cancelling": "Cancelling...",
+    "cancelSuccess": "Subscription cancelled successfully",
+    "cancelScheduled": "Subscription will be cancelled at next billing date",
+    "cancelFailed": "Failed to cancel subscription. Please try again.",
+    "revokeFailed": "Failed to revoke cancellation. Please try again.",
+    "revokeSuccess": "Subscription cancellation revoked successfully"
+  },
+  "SubscriptionInfo": {
+    "title": "Your subscription is currently on hold",
+    "description": "Please update your payment method to resume this subscription"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Your subscription is currently on hold due to a failed payment. Please update your payment method to resume this subscription",
+    "failed": "This subscription has failed. Please try again.",
+    "pending": "Your payment wasn't completed and checkout was left unfinished. If you'd like to subscribe, please try again.",
+    "cancelledOn": "This subscription was cancelled on {date}.",
+    "expired": "This subscription has expired.",
+    "scheduledCancellation": "Your subscription is currently scheduled for cancellation on {date}.",
+    "flexibleSubscription": "This is a flexible subscription, so {name} may adjust the price for your next billing cycle.",
+    "discountApplied": "Discount applied for {count, plural, one {# more billing cycle} other {# more billing cycles}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Change Plan",
+    "sheetTitle": "Select a new plan",
+    "noProducts": "No subscription products available.",
+    "currentPlan": "Current plan",
+    "proceed": "Proceed"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Confirm Plan Change",
+    "noPlanSelected": "No plan selected",
+    "loadingPreview": "Loading preview...",
+    "current": "Current",
+    "updated": "Updated",
+    "qty": "Qty: {value}",
+    "viewAddons": "View add-ons",
+    "manageAddons": "Manage add-ons",
+    "noAddons": "No addons",
+    "tableItem": "Item",
+    "tableQuantity": "Quantity",
+    "tableUnitPrice": "Unit Price",
+    "tableTax": "Tax",
+    "tableTotal": "Total",
+    "creditToBalance": "Credit to Balance",
+    "creditTooltip": "Credit will be used to pay off future payments",
+    "summaryTotal": "Total",
+    "summaryTax": "Tax",
+    "summaryAmountDue": "Amount due now",
+    "payButton": "Pay {amount}",
+    "previewFailed": "Failed to load preview. Please try again.",
+    "changeFailed": "Failed to change plan. Please try again.",
+    "changeSuccess": "Plan changed successfully",
+    "addonRequired": "Please select at least one add-on with quantity 1 or more."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Edit",
+    "sheetTitle": "Edit Payment Method",
+    "addPaymentMethod": "Add Payment Method",
+    "noPaymentMethods": "No eligible payment methods found.",
+    "confirmChanges": "Confirm Changes",
+    "updating": "Updating...",
+    "selectRequired": "Please select a payment method",
+    "loadFailed": "Failed to load payment methods. Please try again.",
+    "updateSuccess": "Payment method updated successfully",
+    "setupInitiated": "Payment method setup initiated",
+    "updateFailed": "Failed to update payment method. Please try again.",
+    "addFailed": "Failed to add new payment method. Please try again."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Remove payment method",
+    "dialogDescription": "Are you sure you want to remove this payment method? This action cannot be undone.",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "removing": "Removing...",
+    "removeAriaLabel": "Remove payment method",
+    "removeSuccess": "Payment method removed",
+    "removeFailed": "Failed to remove payment method"
+  },
+  "PaymentMethodsSection": {
+    "title": "Payment Methods",
+    "empty": "No payment methods added"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Add payment method",
+    "sheetTitle": "Add payment method",
+    "or": "OR",
+    "card": "Card",
+    "cardNumber": "Card number",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Expiry date",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "Security code",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "By providing your card information, you allow Lummi to charge your card for future payments in accordance with their terms."
+  },
+  "Orders": {
+    "billingHistory": "Billing History",
+    "emptyPage": "No purchases found on this page",
+    "emptyAll": "No purchases at the moment",
+    "noBillingHistory": "No billing history available",
+    "fetchFailed": "Failed to fetch product cart. Please try again."
+  },
+  "BillingHistoryColumns": {
+    "date": "Date",
+    "status": "Status",
+    "amount": "Amount",
+    "pricingType": "Pricing Type",
+    "entitlements": "Entitlements",
+    "invoice": "Invoice"
+  },
+  "OrderCard": {
+    "paymentId": "Payment ID",
+    "purchased": "Purchased",
+    "viewDetails": "View Details",
+    "hideDetails": "Hide Details",
+    "noProducts": "No products in this order.",
+    "fetchFailed": "Failed to fetch product details. Please try again."
+  },
+  "RefundsTable": {
+    "title": "Refund History",
+    "empty": "No refunds available"
+  },
+  "RefundColumns": {
+    "date": "Date",
+    "status": "Status",
+    "amount": "Amount",
+    "refundId": "Refund Id",
+    "associatedPayment": "Associated Payment"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "No invoices found on this page",
+    "emptyAll": "No invoices at the moment",
+    "paymentId": "Payment ID",
+    "date": "Date",
+    "amount": "Amount",
+    "status": "Status",
+    "download": "Download"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Invoice not available",
+    "downloadInvoice": "Download Invoice",
+    "invoice": "Invoice",
+    "generateInvoice": "Generate Invoice",
+    "fillDetailsTitle": "Enter full address of customer",
+    "existingAddressTitle": "Download with existing address details",
+    "existingAddressDescription": "This invoice will include only your zip code and country as provided during the checkout process.",
+    "fullAddressTitle": "Download with full address details",
+    "fullAddressDescription": "This invoice will include the complete address of the customer. Please ensure you fill in all the details before downloading.",
+    "fillDetails": "Fill Details"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Address line 1",
+    "state": "State",
+    "city": "City",
+    "postalCode": "Postal code",
+    "download": "Download",
+    "downloadSuccess": "Invoice downloaded successfully",
+    "updateFailed": "Failed to update invoice details. Please try again."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Digital Products",
+    "description": "Access your purchased digital products and downloads",
+    "accessExternal": "Access External Resource",
+    "instructions": "Instructions",
+    "loadFailed": "Failed to load digital products. Please try again."
+  },
+  "WalletsSection": {
+    "title": "Wallet",
+    "selectWallet": "Select wallet",
+    "walletLabel": "{currency} wallet",
+    "availableBalance": "Available balance",
+    "tableType": "Type",
+    "tableReason": "Reason",
+    "tableAmount": "Amount",
+    "noTransactions": "No transactions yet",
+    "credit": "Credit",
+    "debit": "Debit"
+  },
+  "CreditsSection": {
+    "title": "Credits",
+    "selectCredit": "Select credit entitlement",
+    "overageBalance": "Overage balance",
+    "availableCreditBalance": "Available credit balance",
+    "tableType": "Type",
+    "tableDescription": "Description",
+    "tableAmount": "Amount",
+    "noTransactions": "No transactions yet",
+    "credit": "Credit",
+    "debit": "Debit"
+  },
+  "UsageSummary": {
+    "emptyPage": "No usage history found on this page",
+    "emptyAll": "No usage history at the moment"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Billing History",
+    "refundHistory": "Refund History",
+    "usageSummary": "Usage Summary"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "License key",
+    "licenseKeysButton": "License Keys",
+    "licenseKeysTitle": "License Keys",
+    "migrateLicenseTitle": "Migrate - License Key",
+    "licenseKeyCardTitle": "License Key",
+    "clickToView": "Click to view license key",
+    "hideLicenseKey": "Hide license key",
+    "showLicenseKey": "Show license key",
+    "loadingLicenseKeys": "Loading license keys...",
+    "noLicenseKeys": "No license keys available.",
+    "expires": "Expires",
+    "attachmentsButton": "Attachments",
+    "attachmentButton": "Attachment",
+    "attachmentsTitle": "Your Digital Products",
+    "attachmentsDescription": "Access and download your available digital products and files here.",
+    "digitalProductsTitle": "Digital Products",
+    "digitalProductsDescription": "Download your digital products",
+    "noDigitalProducts": "No digital products available.",
+    "filesSection": "Files",
+    "externalLink": "External link",
+    "open": "Open",
+    "instructionsSection": "Instructions",
+    "loadFailed": "Failed to load digital products.",
+    "fetchCartFailed": "Failed to fetch product cart",
+    "fetchDigitalFailed": "Failed to fetch digital products"
+  },
+  "ProfilePage": {
+    "billingDetails": "Your billing details",
+    "name": "Name",
+    "email": "Email",
+    "walletsHeading": "Wallets",
+    "creditsHeading": "Credits"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "No wallets found",
+    "availableBalance": "Available balance",
+    "recentTransactions": "Recent Transactions",
+    "tableType": "Type",
+    "tableReason": "Reason",
+    "tableAmount": "Amount",
+    "emptyPage": "No transactions found on this page",
+    "emptyAll": "No transactions at the moment"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "No credits found",
+    "selectPlaceholder": "Select credit entitlement",
+    "overageBalance": "Overage balance",
+    "availableCreditBalance": "Available credit balance",
+    "recentTransactions": "Recent Transactions",
+    "tableType": "Type",
+    "tableDescription": "Description",
+    "tableAmount": "Amount",
+    "emptyPage": "No transactions found on this page",
+    "emptyAll": "No transactions at the moment"
   }
 }
