@@ -5,6 +5,7 @@ import { Wallet } from "@/components/session/profile/wallets";
 import { Credits } from "@/components/session/profile/credits";
 import { extractPaginationParams } from "@/lib/pagination-utils";
 import { SessionPageLayout } from "@/components/session/session-page-layout";
+import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export default async function ProfilePage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  const t = await getTranslations("ProfilePage");
   let user = null;
   let wallets = null;
   let creditEntitlements = null;
@@ -104,18 +106,18 @@ export default async function ProfilePage({
       <div className="flex flex-col gap-6">
         <div>
           <p className="text-text-primary text-lg font-medium mb-4">
-            Your billing details
+            {t("billingDetails")}
           </p>
           <Card className="p-6 flex flex-col gap-4">
             <CardContent className="flex flex-col md:flex-row gap-4 md:gap-8 p-0">
               <div className="flex flex-col gap-2 min-w-0">
-                <p className="text-text-secondary text-sm">Name</p>
+                <p className="text-text-secondary text-sm">{t("name")}</p>
                 <p className="text-text-primary text-sm break-words">
                   {user?.name}
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-w-0">
-                <p className="text-text-secondary text-sm">Email</p>
+                <p className="text-text-secondary text-sm">{t("email")}</p>
                 <p className="text-text-primary text-sm break-all">
                   {user?.email}
                 </p>
@@ -126,7 +128,7 @@ export default async function ProfilePage({
 
         {walletItems.length > 0 && (
           <div className="flex flex-col gap-4">
-            <p className="text-text-primary text-lg font-medium">Wallets</p>
+            <p className="text-text-primary text-lg font-medium">{t("walletsHeading")}</p>
             <Wallet
               wallets={walletItems}
               allWallets={allWallets}
@@ -144,7 +146,7 @@ export default async function ProfilePage({
 
         {entitlementItems.length > 0 && (
           <div className="flex flex-col gap-4">
-            <p className="text-text-primary text-lg font-medium">Credits</p>
+            <p className="text-text-primary text-lg font-medium">{t("creditsHeading")}</p>
             <Credits
               entitlements={entitlementItems}
               allEntitlements={allEntitlements}

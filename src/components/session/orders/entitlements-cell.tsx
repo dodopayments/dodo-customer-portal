@@ -29,6 +29,7 @@ import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { parseIsoDate } from "@/lib/date-helper";
 import Loading from "@/components/loading";
 import { FileText } from "@phosphor-icons/react";
+import { useTranslations } from "next-intl";
 
 interface EntitlementsCellProps {
     paymentId: string;
@@ -48,6 +49,7 @@ export const EntitlementsCell = ({
     const [digitalProducts, setDigitalProducts] = useState<DigitalProductResponse | null>(null);
     const [digitalProductsLoading, setDigitalProductsLoading] = useState(false);
     const [digitalProductsError, setDigitalProductsError] = useState<string | null>(null);
+    const t = useTranslations("Entitlements");
     const [visibleById, setVisibleById] = useState<Record<string, boolean>>({});
 
     const toggleVisibility = (id: string) =>
@@ -69,7 +71,7 @@ export const EntitlementsCell = ({
             setProductCart(safeCart);
             return safeCart;
         } catch (error) {
-            parseError(error, "Failed to fetch product cart");
+            parseError(error, t("fetchCartFailed"));
             setProductCart([]);
             return [];
         } finally {
@@ -120,11 +122,11 @@ export const EntitlementsCell = ({
                 setDigitalProducts(data.items[0]);
                 setDigitalProductsError(null);
             } else {
-                setDigitalProductsError("Failed to load digital products.");
+                setDigitalProductsError(t("loadFailed"));
             }
         } catch (error) {
-            parseError(error, "Failed to fetch digital products");
-            setDigitalProductsError("Failed to load digital products.");
+            parseError(error, t("fetchDigitalFailed"));
+            setDigitalProductsError(t("loadFailed"));
         } finally {
             setDigitalProductsLoading(false);
         }
@@ -165,19 +167,19 @@ export const EntitlementsCell = ({
                             className="h-auto py-1.5 px-3 text-xs"
                         >
                             <KeyRound className="w-3.5 h-3.5" />
-                            License key
+                            {t("licenseKeyButton")}
                         </Button>
                     </SheetTrigger>
                     <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
                         <SheetHeader>
-                            <SheetTitle>License Keys</SheetTitle>
+                            <SheetTitle>{t("licenseKeysTitle")}</SheetTitle>
                         </SheetHeader>
                         <Separator className="my-4" />
                         {productCartLoading ? (
                             <div className="flex items-center justify-center py-8">
                                 <div className="flex items-center space-x-2">
                                     <Loader2 className="w-6 h-6 animate-spin" />
-                                    <span className="text-sm text-text-secondary">Loading license keys...</span>
+                                    <span className="text-sm text-text-secondary">{t("loadingLicenseKeys")}</span>
                                 </div>
                             </div>
                         ) : allLicenseKeys.length > 0 ? (
@@ -187,7 +189,7 @@ export const EntitlementsCell = ({
                                     return (
                                         <Card key={licenseKey.id} className="p-4">
                                             <CardHeader className="p-0 pb-3">
-                                                <CardTitle className="text-base">License Key</CardTitle>
+                                                <CardTitle className="text-base">{t("licenseKeyCardTitle")}</CardTitle>
                                             </CardHeader>
                                             <CardContent className="p-0">
                                                 <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
@@ -198,7 +200,7 @@ export const EntitlementsCell = ({
                                                             </span>
                                                         ) : (
                                                             <span className="italic">
-                                                                Click to view license key
+                                                                {t("clickToView")}
                                                             </span>
                                                         )}
                                                     </p>
@@ -207,7 +209,7 @@ export const EntitlementsCell = ({
                                                         size="icon"
                                                         className="text-text-secondary"
                                                         onClick={() => toggleVisibility(licenseKey.id)}
-                                                        aria-label={isVisible ? "Hide license key" : "Show license key"}
+                                                        aria-label={isVisible ? t("hideLicenseKey") : t("showLicenseKey")}
                                                     >
                                                         {isVisible ? (
                                                             <EyeOff className="w-5 h-5" />
@@ -224,7 +226,7 @@ export const EntitlementsCell = ({
                                                     {getBadge(licenseKey.status, false, true).message}
                                                 </Badge>
                                                 <p className="text-sm text-text-secondary">
-                                                    Expires {parseIsoDate(licenseKey.expires_at)}
+                                                    {t("expires")} {parseIsoDate(licenseKey.expires_at)}
                                                 </p>
                                             </CardFooter>
                                         </Card>
@@ -232,7 +234,7 @@ export const EntitlementsCell = ({
                                 })}
                             </div>
                         ) : (
-                            <p className="text-sm text-text-secondary">No license keys available.</p>
+                            <p className="text-sm text-text-secondary">{t("noLicenseKeys")}</p>
                         )}
                     </SheetContent>
                 </Sheet>
@@ -247,14 +249,14 @@ export const EntitlementsCell = ({
                             className="h-auto py-1.5 px-3 text-xs"
                         >
                             <FileText className="w-3.5 h-3.5" />
-                            Attachment
+                            {t("attachmentButton")}
                         </Button>
                     </SheetTrigger>
                     <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
                         <SheetHeader>
-                            <SheetTitle>Digital Products</SheetTitle>
+                            <SheetTitle>{t("digitalProductsTitle")}</SheetTitle>
                             <SheetDescription>
-                                Download your digital products
+                                {t("digitalProductsDescription")}
                             </SheetDescription>
                         </SheetHeader>
                         <Separator className="mt-4" />
@@ -277,7 +279,7 @@ export const EntitlementsCell = ({
                                     if (!digitalProducts || (!hasFiles && !externalUrl && !instructions)) {
                                         return (
                                             <p className="text-sm text-text-secondary">
-                                                No digital products available.
+                                                {t("noDigitalProducts")}
                                             </p>
                                         );
                                     }
@@ -286,7 +288,7 @@ export const EntitlementsCell = ({
                                         <div className="space-y-6">
                                             {hasFiles && (
                                                 <div>
-                                                    <h4 className="font-medium mb-2">Files</h4>
+                                                    <h4 className="font-medium mb-2">{t("filesSection")}</h4>
                                                     <div className="space-y-2">
                                                         {files.map((file) => (
                                                             <div
@@ -312,19 +314,19 @@ export const EntitlementsCell = ({
 
                                             {externalUrl && (
                                                 <div>
-                                                    <h4 className="font-medium mb-2">External link</h4>
+                                                    <h4 className="font-medium mb-2">{t("externalLink")}</h4>
                                                     <Button
                                                         variant="secondary"
                                                         onClick={() => window.open(externalUrl, "_blank")}
                                                     >
-                                                        Open
+                                                        {t("open")}
                                                     </Button>
                                                 </div>
                                             )}
 
                                             {instructions && (
                                                 <div>
-                                                    <h4 className="font-medium mb-2">Instructions</h4>
+                                                    <h4 className="font-medium mb-2">{t("instructionsSection")}</h4>
                                                     <p className="text-sm text-text-secondary whitespace-pre-line">
                                                         {instructions}
                                                     </p>

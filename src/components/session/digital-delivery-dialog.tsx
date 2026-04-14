@@ -30,6 +30,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { getToken } from "@/lib/server-actions";
 import parseError from "@/lib/clientErrorHelper";
+import { useTranslations } from "next-intl";
 
 interface DigitalDeliveryDialogProps {
   payment_id: string;
@@ -38,6 +39,7 @@ interface DigitalDeliveryDialogProps {
 export function DigitalDeliveryDialog({
   payment_id,
 }: DigitalDeliveryDialogProps) {
+  const t = useTranslations("DigitalDeliveryDialog");
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState<DigitalProductResponse[]>([]);
   const [isPreloading, setIsPreloading] = useState(false);
@@ -79,7 +81,7 @@ export function DigitalDeliveryDialog({
         setProducts(data.items || []);
         setOpen(true);
       } catch (error) {
-        parseError(error, "Failed to load digital products. Please try again.");
+        parseError(error, t("loadFailed"));
       } finally {
         setIsPreloading(false);
       }
@@ -97,10 +99,8 @@ export function DigitalDeliveryDialog({
       </DialogTrigger>
       <DialogContent className="max-w-[95vw] rounded-lg sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Digital Products</DialogTitle>
-          <DialogDescription>
-            Access your purchased digital products and downloads
-          </DialogDescription>
+          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         <ScrollArea className="max-h-[60vh] pr-4">
           <div className="space-y-6">
@@ -151,14 +151,14 @@ export function DigitalDeliveryDialog({
                       rel="noopener noreferrer"
                     >
                       <LinkIcon className="w-4 h-4 mr-2" />
-                      Access External Resource
+                      {t("accessExternal")}
                     </a>
                   </Button>
                 )}
 
                 {product.deliverable.instructions && (
                   <div className="text-sm text-text-tertiary bg-bg-secondary p-3 rounded-md">
-                    <p className="font-medium mb-1">Instructions:</p>
+                    <p className="font-medium mb-1">{t("instructions")}:</p>
                     <p>{product.deliverable.instructions}</p>
                   </div>
                 )}

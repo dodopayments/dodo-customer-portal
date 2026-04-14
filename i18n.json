@@ -1,0 +1,18 @@
+{
+  "version": 1.8,
+  "locale": {
+    "source": "en",
+    "targets": ["ar", "ca", "zh", "de", "es", "fr", "he", "id", "it", "ja", "ko", "ms", "nl", "pl", "pt", "ro", "ru", "sv", "th", "tr"]
+  },
+  "buckets": {
+    "json": {
+      "include": ["messages/[locale].json"]
+    }
+  },
+  "provider": {
+    "id": "openai",
+    "model": "gpt-5.2-2025-12-11",
+    "prompt": "Act as a professional software localization expert. Translate each key from {source} to {target}. Preserve ICU message format placeholders like {name} and {{count}}. Maintain Markdown formatting including links and code blocks. Match the tone and formality of the source text. Technical terms that are typically untranslated in the industry should remain in English."
+  },
+  "$schema": "https://lingo.dev/schema/i18n.json"
+}

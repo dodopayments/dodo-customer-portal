@@ -25,6 +25,7 @@ import {
 import { useTheme } from "next-themes";
 import { usePathname, useRouter } from "next/navigation";
 import type { UserResponse } from "@/app/session/profile/types";
+import { useTranslations } from "next-intl";
 
 interface SessionHeaderProps {
   showBusinessSwitcher?: boolean;
@@ -33,9 +34,9 @@ interface SessionHeaderProps {
 interface BusinessIdentityProps {
   showBusinessSwitcher: boolean;
 }
-function BusinessIdentity({
-  showBusinessSwitcher,
-}: BusinessIdentityProps) {
+
+function BusinessIdentity({ showBusinessSwitcher }: BusinessIdentityProps) {
+  const t = useTranslations("SessionHeader");
   const router = useRouter();
   const { business, hasBusinessToken } = useBusiness();
   const [isBusinessMenuOpen, setIsBusinessMenuOpen] = useState(false);
@@ -91,7 +92,7 @@ function BusinessIdentity({
           onClick={() => router.push("/businesses")}
           className="cursor-pointer py-3"
         >
-          View all businesses
+          {t("viewAllBusinesses")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -101,6 +102,7 @@ function BusinessIdentity({
 export function SessionHeader({
   showBusinessSwitcher = false,
 }: SessionHeaderProps) {
+  const t = useTranslations("SessionHeader");
   const { business } = useBusiness();
   const { handleLogout, isLoggingOut } = useLogout();
   const { setTheme, resolvedTheme } = useTheme();
@@ -182,16 +184,14 @@ export function SessionHeader({
               variant="ghost"
               size="icon"
               onClick={handleMobileBack}
-              aria-label={isOverview ? "Go back to business" : "Go to overview"}
+              aria-label={isOverview ? t("goBackToBusiness") : t("goToOverview")}
               className="lg:hidden w-9 h-9"
             >
               <ArrowLeft className="w-4 h-4" />
             </Button>
           )}
 
-          <BusinessIdentity
-            showBusinessSwitcher={showBusinessSwitcher}
-          />
+          <BusinessIdentity showBusinessSwitcher={showBusinessSwitcher} />
         </div>
 
         <DropdownMenu>
@@ -221,12 +221,12 @@ export function SessionHeader({
                 {mounted && isDark ? (
                   <>
                     <Sun className="w-4 h-4 mr-2" />
-                    Switch to light mode
+                    {t("switchToLightMode")}
                   </>
                 ) : (
                   <>
                     <Moon className="w-4 h-4 mr-2" />
-                    Switch to dark mode
+                    {t("switchToDarkMode")}
                   </>
                 )}
               </DropdownMenuItem>
@@ -238,7 +238,7 @@ export function SessionHeader({
               className="cursor-pointer py-3"
             >
               <LogOut className="w-4 h-4 mr-2" />
-              {isLoggingOut ? "Logging out..." : "Log Out"}
+              {isLoggingOut ? t("loggingOut") : t("logOut")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

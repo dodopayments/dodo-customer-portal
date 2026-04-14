@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { z } from "zod";
 
@@ -28,13 +28,7 @@ import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
 import parseError from "@/lib/clientErrorHelper";
-
-const emailSchema = z.object({
-  email: z
-    .string()
-    .email("Please enter a valid email address")
-    .min(1, "Email is required"),
-});
+import { useTranslations } from "next-intl";
 
 export interface LoginBusiness {
   name: string;
@@ -49,27 +43,28 @@ const MagicLinkStatus = ({
   email: string;
   business: LoginBusiness;
   setSuccess: (success: boolean) => void;
-}) => (
-  <CardHeader className="flex px-7 pb-4 pt-12 flex-col items-center gap-2">
-    <Avatar className="mb-6">
-      <AvatarImage src={business.image || undefined} />
-      <AvatarFallback name={business.name} />
-    </Avatar>
-    <CardTitle>Almost there!</CardTitle>
-    <CardDescription className="text-center">
-      Access link sent to email{" "}
-      <span className="text-text-primary">{email}</span>. Make sure you check
-      your spam folder!
-    </CardDescription>
-    <Button
-      variant={"secondary"}
-      className="w-full mt-4"
-      onClick={() => setSuccess(false)}
-    >
-      Go back
-    </Button>
-  </CardHeader>
-);
+}) => {
+  const t = useTranslations("LoginForm");
+  return (
+    <CardHeader className="flex px-7 pb-4 pt-12 flex-col items-center gap-2">
+      <Avatar className="mb-6">
+        <AvatarImage src={business.image || undefined} />
+        <AvatarFallback name={business.name} />
+      </Avatar>
+      <CardTitle>{t("successTitle")}</CardTitle>
+      <CardDescription className="text-center">
+        {t("successDescription", { email })}
+      </CardDescription>
+      <Button
+        variant={"secondary"}
+        className="w-full mt-4"
+        onClick={() => setSuccess(false)}
+      >
+        {t("goBack")}
+      </Button>
+    </CardHeader>
+  );
+};
 
 export const LoginForm = ({
   className,
@@ -78,6 +73,18 @@ export const LoginForm = ({
   className?: string;
   initialBusiness: LoginBusiness | null;
 }) => {
+  const t = useTranslations("LoginForm");
+  const emailSchema = useMemo(
+    () =>
+      z.object({
+        email: z
+          .string()
+          .email(t("emailInvalid"))
+          .min(1, t("emailRequired")),
+      }),
+    [t]
+  );
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const params = useParams();
@@ -131,10 +138,10 @@ export const LoginForm = ({
         }
       );
 
-      toast.success("Login link sent to email");
+      toast.success(t("loginLinkSent"));
       setSuccess(true);
     } catch (error) {
-      parseError(error, "Failed to send login link. Please try again.");
+      parseError(error, t("loginLinkFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -150,20 +157,20 @@ export const LoginForm = ({
               <AvatarFallback name={business.name} />
             </Avatar>
             <CardTitle className="text-center text-[22px]">
-              {business.name}&apos;s Billing portal
+              {t("billingPortalTitle", { businessName: business.name })}
             </CardTitle>
             <CardDescription className="text-center text-[14px]">
-              Enter your email to receive the access link
+              {t("enterEmailDescription")}
             </CardDescription>
           </CardHeader>
           <CardContent className=" px-4 sm:px-8  py-8 pt-5 pb-12">
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("emailLabel")}</Label>
                 <Input
                   id="email"
                   type="text"
-                  placeholder="Enter your email"
+                  placeholder={t("emailPlaceholder")}
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -203,7 +210,7 @@ export const LoginForm = ({
                 type="submit"
                 disabled={isLoading || !!turnstileState.error}
               >
-                {isLoading ? "Sending..." : "Get Access Link"}
+                {isLoading ? t("sending") : t("getAccessLink")}
               </Button>
             </form>
           </CardContent>

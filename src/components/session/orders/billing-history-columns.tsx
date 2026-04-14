@@ -10,11 +10,14 @@ import { EntitlementsCell } from "./entitlements-cell";
 import { TimeTooltip } from "@/components/custom/time-tooltip";
 import { CurrencyCode, decodeCurrency, formatCurrency } from "@/lib/currency-helper";
 
-export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
+type TFunction = (key: string) => string;
+
+export function getBillingHistoryColumns(t: TFunction): ColumnDef<OrderData>[] {
+  return [
     {
         id: "date",
         accessorKey: "created_at",
-        header: "Date",
+        header: t("date"),
         cell: ({ row }) => {
             return (
                 <TimeTooltip
@@ -28,7 +31,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
     {
         id: "status",
         accessorKey: "status",
-        header: "Status",
+        header: t("status"),
         cell: ({ row }) => {
             const badge = getBadge(row.original.status);
             return (
@@ -45,7 +48,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
     {
         id: "amount",
         accessorKey: "total_amount",
-        header: "Amount",
+        header: t("amount"),
         cell: ({ row }) => {
             const currency = row.original.currency as CurrencyCode;
             const formatted = formatCurrency(
@@ -58,7 +61,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
     {
         id: "pricing-type",
         accessorKey: "subscription_id",
-        header: "Pricing Type",
+        header: t("pricingType"),
         cell: ({ row }) => {
             const pricingType = row.original.subscription_id
                 ? "Subscription"
@@ -79,7 +82,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
     {
         id: "entitlements",
         accessorKey: "digital_products_delivered",
-        header: "Entitlements",
+        header: t("entitlements"),
         cell: ({ row }) => {
             return (
                 <EntitlementsCell
@@ -92,7 +95,7 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
     },
     {
         id: "invoice",
-        header: () => <div className="text-right">Invoice</div>,
+        header: () => <div className="text-right">{t("invoice")}</div>,
         cell: ({ row }) => {
             const invoiceAvailable = row.original.total_amount > 0;
             return (
@@ -107,4 +110,5 @@ export const BillingHistoryColumns: ColumnDef<OrderData>[] = [
             );
         },
     },
-];
+  ];
+}

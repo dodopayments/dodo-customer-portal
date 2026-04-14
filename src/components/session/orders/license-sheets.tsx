@@ -20,6 +20,7 @@ import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { parseIsoDate } from "@/lib/date-helper";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface LicenseSheetsProps {
   isLicenseSheetOpen: boolean;
@@ -32,6 +33,7 @@ export const LicenseSheets = ({
   setIsLicenseSheetOpen,
   licenseKeys,
 }: LicenseSheetsProps) => {
+  const t = useTranslations("Entitlements");
   const [visibleById, setVisibleById] = useState<Record<string, boolean>>({});
 
   const toggleVisibility = (id: string) =>
@@ -42,12 +44,12 @@ export const LicenseSheets = ({
       <Sheet open={isLicenseSheetOpen} onOpenChange={setIsLicenseSheetOpen}>
         <SheetTrigger asChild>
           <Button variant="secondary" className="w-fit">
-            License Keys
+            {t("licenseKeysButton")}
           </Button>
         </SheetTrigger>
         <SheetContent className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6" floating side="right">
           <SheetHeader>
-            <SheetTitle>Migrate - License Key</SheetTitle>
+            <SheetTitle>{t("migrateLicenseTitle")}</SheetTitle>
           </SheetHeader>
           <Separator className="my-4" />
           {licenseKeys.map((licenseKey: LicenseKeyResponse) => {
@@ -55,7 +57,7 @@ export const LicenseSheets = ({
             return (
               <Card key={licenseKey.id} className="p-4">
                 <CardHeader className="p-0 pb-3">
-                  <CardTitle className="text-base">License Key</CardTitle>
+                  <CardTitle className="text-base">{t("licenseKeyCardTitle")}</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
@@ -66,7 +68,7 @@ export const LicenseSheets = ({
                         </span>
                       ) : (
                         <span className="italic">
-                          Click to view license key
+                          {t("clickToView")}
                         </span>
                       )}
                     </p>
@@ -76,7 +78,7 @@ export const LicenseSheets = ({
                       className="text-text-secondary"
                       onClick={() => toggleVisibility(licenseKey.id)}
                       aria-label={
-                        isVisible ? "Hide license key" : "Show license key"
+                        isVisible ? t("hideLicenseKey") : t("showLicenseKey")
                       }
                     >
                       {isVisible ? (
@@ -97,7 +99,7 @@ export const LicenseSheets = ({
                     {getBadge(licenseKey.status, false, true).message}
                   </Badge>
                   <p className="text-sm text-text-secondary">
-                    Expires {parseIsoDate(licenseKey.expires_at)}
+                    {t("expires")} {parseIsoDate(licenseKey.expires_at)}
                   </p>
                 </CardFooter>
               </Card>

@@ -26,6 +26,7 @@ import type {
   ProductCollectionProduct,
 } from "@/app/session/subscriptions/[id]/types";
 import type { AddOn } from "@/app/session/subscriptions/[id]/types";
+import { useTranslations } from "next-intl";
 
 const asCurrencyCode = (
   currency: string | null | undefined,
@@ -130,6 +131,7 @@ export function ChangePlanSheet({
   productCollection,
   allowMultipleSubscriptions = true,
 }: ChangePlanSheetProps) {
+  const t = useTranslations("ChangePlanSheet");
   const [open, setOpen] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>("select");
   const [selectedPlan, setSelectedPlan] = useState<string>(
@@ -268,7 +270,7 @@ export function ChangePlanSheet({
                           </Badge>
                           {isCurrent && (
                             <Badge variant="green" type="default">
-                              Current plan
+                              {t("currentPlan")}
                             </Badge>
                           )}
                         </div>
@@ -315,7 +317,7 @@ export function ChangePlanSheet({
         onClick={handleProceed}
         disabled={!selectedPlan || selectedPlan === currentProductId}
       >
-        Proceed
+        {t("proceed")}
       </Button>
     </div>
   );
@@ -323,7 +325,7 @@ export function ChangePlanSheet({
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
-        <Button variant="secondary">Change Plan</Button>
+        <Button variant="secondary">{t("trigger")}</Button>
       </SheetTrigger>
       <SheetContent
         side="right"
@@ -333,13 +335,13 @@ export function ChangePlanSheet({
         {currentView === "select" ? (
           <div className="flex flex-col h-full min-h-0">
             <SheetHeader className="border-b border-border-secondary p-4 flex-shrink-0">
-              <SheetTitle className="mr-auto">Select a new plan</SheetTitle>
+              <SheetTitle className="mr-auto">{t("sheetTitle")}</SheetTitle>
             </SheetHeader>
             <ScrollArea className="flex-1 min-h-0">
               <div className="p-4 flex flex-col gap-4">
                 {availableGroups.length === 0 ? (
                   <p className="text-text-secondary text-sm">
-                    No subscription products available.
+                    {t("noProducts")}
                   </p>
                 ) : availableGroups.length === 1 ? (
                   renderGroupProducts(availableGroups[0])

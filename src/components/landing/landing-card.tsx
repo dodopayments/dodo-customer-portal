@@ -31,6 +31,7 @@ import {
   validateTurnstileToken,
 } from "@/lib/turnstile";
 import parseError from "@/lib/clientErrorHelper";
+import { useTranslations } from "next-intl";
 
 interface Action {
   name: string;
@@ -38,28 +39,16 @@ interface Action {
 }
 
 export const LandingCard = ({ className }: { className?: string }) => {
+  const t = useTranslations("LandingCard");
+
   const actions: Action[] = [
-    {
-      name: "Change Payment Method",
-      icon: <CreditCard />,
-    },
-    {
-      name: "Cancel subscription",
-      icon: <ReceiptX />,
-    },
-    {
-      name: "Download invoices",
-      icon: <DownloadSimple />,
-    },
-    {
-      name: "View orders processed through Dodo Payments",
-      icon: <Eye />,
-    },
-    {
-      name: "Other queries",
-      icon: <Question />,
-    },
+    { name: t("actions.changePaymentMethod"), icon: <CreditCard /> },
+    { name: t("actions.cancelSubscription"), icon: <ReceiptX /> },
+    { name: t("actions.downloadInvoices"), icon: <DownloadSimple /> },
+    { name: t("actions.viewOrders"), icon: <Eye /> },
+    { name: t("actions.otherQueries"), icon: <Question /> },
   ];
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -76,7 +65,6 @@ export const LandingCard = ({ className }: { className?: string }) => {
   );
 
   const handleEmailSubmit = async () => {
-    // First click reveals the form; subsequent clicks attempt submission
     if (!isFormVisible) {
       setIsFormVisible(true);
       return;
@@ -84,7 +72,7 @@ export const LandingCard = ({ className }: { className?: string }) => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setEmailError("Invalid email address");
+      setEmailError(t("emailInvalid"));
       return;
     }
     setEmailError("");
@@ -104,10 +92,10 @@ export const LandingCard = ({ className }: { className?: string }) => {
       if (response.status === 200) {
         setIsDone(true);
       } else {
-        setEmailError("Failed to send login link. Please try again.");
+        setEmailError(t("emailFailed"));
       }
     } catch (error) {
-      parseError(error, "Failed to send login link. Please try again.");
+      parseError(error, t("emailFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -118,9 +106,7 @@ export const LandingCard = ({ className }: { className?: string }) => {
       <Card className="max-w-2xl p-2">
         <CardHeader className="pb-6">
           {!isDone && (
-            <CardTitle className="text-lg sm:text-xl">
-              What can we help you with today?
-            </CardTitle>
+            <CardTitle className="text-lg sm:text-xl">{t("heading")}</CardTitle>
           )}
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
@@ -128,9 +114,7 @@ export const LandingCard = ({ className }: { className?: string }) => {
             <>
               <div className="flex flex-col gap-4 rounded-lg border border-border-secondary p-3 sm:p-4">
                 <div className="border-b border-border-secondary pb-4">
-                  <p className="text-sm sm:text-base">
-                    You can do the following actions:
-                  </p>
+                  <p className="text-sm sm:text-base">{t("actionsIntro")}</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 flex-wrap">
                   {actions.map((action) => (
@@ -147,10 +131,10 @@ export const LandingCard = ({ className }: { className?: string }) => {
               {isFormVisible && (
                 <>
                   <div className="flex flex-col gap-2">
-                    <Label>Email</Label>
+                    <Label>{t("emailLabel")}</Label>
                     <Input
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder={t("emailPlaceholder")}
                       className="w-full"
                       value={email}
                       onChange={(e) => {
@@ -194,17 +178,15 @@ export const LandingCard = ({ className }: { className?: string }) => {
           )}
           {isDone && (
             <div className="flex flex-col gap-4 items-center justify-center">
-              {/* email icon */}
               <div className="w-10 h-10 bg-bg-secondary rounded-full flex items-center justify-center text-text-primary">
                 <Envelope />
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-text-primary text-lg font-semibold text-center">
-                  We&apos;ve sent you an email!
+                  {t("sentTitle")}
                 </h3>
                 <p className="text-text-secondary text-sm text-center max-w-xs">
-                  Use the link in the email to login to the Dodo Payments self
-                  serve portal
+                  {t("sentDescription")}
                 </p>
               </div>
             </div>
@@ -219,9 +201,9 @@ export const LandingCard = ({ className }: { className?: string }) => {
             >
               {isFormVisible
                 ? isLoading
-                  ? "Sending..."
-                  : "Send email"
-                : "Look up my purchase"}
+                  ? t("sending")
+                  : t("sendEmail")
+                : t("lookUpPurchase")}
             </Button>
           )}
         </CardFooter>

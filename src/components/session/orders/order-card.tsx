@@ -24,6 +24,7 @@ import { getProductCart } from "@/app/session/orders/actions";
 import { Product, ProductCartItem } from "../product";
 import parseError from "@/lib/clientErrorHelper";
 import InvoiceDownloadSheet from "../invoice-download-sheet";
+import { useTranslations } from "next-intl";
 
 interface OrderCardProps {
   item: OrderData;
@@ -31,6 +32,7 @@ interface OrderCardProps {
 }
 
 export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
+  const t = useTranslations("OrderCard");
   const [loading, setLoading] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [productCart, setProductCart] = useState<ProductCartItem[]>([]);
@@ -41,7 +43,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
       const productCart = await getProductCart(item.payment_id);
       setProductCart(productCart);
     } catch (error) {
-      parseError(error, "Failed to fetch product cart. Please try again.");
+      parseError(error, t("fetchFailed"));
     }
   };
 
@@ -64,7 +66,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
       <CardContent className="flex flex-col px-0 gap-2">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 w-full">
           <div className="flex flex-col gap-2 min-w-0">
-            <p className="text-sm text-text-secondary">Payment ID</p>
+            <p className="text-sm text-text-secondary">{t("paymentId")}</p>
             <CardTitle className="font-display font-semibold text-base leading-5 break-all">
               {item.payment_id}
             </CardTitle>
@@ -87,7 +89,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             {getBadge(item.status).message}
           </Badge>
           <p className="text-sm text-text-secondary">
-            Purchased: {parseIsoDate(item.created_at)}
+            {t("purchased")}: {parseIsoDate(item.created_at)}
           </p>
         </div>
         <div
@@ -105,7 +107,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             onClick={onToggleDetails}
             loading={loading}
           >
-            {showDetails ? "Hide Details" : "View Details"}
+            {showDetails ? t("hideDetails") : t("viewDetails")}
           </Button>
         </div>
       </CardFooter>
@@ -123,7 +125,7 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             ))}
           {productCart.length === 0 && (
             <p className="text-sm text-text-secondary">
-              No products in this order.
+              {t("noProducts")}
             </p>
           )}
         </CollapsibleContent>

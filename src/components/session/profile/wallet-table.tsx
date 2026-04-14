@@ -11,6 +11,7 @@ import {
 } from "@/lib/currency-helper";
 import ServerPagination from "@/components/common/server-pagination";
 import { CircleSlash } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function WalletTable({
   walletLedger,
@@ -29,11 +30,13 @@ export function WalletTable({
   baseUrl: string;
   pageParamKey?: string;
 }) {
+  const t = useTranslations("ProfileWallet");
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const WalletColumn: ColumnDef<any>[] = [
+  const WalletColumn: ColumnDef<any>[] = useMemo(() => [
     {
       accessorKey: "event_type",
-      header: "Type",
+      header: t("tableType"),
       cell: ({ row }) => {
         const eventType = row.original.event_type;
         return (
@@ -45,7 +48,7 @@ export function WalletTable({
     },
     {
       accessorKey: "description",
-      header: "Reason",
+      header: t("tableReason"),
       cell: ({ row }) => {
         const description = row.original.reason || row.original.description;
         return (
@@ -57,7 +60,7 @@ export function WalletTable({
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("tableAmount"),
       cell: ({ row }) => {
         const amount = row.original.amount;
         const currency = row.original.currency as CurrencyCode;
@@ -69,17 +72,15 @@ export function WalletTable({
         );
       },
     },
-  ];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ], [t]);
 
   const data = useMemo(() => {
     return walletLedger;
   }, [walletLedger]);
 
   const isEmpty = walletLedger.length === 0;
-  const emptyMessage =
-    currentPage > 0
-      ? "No transactions found on this page"
-      : "No transactions at the moment";
+  const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyAll");
 
   return (
     <div className="flex flex-col gap-4">

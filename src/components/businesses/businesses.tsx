@@ -5,6 +5,7 @@ import ServerPagination from "@/components/common/server-pagination";
 import { BusinessCard } from "./business-card";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export interface BusinessData {
   business_id: string;
@@ -33,19 +34,18 @@ export const Businesses = ({
   baseUrl,
   pageParamKey,
 }: ItemCardProps) => {
+  const t = useTranslations("Businesses");
   const [searchTerm, setSearchTerm] = useState("");
   const isEmpty = businessData.length === 0;
   const emptyMessage =
-    currentPage > 0
-      ? "No businesses found on this page"
-      : "No businesses found";
+    currentPage > 0 ? t("emptyPage") : t("emptyAll");
 
   return (
     <div className="flex flex-col gap-4 mt-4">
       <div className="flex flex-col gap-4 mb-4">
         <Input
           type="text"
-          placeholder="Search businesses"
+          placeholder={t("searchPlaceholder")}
           className="w-full"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

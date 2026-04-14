@@ -21,10 +21,12 @@ import {
   formatCardNumber,
   formatExpiryDate,
   unformatCardNumber,
-  // parseExpiryDate, 
+  // parseExpiryDate,
 } from "@/lib/payment-helper";
+import { useTranslations } from "next-intl";
 
 export function AddPaymentMethodSheet() {
+  const t = useTranslations("AddPaymentMethodSheet");
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<
     "card" | "gpay" | "applepay" | "affirm" | "klarna"
@@ -96,13 +98,13 @@ export function AddPaymentMethodSheet() {
         className="my-auto"
         onClick={() => setOpen(true)}
       >
-        Add payment method
+        {t("trigger")}
       </Button>
       <SheetContent className="flex flex-col gap-4 border-border-secondary rounded-xl border m-6" side="right"
         floating>
         <SheetHeader>
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
-            Add payment method
+            {t("sheetTitle")}
           </SheetTitle>
         </SheetHeader>
         <Separator className="my-3" />
@@ -137,7 +139,7 @@ export function AddPaymentMethodSheet() {
               }}
             >
               <CreditCard className="w-4 h-4 text-text-secondary my-auto" />
-              <span className="text-sm font-medium">Card</span>
+              <span className="text-sm font-medium">{t("card")}</span>
             </Card>
             <Card
               className={cn(
@@ -191,7 +193,7 @@ export function AddPaymentMethodSheet() {
           {selected === "card" && (
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <Label htmlFor="card-number">Card number</Label>
+                <Label htmlFor="card-number">{t("cardNumber")}</Label>
                 <Input
                   type="text"
                   id="card-number"
@@ -204,7 +206,7 @@ export function AddPaymentMethodSheet() {
               </div>
               <div className="flex flex-row gap-3">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="expiry-date">Expiry date</Label>
+                  <Label htmlFor="expiry-date">{t("expiryDate")}</Label>
                   <Input
                     type="text"
                     id="expiry-date"
@@ -216,7 +218,7 @@ export function AddPaymentMethodSheet() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="security-code">Security code</Label>
+                  <Label htmlFor="security-code">{t("securityCode")}</Label>
                   <Input
                     type="text"
                     id="security-code"
@@ -228,8 +230,7 @@ export function AddPaymentMethodSheet() {
                 </div>
               </div>
               <p className="text-sm text-text-secondary">
-                By providing your card information, you allow Lummi to charge
-                your card for future payments in accordance with their terms.
+                {t("cardTerms")}
               </p>
               <Separator className="my-3" />
             </div>

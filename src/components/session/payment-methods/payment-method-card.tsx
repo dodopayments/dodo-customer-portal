@@ -23,12 +23,14 @@ import {
   getPaymentMethodDisplayName,
 } from "./payment-method-logo";
 import { deletePaymentMethod } from "@/app/session/payment-methods/action";
+import { useTranslations } from "next-intl";
 
 interface PaymentMethodCardProps {
   paymentMethod: PaymentMethodItem;
 }
 
 export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
+  const t = useTranslations("PaymentMethodCard");
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
@@ -47,11 +49,11 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
     setIsDeleting(true);
     try {
       await deletePaymentMethod(paymentMethod.payment_method_id);
-      toast.success("Payment method removed");
+      toast.success(t("removeSuccess"));
       setOpen(false);
       router.refresh();
     } catch (error) {
-      parseError(error, "Failed to remove payment method");
+      parseError(error, t("removeFailed"));
       setOpen(false);
     } finally {
       setIsDeleting(false);
@@ -112,8 +114,8 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
               variant="ghost"
               size="icon"
               onClick={() => setOpen(true)}
-              aria-label="Remove payment method"
-              title="Remove payment method"
+              aria-label={t("removeAriaLabel")}
+              title={t("removeAriaLabel")}
               className="flex-shrink-0 h-7 w-7 text-text-tertiary hover:text-text-primary hover:bg-transparent"
             >
               <X className="h-4 w-4" />
@@ -125,16 +127,13 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle>Remove payment method</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to remove this payment method? This action
-              cannot be undone.
-            </DialogDescription>
+            <DialogTitle>{t("dialogTitle")}</DialogTitle>
+            <DialogDescription>{t("dialogDescription")}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="outline" disabled={isDeleting}>
-                Cancel
+                {t("cancel")}
               </Button>
             </DialogClose>
             <Button
@@ -142,7 +141,7 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
               onClick={handleDelete}
               disabled={isDeleting}
             >
-              {isDeleting ? "Removing..." : "Remove"}
+              {isDeleting ? t("removing") : t("remove")}
             </Button>
           </DialogFooter>
         </DialogContent>

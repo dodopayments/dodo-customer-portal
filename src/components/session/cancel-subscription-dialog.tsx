@@ -12,6 +12,7 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 
 interface CancelSubscriptionDialogProps {
   open: boolean;
@@ -24,6 +25,7 @@ export function CancelSubscriptionDialog({
   onOpenChange,
   onConfirm,
 }: CancelSubscriptionDialogProps) {
+  const t = useTranslations("CancelSubscriptionDialog");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCancelSubscription = async () => {
@@ -43,14 +45,8 @@ export function CancelSubscriptionDialog({
             <div className="bg-bg-error-secondary p-3 w-fit h-fit rounded-full text-border-error dark:text-[#FECDCA]">
               <Warning className="w-6 h-6" />
             </div>
-            <DialogTitle className="pt-4">
-              Are you certain you want to cancel your subscription to this
-              service?
-            </DialogTitle>
-            <DialogDescription>
-              Once you proceed, you will lose access to all associated benefits
-              and this action cannot be reversed.
-            </DialogDescription>
+            <DialogTitle className="pt-4">{t("title")}</DialogTitle>
+            <DialogDescription>{t("description")}</DialogDescription>
           </DialogHeader>
           <DialogFooter className="gap-2 flex flex-row pt-4 w-full sm:gap-0">
             <Button
@@ -58,7 +54,7 @@ export function CancelSubscriptionDialog({
               className="w-full"
               onClick={() => onOpenChange(false)}
             >
-              Close
+              {t("close")}
             </Button>
             <Button
               variant="destructive"
@@ -66,7 +62,7 @@ export function CancelSubscriptionDialog({
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? "Cancelling..." : "Cancel"}
+              {isLoading ? t("cancelling") : t("cancel")}
             </Button>
           </DialogFooter>
         </div>

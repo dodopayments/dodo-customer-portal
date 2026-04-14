@@ -30,6 +30,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import parseError from "@/lib/clientErrorHelper";
 import Loading from "@/components/loading";
+import { useTranslations } from "next-intl";
 import {
   Collapsible,
   CollapsibleContent,
@@ -105,8 +106,10 @@ function PlanAddons({
   isOpen,
   onOpenChange,
   addonNamesMap,
+  noAddonsLabel,
 }: {
   title: string;
+  noAddonsLabel?: string;
   addons: AddOn[];
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
@@ -123,7 +126,7 @@ function PlanAddons({
 
       <CollapsibleContent className="mt-3">
         {addons.length === 0 ? (
-          <p className="text-text-secondary text-sm">No addons</p>
+          <p className="text-text-secondary text-sm">{noAddonsLabel ?? "No addons"}</p>
         ) : (
           <div className="flex flex-col gap-2">
             {addons.map((addon) => (
@@ -135,7 +138,7 @@ function PlanAddons({
                   {addonNamesMap?.[addon.addon_id] || addon.addon_id}
                 </span>
                 <span className="text-text-primary whitespace-nowrap">
-                  Qty: {addon.quantity}
+                  {addon.quantity}
                 </span>
               </div>
             ))}
@@ -154,8 +157,10 @@ function EditableAddons({
   onQuantityChange,
   addonNamesMap,
   getMinQuantity,
+  noAddonsLabel,
 }: {
   title: string;
+  noAddonsLabel?: string;
   addons: AddOn[];
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
@@ -174,7 +179,7 @@ function EditableAddons({
 
       <CollapsibleContent className="mt-3">
         {addons.length === 0 ? (
-          <p className="text-text-secondary text-sm">No addons</p>
+          <p className="text-text-secondary text-sm">{noAddonsLabel ?? "No addons"}</p>
         ) : (
           <div className="flex flex-col gap-3">
             {addons.map((addon) => {
@@ -229,6 +234,15 @@ interface LineItemsCardProps {
   lineItems: LineItem[];
   currency: CurrencyCode | null;
   customerCredits?: number;
+  labels: {
+    item: string;
+    quantity: string;
+    unitPrice: string;
+    tax: string;
+    total: string;
+    creditToBalance: string;
+    creditTooltip: string;
+  };
 }
 
 function LineItemRow({
@@ -356,10 +370,14 @@ function CustomerCreditRow({
   creditAmount,
   currency,
   isLast,
+  creditLabel,
+  creditTooltip,
 }: {
   creditAmount: number;
   currency: CurrencyCode | null;
   isLast: boolean;
+  creditLabel: string;
+  creditTooltip: string;
 }) {
   const formatAmount = (amount: number) => {
     return formatDecodedCurrency(amount, currency);
@@ -368,10 +386,9 @@ function CustomerCreditRow({
   return (
     <>
       <div className="grid grid-cols-5 gap-4 py-3">
-        {/* Item Name */}
         <div className="flex items-center gap-1">
           <span className="text-text-primary text-sm font-medium whitespace-nowrap">
-            Credit to Balance
+            {creditLabel}
           </span>
           <TooltipProvider>
             <Tooltip delayDuration={100}>
@@ -380,7 +397,7 @@ function CustomerCreditRow({
               </TooltipTrigger>
               <TooltipContent className="max-w-md">
                 <p className="text-xs">
-                  Credit will be used to pay off future payments
+                  {creditTooltip}
                 </p>
               </TooltipContent>
             </Tooltip>
@@ -420,6 +437,7 @@ function LineItemsCard({
   lineItems,
   currency,
   customerCredits = 0,
+  labels,
 }: LineItemsCardProps) {
   const hasCustomerCredits = customerCredits !== 0;
 
@@ -435,27 +453,27 @@ function LineItemsCard({
           <div className="grid grid-cols-5 gap-4 pb-3 border-b border-border-secondary">
             <div>
               <span className="text-text-secondary text-sm font-medium">
-                Item
+                {labels.item}
               </span>
             </div>
             <div className="flex justify-end">
               <span className="text-text-secondary text-sm font-medium">
-                Quantity
+                {labels.quantity}
               </span>
             </div>
             <div className="flex justify-end">
               <span className="text-text-secondary text-sm font-medium">
-                Unit Price
+                {labels.unitPrice}
               </span>
             </div>
             <div className="flex justify-end">
               <span className="text-text-secondary text-sm font-medium">
-                Tax
+                {labels.tax}
               </span>
             </div>
             <div className="flex justify-end">
               <span className="text-text-secondary text-sm font-medium">
-                Total
+                {labels.total}
               </span>
             </div>
           </div>
@@ -474,6 +492,8 @@ function LineItemsCard({
                 creditAmount={customerCredits}
                 currency={currency || (lineItems[0]?.currency as CurrencyCode | null) || null}
                 isLast={true}
+                creditLabel={labels.creditToBalance}
+                creditTooltip={labels.creditTooltip}
               />
             )}
           </div>
@@ -493,6 +513,7 @@ export function PlanPreview({
   currentQuantity,
   currentAddons,
 }: PlanPreviewProps) {
+  const t = useTranslations("PlanPreview");
   const [isConfirming, setIsConfirming] = useState(false);
   const [billingMode] = useState<ProrationBillingMode>("prorated_immediately");
   const [isCurrentAddonsOpen, setIsCurrentAddonsOpen] = useState(false);
@@ -622,13 +643,13 @@ export function PlanPreview({
           },
         });
         if (!result.success) {
-          toast.error(result.error || "Failed to load preview. Please try again.");
+          toast.error(result.error || t("previewFailed"));
           onBackClick();
           return;
         }
         setPreviewData(result.data);
       } catch (error) {
-        parseError(error, "Failed to load preview. Please try again.");
+        parseError(error, t("previewFailed"));
         onBackClick();
       } finally {
         setIsLoadingPreview(false);
@@ -663,12 +684,12 @@ export function PlanPreview({
               <ArrowLeft className="h-4 w-4" />
             </Button>
             <h4 className="text-lg font-semibold text-foreground">
-              Confirm Plan Change
+              {t("confirmPlanChange")}
             </h4>
           </div>
         </SheetHeader>
         <div className="p-4">
-          <p className="text-text-secondary text-sm">No plan selected</p>
+          <p className="text-text-secondary text-sm">{t("noPlanSelected")}</p>
         </div>
       </>
     );
@@ -691,16 +712,16 @@ export function PlanPreview({
 
   const handleConfirmChangePlan = async () => {
     if (requiresAtLeastOneAddon && !hasAtLeastOneAddon) {
-      toast.error("Please select at least one add-on with quantity 1 or more.");
+      toast.error(t("addonRequired"));
       return;
     }
 
     try {
       setIsConfirming(true);
-      const addonsToSend = isUsageBasedProduct 
-        ? [] 
+      const addonsToSend = isUsageBasedProduct
+        ? []
         : editableAddons.filter(a => a.quantity > 0);
-      
+
       const result = await changeSubscriptionPlan({
         subscription_id: subscriptionId,
         data: {
@@ -712,14 +733,14 @@ export function PlanPreview({
         },
       });
       if (!result.success) {
-        toast.error(result.error || "Failed to change plan. Please try again.");
+        toast.error(result.error || t("changeFailed"));
         return;
       }
-      toast.success("Plan changed successfully");
+      toast.success(t("changeSuccess"));
       router.refresh();
       onConfirm();
     } catch (error) {
-      parseError(error, "Failed to change plan. Please try again.");
+      parseError(error, t("changeFailed"));
     } finally {
       setIsConfirming(false);
     }
@@ -738,7 +759,7 @@ export function PlanPreview({
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h4 className="text-base sm:text-lg font-semibold text-foreground">
-            Confirm Plan Change
+            {t("confirmPlanChange")}
           </h4>
         </div>
       </SheetHeader>
@@ -747,7 +768,7 @@ export function PlanPreview({
         <div className="flex-1 flex items-center justify-center min-h-0">
           <div className="flex flex-col items-center gap-3">
             <Loading />
-            <p className="text-text-secondary text-sm">Loading preview...</p>
+            <p className="text-text-secondary text-sm">{t("loadingPreview")}</p>
           </div>
         </div>
       ) : (
@@ -756,7 +777,7 @@ export function PlanPreview({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
                 <span className="text-text-primary font-bold text-sm">
-                  Current
+                  {t("current")}
                 </span>
                 <Card className="border-border-secondary">
                   <CardContent className="p-4 flex flex-col gap-3">
@@ -771,7 +792,7 @@ export function PlanPreview({
                               {formatPlanPrice(currentProduct)}
                             </span>
                             <span className="text-text-secondary text-xs">
-                              Qty: {Math.max(currentQuantity, 0)}
+                              {t("qty", { value: Math.max(currentQuantity, 0) })}
                             </span>
                           </div>
                         </div>
@@ -784,7 +805,8 @@ export function PlanPreview({
                           <>
                             <div className="h-px w-full bg-border-secondary" />
                             <PlanAddons
-                              title="View add-ons"
+                              title={t("viewAddons")}
+                              noAddonsLabel={t("noAddons")}
                               addons={currentAddons}
                               isOpen={isCurrentAddonsOpen}
                               onOpenChange={setIsCurrentAddonsOpen}
@@ -802,7 +824,7 @@ export function PlanPreview({
 
               <div className="flex flex-col gap-3">
                 <span className="text-text-primary font-bold text-sm">
-                  Updated
+                  {t("updated")}
                 </span>
                 <Card className="border-border-secondary">
                   <CardContent className="p-4 flex flex-col gap-3">
@@ -815,7 +837,7 @@ export function PlanPreview({
                           {formatPlanPrice(selectedProduct)}
                         </span>
                         <span className="text-text-secondary text-xs">
-                          Qty: {Math.max(quantity, 0)}
+                          {t("qty", { value: Math.max(quantity, 0) })}
                         </span>
                       </div>
                     </div>
@@ -828,7 +850,8 @@ export function PlanPreview({
                       <>
                         <div className="h-px w-full bg-border-secondary" />
                         <EditableAddons
-                          title="Manage add-ons"
+                          title={t("manageAddons")}
+                          noAddonsLabel={t("noAddons")}
                           addons={editableAddons}
                           isOpen={isNewAddonsOpen}
                           onOpenChange={setIsNewAddonsOpen}
@@ -848,6 +871,15 @@ export function PlanPreview({
                 lineItems={previewData.immediate_charge.line_items}
                 currency={settlementCurrency}
                 customerCredits={previewData.immediate_charge.summary.customer_credits}
+                labels={{
+                  item: t("tableItem"),
+                  quantity: t("tableQuantity"),
+                  unitPrice: t("tableUnitPrice"),
+                  tax: t("tableTax"),
+                  total: t("tableTotal"),
+                  creditToBalance: t("creditToBalance"),
+                  creditTooltip: t("creditTooltip"),
+                }}
               />
             )}
 
@@ -856,7 +888,7 @@ export function PlanPreview({
                 <CardContent className="p-4 flex flex-col gap-0 bg-button-secondary-bg rounded-lg">
                   {[
                     {
-                      label: "Total",
+                      label: t("summaryTotal"),
                       value:
                         previewData && summary
                           ? Math.abs(summary.settlement_amount || 0)
@@ -864,7 +896,7 @@ export function PlanPreview({
                       showSeparator: true,
                     },
                     {
-                      label: "Tax",
+                      label: t("summaryTax"),
                       value:
                         previewData && summary
                           ? Math.abs(summary.settlement_tax || 0)
@@ -872,7 +904,7 @@ export function PlanPreview({
                       showSeparator: true,
                     },
                     {
-                      label: "Amount due now",
+                      label: t("summaryAmountDue"),
                       value:
                         previewData && summary
                           ? Math.abs(
@@ -925,13 +957,15 @@ export function PlanPreview({
               loading={isConfirming}
             >
               {previewData && summary
-                ? `Pay ${formatSettlementAmount(
-                  Math.abs(
-                    (summary.settlement_amount || 0) +
-                    (summary.settlement_tax || 0)
-                  )
-                )}`
-                : "Confirm Plan Change"}
+                ? t("payButton", {
+                  amount: formatSettlementAmount(
+                    Math.abs(
+                      (summary.settlement_amount || 0) +
+                      (summary.settlement_tax || 0)
+                    )
+                  ),
+                })
+                : t("confirmPlanChange")}
             </Button>
           </div>
         </ScrollArea>

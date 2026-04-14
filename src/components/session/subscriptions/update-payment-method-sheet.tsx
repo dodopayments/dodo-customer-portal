@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import parseError from "@/lib/clientErrorHelper";
 import { api } from "@/lib/http";
+import { useTranslations } from "next-intl";
 import {
   UpdatePaymentMethodParams,
   UpdatePaymentMethodResponse,
@@ -203,6 +204,7 @@ export function UpdatePaymentMethodSheet({
   subscription_id,
   variant = "secondary",
 }: UpdatePaymentMethodSheetProps) {
+  const t = useTranslations("UpdatePaymentMethodSheet");
   const baseId = useId();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -220,14 +222,14 @@ export function UpdatePaymentMethodSheet({
     try {
       const result = await fetchEligiblePaymentMethods(subscription_id);
       if (!result.success) {
-        toast.error(result.error || "Failed to load payment methods. Please try again.");
+        toast.error(result.error || t("loadFailed"));
         setEligiblePaymentMethods(null);
         return;
       }
       setEligiblePaymentMethods(result.data.items);
       setOpen(true);
     } catch (error) {
-      parseError(error, "Failed to load payment methods. Please try again.");
+      parseError(error, t("loadFailed"));
       setEligiblePaymentMethods(null);
     } finally {
       setLoadingData(false);
@@ -256,7 +258,7 @@ export function UpdatePaymentMethodSheet({
   const handleSubmit = useCallback(
     async ({ type }: { type: "existing" | "new" }) => {
       if (type === "existing" && !selectedPaymentMethodId) {
-        toast.error("Please select a payment method");
+        toast.error(t("selectRequired"));
         return;
       }
 
@@ -277,14 +279,12 @@ export function UpdatePaymentMethodSheet({
         }
 
         toast.success(
-          type === "existing"
-            ? "Payment method updated successfully"
-            : "Payment method setup initiated"
+          type === "existing" ? t("updateSuccess") : t("setupInitiated")
         );
         router.refresh();
         setOpen(false);
       } catch (error) {
-        parseError(error, "Failed to update payment method. Please try again.");
+        parseError(error, t("updateFailed"));
       } finally {
         setIsSubmitting(false);
       }
@@ -311,11 +311,11 @@ export function UpdatePaymentMethodSheet({
         return;
       }
 
-      toast.success("Payment method setup initiated");
+      toast.success(t("setupInitiated"));
       router.refresh();
       setOpen(false);
     } catch (error) {
-      parseError(error, "Failed to add new payment method. Please try again.");
+      parseError(error, t("addFailed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -338,12 +338,12 @@ export function UpdatePaymentMethodSheet({
         variant={variant}
         className="my-auto"
       >
-        Edit
+        {t("editButton")}
       </Button>
       <SheetContent className="flex flex-col p-0 overflow-y-auto border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader className="border-b p-6 border-border-secondary pb-4">
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
-            Edit Payment Method
+            {t("sheetTitle")}
           </SheetTitle>
         </SheetHeader>
         <div className="grid border-b border-border-secondary auto-rows-min gap-6 p-6">
@@ -370,21 +370,21 @@ export function UpdatePaymentMethodSheet({
                   className="w-fit"
                   onClick={() => handleSubmit({ type: "new" })}
                 >
-                  Add Payment Method
+                  {t("addPaymentMethod")}
                 </Button>
               </div>
             </>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 gap-4">
               <p className="text-text-secondary text-sm">
-                No eligible payment methods found.
+                {t("noPaymentMethods")}
               </p>
               <Button
                 variant="secondary"
                 className="w-fit"
                 onClick={handleAddNewPaymentMethod}
               >
-                Add Payment Method
+                {t("addPaymentMethod")}
               </Button>
             </div>
           )}
@@ -396,7 +396,7 @@ export function UpdatePaymentMethodSheet({
             className="w-full"
             disabled={isSubmitting || !selectedPaymentMethodId}
           >
-            {isSubmitting ? "Updating..." : "Confirm Changes"}
+            {isSubmitting ? t("updating") : t("confirmChanges")}
           </Button>
         </SheetFooter>
       </SheetContent>

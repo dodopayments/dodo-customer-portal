@@ -27,6 +27,7 @@ import {
 } from "@/lib/currency-helper";
 import ProductMarkdownDescription from "../common/product-markdown-description";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface CancelSubscriptionSheetProps {
   subscription: SubscriptionDetailsData;
@@ -37,6 +38,7 @@ export function CancelSubscriptionSheet({
   subscription,
   subscriptionId,
 }: CancelSubscriptionSheetProps) {
+  const t = useTranslations("CancelSubscriptionSheet");
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isCancellingAtNextBilling, setIsCancellingAtNextBilling] =
@@ -53,18 +55,16 @@ export function CancelSubscriptionSheet({
         cancelAtNextBillingDate,
       });
       if (!result.success) {
-        toast.error(result.error || "Failed to cancel subscription. Please try again.");
+        toast.error(result.error || t("cancelFailed"));
         return;
       }
       toast.success(
-        cancelAtNextBillingDate
-          ? "Subscription will be cancelled at next billing date"
-          : "Subscription cancelled successfully"
+        cancelAtNextBillingDate ? t("cancelScheduled") : t("cancelSuccess")
       );
       router.refresh();
       setOpen(false);
     } catch (error) {
-      parseError(error, "Failed to cancel subscription. Please try again.");
+      parseError(error, t("cancelFailed"));
     } finally {
       setIsLoading(false);
       setIsCancellingAtNextBilling(false);
@@ -79,14 +79,14 @@ export function CancelSubscriptionSheet({
         revokeCancelation: true,
       });
       if (!result.success) {
-        toast.error(result.error || "Failed to revoke cancellation. Please try again.");
+        toast.error(result.error || t("revokeFailed"));
         return;
       }
-      toast.success("Subscription cancellation revoked successfully");
+      toast.success(t("revokeSuccess"));
       router.refresh();
       setOpen(false);
     } catch (error) {
-      parseError(error, "Failed to revoke cancellation. Please try again.");
+      parseError(error, t("revokeFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -105,32 +105,39 @@ export function CancelSubscriptionSheet({
       <SheetTrigger asChild>
         <Button
           variant={
-            subscription.cancel_at_next_billing_date
-              ? "default"
-              : "secondary"
+            subscription.cancel_at_next_billing_date ? "default" : "secondary"
           }
         >
           {subscription.cancel_at_next_billing_date
-            ? "Revoke Cancellation"
-            : "Cancel Subscription"}
+            ? t("triggerRevoke")
+            : t("triggerCancel")}
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col gap-6 overflow-y-auto border-border-secondary rounded-xl border m-6" side="right"
-        floating>
+      <SheetContent
+        className="flex flex-col gap-6 overflow-y-auto border-border-secondary rounded-xl border m-6"
+        side="right"
+        floating
+      >
         <SheetHeader className="border-b border-border-secondary pb-4">
           <SheetTitle className="text-left font-display font-semibold text-base leading-tight tracking-normal">
-            We&apos;re sorry to see you go...
+            {t("sheetTitle")}
           </SheetTitle>
         </SheetHeader>
 
         <div className="flex flex-col gap-4 flex-1">
           <div className="flex flex-col gap-4">
             <p className="font-body font-normal text-[13px] leading-[20px] text-text-secondary">
-              Current plan
+              {t("currentPlan")}
             </p>
 
             <div className="border border-border-secondary rounded-lg p-4 flex flex-col gap-4">
-              <div className={cn("flex items-center justify-between", subscription.product.description && "border-b border-border-secondary pb-3")}>
+              <div
+                className={cn(
+                  "flex items-center justify-between",
+                  subscription.product.description &&
+                    "border-b border-border-secondary pb-3"
+                )}
+              >
                 <p className="font-display font-medium text-[13px] leading-[20px] text-text-primary">
                   {subscription.product.name}
                 </p>
@@ -151,12 +158,12 @@ export function CancelSubscriptionSheet({
                   <CollapsibleTrigger asChild>
                     <button className="flex items-center justify-between w-full p-3 rounded-lg hover:bg-secondary/50 transition-colors">
                       <p className="font-display font-normal text-[13px] leading-[28px] text-text-primary">
-                        {subscription.addons.length} add-on
-                        {subscription.addons.length !== 1 ? "s" : ""}
+                        {t("addOns", { count: subscription.addons.length })}
                       </p>
                       <ChevronDown
-                        className={`h-4 w-4 text-text-secondary transition-transform ${addonsOpen ? "transform rotate-180" : ""
-                          }`}
+                        className={`h-4 w-4 text-text-secondary transition-transform ${
+                          addonsOpen ? "transform rotate-180" : ""
+                        }`}
                       />
                     </button>
                   </CollapsibleTrigger>
@@ -171,7 +178,7 @@ export function CancelSubscriptionSheet({
                             {addon.name || addon.addon_id}
                           </p>
                           <p className="font-body font-normal text-sm text-text-secondary">
-                            Quantity: {addon.quantity}
+                            {t("quantity", { value: addon.quantity })}
                           </p>
                         </div>
                       ))}
@@ -188,8 +195,7 @@ export function CancelSubscriptionSheet({
             <>
               <div className="p-3 rounded-lg bg-warning-primary border border-warning-secondary">
                 <p className="font-body font-normal text-sm text-text-primary">
-                  This subscription is scheduled to be cancelled at the next
-                  billing date.
+                  {t("scheduledCancellationWarning")}
                 </p>
               </div>
               <Button
@@ -198,18 +204,8 @@ export function CancelSubscriptionSheet({
                 onClick={handleRevokeCancellation}
                 disabled={isLoading}
               >
-                {isLoading ? "Revoking..." : "Revoke Cancellation"}
+                {isLoading ? t("revoking") : t("revokeCancellation")}
               </Button>
-              {/* <Button
-                variant="destructive"
-                className="w-full h-10"
-                onClick={() => handleCancelSubscription(false)}
-                disabled={isLoading}
-              >
-                {isLoading && !isCancellingAtNextBilling
-                  ? "Cancelling..."
-                  : "Cancel Immediately"}
-              </Button> */}
             </>
           ) : (
             <>
@@ -220,19 +216,9 @@ export function CancelSubscriptionSheet({
                 disabled={isLoading}
               >
                 {isLoading && isCancellingAtNextBilling
-                  ? "Cancelling..."
-                  : "Cancel at next billing date"}
+                  ? t("cancelling")
+                  : t("cancelAtNextBilling")}
               </Button>
-              {/* <Button
-                variant="destructive"
-                className="w-full h-10"
-                onClick={() => handleCancelSubscription(false)}
-                disabled={isLoading}
-              >
-                {isLoading && !isCancellingAtNextBilling
-                  ? "Cancelling..."
-                  : "Cancel now"}
-              </Button> */}
             </>
           )}
         </div>

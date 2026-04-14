@@ -11,6 +11,7 @@ import {
 import { decodeCurrency, formatCurrency } from "@/lib/currency-helper";
 import { CurrencyCode } from "@/lib/currency-helper";
 import { WalletTable } from "./wallet-table";
+import { useTranslations } from "next-intl";
 
 export function Wallet({
   wallets,
@@ -35,8 +36,10 @@ export function Wallet({
   baseUrl: string;
   pageParamKey?: string;
 }) {
+  const t = useTranslations("ProfileWallet");
+
   if (allWallets.length === 0) {
-    return <p className="text-text-secondary text-sm">No wallets found</p>;
+    return <p className="text-text-secondary text-sm">{t("noWalletsFound")}</p>;
   }
   const selectedCurrency = (tab?.replace("-wallet", "") || "usd").toUpperCase();
   const currentWallet: WalletItem | undefined = wallets.find(
@@ -61,13 +64,13 @@ export function Wallet({
             )}
           </CardTitle>
           <CardDescription className="text-text-secondary text-sm text-center">
-            Available balance
+            {t("availableBalance")}
           </CardDescription>
         </CardHeader>
         <Separator className="my-0" />
         <CardContent className="flex flex-col gap-4 p-0">
           <div className="flex flex-col gap-2">
-            <p className="text-sm">Recent Transactions</p>
+            <p className="text-sm">{t("recentTransactions")}</p>
             <WalletTable
               walletLedger={ledgerItems}
               currentPage={currentPage}

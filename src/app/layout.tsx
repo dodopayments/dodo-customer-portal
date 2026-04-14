@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/hooks/theme-provider";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { getUserLocale } from "@/lib/i18n-helper";
 import ThemeToaster from "@/hooks/theme-toaster";
 import { DeferredProviders } from "@/hooks/deferred-providers";
 import { cookies } from "next/headers";
@@ -57,9 +58,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // const locale = await getLocale();
-  // Providing all messages to the client
-  // side is the easiest way to get started
+  const locale = await getUserLocale();
   const messages = await getMessages();
 
   // Read theme_mode from cookie (set during session validation) — no API call
@@ -72,7 +71,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${inter.variable} ${gabarito.variable} ${hankenGrotesk.variable} h-full`}
       suppressHydrationWarning
     >

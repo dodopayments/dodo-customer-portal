@@ -7,6 +7,7 @@ import {
 } from "@/app/session/subscriptions/[id]/action";
 import { fetchRefunds } from "@/app/session/orders/actions";
 import { getServerApiUrl } from "@/lib/server-http";
+import { getTranslations } from "next-intl/server";
 import { UsageSummary } from "./usage-summary";
 import { SubscriptionDetailsData } from "@/app/session/subscriptions/[id]/types";
 import { CurrencyCode } from "@/lib/currency-helper";
@@ -71,6 +72,7 @@ export async function SubscriptionTabsTable({
     pageParamKey: string;
   };
 }) {
+  const t = await getTranslations("SubscriptionTabsTable");
   const params = await searchParams;
   const tabParam = Array.isArray(params?.tab) ? params.tab[0] : params?.tab;
   const normalizedTabParam = typeof tabParam === "string" ? tabParam : "";
@@ -184,20 +186,20 @@ export async function SubscriptionTabsTable({
           items={[
             {
               value: "invoice-history",
-              label: "Billing History",
+              label: t("billingHistory"),
               link: `/session/subscriptions/${subscriptionId}?tab=invoice-history`,
             },
             ...(hasRefunds ? [
               {
                 value: "refund-history",
-                label: "Refund History",
+                label: t("refundHistory"),
                 link: `/session/subscriptions/${subscriptionId}?tab=refund-history`,
               },
             ] : []),
             ...(isUsageBased ? [
               {
                 value: "usage-summary",
-                label: "Usage Summary",
+                label: t("usageSummary"),
                 link: `/session/subscriptions/${subscriptionId}?tab=usage-summary`,
               },
             ] : []),

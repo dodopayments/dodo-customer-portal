@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { CircleSlash } from "lucide-react";
 import { PaymentMethodCard } from "../payment-methods/payment-method-card";
+import { useTranslations } from "next-intl";
 
 interface PaymentMethodsSectionProps {
   paymentMethods: PaymentMethodItem[];
@@ -12,13 +13,14 @@ interface PaymentMethodsSectionProps {
 export function PaymentMethodsSection({
   paymentMethods,
 }: PaymentMethodsSectionProps) {
+  const t = useTranslations("PaymentMethodsSection");
   const isEmpty = !paymentMethods || paymentMethods.length === 0;
 
   return (
     <section id="payment-methods">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-display font-medium text-text-primary">
-          Payment Methods
+          {t("title")}
         </h2>
       </div>
 
@@ -29,9 +31,7 @@ export function PaymentMethodsSection({
               <div className="p-4 bg-bg-secondary rounded-full mb-4">
                 <CircleSlash className="w-6 h-6 text-text-secondary" />
               </div>
-              <p className="text-text-secondary text-sm mb-4">
-                No payment methods added
-              </p>
+              <p className="text-text-secondary text-sm mb-4">{t("empty")}</p>
             </div>
           </CardContent>
         </Card>
