@@ -1,6 +1,6 @@
-function parseIso(dateString: string): string {
+function parseIso(dateString: string, locale: string = "en"): string {
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleString("en-GB", {
+  return date.toLocaleString(locale, {
     day: "numeric",
     month: "short",
     year: "2-digit",
@@ -10,12 +10,11 @@ function parseIso(dateString: string): string {
     hour12: true,
     timeZone: "UTC",
   });
-  return formattedDate;
 }
 
-export function parseIsoDate(dateString: string): string {
+export function parseIsoDate(dateString: string, locale: string = "en"): string {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-GB", {
+  return date.toLocaleDateString(locale, {
     day: "numeric",
     month: "short",
     year: "2-digit",

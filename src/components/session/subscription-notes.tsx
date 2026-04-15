@@ -5,7 +5,7 @@ import type { BadgeVariant } from "@/components/ui/badge";
 import { badgeVariants } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { SubscriptionData } from "./subscriptions/subscriptions";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export type SubscriptionNoteType = "warning" | "error" | "info";
 
@@ -16,13 +16,10 @@ export interface SubscriptionNote {
   icon: React.ReactNode;
 }
 
-/**
- * Generates contextual notes for a subscription based on its state.
- * Returns structured data with message keys and values for i18n translation.
- */
 export function getSubscriptionNotes(
   subscription: SubscriptionData,
-  businessName?: string
+  businessName?: string,
+  locale: string = "en"
 ): SubscriptionNote[] {
   const notes: SubscriptionNote[] = [];
 
@@ -54,26 +51,40 @@ export function getSubscriptionNotes(
     subscription.cancel_at_next_billing_date &&
     subscription.status !== "cancelled"
   ) {
-    const cancellationDate = subscription.next_billing_date
-      ? new Date(subscription.next_billing_date).toLocaleDateString("en-GB")
-      : "the next billing date";
-
-    notes.push({
-      type: "warning",
-      messageKey: "scheduledCancellation",
-      messageValues: { date: cancellationDate },
-      icon: <Clock className="w-4 h-4 flex-shrink-0" />,
-    });
+    if (subscription.next_billing_date) {
+      const cancellationDate = new Date(
+        subscription.next_billing_date
+      ).toLocaleDateString(locale, { dateStyle: "medium" });
+      notes.push({
+        type: "warning",
+        messageKey: "scheduledCancellation",
+        messageValues: { date: cancellationDate },
+        icon: <Clock className="w-4 h-4 flex-shrink-0" />,
+      });
+    } else {
+      notes.push({
+        type: "warning",
+        messageKey: "scheduledCancellationNoDate",
+        icon: <Clock className="w-4 h-4 flex-shrink-0" />,
+      });
+    }
   }
 
   if (subscription.on_demand && subscription.status === "active") {
-    const name = businessName || "the merchant";
-    notes.push({
-      type: "info",
-      messageKey: "flexibleSubscription",
-      messageValues: { name },
-      icon: <Zap className="w-4 h-4 flex-shrink-0" />,
-    });
+    if (businessName) {
+      notes.push({
+        type: "info",
+        messageKey: "flexibleSubscription",
+        messageValues: { name: businessName },
+        icon: <Zap className="w-4 h-4 flex-shrink-0" />,
+      });
+    } else {
+      notes.push({
+        type: "info",
+        messageKey: "flexibleSubscriptionUnknownMerchant",
+        icon: <Zap className="w-4 h-4 flex-shrink-0" />,
+      });
+    }
   }
 
   if (
@@ -90,7 +101,9 @@ export function getSubscriptionNotes(
   }
 
   if (subscription.status === "cancelled" && subscription.cancelled_at) {
-    const cancelledDate = new Date(subscription.cancelled_at).toLocaleDateString("en-GB");
+    const cancelledDate = new Date(
+      subscription.cancelled_at
+    ).toLocaleDateString(locale, { dateStyle: "medium" });
     notes.push({
       type: "error",
       messageKey: "cancelledOn",
@@ -128,8 +141,7 @@ export function SubscriptionNoteDisplay({
   note,
   infoStyleOverride = false,
 }: SubscriptionNoteDisplayProps) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const t = useTranslations("SubscriptionNotes") as any;
+  const t = useTranslations("SubscriptionNotes");
   const variant = noteTypeToBadgeVariant[note.type];
   const useOverride = note.type === "info" && infoStyleOverride;
 
@@ -147,7 +159,7 @@ export function SubscriptionNoteDisplay({
           useOverride && "text-text-primary dark:text-text-primary"
         )}
       >
-        {t(note.messageKey, note.messageValues)}
+        {t(note.messageKey as Parameters<typeof t>[0], note.messageValues)}
       </p>
     </div>
   );
@@ -168,7 +180,8 @@ export function SubscriptionNotes({
   maxNotes,
   infoStyleOverride = false,
 }: SubscriptionNotesProps) {
-  const notes = getSubscriptionNotes(subscription, businessName);
+  const locale = useLocale();
+  const notes = getSubscriptionNotes(subscription, businessName, locale);
 
   if (notes.length === 0) return null;
 

@@ -68,13 +68,14 @@ export const Orders = ({
 }: OrdersProps) => {
   const t = useTranslations("Orders");
   const tColumns = useTranslations("BillingHistoryColumns");
+  const tBadge = useTranslations("BadgeStatus");
 
   const OVERVIEW_PAGE_SIZE = 25;
 
   const totalCount = externalTotalCount ?? ordersData.length;
   const isEmpty = ordersData.length === 0;
   const emptyMessage = currentPage > 0 ? t("emptyPage") : t("emptyAll");
-  const billingHistoryColumns = getBillingHistoryColumns(tColumns);
+  const billingHistoryColumns = getBillingHistoryColumns(tColumns, tBadge);
 
   const shouldShowPagination = showPagination;
 

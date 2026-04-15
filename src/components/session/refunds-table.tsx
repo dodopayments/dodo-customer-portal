@@ -47,7 +47,8 @@ export function RefundsTable({
 }: RefundsTableProps) {
   const t = useTranslations("RefundsTable");
   const tColumns = useTranslations("RefundColumns");
-  const columns = useMemo(() => getRefundColumns(tColumns), [tColumns]);
+  const tBadge = useTranslations("BadgeStatus");
+  const columns = useMemo(() => getRefundColumns(tColumns, tBadge), [tColumns, tBadge]);
   const resolvedTitle = title ?? t("title");
   const isEmpty = refundsData.length === 0;
   const shouldShowGridPagination = showPagination && totalCount > pageSize;

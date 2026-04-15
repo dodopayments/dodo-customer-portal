@@ -3,7 +3,7 @@ import { SmileySad } from "@phosphor-icons/react/dist/ssr";
 import { getTranslations } from "next-intl/server";
 
 const NotFound = async () => {
-  const t = await getTranslations("ErrorPage");
+  const t = await getTranslations("NotFoundPage");
   return (
     <div className="w-full h-screen flex flex-col bg-bg-primary items-center justify-center">
       <IconColors icon={<SmileySad className="w-6 h-6" />} />
