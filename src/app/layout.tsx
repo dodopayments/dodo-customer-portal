@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import type { AbstractIntlMessages } from "next-intl";
 import { getUserLocale } from "@/lib/i18n-helper";
+import { LanguageSelector } from "@/components/custom/language-selector";
 import ThemeToaster from "@/hooks/theme-toaster";
 import { DeferredProviders } from "@/hooks/deferred-providers";
 import { cookies } from "next/headers";
@@ -95,6 +96,9 @@ export default async function RootLayout({
               <ThemeToaster />
               {children}
             </main>
+            <div className="fixed flex z-10 bottom-5 right-6">
+              <LanguageSelector />
+            </div>
           </NextIntlClientProvider>
         </ThemeProvider>
         <DeferredProviders />
