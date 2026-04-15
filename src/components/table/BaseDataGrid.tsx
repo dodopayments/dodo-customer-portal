@@ -25,6 +25,7 @@
  */
 
 import { useEffect, useMemo, useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { DataGrid, DataGridContainer } from "@/components/ui/data-grid";
 import { DataGridPagination } from "@/components/ui/data-grid-pagination";
 import { DataGridTable } from "@/components/ui/data-grid-table";
@@ -115,11 +116,14 @@ export function BaseDataGrid<TData = any>({
     columnsVisibility: true,
   },
   showResetButton = false,
-  resetButtonText = "Reset Table",
-  emptyStateMessage = "No data available",
+  resetButtonText,
+  emptyStateMessage,
   className = "",
   onTableReady,
 }: BaseDataGridProps<TData>) {
+  const tGrid = useTranslations("BaseDataGrid");
+  const resolvedResetButtonText = resetButtonText ?? tGrid("reset");
+  const resolvedEmptyStateMessage = emptyStateMessage ?? tGrid("noData");
   // Hydration guard to prevent SSR/client mismatch
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -341,7 +345,7 @@ export function BaseDataGrid<TData = any>({
       {showResetButton && (
         <div className="mb-4 flex justify-end">
           <Button variant="outline" onClick={resetTableState}>
-            {resetButtonText}
+            {resolvedResetButtonText}
           </Button>
         </div>
       )}
@@ -350,7 +354,7 @@ export function BaseDataGrid<TData = any>({
         table={table}
         recordCount={totalRecordCount}
         tableLayout={tableLayout}
-        emptyMessage={customEmptyMessage || emptyStateMessage}
+        emptyMessage={customEmptyMessage || resolvedEmptyStateMessage}
         onRowClick={onRowClick}
         isLoading={false}
       >

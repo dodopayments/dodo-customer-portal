@@ -87,7 +87,7 @@ const PaginationLink = ({
 };
 PaginationLink.displayName = "PaginationLink";
 
-const PaginationPrevious = (props: PaginationLinkProps) => {
+const PaginationPrevious = ({ label, ...props }: PaginationLinkProps & { label?: string }) => {
   const { className, ...restProps } = props;
   return (
     <PaginationLink
@@ -97,13 +97,13 @@ const PaginationPrevious = (props: PaginationLinkProps) => {
       {...restProps}
     >
       <ChevronLeft className="h-4 w-4 " />
-      <span>Previous</span>
+      <span>{label ?? "Previous"}</span>
     </PaginationLink>
   );
 };
 PaginationPrevious.displayName = "PaginationPrevious";
 
-const PaginationNext = (props: PaginationLinkProps) => {
+const PaginationNext = ({ label, ...props }: PaginationLinkProps & { label?: string }) => {
   const { className, ...restProps } = props;
   return (
     <PaginationLink
@@ -112,7 +112,7 @@ const PaginationNext = (props: PaginationLinkProps) => {
       className={cn("gap-1 bg-bg-secondary text-text-primary pr-2.5", className)}
       {...restProps}
     >
-      <span>Next</span>
+      <span>{label ?? "Next"}</span>
       <ChevronRight className="h-4 w-4" />
     </PaginationLink>
   );

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/pagination";
 import { buildPageUrl } from "@/lib/pagination-utils";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 export interface ServerPaginationProps {
   currentPage: number;
@@ -29,6 +30,7 @@ export default function ServerPagination({
   baseUrl,
   pageParamKey = "page",
 }: ServerPaginationProps) {
+  const t = useTranslations("Pagination");
   const normalizedPage = Math.max(0, Math.floor(currentPage));
   const displayPage = normalizedPage + 1;
   const canPreviousPage = normalizedPage > 0;
@@ -92,11 +94,13 @@ export default function ServerPagination({
             {canPreviousPage ? (
               <PaginationPrevious
                 href={previousPageUrl}
+                label={t("previous")}
                 className="hover:text-text-primary transition-opacity"
               />
             ) : (
               <PaginationPrevious
                 href="#"
+                label={t("previous")}
                 className="opacity-50 cursor-not-allowed pointer-events-none"
                 aria-disabled={true}
               />
@@ -127,11 +131,13 @@ export default function ServerPagination({
             {canNextPage ? (
               <PaginationNext
                 href={nextPageUrl}
+                label={t("next")}
                 className="hover:text-text-primary transition-opacity"
               />
             ) : (
               <PaginationNext
                 href="#"
+                label={t("next")}
                 className="opacity-50 cursor-not-allowed pointer-events-none"
                 aria-disabled={true}
               />
