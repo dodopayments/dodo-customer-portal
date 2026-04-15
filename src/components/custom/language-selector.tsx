@@ -4,7 +4,7 @@ import { useCallback, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { getCookie, setCookie } from "cookies-next";
-import { GlobeSimple } from "@phosphor-icons/react";
+import { GlobeSimpleIcon } from "@phosphor-icons/react";
 import flags from "react-phone-number-input/flags";
 import * as RPNInput from "react-phone-number-input";
 import { toast } from "sonner";
@@ -95,7 +95,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
   return (
     <Select value={locale} onValueChange={handleLanguageChange}>
       <SelectTrigger
-        className={cn("w-fit h-[32px] bg-transparent p-0", className)}
+        className={cn("w-fit h-[32px] bg-bg-secondary rounded-md p-0", className)}
       >
         <div className="flex w-fit font-display text-xs items-center gap-2 h-[32px] pl-2">
           {currentLanguage ? (
@@ -104,7 +104,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
               countryName={currentLanguage.name}
             />
           ) : (
-            <GlobeSimple className="w-4 h-4" />
+            <GlobeSimpleIcon className="w-4 h-4" />
           )}
           <span className="text-text-primary font-normal text-xs">
             {locale.toUpperCase()}
