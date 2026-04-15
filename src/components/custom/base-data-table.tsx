@@ -6,6 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import {
   Table,
@@ -28,6 +29,7 @@ export default function BaseDataTable<TData, TValue>({
   data,
   rounded = false,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("DataTable");
   const table = useReactTable({
     data,
     columns,
@@ -87,7 +89,7 @@ export default function BaseDataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {t("noResults")}
                 </TableCell>
               </TableRow>
             )}

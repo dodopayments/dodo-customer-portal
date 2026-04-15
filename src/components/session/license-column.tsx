@@ -24,11 +24,12 @@ interface LicenseResponse {
 
 export function getLicenseColumns(
   tBadge: (key: string) => string,
+  t: (key: string) => string,
 ): ColumnDef<LicenseResponse>[] {
   return [
   {
     accessorKey: "key",
-    header: "License Key",
+    header: t("licenseKey"),
     cell: ({ row }) => (
       <div className="flex items-center">
         <IDTooltip idValue={row.getValue("key")} />
@@ -37,7 +38,7 @@ export function getLicenseColumns(
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t("status"),
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       const { color, messageKey } = getBadge(status, false, true);
@@ -50,7 +51,7 @@ export function getLicenseColumns(
   },
   {
     accessorKey: "product_id",
-    header: "Product Id",
+    header: t("productId"),
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
@@ -61,22 +62,22 @@ export function getLicenseColumns(
   },
   {
     accessorKey: "expires_at",
-    header: "Expiry (UTC)",
+    header: t("expiry"),
     cell: ({ row }) => {
       const isoDate = row.getValue("expires_at") as string;
-      if (isoDate == "Never Expires" || isoDate == "Same as Subscripton") {
-        return <div className="pl-3">{isoDate}</div>;
+      if (isoDate === "Never Expires" || isoDate === "Same as Subscripton") {
+        return <div className="pl-3">{t("neverExpires")}</div>;
       }
       return <div className="pl-3">{parseIso(isoDate)}</div>;
     },
   },
   {
     accessorKey: "instances_count",
-    header: "Activations used",
+    header: t("activationsUsed"),
   },
   {
     accessorKey: "payment_id",
-    header: "Payment Id",
+    header: t("paymentId"),
     cell: ({ row }) => {
       return (
         <div className="flex items-center">

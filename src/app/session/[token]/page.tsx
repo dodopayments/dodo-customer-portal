@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import LoadingOverlay from '@/components/loading-overlay';
+import { useTranslations } from 'next-intl';
 
 export default function Page() {
+  const t = useTranslations("TokenPage");
   const params = useParams();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +49,7 @@ export default function Page() {
           }
           window.location.replace(data.redirect);
         } else {
-          setError('Validation failed. Please try again.');
+          setError(t('validationFailed'));
         }
       } catch (err) {
         console.error('Token validation error:', err);
@@ -67,7 +69,7 @@ export default function Page() {
             onClick={() => window.location.replace('/expired')}
             className="px-4 py-2 bg-primary text-white rounded"
           >
-            Go to Expired Page
+            {t('goToExpiredPage')}
           </button>
         </div>
       </div>

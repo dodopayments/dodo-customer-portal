@@ -4,10 +4,12 @@ import { PaymentMethodItem } from "./type";
 import { CircleSlash } from "lucide-react";
 import { SessionPageLayout } from "@/components/session/session-page-layout";
 import { PaymentMethodCard } from "@/components/session/payment-methods/payment-method-card";
+import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function PaymentMethodsPage() {
+  const t = await getTranslations("PaymentMethodsPage");
   let paymentMethods: PaymentMethodItem[] | null = null;
   try {
     paymentMethods = await fetchPaymentMethods();
@@ -16,13 +18,12 @@ export default async function PaymentMethodsPage() {
   }
 
   const isEmpty = !paymentMethods || paymentMethods.length === 0;
-  const emptyMessage = "No payment methods found";
 
   return (
     <SessionPageLayout>
       <div className="flex flex-col gap-3">
         <h4 className="text-text-primary text-lg font-medium">
-          Your payment methods
+          {t("heading")}
         </h4>
         <Card className="p-6 flex flex-col items-start gap-4 flex-none order-1 self-stretch flex-grow-0">
           {isEmpty ? (
@@ -31,7 +32,7 @@ export default async function PaymentMethodsPage() {
                 <CircleSlash />
               </span>
               <span className="text-sm font-display text-center tracking-wide text-text-secondary">
-                {emptyMessage}
+                {t("empty")}
               </span>
             </div>
           ) : (

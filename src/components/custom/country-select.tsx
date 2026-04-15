@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { FlagImage } from "react-international-phone";
 import { CountriesList } from "@/constants/Countries";
 import parseError from "@/lib/clientErrorHelper";
+import { useTranslations } from "next-intl";
 
 interface CountrySelectProps {
   control: any;
@@ -45,6 +46,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
   required = false,
   className,
 }) => {
+  const t = useTranslations("CountrySelect");
   const [open, setOpen] = useState(false);
   const [countries, setCountries] = useState<CountriesList[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,7 +58,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
         const fetchedCountries = await CountriesList;
         setCountries(fetchedCountries);
       } catch (error) {
-        parseError(error, "Failed to load countries. Please try again.");
+        parseError(error, t("loadFailed"));
       } finally {
         setIsLoading(false);
       }
@@ -116,7 +118,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
                       }
                     </>
                   ) : isLoading ? (
-                    "Loading..."
+                    t("loading")
                   ) : (
                     placeholder
                   )}
@@ -128,11 +130,11 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
               <Command>
                 <CommandInput
                   className="bg-bg-primary"
-                  placeholder="Search country..."
+                  placeholder={t("searchPlaceholder")}
                   onValueChange={setSearchTerm}
                 />
                 <CommandList>
-                  <CommandEmpty>No country found.</CommandEmpty>
+                  <CommandEmpty>{t("noCountryFound")}</CommandEmpty>
                   <CommandGroup className="bg-bg-primary">
                     {filteredCountries.map((country) => (
                       <CommandItem

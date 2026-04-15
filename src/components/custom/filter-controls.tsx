@@ -1,6 +1,8 @@
+"use client";
 import { DateRange } from "react-day-picker";
 import DateFilter from "./date-filter";
 import FilterButton from "./filter-dropdown";
+import { useTranslations } from "next-intl";
 
 export const FilterControls = ({
   dateFilter,
@@ -16,19 +18,22 @@ export const FilterControls = ({
   setStatusFilter: (value: string[]) => void;
   setPageNumber: (page: number) => void;
   options: { label: string; value: string }[];
-}) => (
-  <div className="flex items-center gap-2">
-    <DateFilter
-      dateFilter={dateFilter}
-      setPageNumber={setPageNumber}
-      setDateFilter={setDateFilter}
-    />
-    <FilterButton
-      filters={statusFilter[0]}
-      setFilters={(value) => setStatusFilter(value ? [value] : [])}
-      setPageNumber={setPageNumber}
-      label="Status"
-      options={options}
-    />
-  </div>
-);
+}) => {
+  const t = useTranslations("FilterControls");
+  return (
+    <div className="flex items-center gap-2">
+      <DateFilter
+        dateFilter={dateFilter}
+        setPageNumber={setPageNumber}
+        setDateFilter={setDateFilter}
+      />
+      <FilterButton
+        filters={statusFilter[0]}
+        setFilters={(value) => setStatusFilter(value ? [value] : [])}
+        setPageNumber={setPageNumber}
+        label={t("statusLabel")}
+        options={options}
+      />
+    </div>
+  );
+};

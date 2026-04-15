@@ -38,16 +38,17 @@ import DigitalDeliveryDialog from "./digital-delivery-dialog";
 
 export function getPaymentColumns(
   tBadge: (key: string) => string,
+  t: (key: string) => string,
 ): ColumnDef<PaymentResponse>[] {
   return [
   {
     accessorKey: "payment_id",
-    header: "Payment ID",
+    header: t("paymentId"),
     cell: ({ row }) => <IDTooltip idValue={row.getValue("payment_id")} />,
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t("status"),
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       const { color, messageKey } = getBadge(status, false, true);
@@ -60,7 +61,7 @@ export function getPaymentColumns(
   },
   {
     accessorKey: "payment_method",
-    header: "Payment Method",
+    header: t("paymentMethod"),
     cell: ({ row }) => {
       return (
         <div className="text-left">
@@ -73,7 +74,7 @@ export function getPaymentColumns(
   },
   {
     accessorKey: "total_amount",
-    header: "Amount",
+    header: t("amount"),
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("total_amount"));
       const currency = row.original.currency as CurrencyCode;
@@ -86,7 +87,7 @@ export function getPaymentColumns(
   },
   {
     accessorKey: "created_at",
-    header: "Date (UTC)",
+    header: t("date"),
     cell: ({ row }) => {
       const dateStr = row.getValue("created_at") as string;
       return (
@@ -99,7 +100,7 @@ export function getPaymentColumns(
 
   {
     accessorKey: "actions",
-    header: "Invoice",
+    header: t("invoice"),
     cell: ({ row }) => {
       return (
         <div className="text-left">
@@ -108,7 +109,7 @@ export function getPaymentColumns(
               target="_blank"
               href={`${api_url}/invoices/payments/${row.original.payment_id}`}
             >
-              <DownloadSimple className="w-4 h-4 mr-2" /> Invoice
+              <DownloadSimple className="w-4 h-4 mr-2" /> {t("invoiceButtonLabel")}
             </Link>
           </Button>
         </div>
@@ -117,7 +118,7 @@ export function getPaymentColumns(
   },
   {
     accessorKey: "digital_products_delivered",
-    header: "Files",
+    header: t("files"),
     cell: ({ row }) => {
       if (row.original.digital_products_delivered) {
         return (

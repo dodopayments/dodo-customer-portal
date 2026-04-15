@@ -6,15 +6,17 @@ import { UsageHistoryMeter } from "./subscription-tabs-table";
 import { getCurrencySymbol, decodeFloatCurrency } from "@/lib/currency-helper";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<UsageHistoryMeter>[] {
   const router = useRouter();
+  const t = useTranslations("UsageHistoryColumns");
   return [
     {
       id: "name",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Meter Name"
+          title={t("meterName")}
           visibility={true}
           column={column}
         />
@@ -34,7 +36,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "id",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Meter ID"
+          title={t("meterId")}
           visibility={true}
           column={column}
         />
@@ -54,7 +56,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "consumed_units",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Consumed Units"
+          title={t("consumedUnits")}
           visibility={true}
           column={column}
         />
@@ -74,7 +76,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "chargeable_units",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Chargeable Units"
+          title={t("chargeableUnits")}
           visibility={true}
           column={column}
         />
@@ -94,7 +96,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "free_threshold",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Free Threshold"
+          title={t("freeThreshold")}
           visibility={true}
           column={column}
         />
@@ -102,7 +104,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       cell: ({ row }) => {
         return (
           <div className="text-sm font-medium text-text-primary">
-            {row.original.free_threshold} units
+            {row.original.free_threshold} {t("units")}
           </div>
         );
       },
@@ -114,7 +116,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "price_per_unit",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Unit Price"
+          title={t("unitPrice")}
           visibility={true}
           column={column}
         />
@@ -138,7 +140,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "total_price",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Total Cost"
+          title={t("totalCost")}
           visibility={true}
           column={column}
         />
@@ -162,7 +164,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
       id: "actions",
       header: ({ column }) => (
         <DataGridColumnHeader
-          title="Actions"
+          title={t("actions")}
           visibility={true}
           column={column}
         />
@@ -173,7 +175,7 @@ export function UsageHistoryColumns({ sub_id }: { sub_id: string }): ColumnDef<U
             <Button variant="secondary" onClick={() => {
               router.push(`/session/subscriptions/${sub_id}/${row.original.id}`);
             }}>
-              View
+              {t("view")}
             </Button>
           </div>
         );
