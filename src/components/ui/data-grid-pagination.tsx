@@ -1,4 +1,6 @@
+"use client";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useDataGrid } from "@/components/ui/data-grid";
 import {
@@ -27,6 +29,7 @@ interface DataGridPaginationProps {
 }
 
 function DataGridPagination(props: DataGridPaginationProps) {
+  const t = useTranslations("DataGridPagination");
   const { table, recordCount, isLoading } = useDataGrid();
 
   const defaultProps: Partial<DataGridPaginationProps> = {
@@ -73,7 +76,7 @@ function DataGridPagination(props: DataGridPaginationProps) {
             mergedProps?.sizesSkeleton
           ) : (
             <>
-              <div className="text-sm text-text-secondary">Rows per page</div>
+              <div className="text-sm text-text-secondary">{t("rowsPerPage")}</div>
               <Select
                 value={`${pageSize}`}
                 onValueChange={(value) => {

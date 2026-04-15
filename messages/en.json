@@ -401,6 +401,29 @@
     "emptyPage": "No transactions found on this page",
     "emptyAll": "No transactions at the moment"
   },
+  "Pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "BaseDataGrid": {
+    "noData": "No data available",
+    "reset": "Reset Table"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Asc",
+    "desc": "Desc",
+    "pinLeft": "Pin to left",
+    "pinRight": "Pin to right",
+    "moveLeft": "Move to Left",
+    "moveRight": "Move to Right",
+    "columns": "Columns"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Rows per page"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Edit Columns"
+  },
   "TokenPage": {
     "validationFailed": "Validation failed. Please try again.",
     "goToExpiredPage": "Go to Expired Page"

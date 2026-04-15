@@ -1,4 +1,6 @@
+"use client";
 import { ReactNode, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -23,6 +25,7 @@ function DataGridColumnVisibilityStandalone<TData>({
   columnVisibility,
   trigger,
 }: DataGridColumnVisibilityStandaloneProps<TData>) {
+  const t = useTranslations("DataGridColumnVisibility");
   const columns = useMemo(() => {
     return table
       .getAllColumns()
@@ -41,7 +44,7 @@ function DataGridColumnVisibilityStandalone<TData>({
       icon={<Gear className="h-4 w-4" />}
       className="flex items-center gap-2"
     >
-      <span>Edit Columns</span>
+      <span>{t("editColumns")}</span>
     </Button>
   );
 

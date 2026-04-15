@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { DateRange } from "react-day-picker";
 import { useState, useEffect } from "react";
 import { FilterControls } from "@/components/custom/filter-controls";
+import { useTranslations } from "next-intl";
 
 interface StatusOption {
   label: string;
@@ -21,6 +22,7 @@ export default function Filters({
   showRefundsOption = false,
   isRefundSection = false,
 }: FiltersProps) {
+  const t = useTranslations("BadgeStatus");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -98,16 +100,16 @@ export default function Filters({
       ? statusOptions
       : showRefundsOption
         ? [
-            { label: "Successful", value: "succeeded" },
-            { label: "Failed", value: "failed" },
-            { label: "Pending", value: "pending" },
-            { label: "Review", value: "review" },
+            { label: t("succeeded"), value: "succeeded" },
+            { label: t("failed"), value: "failed" },
+            { label: t("pending"), value: "pending" },
+            { label: t("review"), value: "review" },
           ]
         : [
-            { label: "Successful", value: "succeeded" },
-            { label: "Failed", value: "failed" },
-            { label: "Not Initiated", value: "requires_payment_method" },
-            { label: "In Progress", value: "processing" },
+            { label: t("succeeded"), value: "succeeded" },
+            { label: t("failed"), value: "failed" },
+            { label: t("notInitiated"), value: "requires_payment_method" },
+            { label: t("processing"), value: "processing" },
           ];
 
   return (
