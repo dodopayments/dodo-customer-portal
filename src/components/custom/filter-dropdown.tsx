@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { useId } from "react";
 import { Sliders } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface FilterOption {
   label: string;
@@ -30,10 +32,11 @@ const FilterButton = ({
   setFilters,
   options,
   label,
-  buttonText = "Filters",
+  buttonText,
   className = "",
   setPageNumber,
 }: FilterButtonProps) => {
+  const t = useTranslations("FilterDropdown");
   const id = useId();
   const [open, setOpen] = useState(false);
   const [tempFilters, setTempFilters] = useState<string | undefined>(filters);
@@ -64,7 +67,7 @@ const FilterButton = ({
         <PopoverTrigger asChild>
           <Button variant="secondary" className="flex items-center gap-2">
             <Sliders className="w-4 h-4" />
-            <span>{buttonText}</span>
+            <span>{buttonText ?? t("filters")}</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -74,7 +77,7 @@ const FilterButton = ({
         >
           <div className="space-y-3">
             <div className="text-xs border-b border-border-secondary pb-2 font-medium text-text-secondary">
-              Filter by :
+              {t("filterBy")}
             </div>
             <span className="text-xs py-3 font-normal text-text-secondary">
               {label}
@@ -111,7 +114,7 @@ const FilterButton = ({
                   className="h-7 text-xs px-5"
                   onClick={handleClear}
                 >
-                  Clear
+                  {t("clear")}
                 </Button>
                 <Button
                   type="button"
@@ -119,7 +122,7 @@ const FilterButton = ({
                   className="h-7 text-xs px-5"
                   onClick={handleApply}
                 >
-                  Filter
+                  {t("filter")}
                 </Button>
               </div>
             </form>

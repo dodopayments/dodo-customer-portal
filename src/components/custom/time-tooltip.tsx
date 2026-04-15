@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { House, Copy, Check, Laptop } from "@phosphor-icons/react";
@@ -127,6 +127,7 @@ export function TimeTooltip({
   className,
   triggerFormat = "default",
 }: TimeTooltipProps) {
+  const t = useTranslations("TimeTooltip");
   const [copied, setCopied] = useState<"device" | "project" | null>(null);
   const locale = useLocale();
   const deviceTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -158,14 +159,14 @@ export function TimeTooltip({
         >
           <div className="px-4 pt-4 pb-2">
             <h3 className="font-medium font-display text-base">
-              Timezone conversion
+              {t("title")}
             </h3>
           </div>
           <Separator className="my-1" />
           <div className="flex flex-col gap-4 pt-2 px-4 pb-4">
             <TimeDisplay
               icon={<Laptop className="w-5 h-5 text-text-secondary" />}
-              title="Your device"
+              title={t("yourDevice")}
               bold={true}
               timezone={deviceOffset}
               time={deviceTime}
@@ -174,7 +175,7 @@ export function TimeTooltip({
             />
             <TimeDisplay
               icon={<House className="w-5 h-5 text-text-secondary" />}
-              title="System"
+              title={t("system")}
               timezone="UTC"
               time={utcTime}
               onCopy={() => handleCopy(utcTime, "project")}

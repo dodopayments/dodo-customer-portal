@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
   addDays,
@@ -24,6 +25,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { CalendarDots, X } from "@phosphor-icons/react";
+import { useTranslations } from "next-intl";
 
 interface DateFilterProps {
   className?: string;
@@ -38,6 +40,8 @@ export default function DateFilter({
   setDateFilter,
   setPageNumber,
 }: DateFilterProps) {
+  const t = useTranslations("DateFilter");
+
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: dateFilter?.from,
     to: dateFilter?.to,
@@ -49,49 +53,49 @@ export default function DateFilter({
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(true);
 
   const presets = [
-    { label: "Today", dates: { from: new Date(), to: new Date() } },
+    { label: t("today"), dates: { from: new Date(), to: new Date() } },
     {
-      label: "Yesterday",
+      label: t("yesterday"),
       dates: { from: addDays(new Date(), -1), to: addDays(new Date(), -1) },
     },
     {
-      label: "This week",
+      label: t("thisWeek"),
       dates: { from: startOfWeek(new Date()), to: endOfWeek(new Date()) },
     },
     {
-      label: "Last week",
+      label: t("lastWeek"),
       dates: {
         from: startOfWeek(addDays(new Date(), -7)),
         to: endOfWeek(addDays(new Date(), -7)),
       },
     },
     {
-      label: "This month",
+      label: t("thisMonth"),
       dates: { from: startOfMonth(new Date()), to: endOfMonth(new Date()) },
     },
     {
-      label: "Last month",
+      label: t("lastMonth"),
       dates: {
         from: startOfMonth(subMonths(new Date(), 1)),
         to: endOfMonth(subMonths(new Date(), 1)),
       },
     },
     {
-      label: "This year",
+      label: t("thisYear"),
       dates: {
         from: new Date(new Date().getFullYear(), 0, 1),
         to: new Date(new Date().getFullYear(), 11, 31),
       },
     },
     {
-      label: "Last year",
+      label: t("lastYear"),
       dates: {
         from: new Date(new Date().getFullYear() - 1, 0, 1),
         to: new Date(new Date().getFullYear() - 1, 11, 31),
       },
     },
     {
-      label: "All time",
+      label: t("allTime"),
       dates: {
         from: new Date(2020, 0, 1),
         to: new Date(),
@@ -143,7 +147,7 @@ export default function DateFilter({
           <DialogTrigger asChild>
             <Button variant="secondary">
               <CalendarDots className="w-5 h-5 mr-1" />
-              Select Date Range
+              {t("selectDateRange")}
             </Button>
           </DialogTrigger>
         )}
@@ -152,9 +156,9 @@ export default function DateFilter({
             <div className="bg-bg-secondary w-fit rounded-full p-3">
               <CalendarDots className="w-5 h-5" />
             </div>
-            <DialogTitle>Select Date Range</DialogTitle>
+            <DialogTitle>{t("selectDateRange")}</DialogTitle>
             <DialogDescription>
-              Select the date range to filter the data
+              {t("dialogDescription")}
             </DialogDescription>
           </DialogHeader>
 
@@ -166,14 +170,14 @@ export default function DateFilter({
                 className="flex-1"
                 onClick={() => setIsCalendarOpen(false)}
               >
-                Presets
+                {t("presets")}
               </Button>
               <Button
                 variant={isCalendarOpen ? "secondary" : "ghost"}
                 className="flex-1"
                 onClick={() => setIsCalendarOpen(true)}
               >
-                Calendar
+                {t("calendar")}
               </Button>
             </div>
 
@@ -255,13 +259,13 @@ export default function DateFilter({
             <div className="w-full">
               <DialogClose asChild>
                 <Button variant="secondary" className="w-full">
-                  Cancel
+                  {t("cancel")}
                 </Button>
               </DialogClose>
             </div>
             <DialogClose asChild>
               <Button onClick={handleFilter} className="w-full">
-                Apply Filter
+                {t("applyFilter")}
               </Button>
             </DialogClose>
           </DialogFooter>

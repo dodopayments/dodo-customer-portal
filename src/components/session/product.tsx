@@ -11,6 +11,7 @@ import {
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getToken } from "@/lib/server-actions";
 import { api_url } from "@/lib/http";
 import { formatCurrency } from "@/lib/currency-helper";
@@ -70,6 +71,7 @@ export const Product = ({
   subscription_id: string | null;
   product: ProductCartItem;
 }) => {
+  const t = useTranslations("Product");
   const router = useRouter();
   const [isAttachmentsSheetOpen, setIsAttachmentsSheetOpen] = useState(false);
   const [digitalProducts, setDigitalProducts] =
@@ -99,15 +101,15 @@ export const Product = ({
         setSubscription(data);
       }
     } catch (error) {
-      parseError(error, "Failed to fetch subscription. Please try again.");
+      parseError(error, t("fetchSubscriptionFailed"));
     }
-  }, [subscription_id]);
+  }, [subscription_id, t]);
 
   const fetchDigitalProducts = useCallback(async () => {
     try {
       const token = await getToken();
       if (!token) {
-        throw new Error("No authentication token found");
+        throw new Error(t("noAuthToken"));
       }
       setDigitalProductsLoading(true);
       const response = await fetch(
@@ -125,15 +127,15 @@ export const Product = ({
         setDigitalProducts(data.items[0]);
         setDigitalProductsError(null);
       } else {
-        setDigitalProductsError("Failed to load digital products.");
+        setDigitalProductsError(t("loadDigitalProductsFailed"));
       }
     } catch (error) {
-      parseError(error, "Failed to fetch digital products. Please try again.");
-      setDigitalProductsError("Failed to load digital products.");
+      parseError(error, t("fetchDigitalProductsFailed"));
+      setDigitalProductsError(t("loadDigitalProductsFailed"));
     } finally {
       setDigitalProductsLoading(false);
     }
-  }, [payment_id]);
+  }, [payment_id, t]);
 
   useEffect(() => {
     if (subscription_id) {
@@ -184,7 +186,7 @@ export const Product = ({
         <div className="flex flex-wrap items-center gap-2">
           {!product.is_subscription && product.quantity > 0 && (
             <p className="text-sm text-text-secondary">
-              QTY: {product.quantity}
+              {t("qty", { value: product.quantity })}
             </p>
           )}
           {subscription && (
@@ -218,7 +220,7 @@ export const Product = ({
                 router.push(`/session/subscriptions/${subscription_id}`)
               }
             >
-              Manage Subscription
+              {t("manageSubscription")}
             </Button>
           )}
         </div>
