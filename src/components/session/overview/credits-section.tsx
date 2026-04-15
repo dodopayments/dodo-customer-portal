@@ -24,8 +24,15 @@ export function CreditsSection({
   creditLedgerByEntitlement,
 }: CreditsSectionProps) {
   const t = useTranslations("CreditsSection");
+  const hasData = (e: CreditEntitlementItem) => {
+    const b = Number(e.balance || 0);
+    const o = Number(e.overage || 0);
+    const ledger = creditLedgerByEntitlement[e.credit_entitlement_id] || [];
+    return b > 0 || o > 0 || ledger.length > 0;
+  };
+
   const [selectedId, setSelectedId] = useState<string>(
-    entitlements[0]?.credit_entitlement_id || ""
+    (entitlements.find(hasData) ?? entitlements[0])?.credit_entitlement_id || ""
   );
 
   const selectedEntitlement = entitlements.find(
@@ -37,13 +44,13 @@ export function CreditsSection({
     return null;
   }
 
+  if (!entitlements.some(hasData)) {
+    return null;
+  }
+
   const balance = Number(selectedEntitlement?.balance || 0);
   const overage = Number(selectedEntitlement?.overage || 0);
   const isOverage = balance === 0 && overage > 0;
-
-  if (balance <= 0 && overage <= 0 && creditLedger.length === 0) {
-    return null;
-  }
 
   return (
     <section id="credits">

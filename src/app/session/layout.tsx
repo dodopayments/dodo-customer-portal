@@ -44,7 +44,7 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
             <main className="flex-1 min-h-0 overflow-y-auto">
               {children}
             </main>
-            <div className="fixed hidden lg:flex z-10 bottom-5 right-6">
+            <div className="fixed flex z-10 bottom-5 right-6">
               <LanguageSelector />
             </div>
           </div>
