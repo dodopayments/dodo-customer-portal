@@ -64,7 +64,7 @@ export default async function ProfilePage({
 
   const allWallets = walletItems.map((wallet: WalletItem) => ({
     value: `${wallet.currency.toLowerCase()}-wallet`,
-    label: `${wallet.currency} Wallet`,
+    label: t("walletTabLabel", { currency: wallet.currency }),
     link: `/session/profile?tab=${wallet.currency.toLowerCase()}-wallet`,
   }));
 

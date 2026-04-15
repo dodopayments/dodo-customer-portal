@@ -1,6 +1,6 @@
 "use server";
 
-import { defaultLocale, locales, type Locale } from "@/i18n/config";
+import { defaultLocale, locales, LOCALE_COOKIE_OPTIONS, type Locale } from "@/i18n/config";
 import { cookies } from "next/headers";
 
 const COOKIE_NAME = "NEXT_LOCALE";
@@ -14,10 +14,9 @@ export async function getUserLocale(): Promise<Locale> {
 }
 
 export async function setUserLocale(locale: Locale) {
-  (await cookies()).set(COOKIE_NAME, locale, {
-    sameSite: "none",
-    secure: true,
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  });
+  try {
+    (await cookies()).set(COOKIE_NAME, locale, LOCALE_COOKIE_OPTIONS);
+  } catch (error) {
+    console.error("[i18n] Failed to set locale cookie", { locale, error });
+  }
 }

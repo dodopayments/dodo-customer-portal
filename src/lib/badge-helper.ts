@@ -1,6 +1,6 @@
-type BadgeResponse = {
+export type BadgeResponse = {
   color: string;
-  message: string;
+  messageKey: string;
 };
 
 export function getBadge(
@@ -10,67 +10,64 @@ export function getBadge(
 ): BadgeResponse {
   if (status === null) {
     if (isVerification) {
-      return { color: "red", message: "Pending" };
+      return { color: "red", messageKey: "pending" };
     } else if (isPayment) {
-      return { color: "default", message: "Not Initiated" };
+      return { color: "default", messageKey: "notInitiated" };
     } else {
-      return { color: "default", message: "No Status" };
+      return { color: "default", messageKey: "noStatus" };
     }
   }
 
   const statusMap: Record<string, BadgeResponse> = {
     // Payment Statuses
-    succeeded: { color: "green", message: "Successful" },
-    failed: { color: "red", message: "Failed" },
-    cancelled: { color: "red", message: "Cancelled" },
-    expired: { color: "red", message: "Expired" },
-    processing: { color: "yellow", message: "In Progress" },
-    pending: { color: "yellow", message: "Pending" },
-    review: { color: "yellow", message: "In Review" },
-    requires_customer_action: { color: "yellow", message: "Pending" },
-    requires_payment_method: { color: "default", message: "Not initated" },
-    requires_merchant_action: { color: "orange", message: "On Hold" },
-    requires_confirmation: { color: "orange", message: "On Hold" },
-    requires_capture: { color: "orange", message: "On Hold" },
-    partially_captured: { color: "orange", message: "On Hold" },
-    partially_captured_and_capturable: { color: "orange", message: "On Hold" },
+    succeeded: { color: "green", messageKey: "succeeded" },
+    failed: { color: "red", messageKey: "failed" },
+    cancelled: { color: "red", messageKey: "cancelled" },
+    expired: { color: "red", messageKey: "expired" },
+    processing: { color: "yellow", messageKey: "processing" },
+    pending: { color: "yellow", messageKey: "pending" },
+    review: { color: "yellow", messageKey: "review" },
+    requires_customer_action: { color: "yellow", messageKey: "pending" },
+    requires_payment_method: { color: "default", messageKey: "notInitiated" },
+    requires_merchant_action: { color: "orange", messageKey: "onHold" },
+    requires_confirmation: { color: "orange", messageKey: "onHold" },
+    requires_capture: { color: "orange", messageKey: "onHold" },
+    partially_captured: { color: "orange", messageKey: "onHold" },
+    partially_captured_and_capturable: { color: "orange", messageKey: "onHold" },
 
     // Dispute Stages
-    pre_dispute: { color: "yellow", message: "Pre-Dispute" },
-    dispute: { color: "orange", message: "Dispute" },
-    pre_arbitration: { color: "orange", message: "Pre-Arbitration" },
+    pre_dispute: { color: "yellow", messageKey: "preDispute" },
+    dispute: { color: "orange", messageKey: "dispute" },
+    pre_arbitration: { color: "orange", messageKey: "preArbitration" },
 
     // Dispute Statuses
-    dispute_opened: { color: "yellow", message: "Dispute Opened" },
-    dispute_expired: { color: "red", message: "Dispute Expired" },
-    dispute_accepted: { color: "green", message: "Dispute Accepted" },
-    dispute_cancelled: { color: "red", message: "Dispute Cancelled" },
-    dispute_challenged: { color: "yellow", message: "Dispute Challenged" },
-    dispute_won: { color: "green", message: "Dispute Won" },
-    dispute_lost: { color: "red", message: "Dispute Lost" },
+    dispute_opened: { color: "yellow", messageKey: "disputeOpened" },
+    dispute_expired: { color: "red", messageKey: "disputeExpired" },
+    dispute_accepted: { color: "green", messageKey: "disputeAccepted" },
+    dispute_cancelled: { color: "red", messageKey: "disputeCancelled" },
+    dispute_challenged: { color: "yellow", messageKey: "disputeChallenged" },
+    dispute_won: { color: "green", messageKey: "disputeWon" },
+    dispute_lost: { color: "red", messageKey: "disputeLost" },
 
     // Generic Statuses
-    Fail: { color: "red", message: "Failed" },
-    Review: { color: "yellow", message: "In Review" },
-    Hold: { color: "yellow", message: "On Hold" },
-    Success: { color: "green", message: "Verified" },
+    Fail: { color: "red", messageKey: "failed" },
+    Review: { color: "yellow", messageKey: "review" },
+    Hold: { color: "yellow", messageKey: "onHold" },
+    Success: { color: "green", messageKey: "verified" },
 
-    // pricing type
-    One_time: { color: "blue", message: "One Time" },
-    Subscription: { color: "purple", message: "Subscription" },
+    // Pricing type
+    One_time: { color: "blue", messageKey: "oneTime" },
+    Subscription: { color: "purple", messageKey: "subscription" },
 
     // License Status
-    active: { color: "green", message: "Active" },
-    disabled: { color: "yellow", message: "Disabled" },
+    active: { color: "green", messageKey: "active" },
+    disabled: { color: "yellow", messageKey: "disabled" },
   };
 
-  // Return matched status or default fallback
   return (
-    statusMap[status] || {
+    statusMap[status] ?? {
       color: "default",
-      message:
-        status.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase()) ||
-        "Unknown",
+      messageKey: "unknown",
     }
   );
 }

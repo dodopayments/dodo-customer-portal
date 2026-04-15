@@ -12,7 +12,10 @@ import { CurrencyCode, decodeCurrency, formatCurrency } from "@/lib/currency-hel
 
 type TFunction = (key: string) => string;
 
-export function getBillingHistoryColumns(t: TFunction): ColumnDef<OrderData>[] {
+export function getBillingHistoryColumns(
+  t: TFunction,
+  tBadge: TFunction
+): ColumnDef<OrderData>[] {
   return [
     {
         id: "date",
@@ -40,7 +43,7 @@ export function getBillingHistoryColumns(t: TFunction): ColumnDef<OrderData>[] {
                     dot={false}
                     className="rounded-sm text-xs"
                 >
-                    {badge.message}
+                    {tBadge(badge.messageKey)}
                 </Badge>
             );
         },
@@ -74,7 +77,7 @@ export function getBillingHistoryColumns(t: TFunction): ColumnDef<OrderData>[] {
                     dot={false}
                     className="rounded-sm text-xs"
                 >
-                    {badge.message}
+                    {tBadge(badge.messageKey)}
                 </Badge>
             );
         },

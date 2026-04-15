@@ -29,7 +29,7 @@ import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { getPaymentMethodLogoUrl } from "./payment-methods/payment-method-logo";
 import { SubscriptionNotes } from "./subscription-notes";
 import { useBusiness } from "@/hooks/use-business";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface SubscriptionCardProps {
   item: SubscriptionData;
@@ -74,6 +74,8 @@ export const SubscriptionCard = ({
   paymentMethod,
 }: SubscriptionCardProps) => {
   const t = useTranslations("SubscriptionCard");
+  const tBadge = useTranslations("BadgeStatus");
+  const locale = useLocale();
   const router = useRouter();
   const { business } = useBusiness();
 
@@ -178,7 +180,7 @@ export const SubscriptionCard = ({
                     {t("renewsOn")}{" "}
                     {item.next_billing_date
                       ? new Date(item.next_billing_date).toLocaleDateString(
-                          "en-GB",
+                          locale,
                         )
                       : "N/A"}
                   </span>
@@ -186,7 +188,7 @@ export const SubscriptionCard = ({
                     {t("validTill")}{" "}
                     {item.next_billing_date
                       ? new Date(item.next_billing_date).toLocaleDateString(
-                          "en-GB",
+                          locale,
                         )
                       : "N/A"}
                   </span>
@@ -231,7 +233,7 @@ export const SubscriptionCard = ({
                   dot={false}
                   className="rounded-sm border-sm"
                 >
-                  {getBadge(item.status).message}
+                  {tBadge(getBadge(item.status).messageKey)}
                 </Badge>
               </div>
               <div className="font-display font-semibold text-base leading-5 text-right sm:text-left shrink-0">

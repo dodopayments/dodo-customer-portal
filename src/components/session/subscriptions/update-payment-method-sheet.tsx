@@ -234,7 +234,7 @@ export function UpdatePaymentMethodSheet({
     } finally {
       setLoadingData(false);
     }
-  }, [subscription_id]);
+  }, [subscription_id, t]);
 
   // Reset state when sheet closes
   useEffect(() => {
@@ -289,7 +289,7 @@ export function UpdatePaymentMethodSheet({
         setIsSubmitting(false);
       }
     },
-    [selectedPaymentMethodId, subscription_id, router]
+    [selectedPaymentMethodId, subscription_id, router, t]
   );
 
   const handleValueChange = useCallback((value: string) => {
@@ -319,7 +319,7 @@ export function UpdatePaymentMethodSheet({
     } finally {
       setIsSubmitting(false);
     }
-  }, [subscription_id, router]);
+  }, [subscription_id, router, t]);
 
   const handleOpenChange = useCallback(
     (newOpen: boolean) => {

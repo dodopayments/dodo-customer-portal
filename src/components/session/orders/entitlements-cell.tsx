@@ -29,7 +29,7 @@ import { Badge, BadgeVariant } from "@/components/ui/badge";
 import { parseIsoDate } from "@/lib/date-helper";
 import Loading from "@/components/loading";
 import { FileText } from "@phosphor-icons/react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface EntitlementsCellProps {
     paymentId: string;
@@ -50,6 +50,8 @@ export const EntitlementsCell = ({
     const [digitalProductsLoading, setDigitalProductsLoading] = useState(false);
     const [digitalProductsError, setDigitalProductsError] = useState<string | null>(null);
     const t = useTranslations("Entitlements");
+    const tBadge = useTranslations("BadgeStatus");
+    const locale = useLocale();
     const [visibleById, setVisibleById] = useState<Record<string, boolean>>({});
 
     const toggleVisibility = (id: string) =>
@@ -77,7 +79,7 @@ export const EntitlementsCell = ({
         } finally {
             setProductCartLoading(false);
         }
-    }, [productCart, productCartLoading, paymentId]);
+    }, [productCart, productCartLoading, paymentId, t]);
 
     useEffect(() => {
         if (!hasLicenseKeys) {
@@ -130,7 +132,7 @@ export const EntitlementsCell = ({
         } finally {
             setDigitalProductsLoading(false);
         }
-    }, [paymentId]);
+    }, [paymentId, t]);
 
     const allLicenseKeys: LicenseKeyResponse[] =
         productCart?.flatMap((p) => p.license_keys || []) || [];
@@ -223,10 +225,10 @@ export const EntitlementsCell = ({
                                                 <Badge
                                                     variant={getBadge(licenseKey.status, false, true).color as BadgeVariant}
                                                 >
-                                                    {getBadge(licenseKey.status, false, true).message}
+                                                    {tBadge(getBadge(licenseKey.status, false, true).messageKey)}
                                                 </Badge>
                                                 <p className="text-sm text-text-secondary">
-                                                    {t("expires")} {parseIsoDate(licenseKey.expires_at)}
+                                                    {t("expires")} {parseIsoDate(licenseKey.expires_at, locale)}
                                                 </p>
                                             </CardFooter>
                                         </Card>

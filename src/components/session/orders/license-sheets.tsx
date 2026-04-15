@@ -21,6 +21,7 @@ import { parseIsoDate } from "@/lib/date-helper";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 interface LicenseSheetsProps {
   isLicenseSheetOpen: boolean;
@@ -34,6 +35,8 @@ export const LicenseSheets = ({
   licenseKeys,
 }: LicenseSheetsProps) => {
   const t = useTranslations("Entitlements");
+  const tBadge = useTranslations("BadgeStatus");
+  const locale = useLocale();
   const [visibleById, setVisibleById] = useState<Record<string, boolean>>({});
 
   const toggleVisibility = (id: string) =>
@@ -96,10 +99,10 @@ export const LicenseSheets = ({
                         .color as BadgeVariant
                     }
                   >
-                    {getBadge(licenseKey.status, false, true).message}
+                    {tBadge(getBadge(licenseKey.status, false, true).messageKey)}
                   </Badge>
                   <p className="text-sm text-text-secondary">
-                    {t("expires")} {parseIsoDate(licenseKey.expires_at)}
+                    {t("expires")} {parseIsoDate(licenseKey.expires_at, locale)}
                   </p>
                 </CardFooter>
               </Card>

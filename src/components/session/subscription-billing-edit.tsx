@@ -78,7 +78,7 @@ export default function SubscriptionBillingEdit({
       }
     };
     fetchData();
-  }, []);
+  }, [t]);
 
   const onSave = async (data: BillingDetailsFormValues) => {
     try {

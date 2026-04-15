@@ -22,7 +22,10 @@ interface LicenseResponse {
   subscription_id: string;
 }
 
-export const LicenseColumn: ColumnDef<LicenseResponse>[] = [
+export function getLicenseColumns(
+  tBadge: (key: string) => string,
+): ColumnDef<LicenseResponse>[] {
+  return [
   {
     accessorKey: "key",
     header: "License Key",
@@ -37,10 +40,10 @@ export const LicenseColumn: ColumnDef<LicenseResponse>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
-      const { color, message } = getBadge(status, false, true);
+      const { color, messageKey } = getBadge(status, false, true);
       return (
         <Badge dot={false} variant={color as any}>
-          {message}
+          {tBadge(messageKey)}
         </Badge>
       );
     },
@@ -82,4 +85,5 @@ export const LicenseColumn: ColumnDef<LicenseResponse>[] = [
       );
     },
   },
-];
+  ];
+}

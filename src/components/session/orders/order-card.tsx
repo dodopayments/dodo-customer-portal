@@ -24,7 +24,7 @@ import { getProductCart } from "@/app/session/orders/actions";
 import { Product, ProductCartItem } from "../product";
 import parseError from "@/lib/clientErrorHelper";
 import InvoiceDownloadSheet from "../invoice-download-sheet";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface OrderCardProps {
   item: OrderData;
@@ -33,6 +33,8 @@ interface OrderCardProps {
 
 export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
   const t = useTranslations("OrderCard");
+  const tBadge = useTranslations("BadgeStatus");
+  const locale = useLocale();
   const [loading, setLoading] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [productCart, setProductCart] = useState<ProductCartItem[]>([]);
@@ -86,10 +88,10 @@ export const OrderCard = ({ item, cardClassName }: OrderCardProps) => {
             dot={false}
             className="rounded-sm border-sm"
           >
-            {getBadge(item.status).message}
+            {tBadge(getBadge(item.status).messageKey)}
           </Badge>
           <p className="text-sm text-text-secondary">
-            {t("purchased")}: {parseIsoDate(item.created_at)}
+            {t("purchased")}: {parseIsoDate(item.created_at, locale)}
           </p>
         </div>
         <div

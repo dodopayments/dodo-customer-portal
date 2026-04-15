@@ -358,7 +358,7 @@ export function ChangePlanSheet({
                           value={group.group_id}
                           className="data-[state=active]:bg-bg-secondary rounded-lg !after:content-none !after:h-0 !after:absolute !after:inset-x-0 !after:bottom-0 !border-b-0"
                         >
-                          {group.group_name || "Unnamed Group"}
+                          {group.group_name || t("unnamedGroup")}
                         </TabsTrigger>
                       ))}
                     </TabsList>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { House, Copy, Check, Laptop } from "@phosphor-icons/react";
@@ -28,9 +29,9 @@ function getDeviceTimezoneOffset(): string {
   return `UTC${sign}${hours}:${minutes}`;
 }
 
-function formatDateTime(dateString: string, timeZone: string): string {
+function formatDateTime(dateString: string, timeZone: string, locale: string): string {
   const date = new Date(dateString);
-  return date.toLocaleString("en-US", {
+  return date.toLocaleString(locale, {
     weekday: "short",
     year: "numeric",
     month: "short",
@@ -46,10 +47,11 @@ function formatDateTime(dateString: string, timeZone: string): string {
 function TimeTriggerFormat(
   dateString: string,
   format: "default" | "shortDate",
+  locale: string,
 ): string {
   const date = new Date(dateString);
   if (format === "shortDate") {
-    return date.toLocaleDateString("en-GB", {
+    return date.toLocaleDateString(locale, {
       day: "2-digit",
       month: "2-digit",
       year: "2-digit",
@@ -57,7 +59,7 @@ function TimeTriggerFormat(
     });
   }
 
-  return date.toLocaleString("en-GB", {
+  return date.toLocaleString(locale, {
     day: "numeric",
     month: "short",
     hour: "numeric",
@@ -126,11 +128,12 @@ export function TimeTooltip({
   triggerFormat = "default",
 }: TimeTooltipProps) {
   const [copied, setCopied] = useState<"device" | "project" | null>(null);
+  const locale = useLocale();
   const deviceTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const deviceOffset = getDeviceTimezoneOffset();
-  const deviceTime = formatDateTime(timeStamp, deviceTz);
-  const displayTime = TimeTriggerFormat(timeStamp, triggerFormat);
-  const utcTime = formatDateTime(timeStamp, "UTC");
+  const deviceTime = formatDateTime(timeStamp, deviceTz, locale);
+  const displayTime = TimeTriggerFormat(timeStamp, triggerFormat, locale);
+  const utcTime = formatDateTime(timeStamp, "UTC", locale);
 
   function handleCopy(value: string, type: "device" | "project") {
     navigator.clipboard.writeText(value);

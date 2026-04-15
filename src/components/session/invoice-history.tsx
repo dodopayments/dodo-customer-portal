@@ -10,7 +10,7 @@ import { formatCurrency, decodeCurrency } from "@/lib/currency-helper";
 import { CircleSlash } from "lucide-react";
 import ServerPagination from "@/components/common/server-pagination";
 import InvoiceDownloadSheet from "./invoice-download-sheet";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function InvoiceHistory({
   invoiceHistory,
@@ -30,6 +30,8 @@ export function InvoiceHistory({
   pageParamKey?: string;
 }) {
   const t = useTranslations("InvoiceHistory");
+  const tBadge = useTranslations("BadgeStatus");
+  const locale = useLocale();
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const InvoiceColumn: ColumnDef<any>[] = useMemo(() => [
@@ -45,7 +47,7 @@ export function InvoiceHistory({
       header: t("date"),
       cell: ({ row }: { row: any }) => (
         <div className="text-left">
-          {new Date(row.original.date).toLocaleDateString("en-GB", {
+          {new Date(row.original.date).toLocaleDateString(locale, {
             day: "numeric",
             month: "short",
             year: "2-digit",
@@ -70,7 +72,7 @@ export function InvoiceHistory({
       header: t("status"),
       cell: ({ row }: { row: any }) => (
         <Badge variant={getBadge(row.original.status).color as any}>
-          {getBadge(row.original.status).message}
+          {tBadge(getBadge(row.original.status).messageKey)}
         </Badge>
       ),
     },
@@ -86,7 +88,7 @@ export function InvoiceHistory({
         />
       ),
     },
-  ], [t]);
+  ], [t, tBadge, locale]);
 
   const data = useMemo(() => invoiceHistory, [invoiceHistory]);
 

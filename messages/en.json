@@ -3,6 +3,10 @@
     "title": "Something went wrong",
     "description": "You might be having a network connection problem, the link might be expired, or the link/product might be invalid."
   },
+  "NotFoundPage": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or may have been moved."
+  },
   "ExpiredPage": {
     "title": "For security reasons, this page has expired."
   },
@@ -64,6 +68,9 @@
     "poweredBy": "Powered by",
     "privacy": "Privacy",
     "terms": "Terms"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Failed to change language. Please try again."
   },
   "Subscriptions": {
     "headingActive": "Active subscriptions",
@@ -148,7 +155,9 @@
     "cancelledOn": "This subscription was cancelled on {date}.",
     "expired": "This subscription has expired.",
     "scheduledCancellation": "Your subscription is currently scheduled for cancellation on {date}.",
+    "scheduledCancellationNoDate": "Your subscription is currently scheduled for cancellation.",
     "flexibleSubscription": "This is a flexible subscription, so {name} may adjust the price for your next billing cycle.",
+    "flexibleSubscriptionUnknownMerchant": "This is a flexible subscription, so the billing amount may be adjusted for your next billing cycle.",
     "discountApplied": "Discount applied for {count, plural, one {# more billing cycle} other {# more billing cycles}}."
   },
   "ChangePlanSheet": {
@@ -156,7 +165,8 @@
     "sheetTitle": "Select a new plan",
     "noProducts": "No subscription products available.",
     "currentPlan": "Current plan",
-    "proceed": "Proceed"
+    "proceed": "Proceed",
+    "unnamedGroup": "Unnamed Group"
   },
   "PlanPreview": {
     "confirmPlanChange": "Confirm Plan Change",
@@ -223,7 +233,7 @@
     "expiryDatePlaceholder": "MM/YY",
     "securityCode": "Security code",
     "securityCodePlaceholder": "123",
-    "cardTerms": "By providing your card information, you allow Lummi to charge your card for future payments in accordance with their terms."
+    "cardTerms": "By providing your card information, you allow Dodo Payments to charge your card for future payments in accordance with their terms."
   },
   "Orders": {
     "billingHistory": "Billing History",
@@ -361,7 +371,8 @@
     "name": "Name",
     "email": "Email",
     "walletsHeading": "Wallets",
-    "creditsHeading": "Credits"
+    "creditsHeading": "Credits",
+    "walletTabLabel": "{currency} Wallet"
   },
   "ProfileWallet": {
     "noWalletsFound": "No wallets found",
@@ -384,5 +395,33 @@
     "tableAmount": "Amount",
     "emptyPage": "No transactions found on this page",
     "emptyAll": "No transactions at the moment"
+  },
+  "BadgeStatus": {
+    "succeeded": "Successful",
+    "failed": "Failed",
+    "cancelled": "Cancelled",
+    "expired": "Expired",
+    "processing": "In Progress",
+    "pending": "Pending",
+    "review": "In Review",
+    "onHold": "On Hold",
+    "notInitiated": "Not Initiated",
+    "noStatus": "No Status",
+    "verified": "Verified",
+    "active": "Active",
+    "disabled": "Disabled",
+    "preDispute": "Pre-Dispute",
+    "dispute": "Dispute",
+    "preArbitration": "Pre-Arbitration",
+    "disputeOpened": "Dispute Opened",
+    "disputeExpired": "Dispute Expired",
+    "disputeAccepted": "Dispute Accepted",
+    "disputeCancelled": "Dispute Cancelled",
+    "disputeChallenged": "Dispute Challenged",
+    "disputeWon": "Dispute Won",
+    "disputeLost": "Dispute Lost",
+    "oneTime": "One Time",
+    "subscription": "Subscription",
+    "unknown": "Unknown"
   }
 }

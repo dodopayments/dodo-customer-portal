@@ -21,7 +21,6 @@ import {
   formatCardNumber,
   formatExpiryDate,
   unformatCardNumber,
-  // parseExpiryDate,
 } from "@/lib/payment-helper";
 import { useTranslations } from "next-intl";
 
@@ -84,13 +83,6 @@ export function AddPaymentMethodSheet() {
     }
   };
 
-  // const handleAddCard = () => {
-  //   const cardNumberDigits = unformatCardNumber(cardNumber);
-  //   const expiryParsed = parseExpiryDate(expiryDate);
-  //   // TODO: Implement add card functionality
-  //   // cardNumberDigits, expiryParsed?.month, expiryParsed?.year, securityCode
-  // };
-
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <Button
@@ -119,7 +111,7 @@ export function AddPaymentMethodSheet() {
           </div>
           <div className="flex items-center gap-4 my-2">
             <Separator className="flex-1" />
-            <span className="text-sm text-text-secondary">OR</span>
+            <span className="text-sm text-text-secondary">{t("or")}</span>
             <Separator className="flex-1" />
           </div>
           <div className="flex flex-row gap-2 w-full">
@@ -210,7 +202,7 @@ export function AddPaymentMethodSheet() {
                   <Input
                     type="text"
                     id="expiry-date"
-                    placeholder="MM/YY"
+                    placeholder={t("expiryDatePlaceholder")}
                     value={expiryDate}
                     onChange={handleExpiryDateChange}
                     onKeyDown={handleExpiryDateKeyDown}
@@ -222,7 +214,7 @@ export function AddPaymentMethodSheet() {
                   <Input
                     type="text"
                     id="security-code"
-                    placeholder="123"
+                    placeholder={t("securityCodePlaceholder")}
                     value={securityCode}
                     onChange={(e) => setSecurityCode(e.target.value)}
                     maxLength={4}
@@ -235,9 +227,6 @@ export function AddPaymentMethodSheet() {
               <Separator className="my-3" />
             </div>
           )}
-          {/* <Button className="w-full" onClick={handleAddCard}>
-            Add
-          </Button> */}
         </div>
       </SheetContent>
     </Sheet>

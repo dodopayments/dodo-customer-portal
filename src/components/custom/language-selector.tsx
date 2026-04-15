@@ -1,19 +1,20 @@
 "use client";
 
 import { useCallback, useEffect } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { getCookie, setCookie } from "cookies-next";
 import { GlobeSimple } from "@phosphor-icons/react";
 import flags from "react-phone-number-input/flags";
 import * as RPNInput from "react-phone-number-input";
+import { toast } from "sonner";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { languages } from "@/i18n/config";
+import { languages, defaultLocale, LOCALE_COOKIE_OPTIONS } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 
 const sortedLanguages = [...languages].sort((a, b) =>
@@ -34,12 +35,12 @@ const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
 };
 
 function detectBrowserLanguage(): string {
-  if (typeof navigator === "undefined") return "en";
+  if (typeof navigator === "undefined") return defaultLocale;
   const browserLangs = navigator.languages || [navigator.language];
   return (
     browserLangs
       .map((l) => l.split("-")[0])
-      .find((l) => languages.some((lang) => lang.code === l)) || "en"
+      .find((l) => languages.some((lang) => lang.code === l)) || defaultLocale
   );
 }
 
@@ -50,18 +51,20 @@ interface LanguageSelectorProps {
 export function LanguageSelector({ className }: LanguageSelectorProps) {
   const locale = useLocale();
   const router = useRouter();
+  const t = useTranslations("LanguageSelector");
   const currentLanguage = languages.find((l) => l.code === locale);
 
   const handleLanguageChange = useCallback(
     (value: string) => {
       if (value === locale) return;
 
-      setCookie("NEXT_LOCALE", value, {
-        maxAge: 60 * 60 * 24 * 365,
-        sameSite: "none",
-        secure: true,
-        path: "/",
-      });
+      try {
+        setCookie("NEXT_LOCALE", value, LOCALE_COOKIE_OPTIONS);
+      } catch (error) {
+        console.error("[i18n] Failed to set locale cookie", { error });
+        toast.error(t("changeFailed"));
+        return;
+      }
 
       // Safari blocks cookies in iframes — fall back to URL param which middleware picks up
       const isInIframe = window.self !== window.top;
@@ -74,10 +77,10 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
 
       router.refresh();
     },
-    [locale, router]
+    [locale, router, t]
   );
 
-  // Auto-detect browser language on first visit (no cookie set yet)
+  // Run once on mount — re-running on locale change would override manual selection.
   useEffect(() => {
     const isInIframe = window.self !== window.top;
     if (!isInIframe && !getCookie("NEXT_LOCALE")) {
@@ -86,7 +89,8 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
         handleLanguageChange(detected);
       }
     }
-  }, [handleLanguageChange, locale]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Select value={locale} onValueChange={handleLanguageChange}>

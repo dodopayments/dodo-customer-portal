@@ -25,7 +25,10 @@ export interface RefundResponse {
 
 type TFunction = (key: string) => string;
 
-export function getRefundColumns(t: TFunction): ColumnDef<RefundResponse>[] {
+export function getRefundColumns(
+  t: TFunction,
+  tBadge: TFunction
+): ColumnDef<RefundResponse>[] {
   return [
     {
       accessorKey: "created_at",
@@ -45,10 +48,10 @@ export function getRefundColumns(t: TFunction): ColumnDef<RefundResponse>[] {
       header: t("status"),
       cell: ({ row }) => {
         const status = row.getValue("status") as string;
-        const { color, message } = getBadge(status);
+        const badge = getBadge(status);
         return (
-          <Badge dot={false} variant={color as any}>
-            {message}
+          <Badge dot={false} variant={badge.color as any}>
+            {tBadge(badge.messageKey)}
           </Badge>
         );
       },

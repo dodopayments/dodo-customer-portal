@@ -36,7 +36,10 @@ import Link from "next/link";
 import { api_url } from "@/lib/http";
 import DigitalDeliveryDialog from "./digital-delivery-dialog";
 
-export const PaymentColumn: ColumnDef<PaymentResponse>[] = [
+export function getPaymentColumns(
+  tBadge: (key: string) => string,
+): ColumnDef<PaymentResponse>[] {
+  return [
   {
     accessorKey: "payment_id",
     header: "Payment ID",
@@ -47,10 +50,10 @@ export const PaymentColumn: ColumnDef<PaymentResponse>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
-      const { color, message } = getBadge(status, false, true);
+      const { color, messageKey } = getBadge(status, false, true);
       return (
         <Badge dot={false} variant={color as any}>
-          {message}
+          {tBadge(messageKey)}
         </Badge>
       );
     },
@@ -128,4 +131,5 @@ export const PaymentColumn: ColumnDef<PaymentResponse>[] = [
       }
     },
   },
-];
+  ];
+}
