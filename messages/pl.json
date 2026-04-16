@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Coś poszło nie tak",
+    "description": "Możesz mieć problem z połączeniem sieciowym, link mógł wygasnąć albo link/produkt może być nieprawidłowy."
+  },
+  "NotFoundPage": {
+    "title": "Nie znaleziono strony",
+    "description": "Strona, której szukasz, nie istnieje lub mogła zostać przeniesiona."
+  },
+  "ExpiredPage": {
+    "title": "Ze względów bezpieczeństwa ta strona wygasła."
+  },
+  "LandingCard": {
+    "heading": "W czym możemy Ci dziś pomóc?",
+    "actionsIntro": "Możesz wykonać następujące działania:",
+    "actions": {
+      "changePaymentMethod": "Zmień metodę płatności",
+      "cancelSubscription": "Anuluj subskrypcję",
+      "downloadInvoices": "Pobierz faktury",
+      "viewOrders": "Wyświetl zamówienia przetworzone przez Dodo Payments",
+      "otherQueries": "Inne zapytania"
+    },
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Wpisz swój e-mail",
+    "emailInvalid": "Nieprawidłowy adres e-mail",
+    "emailFailed": "Nie udało się wysłać linku do logowania. Spróbuj ponownie.",
+    "lookUpPurchase": "Znajdź mój zakup",
+    "sendEmail": "Wyślij e-mail",
+    "sending": "Wysyłanie...",
+    "sentTitle": "Wysłaliśmy do Ciebie e-mail!",
+    "sentDescription": "Użyj linku w e-mailu, aby zalogować się do portalu self-service Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Czym jest Dodo Payments?",
+    "description": "Dodo Payments to platforma Merchant of Record (MoR), która zarządza płatnościami, zgodnością podatkową oraz infrastrukturą rozliczeń dla rosnącej liczby firm cyfrowych, w tym produktów software, narzędzi i usług. Gdy dokonujesz zakupu lub subskrypcji produktu sprzedawanego przez jedną z tych firm, to Dodo Payments obsługuje transakcję, rozliczenia, wsparcie klienta, zwroty oraz spory.",
+    "visitPrompt": "Odwiedź <link>dodopayments.com</link>, aby dowiedzieć się więcej."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "Portal rozliczeniowy {businessName}",
+    "enterEmailDescription": "Wpisz swój e-mail, aby otrzymać link dostępu",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Wpisz swój e-mail",
+    "emailInvalid": "Wprowadź prawidłowy adres e-mail",
+    "emailRequired": "E-mail jest wymagany",
+    "getAccessLink": "Uzyskaj link dostępu",
+    "sending": "Wysyłanie...",
+    "successTitle": "Jeszcze tylko krok!",
+    "successDescription": "Link dostępu wysłano na adres e-mail {email}. Sprawdź też folder spam!",
+    "goBack": "Wróć",
+    "loginLinkSent": "Link do logowania wysłano na adres e-mail",
+    "loginLinkFailed": "Nie udało się wysłać linku do logowania. Spróbuj ponownie."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Szukaj firm",
+    "emptyPage": "Na tej stronie nie znaleziono żadnych firm",
+    "emptyAll": "Nie znaleziono żadnych firm",
+    "fetchError": "Nie udało się pobrać szczegółów firmy",
+    "viewDetails": "Wyświetl szczegóły"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Wyświetl wszystkie firmy",
+    "switchToLightMode": "Przełącz na jasny motyw",
+    "switchToDarkMode": "Przełącz na ciemny motyw",
+    "loggingOut": "Wylogowywanie...",
+    "logOut": "Wyloguj",
+    "goBackToBusiness": "Wróć do firmy",
+    "goToOverview": "Przejdź do przeglądu"
+  },
+  "LeftPanel": {
+    "goBackTo": "Wróć do {businessName}",
+    "heading": "Zarządzaj subskrypcją i ustawieniami rozliczeń",
+    "description": "Wyświetl historię płatności, pobieraj faktury oraz zarządzaj subskrypcjami i metodami płatności.",
+    "poweredBy": "Powered by",
+    "privacy": "Prywatność",
+    "terms": "Warunki"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Nie udało się zmienić języka. Spróbuj ponownie."
+  },
+  "Subscriptions": {
+    "headingActive": "Aktywne subskrypcje",
+    "headingAll": "Subskrypcje",
+    "emptyPage": "Na tej stronie nie znaleziono subskrypcji",
+    "emptyActive": "Obecnie brak aktywnych subskrypcji",
+    "viewAll": "Wyświetl wszystkie subskrypcje"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Zarządzaj subskrypcją",
+    "updatePaymentMethod": "Zaktualizuj metodę płatności",
+    "viewDetails": "Wyświetl szczegóły",
+    "renewsOn": "odnowienie",
+    "validTill": "ważne do"
+  },
+  "SubscriptionDetails": {
+    "addons": "Add-ons",
+    "meters": "Meters",
+    "freeThreshold": "Darmowy próg",
+    "per": "za",
+    "qty": "Ilość: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Informacje rozliczeniowe",
+    "name": "Imię i nazwisko",
+    "phoneNumber": "Numer telefonu",
+    "email": "E-mail",
+    "billingAddress": "Adres rozliczeniowy"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Edytuj",
+    "sheetTitle": "Edytuj dane rozliczeniowe",
+    "customerName": "Imię i nazwisko klienta",
+    "fullNamePlaceholder": "Imię i nazwisko",
+    "billingAddress": "Adres rozliczeniowy",
+    "loadingCountries": "Ładowanie...",
+    "addressLine": "Adres — linia 1",
+    "state": "Stan",
+    "city": "Miasto",
+    "postalCode": "Kod pocztowy",
+    "purchasingAsBusiness": "Zakup jako firma",
+    "taxId": "NIP",
+    "taxIdPlaceholder": "NIP",
+    "saveDetails": "Zapisz dane",
+    "updateSuccess": "Pomyślnie zaktualizowano dane rozliczeniowe",
+    "updateFailed": "Nie udało się zaktualizować danych rozliczeniowych. Spróbuj ponownie.",
+    "countriesLoadFailed": "Nie udało się załadować krajów. Spróbuj ponownie."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Czy na pewno chcesz anulować subskrypcję tej usługi?",
+    "description": "Po kontynuowaniu utracisz dostęp do wszystkich powiązanych korzyści, a tej akcji nie można cofnąć.",
+    "close": "Zamknij",
+    "cancel": "Anuluj",
+    "cancelling": "Anulowanie..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Anuluj subskrypcję",
+    "triggerRevoke": "Cofnij anulowanie",
+    "sheetTitle": "Przykro nam, że odchodzisz...",
+    "currentPlan": "Obecny plan",
+    "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
+    "quantity": "Ilość: {value}",
+    "scheduledCancellationWarning": "Ta subskrypcja jest zaplanowana do anulowania w następnym terminie rozliczenia.",
+    "revokeCancellation": "Cofnij anulowanie",
+    "revoking": "Cofanie...",
+    "cancelAtNextBilling": "Anuluj w następnym terminie rozliczenia",
+    "cancelling": "Anulowanie...",
+    "cancelSuccess": "Subskrypcja została anulowana",
+    "cancelScheduled": "Subskrypcja zostanie anulowana w następnym terminie rozliczenia",
+    "cancelFailed": "Nie udało się anulować subskrypcji. Spróbuj ponownie.",
+    "revokeFailed": "Nie udało się cofnąć anulowania. Spróbuj ponownie.",
+    "revokeSuccess": "Pomyślnie cofnięto anulowanie subskrypcji"
+  },
+  "SubscriptionInfo": {
+    "title": "Twoja subskrypcja jest obecnie wstrzymana",
+    "description": "Zaktualizuj metodę płatności, aby wznowić tę subskrypcję"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Twoja subskrypcja jest obecnie wstrzymana z powodu nieudanej płatności. Zaktualizuj metodę płatności, aby wznowić tę subskrypcję",
+    "failed": "Ta subskrypcja nie powiodła się. Spróbuj ponownie.",
+    "pending": "Płatność nie została ukończona, a checkout został pozostawiony niedokończony. Jeśli chcesz zasubskrybować, spróbuj ponownie.",
+    "cancelledOn": "Ta subskrypcja została anulowana {date}.",
+    "expired": "Ta subskrypcja wygasła.",
+    "scheduledCancellation": "Twoja subskrypcja jest obecnie zaplanowana do anulowania {date}.",
+    "scheduledCancellationNoDate": "Twoja subskrypcja jest obecnie zaplanowana do anulowania.",
+    "flexibleSubscription": "To elastyczna subskrypcja, więc {name} może dostosować cenę w następnym cyklu rozliczeniowym.",
+    "flexibleSubscriptionUnknownMerchant": "To elastyczna subskrypcja, więc kwota rozliczenia może zostać dostosowana w następnym cyklu rozliczeniowym.",
+    "discountApplied": "Zastosowano zniżkę na {count, plural, one {# kolejny cykl rozliczeniowy} other {# kolejne cykle rozliczeniowe}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Zmień plan",
+    "sheetTitle": "Wybierz nowy plan",
+    "noProducts": "Brak dostępnych produktów subskrypcyjnych.",
+    "currentPlan": "Obecny plan",
+    "proceed": "Kontynuuj",
+    "unnamedGroup": "Grupa bez nazwy"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Potwierdź zmianę planu",
+    "noPlanSelected": "Nie wybrano planu",
+    "loadingPreview": "Ładowanie podglądu...",
+    "current": "Obecny",
+    "updated": "Zaktualizowany",
+    "qty": "Ilość: {value}",
+    "viewAddons": "Wyświetl add-ons",
+    "manageAddons": "Zarządzaj add-ons",
+    "noAddons": "Brak add-ons",
+    "tableItem": "Pozycja",
+    "tableQuantity": "Ilość",
+    "tableUnitPrice": "Cena jednostkowa",
+    "tableTax": "Podatek",
+    "tableTotal": "Razem",
+    "creditToBalance": "Uznanie salda",
+    "creditTooltip": "Uznanie zostanie wykorzystane do rozliczenia przyszłych płatności",
+    "summaryTotal": "Razem",
+    "summaryTax": "Podatek",
+    "summaryAmountDue": "Kwota do zapłaty teraz",
+    "payButton": "Zapłać {amount}",
+    "previewFailed": "Nie udało się załadować podglądu. Spróbuj ponownie.",
+    "changeFailed": "Nie udało się zmienić planu. Spróbuj ponownie.",
+    "changeSuccess": "Pomyślnie zmieniono plan",
+    "addonRequired": "Wybierz co najmniej jeden add-on z ilością 1 lub większą."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Edytuj",
+    "sheetTitle": "Edytuj metodę płatności",
+    "addPaymentMethod": "Dodaj metodę płatności",
+    "noPaymentMethods": "Nie znaleziono kwalifikujących się metod płatności.",
+    "confirmChanges": "Potwierdź zmiany",
+    "updating": "Aktualizowanie...",
+    "selectRequired": "Wybierz metodę płatności",
+    "loadFailed": "Nie udało się załadować metod płatności. Spróbuj ponownie.",
+    "updateSuccess": "Pomyślnie zaktualizowano metodę płatności",
+    "setupInitiated": "Zainicjowano konfigurację metody płatności",
+    "updateFailed": "Nie udało się zaktualizować metody płatności. Spróbuj ponownie.",
+    "addFailed": "Nie udało się dodać nowej metody płatności. Spróbuj ponownie."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Usuń metodę płatności",
+    "dialogDescription": "Czy na pewno chcesz usunąć tę metodę płatności? Tej akcji nie można cofnąć.",
+    "cancel": "Anuluj",
+    "remove": "Usuń",
+    "removing": "Usuwanie...",
+    "removeAriaLabel": "Usuń metodę płatności",
+    "removeSuccess": "Metoda płatności została usunięta",
+    "removeFailed": "Nie udało się usunąć metody płatności"
+  },
+  "PaymentMethodsSection": {
+    "title": "Metody płatności",
+    "empty": "Nie dodano żadnych metod płatności"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Dodaj metodę płatności",
+    "sheetTitle": "Dodaj metodę płatności",
+    "or": "LUB",
+    "card": "Karta",
+    "cardNumber": "Numer karty",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Data ważności",
+    "expiryDatePlaceholder": "MM/RR",
+    "securityCode": "Kod zabezpieczający",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Podając dane karty, upoważniasz Dodo Payments do obciążania Twojej karty za przyszłe płatności zgodnie z ich warunkami."
+  },
+  "Orders": {
+    "billingHistory": "Historia rozliczeń",
+    "emptyPage": "Na tej stronie nie znaleziono zakupów",
+    "emptyAll": "Obecnie brak zakupów",
+    "noBillingHistory": "Brak dostępnej historii rozliczeń",
+    "fetchFailed": "Nie udało się pobrać koszyka produktów. Spróbuj ponownie."
+  },
+  "BillingHistoryColumns": {
+    "date": "Data",
+    "status": "Status",
+    "amount": "Kwota",
+    "pricingType": "Typ cennika",
+    "entitlements": "Uprawnienia",
+    "invoice": "Faktura"
+  },
+  "OrderCard": {
+    "paymentId": "ID płatności",
+    "purchased": "Zakupiono",
+    "viewDetails": "Wyświetl szczegóły",
+    "hideDetails": "Ukryj szczegóły",
+    "noProducts": "Brak produktów w tym zamówieniu.",
+    "fetchFailed": "Nie udało się pobrać szczegółów produktu. Spróbuj ponownie."
+  },
+  "RefundsTable": {
+    "title": "Historia zwrotów",
+    "empty": "Brak dostępnych zwrotów"
+  },
+  "RefundColumns": {
+    "date": "Data",
+    "status": "Status",
+    "amount": "Kwota",
+    "refundId": "ID zwrotu",
+    "associatedPayment": "Powiązana płatność"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "Na tej stronie nie znaleziono faktur",
+    "emptyAll": "Obecnie brak faktur",
+    "paymentId": "ID płatności",
+    "date": "Data",
+    "amount": "Kwota",
+    "status": "Status",
+    "download": "Pobierz"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Faktura niedostępna",
+    "downloadInvoice": "Pobierz fakturę",
+    "invoice": "Faktura",
+    "generateInvoice": "Wygeneruj fakturę",
+    "fillDetailsTitle": "Wpisz pełny adres klienta",
+    "existingAddressTitle": "Pobierz z istniejącymi danymi adresowymi",
+    "existingAddressDescription": "Ta faktura będzie zawierać tylko kod pocztowy i kraj podane podczas procesu checkout.",
+    "fullAddressTitle": "Pobierz z pełnymi danymi adresowymi",
+    "fullAddressDescription": "Ta faktura będzie zawierać pełny adres klienta. Upewnij się, że uzupełniłeś(-aś) wszystkie dane przed pobraniem.",
+    "fillDetails": "Uzupełnij dane"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Adres — linia 1",
+    "state": "Stan",
+    "city": "Miasto",
+    "postalCode": "Kod pocztowy",
+    "download": "Pobierz",
+    "downloadSuccess": "Pomyślnie pobrano fakturę",
+    "updateFailed": "Nie udało się zaktualizować danych faktury. Spróbuj ponownie."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Produkty cyfrowe",
+    "description": "Uzyskaj dostęp do zakupionych produktów cyfrowych i plików do pobrania",
+    "accessExternal": "Przejdź do zasobu zewnętrznego",
+    "instructions": "Instrukcje",
+    "loadFailed": "Nie udało się załadować produktów cyfrowych. Spróbuj ponownie."
+  },
+  "WalletsSection": {
+    "title": "Portfel",
+    "selectWallet": "Wybierz portfel",
+    "walletLabel": "Portfel {currency}",
+    "availableBalance": "Dostępne saldo",
+    "tableType": "Typ",
+    "tableReason": "Powód",
+    "tableAmount": "Kwota",
+    "noTransactions": "Brak transakcji",
+    "credit": "Uznanie",
+    "debit": "Obciążenie"
+  },
+  "CreditsSection": {
+    "title": "Kredyty",
+    "selectCredit": "Wybierz uprawnienie kredytowe",
+    "overageBalance": "Saldo nadwyżki",
+    "availableCreditBalance": "Dostępne saldo kredytowe",
+    "tableType": "Typ",
+    "tableDescription": "Opis",
+    "tableAmount": "Kwota",
+    "noTransactions": "Brak transakcji",
+    "credit": "Uznanie",
+    "debit": "Obciążenie"
+  },
+  "UsageSummary": {
+    "emptyPage": "Na tej stronie nie znaleziono historii użycia",
+    "emptyAll": "Obecnie brak historii użycia"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Historia rozliczeń",
+    "refundHistory": "Historia zwrotów",
+    "usageSummary": "Podsumowanie użycia"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Klucz licencyjny",
+    "licenseKeysButton": "Klucze licencyjne",
+    "licenseKeysTitle": "Klucze licencyjne",
+    "migrateLicenseTitle": "Migracja – klucz licencyjny",
+    "licenseKeyCardTitle": "Klucz licencyjny",
+    "clickToView": "Kliknij, aby wyświetlić klucz licencyjny",
+    "hideLicenseKey": "Ukryj klucz licencyjny",
+    "showLicenseKey": "Pokaż klucz licencyjny",
+    "loadingLicenseKeys": "Ładowanie kluczy licencyjnych...",
+    "noLicenseKeys": "Brak dostępnych kluczy licencyjnych.",
+    "expires": "Wygasa",
+    "attachmentsButton": "Załączniki",
+    "attachmentButton": "Załącznik",
+    "attachmentsTitle": "Twoje produkty cyfrowe",
+    "attachmentsDescription": "Tutaj uzyskasz dostęp do dostępnych produktów cyfrowych i plików oraz możesz je pobrać.",
+    "digitalProductsTitle": "Produkty cyfrowe",
+    "digitalProductsDescription": "Pobierz swoje produkty cyfrowe",
+    "noDigitalProducts": "Brak dostępnych produktów cyfrowych.",
+    "filesSection": "Pliki",
+    "externalLink": "Link zewnętrzny",
+    "open": "Otwórz",
+    "instructionsSection": "Instrukcje",
+    "loadFailed": "Nie udało się załadować produktów cyfrowych.",
+    "fetchCartFailed": "Nie udało się pobrać koszyka produktów",
+    "fetchDigitalFailed": "Nie udało się pobrać produktów cyfrowych"
+  },
+  "ProfilePage": {
+    "billingDetails": "Twoje dane rozliczeniowe",
+    "name": "Imię i nazwisko",
+    "email": "E-mail",
+    "walletsHeading": "Portfele",
+    "creditsHeading": "Kredyty",
+    "walletTabLabel": "Portfel {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Nie znaleziono portfeli",
+    "availableBalance": "Dostępne saldo",
+    "recentTransactions": "Ostatnie transakcje",
+    "tableType": "Typ",
+    "tableReason": "Powód",
+    "tableAmount": "Kwota",
+    "emptyPage": "Na tej stronie nie znaleziono transakcji",
+    "emptyAll": "Obecnie brak transakcji"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Nie znaleziono kredytów",
+    "selectPlaceholder": "Wybierz uprawnienie kredytowe",
+    "overageBalance": "Saldo nadwyżki",
+    "availableCreditBalance": "Dostępne saldo kredytowe",
+    "recentTransactions": "Ostatnie transakcje",
+    "tableType": "Typ",
+    "tableDescription": "Opis",
+    "tableAmount": "Kwota",
+    "emptyPage": "Na tej stronie nie znaleziono transakcji",
+    "emptyAll": "Obecnie brak transakcji"
+  },
+  "Pagination": {
+    "previous": "Poprzednia",
+    "next": "Następna"
+  },
+  "BaseDataGrid": {
+    "noData": "Brak dostępnych danych",
+    "reset": "Resetuj tabelę"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Rosnąco",
+    "desc": "Malejąco",
+    "pinLeft": "Przypnij do lewej",
+    "pinRight": "Przypnij do prawej",
+    "moveLeft": "Przenieś w lewo",
+    "moveRight": "Przenieś w prawo",
+    "columns": "Kolumny"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Wierszy na stronę"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Edytuj kolumny"
+  },
+  "TokenPage": {
+    "validationFailed": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
+    "goToExpiredPage": "Przejdź do strony wygasłej"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Nazwa meter",
+    "meterId": "ID meter",
+    "consumedUnits": "Zużyte jednostki",
+    "chargeableUnits": "Jednostki rozliczane",
+    "freeThreshold": "Darmowy próg",
+    "units": "jednostki",
+    "unitPrice": "Cena jednostkowa",
+    "totalCost": "Łączny koszt",
+    "actions": "Działania",
+    "view": "Wyświetl"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Twoje metody płatności",
+    "empty": "Nie znaleziono metod płatności"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Klucz licencyjny",
+    "status": "Status",
+    "productId": "ID produktu",
+    "expiry": "Wygasa (UTC)",
+    "neverExpires": "Nigdy nie wygasa",
+    "sameAsSubscription": "Takie samo jak subskrypcja",
+    "activationsUsed": "Wykorzystane aktywacje",
+    "paymentId": "ID płatności"
+  },
+  "PaymentColumns": {
+    "paymentId": "ID płatności",
+    "status": "Status",
+    "paymentMethod": "Metoda płatności",
+    "amount": "Kwota",
+    "date": "Data (UTC)",
+    "invoice": "Faktura",
+    "invoiceButtonLabel": "Faktura",
+    "files": "Pliki"
+  },
+  "TimeTooltip": {
+    "title": "Konwersja strefy czasowej",
+    "yourDevice": "Twoje urządzenie",
+    "system": "System"
+  },
+  "DateFilter": {
+    "selectDateRange": "Wybierz zakres dat",
+    "dialogDescription": "Wybierz zakres dat, aby filtrować dane",
+    "presets": "Ustawienia wstępne",
+    "calendar": "Kalendarz",
+    "cancel": "Anuluj",
+    "applyFilter": "Zastosuj filtr",
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj",
+    "thisWeek": "Ten tydzień",
+    "lastWeek": "Poprzedni tydzień",
+    "thisMonth": "Ten miesiąc",
+    "lastMonth": "Poprzedni miesiąc",
+    "thisYear": "Ten rok",
+    "lastYear": "Poprzedni rok",
+    "allTime": "Cały okres"
+  },
+  "FilterControls": {
+    "statusLabel": "Status"
+  },
+  "FilterDropdown": {
+    "filters": "Filtry",
+    "filterBy": "Filtruj według:",
+    "clear": "Wyczyść",
+    "filter": "Filtruj"
+  },
+  "CountrySelect": {
+    "loading": "Ładowanie...",
+    "searchPlaceholder": "Szukaj kraju...",
+    "noCountryFound": "Nie znaleziono kraju.",
+    "loadFailed": "Nie udało się załadować krajów. Spróbuj ponownie."
+  },
+  "DataTable": {
+    "noResults": "Brak wyników."
+  },
+  "Product": {
+    "qty": "ILOŚĆ: {value}",
+    "manageSubscription": "Zarządzaj subskrypcją",
+    "fetchSubscriptionFailed": "Nie udało się pobrać subskrypcji. Spróbuj ponownie.",
+    "noAuthToken": "Nie znaleziono tokena uwierzytelniającego",
+    "loadDigitalProductsFailed": "Nie udało się załadować produktów cyfrowych.",
+    "fetchDigitalProductsFailed": "Nie udało się pobrać produktów cyfrowych. Spróbuj ponownie."
+  },
+  "BadgeStatus": {
+    "succeeded": "Sukces",
+    "failed": "Niepowodzenie",
+    "cancelled": "Anulowane",
+    "expired": "Wygasłe",
+    "processing": "W toku",
+    "pending": "Oczekujące",
+    "review": "W trakcie weryfikacji",
+    "onHold": "Wstrzymane",
+    "notInitiated": "Nierozpoczęte",
+    "noStatus": "Brak statusu",
+    "verified": "Zweryfikowane",
+    "active": "Aktywne",
+    "disabled": "Wyłączone",
+    "preDispute": "Przed sporem",
+    "dispute": "Spór",
+    "preArbitration": "Przed arbitrażem",
+    "disputeOpened": "Spór otwarty",
+    "disputeExpired": "Spór wygasł",
+    "disputeAccepted": "Spór zaakceptowany",
+    "disputeCancelled": "Spór anulowany",
+    "disputeChallenged": "Spór zakwestionowany",
+    "disputeWon": "Spór wygrany",
+    "disputeLost": "Spór przegrany",
+    "oneTime": "Jednorazowe",
+    "subscription": "Subskrypcja",
+    "unknown": "Nieznane"
+  }
+}

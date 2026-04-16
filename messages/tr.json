@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Ağ bağlantısı sorunu yaşıyor olabilirsiniz, bağlantının süresi dolmuş olabilir veya bağlantı/ürün geçersiz olabilir."
+  },
+  "NotFoundPage": {
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa mevcut değil veya taşınmış olabilir."
+  },
+  "ExpiredPage": {
+    "title": "Güvenlik nedeniyle bu sayfanın süresi doldu."
+  },
+  "LandingCard": {
+    "heading": "Bugün size nasıl yardımcı olabiliriz?",
+    "actionsIntro": "Şunları yapabilirsiniz:",
+    "actions": {
+      "changePaymentMethod": "Ödeme Yöntemini Değiştir",
+      "cancelSubscription": "Aboneliği iptal et",
+      "downloadInvoices": "Faturaları indir",
+      "viewOrders": "Dodo Payments üzerinden işlenen siparişleri görüntüle",
+      "otherQueries": "Diğer sorular"
+    },
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "E-postanızı girin",
+    "emailInvalid": "Geçersiz e-posta adresi",
+    "emailFailed": "Giriş bağlantısı gönderilemedi. Lütfen tekrar deneyin.",
+    "lookUpPurchase": "Satın alımımı bul",
+    "sendEmail": "E-posta gönder",
+    "sending": "Gönderiliyor...",
+    "sentTitle": "Size bir e-posta gönderdik!",
+    "sentDescription": "Dodo Payments self servis portalına giriş yapmak için e-postadaki bağlantıyı kullanın"
+  },
+  "LandingInfoCard": {
+    "title": "Dodo Payments nedir?",
+    "description": "Dodo Payments, yazılım ürünleri, araçlar ve hizmetler dahil olmak üzere giderek artan sayıda dijital işletme için ödemeleri, vergi uyumluluğunu ve faturalama altyapısını yöneten bir Merchant of Record (MoR) platformudur. Bu işletmelerden biri tarafından satılan bir ürünü satın aldığınızda veya bir ürüne abone olduğunuzda, işlemi, faturalandırmayı, müşteri desteğini, iadeleri ve itirazları Dodo Payments yönetir.",
+    "visitPrompt": "Daha fazla bilgi için <link>dodopayments.com</link> adresini ziyaret edin."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "{businessName} Faturalama portalı",
+    "enterEmailDescription": "Erişim bağlantısını almak için e-posta adresinizi girin",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "E-postanızı girin",
+    "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+    "emailRequired": "E-posta zorunludur",
+    "getAccessLink": "Erişim Bağlantısı Al",
+    "sending": "Gönderiliyor...",
+    "successTitle": "Az kaldı!",
+    "successDescription": "Erişim bağlantısı {email} adresine gönderildi. Spam klasörünüzü kontrol etmeyi unutmayın!",
+    "goBack": "Geri dön",
+    "loginLinkSent": "Giriş bağlantısı e-postaya gönderildi",
+    "loginLinkFailed": "Giriş bağlantısı gönderilemedi. Lütfen tekrar deneyin."
+  },
+  "Businesses": {
+    "searchPlaceholder": "İşletmeleri ara",
+    "emptyPage": "Bu sayfada işletme bulunamadı",
+    "emptyAll": "İşletme bulunamadı",
+    "fetchError": "İşletme ayrıntıları alınamadı",
+    "viewDetails": "Ayrıntıları Görüntüle"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Tüm işletmeleri görüntüle",
+    "switchToLightMode": "Açık moda geç",
+    "switchToDarkMode": "Koyu moda geç",
+    "loggingOut": "Çıkış yapılıyor...",
+    "logOut": "Çıkış Yap",
+    "goBackToBusiness": "İşletmeye geri dön",
+    "goToOverview": "Genel görünüme git"
+  },
+  "LeftPanel": {
+    "goBackTo": "{businessName} işletmesine geri dön",
+    "heading": "Aboneliğinizi ve faturalama ayarlarınızı yönetin",
+    "description": "Ödeme geçmişini görüntüleyin, faturaları indirin ve abonelikleri ile ödeme yöntemlerini yönetin.",
+    "poweredBy": "Destekleyen",
+    "privacy": "Gizlilik",
+    "terms": "Şartlar"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Dil değiştirilemedi. Lütfen tekrar deneyin."
+  },
+  "Subscriptions": {
+    "headingActive": "Aktif abonelikler",
+    "headingAll": "Abonelikler",
+    "emptyPage": "Bu sayfada abonelik bulunamadı",
+    "emptyActive": "Şu anda aktif abonelik yok",
+    "viewAll": "Tüm abonelikleri görüntüle"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Aboneliği yönet",
+    "updatePaymentMethod": "Ödeme yöntemini güncelle",
+    "viewDetails": "Ayrıntıları görüntüle",
+    "renewsOn": "yenilenme tarihi",
+    "validTill": "geçerlilik tarihi"
+  },
+  "SubscriptionDetails": {
+    "addons": "Add-on'lar",
+    "meters": "Meter'lar",
+    "freeThreshold": "Ücretsiz Eşik",
+    "per": "başına",
+    "qty": "Adet: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Faturalama Bilgileri",
+    "name": "Ad",
+    "phoneNumber": "Telefon numarası",
+    "email": "E-posta",
+    "billingAddress": "Fatura Adresi"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Düzenle",
+    "sheetTitle": "Fatura Bilgilerini Düzenle",
+    "customerName": "Müşteri Adı",
+    "fullNamePlaceholder": "Ad Soyad",
+    "billingAddress": "Fatura Adresi",
+    "loadingCountries": "Yükleniyor...",
+    "addressLine": "Adres satırı 1",
+    "state": "Eyalet",
+    "city": "Şehir",
+    "postalCode": "Posta kodu",
+    "purchasingAsBusiness": "İşletme olarak satın alıyorum",
+    "taxId": "Vergi Kimlik No",
+    "taxIdPlaceholder": "Vergi Kimlik No",
+    "saveDetails": "Bilgileri Kaydet",
+    "updateSuccess": "Fatura bilgileri başarıyla güncellendi",
+    "updateFailed": "Fatura bilgileri güncellenemedi. Lütfen tekrar deneyin.",
+    "countriesLoadFailed": "Ülkeler yüklenemedi. Lütfen tekrar deneyin."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Bu hizmete olan aboneliğinizi iptal etmek istediğinizden emin misiniz?",
+    "description": "Devam ederseniz, ilgili tüm avantajlara erişiminizi kaybedersiniz ve bu işlem geri alınamaz.",
+    "close": "Kapat",
+    "cancel": "İptal",
+    "cancelling": "İptal ediliyor..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Aboneliği İptal Et",
+    "triggerRevoke": "İptali Geri Al",
+    "sheetTitle": "Gitmenize üzüldük...",
+    "currentPlan": "Mevcut plan",
+    "addOns": "{count, plural, one {# add-on} other {# add-on}}",
+    "quantity": "Miktar: {value}",
+    "scheduledCancellationWarning": "Bu aboneliğin, bir sonraki faturalama tarihinde iptal edilmesi planlanmış.",
+    "revokeCancellation": "İptali Geri Al",
+    "revoking": "Geri alınıyor...",
+    "cancelAtNextBilling": "Bir sonraki faturalama tarihinde iptal et",
+    "cancelling": "İptal ediliyor...",
+    "cancelSuccess": "Abonelik başarıyla iptal edildi",
+    "cancelScheduled": "Abonelik bir sonraki faturalama tarihinde iptal edilecek",
+    "cancelFailed": "Abonelik iptal edilemedi. Lütfen tekrar deneyin.",
+    "revokeFailed": "İptal geri alınamadı. Lütfen tekrar deneyin.",
+    "revokeSuccess": "Abonelik iptali başarıyla geri alındı"
+  },
+  "SubscriptionInfo": {
+    "title": "Aboneliğiniz şu anda askıda",
+    "description": "Bu aboneliği devam ettirmek için lütfen ödeme yönteminizi güncelleyin"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Başarısız bir ödeme nedeniyle aboneliğiniz şu anda askıda. Bu aboneliği devam ettirmek için lütfen ödeme yönteminizi güncelleyin",
+    "failed": "Bu abonelik başarısız oldu. Lütfen tekrar deneyin.",
+    "pending": "Ödemeniz tamamlanmadı ve checkout işlemi yarım kaldı. Abone olmak istiyorsanız, lütfen tekrar deneyin.",
+    "cancelledOn": "Bu abonelik {date} tarihinde iptal edildi.",
+    "expired": "Bu aboneliğin süresi doldu.",
+    "scheduledCancellation": "Aboneliğinizin {date} tarihinde iptal edilmesi planlanmış.",
+    "scheduledCancellationNoDate": "Aboneliğinizin iptal edilmesi planlanmış.",
+    "flexibleSubscription": "Bu esnek bir aboneliktir; bu nedenle {name}, bir sonraki faturalama dönemi için fiyatı ayarlayabilir.",
+    "flexibleSubscriptionUnknownMerchant": "Bu esnek bir aboneliktir; bu nedenle bir sonraki faturalama dönemi için faturalandırma tutarı ayarlanabilir.",
+    "discountApplied": "{count, plural, one {# faturalama dönemi daha} other {# faturalama dönemi daha}} için indirim uygulandı."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Planı Değiştir",
+    "sheetTitle": "Yeni bir plan seçin",
+    "noProducts": "Kullanılabilir abonelik ürünü yok.",
+    "currentPlan": "Mevcut plan",
+    "proceed": "Devam et",
+    "unnamedGroup": "Adsız Grup"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Plan Değişikliğini Onayla",
+    "noPlanSelected": "Plan seçilmedi",
+    "loadingPreview": "Önizleme yükleniyor...",
+    "current": "Mevcut",
+    "updated": "Güncellenmiş",
+    "qty": "Adet: {value}",
+    "viewAddons": "Add-on'ları görüntüle",
+    "manageAddons": "Add-on'ları yönet",
+    "noAddons": "Add-on yok",
+    "tableItem": "Kalem",
+    "tableQuantity": "Miktar",
+    "tableUnitPrice": "Birim Fiyat",
+    "tableTax": "Vergi",
+    "tableTotal": "Toplam",
+    "creditToBalance": "Bakiyeye Kredi",
+    "creditTooltip": "Kredi, gelecekteki ödemeleri karşılamak için kullanılacak",
+    "summaryTotal": "Toplam",
+    "summaryTax": "Vergi",
+    "summaryAmountDue": "Şimdi ödenecek tutar",
+    "payButton": "{amount} öde",
+    "previewFailed": "Önizleme yüklenemedi. Lütfen tekrar deneyin.",
+    "changeFailed": "Plan değiştirilemedi. Lütfen tekrar deneyin.",
+    "changeSuccess": "Plan başarıyla değiştirildi",
+    "addonRequired": "Lütfen miktarı 1 veya daha fazla olan en az bir add-on seçin."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Düzenle",
+    "sheetTitle": "Ödeme Yöntemini Düzenle",
+    "addPaymentMethod": "Ödeme Yöntemi Ekle",
+    "noPaymentMethods": "Uygun ödeme yöntemi bulunamadı.",
+    "confirmChanges": "Değişiklikleri Onayla",
+    "updating": "Güncelleniyor...",
+    "selectRequired": "Lütfen bir ödeme yöntemi seçin",
+    "loadFailed": "Ödeme yöntemleri yüklenemedi. Lütfen tekrar deneyin.",
+    "updateSuccess": "Ödeme yöntemi başarıyla güncellendi",
+    "setupInitiated": "Ödeme yöntemi kurulumu başlatıldı",
+    "updateFailed": "Ödeme yöntemi güncellenemedi. Lütfen tekrar deneyin.",
+    "addFailed": "Yeni ödeme yöntemi eklenemedi. Lütfen tekrar deneyin."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Ödeme yöntemini kaldır",
+    "dialogDescription": "Bu ödeme yöntemini kaldırmak istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "cancel": "İptal",
+    "remove": "Kaldır",
+    "removing": "Kaldırılıyor...",
+    "removeAriaLabel": "Ödeme yöntemini kaldır",
+    "removeSuccess": "Ödeme yöntemi kaldırıldı",
+    "removeFailed": "Ödeme yöntemi kaldırılamadı"
+  },
+  "PaymentMethodsSection": {
+    "title": "Ödeme Yöntemleri",
+    "empty": "Eklenmiş ödeme yöntemi yok"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Ödeme yöntemi ekle",
+    "sheetTitle": "Ödeme yöntemi ekle",
+    "or": "VEYA",
+    "card": "Kart",
+    "cardNumber": "Kart numarası",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Son kullanma tarihi",
+    "expiryDatePlaceholder": "AA/YY",
+    "securityCode": "Güvenlik kodu",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Kart bilgilerinizi sağlayarak, Dodo Payments'ın şartlarına uygun olarak gelecekteki ödemeler için kartınızdan tahsilat yapmasına izin vermiş olursunuz."
+  },
+  "Orders": {
+    "billingHistory": "Faturalama Geçmişi",
+    "emptyPage": "Bu sayfada satın alım bulunamadı",
+    "emptyAll": "Şu anda satın alım yok",
+    "noBillingHistory": "Faturalama geçmişi mevcut değil",
+    "fetchFailed": "Ürün sepeti alınamadı. Lütfen tekrar deneyin."
+  },
+  "BillingHistoryColumns": {
+    "date": "Tarih",
+    "status": "Durum",
+    "amount": "Tutar",
+    "pricingType": "Fiyatlandırma Türü",
+    "entitlements": "Yetkilendirmeler",
+    "invoice": "Fatura"
+  },
+  "OrderCard": {
+    "paymentId": "Ödeme ID",
+    "purchased": "Satın alındı",
+    "viewDetails": "Ayrıntıları Görüntüle",
+    "hideDetails": "Ayrıntıları Gizle",
+    "noProducts": "Bu siparişte ürün yok.",
+    "fetchFailed": "Ürün ayrıntıları alınamadı. Lütfen tekrar deneyin."
+  },
+  "RefundsTable": {
+    "title": "İade Geçmişi",
+    "empty": "İade mevcut değil"
+  },
+  "RefundColumns": {
+    "date": "Tarih",
+    "status": "Durum",
+    "amount": "Tutar",
+    "refundId": "İade ID",
+    "associatedPayment": "İlişkili Ödeme"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "Bu sayfada fatura bulunamadı",
+    "emptyAll": "Şu anda fatura yok",
+    "paymentId": "Ödeme ID",
+    "date": "Tarih",
+    "amount": "Tutar",
+    "status": "Durum",
+    "download": "İndir"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Fatura mevcut değil",
+    "downloadInvoice": "Faturayı İndir",
+    "invoice": "Fatura",
+    "generateInvoice": "Fatura Oluştur",
+    "fillDetailsTitle": "Müşterinin tam adresini girin",
+    "existingAddressTitle": "Mevcut adres bilgileriyle indir",
+    "existingAddressDescription": "Bu fatura, checkout sırasında sağlandığı şekilde yalnızca posta kodunuzu ve ülkenizi içerecektir.",
+    "fullAddressTitle": "Tam adres bilgileriyle indir",
+    "fullAddressDescription": "Bu fatura müşterinin tam adresini içerecektir. Lütfen indirmeden önce tüm bilgileri doldurduğunuzdan emin olun.",
+    "fillDetails": "Bilgileri Doldur"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Adres satırı 1",
+    "state": "Eyalet",
+    "city": "Şehir",
+    "postalCode": "Posta kodu",
+    "download": "İndir",
+    "downloadSuccess": "Fatura başarıyla indirildi",
+    "updateFailed": "Fatura bilgileri güncellenemedi. Lütfen tekrar deneyin."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Dijital Ürünler",
+    "description": "Satın aldığınız dijital ürünlere ve indirmelere erişin",
+    "accessExternal": "Harici Kaynağa Eriş",
+    "instructions": "Talimatlar",
+    "loadFailed": "Dijital ürünler yüklenemedi. Lütfen tekrar deneyin."
+  },
+  "WalletsSection": {
+    "title": "Cüzdan",
+    "selectWallet": "Cüzdan seçin",
+    "walletLabel": "{currency} cüzdanı",
+    "availableBalance": "Kullanılabilir bakiye",
+    "tableType": "Tür",
+    "tableReason": "Neden",
+    "tableAmount": "Tutar",
+    "noTransactions": "Henüz işlem yok",
+    "credit": "Alacak",
+    "debit": "Borç"
+  },
+  "CreditsSection": {
+    "title": "Krediler",
+    "selectCredit": "Kredi entitlement seçin",
+    "overageBalance": "Aşım bakiyesi",
+    "availableCreditBalance": "Kullanılabilir kredi bakiyesi",
+    "tableType": "Tür",
+    "tableDescription": "Açıklama",
+    "tableAmount": "Tutar",
+    "noTransactions": "Henüz işlem yok",
+    "credit": "Alacak",
+    "debit": "Borç"
+  },
+  "UsageSummary": {
+    "emptyPage": "Bu sayfada kullanım geçmişi bulunamadı",
+    "emptyAll": "Şu anda kullanım geçmişi yok"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Faturalama Geçmişi",
+    "refundHistory": "İade Geçmişi",
+    "usageSummary": "Kullanım Özeti"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Lisans anahtarı",
+    "licenseKeysButton": "Lisans Anahtarları",
+    "licenseKeysTitle": "Lisans Anahtarları",
+    "migrateLicenseTitle": "Taşı - Lisans Anahtarı",
+    "licenseKeyCardTitle": "Lisans Anahtarı",
+    "clickToView": "Lisans anahtarını görüntülemek için tıklayın",
+    "hideLicenseKey": "Lisans anahtarını gizle",
+    "showLicenseKey": "Lisans anahtarını göster",
+    "loadingLicenseKeys": "Lisans anahtarları yükleniyor...",
+    "noLicenseKeys": "Kullanılabilir lisans anahtarı yok.",
+    "expires": "Bitiş",
+    "attachmentsButton": "Ekler",
+    "attachmentButton": "Ek",
+    "attachmentsTitle": "Dijital Ürünleriniz",
+    "attachmentsDescription": "Mevcut dijital ürünlerinize ve dosyalarınıza buradan erişin ve indirin.",
+    "digitalProductsTitle": "Dijital Ürünler",
+    "digitalProductsDescription": "Dijital ürünlerinizi indirin",
+    "noDigitalProducts": "Kullanılabilir dijital ürün yok.",
+    "filesSection": "Dosyalar",
+    "externalLink": "Harici bağlantı",
+    "open": "Aç",
+    "instructionsSection": "Talimatlar",
+    "loadFailed": "Dijital ürünler yüklenemedi.",
+    "fetchCartFailed": "Ürün sepeti alınamadı",
+    "fetchDigitalFailed": "Dijital ürünler alınamadı"
+  },
+  "ProfilePage": {
+    "billingDetails": "Faturalama bilgileriniz",
+    "name": "Ad",
+    "email": "E-posta",
+    "walletsHeading": "Cüzdanlar",
+    "creditsHeading": "Krediler",
+    "walletTabLabel": "{currency} Cüzdan"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Cüzdan bulunamadı",
+    "availableBalance": "Kullanılabilir bakiye",
+    "recentTransactions": "Son İşlemler",
+    "tableType": "Tür",
+    "tableReason": "Neden",
+    "tableAmount": "Tutar",
+    "emptyPage": "Bu sayfada işlem bulunamadı",
+    "emptyAll": "Şu anda işlem yok"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Kredi bulunamadı",
+    "selectPlaceholder": "Kredi entitlement seçin",
+    "overageBalance": "Aşım bakiyesi",
+    "availableCreditBalance": "Kullanılabilir kredi bakiyesi",
+    "recentTransactions": "Son İşlemler",
+    "tableType": "Tür",
+    "tableDescription": "Açıklama",
+    "tableAmount": "Tutar",
+    "emptyPage": "Bu sayfada işlem bulunamadı",
+    "emptyAll": "Şu anda işlem yok"
+  },
+  "Pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki"
+  },
+  "BaseDataGrid": {
+    "noData": "Veri mevcut değil",
+    "reset": "Tabloyu Sıfırla"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Artan",
+    "desc": "Azalan",
+    "pinLeft": "Sola sabitle",
+    "pinRight": "Sağa sabitle",
+    "moveLeft": "Sola Taşı",
+    "moveRight": "Sağa Taşı",
+    "columns": "Sütunlar"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Sayfa başına satır"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Sütunları Düzenle"
+  },
+  "TokenPage": {
+    "validationFailed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
+    "goToExpiredPage": "Süresi Dolmuş Sayfaya Git"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Meter Adı",
+    "meterId": "Meter ID",
+    "consumedUnits": "Tüketilen Birimler",
+    "chargeableUnits": "Ücretlendirilebilir Birimler",
+    "freeThreshold": "Ücretsiz Eşik",
+    "units": "birim",
+    "unitPrice": "Birim Fiyat",
+    "totalCost": "Toplam Maliyet",
+    "actions": "İşlemler",
+    "view": "Görüntüle"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Ödeme yöntemleriniz",
+    "empty": "Ödeme yöntemi bulunamadı"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Lisans Anahtarı",
+    "status": "Durum",
+    "productId": "Ürün ID",
+    "expiry": "Son Kullanım (UTC)",
+    "neverExpires": "Süresi dolmaz",
+    "sameAsSubscription": "Abonelik ile aynı",
+    "activationsUsed": "Kullanılan aktivasyonlar",
+    "paymentId": "Ödeme ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Ödeme ID",
+    "status": "Durum",
+    "paymentMethod": "Ödeme Yöntemi",
+    "amount": "Tutar",
+    "date": "Tarih (UTC)",
+    "invoice": "Fatura",
+    "invoiceButtonLabel": "Fatura",
+    "files": "Dosyalar"
+  },
+  "TimeTooltip": {
+    "title": "Saat dilimi dönüşümü",
+    "yourDevice": "Cihazınız",
+    "system": "Sistem"
+  },
+  "DateFilter": {
+    "selectDateRange": "Tarih Aralığı Seç",
+    "dialogDescription": "Verileri filtrelemek için tarih aralığını seçin",
+    "presets": "Hazır Ayarlar",
+    "calendar": "Takvim",
+    "cancel": "İptal",
+    "applyFilter": "Filtreyi Uygula",
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "thisWeek": "Bu hafta",
+    "lastWeek": "Geçen hafta",
+    "thisMonth": "Bu ay",
+    "lastMonth": "Geçen ay",
+    "thisYear": "Bu yıl",
+    "lastYear": "Geçen yıl",
+    "allTime": "Tüm zamanlar"
+  },
+  "FilterControls": {
+    "statusLabel": "Durum"
+  },
+  "FilterDropdown": {
+    "filters": "Filtreler",
+    "filterBy": "Filtrele:",
+    "clear": "Temizle",
+    "filter": "Filtrele"
+  },
+  "CountrySelect": {
+    "loading": "Yükleniyor...",
+    "searchPlaceholder": "Ülke ara...",
+    "noCountryFound": "Ülke bulunamadı.",
+    "loadFailed": "Ülkeler yüklenemedi. Lütfen tekrar deneyin."
+  },
+  "DataTable": {
+    "noResults": "Sonuç yok."
+  },
+  "Product": {
+    "qty": "ADET: {value}",
+    "manageSubscription": "Aboneliği Yönet",
+    "fetchSubscriptionFailed": "Abonelik alınamadı. Lütfen tekrar deneyin.",
+    "noAuthToken": "Kimlik doğrulama token'ı bulunamadı",
+    "loadDigitalProductsFailed": "Dijital ürünler yüklenemedi.",
+    "fetchDigitalProductsFailed": "Dijital ürünler alınamadı. Lütfen tekrar deneyin."
+  },
+  "BadgeStatus": {
+    "succeeded": "Başarılı",
+    "failed": "Başarısız",
+    "cancelled": "İptal edildi",
+    "expired": "Süresi doldu",
+    "processing": "İşleniyor",
+    "pending": "Beklemede",
+    "review": "İncelemede",
+    "onHold": "Askıda",
+    "notInitiated": "Başlatılmadı",
+    "noStatus": "Durum Yok",
+    "verified": "Doğrulandı",
+    "active": "Aktif",
+    "disabled": "Devre dışı",
+    "preDispute": "İtiraz Öncesi",
+    "dispute": "İtiraz",
+    "preArbitration": "Tahkim Öncesi",
+    "disputeOpened": "İtiraz Açıldı",
+    "disputeExpired": "İtirazın Süresi Doldu",
+    "disputeAccepted": "İtiraz Kabul Edildi",
+    "disputeCancelled": "İtiraz İptal Edildi",
+    "disputeChallenged": "İtiraz Reddedildi",
+    "disputeWon": "İtiraz Kazanıldı",
+    "disputeLost": "İtiraz Kaybedildi",
+    "oneTime": "Tek Seferlik",
+    "subscription": "Abonelik",
+    "unknown": "Bilinmiyor"
+  }
+}

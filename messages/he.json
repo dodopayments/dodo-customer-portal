@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "משהו השתבש",
+    "description": "ייתכן שיש בעיה בחיבור לרשת, שהקישור פג תוקף, או שהקישור/המוצר אינו תקין."
+  },
+  "NotFoundPage": {
+    "title": "הדף לא נמצא",
+    "description": "הדף שחיפשת לא קיים או ייתכן שהועבר."
+  },
+  "ExpiredPage": {
+    "title": "מטעמי אבטחה, תוקף הדף הזה פג."
+  },
+  "LandingCard": {
+    "heading": "במה נוכל לעזור לך היום?",
+    "actionsIntro": "אפשר לבצע את הפעולות הבאות:",
+    "actions": {
+      "changePaymentMethod": "שינוי אמצעי תשלום",
+      "cancelSubscription": "ביטול המנוי",
+      "downloadInvoices": "הורדת חשבוניות",
+      "viewOrders": "צפייה בהזמנות שעובדו דרך Dodo Payments",
+      "otherQueries": "פניות נוספות"
+    },
+    "emailLabel": "אימייל",
+    "emailPlaceholder": "הזן/י את האימייל שלך",
+    "emailInvalid": "כתובת אימייל לא תקינה",
+    "emailFailed": "שליחת קישור ההתחברות נכשלה. נסו שוב.",
+    "lookUpPurchase": "איתור הרכישה שלי",
+    "sendEmail": "שליחת אימייל",
+    "sending": "שולח...",
+    "sentTitle": "שלחנו לך אימייל!",
+    "sentDescription": "השתמש/י בקישור שבאימייל כדי להתחבר לפורטל השירות העצמי של Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "מה זה Dodo Payments?",
+    "description": "Dodo Payments היא פלטפורמת Merchant of Record ‏(MoR) שמנהלת תשלומים, תאימות מס ותשתיות חיוב עבור מספר הולך וגדל של עסקים דיגיטליים, כולל מוצרי תוכנה, כלים ושירותים. כשאת/ה מבצע/ת רכישה או נרשם/ת למוצר שנמכר על ידי אחד מהעסקים האלה, Dodo Payments היא זו שמטפלת בעסקה, בחיוב, בתמיכת הלקוחות, בהחזרים ובמחלוקות.",
+    "visitPrompt": "בקר/י ב-<link>dodopayments.com</link> כדי ללמוד עוד."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "פורטל החיוב של {businessName}",
+    "enterEmailDescription": "הזן/י את האימייל שלך כדי לקבל את קישור הגישה",
+    "emailLabel": "אימייל",
+    "emailPlaceholder": "הזן/י את האימייל שלך",
+    "emailInvalid": "נא להזין כתובת אימייל תקינה",
+    "emailRequired": "נדרש אימייל",
+    "getAccessLink": "קבלת קישור גישה",
+    "sending": "שולח...",
+    "successTitle": "כמעט שם!",
+    "successDescription": "קישור הגישה נשלח לאימייל {email}. ודא/י שבדקת גם את תיקיית הספאם!",
+    "goBack": "חזרה",
+    "loginLinkSent": "קישור ההתחברות נשלח לאימייל",
+    "loginLinkFailed": "שליחת קישור ההתחברות נכשלה. נסו שוב."
+  },
+  "Businesses": {
+    "searchPlaceholder": "חיפוש עסקים",
+    "emptyPage": "לא נמצאו עסקים בעמוד זה",
+    "emptyAll": "לא נמצאו עסקים",
+    "fetchError": "נכשל בשליפת פרטי העסק",
+    "viewDetails": "צפייה בפרטים"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "צפייה בכל העסקים",
+    "switchToLightMode": "מעבר למצב בהיר",
+    "switchToDarkMode": "מעבר למצב כהה",
+    "loggingOut": "מתנתק...",
+    "logOut": "התנתקות",
+    "goBackToBusiness": "חזרה לעסק",
+    "goToOverview": "מעבר לסקירה"
+  },
+  "LeftPanel": {
+    "goBackTo": "חזרה אל {businessName}",
+    "heading": "ניהול המנוי והגדרות החיוב שלך",
+    "description": "צפייה בהיסטוריית תשלומים, הורדת חשבוניות וניהול מנויים ואמצעי תשלום.",
+    "poweredBy": "מופעל על ידי",
+    "privacy": "פרטיות",
+    "terms": "תנאים"
+  },
+  "LanguageSelector": {
+    "changeFailed": "שינוי השפה נכשל. נסו שוב."
+  },
+  "Subscriptions": {
+    "headingActive": "מנויים פעילים",
+    "headingAll": "מנויים",
+    "emptyPage": "לא נמצאו מנויים בעמוד זה",
+    "emptyActive": "אין כרגע מנויים פעילים",
+    "viewAll": "צפייה בכל המנויים"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "ניהול המנוי",
+    "updatePaymentMethod": "עדכון אמצעי תשלום",
+    "viewDetails": "צפייה בפרטים",
+    "renewsOn": "מתחדש ב-",
+    "validTill": "בתוקף עד"
+  },
+  "SubscriptionDetails": {
+    "addons": "תוספים",
+    "meters": "מונים",
+    "freeThreshold": "סף חינם",
+    "per": "ל-",
+    "qty": "כמות: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "פרטי חיוב",
+    "name": "שם",
+    "phoneNumber": "מספר טלפון",
+    "email": "אימייל",
+    "billingAddress": "כתובת לחיוב"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "עריכה",
+    "sheetTitle": "עריכת פרטי חיוב",
+    "customerName": "שם הלקוח",
+    "fullNamePlaceholder": "שם מלא",
+    "billingAddress": "כתובת לחיוב",
+    "loadingCountries": "טוען...",
+    "addressLine": "שורת כתובת 1",
+    "state": "מדינה/מחוז",
+    "city": "עיר",
+    "postalCode": "מיקוד",
+    "purchasingAsBusiness": "רכישה כעסק",
+    "taxId": "מספר מס",
+    "taxIdPlaceholder": "מספר מס",
+    "saveDetails": "שמירת פרטים",
+    "updateSuccess": "פרטי החיוב עודכנו בהצלחה",
+    "updateFailed": "עדכון פרטי החיוב נכשל. נסו שוב.",
+    "countriesLoadFailed": "טעינת המדינות נכשלה. נסו שוב."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "האם את/ה בטוח/ה שברצונך לבטל את המנוי לשירות זה?",
+    "description": "לאחר שתמשיך/י, תאבד/י גישה לכל ההטבות המשויכות ולא ניתן יהיה לבטל פעולה זו.",
+    "close": "סגירה",
+    "cancel": "ביטול",
+    "cancelling": "מבטל..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "ביטול מנוי",
+    "triggerRevoke": "ביטול ביטול",
+    "sheetTitle": "חבל לראות אותך עוזב/ת...",
+    "currentPlan": "תוכנית נוכחית",
+    "addOns": "{count, plural, one {תוסף אחד} other {# תוספים}}",
+    "quantity": "כמות: {value}",
+    "scheduledCancellationWarning": "המנוי הזה מתוזמן לביטול בתאריך החיוב הבא.",
+    "revokeCancellation": "ביטול הביטול",
+    "revoking": "מבטל...",
+    "cancelAtNextBilling": "ביטול בתאריך החיוב הבא",
+    "cancelling": "מבטל...",
+    "cancelSuccess": "המנוי בוטל בהצלחה",
+    "cancelScheduled": "המנוי יבוטל בתאריך החיוב הבא",
+    "cancelFailed": "ביטול המנוי נכשל. נסו שוב.",
+    "revokeFailed": "ביטול הביטול נכשל. נסו שוב.",
+    "revokeSuccess": "ביטול המנוי בוטל בהצלחה"
+  },
+  "SubscriptionInfo": {
+    "title": "המנוי שלך נמצא כעת בהשהיה",
+    "description": "נא לעדכן את אמצעי התשלום כדי לחדש את המנוי"
+  },
+  "SubscriptionNotes": {
+    "onHold": "המנוי שלך נמצא כעת בהשהיה עקב תשלום שנכשל. נא לעדכן את אמצעי התשלום כדי לחדש את המנוי",
+    "failed": "המנוי הזה נכשל. נסו שוב.",
+    "pending": "התשלום שלך לא הושלם ותהליך ה-checkout נשאר לא גמור. אם ברצונך להירשם, נסו שוב.",
+    "cancelledOn": "המנוי הזה בוטל בתאריך {date}.",
+    "expired": "תוקף המנוי הזה פג.",
+    "scheduledCancellation": "המנוי שלך מתוזמן כעת לביטול בתאריך {date}.",
+    "scheduledCancellationNoDate": "המנוי שלך מתוזמן כעת לביטול.",
+    "flexibleSubscription": "זהו מנוי גמיש, ולכן {name} עשוי/ה להתאים את המחיר למחזור החיוב הבא שלך.",
+    "flexibleSubscriptionUnknownMerchant": "זהו מנוי גמיש, ולכן סכום החיוב עשוי להיות מותאם למחזור החיוב הבא שלך.",
+    "discountApplied": "הנחה הוחלה עבור {count, plural, one {מחזור חיוב נוסף אחד} other {# מחזורי חיוב נוספים}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "שינוי תוכנית",
+    "sheetTitle": "בחירת תוכנית חדשה",
+    "noProducts": "אין מוצרי מנוי זמינים.",
+    "currentPlan": "תוכנית נוכחית",
+    "proceed": "המשך",
+    "unnamedGroup": "קבוצה ללא שם"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "אישור שינוי תוכנית",
+    "noPlanSelected": "לא נבחרה תוכנית",
+    "loadingPreview": "טוען תצוגה מקדימה...",
+    "current": "נוכחי",
+    "updated": "מעודכן",
+    "qty": "כמות: {value}",
+    "viewAddons": "צפייה בתוספים",
+    "manageAddons": "ניהול תוספים",
+    "noAddons": "אין תוספים",
+    "tableItem": "פריט",
+    "tableQuantity": "כמות",
+    "tableUnitPrice": "מחיר ליחידה",
+    "tableTax": "מס",
+    "tableTotal": "סה״כ",
+    "creditToBalance": "זיכוי ליתרה",
+    "creditTooltip": "הזיכוי ישמש לתשלום תשלומים עתידיים",
+    "summaryTotal": "סה״כ",
+    "summaryTax": "מס",
+    "summaryAmountDue": "סכום לתשלום כעת",
+    "payButton": "תשלום {amount}",
+    "previewFailed": "טעינת התצוגה המקדימה נכשלה. נסו שוב.",
+    "changeFailed": "שינוי התוכנית נכשל. נסו שוב.",
+    "changeSuccess": "התוכנית שונתה בהצלחה",
+    "addonRequired": "נא לבחור לפחות תוסף אחד עם כמות 1 ומעלה."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "עריכה",
+    "sheetTitle": "עריכת אמצעי תשלום",
+    "addPaymentMethod": "הוספת אמצעי תשלום",
+    "noPaymentMethods": "לא נמצאו אמצעי תשלום מתאימים.",
+    "confirmChanges": "אישור שינויים",
+    "updating": "מעדכן...",
+    "selectRequired": "נא לבחור אמצעי תשלום",
+    "loadFailed": "טעינת אמצעי התשלום נכשלה. נסו שוב.",
+    "updateSuccess": "אמצעי התשלום עודכן בהצלחה",
+    "setupInitiated": "התחלת הגדרת אמצעי התשלום",
+    "updateFailed": "עדכון אמצעי התשלום נכשל. נסו שוב.",
+    "addFailed": "הוספת אמצעי תשלום חדש נכשלה. נסו שוב."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "הסרת אמצעי תשלום",
+    "dialogDescription": "האם את/ה בטוח/ה שברצונך להסיר את אמצעי התשלום הזה? לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "remove": "הסרה",
+    "removing": "מסיר...",
+    "removeAriaLabel": "הסרת אמצעי תשלום",
+    "removeSuccess": "אמצעי התשלום הוסר",
+    "removeFailed": "הסרת אמצעי התשלום נכשלה"
+  },
+  "PaymentMethodsSection": {
+    "title": "אמצעי תשלום",
+    "empty": "לא נוספו אמצעי תשלום"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "הוספת אמצעי תשלום",
+    "sheetTitle": "הוספת אמצעי תשלום",
+    "or": "או",
+    "card": "כרטיס",
+    "cardNumber": "מספר כרטיס",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "תאריך תפוגה",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "קוד אבטחה",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "במסירת פרטי הכרטיס שלך, את/ה מאפשר/ת ל-Dodo Payments לחייב את הכרטיס שלך עבור תשלומים עתידיים בהתאם לתנאים שלהם."
+  },
+  "Orders": {
+    "billingHistory": "היסטוריית חיוב",
+    "emptyPage": "לא נמצאו רכישות בעמוד זה",
+    "emptyAll": "אין כרגע רכישות",
+    "noBillingHistory": "אין היסטוריית חיוב זמינה",
+    "fetchFailed": "שליפת עגלת המוצרים נכשלה. נסו שוב."
+  },
+  "BillingHistoryColumns": {
+    "date": "תאריך",
+    "status": "סטטוס",
+    "amount": "סכום",
+    "pricingType": "סוג תמחור",
+    "entitlements": "זכאויות",
+    "invoice": "חשבונית"
+  },
+  "OrderCard": {
+    "paymentId": "מזהה תשלום",
+    "purchased": "נרכש",
+    "viewDetails": "צפייה בפרטים",
+    "hideDetails": "הסתרת פרטים",
+    "noProducts": "אין מוצרים בהזמנה זו.",
+    "fetchFailed": "שליפת פרטי המוצר נכשלה. נסו שוב."
+  },
+  "RefundsTable": {
+    "title": "היסטוריית החזרים",
+    "empty": "אין החזרים זמינים"
+  },
+  "RefundColumns": {
+    "date": "תאריך",
+    "status": "סטטוס",
+    "amount": "סכום",
+    "refundId": "מזהה החזר",
+    "associatedPayment": "תשלום משויך"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "לא נמצאו חשבוניות בעמוד זה",
+    "emptyAll": "אין כרגע חשבוניות",
+    "paymentId": "מזהה תשלום",
+    "date": "תאריך",
+    "amount": "סכום",
+    "status": "סטטוס",
+    "download": "הורדה"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "החשבונית אינה זמינה",
+    "downloadInvoice": "הורדת חשבונית",
+    "invoice": "חשבונית",
+    "generateInvoice": "הפקת חשבונית",
+    "fillDetailsTitle": "הזן/י כתובת מלאה של הלקוח",
+    "existingAddressTitle": "הורדה עם פרטי כתובת קיימים",
+    "existingAddressDescription": "חשבונית זו תכלול רק את המיקוד והמדינה כפי שנמסרו במהלך תהליך ה-checkout.",
+    "fullAddressTitle": "הורדה עם פרטי כתובת מלאים",
+    "fullAddressDescription": "חשבונית זו תכלול את הכתובת המלאה של הלקוח. נא לוודא שכל הפרטים מולאו לפני ההורדה.",
+    "fillDetails": "מילוי פרטים"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "שורת כתובת 1",
+    "state": "מדינה/מחוז",
+    "city": "עיר",
+    "postalCode": "מיקוד",
+    "download": "הורדה",
+    "downloadSuccess": "החשבונית הורדה בהצלחה",
+    "updateFailed": "עדכון פרטי החשבונית נכשל. נסו שוב."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "מוצרים דיגיטליים",
+    "description": "גישה למוצרים הדיגיטליים שנרכשו ולהורדות",
+    "accessExternal": "גישה למשאב חיצוני",
+    "instructions": "הוראות",
+    "loadFailed": "טעינת המוצרים הדיגיטליים נכשלה. נסו שוב."
+  },
+  "WalletsSection": {
+    "title": "ארנק",
+    "selectWallet": "בחירת ארנק",
+    "walletLabel": "ארנק {currency}",
+    "availableBalance": "יתרה זמינה",
+    "tableType": "סוג",
+    "tableReason": "סיבה",
+    "tableAmount": "סכום",
+    "noTransactions": "עדיין אין עסקאות",
+    "credit": "זיכוי",
+    "debit": "חיוב"
+  },
+  "CreditsSection": {
+    "title": "קרדיטים",
+    "selectCredit": "בחירת זכאות קרדיט",
+    "overageBalance": "יתרת חריגה",
+    "availableCreditBalance": "יתרת קרדיט זמינה",
+    "tableType": "סוג",
+    "tableDescription": "תיאור",
+    "tableAmount": "סכום",
+    "noTransactions": "עדיין אין עסקאות",
+    "credit": "זיכוי",
+    "debit": "חיוב"
+  },
+  "UsageSummary": {
+    "emptyPage": "לא נמצאה היסטוריית שימוש בעמוד זה",
+    "emptyAll": "אין כרגע היסטוריית שימוש"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "היסטוריית חיוב",
+    "refundHistory": "היסטוריית החזרים",
+    "usageSummary": "סיכום שימוש"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "מפתח רישיון",
+    "licenseKeysButton": "מפתחות רישיון",
+    "licenseKeysTitle": "מפתחות רישיון",
+    "migrateLicenseTitle": "העברה - מפתח רישיון",
+    "licenseKeyCardTitle": "מפתח רישיון",
+    "clickToView": "לחץ/י כדי לצפות במפתח הרישיון",
+    "hideLicenseKey": "הסתרת מפתח רישיון",
+    "showLicenseKey": "הצגת מפתח רישיון",
+    "loadingLicenseKeys": "טוען מפתחות רישיון...",
+    "noLicenseKeys": "אין מפתחות רישיון זמינים.",
+    "expires": "פג תוקף",
+    "attachmentsButton": "קבצים מצורפים",
+    "attachmentButton": "קובץ מצורף",
+    "attachmentsTitle": "המוצרים הדיגיטליים שלך",
+    "attachmentsDescription": "גש/י והורד/י כאן את המוצרים הדיגיטליים והקבצים הזמינים לך.",
+    "digitalProductsTitle": "מוצרים דיגיטליים",
+    "digitalProductsDescription": "הורד/י את המוצרים הדיגיטליים שלך",
+    "noDigitalProducts": "אין מוצרים דיגיטליים זמינים.",
+    "filesSection": "קבצים",
+    "externalLink": "קישור חיצוני",
+    "open": "פתיחה",
+    "instructionsSection": "הוראות",
+    "loadFailed": "טעינת המוצרים הדיגיטליים נכשלה.",
+    "fetchCartFailed": "שליפת עגלת המוצרים נכשלה",
+    "fetchDigitalFailed": "שליפת המוצרים הדיגיטליים נכשלה"
+  },
+  "ProfilePage": {
+    "billingDetails": "פרטי החיוב שלך",
+    "name": "שם",
+    "email": "אימייל",
+    "walletsHeading": "ארנקים",
+    "creditsHeading": "קרדיטים",
+    "walletTabLabel": "ארנק {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "לא נמצאו ארנקים",
+    "availableBalance": "יתרה זמינה",
+    "recentTransactions": "עסקאות אחרונות",
+    "tableType": "סוג",
+    "tableReason": "סיבה",
+    "tableAmount": "סכום",
+    "emptyPage": "לא נמצאו עסקאות בעמוד זה",
+    "emptyAll": "אין כרגע עסקאות"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "לא נמצאו קרדיטים",
+    "selectPlaceholder": "בחירת זכאות קרדיט",
+    "overageBalance": "יתרת חריגה",
+    "availableCreditBalance": "יתרת קרדיט זמינה",
+    "recentTransactions": "עסקאות אחרונות",
+    "tableType": "סוג",
+    "tableDescription": "תיאור",
+    "tableAmount": "סכום",
+    "emptyPage": "לא נמצאו עסקאות בעמוד זה",
+    "emptyAll": "אין כרגע עסקאות"
+  },
+  "Pagination": {
+    "previous": "הקודם",
+    "next": "הבא"
+  },
+  "BaseDataGrid": {
+    "noData": "אין נתונים זמינים",
+    "reset": "איפוס הטבלה"
+  },
+  "DataGridColumnHeader": {
+    "asc": "עולה",
+    "desc": "יורד",
+    "pinLeft": "נעיצה לשמאל",
+    "pinRight": "נעיצה לימין",
+    "moveLeft": "הזזה שמאלה",
+    "moveRight": "הזזה ימינה",
+    "columns": "עמודות"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "שורות לעמוד"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "עריכת עמודות"
+  },
+  "TokenPage": {
+    "validationFailed": "האימות נכשל. נסו שוב.",
+    "goToExpiredPage": "מעבר לדף פג תוקף"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "שם המונה",
+    "meterId": "מזהה מונה",
+    "consumedUnits": "יחידות שנצרכו",
+    "chargeableUnits": "יחידות לחיוב",
+    "freeThreshold": "סף חינם",
+    "units": "יחידות",
+    "unitPrice": "מחיר ליחידה",
+    "totalCost": "עלות כוללת",
+    "actions": "פעולות",
+    "view": "צפייה"
+  },
+  "PaymentMethodsPage": {
+    "heading": "אמצעי התשלום שלך",
+    "empty": "לא נמצאו אמצעי תשלום"
+  },
+  "LicenseColumns": {
+    "licenseKey": "מפתח רישיון",
+    "status": "סטטוס",
+    "productId": "מזהה מוצר",
+    "expiry": "תוקף (UTC)",
+    "neverExpires": "ללא תפוגה",
+    "sameAsSubscription": "כמו במנוי",
+    "activationsUsed": "הפעלות שנוצלו",
+    "paymentId": "מזהה תשלום"
+  },
+  "PaymentColumns": {
+    "paymentId": "מזהה תשלום",
+    "status": "סטטוס",
+    "paymentMethod": "אמצעי תשלום",
+    "amount": "סכום",
+    "date": "תאריך (UTC)",
+    "invoice": "חשבונית",
+    "invoiceButtonLabel": "חשבונית",
+    "files": "קבצים"
+  },
+  "TimeTooltip": {
+    "title": "המרת אזור זמן",
+    "yourDevice": "המכשיר שלך",
+    "system": "מערכת"
+  },
+  "DateFilter": {
+    "selectDateRange": "בחירת טווח תאריכים",
+    "dialogDescription": "בחר/י את טווח התאריכים כדי לסנן את הנתונים",
+    "presets": "קביעות מראש",
+    "calendar": "לוח שנה",
+    "cancel": "ביטול",
+    "applyFilter": "החלת סינון",
+    "today": "היום",
+    "yesterday": "אתמול",
+    "thisWeek": "השבוע",
+    "lastWeek": "השבוע שעבר",
+    "thisMonth": "החודש",
+    "lastMonth": "החודש שעבר",
+    "thisYear": "השנה",
+    "lastYear": "השנה שעברה",
+    "allTime": "כל הזמנים"
+  },
+  "FilterControls": {
+    "statusLabel": "סטטוס"
+  },
+  "FilterDropdown": {
+    "filters": "מסננים",
+    "filterBy": "סינון לפי:",
+    "clear": "נקה",
+    "filter": "סינון"
+  },
+  "CountrySelect": {
+    "loading": "טוען...",
+    "searchPlaceholder": "חיפוש מדינה...",
+    "noCountryFound": "לא נמצאה מדינה.",
+    "loadFailed": "טעינת המדינות נכשלה. נסו שוב."
+  },
+  "DataTable": {
+    "noResults": "אין תוצאות."
+  },
+  "Product": {
+    "qty": "כמות: {value}",
+    "manageSubscription": "ניהול מנוי",
+    "fetchSubscriptionFailed": "שליפת המנוי נכשלה. נסו שוב.",
+    "noAuthToken": "לא נמצא token אימות",
+    "loadDigitalProductsFailed": "טעינת המוצרים הדיגיטליים נכשלה.",
+    "fetchDigitalProductsFailed": "שליפת המוצרים הדיגיטליים נכשלה. נסו שוב."
+  },
+  "BadgeStatus": {
+    "succeeded": "הצליח",
+    "failed": "נכשל",
+    "cancelled": "בוטל",
+    "expired": "פג תוקף",
+    "processing": "בטיפול",
+    "pending": "ממתין",
+    "review": "בבדיקה",
+    "onHold": "בהשהיה",
+    "notInitiated": "לא הוחל",
+    "noStatus": "ללא סטטוס",
+    "verified": "מאומת",
+    "active": "פעיל",
+    "disabled": "מושבת",
+    "preDispute": "לפני מחלוקת",
+    "dispute": "מחלוקת",
+    "preArbitration": "לפני בוררות",
+    "disputeOpened": "נפתחה מחלוקת",
+    "disputeExpired": "תוקף המחלוקת פג",
+    "disputeAccepted": "המחלוקת התקבלה",
+    "disputeCancelled": "המחלוקת בוטלה",
+    "disputeChallenged": "המחלוקת אותגרה",
+    "disputeWon": "המחלוקת התקבלה לטובתך",
+    "disputeLost": "המחלוקת נדחתה",
+    "oneTime": "חד-פעמי",
+    "subscription": "מנוי",
+    "unknown": "לא ידוע"
+  }
+}

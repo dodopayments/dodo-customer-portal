@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "出了点问题",
+    "description": "你可能遇到了网络连接问题，链接可能已过期，或链接/产品可能无效。"
+  },
+  "NotFoundPage": {
+    "title": "未找到页面",
+    "description": "你正在查找的页面不存在或可能已被移动。"
+  },
+  "ExpiredPage": {
+    "title": "出于安全原因，此页面已过期。"
+  },
+  "LandingCard": {
+    "heading": "今天我们可以为你提供什么帮助？",
+    "actionsIntro": "你可以进行以下操作：",
+    "actions": {
+      "changePaymentMethod": "更改付款方式",
+      "cancelSubscription": "取消订阅",
+      "downloadInvoices": "下载发票",
+      "viewOrders": "查看通过 Dodo Payments 处理的订单",
+      "otherQueries": "其他问题"
+    },
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "输入你的邮箱",
+    "emailInvalid": "邮箱地址无效",
+    "emailFailed": "发送登录链接失败。请重试。",
+    "lookUpPurchase": "查询我的购买记录",
+    "sendEmail": "发送邮件",
+    "sending": "发送中...",
+    "sentTitle": "我们已向你发送了一封邮件！",
+    "sentDescription": "使用邮件中的链接登录 Dodo Payments 自助门户"
+  },
+  "LandingInfoCard": {
+    "title": "什么是 Dodo Payments？",
+    "description": "Dodo Payments 是一个 Merchant of Record (MoR) 平台，为越来越多的数字业务（包括软件产品、工具和服务）管理支付、税务合规和计费基础设施。当你购买或订阅这些业务销售的产品时，交易、计费、客户支持、退款和争议处理均由 Dodo Payments 负责。",
+    "visitPrompt": "访问 <link>dodopayments.com</link> 了解更多。"
+  },
+  "LoginForm": {
+    "billingPortalTitle": "{businessName} 的账单门户",
+    "enterEmailDescription": "输入你的邮箱以接收访问链接",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "输入你的邮箱",
+    "emailInvalid": "请输入有效的邮箱地址",
+    "emailRequired": "邮箱为必填项",
+    "getAccessLink": "获取访问链接",
+    "sending": "发送中...",
+    "successTitle": "就快完成了！",
+    "successDescription": "访问链接已发送至邮箱 {email}。请务必检查你的垃圾邮件文件夹！",
+    "goBack": "返回",
+    "loginLinkSent": "登录链接已发送至邮箱",
+    "loginLinkFailed": "发送登录链接失败。请重试。"
+  },
+  "Businesses": {
+    "searchPlaceholder": "搜索商家",
+    "emptyPage": "此页面未找到商家",
+    "emptyAll": "未找到商家",
+    "fetchError": "获取商家详情失败",
+    "viewDetails": "查看详情"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "查看所有商家",
+    "switchToLightMode": "切换到浅色模式",
+    "switchToDarkMode": "切换到深色模式",
+    "loggingOut": "正在退出...",
+    "logOut": "退出登录",
+    "goBackToBusiness": "返回商家",
+    "goToOverview": "前往概览"
+  },
+  "LeftPanel": {
+    "goBackTo": "返回 {businessName}",
+    "heading": "管理你的订阅和账单设置",
+    "description": "查看付款历史、下载发票，以及管理订阅和付款方式。",
+    "poweredBy": "Powered by",
+    "privacy": "隐私",
+    "terms": "条款"
+  },
+  "LanguageSelector": {
+    "changeFailed": "切换语言失败。请重试。"
+  },
+  "Subscriptions": {
+    "headingActive": "有效订阅",
+    "headingAll": "订阅",
+    "emptyPage": "此页面未找到订阅",
+    "emptyActive": "当前没有有效订阅",
+    "viewAll": "查看所有订阅"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "管理订阅",
+    "updatePaymentMethod": "更新付款方式",
+    "viewDetails": "查看详情",
+    "renewsOn": "续订日期",
+    "validTill": "有效期至"
+  },
+  "SubscriptionDetails": {
+    "addons": "附加项",
+    "meters": "计量项",
+    "freeThreshold": "免费阈值",
+    "per": "每",
+    "qty": "数量：{value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "账单信息",
+    "name": "姓名",
+    "phoneNumber": "电话号码",
+    "email": "邮箱",
+    "billingAddress": "账单地址"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "编辑",
+    "sheetTitle": "编辑账单详情",
+    "customerName": "客户名称",
+    "fullNamePlaceholder": "全名",
+    "billingAddress": "账单地址",
+    "loadingCountries": "加载中...",
+    "addressLine": "地址行 1",
+    "state": "州/省",
+    "city": "城市",
+    "postalCode": "邮政编码",
+    "purchasingAsBusiness": "以企业身份购买",
+    "taxId": "税号",
+    "taxIdPlaceholder": "税号",
+    "saveDetails": "保存详情",
+    "updateSuccess": "账单详情更新成功",
+    "updateFailed": "更新账单详情失败。请重试。",
+    "countriesLoadFailed": "加载国家/地区失败。请重试。"
+  },
+  "CancelSubscriptionDialog": {
+    "title": "你确定要取消对该服务的订阅吗？",
+    "description": "继续后，你将失去所有相关权益，且此操作无法撤销。",
+    "close": "关闭",
+    "cancel": "取消",
+    "cancelling": "正在取消..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "取消订阅",
+    "triggerRevoke": "撤销取消",
+    "sheetTitle": "很遗憾看到你离开...",
+    "currentPlan": "当前方案",
+    "addOns": "{count, plural, one {# 个附加项} other {# 个附加项}}",
+    "quantity": "数量：{value}",
+    "scheduledCancellationWarning": "此订阅已安排在下一个计费日期取消。",
+    "revokeCancellation": "撤销取消",
+    "revoking": "正在撤销...",
+    "cancelAtNextBilling": "在下一个计费日期取消",
+    "cancelling": "正在取消...",
+    "cancelSuccess": "订阅取消成功",
+    "cancelScheduled": "订阅将在下一个计费日期取消",
+    "cancelFailed": "取消订阅失败。请重试。",
+    "revokeFailed": "撤销取消失败。请重试。",
+    "revokeSuccess": "已成功撤销订阅取消"
+  },
+  "SubscriptionInfo": {
+    "title": "你的订阅当前已暂停",
+    "description": "请更新你的付款方式以恢复此订阅"
+  },
+  "SubscriptionNotes": {
+    "onHold": "由于付款失败，你的订阅当前已暂停。请更新你的付款方式以恢复此订阅",
+    "failed": "此订阅失败。请重试。",
+    "pending": "你的付款未完成，结账流程未完成。如果你想订阅，请重试。",
+    "cancelledOn": "此订阅已于 {date} 取消。",
+    "expired": "此订阅已过期。",
+    "scheduledCancellation": "你的订阅当前已安排于 {date} 取消。",
+    "scheduledCancellationNoDate": "你的订阅当前已安排取消。",
+    "flexibleSubscription": "这是一个灵活订阅，因此 {name} 可能会调整你下一个计费周期的价格。",
+    "flexibleSubscriptionUnknownMerchant": "这是一个灵活订阅，因此你下一个计费周期的账单金额可能会调整。",
+    "discountApplied": "已应用折扣，适用于接下来的 {count, plural, one {# 个计费周期} other {# 个计费周期}}。"
+  },
+  "ChangePlanSheet": {
+    "trigger": "更换方案",
+    "sheetTitle": "选择新方案",
+    "noProducts": "没有可用的订阅产品。",
+    "currentPlan": "当前方案",
+    "proceed": "继续",
+    "unnamedGroup": "未命名分组"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "确认更换方案",
+    "noPlanSelected": "未选择方案",
+    "loadingPreview": "正在加载预览...",
+    "current": "当前",
+    "updated": "已更新",
+    "qty": "数量：{value}",
+    "viewAddons": "查看附加项",
+    "manageAddons": "管理附加项",
+    "noAddons": "没有附加项",
+    "tableItem": "项目",
+    "tableQuantity": "数量",
+    "tableUnitPrice": "单价",
+    "tableTax": "税费",
+    "tableTotal": "合计",
+    "creditToBalance": "计入余额",
+    "creditTooltip": "余额将用于支付未来的付款",
+    "summaryTotal": "合计",
+    "summaryTax": "税费",
+    "summaryAmountDue": "当前应付金额",
+    "payButton": "支付 {amount}",
+    "previewFailed": "加载预览失败。请重试。",
+    "changeFailed": "更换方案失败。请重试。",
+    "changeSuccess": "方案更换成功",
+    "addonRequired": "请至少选择一个数量为 1 或以上的附加项。"
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "编辑",
+    "sheetTitle": "编辑付款方式",
+    "addPaymentMethod": "添加付款方式",
+    "noPaymentMethods": "未找到符合条件的付款方式。",
+    "confirmChanges": "确认更改",
+    "updating": "更新中...",
+    "selectRequired": "请选择一种付款方式",
+    "loadFailed": "加载付款方式失败。请重试。",
+    "updateSuccess": "付款方式更新成功",
+    "setupInitiated": "已发起付款方式设置",
+    "updateFailed": "更新付款方式失败。请重试。",
+    "addFailed": "添加新的付款方式失败。请重试。"
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "移除付款方式",
+    "dialogDescription": "确定要移除此付款方式吗？此操作无法撤销。",
+    "cancel": "取消",
+    "remove": "移除",
+    "removing": "移除中...",
+    "removeAriaLabel": "移除付款方式",
+    "removeSuccess": "付款方式已移除",
+    "removeFailed": "移除付款方式失败"
+  },
+  "PaymentMethodsSection": {
+    "title": "付款方式",
+    "empty": "尚未添加付款方式"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "添加付款方式",
+    "sheetTitle": "添加付款方式",
+    "or": "或",
+    "card": "卡",
+    "cardNumber": "卡号",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "有效期",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "安全码",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "提供你的卡信息即表示你允许 Dodo Payments 根据其条款对你的卡进行未来付款扣款。"
+  },
+  "Orders": {
+    "billingHistory": "账单历史",
+    "emptyPage": "此页面未找到购买记录",
+    "emptyAll": "当前没有购买记录",
+    "noBillingHistory": "暂无账单历史",
+    "fetchFailed": "获取产品购物车失败。请重试。"
+  },
+  "BillingHistoryColumns": {
+    "date": "日期",
+    "status": "状态",
+    "amount": "金额",
+    "pricingType": "定价类型",
+    "entitlements": "权益",
+    "invoice": "发票"
+  },
+  "OrderCard": {
+    "paymentId": "Payment ID",
+    "purchased": "已购买",
+    "viewDetails": "查看详情",
+    "hideDetails": "隐藏详情",
+    "noProducts": "此订单中没有产品。",
+    "fetchFailed": "获取产品详情失败。请重试。"
+  },
+  "RefundsTable": {
+    "title": "退款历史",
+    "empty": "暂无退款记录"
+  },
+  "RefundColumns": {
+    "date": "日期",
+    "status": "状态",
+    "amount": "金额",
+    "refundId": "Refund ID",
+    "associatedPayment": "关联付款"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "此页面未找到发票",
+    "emptyAll": "当前没有发票",
+    "paymentId": "Payment ID",
+    "date": "日期",
+    "amount": "金额",
+    "status": "状态",
+    "download": "下载"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "发票不可用",
+    "downloadInvoice": "下载发票",
+    "invoice": "发票",
+    "generateInvoice": "生成发票",
+    "fillDetailsTitle": "输入客户的完整地址",
+    "existingAddressTitle": "使用现有地址信息下载",
+    "existingAddressDescription": "该发票将仅包含你在结账过程中提供的邮编和国家/地区。",
+    "fullAddressTitle": "使用完整地址信息下载",
+    "fullAddressDescription": "该发票将包含客户的完整地址。请确保在下载前填写所有信息。",
+    "fillDetails": "填写信息"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "地址行 1",
+    "state": "州/省",
+    "city": "城市",
+    "postalCode": "邮政编码",
+    "download": "下载",
+    "downloadSuccess": "发票下载成功",
+    "updateFailed": "更新发票信息失败。请重试。"
+  },
+  "DigitalDeliveryDialog": {
+    "title": "数字产品",
+    "description": "访问你已购买的数字产品和下载内容",
+    "accessExternal": "访问外部资源",
+    "instructions": "说明",
+    "loadFailed": "加载数字产品失败。请重试。"
+  },
+  "WalletsSection": {
+    "title": "钱包",
+    "selectWallet": "选择钱包",
+    "walletLabel": "{currency} 钱包",
+    "availableBalance": "可用余额",
+    "tableType": "类型",
+    "tableReason": "原因",
+    "tableAmount": "金额",
+    "noTransactions": "暂无交易记录",
+    "credit": "入账",
+    "debit": "出账"
+  },
+  "CreditsSection": {
+    "title": "Credits",
+    "selectCredit": "选择 credit entitlement",
+    "overageBalance": "超额余额",
+    "availableCreditBalance": "可用 credit 余额",
+    "tableType": "类型",
+    "tableDescription": "描述",
+    "tableAmount": "金额",
+    "noTransactions": "暂无交易记录",
+    "credit": "入账",
+    "debit": "出账"
+  },
+  "UsageSummary": {
+    "emptyPage": "此页面未找到用量历史",
+    "emptyAll": "当前没有用量历史"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "账单历史",
+    "refundHistory": "退款历史",
+    "usageSummary": "用量概览"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "License key",
+    "licenseKeysButton": "License Keys",
+    "licenseKeysTitle": "License Keys",
+    "migrateLicenseTitle": "迁移 - License Key",
+    "licenseKeyCardTitle": "License Key",
+    "clickToView": "点击查看 License Key",
+    "hideLicenseKey": "隐藏 License Key",
+    "showLicenseKey": "显示 License Key",
+    "loadingLicenseKeys": "正在加载 License Keys...",
+    "noLicenseKeys": "暂无可用的 License Keys。",
+    "expires": "到期",
+    "attachmentsButton": "附件",
+    "attachmentButton": "附件",
+    "attachmentsTitle": "你的数字产品",
+    "attachmentsDescription": "在此访问并下载你可用的数字产品和文件。",
+    "digitalProductsTitle": "数字产品",
+    "digitalProductsDescription": "下载你的数字产品",
+    "noDigitalProducts": "暂无可用的数字产品。",
+    "filesSection": "文件",
+    "externalLink": "外部链接",
+    "open": "打开",
+    "instructionsSection": "说明",
+    "loadFailed": "加载数字产品失败。",
+    "fetchCartFailed": "获取产品购物车失败",
+    "fetchDigitalFailed": "获取数字产品失败"
+  },
+  "ProfilePage": {
+    "billingDetails": "你的账单详情",
+    "name": "姓名",
+    "email": "邮箱",
+    "walletsHeading": "钱包",
+    "creditsHeading": "Credits",
+    "walletTabLabel": "{currency} 钱包"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "未找到钱包",
+    "availableBalance": "可用余额",
+    "recentTransactions": "最近交易",
+    "tableType": "类型",
+    "tableReason": "原因",
+    "tableAmount": "金额",
+    "emptyPage": "此页面未找到交易记录",
+    "emptyAll": "当前没有交易记录"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "未找到 credits",
+    "selectPlaceholder": "选择 credit entitlement",
+    "overageBalance": "超额余额",
+    "availableCreditBalance": "可用 credit 余额",
+    "recentTransactions": "最近交易",
+    "tableType": "类型",
+    "tableDescription": "描述",
+    "tableAmount": "金额",
+    "emptyPage": "此页面未找到交易记录",
+    "emptyAll": "当前没有交易记录"
+  },
+  "Pagination": {
+    "previous": "上一页",
+    "next": "下一页"
+  },
+  "BaseDataGrid": {
+    "noData": "暂无数据",
+    "reset": "重置表格"
+  },
+  "DataGridColumnHeader": {
+    "asc": "升序",
+    "desc": "降序",
+    "pinLeft": "固定到左侧",
+    "pinRight": "固定到右侧",
+    "moveLeft": "向左移动",
+    "moveRight": "向右移动",
+    "columns": "列"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "每页行数"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "编辑列"
+  },
+  "TokenPage": {
+    "validationFailed": "验证失败。请重试。",
+    "goToExpiredPage": "前往过期页面"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "计量项名称",
+    "meterId": "Meter ID",
+    "consumedUnits": "已消耗单位",
+    "chargeableUnits": "计费单位",
+    "freeThreshold": "免费阈值",
+    "units": "单位",
+    "unitPrice": "单价",
+    "totalCost": "总费用",
+    "actions": "操作",
+    "view": "查看"
+  },
+  "PaymentMethodsPage": {
+    "heading": "你的付款方式",
+    "empty": "未找到付款方式"
+  },
+  "LicenseColumns": {
+    "licenseKey": "License Key",
+    "status": "状态",
+    "productId": "Product ID",
+    "expiry": "到期时间 (UTC)",
+    "neverExpires": "永不过期",
+    "sameAsSubscription": "与订阅相同",
+    "activationsUsed": "已使用激活次数",
+    "paymentId": "Payment ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Payment ID",
+    "status": "状态",
+    "paymentMethod": "付款方式",
+    "amount": "金额",
+    "date": "日期 (UTC)",
+    "invoice": "发票",
+    "invoiceButtonLabel": "发票",
+    "files": "文件"
+  },
+  "TimeTooltip": {
+    "title": "时区转换",
+    "yourDevice": "你的设备",
+    "system": "系统"
+  },
+  "DateFilter": {
+    "selectDateRange": "选择日期范围",
+    "dialogDescription": "选择用于筛选数据的日期范围",
+    "presets": "预设",
+    "calendar": "日历",
+    "cancel": "取消",
+    "applyFilter": "应用筛选",
+    "today": "今天",
+    "yesterday": "昨天",
+    "thisWeek": "本周",
+    "lastWeek": "上周",
+    "thisMonth": "本月",
+    "lastMonth": "上个月",
+    "thisYear": "今年",
+    "lastYear": "去年",
+    "allTime": "全部时间"
+  },
+  "FilterControls": {
+    "statusLabel": "状态"
+  },
+  "FilterDropdown": {
+    "filters": "筛选器",
+    "filterBy": "筛选条件：",
+    "clear": "清除",
+    "filter": "筛选"
+  },
+  "CountrySelect": {
+    "loading": "加载中...",
+    "searchPlaceholder": "搜索国家/地区...",
+    "noCountryFound": "未找到国家/地区。",
+    "loadFailed": "加载国家/地区失败。请重试。"
+  },
+  "DataTable": {
+    "noResults": "无结果。"
+  },
+  "Product": {
+    "qty": "数量：{value}",
+    "manageSubscription": "管理订阅",
+    "fetchSubscriptionFailed": "获取订阅失败。请重试。",
+    "noAuthToken": "未找到身份验证 token",
+    "loadDigitalProductsFailed": "加载数字产品失败。",
+    "fetchDigitalProductsFailed": "获取数字产品失败。请重试。"
+  },
+  "BadgeStatus": {
+    "succeeded": "成功",
+    "failed": "失败",
+    "cancelled": "已取消",
+    "expired": "已过期",
+    "processing": "进行中",
+    "pending": "待处理",
+    "review": "审核中",
+    "onHold": "已暂停",
+    "notInitiated": "未发起",
+    "noStatus": "无状态",
+    "verified": "已验证",
+    "active": "有效",
+    "disabled": "已禁用",
+    "preDispute": "争议前",
+    "dispute": "争议",
+    "preArbitration": "仲裁前",
+    "disputeOpened": "争议已开启",
+    "disputeExpired": "争议已过期",
+    "disputeAccepted": "争议已接受",
+    "disputeCancelled": "争议已取消",
+    "disputeChallenged": "争议已申诉",
+    "disputeWon": "争议胜诉",
+    "disputeLost": "争议败诉",
+    "oneTime": "一次性",
+    "subscription": "订阅",
+    "unknown": "未知"
+  }
+}

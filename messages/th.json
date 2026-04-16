@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "เกิดข้อผิดพลาดบางอย่าง",
+    "description": "คุณอาจมีปัญหาการเชื่อมต่อเครือข่าย ลิงก์อาจหมดอายุ หรือ ลิงก์/สินค้าอาจไม่ถูกต้อง"
+  },
+  "NotFoundPage": {
+    "title": "ไม่พบหน้านี้",
+    "description": "ไม่มีหน้าที่คุณกำลังมองหา หรืออาจถูกย้ายไปแล้ว"
+  },
+  "ExpiredPage": {
+    "title": "ด้วยเหตุผลด้านความปลอดภัย หน้านี้หมดอายุแล้ว"
+  },
+  "LandingCard": {
+    "heading": "วันนี้เราช่วยอะไรคุณได้บ้าง?",
+    "actionsIntro": "คุณสามารถทำสิ่งต่อไปนี้ได้:",
+    "actions": {
+      "changePaymentMethod": "เปลี่ยนวิธีชำระเงิน",
+      "cancelSubscription": "ยกเลิกการสมัครสมาชิก",
+      "downloadInvoices": "ดาวน์โหลดใบแจ้งหนี้",
+      "viewOrders": "ดูคำสั่งซื้อที่ดำเนินการผ่าน Dodo Payments",
+      "otherQueries": "คำถามอื่นๆ"
+    },
+    "emailLabel": "อีเมล",
+    "emailPlaceholder": "กรอกอีเมลของคุณ",
+    "emailInvalid": "ที่อยู่อีเมลไม่ถูกต้อง",
+    "emailFailed": "ส่งลิงก์เข้าสู่ระบบไม่สำเร็จ โปรดลองอีกครั้ง",
+    "lookUpPurchase": "ค้นหาการซื้อของฉัน",
+    "sendEmail": "ส่งอีเมล",
+    "sending": "กำลังส่ง...",
+    "sentTitle": "เราได้ส่งอีเมลให้คุณแล้ว!",
+    "sentDescription": "ใช้ลิงก์ในอีเมลเพื่อเข้าสู่ระบบพอร์ทัลบริการด้วยตนเองของ Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Dodo Payments คืออะไร?",
+    "description": "Dodo Payments เป็นแพลตฟอร์ม Merchant of Record (MoR) ที่จัดการการชำระเงิน การปฏิบัติตามข้อกำหนดด้านภาษี และโครงสร้างพื้นฐานด้านการเรียกเก็บเงินสำหรับธุรกิจดิจิทัลที่กำลังเติบโตจำนวนมาก รวมถึงผลิตภัณฑ์ซอฟต์แวร์ เครื่องมือ และบริการ เมื่อคุณทำการซื้อหรือสมัครสมาชิกผลิตภัณฑ์ที่จำหน่ายโดยหนึ่งในธุรกิจเหล่านี้ Dodo Payments จะเป็นผู้ดูแลธุรกรรม การเรียกเก็บเงิน การสนับสนุนลูกค้า การคืนเงิน และข้อพิพาท",
+    "visitPrompt": "ไปที่ <link>dodopayments.com</link> เพื่อเรียนรู้เพิ่มเติม"
+  },
+  "LoginForm": {
+    "billingPortalTitle": "พอร์ทัลการเรียกเก็บเงินของ {businessName}",
+    "enterEmailDescription": "กรอกอีเมลของคุณเพื่อรับลิงก์สำหรับเข้าถึง",
+    "emailLabel": "อีเมล",
+    "emailPlaceholder": "กรอกอีเมลของคุณ",
+    "emailInvalid": "โปรดกรอกที่อยู่อีเมลที่ถูกต้อง",
+    "emailRequired": "ต้องระบุอีเมล",
+    "getAccessLink": "รับลิงก์สำหรับเข้าถึง",
+    "sending": "กำลังส่ง...",
+    "successTitle": "ใกล้เสร็จแล้ว!",
+    "successDescription": "ส่งลิงก์สำหรับเข้าถึงไปที่อีเมล {email} แล้ว อย่าลืมตรวจสอบโฟลเดอร์สแปม!",
+    "goBack": "ย้อนกลับ",
+    "loginLinkSent": "ส่งลิงก์เข้าสู่ระบบไปที่อีเมลแล้ว",
+    "loginLinkFailed": "ส่งลิงก์เข้าสู่ระบบไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "Businesses": {
+    "searchPlaceholder": "ค้นหาธุรกิจ",
+    "emptyPage": "ไม่พบบนหน้านี้",
+    "emptyAll": "ไม่พบธุรกิจ",
+    "fetchError": "ดึงรายละเอียดธุรกิจไม่สำเร็จ",
+    "viewDetails": "ดูรายละเอียด"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "ดูธุรกิจทั้งหมด",
+    "switchToLightMode": "สลับเป็นโหมดสว่าง",
+    "switchToDarkMode": "สลับเป็นโหมดมืด",
+    "loggingOut": "กำลังออกจากระบบ...",
+    "logOut": "ออกจากระบบ",
+    "goBackToBusiness": "กลับไปที่ธุรกิจ",
+    "goToOverview": "ไปที่ภาพรวม"
+  },
+  "LeftPanel": {
+    "goBackTo": "กลับไปที่ {businessName}",
+    "heading": "จัดการการสมัครสมาชิกและการตั้งค่าการเรียกเก็บเงินของคุณ",
+    "description": "ดูประวัติการชำระเงิน ดาวน์โหลดใบแจ้งหนี้ และจัดการการสมัครสมาชิกและวิธีชำระเงิน",
+    "poweredBy": "ขับเคลื่อนโดย",
+    "privacy": "ความเป็นส่วนตัว",
+    "terms": "ข้อกำหนด"
+  },
+  "LanguageSelector": {
+    "changeFailed": "เปลี่ยนภาษาไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "Subscriptions": {
+    "headingActive": "การสมัครสมาชิกที่ใช้งานอยู่",
+    "headingAll": "การสมัครสมาชิก",
+    "emptyPage": "ไม่พบการสมัครสมาชิกบนหน้านี้",
+    "emptyActive": "ขณะนี้ไม่มีการสมัครสมาชิกที่ใช้งานอยู่",
+    "viewAll": "ดูการสมัครสมาชิกทั้งหมด"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "จัดการการสมัครสมาชิก",
+    "updatePaymentMethod": "อัปเดตวิธีชำระเงิน",
+    "viewDetails": "ดูรายละเอียด",
+    "renewsOn": "ต่ออายุในวันที่",
+    "validTill": "ใช้ได้ถึง"
+  },
+  "SubscriptionDetails": {
+    "addons": "Add-ons",
+    "meters": "Meters",
+    "freeThreshold": "เกณฑ์ใช้งานฟรี",
+    "per": "ต่อ",
+    "qty": "จำนวน: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "ข้อมูลการเรียกเก็บเงิน",
+    "name": "ชื่อ",
+    "phoneNumber": "หมายเลขโทรศัพท์",
+    "email": "อีเมล",
+    "billingAddress": "ที่อยู่สำหรับเรียกเก็บเงิน"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "แก้ไข",
+    "sheetTitle": "แก้ไขรายละเอียดการเรียกเก็บเงิน",
+    "customerName": "ชื่อลูกค้า",
+    "fullNamePlaceholder": "ชื่อ-นามสกุล",
+    "billingAddress": "ที่อยู่สำหรับเรียกเก็บเงิน",
+    "loadingCountries": "กำลังโหลด...",
+    "addressLine": "ที่อยู่บรรทัดที่ 1",
+    "state": "รัฐ/จังหวัด",
+    "city": "เมือง",
+    "postalCode": "รหัสไปรษณีย์",
+    "purchasingAsBusiness": "ซื้อในนามธุรกิจ",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax ID",
+    "saveDetails": "บันทึกรายละเอียด",
+    "updateSuccess": "อัปเดตรายละเอียดการเรียกเก็บเงินเรียบร้อยแล้ว",
+    "updateFailed": "อัปเดตรายละเอียดการเรียกเก็บเงินไม่สำเร็จ โปรดลองอีกครั้ง",
+    "countriesLoadFailed": "โหลดรายชื่อประเทศไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "CancelSubscriptionDialog": {
+    "title": "คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสมัครสมาชิกบริการนี้?",
+    "description": "เมื่อดำเนินการต่อ คุณจะสูญเสียสิทธิประโยชน์ที่เกี่ยวข้องทั้งหมด และการดำเนินการนี้ไม่สามารถย้อนกลับได้",
+    "close": "ปิด",
+    "cancel": "ยกเลิก",
+    "cancelling": "กำลังยกเลิก..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "ยกเลิกการสมัครสมาชิก",
+    "triggerRevoke": "ยกเลิกการยกเลิก",
+    "sheetTitle": "เสียใจที่ต้องเห็นคุณจากไป...",
+    "currentPlan": "แผนปัจจุบัน",
+    "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
+    "quantity": "จำนวน: {value}",
+    "scheduledCancellationWarning": "การสมัครสมาชิกนี้ถูกกำหนดให้ยกเลิกในวันเรียกเก็บเงินถัดไป",
+    "revokeCancellation": "ยกเลิกการยกเลิก",
+    "revoking": "กำลังยกเลิกการยกเลิก...",
+    "cancelAtNextBilling": "ยกเลิกในวันเรียกเก็บเงินถัดไป",
+    "cancelling": "กำลังยกเลิก...",
+    "cancelSuccess": "ยกเลิกการสมัครสมาชิกเรียบร้อยแล้ว",
+    "cancelScheduled": "การสมัครสมาชิกจะถูกยกเลิกในวันเรียกเก็บเงินถัดไป",
+    "cancelFailed": "ยกเลิกการสมัครสมาชิกไม่สำเร็จ โปรดลองอีกครั้ง",
+    "revokeFailed": "ยกเลิกการยกเลิกไม่สำเร็จ โปรดลองอีกครั้ง",
+    "revokeSuccess": "ยกเลิกการยกเลิกการสมัครสมาชิกเรียบร้อยแล้ว"
+  },
+  "SubscriptionInfo": {
+    "title": "ขณะนี้การสมัครสมาชิกของคุณถูกพักไว้",
+    "description": "โปรดอัปเดตวิธีชำระเงินเพื่อกลับมาใช้งานการสมัครสมาชิกนี้อีกครั้ง"
+  },
+  "SubscriptionNotes": {
+    "onHold": "ขณะนี้การสมัครสมาชิกของคุณถูกพักไว้เนื่องจากการชำระเงินล้มเหลว โปรดอัปเดตวิธีชำระเงินเพื่อกลับมาใช้งานการสมัครสมาชิกนี้อีกครั้ง",
+    "failed": "การสมัครสมาชิกนี้ล้มเหลว โปรดลองอีกครั้ง",
+    "pending": "การชำระเงินของคุณไม่เสร็จสมบูรณ์และการชำระเงินถูกทิ้งไว้ไม่เสร็จ หากคุณต้องการสมัครสมาชิก โปรดลองอีกครั้ง",
+    "cancelledOn": "การสมัครสมาชิกนี้ถูกยกเลิกเมื่อ {date}",
+    "expired": "การสมัครสมาชิกนี้หมดอายุแล้ว",
+    "scheduledCancellation": "ขณะนี้การสมัครสมาชิกของคุณถูกกำหนดให้ยกเลิกในวันที่ {date}",
+    "scheduledCancellationNoDate": "ขณะนี้การสมัครสมาชิกของคุณถูกกำหนดให้ยกเลิก",
+    "flexibleSubscription": "นี่คือการสมัครสมาชิกแบบยืดหยุ่น ดังนั้น {name} อาจปรับราคาในรอบการเรียกเก็บเงินถัดไปของคุณ",
+    "flexibleSubscriptionUnknownMerchant": "นี่คือการสมัครสมาชิกแบบยืดหยุ่น ดังนั้นยอดเรียกเก็บเงินอาจถูกปรับสำหรับรอบการเรียกเก็บเงินถัดไปของคุณ",
+    "discountApplied": "ใช้ส่วนลดสำหรับ {count, plural, one {อีก # รอบการเรียกเก็บเงิน} other {อีก # รอบการเรียกเก็บเงิน}}"
+  },
+  "ChangePlanSheet": {
+    "trigger": "เปลี่ยนแผน",
+    "sheetTitle": "เลือกแผนใหม่",
+    "noProducts": "ไม่มีผลิตภัณฑ์การสมัครสมาชิกให้ใช้งาน",
+    "currentPlan": "แผนปัจจุบัน",
+    "proceed": "ดำเนินการต่อ",
+    "unnamedGroup": "กลุ่มที่ไม่มีชื่อ"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "ยืนยันการเปลี่ยนแผน",
+    "noPlanSelected": "ยังไม่ได้เลือกแผน",
+    "loadingPreview": "กำลังโหลดตัวอย่าง...",
+    "current": "ปัจจุบัน",
+    "updated": "อัปเดตแล้ว",
+    "qty": "จำนวน: {value}",
+    "viewAddons": "ดู add-ons",
+    "manageAddons": "จัดการ add-ons",
+    "noAddons": "ไม่มี add-ons",
+    "tableItem": "รายการ",
+    "tableQuantity": "จำนวน",
+    "tableUnitPrice": "ราคาต่อหน่วย",
+    "tableTax": "ภาษี",
+    "tableTotal": "รวม",
+    "creditToBalance": "เครดิตเข้ายอดคงเหลือ",
+    "creditTooltip": "เครดิตจะถูกใช้เพื่อชำระการชำระเงินในอนาคต",
+    "summaryTotal": "รวม",
+    "summaryTax": "ภาษี",
+    "summaryAmountDue": "ยอดที่ต้องชำระตอนนี้",
+    "payButton": "ชำระ {amount}",
+    "previewFailed": "โหลดตัวอย่างไม่สำเร็จ โปรดลองอีกครั้ง",
+    "changeFailed": "เปลี่ยนแผนไม่สำเร็จ โปรดลองอีกครั้ง",
+    "changeSuccess": "เปลี่ยนแผนเรียบร้อยแล้ว",
+    "addonRequired": "โปรดเลือกอย่างน้อยหนึ่ง add-on ที่มีจำนวน 1 ขึ้นไป"
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "แก้ไข",
+    "sheetTitle": "แก้ไขวิธีชำระเงิน",
+    "addPaymentMethod": "เพิ่มวิธีชำระเงิน",
+    "noPaymentMethods": "ไม่พบวิธีชำระเงินที่เข้าเงื่อนไข",
+    "confirmChanges": "ยืนยันการเปลี่ยนแปลง",
+    "updating": "กำลังอัปเดต...",
+    "selectRequired": "โปรดเลือกวิธีชำระเงิน",
+    "loadFailed": "โหลดวิธีชำระเงินไม่สำเร็จ โปรดลองอีกครั้ง",
+    "updateSuccess": "อัปเดตวิธีชำระเงินเรียบร้อยแล้ว",
+    "setupInitiated": "เริ่มตั้งค่าวิธีชำระเงินแล้ว",
+    "updateFailed": "อัปเดตวิธีชำระเงินไม่สำเร็จ โปรดลองอีกครั้ง",
+    "addFailed": "เพิ่มวิธีชำระเงินใหม่ไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "ลบวิธีชำระเงิน",
+    "dialogDescription": "คุณแน่ใจหรือไม่ว่าต้องการลบวิธีชำระเงินนี้? การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+    "cancel": "ยกเลิก",
+    "remove": "ลบ",
+    "removing": "กำลังลบ...",
+    "removeAriaLabel": "ลบวิธีชำระเงิน",
+    "removeSuccess": "ลบวิธีชำระเงินแล้ว",
+    "removeFailed": "ลบวิธีชำระเงินไม่สำเร็จ"
+  },
+  "PaymentMethodsSection": {
+    "title": "วิธีชำระเงิน",
+    "empty": "ยังไม่ได้เพิ่มวิธีชำระเงิน"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "เพิ่มวิธีชำระเงิน",
+    "sheetTitle": "เพิ่มวิธีชำระเงิน",
+    "or": "หรือ",
+    "card": "บัตร",
+    "cardNumber": "หมายเลขบัตร",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "วันหมดอายุ",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "รหัสความปลอดภัย",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "เมื่อคุณให้ข้อมูลบัตรของคุณ คุณอนุญาตให้ Dodo Payments เรียกเก็บเงินจากบัตรของคุณสำหรับการชำระเงินในอนาคตตามข้อกำหนดของพวกเขา"
+  },
+  "Orders": {
+    "billingHistory": "ประวัติการเรียกเก็บเงิน",
+    "emptyPage": "ไม่พบการซื้อบนหน้านี้",
+    "emptyAll": "ขณะนี้ไม่มีการซื้อ",
+    "noBillingHistory": "ไม่มีประวัติการเรียกเก็บเงิน",
+    "fetchFailed": "ดึงข้อมูลตะกร้าสินค้าไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "BillingHistoryColumns": {
+    "date": "วันที่",
+    "status": "สถานะ",
+    "amount": "จำนวนเงิน",
+    "pricingType": "ประเภทการกำหนดราคา",
+    "entitlements": "สิทธิ์การใช้งาน",
+    "invoice": "ใบแจ้งหนี้"
+  },
+  "OrderCard": {
+    "paymentId": "Payment ID",
+    "purchased": "ซื้อแล้ว",
+    "viewDetails": "ดูรายละเอียด",
+    "hideDetails": "ซ่อนรายละเอียด",
+    "noProducts": "ไม่มีสินค้าในคำสั่งซื้อนี้",
+    "fetchFailed": "ดึงรายละเอียดสินค้าไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "RefundsTable": {
+    "title": "ประวัติการคืนเงิน",
+    "empty": "ไม่มีรายการคืนเงิน"
+  },
+  "RefundColumns": {
+    "date": "วันที่",
+    "status": "สถานะ",
+    "amount": "จำนวนเงิน",
+    "refundId": "Refund ID",
+    "associatedPayment": "การชำระเงินที่เกี่ยวข้อง"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "ไม่พบใบแจ้งหนี้บนหน้านี้",
+    "emptyAll": "ขณะนี้ไม่มีใบแจ้งหนี้",
+    "paymentId": "Payment ID",
+    "date": "วันที่",
+    "amount": "จำนวนเงิน",
+    "status": "สถานะ",
+    "download": "ดาวน์โหลด"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "ไม่มีใบแจ้งหนี้",
+    "downloadInvoice": "ดาวน์โหลดใบแจ้งหนี้",
+    "invoice": "ใบแจ้งหนี้",
+    "generateInvoice": "สร้างใบแจ้งหนี้",
+    "fillDetailsTitle": "กรอกที่อยู่เต็มของลูกค้า",
+    "existingAddressTitle": "ดาวน์โหลดโดยใช้รายละเอียดที่อยู่เดิม",
+    "existingAddressDescription": "ใบแจ้งหนี้นี้จะแสดงเฉพาะรหัสไปรษณีย์และประเทศตามที่ระบุไว้ระหว่างการชำระเงิน",
+    "fullAddressTitle": "ดาวน์โหลดโดยใช้รายละเอียดที่อยู่แบบเต็ม",
+    "fullAddressDescription": "ใบแจ้งหนี้นี้จะรวมที่อยู่แบบเต็มของลูกค้า โปรดตรวจสอบให้แน่ใจว่าคุณกรอกรายละเอียดครบถ้วนก่อนดาวน์โหลด",
+    "fillDetails": "กรอกรายละเอียด"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "ที่อยู่บรรทัดที่ 1",
+    "state": "รัฐ/จังหวัด",
+    "city": "เมือง",
+    "postalCode": "รหัสไปรษณีย์",
+    "download": "ดาวน์โหลด",
+    "downloadSuccess": "ดาวน์โหลดใบแจ้งหนี้เรียบร้อยแล้ว",
+    "updateFailed": "อัปเดตรายละเอียดใบแจ้งหนี้ไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "DigitalDeliveryDialog": {
+    "title": "สินค้าดิจิทัล",
+    "description": "เข้าถึงสินค้าดิจิทัลที่คุณซื้อและไฟล์ดาวน์โหลด",
+    "accessExternal": "เข้าถึงทรัพยากรภายนอก",
+    "instructions": "คำแนะนำ",
+    "loadFailed": "โหลดสินค้าดิจิทัลไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "WalletsSection": {
+    "title": "Wallet",
+    "selectWallet": "เลือก wallet",
+    "walletLabel": "wallet {currency}",
+    "availableBalance": "ยอดคงเหลือที่ใช้ได้",
+    "tableType": "ประเภท",
+    "tableReason": "เหตุผล",
+    "tableAmount": "จำนวนเงิน",
+    "noTransactions": "ยังไม่มีธุรกรรม",
+    "credit": "เครดิต",
+    "debit": "เดบิต"
+  },
+  "CreditsSection": {
+    "title": "เครดิต",
+    "selectCredit": "เลือกสิทธิ์เครดิต",
+    "overageBalance": "ยอดคงเหลือส่วนเกิน",
+    "availableCreditBalance": "ยอดคงเหลือเครดิตที่ใช้ได้",
+    "tableType": "ประเภท",
+    "tableDescription": "คำอธิบาย",
+    "tableAmount": "จำนวนเงิน",
+    "noTransactions": "ยังไม่มีธุรกรรม",
+    "credit": "เครดิต",
+    "debit": "เดบิต"
+  },
+  "UsageSummary": {
+    "emptyPage": "ไม่พบประวัติการใช้งานบนหน้านี้",
+    "emptyAll": "ขณะนี้ไม่มีประวัติการใช้งาน"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "ประวัติการเรียกเก็บเงิน",
+    "refundHistory": "ประวัติการคืนเงิน",
+    "usageSummary": "สรุปการใช้งาน"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "License key",
+    "licenseKeysButton": "License Keys",
+    "licenseKeysTitle": "License Keys",
+    "migrateLicenseTitle": "ย้าย - License Key",
+    "licenseKeyCardTitle": "License Key",
+    "clickToView": "คลิกเพื่อดู license key",
+    "hideLicenseKey": "ซ่อน license key",
+    "showLicenseKey": "แสดง license key",
+    "loadingLicenseKeys": "กำลังโหลด license keys...",
+    "noLicenseKeys": "ไม่มี license keys",
+    "expires": "หมดอายุ",
+    "attachmentsButton": "ไฟล์แนบ",
+    "attachmentButton": "ไฟล์แนบ",
+    "attachmentsTitle": "สินค้าดิจิทัลของคุณ",
+    "attachmentsDescription": "เข้าถึงและดาวน์โหลดสินค้าดิจิทัลและไฟล์ที่คุณมีได้ที่นี่",
+    "digitalProductsTitle": "สินค้าดิจิทัล",
+    "digitalProductsDescription": "ดาวน์โหลดสินค้าดิจิทัลของคุณ",
+    "noDigitalProducts": "ไม่มีสินค้าดิจิทัล",
+    "filesSection": "ไฟล์",
+    "externalLink": "ลิงก์ภายนอก",
+    "open": "เปิด",
+    "instructionsSection": "คำแนะนำ",
+    "loadFailed": "โหลดสินค้าดิจิทัลไม่สำเร็จ",
+    "fetchCartFailed": "ดึงข้อมูลตะกร้าสินค้าไม่สำเร็จ",
+    "fetchDigitalFailed": "ดึงข้อมูลสินค้าดิจิทัลไม่สำเร็จ"
+  },
+  "ProfilePage": {
+    "billingDetails": "รายละเอียดการเรียกเก็บเงินของคุณ",
+    "name": "ชื่อ",
+    "email": "อีเมล",
+    "walletsHeading": "Wallets",
+    "creditsHeading": "เครดิต",
+    "walletTabLabel": "Wallet {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "ไม่พบ wallets",
+    "availableBalance": "ยอดคงเหลือที่ใช้ได้",
+    "recentTransactions": "ธุรกรรมล่าสุด",
+    "tableType": "ประเภท",
+    "tableReason": "เหตุผล",
+    "tableAmount": "จำนวนเงิน",
+    "emptyPage": "ไม่พบธุรกรรมบนหน้านี้",
+    "emptyAll": "ขณะนี้ไม่มีธุรกรรม"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "ไม่พบเครดิต",
+    "selectPlaceholder": "เลือกสิทธิ์เครดิต",
+    "overageBalance": "ยอดคงเหลือส่วนเกิน",
+    "availableCreditBalance": "ยอดคงเหลือเครดิตที่ใช้ได้",
+    "recentTransactions": "ธุรกรรมล่าสุด",
+    "tableType": "ประเภท",
+    "tableDescription": "คำอธิบาย",
+    "tableAmount": "จำนวนเงิน",
+    "emptyPage": "ไม่พบธุรกรรมบนหน้านี้",
+    "emptyAll": "ขณะนี้ไม่มีธุรกรรม"
+  },
+  "Pagination": {
+    "previous": "ก่อนหน้า",
+    "next": "ถัดไป"
+  },
+  "BaseDataGrid": {
+    "noData": "ไม่มีข้อมูล",
+    "reset": "รีเซ็ตตาราง"
+  },
+  "DataGridColumnHeader": {
+    "asc": "น้อยไปมาก",
+    "desc": "มากไปน้อย",
+    "pinLeft": "ปักหมุดไปทางซ้าย",
+    "pinRight": "ปักหมุดไปทางขวา",
+    "moveLeft": "ย้ายไปทางซ้าย",
+    "moveRight": "ย้ายไปทางขวา",
+    "columns": "คอลัมน์"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "แถวต่อหน้า"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "แก้ไขคอลัมน์"
+  },
+  "TokenPage": {
+    "validationFailed": "การตรวจสอบล้มเหลว โปรดลองอีกครั้ง",
+    "goToExpiredPage": "ไปที่หน้าหมดอายุ"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "ชื่อมิเตอร์",
+    "meterId": "Meter ID",
+    "consumedUnits": "หน่วยที่ใช้ไป",
+    "chargeableUnits": "หน่วยที่คิดค่าบริการ",
+    "freeThreshold": "เกณฑ์ใช้งานฟรี",
+    "units": "หน่วย",
+    "unitPrice": "ราคาต่อหน่วย",
+    "totalCost": "ค่าใช้จ่ายรวม",
+    "actions": "การดำเนินการ",
+    "view": "ดู"
+  },
+  "PaymentMethodsPage": {
+    "heading": "วิธีชำระเงินของคุณ",
+    "empty": "ไม่พบวิธีชำระเงิน"
+  },
+  "LicenseColumns": {
+    "licenseKey": "License Key",
+    "status": "สถานะ",
+    "productId": "Product ID",
+    "expiry": "วันหมดอายุ (UTC)",
+    "neverExpires": "ไม่มีวันหมดอายุ",
+    "sameAsSubscription": "เหมือนกับการสมัครสมาชิก",
+    "activationsUsed": "จำนวนการเปิดใช้งานที่ใช้ไป",
+    "paymentId": "Payment ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Payment ID",
+    "status": "สถานะ",
+    "paymentMethod": "วิธีชำระเงิน",
+    "amount": "จำนวนเงิน",
+    "date": "วันที่ (UTC)",
+    "invoice": "ใบแจ้งหนี้",
+    "invoiceButtonLabel": "ใบแจ้งหนี้",
+    "files": "ไฟล์"
+  },
+  "TimeTooltip": {
+    "title": "การแปลงเขตเวลา",
+    "yourDevice": "อุปกรณ์ของคุณ",
+    "system": "ระบบ"
+  },
+  "DateFilter": {
+    "selectDateRange": "เลือกช่วงวันที่",
+    "dialogDescription": "เลือกช่วงวันที่เพื่อกรองข้อมูล",
+    "presets": "ค่าที่ตั้งไว้",
+    "calendar": "ปฏิทิน",
+    "cancel": "ยกเลิก",
+    "applyFilter": "ใช้ตัวกรอง",
+    "today": "วันนี้",
+    "yesterday": "เมื่อวาน",
+    "thisWeek": "สัปดาห์นี้",
+    "lastWeek": "สัปดาห์ที่แล้ว",
+    "thisMonth": "เดือนนี้",
+    "lastMonth": "เดือนที่แล้ว",
+    "thisYear": "ปีนี้",
+    "lastYear": "ปีที่แล้ว",
+    "allTime": "ทั้งหมด"
+  },
+  "FilterControls": {
+    "statusLabel": "สถานะ"
+  },
+  "FilterDropdown": {
+    "filters": "ตัวกรอง",
+    "filterBy": "กรองตาม:",
+    "clear": "ล้าง",
+    "filter": "กรอง"
+  },
+  "CountrySelect": {
+    "loading": "กำลังโหลด...",
+    "searchPlaceholder": "ค้นหาประเทศ...",
+    "noCountryFound": "ไม่พบประเทศ",
+    "loadFailed": "โหลดรายชื่อประเทศไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "DataTable": {
+    "noResults": "ไม่มีผลลัพธ์"
+  },
+  "Product": {
+    "qty": "จำนวน: {value}",
+    "manageSubscription": "จัดการการสมัครสมาชิก",
+    "fetchSubscriptionFailed": "ดึงข้อมูลการสมัครสมาชิกไม่สำเร็จ โปรดลองอีกครั้ง",
+    "noAuthToken": "ไม่พบโทเค็นการยืนยันตัวตน",
+    "loadDigitalProductsFailed": "โหลดสินค้าดิจิทัลไม่สำเร็จ",
+    "fetchDigitalProductsFailed": "ดึงข้อมูลสินค้าดิจิทัลไม่สำเร็จ โปรดลองอีกครั้ง"
+  },
+  "BadgeStatus": {
+    "succeeded": "สำเร็จ",
+    "failed": "ล้มเหลว",
+    "cancelled": "ยกเลิกแล้ว",
+    "expired": "หมดอายุ",
+    "processing": "กำลังดำเนินการ",
+    "pending": "รอดำเนินการ",
+    "review": "อยู่ระหว่างตรวจสอบ",
+    "onHold": "พักไว้",
+    "notInitiated": "ยังไม่ได้เริ่ม",
+    "noStatus": "ไม่มีสถานะ",
+    "verified": "ยืนยันแล้ว",
+    "active": "ใช้งานอยู่",
+    "disabled": "ปิดใช้งาน",
+    "preDispute": "ก่อนโต้แย้ง",
+    "dispute": "ข้อพิพาท",
+    "preArbitration": "ก่อนอนุญาโตตุลาการ",
+    "disputeOpened": "เปิดข้อพิพาทแล้ว",
+    "disputeExpired": "ข้อพิพาทหมดอายุแล้ว",
+    "disputeAccepted": "ยอมรับข้อพิพาทแล้ว",
+    "disputeCancelled": "ยกเลิกข้อพิพาทแล้ว",
+    "disputeChallenged": "โต้แย้งข้อพิพาทแล้ว",
+    "disputeWon": "ชนะข้อพิพาท",
+    "disputeLost": "แพ้ข้อพิพาท",
+    "oneTime": "ครั้งเดียว",
+    "subscription": "การสมัครสมาชิก",
+    "unknown": "ไม่ทราบ"
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Sesuatu telah berlaku",
+    "description": "Anda mungkin menghadapi masalah sambungan rangkaian, pautan mungkin telah tamat tempoh, atau pautan/produk mungkin tidak sah."
+  },
+  "NotFoundPage": {
+    "title": "Halaman tidak ditemui",
+    "description": "Halaman yang anda cari tidak wujud atau mungkin telah dipindahkan."
+  },
+  "ExpiredPage": {
+    "title": "Atas sebab keselamatan, halaman ini telah tamat tempoh."
+  },
+  "LandingCard": {
+    "heading": "Apa yang boleh kami bantu anda hari ini?",
+    "actionsIntro": "Anda boleh melakukan tindakan berikut:",
+    "actions": {
+      "changePaymentMethod": "Tukar Kaedah Pembayaran",
+      "cancelSubscription": "Batalkan langganan",
+      "downloadInvoices": "Muat turun invois",
+      "viewOrders": "Lihat pesanan yang diproses melalui Dodo Payments",
+      "otherQueries": "Pertanyaan lain"
+    },
+    "emailLabel": "E-mel",
+    "emailPlaceholder": "Masukkan e-mel anda",
+    "emailInvalid": "Alamat e-mel tidak sah",
+    "emailFailed": "Gagal menghantar pautan log masuk. Sila cuba lagi.",
+    "lookUpPurchase": "Semak pembelian saya",
+    "sendEmail": "Hantar e-mel",
+    "sending": "Menghantar...",
+    "sentTitle": "Kami telah menghantar e-mel kepada anda!",
+    "sentDescription": "Gunakan pautan dalam e-mel untuk log masuk ke portal layan diri Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Apakah itu Dodo Payments?",
+    "description": "Dodo Payments ialah platform Merchant of Record (MoR) yang mengurus pembayaran, pematuhan cukai dan infrastruktur bil untuk semakin banyak perniagaan digital, termasuk produk perisian, alat dan perkhidmatan. Apabila anda membuat pembelian atau melanggan produk yang dijual oleh salah satu perniagaan ini, Dodo Payments yang mengendalikan transaksi, pengebilan, sokongan pelanggan, bayaran balik dan pertikaian.",
+    "visitPrompt": "Lawati <link>dodopayments.com</link> untuk mengetahui lebih lanjut."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "Portal pengebilan {businessName}",
+    "enterEmailDescription": "Masukkan e-mel anda untuk menerima pautan akses",
+    "emailLabel": "E-mel",
+    "emailPlaceholder": "Masukkan e-mel anda",
+    "emailInvalid": "Sila masukkan alamat e-mel yang sah",
+    "emailRequired": "E-mel diperlukan",
+    "getAccessLink": "Dapatkan Pautan Akses",
+    "sending": "Menghantar...",
+    "successTitle": "Hampir siap!",
+    "successDescription": "Pautan akses dihantar ke e-mel {email}. Pastikan anda semak folder spam anda!",
+    "goBack": "Kembali",
+    "loginLinkSent": "Pautan log masuk dihantar ke e-mel",
+    "loginLinkFailed": "Gagal menghantar pautan log masuk. Sila cuba lagi."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Cari perniagaan",
+    "emptyPage": "Tiada perniagaan ditemui pada halaman ini",
+    "emptyAll": "Tiada perniagaan ditemui",
+    "fetchError": "Gagal mendapatkan butiran perniagaan",
+    "viewDetails": "Lihat Butiran"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Lihat semua perniagaan",
+    "switchToLightMode": "Tukar ke mod cerah",
+    "switchToDarkMode": "Tukar ke mod gelap",
+    "loggingOut": "Sedang log keluar...",
+    "logOut": "Log Keluar",
+    "goBackToBusiness": "Kembali ke perniagaan",
+    "goToOverview": "Pergi ke gambaran keseluruhan"
+  },
+  "LeftPanel": {
+    "goBackTo": "Kembali ke {businessName}",
+    "heading": "Urus tetapan langganan dan pengebilan anda",
+    "description": "Lihat sejarah pembayaran, muat turun invois dan urus langganan serta kaedah pembayaran.",
+    "poweredBy": "Dikuasakan oleh",
+    "privacy": "Privasi",
+    "terms": "Terma"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Gagal menukar bahasa. Sila cuba lagi."
+  },
+  "Subscriptions": {
+    "headingActive": "Langganan aktif",
+    "headingAll": "Langganan",
+    "emptyPage": "Tiada langganan ditemui pada halaman ini",
+    "emptyActive": "Tiada langganan aktif buat masa ini",
+    "viewAll": "Lihat semua langganan"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Urus langganan",
+    "updatePaymentMethod": "Kemas kini kaedah pembayaran",
+    "viewDetails": "Lihat butiran",
+    "renewsOn": "diperbaharui pada",
+    "validTill": "sah hingga"
+  },
+  "SubscriptionDetails": {
+    "addons": "Add-on",
+    "meters": "Meter",
+    "freeThreshold": "Ambang Percuma",
+    "per": "setiap",
+    "qty": "Kuantiti: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Maklumat Pengebilan",
+    "name": "Nama",
+    "phoneNumber": "Nombor telefon",
+    "email": "E-mel",
+    "billingAddress": "Alamat Pengebilan"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Edit",
+    "sheetTitle": "Edit Butiran Pengebilan",
+    "customerName": "Nama Pelanggan",
+    "fullNamePlaceholder": "Nama Penuh",
+    "billingAddress": "Alamat Pengebilan",
+    "loadingCountries": "Memuatkan...",
+    "addressLine": "Baris alamat 1",
+    "state": "Negeri",
+    "city": "Bandar",
+    "postalCode": "Poskod",
+    "purchasingAsBusiness": "Membeli sebagai perniagaan",
+    "taxId": "ID Cukai",
+    "taxIdPlaceholder": "ID Cukai",
+    "saveDetails": "Simpan Butiran",
+    "updateSuccess": "Butiran pengebilan berjaya dikemas kini",
+    "updateFailed": "Gagal mengemas kini butiran pengebilan. Sila cuba lagi.",
+    "countriesLoadFailed": "Gagal memuatkan negara. Sila cuba lagi."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Adakah anda pasti mahu membatalkan langganan anda untuk perkhidmatan ini?",
+    "description": "Sebaik sahaja anda meneruskan, anda akan kehilangan akses kepada semua manfaat berkaitan dan tindakan ini tidak boleh dibatalkan.",
+    "close": "Tutup",
+    "cancel": "Batal",
+    "cancelling": "Sedang membatalkan..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Batalkan Langganan",
+    "triggerRevoke": "Tarik Balik Pembatalan",
+    "sheetTitle": "Kami sedih melihat anda pergi...",
+    "currentPlan": "Pelan semasa",
+    "addOns": "{count, plural, one {# add-on} other {# add-on}}",
+    "quantity": "Kuantiti: {value}",
+    "scheduledCancellationWarning": "Langganan ini dijadualkan untuk dibatalkan pada tarikh pengebilan seterusnya.",
+    "revokeCancellation": "Tarik Balik Pembatalan",
+    "revoking": "Sedang menarik balik...",
+    "cancelAtNextBilling": "Batalkan pada tarikh pengebilan seterusnya",
+    "cancelling": "Sedang membatalkan...",
+    "cancelSuccess": "Langganan berjaya dibatalkan",
+    "cancelScheduled": "Langganan akan dibatalkan pada tarikh pengebilan seterusnya",
+    "cancelFailed": "Gagal membatalkan langganan. Sila cuba lagi.",
+    "revokeFailed": "Gagal menarik balik pembatalan. Sila cuba lagi.",
+    "revokeSuccess": "Pembatalan langganan berjaya ditarik balik"
+  },
+  "SubscriptionInfo": {
+    "title": "Langganan anda sedang ditangguhkan",
+    "description": "Sila kemas kini kaedah pembayaran anda untuk menyambung semula langganan ini"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Langganan anda sedang ditangguhkan disebabkan pembayaran yang gagal. Sila kemas kini kaedah pembayaran anda untuk menyambung semula langganan ini",
+    "failed": "Langganan ini telah gagal. Sila cuba lagi.",
+    "pending": "Pembayaran anda tidak selesai dan checkout ditinggalkan tanpa diselesaikan. Jika anda ingin melanggan, sila cuba lagi.",
+    "cancelledOn": "Langganan ini telah dibatalkan pada {date}.",
+    "expired": "Langganan ini telah tamat tempoh.",
+    "scheduledCancellation": "Langganan anda kini dijadualkan untuk pembatalan pada {date}.",
+    "scheduledCancellationNoDate": "Langganan anda kini dijadualkan untuk pembatalan.",
+    "flexibleSubscription": "Ini ialah langganan fleksibel, jadi {name} mungkin melaraskan harga untuk kitaran pengebilan anda yang seterusnya.",
+    "flexibleSubscriptionUnknownMerchant": "Ini ialah langganan fleksibel, jadi jumlah pengebilan mungkin dilaraskan untuk kitaran pengebilan anda yang seterusnya.",
+    "discountApplied": "Diskaun digunakan untuk {count, plural, one {# lagi kitaran pengebilan} other {# lagi kitaran pengebilan}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Tukar Pelan",
+    "sheetTitle": "Pilih pelan baharu",
+    "noProducts": "Tiada produk langganan tersedia.",
+    "currentPlan": "Pelan semasa",
+    "proceed": "Teruskan",
+    "unnamedGroup": "Kumpulan Tanpa Nama"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Sahkan Pertukaran Pelan",
+    "noPlanSelected": "Tiada pelan dipilih",
+    "loadingPreview": "Memuatkan pratonton...",
+    "current": "Semasa",
+    "updated": "Dikemas kini",
+    "qty": "Kuantiti: {value}",
+    "viewAddons": "Lihat add-on",
+    "manageAddons": "Urus add-on",
+    "noAddons": "Tiada add-on",
+    "tableItem": "Item",
+    "tableQuantity": "Kuantiti",
+    "tableUnitPrice": "Harga Seunit",
+    "tableTax": "Cukai",
+    "tableTotal": "Jumlah",
+    "creditToBalance": "Kredit ke Baki",
+    "creditTooltip": "Kredit akan digunakan untuk membayar pembayaran pada masa hadapan",
+    "summaryTotal": "Jumlah",
+    "summaryTax": "Cukai",
+    "summaryAmountDue": "Jumlah perlu dibayar sekarang",
+    "payButton": "Bayar {amount}",
+    "previewFailed": "Gagal memuatkan pratonton. Sila cuba lagi.",
+    "changeFailed": "Gagal menukar pelan. Sila cuba lagi.",
+    "changeSuccess": "Pelan berjaya ditukar",
+    "addonRequired": "Sila pilih sekurang-kurangnya satu add-on dengan kuantiti 1 atau lebih."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Edit",
+    "sheetTitle": "Edit Kaedah Pembayaran",
+    "addPaymentMethod": "Tambah Kaedah Pembayaran",
+    "noPaymentMethods": "Tiada kaedah pembayaran yang layak ditemui.",
+    "confirmChanges": "Sahkan Perubahan",
+    "updating": "Sedang mengemas kini...",
+    "selectRequired": "Sila pilih kaedah pembayaran",
+    "loadFailed": "Gagal memuatkan kaedah pembayaran. Sila cuba lagi.",
+    "updateSuccess": "Kaedah pembayaran berjaya dikemas kini",
+    "setupInitiated": "Penyediaan kaedah pembayaran dimulakan",
+    "updateFailed": "Gagal mengemas kini kaedah pembayaran. Sila cuba lagi.",
+    "addFailed": "Gagal menambah kaedah pembayaran baharu. Sila cuba lagi."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Alih keluar kaedah pembayaran",
+    "dialogDescription": "Adakah anda pasti mahu mengalih keluar kaedah pembayaran ini? Tindakan ini tidak boleh dibuat asal.",
+    "cancel": "Batal",
+    "remove": "Alih keluar",
+    "removing": "Sedang mengalih keluar...",
+    "removeAriaLabel": "Alih keluar kaedah pembayaran",
+    "removeSuccess": "Kaedah pembayaran telah dialih keluar",
+    "removeFailed": "Gagal mengalih keluar kaedah pembayaran"
+  },
+  "PaymentMethodsSection": {
+    "title": "Kaedah Pembayaran",
+    "empty": "Tiada kaedah pembayaran ditambah"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Tambah kaedah pembayaran",
+    "sheetTitle": "Tambah kaedah pembayaran",
+    "or": "ATAU",
+    "card": "Kad",
+    "cardNumber": "Nombor kad",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Tarikh luput",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "Kod keselamatan",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Dengan memberikan maklumat kad anda, anda membenarkan Dodo Payments mengenakan caj pada kad anda untuk pembayaran pada masa hadapan selaras dengan terma mereka."
+  },
+  "Orders": {
+    "billingHistory": "Sejarah Pengebilan",
+    "emptyPage": "Tiada pembelian ditemui pada halaman ini",
+    "emptyAll": "Tiada pembelian buat masa ini",
+    "noBillingHistory": "Tiada sejarah pengebilan tersedia",
+    "fetchFailed": "Gagal mendapatkan cart produk. Sila cuba lagi."
+  },
+  "BillingHistoryColumns": {
+    "date": "Tarikh",
+    "status": "Status",
+    "amount": "Amaun",
+    "pricingType": "Jenis Harga",
+    "entitlements": "Entitlement",
+    "invoice": "Invois"
+  },
+  "OrderCard": {
+    "paymentId": "ID Pembayaran",
+    "purchased": "Dibeli",
+    "viewDetails": "Lihat Butiran",
+    "hideDetails": "Sembunyikan Butiran",
+    "noProducts": "Tiada produk dalam pesanan ini.",
+    "fetchFailed": "Gagal mendapatkan butiran produk. Sila cuba lagi."
+  },
+  "RefundsTable": {
+    "title": "Sejarah Bayaran Balik",
+    "empty": "Tiada bayaran balik tersedia"
+  },
+  "RefundColumns": {
+    "date": "Tarikh",
+    "status": "Status",
+    "amount": "Amaun",
+    "refundId": "ID Bayaran Balik",
+    "associatedPayment": "Pembayaran Berkaitan"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "Tiada invois ditemui pada halaman ini",
+    "emptyAll": "Tiada invois buat masa ini",
+    "paymentId": "ID Pembayaran",
+    "date": "Tarikh",
+    "amount": "Amaun",
+    "status": "Status",
+    "download": "Muat turun"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Invois tidak tersedia",
+    "downloadInvoice": "Muat turun Invois",
+    "invoice": "Invois",
+    "generateInvoice": "Jana Invois",
+    "fillDetailsTitle": "Masukkan alamat penuh pelanggan",
+    "existingAddressTitle": "Muat turun dengan butiran alamat sedia ada",
+    "existingAddressDescription": "Invois ini hanya akan menyertakan poskod dan negara anda seperti yang diberikan semasa proses checkout.",
+    "fullAddressTitle": "Muat turun dengan butiran alamat penuh",
+    "fullAddressDescription": "Invois ini akan menyertakan alamat lengkap pelanggan. Sila pastikan anda mengisi semua butiran sebelum memuat turun.",
+    "fillDetails": "Isi Butiran"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Baris alamat 1",
+    "state": "Negeri",
+    "city": "Bandar",
+    "postalCode": "Poskod",
+    "download": "Muat turun",
+    "downloadSuccess": "Invois berjaya dimuat turun",
+    "updateFailed": "Gagal mengemas kini butiran invois. Sila cuba lagi."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Produk Digital",
+    "description": "Akses produk digital yang telah anda beli dan muat turun",
+    "accessExternal": "Akses Sumber Luaran",
+    "instructions": "Arahan",
+    "loadFailed": "Gagal memuatkan produk digital. Sila cuba lagi."
+  },
+  "WalletsSection": {
+    "title": "Wallet",
+    "selectWallet": "Pilih wallet",
+    "walletLabel": "wallet {currency}",
+    "availableBalance": "Baki tersedia",
+    "tableType": "Jenis",
+    "tableReason": "Sebab",
+    "tableAmount": "Amaun",
+    "noTransactions": "Tiada transaksi lagi",
+    "credit": "Kredit",
+    "debit": "Debit"
+  },
+  "CreditsSection": {
+    "title": "Kredit",
+    "selectCredit": "Pilih entitlement kredit",
+    "overageBalance": "Baki lebihan",
+    "availableCreditBalance": "Baki kredit tersedia",
+    "tableType": "Jenis",
+    "tableDescription": "Penerangan",
+    "tableAmount": "Amaun",
+    "noTransactions": "Tiada transaksi lagi",
+    "credit": "Kredit",
+    "debit": "Debit"
+  },
+  "UsageSummary": {
+    "emptyPage": "Tiada sejarah penggunaan ditemui pada halaman ini",
+    "emptyAll": "Tiada sejarah penggunaan buat masa ini"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Sejarah Pengebilan",
+    "refundHistory": "Sejarah Bayaran Balik",
+    "usageSummary": "Ringkasan Penggunaan"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Kunci lesen",
+    "licenseKeysButton": "Kunci Lesen",
+    "licenseKeysTitle": "Kunci Lesen",
+    "migrateLicenseTitle": "Migrasi - Kunci Lesen",
+    "licenseKeyCardTitle": "Kunci Lesen",
+    "clickToView": "Klik untuk melihat kunci lesen",
+    "hideLicenseKey": "Sembunyikan kunci lesen",
+    "showLicenseKey": "Tunjukkan kunci lesen",
+    "loadingLicenseKeys": "Memuatkan kunci lesen...",
+    "noLicenseKeys": "Tiada kunci lesen tersedia.",
+    "expires": "Tamat tempoh",
+    "attachmentsButton": "Lampiran",
+    "attachmentButton": "Lampiran",
+    "attachmentsTitle": "Produk Digital Anda",
+    "attachmentsDescription": "Akses dan muat turun produk digital serta fail yang tersedia di sini.",
+    "digitalProductsTitle": "Produk Digital",
+    "digitalProductsDescription": "Muat turun produk digital anda",
+    "noDigitalProducts": "Tiada produk digital tersedia.",
+    "filesSection": "Fail",
+    "externalLink": "Pautan luaran",
+    "open": "Buka",
+    "instructionsSection": "Arahan",
+    "loadFailed": "Gagal memuatkan produk digital.",
+    "fetchCartFailed": "Gagal mendapatkan cart produk",
+    "fetchDigitalFailed": "Gagal mendapatkan produk digital"
+  },
+  "ProfilePage": {
+    "billingDetails": "Butiran pengebilan anda",
+    "name": "Nama",
+    "email": "E-mel",
+    "walletsHeading": "Wallet",
+    "creditsHeading": "Kredit",
+    "walletTabLabel": "Wallet {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Tiada wallet ditemui",
+    "availableBalance": "Baki tersedia",
+    "recentTransactions": "Transaksi Terkini",
+    "tableType": "Jenis",
+    "tableReason": "Sebab",
+    "tableAmount": "Amaun",
+    "emptyPage": "Tiada transaksi ditemui pada halaman ini",
+    "emptyAll": "Tiada transaksi buat masa ini"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Tiada kredit ditemui",
+    "selectPlaceholder": "Pilih entitlement kredit",
+    "overageBalance": "Baki lebihan",
+    "availableCreditBalance": "Baki kredit tersedia",
+    "recentTransactions": "Transaksi Terkini",
+    "tableType": "Jenis",
+    "tableDescription": "Penerangan",
+    "tableAmount": "Amaun",
+    "emptyPage": "Tiada transaksi ditemui pada halaman ini",
+    "emptyAll": "Tiada transaksi buat masa ini"
+  },
+  "Pagination": {
+    "previous": "Sebelumnya",
+    "next": "Seterusnya"
+  },
+  "BaseDataGrid": {
+    "noData": "Tiada data tersedia",
+    "reset": "Reset Jadual"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Menaik",
+    "desc": "Menurun",
+    "pinLeft": "Pin ke kiri",
+    "pinRight": "Pin ke kanan",
+    "moveLeft": "Alih ke Kiri",
+    "moveRight": "Alih ke Kanan",
+    "columns": "Lajur"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Baris setiap halaman"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Edit Lajur"
+  },
+  "TokenPage": {
+    "validationFailed": "Pengesahan gagal. Sila cuba lagi.",
+    "goToExpiredPage": "Pergi ke Halaman Tamat Tempoh"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Nama Meter",
+    "meterId": "ID Meter",
+    "consumedUnits": "Unit Digunakan",
+    "chargeableUnits": "Unit Bercaj",
+    "freeThreshold": "Ambang Percuma",
+    "units": "unit",
+    "unitPrice": "Harga Seunit",
+    "totalCost": "Jumlah Kos",
+    "actions": "Tindakan",
+    "view": "Lihat"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Kaedah pembayaran anda",
+    "empty": "Tiada kaedah pembayaran ditemui"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Kunci Lesen",
+    "status": "Status",
+    "productId": "ID Produk",
+    "expiry": "Tamat tempoh (UTC)",
+    "neverExpires": "Tidak Pernah Tamat Tempoh",
+    "sameAsSubscription": "Sama seperti Langganan",
+    "activationsUsed": "Aktivasi digunakan",
+    "paymentId": "ID Pembayaran"
+  },
+  "PaymentColumns": {
+    "paymentId": "ID Pembayaran",
+    "status": "Status",
+    "paymentMethod": "Kaedah Pembayaran",
+    "amount": "Amaun",
+    "date": "Tarikh (UTC)",
+    "invoice": "Invois",
+    "invoiceButtonLabel": "Invois",
+    "files": "Fail"
+  },
+  "TimeTooltip": {
+    "title": "Penukaran zon waktu",
+    "yourDevice": "Peranti anda",
+    "system": "Sistem"
+  },
+  "DateFilter": {
+    "selectDateRange": "Pilih Julat Tarikh",
+    "dialogDescription": "Pilih julat tarikh untuk menapis data",
+    "presets": "Praset",
+    "calendar": "Kalendar",
+    "cancel": "Batal",
+    "applyFilter": "Gunakan Penapis",
+    "today": "Hari ini",
+    "yesterday": "Semalam",
+    "thisWeek": "Minggu ini",
+    "lastWeek": "Minggu lepas",
+    "thisMonth": "Bulan ini",
+    "lastMonth": "Bulan lepas",
+    "thisYear": "Tahun ini",
+    "lastYear": "Tahun lepas",
+    "allTime": "Sepanjang masa"
+  },
+  "FilterControls": {
+    "statusLabel": "Status"
+  },
+  "FilterDropdown": {
+    "filters": "Penapis",
+    "filterBy": "Tapis mengikut:",
+    "clear": "Kosongkan",
+    "filter": "Tapis"
+  },
+  "CountrySelect": {
+    "loading": "Memuatkan...",
+    "searchPlaceholder": "Cari negara...",
+    "noCountryFound": "Tiada negara ditemui.",
+    "loadFailed": "Gagal memuatkan negara. Sila cuba lagi."
+  },
+  "DataTable": {
+    "noResults": "Tiada hasil."
+  },
+  "Product": {
+    "qty": "Kuantiti: {value}",
+    "manageSubscription": "Urus Langganan",
+    "fetchSubscriptionFailed": "Gagal mendapatkan langganan. Sila cuba lagi.",
+    "noAuthToken": "Tiada token pengesahan ditemui",
+    "loadDigitalProductsFailed": "Gagal memuatkan produk digital.",
+    "fetchDigitalProductsFailed": "Gagal mendapatkan produk digital. Sila cuba lagi."
+  },
+  "BadgeStatus": {
+    "succeeded": "Berjaya",
+    "failed": "Gagal",
+    "cancelled": "Dibatalkan",
+    "expired": "Tamat tempoh",
+    "processing": "Sedang Diproses",
+    "pending": "Menunggu",
+    "review": "Dalam Semakan",
+    "onHold": "Ditangguhkan",
+    "notInitiated": "Belum Dimulakan",
+    "noStatus": "Tiada Status",
+    "verified": "Disahkan",
+    "active": "Aktif",
+    "disabled": "Dilumpuhkan",
+    "preDispute": "Pra-Pertikaian",
+    "dispute": "Pertikaian",
+    "preArbitration": "Pra-Arbitrasi",
+    "disputeOpened": "Pertikaian Dibuka",
+    "disputeExpired": "Pertikaian Tamat Tempoh",
+    "disputeAccepted": "Pertikaian Diterima",
+    "disputeCancelled": "Pertikaian Dibatalkan",
+    "disputeChallenged": "Pertikaian Dicabar",
+    "disputeWon": "Pertikaian Dimenangi",
+    "disputeLost": "Pertikaian Dikalahkan",
+    "oneTime": "Sekali Sahaja",
+    "subscription": "Langganan",
+    "unknown": "Tidak Diketahui"
+  }
+}

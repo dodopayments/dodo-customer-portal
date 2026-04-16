@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Alguna cosa ha anat malament",
+    "description": "És possible que tinguis un problema de connexió de xarxa, que l’enllaç hagi caducat o que l’enllaç/producte no sigui vàlid."
+  },
+  "NotFoundPage": {
+    "title": "Pàgina no trobada",
+    "description": "La pàgina que cerques no existeix o pot haver estat moguda."
+  },
+  "ExpiredPage": {
+    "title": "Per motius de seguretat, aquesta pàgina ha caducat."
+  },
+  "LandingCard": {
+    "heading": "En què et podem ajudar avui?",
+    "actionsIntro": "Pots fer les accions següents:",
+    "actions": {
+      "changePaymentMethod": "Canvia la forma de pagament",
+      "cancelSubscription": "Cancel·la la subscripció",
+      "downloadInvoices": "Descarrega les factures",
+      "viewOrders": "Mostra les comandes processades a través de Dodo Payments",
+      "otherQueries": "Altres consultes"
+    },
+    "emailLabel": "Correu electrònic",
+    "emailPlaceholder": "Introdueix el teu correu electrònic",
+    "emailInvalid": "Adreça de correu electrònic no vàlida",
+    "emailFailed": "No s’ha pogut enviar l’enllaç d’inici de sessió. Torna-ho a provar.",
+    "lookUpPurchase": "Cerca la meva compra",
+    "sendEmail": "Envia un correu",
+    "sending": "S’està enviant...",
+    "sentTitle": "T’hem enviat un correu electrònic!",
+    "sentDescription": "Utilitza l’enllaç del correu per iniciar la sessió al portal d’autoservei de Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Què és Dodo Payments?",
+    "description": "Dodo Payments és una plataforma Merchant of Record (MoR) que gestiona els pagaments, el compliment fiscal i la infraestructura de facturació per a un nombre creixent de negocis digitals, incloent-hi productes de software, eines i serveis. Quan fas una compra o et subscrius a un producte venut per un d’aquests negocis, és Dodo Payments qui gestiona la transacció, la facturació, l’atenció al client, els reemborsaments i les disputes.",
+    "visitPrompt": "Visita <link>dodopayments.com</link> per saber-ne més."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "Portal de facturació de {businessName}",
+    "enterEmailDescription": "Introdueix el teu correu electrònic per rebre l’enllaç d’accés",
+    "emailLabel": "Correu electrònic",
+    "emailPlaceholder": "Introdueix el teu correu electrònic",
+    "emailInvalid": "Introdueix una adreça de correu electrònic vàlida",
+    "emailRequired": "El correu electrònic és obligatori",
+    "getAccessLink": "Obtén l’enllaç d’accés",
+    "sending": "S’està enviant...",
+    "successTitle": "Ja gairebé hi som!",
+    "successDescription": "S’ha enviat l’enllaç d’accés al correu {email}. Assegura’t de revisar la carpeta de correu brossa!",
+    "goBack": "Torna enrere",
+    "loginLinkSent": "Enllaç d’inici de sessió enviat al correu",
+    "loginLinkFailed": "No s’ha pogut enviar l’enllaç d’inici de sessió. Torna-ho a provar."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Cerca negocis",
+    "emptyPage": "No s’han trobat negocis en aquesta pàgina",
+    "emptyAll": "No s’han trobat negocis",
+    "fetchError": "No s’han pogut obtenir els detalls del negoci",
+    "viewDetails": "Mostra’n els detalls"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Mostra tots els negocis",
+    "switchToLightMode": "Canvia al mode clar",
+    "switchToDarkMode": "Canvia al mode fosc",
+    "loggingOut": "Tancant la sessió...",
+    "logOut": "Tanca la sessió",
+    "goBackToBusiness": "Torna al negoci",
+    "goToOverview": "Vés al resum"
+  },
+  "LeftPanel": {
+    "goBackTo": "Torna a {businessName}",
+    "heading": "Gestiona la teva subscripció i la configuració de facturació",
+    "description": "Consulta l’historial de pagaments, descarrega factures i gestiona subscripcions i formes de pagament.",
+    "poweredBy": "Amb tecnologia de",
+    "privacy": "Privacitat",
+    "terms": "Termes"
+  },
+  "LanguageSelector": {
+    "changeFailed": "No s’ha pogut canviar l’idioma. Torna-ho a provar."
+  },
+  "Subscriptions": {
+    "headingActive": "Subscripcions actives",
+    "headingAll": "Subscripcions",
+    "emptyPage": "No s’han trobat subscripcions en aquesta pàgina",
+    "emptyActive": "Ara mateix no hi ha subscripcions actives",
+    "viewAll": "Mostra totes les subscripcions"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Gestiona la subscripció",
+    "updatePaymentMethod": "Actualitza la forma de pagament",
+    "viewDetails": "Mostra’n els detalls",
+    "renewsOn": "es renova el",
+    "validTill": "vàlid fins al"
+  },
+  "SubscriptionDetails": {
+    "addons": "Complements",
+    "meters": "Mesuradors",
+    "freeThreshold": "Llindar gratuït",
+    "per": "per",
+    "qty": "Quantitat: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Informació de facturació",
+    "name": "Nom",
+    "phoneNumber": "Número de telèfon",
+    "email": "Correu electrònic",
+    "billingAddress": "Adreça de facturació"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Edita",
+    "sheetTitle": "Edita les dades de facturació",
+    "customerName": "Nom del client",
+    "fullNamePlaceholder": "Nom complet",
+    "billingAddress": "Adreça de facturació",
+    "loadingCountries": "S’està carregant...",
+    "addressLine": "Línia d’adreça 1",
+    "state": "Estat",
+    "city": "Ciutat",
+    "postalCode": "Codi postal",
+    "purchasingAsBusiness": "Compra com a empresa",
+    "taxId": "NIF",
+    "taxIdPlaceholder": "NIF",
+    "saveDetails": "Desa les dades",
+    "updateSuccess": "Les dades de facturació s’han actualitzat correctament",
+    "updateFailed": "No s’han pogut actualitzar les dades de facturació. Torna-ho a provar.",
+    "countriesLoadFailed": "No s’han pogut carregar els països. Torna-ho a provar."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Segur que vols cancel·lar la subscripció a aquest servei?",
+    "description": "Quan continuïs, perdràs l’accés a tots els beneficis associats i aquesta acció no es pot desfer.",
+    "close": "Tanca",
+    "cancel": "Cancel·la",
+    "cancelling": "S’està cancel·lant..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Cancel·la la subscripció",
+    "triggerRevoke": "Revoca la cancel·lació",
+    "sheetTitle": "Ens sap greu veure’t marxar...",
+    "currentPlan": "Pla actual",
+    "addOns": "{count, plural, one {# complement} other {# complements}}",
+    "quantity": "Quantitat: {value}",
+    "scheduledCancellationWarning": "Aquesta subscripció està programada per cancel·lar-se a la propera data de facturació.",
+    "revokeCancellation": "Revoca la cancel·lació",
+    "revoking": "S’està revocant...",
+    "cancelAtNextBilling": "Cancel·la a la propera data de facturació",
+    "cancelling": "S’està cancel·lant...",
+    "cancelSuccess": "Subscripció cancel·lada correctament",
+    "cancelScheduled": "La subscripció es cancel·larà a la propera data de facturació",
+    "cancelFailed": "No s’ha pogut cancel·lar la subscripció. Torna-ho a provar.",
+    "revokeFailed": "No s’ha pogut revocar la cancel·lació. Torna-ho a provar.",
+    "revokeSuccess": "S’ha revocat correctament la cancel·lació de la subscripció"
+  },
+  "SubscriptionInfo": {
+    "title": "La teva subscripció està en pausa",
+    "description": "Actualitza la teva forma de pagament per reprendre aquesta subscripció"
+  },
+  "SubscriptionNotes": {
+    "onHold": "La teva subscripció està en pausa a causa d’un pagament fallit. Actualitza la teva forma de pagament per reprendre aquesta subscripció",
+    "failed": "Aquesta subscripció ha fallat. Torna-ho a provar.",
+    "pending": "El pagament no s’ha completat i el checkout ha quedat inacabat. Si vols subscriure’t, torna-ho a provar.",
+    "cancelledOn": "Aquesta subscripció es va cancel·lar el {date}.",
+    "expired": "Aquesta subscripció ha caducat.",
+    "scheduledCancellation": "La teva subscripció està programada per cancel·lar-se el {date}.",
+    "scheduledCancellationNoDate": "La teva subscripció està programada per cancel·lar-se.",
+    "flexibleSubscription": "Aquesta és una subscripció flexible, així que {name} pot ajustar el preu per al teu proper cicle de facturació.",
+    "flexibleSubscriptionUnknownMerchant": "Aquesta és una subscripció flexible, així que l’import de facturació es pot ajustar per al teu proper cicle de facturació.",
+    "discountApplied": "Descompte aplicat durant {count, plural, one {# cicle de facturació més} other {# cicles de facturació més}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Canvia de pla",
+    "sheetTitle": "Selecciona un pla nou",
+    "noProducts": "No hi ha productes de subscripció disponibles.",
+    "currentPlan": "Pla actual",
+    "proceed": "Continua",
+    "unnamedGroup": "Grup sense nom"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Confirma el canvi de pla",
+    "noPlanSelected": "No s’ha seleccionat cap pla",
+    "loadingPreview": "S’està carregant la previsualització...",
+    "current": "Actual",
+    "updated": "Actualitzat",
+    "qty": "Quantitat: {value}",
+    "viewAddons": "Mostra els complements",
+    "manageAddons": "Gestiona els complements",
+    "noAddons": "Sense complements",
+    "tableItem": "Element",
+    "tableQuantity": "Quantitat",
+    "tableUnitPrice": "Preu unitari",
+    "tableTax": "Impost",
+    "tableTotal": "Total",
+    "creditToBalance": "Crèdit al saldo",
+    "creditTooltip": "El crèdit s’utilitzarà per pagar pagaments futurs",
+    "summaryTotal": "Total",
+    "summaryTax": "Impost",
+    "summaryAmountDue": "Import a pagar ara",
+    "payButton": "Paga {amount}",
+    "previewFailed": "No s’ha pogut carregar la previsualització. Torna-ho a provar.",
+    "changeFailed": "No s’ha pogut canviar el pla. Torna-ho a provar.",
+    "changeSuccess": "El pla s’ha canviat correctament",
+    "addonRequired": "Selecciona com a mínim un complement amb quantitat 1 o superior."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Edita",
+    "sheetTitle": "Edita la forma de pagament",
+    "addPaymentMethod": "Afegeix una forma de pagament",
+    "noPaymentMethods": "No s’han trobat formes de pagament elegibles.",
+    "confirmChanges": "Confirma els canvis",
+    "updating": "S’està actualitzant...",
+    "selectRequired": "Selecciona una forma de pagament",
+    "loadFailed": "No s’han pogut carregar les formes de pagament. Torna-ho a provar.",
+    "updateSuccess": "La forma de pagament s’ha actualitzat correctament",
+    "setupInitiated": "S’ha iniciat la configuració de la forma de pagament",
+    "updateFailed": "No s’ha pogut actualitzar la forma de pagament. Torna-ho a provar.",
+    "addFailed": "No s’ha pogut afegir una forma de pagament nova. Torna-ho a provar."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Elimina la forma de pagament",
+    "dialogDescription": "Segur que vols eliminar aquesta forma de pagament? Aquesta acció no es pot desfer.",
+    "cancel": "Cancel·la",
+    "remove": "Elimina",
+    "removing": "S’està eliminant...",
+    "removeAriaLabel": "Elimina la forma de pagament",
+    "removeSuccess": "Forma de pagament eliminada",
+    "removeFailed": "No s’ha pogut eliminar la forma de pagament"
+  },
+  "PaymentMethodsSection": {
+    "title": "Formes de pagament",
+    "empty": "No s’ha afegit cap forma de pagament"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Afegeix una forma de pagament",
+    "sheetTitle": "Afegeix una forma de pagament",
+    "or": "O",
+    "card": "Targeta",
+    "cardNumber": "Número de targeta",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Data de caducitat",
+    "expiryDatePlaceholder": "MM/AA",
+    "securityCode": "Codi de seguretat",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "En proporcionar la informació de la teva targeta, autoritzes Dodo Payments a carregar-hi futurs pagaments d’acord amb els seus termes."
+  },
+  "Orders": {
+    "billingHistory": "Historial de facturació",
+    "emptyPage": "No s’han trobat compres en aquesta pàgina",
+    "emptyAll": "Ara mateix no hi ha compres",
+    "noBillingHistory": "No hi ha historial de facturació disponible",
+    "fetchFailed": "No s’ha pogut obtenir el carretó de productes. Torna-ho a provar."
+  },
+  "BillingHistoryColumns": {
+    "date": "Data",
+    "status": "Estat",
+    "amount": "Import",
+    "pricingType": "Tipus de preu",
+    "entitlements": "Drets",
+    "invoice": "Factura"
+  },
+  "OrderCard": {
+    "paymentId": "ID de pagament",
+    "purchased": "Comprat",
+    "viewDetails": "Mostra’n els detalls",
+    "hideDetails": "Amaga els detalls",
+    "noProducts": "No hi ha productes en aquesta comanda.",
+    "fetchFailed": "No s’han pogut obtenir els detalls del producte. Torna-ho a provar."
+  },
+  "RefundsTable": {
+    "title": "Historial de reemborsaments",
+    "empty": "No hi ha reemborsaments disponibles"
+  },
+  "RefundColumns": {
+    "date": "Data",
+    "status": "Estat",
+    "amount": "Import",
+    "refundId": "ID de reemborsament",
+    "associatedPayment": "Pagament associat"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "No s’han trobat factures en aquesta pàgina",
+    "emptyAll": "Ara mateix no hi ha factures",
+    "paymentId": "ID de pagament",
+    "date": "Data",
+    "amount": "Import",
+    "status": "Estat",
+    "download": "Descarrega"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Factura no disponible",
+    "downloadInvoice": "Descarrega la factura",
+    "invoice": "Factura",
+    "generateInvoice": "Genera la factura",
+    "fillDetailsTitle": "Introdueix l’adreça completa del client",
+    "existingAddressTitle": "Descarrega amb les dades d’adreça existents",
+    "existingAddressDescription": "Aquesta factura inclourà només el teu codi postal i el país, tal com es van indicar durant el procés de checkout.",
+    "fullAddressTitle": "Descarrega amb les dades d’adreça completes",
+    "fullAddressDescription": "Aquesta factura inclourà l’adreça completa del client. Assegura’t d’omplir totes les dades abans de descarregar-la.",
+    "fillDetails": "Omple les dades"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Línia d’adreça 1",
+    "state": "Estat",
+    "city": "Ciutat",
+    "postalCode": "Codi postal",
+    "download": "Descarrega",
+    "downloadSuccess": "Factura descarregada correctament",
+    "updateFailed": "No s’han pogut actualitzar les dades de la factura. Torna-ho a provar."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Productes digitals",
+    "description": "Accedeix als productes digitals comprats i a les descàrregues",
+    "accessExternal": "Accedeix al recurs extern",
+    "instructions": "Instruccions",
+    "loadFailed": "No s’han pogut carregar els productes digitals. Torna-ho a provar."
+  },
+  "WalletsSection": {
+    "title": "Wallet",
+    "selectWallet": "Selecciona wallet",
+    "walletLabel": "Wallet {currency}",
+    "availableBalance": "Saldo disponible",
+    "tableType": "Tipus",
+    "tableReason": "Motiu",
+    "tableAmount": "Import",
+    "noTransactions": "Encara no hi ha transaccions",
+    "credit": "Crèdit",
+    "debit": "Dèbit"
+  },
+  "CreditsSection": {
+    "title": "Crèdits",
+    "selectCredit": "Selecciona el dret de crèdit",
+    "overageBalance": "Saldo d’excés",
+    "availableCreditBalance": "Saldo de crèdit disponible",
+    "tableType": "Tipus",
+    "tableDescription": "Descripció",
+    "tableAmount": "Import",
+    "noTransactions": "Encara no hi ha transaccions",
+    "credit": "Crèdit",
+    "debit": "Dèbit"
+  },
+  "UsageSummary": {
+    "emptyPage": "No s’ha trobat historial d’ús en aquesta pàgina",
+    "emptyAll": "Ara mateix no hi ha historial d’ús"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Historial de facturació",
+    "refundHistory": "Historial de reemborsaments",
+    "usageSummary": "Resum d’ús"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Clau de llicència",
+    "licenseKeysButton": "Claus de llicència",
+    "licenseKeysTitle": "Claus de llicència",
+    "migrateLicenseTitle": "Migra - clau de llicència",
+    "licenseKeyCardTitle": "Clau de llicència",
+    "clickToView": "Fes clic per veure la clau de llicència",
+    "hideLicenseKey": "Amaga la clau de llicència",
+    "showLicenseKey": "Mostra la clau de llicència",
+    "loadingLicenseKeys": "S’estan carregant les claus de llicència...",
+    "noLicenseKeys": "No hi ha claus de llicència disponibles.",
+    "expires": "Caduca",
+    "attachmentsButton": "Adjunts",
+    "attachmentButton": "Adjunt",
+    "attachmentsTitle": "Els teus productes digitals",
+    "attachmentsDescription": "Accedeix i descarrega aquí els productes i fitxers digitals disponibles.",
+    "digitalProductsTitle": "Productes digitals",
+    "digitalProductsDescription": "Descarrega els teus productes digitals",
+    "noDigitalProducts": "No hi ha productes digitals disponibles.",
+    "filesSection": "Fitxers",
+    "externalLink": "Enllaç extern",
+    "open": "Obre",
+    "instructionsSection": "Instruccions",
+    "loadFailed": "No s’han pogut carregar els productes digitals.",
+    "fetchCartFailed": "No s’ha pogut obtenir el carretó de productes",
+    "fetchDigitalFailed": "No s’han pogut obtenir els productes digitals"
+  },
+  "ProfilePage": {
+    "billingDetails": "Les teves dades de facturació",
+    "name": "Nom",
+    "email": "Correu electrònic",
+    "walletsHeading": "Wallets",
+    "creditsHeading": "Crèdits",
+    "walletTabLabel": "Wallet {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "No s’han trobat wallets",
+    "availableBalance": "Saldo disponible",
+    "recentTransactions": "Transaccions recents",
+    "tableType": "Tipus",
+    "tableReason": "Motiu",
+    "tableAmount": "Import",
+    "emptyPage": "No s’han trobat transaccions en aquesta pàgina",
+    "emptyAll": "Ara mateix no hi ha transaccions"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "No s’han trobat crèdits",
+    "selectPlaceholder": "Selecciona el dret de crèdit",
+    "overageBalance": "Saldo d’excés",
+    "availableCreditBalance": "Saldo de crèdit disponible",
+    "recentTransactions": "Transaccions recents",
+    "tableType": "Tipus",
+    "tableDescription": "Descripció",
+    "tableAmount": "Import",
+    "emptyPage": "No s’han trobat transaccions en aquesta pàgina",
+    "emptyAll": "Ara mateix no hi ha transaccions"
+  },
+  "Pagination": {
+    "previous": "Anterior",
+    "next": "Següent"
+  },
+  "BaseDataGrid": {
+    "noData": "No hi ha dades disponibles",
+    "reset": "Reinicia la taula"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Asc",
+    "desc": "Desc",
+    "pinLeft": "Fixa a l’esquerra",
+    "pinRight": "Fixa a la dreta",
+    "moveLeft": "Mou a l’esquerra",
+    "moveRight": "Mou a la dreta",
+    "columns": "Columnes"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Files per pàgina"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Edita les columnes"
+  },
+  "TokenPage": {
+    "validationFailed": "La validació ha fallat. Torna-ho a provar.",
+    "goToExpiredPage": "Vés a la pàgina caducada"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Nom del mesurador",
+    "meterId": "ID del mesurador",
+    "consumedUnits": "Unitats consumides",
+    "chargeableUnits": "Unitats facturables",
+    "freeThreshold": "Llindar gratuït",
+    "units": "unitats",
+    "unitPrice": "Preu unitari",
+    "totalCost": "Cost total",
+    "actions": "Accions",
+    "view": "Mostra"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Les teves formes de pagament",
+    "empty": "No s’han trobat formes de pagament"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Clau de llicència",
+    "status": "Estat",
+    "productId": "ID del producte",
+    "expiry": "Caducitat (UTC)",
+    "neverExpires": "No caduca mai",
+    "sameAsSubscription": "Igual que la subscripció",
+    "activationsUsed": "Activacions utilitzades",
+    "paymentId": "ID de pagament"
+  },
+  "PaymentColumns": {
+    "paymentId": "ID de pagament",
+    "status": "Estat",
+    "paymentMethod": "Forma de pagament",
+    "amount": "Import",
+    "date": "Data (UTC)",
+    "invoice": "Factura",
+    "invoiceButtonLabel": "Factura",
+    "files": "Fitxers"
+  },
+  "TimeTooltip": {
+    "title": "Conversió de zona horària",
+    "yourDevice": "El teu dispositiu",
+    "system": "Sistema"
+  },
+  "DateFilter": {
+    "selectDateRange": "Selecciona un interval de dates",
+    "dialogDescription": "Selecciona l’interval de dates per filtrar les dades",
+    "presets": "Predefinits",
+    "calendar": "Calendari",
+    "cancel": "Cancel·la",
+    "applyFilter": "Aplica el filtre",
+    "today": "Avui",
+    "yesterday": "Ahir",
+    "thisWeek": "Aquesta setmana",
+    "lastWeek": "La setmana passada",
+    "thisMonth": "Aquest mes",
+    "lastMonth": "El mes passat",
+    "thisYear": "Aquest any",
+    "lastYear": "L’any passat",
+    "allTime": "Tot el temps"
+  },
+  "FilterControls": {
+    "statusLabel": "Estat"
+  },
+  "FilterDropdown": {
+    "filters": "Filtres",
+    "filterBy": "Filtra per:",
+    "clear": "Neteja",
+    "filter": "Filtra"
+  },
+  "CountrySelect": {
+    "loading": "S’està carregant...",
+    "searchPlaceholder": "Cerca un país...",
+    "noCountryFound": "No s’ha trobat cap país.",
+    "loadFailed": "No s’han pogut carregar els països. Torna-ho a provar."
+  },
+  "DataTable": {
+    "noResults": "Sense resultats."
+  },
+  "Product": {
+    "qty": "QTY: {value}",
+    "manageSubscription": "Gestiona la subscripció",
+    "fetchSubscriptionFailed": "No s’ha pogut obtenir la subscripció. Torna-ho a provar.",
+    "noAuthToken": "No s’ha trobat cap token d’autenticació",
+    "loadDigitalProductsFailed": "No s’han pogut carregar els productes digitals.",
+    "fetchDigitalProductsFailed": "No s’han pogut obtenir els productes digitals. Torna-ho a provar."
+  },
+  "BadgeStatus": {
+    "succeeded": "Correcte",
+    "failed": "Fallida",
+    "cancelled": "Cancel·lada",
+    "expired": "Caducada",
+    "processing": "En curs",
+    "pending": "Pendent",
+    "review": "En revisió",
+    "onHold": "En pausa",
+    "notInitiated": "No iniciat",
+    "noStatus": "Sense estat",
+    "verified": "Verificat",
+    "active": "Actiu",
+    "disabled": "Desactivat",
+    "preDispute": "Pre-dispute",
+    "dispute": "Dispute",
+    "preArbitration": "Pre-arbitration",
+    "disputeOpened": "Dispute oberta",
+    "disputeExpired": "Dispute caducada",
+    "disputeAccepted": "Dispute acceptada",
+    "disputeCancelled": "Dispute cancel·lada",
+    "disputeChallenged": "Dispute impugnada",
+    "disputeWon": "Dispute guanyada",
+    "disputeLost": "Dispute perduda",
+    "oneTime": "Únic",
+    "subscription": "Subscripció",
+    "unknown": "Desconegut"
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "問題が発生しました",
+    "description": "ネットワーク接続に問題がある可能性があります。リンクの有効期限が切れているか、リンク／商品が無効な可能性もあります。"
+  },
+  "NotFoundPage": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しないか、移動された可能性があります。"
+  },
+  "ExpiredPage": {
+    "title": "セキュリティ上の理由により、このページの有効期限が切れています。"
+  },
+  "LandingCard": {
+    "heading": "本日はどのようなご用件でしょうか？",
+    "actionsIntro": "以下の操作が可能です:",
+    "actions": {
+      "changePaymentMethod": "支払い方法を変更",
+      "cancelSubscription": "サブスクリプションを解約",
+      "downloadInvoices": "請求書をダウンロード",
+      "viewOrders": "Dodo Payments 経由で処理された注文を表示",
+      "otherQueries": "その他のお問い合わせ"
+    },
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "メールアドレスを入力",
+    "emailInvalid": "無効なメールアドレスです",
+    "emailFailed": "ログインリンクの送信に失敗しました。もう一度お試しください。",
+    "lookUpPurchase": "購入内容を確認する",
+    "sendEmail": "メールを送信",
+    "sending": "送信中...",
+    "sentTitle": "メールを送信しました！",
+    "sentDescription": "メール内のリンクを使用して、Dodo Payments セルフサーブポータルにログインしてください"
+  },
+  "LandingInfoCard": {
+    "title": "Dodo Payments とは？",
+    "description": "Dodo Payments は Merchant of Record（MoR）プラットフォームで、ソフトウェア製品、ツール、サービスなど、増え続けるデジタルビジネスの決済、税務コンプライアンス、請求基盤を管理します。これらのビジネスが販売する製品を購入または購読すると、取引処理、請求、カスタマーサポート、返金およびチャージバック（dispute）の対応は Dodo Payments が行います。",
+    "visitPrompt": "詳細は <link>dodopayments.com</link> をご覧ください。"
+  },
+  "LoginForm": {
+    "billingPortalTitle": "{businessName} の請求ポータル",
+    "enterEmailDescription": "アクセスリンクを受け取るにはメールアドレスを入力してください",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "メールアドレスを入力",
+    "emailInvalid": "有効なメールアドレスを入力してください",
+    "emailRequired": "メールアドレスは必須です",
+    "getAccessLink": "アクセスリンクを取得",
+    "sending": "送信中...",
+    "successTitle": "あと少しです！",
+    "successDescription": "アクセスリンクを {email} に送信しました。迷惑メールフォルダもご確認ください。",
+    "goBack": "戻る",
+    "loginLinkSent": "ログインリンクをメールに送信しました",
+    "loginLinkFailed": "ログインリンクの送信に失敗しました。もう一度お試しください。"
+  },
+  "Businesses": {
+    "searchPlaceholder": "ビジネスを検索",
+    "emptyPage": "このページにビジネスが見つかりません",
+    "emptyAll": "ビジネスが見つかりません",
+    "fetchError": "ビジネスの詳細の取得に失敗しました",
+    "viewDetails": "詳細を表示"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "すべてのビジネスを表示",
+    "switchToLightMode": "ライトモードに切り替え",
+    "switchToDarkMode": "ダークモードに切り替え",
+    "loggingOut": "ログアウト中...",
+    "logOut": "ログアウト",
+    "goBackToBusiness": "ビジネスに戻る",
+    "goToOverview": "概要へ移動"
+  },
+  "LeftPanel": {
+    "goBackTo": "{businessName} に戻る",
+    "heading": "サブスクリプションと請求設定を管理",
+    "description": "支払い履歴の確認、請求書のダウンロード、サブスクリプションおよび支払い方法の管理ができます。",
+    "poweredBy": "Powered by",
+    "privacy": "プライバシー",
+    "terms": "利用規約"
+  },
+  "LanguageSelector": {
+    "changeFailed": "言語の変更に失敗しました。もう一度お試しください。"
+  },
+  "Subscriptions": {
+    "headingActive": "有効なサブスクリプション",
+    "headingAll": "サブスクリプション",
+    "emptyPage": "このページにサブスクリプションが見つかりません",
+    "emptyActive": "現在、有効なサブスクリプションはありません",
+    "viewAll": "すべてのサブスクリプションを表示"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "サブスクリプションを管理",
+    "updatePaymentMethod": "支払い方法を更新",
+    "viewDetails": "詳細を表示",
+    "renewsOn": "更新日",
+    "validTill": "有効期限"
+  },
+  "SubscriptionDetails": {
+    "addons": "アドオン",
+    "meters": "メーター",
+    "freeThreshold": "無料しきい値",
+    "per": "あたり",
+    "qty": "数量: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "請求情報",
+    "name": "氏名",
+    "phoneNumber": "電話番号",
+    "email": "メールアドレス",
+    "billingAddress": "請求先住所"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "編集",
+    "sheetTitle": "請求先情報を編集",
+    "customerName": "顧客名",
+    "fullNamePlaceholder": "氏名（フルネーム）",
+    "billingAddress": "請求先住所",
+    "loadingCountries": "読み込み中...",
+    "addressLine": "住所1（番地など）",
+    "state": "都道府県／州",
+    "city": "市区町村",
+    "postalCode": "郵便番号",
+    "purchasingAsBusiness": "法人として購入する",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax ID",
+    "saveDetails": "保存",
+    "updateSuccess": "請求先情報を更新しました",
+    "updateFailed": "請求先情報の更新に失敗しました。もう一度お試しください。",
+    "countriesLoadFailed": "国の読み込みに失敗しました。もう一度お試しください。"
+  },
+  "CancelSubscriptionDialog": {
+    "title": "このサービスのサブスクリプションを解約してもよろしいですか？",
+    "description": "続行すると、関連する特典へのアクセスがすべて失われ、この操作は取り消せません。",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "cancelling": "解約中..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "サブスクリプションを解約",
+    "triggerRevoke": "解約を取り消す",
+    "sheetTitle": "ご利用ありがとうございました...",
+    "currentPlan": "現在のプラン",
+    "addOns": "{count, plural, one {# 件のアドオン} other {# 件のアドオン}}",
+    "quantity": "数量: {value}",
+    "scheduledCancellationWarning": "このサブスクリプションは次回の請求日に解約される予定です。",
+    "revokeCancellation": "解約を取り消す",
+    "revoking": "取り消し中...",
+    "cancelAtNextBilling": "次回の請求日に解約",
+    "cancelling": "解約中...",
+    "cancelSuccess": "サブスクリプションを解約しました",
+    "cancelScheduled": "サブスクリプションは次回の請求日に解約されます",
+    "cancelFailed": "サブスクリプションの解約に失敗しました。もう一度お試しください。",
+    "revokeFailed": "解約の取り消しに失敗しました。もう一度お試しください。",
+    "revokeSuccess": "サブスクリプションの解約を取り消しました"
+  },
+  "SubscriptionInfo": {
+    "title": "現在、サブスクリプションは保留中です",
+    "description": "このサブスクリプションを再開するには、支払い方法を更新してください"
+  },
+  "SubscriptionNotes": {
+    "onHold": "支払い失敗により、現在サブスクリプションは保留中です。再開するには支払い方法を更新してください",
+    "failed": "このサブスクリプションは失敗しました。もう一度お試しください。",
+    "pending": "お支払いが完了せず、チェックアウトが未完了のままです。購読をご希望の場合は、もう一度お試しください。",
+    "cancelledOn": "このサブスクリプションは {date} に解約されました。",
+    "expired": "このサブスクリプションは期限切れです。",
+    "scheduledCancellation": "このサブスクリプションは {date} に解約予定です。",
+    "scheduledCancellationNoDate": "このサブスクリプションは解約予定です。",
+    "flexibleSubscription": "これは柔軟なサブスクリプションのため、{name} が次回の請求サイクルの価格を調整する場合があります。",
+    "flexibleSubscriptionUnknownMerchant": "これは柔軟なサブスクリプションのため、次回の請求サイクルの請求金額が調整される場合があります。",
+    "discountApplied": "割引が適用されています（残り {count, plural, one {# サイクル} other {# サイクル}}）。"
+  },
+  "ChangePlanSheet": {
+    "trigger": "プランを変更",
+    "sheetTitle": "新しいプランを選択",
+    "noProducts": "利用可能なサブスクリプション商品がありません。",
+    "currentPlan": "現在のプラン",
+    "proceed": "続行",
+    "unnamedGroup": "名称未設定のグループ"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "プラン変更を確定",
+    "noPlanSelected": "プランが選択されていません",
+    "loadingPreview": "プレビューを読み込み中...",
+    "current": "現在",
+    "updated": "更新後",
+    "qty": "数量: {value}",
+    "viewAddons": "アドオンを表示",
+    "manageAddons": "アドオンを管理",
+    "noAddons": "アドオンはありません",
+    "tableItem": "項目",
+    "tableQuantity": "数量",
+    "tableUnitPrice": "単価",
+    "tableTax": "税",
+    "tableTotal": "合計",
+    "creditToBalance": "残高へのクレジット",
+    "creditTooltip": "クレジットは今後の支払いに充当されます",
+    "summaryTotal": "合計",
+    "summaryTax": "税",
+    "summaryAmountDue": "今回の支払い金額",
+    "payButton": "{amount} を支払う",
+    "previewFailed": "プレビューの読み込みに失敗しました。もう一度お試しください。",
+    "changeFailed": "プランの変更に失敗しました。もう一度お試しください。",
+    "changeSuccess": "プランを変更しました",
+    "addonRequired": "数量が 1 以上のアドオンを少なくとも 1 つ選択してください。"
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "編集",
+    "sheetTitle": "支払い方法を編集",
+    "addPaymentMethod": "支払い方法を追加",
+    "noPaymentMethods": "利用可能な支払い方法が見つかりません。",
+    "confirmChanges": "変更を確定",
+    "updating": "更新中...",
+    "selectRequired": "支払い方法を選択してください",
+    "loadFailed": "支払い方法の読み込みに失敗しました。もう一度お試しください。",
+    "updateSuccess": "支払い方法を更新しました",
+    "setupInitiated": "支払い方法の設定を開始しました",
+    "updateFailed": "支払い方法の更新に失敗しました。もう一度お試しください。",
+    "addFailed": "新しい支払い方法の追加に失敗しました。もう一度お試しください。"
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "支払い方法を削除",
+    "dialogDescription": "この支払い方法を削除してもよろしいですか？この操作は元に戻せません。",
+    "cancel": "キャンセル",
+    "remove": "削除",
+    "removing": "削除中...",
+    "removeAriaLabel": "支払い方法を削除",
+    "removeSuccess": "支払い方法を削除しました",
+    "removeFailed": "支払い方法の削除に失敗しました"
+  },
+  "PaymentMethodsSection": {
+    "title": "支払い方法",
+    "empty": "支払い方法が追加されていません"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "支払い方法を追加",
+    "sheetTitle": "支払い方法を追加",
+    "or": "または",
+    "card": "カード",
+    "cardNumber": "カード番号",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "有効期限",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "セキュリティコード",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "カード情報を提供することで、Dodo Payments が利用規約に従い、今後の支払いのためにカードへ請求することに同意したものとみなされます。"
+  },
+  "Orders": {
+    "billingHistory": "請求履歴",
+    "emptyPage": "このページに購入履歴が見つかりません",
+    "emptyAll": "現在、購入はありません",
+    "noBillingHistory": "利用可能な請求履歴がありません",
+    "fetchFailed": "商品カートの取得に失敗しました。もう一度お試しください。"
+  },
+  "BillingHistoryColumns": {
+    "date": "日付",
+    "status": "ステータス",
+    "amount": "金額",
+    "pricingType": "料金タイプ",
+    "entitlements": "権利",
+    "invoice": "請求書"
+  },
+  "OrderCard": {
+    "paymentId": "Payment ID",
+    "purchased": "購入日",
+    "viewDetails": "詳細を表示",
+    "hideDetails": "詳細を非表示",
+    "noProducts": "この注文に商品はありません。",
+    "fetchFailed": "商品の詳細の取得に失敗しました。もう一度お試しください。"
+  },
+  "RefundsTable": {
+    "title": "返金履歴",
+    "empty": "返金はありません"
+  },
+  "RefundColumns": {
+    "date": "日付",
+    "status": "ステータス",
+    "amount": "金額",
+    "refundId": "Refund ID",
+    "associatedPayment": "関連する支払い"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "このページに請求書が見つかりません",
+    "emptyAll": "現在、請求書はありません",
+    "paymentId": "Payment ID",
+    "date": "日付",
+    "amount": "金額",
+    "status": "ステータス",
+    "download": "ダウンロード"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "請求書は利用できません",
+    "downloadInvoice": "請求書をダウンロード",
+    "invoice": "請求書",
+    "generateInvoice": "請求書を生成",
+    "fillDetailsTitle": "顧客の住所（全文）を入力",
+    "existingAddressTitle": "既存の住所情報でダウンロード",
+    "existingAddressDescription": "この請求書には、チェックアウト時に提供された郵便番号と国のみが含まれます。",
+    "fullAddressTitle": "住所（全文）を含めてダウンロード",
+    "fullAddressDescription": "この請求書には顧客の完全な住所が含まれます。ダウンロード前にすべての項目を入力してください。",
+    "fillDetails": "詳細を入力"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "住所1（番地など）",
+    "state": "都道府県／州",
+    "city": "市区町村",
+    "postalCode": "郵便番号",
+    "download": "ダウンロード",
+    "downloadSuccess": "請求書をダウンロードしました",
+    "updateFailed": "請求書情報の更新に失敗しました。もう一度お試しください。"
+  },
+  "DigitalDeliveryDialog": {
+    "title": "デジタル製品",
+    "description": "購入したデジタル製品やダウンロードにアクセスできます",
+    "accessExternal": "外部リソースにアクセス",
+    "instructions": "手順",
+    "loadFailed": "デジタル製品の読み込みに失敗しました。もう一度お試しください。"
+  },
+  "WalletsSection": {
+    "title": "ウォレット",
+    "selectWallet": "ウォレットを選択",
+    "walletLabel": "{currency} ウォレット",
+    "availableBalance": "利用可能残高",
+    "tableType": "種類",
+    "tableReason": "理由",
+    "tableAmount": "金額",
+    "noTransactions": "取引はまだありません",
+    "credit": "クレジット",
+    "debit": "デビット"
+  },
+  "CreditsSection": {
+    "title": "クレジット",
+    "selectCredit": "クレジット権利を選択",
+    "overageBalance": "超過残高",
+    "availableCreditBalance": "利用可能なクレジット残高",
+    "tableType": "種類",
+    "tableDescription": "説明",
+    "tableAmount": "金額",
+    "noTransactions": "取引はまだありません",
+    "credit": "クレジット",
+    "debit": "デビット"
+  },
+  "UsageSummary": {
+    "emptyPage": "このページに利用履歴が見つかりません",
+    "emptyAll": "現在、利用履歴はありません"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "請求履歴",
+    "refundHistory": "返金履歴",
+    "usageSummary": "利用状況サマリー"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "ライセンスキー",
+    "licenseKeysButton": "ライセンスキー",
+    "licenseKeysTitle": "ライセンスキー",
+    "migrateLicenseTitle": "移行 - ライセンスキー",
+    "licenseKeyCardTitle": "ライセンスキー",
+    "clickToView": "クリックしてライセンスキーを表示",
+    "hideLicenseKey": "ライセンスキーを非表示",
+    "showLicenseKey": "ライセンスキーを表示",
+    "loadingLicenseKeys": "ライセンスキーを読み込み中...",
+    "noLicenseKeys": "ライセンスキーがありません。",
+    "expires": "有効期限",
+    "attachmentsButton": "添付ファイル",
+    "attachmentButton": "添付ファイル",
+    "attachmentsTitle": "デジタル製品",
+    "attachmentsDescription": "利用可能なデジタル製品およびファイルにアクセスし、ここからダウンロードできます。",
+    "digitalProductsTitle": "デジタル製品",
+    "digitalProductsDescription": "デジタル製品をダウンロード",
+    "noDigitalProducts": "利用可能なデジタル製品がありません。",
+    "filesSection": "ファイル",
+    "externalLink": "外部リンク",
+    "open": "開く",
+    "instructionsSection": "手順",
+    "loadFailed": "デジタル製品の読み込みに失敗しました。",
+    "fetchCartFailed": "商品カートの取得に失敗しました",
+    "fetchDigitalFailed": "デジタル製品の取得に失敗しました"
+  },
+  "ProfilePage": {
+    "billingDetails": "請求先情報",
+    "name": "氏名",
+    "email": "メールアドレス",
+    "walletsHeading": "ウォレット",
+    "creditsHeading": "クレジット",
+    "walletTabLabel": "{currency} ウォレット"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "ウォレットが見つかりません",
+    "availableBalance": "利用可能残高",
+    "recentTransactions": "最近の取引",
+    "tableType": "種類",
+    "tableReason": "理由",
+    "tableAmount": "金額",
+    "emptyPage": "このページに取引が見つかりません",
+    "emptyAll": "現在、取引はありません"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "クレジットが見つかりません",
+    "selectPlaceholder": "クレジット権利を選択",
+    "overageBalance": "超過残高",
+    "availableCreditBalance": "利用可能なクレジット残高",
+    "recentTransactions": "最近の取引",
+    "tableType": "種類",
+    "tableDescription": "説明",
+    "tableAmount": "金額",
+    "emptyPage": "このページに取引が見つかりません",
+    "emptyAll": "現在、取引はありません"
+  },
+  "Pagination": {
+    "previous": "前へ",
+    "next": "次へ"
+  },
+  "BaseDataGrid": {
+    "noData": "利用可能なデータがありません",
+    "reset": "テーブルをリセット"
+  },
+  "DataGridColumnHeader": {
+    "asc": "昇順",
+    "desc": "降順",
+    "pinLeft": "左に固定",
+    "pinRight": "右に固定",
+    "moveLeft": "左へ移動",
+    "moveRight": "右へ移動",
+    "columns": "列"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "1ページあたりの行数"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "列を編集"
+  },
+  "TokenPage": {
+    "validationFailed": "検証に失敗しました。もう一度お試しください。",
+    "goToExpiredPage": "期限切れページへ移動"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "メーター名",
+    "meterId": "Meter ID",
+    "consumedUnits": "消費ユニット",
+    "chargeableUnits": "課金対象ユニット",
+    "freeThreshold": "無料しきい値",
+    "units": "ユニット",
+    "unitPrice": "単価",
+    "totalCost": "合計金額",
+    "actions": "操作",
+    "view": "表示"
+  },
+  "PaymentMethodsPage": {
+    "heading": "支払い方法",
+    "empty": "支払い方法が見つかりません"
+  },
+  "LicenseColumns": {
+    "licenseKey": "ライセンスキー",
+    "status": "ステータス",
+    "productId": "Product ID",
+    "expiry": "有効期限（UTC）",
+    "neverExpires": "無期限",
+    "sameAsSubscription": "サブスクリプションと同じ",
+    "activationsUsed": "使用済みアクティベーション数",
+    "paymentId": "Payment ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Payment ID",
+    "status": "ステータス",
+    "paymentMethod": "支払い方法",
+    "amount": "金額",
+    "date": "日付（UTC）",
+    "invoice": "請求書",
+    "invoiceButtonLabel": "請求書",
+    "files": "ファイル"
+  },
+  "TimeTooltip": {
+    "title": "タイムゾーン変換",
+    "yourDevice": "端末",
+    "system": "システム"
+  },
+  "DateFilter": {
+    "selectDateRange": "日付範囲を選択",
+    "dialogDescription": "データを絞り込む日付範囲を選択してください",
+    "presets": "プリセット",
+    "calendar": "カレンダー",
+    "cancel": "キャンセル",
+    "applyFilter": "フィルターを適用",
+    "today": "今日",
+    "yesterday": "昨日",
+    "thisWeek": "今週",
+    "lastWeek": "先週",
+    "thisMonth": "今月",
+    "lastMonth": "先月",
+    "thisYear": "今年",
+    "lastYear": "昨年",
+    "allTime": "全期間"
+  },
+  "FilterControls": {
+    "statusLabel": "ステータス"
+  },
+  "FilterDropdown": {
+    "filters": "フィルター",
+    "filterBy": "絞り込み:",
+    "clear": "クリア",
+    "filter": "フィルター"
+  },
+  "CountrySelect": {
+    "loading": "読み込み中...",
+    "searchPlaceholder": "国を検索...",
+    "noCountryFound": "国が見つかりません。",
+    "loadFailed": "国の読み込みに失敗しました。もう一度お試しください。"
+  },
+  "DataTable": {
+    "noResults": "結果がありません。"
+  },
+  "Product": {
+    "qty": "数量: {value}",
+    "manageSubscription": "サブスクリプションを管理",
+    "fetchSubscriptionFailed": "サブスクリプションの取得に失敗しました。もう一度お試しください。",
+    "noAuthToken": "認証トークンが見つかりません",
+    "loadDigitalProductsFailed": "デジタル製品の読み込みに失敗しました。",
+    "fetchDigitalProductsFailed": "デジタル製品の取得に失敗しました。もう一度お試しください。"
+  },
+  "BadgeStatus": {
+    "succeeded": "成功",
+    "failed": "失敗",
+    "cancelled": "キャンセル済み",
+    "expired": "期限切れ",
+    "processing": "処理中",
+    "pending": "保留中",
+    "review": "レビュー中",
+    "onHold": "保留",
+    "notInitiated": "未開始",
+    "noStatus": "ステータスなし",
+    "verified": "確認済み",
+    "active": "有効",
+    "disabled": "無効",
+    "preDispute": "Dispute 前",
+    "dispute": "Dispute",
+    "preArbitration": "Arbitration 前",
+    "disputeOpened": "Dispute 開始",
+    "disputeExpired": "Dispute 期限切れ",
+    "disputeAccepted": "Dispute 承認",
+    "disputeCancelled": "Dispute キャンセル",
+    "disputeChallenged": "Dispute 異議申し立て",
+    "disputeWon": "Dispute 勝訴",
+    "disputeLost": "Dispute 敗訴",
+    "oneTime": "1回限り",
+    "subscription": "サブスクリプション",
+    "unknown": "不明"
+  }
+}

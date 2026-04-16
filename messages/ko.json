@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "문제가 발생했습니다",
+    "description": "네트워크 연결 문제이거나 링크가 만료되었거나, 링크/상품이 유효하지 않을 수 있습니다."
+  },
+  "NotFoundPage": {
+    "title": "페이지를 찾을 수 없습니다",
+    "description": "찾으시는 페이지가 존재하지 않거나 이동되었을 수 있습니다."
+  },
+  "ExpiredPage": {
+    "title": "보안상의 이유로 이 페이지는 만료되었습니다."
+  },
+  "LandingCard": {
+    "heading": "오늘 무엇을 도와드릴까요?",
+    "actionsIntro": "다음 작업을 수행할 수 있습니다:",
+    "actions": {
+      "changePaymentMethod": "결제 수단 변경",
+      "cancelSubscription": "구독 취소",
+      "downloadInvoices": "인보이스 다운로드",
+      "viewOrders": "Dodo Payments를 통해 처리된 주문 보기",
+      "otherQueries": "기타 문의"
+    },
+    "emailLabel": "이메일",
+    "emailPlaceholder": "이메일을 입력하세요",
+    "emailInvalid": "유효하지 않은 이메일 주소입니다",
+    "emailFailed": "로그인 링크 전송에 실패했습니다. 다시 시도해 주세요.",
+    "lookUpPurchase": "구매 내역 조회",
+    "sendEmail": "이메일 보내기",
+    "sending": "전송 중...",
+    "sentTitle": "이메일을 보내드렸습니다!",
+    "sentDescription": "이메일에 있는 링크를 사용해 Dodo Payments 셀프 서비스 포털에 로그인하세요"
+  },
+  "LandingInfoCard": {
+    "title": "Dodo Payments란 무엇인가요?",
+    "description": "Dodo Payments는 Merchant of Record(MoR) 플랫폼으로, 소프트웨어 제품, 도구, 서비스 등을 포함한 점점 더 많은 디지털 비즈니스를 위해 결제, 세금 준수, 청구 인프라를 관리합니다. 이러한 비즈니스 중 하나가 판매하는 제품을 구매하거나 구독하면, Dodo Payments가 거래 처리, 청구, 고객 지원, 환불 및 분쟁을 처리합니다.",
+    "visitPrompt": "자세히 알아보려면 <link>dodopayments.com</link>을 방문하세요."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "{businessName}의 청구 포털",
+    "enterEmailDescription": "액세스 링크를 받으려면 이메일을 입력하세요",
+    "emailLabel": "이메일",
+    "emailPlaceholder": "이메일을 입력하세요",
+    "emailInvalid": "유효한 이메일 주소를 입력해 주세요",
+    "emailRequired": "이메일은 필수입니다",
+    "getAccessLink": "액세스 링크 받기",
+    "sending": "전송 중...",
+    "successTitle": "거의 다 왔습니다!",
+    "successDescription": "액세스 링크를 {email}로 보냈습니다. 스팸 폴더도 확인해 주세요!",
+    "goBack": "뒤로 가기",
+    "loginLinkSent": "로그인 링크가 이메일로 전송되었습니다",
+    "loginLinkFailed": "로그인 링크 전송에 실패했습니다. 다시 시도해 주세요."
+  },
+  "Businesses": {
+    "searchPlaceholder": "비즈니스 검색",
+    "emptyPage": "이 페이지에서 비즈니스를 찾을 수 없습니다",
+    "emptyAll": "비즈니스를 찾을 수 없습니다",
+    "fetchError": "비즈니스 정보를 가져오지 못했습니다",
+    "viewDetails": "상세 보기"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "모든 비즈니스 보기",
+    "switchToLightMode": "라이트 모드로 전환",
+    "switchToDarkMode": "다크 모드로 전환",
+    "loggingOut": "로그아웃 중...",
+    "logOut": "로그아웃",
+    "goBackToBusiness": "비즈니스로 돌아가기",
+    "goToOverview": "개요로 이동"
+  },
+  "LeftPanel": {
+    "goBackTo": "{businessName}(으)로 돌아가기",
+    "heading": "구독 및 청구 설정 관리",
+    "description": "결제 내역을 확인하고 인보이스를 다운로드하며 구독과 결제 수단을 관리하세요.",
+    "poweredBy": "Powered by",
+    "privacy": "개인정보처리방침",
+    "terms": "이용약관"
+  },
+  "LanguageSelector": {
+    "changeFailed": "언어 변경에 실패했습니다. 다시 시도해 주세요."
+  },
+  "Subscriptions": {
+    "headingActive": "활성 구독",
+    "headingAll": "구독",
+    "emptyPage": "이 페이지에서 구독을 찾을 수 없습니다",
+    "emptyActive": "현재 활성 구독이 없습니다",
+    "viewAll": "모든 구독 보기"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "구독 관리",
+    "updatePaymentMethod": "결제 수단 업데이트",
+    "viewDetails": "상세 보기",
+    "renewsOn": "갱신일",
+    "validTill": "유효 기간"
+  },
+  "SubscriptionDetails": {
+    "addons": "애드온",
+    "meters": "미터",
+    "freeThreshold": "무료 임계값",
+    "per": "당",
+    "qty": "수량: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "청구 정보",
+    "name": "이름",
+    "phoneNumber": "전화번호",
+    "email": "이메일",
+    "billingAddress": "청구지 주소"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "수정",
+    "sheetTitle": "청구 정보 수정",
+    "customerName": "고객명",
+    "fullNamePlaceholder": "성명",
+    "billingAddress": "청구지 주소",
+    "loadingCountries": "로딩 중...",
+    "addressLine": "주소 1",
+    "state": "주/도",
+    "city": "도시",
+    "postalCode": "우편번호",
+    "purchasingAsBusiness": "사업자로 구매",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax ID",
+    "saveDetails": "정보 저장",
+    "updateSuccess": "청구 정보가 성공적으로 업데이트되었습니다",
+    "updateFailed": "청구 정보 업데이트에 실패했습니다. 다시 시도해 주세요.",
+    "countriesLoadFailed": "국가 목록을 불러오지 못했습니다. 다시 시도해 주세요."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "이 서비스 구독을 취소하시겠습니까?",
+    "description": "계속 진행하면 관련된 모든 혜택에 대한 접근 권한이 사라지며, 이 작업은 되돌릴 수 없습니다.",
+    "close": "닫기",
+    "cancel": "취소",
+    "cancelling": "취소 중..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "구독 취소",
+    "triggerRevoke": "취소 철회",
+    "sheetTitle": "떠나시다니 아쉽습니다...",
+    "currentPlan": "현재 플랜",
+    "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
+    "quantity": "수량: {value}",
+    "scheduledCancellationWarning": "이 구독은 다음 청구일에 취소되도록 예정되어 있습니다.",
+    "revokeCancellation": "취소 철회",
+    "revoking": "철회 중...",
+    "cancelAtNextBilling": "다음 청구일에 취소",
+    "cancelling": "취소 중...",
+    "cancelSuccess": "구독이 성공적으로 취소되었습니다",
+    "cancelScheduled": "구독은 다음 청구일에 취소됩니다",
+    "cancelFailed": "구독 취소에 실패했습니다. 다시 시도해 주세요.",
+    "revokeFailed": "취소 철회에 실패했습니다. 다시 시도해 주세요.",
+    "revokeSuccess": "구독 취소가 성공적으로 철회되었습니다"
+  },
+  "SubscriptionInfo": {
+    "title": "현재 구독이 보류 중입니다",
+    "description": "이 구독을 재개하려면 결제 수단을 업데이트해 주세요"
+  },
+  "SubscriptionNotes": {
+    "onHold": "결제 실패로 인해 현재 구독이 보류 중입니다. 이 구독을 재개하려면 결제 수단을 업데이트해 주세요",
+    "failed": "이 구독은 실패했습니다. 다시 시도해 주세요.",
+    "pending": "결제가 완료되지 않아 체크아웃이 마무리되지 않았습니다. 구독을 원하시면 다시 시도해 주세요.",
+    "cancelledOn": "이 구독은 {date}에 취소되었습니다.",
+    "expired": "이 구독은 만료되었습니다.",
+    "scheduledCancellation": "현재 구독은 {date}에 취소되도록 예정되어 있습니다.",
+    "scheduledCancellationNoDate": "현재 구독은 취소되도록 예정되어 있습니다.",
+    "flexibleSubscription": "유연 구독이므로 {name}에서 다음 청구 주기의 가격을 조정할 수 있습니다.",
+    "flexibleSubscriptionUnknownMerchant": "유연 구독이므로 다음 청구 주기의 청구 금액이 조정될 수 있습니다.",
+    "discountApplied": "{count, plural, one {#회 남은 청구 주기} other {#회 남은 청구 주기}} 동안 할인이 적용됩니다."
+  },
+  "ChangePlanSheet": {
+    "trigger": "플랜 변경",
+    "sheetTitle": "새 플랜 선택",
+    "noProducts": "사용 가능한 구독 상품이 없습니다.",
+    "currentPlan": "현재 플랜",
+    "proceed": "계속",
+    "unnamedGroup": "이름 없는 그룹"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "플랜 변경 확인",
+    "noPlanSelected": "선택된 플랜이 없습니다",
+    "loadingPreview": "미리보기를 불러오는 중...",
+    "current": "현재",
+    "updated": "변경 후",
+    "qty": "수량: {value}",
+    "viewAddons": "애드온 보기",
+    "manageAddons": "애드온 관리",
+    "noAddons": "애드온 없음",
+    "tableItem": "항목",
+    "tableQuantity": "수량",
+    "tableUnitPrice": "단가",
+    "tableTax": "세금",
+    "tableTotal": "합계",
+    "creditToBalance": "잔액으로 크레딧",
+    "creditTooltip": "크레딧은 향후 결제에 사용됩니다",
+    "summaryTotal": "합계",
+    "summaryTax": "세금",
+    "summaryAmountDue": "지금 결제할 금액",
+    "payButton": "{amount} 결제",
+    "previewFailed": "미리보기를 불러오지 못했습니다. 다시 시도해 주세요.",
+    "changeFailed": "플랜 변경에 실패했습니다. 다시 시도해 주세요.",
+    "changeSuccess": "플랜이 성공적으로 변경되었습니다",
+    "addonRequired": "수량 1개 이상인 애드온을 최소 1개 선택해 주세요."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "수정",
+    "sheetTitle": "결제 수단 수정",
+    "addPaymentMethod": "결제 수단 추가",
+    "noPaymentMethods": "사용 가능한 결제 수단이 없습니다.",
+    "confirmChanges": "변경 사항 확인",
+    "updating": "업데이트 중...",
+    "selectRequired": "결제 수단을 선택해 주세요",
+    "loadFailed": "결제 수단을 불러오지 못했습니다. 다시 시도해 주세요.",
+    "updateSuccess": "결제 수단이 성공적으로 업데이트되었습니다",
+    "setupInitiated": "결제 수단 설정이 시작되었습니다",
+    "updateFailed": "결제 수단 업데이트에 실패했습니다. 다시 시도해 주세요.",
+    "addFailed": "새 결제 수단 추가에 실패했습니다. 다시 시도해 주세요."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "결제 수단 삭제",
+    "dialogDescription": "이 결제 수단을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+    "cancel": "취소",
+    "remove": "삭제",
+    "removing": "삭제 중...",
+    "removeAriaLabel": "결제 수단 삭제",
+    "removeSuccess": "결제 수단이 삭제되었습니다",
+    "removeFailed": "결제 수단 삭제에 실패했습니다"
+  },
+  "PaymentMethodsSection": {
+    "title": "결제 수단",
+    "empty": "추가된 결제 수단이 없습니다"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "결제 수단 추가",
+    "sheetTitle": "결제 수단 추가",
+    "or": "또는",
+    "card": "카드",
+    "cardNumber": "카드 번호",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "만료일",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "보안 코드",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "카드 정보를 제공하면 Dodo Payments가 해당 약관에 따라 향후 결제를 위해 카드에 청구하는 것에 동의하게 됩니다."
+  },
+  "Orders": {
+    "billingHistory": "청구 내역",
+    "emptyPage": "이 페이지에서 구매 내역을 찾을 수 없습니다",
+    "emptyAll": "현재 구매 내역이 없습니다",
+    "noBillingHistory": "사용 가능한 청구 내역이 없습니다",
+    "fetchFailed": "상품 카트를 가져오지 못했습니다. 다시 시도해 주세요."
+  },
+  "BillingHistoryColumns": {
+    "date": "날짜",
+    "status": "상태",
+    "amount": "금액",
+    "pricingType": "가격 유형",
+    "entitlements": "사용 권한",
+    "invoice": "인보이스"
+  },
+  "OrderCard": {
+    "paymentId": "결제 ID",
+    "purchased": "구매일",
+    "viewDetails": "상세 보기",
+    "hideDetails": "상세 숨기기",
+    "noProducts": "이 주문에 상품이 없습니다.",
+    "fetchFailed": "상품 정보를 가져오지 못했습니다. 다시 시도해 주세요."
+  },
+  "RefundsTable": {
+    "title": "환불 내역",
+    "empty": "환불 내역이 없습니다"
+  },
+  "RefundColumns": {
+    "date": "날짜",
+    "status": "상태",
+    "amount": "금액",
+    "refundId": "환불 ID",
+    "associatedPayment": "연결된 결제"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "이 페이지에서 인보이스를 찾을 수 없습니다",
+    "emptyAll": "현재 인보이스가 없습니다",
+    "paymentId": "결제 ID",
+    "date": "날짜",
+    "amount": "금액",
+    "status": "상태",
+    "download": "다운로드"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "인보이스를 사용할 수 없습니다",
+    "downloadInvoice": "인보이스 다운로드",
+    "invoice": "인보이스",
+    "generateInvoice": "인보이스 생성",
+    "fillDetailsTitle": "고객의 전체 주소를 입력하세요",
+    "existingAddressTitle": "기존 주소 정보로 다운로드",
+    "existingAddressDescription": "이 인보이스에는 체크아웃 과정에서 제공된 우편번호와 국가만 포함됩니다.",
+    "fullAddressTitle": "전체 주소 정보로 다운로드",
+    "fullAddressDescription": "이 인보이스에는 고객의 전체 주소가 포함됩니다. 다운로드 전에 모든 정보를 입력했는지 확인해 주세요.",
+    "fillDetails": "정보 입력"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "주소 1",
+    "state": "주/도",
+    "city": "도시",
+    "postalCode": "우편번호",
+    "download": "다운로드",
+    "downloadSuccess": "인보이스가 성공적으로 다운로드되었습니다",
+    "updateFailed": "인보이스 정보 업데이트에 실패했습니다. 다시 시도해 주세요."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "디지털 상품",
+    "description": "구매한 디지털 상품과 다운로드에 액세스하세요",
+    "accessExternal": "외부 리소스에 액세스",
+    "instructions": "안내",
+    "loadFailed": "디지털 상품을 불러오지 못했습니다. 다시 시도해 주세요."
+  },
+  "WalletsSection": {
+    "title": "Wallet",
+    "selectWallet": "wallet 선택",
+    "walletLabel": "{currency} wallet",
+    "availableBalance": "사용 가능한 잔액",
+    "tableType": "유형",
+    "tableReason": "사유",
+    "tableAmount": "금액",
+    "noTransactions": "아직 거래 내역이 없습니다",
+    "credit": "크레딧",
+    "debit": "차감"
+  },
+  "CreditsSection": {
+    "title": "크레딧",
+    "selectCredit": "크레딧 사용 권한 선택",
+    "overageBalance": "초과분 잔액",
+    "availableCreditBalance": "사용 가능한 크레딧 잔액",
+    "tableType": "유형",
+    "tableDescription": "설명",
+    "tableAmount": "금액",
+    "noTransactions": "아직 거래 내역이 없습니다",
+    "credit": "크레딧",
+    "debit": "차감"
+  },
+  "UsageSummary": {
+    "emptyPage": "이 페이지에서 사용량 내역을 찾을 수 없습니다",
+    "emptyAll": "현재 사용량 내역이 없습니다"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "청구 내역",
+    "refundHistory": "환불 내역",
+    "usageSummary": "사용량 요약"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "라이선스 키",
+    "licenseKeysButton": "라이선스 키",
+    "licenseKeysTitle": "라이선스 키",
+    "migrateLicenseTitle": "마이그레이션 - 라이선스 키",
+    "licenseKeyCardTitle": "라이선스 키",
+    "clickToView": "클릭하여 라이선스 키 보기",
+    "hideLicenseKey": "라이선스 키 숨기기",
+    "showLicenseKey": "라이선스 키 표시",
+    "loadingLicenseKeys": "라이선스 키를 불러오는 중...",
+    "noLicenseKeys": "사용 가능한 라이선스 키가 없습니다.",
+    "expires": "만료",
+    "attachmentsButton": "첨부파일",
+    "attachmentButton": "첨부파일",
+    "attachmentsTitle": "디지털 상품",
+    "attachmentsDescription": "여기에서 사용 가능한 디지털 상품과 파일에 액세스하고 다운로드할 수 있습니다.",
+    "digitalProductsTitle": "디지털 상품",
+    "digitalProductsDescription": "디지털 상품 다운로드",
+    "noDigitalProducts": "사용 가능한 디지털 상품이 없습니다.",
+    "filesSection": "파일",
+    "externalLink": "외부 링크",
+    "open": "열기",
+    "instructionsSection": "안내",
+    "loadFailed": "디지털 상품을 불러오지 못했습니다.",
+    "fetchCartFailed": "상품 카트를 가져오지 못했습니다",
+    "fetchDigitalFailed": "디지털 상품을 가져오지 못했습니다"
+  },
+  "ProfilePage": {
+    "billingDetails": "청구 정보",
+    "name": "이름",
+    "email": "이메일",
+    "walletsHeading": "Wallets",
+    "creditsHeading": "크레딧",
+    "walletTabLabel": "{currency} Wallet"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "wallet을 찾을 수 없습니다",
+    "availableBalance": "사용 가능한 잔액",
+    "recentTransactions": "최근 거래",
+    "tableType": "유형",
+    "tableReason": "사유",
+    "tableAmount": "금액",
+    "emptyPage": "이 페이지에서 거래 내역을 찾을 수 없습니다",
+    "emptyAll": "현재 거래 내역이 없습니다"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "크레딧을 찾을 수 없습니다",
+    "selectPlaceholder": "크레딧 사용 권한 선택",
+    "overageBalance": "초과분 잔액",
+    "availableCreditBalance": "사용 가능한 크레딧 잔액",
+    "recentTransactions": "최근 거래",
+    "tableType": "유형",
+    "tableDescription": "설명",
+    "tableAmount": "금액",
+    "emptyPage": "이 페이지에서 거래 내역을 찾을 수 없습니다",
+    "emptyAll": "현재 거래 내역이 없습니다"
+  },
+  "Pagination": {
+    "previous": "이전",
+    "next": "다음"
+  },
+  "BaseDataGrid": {
+    "noData": "사용 가능한 데이터가 없습니다",
+    "reset": "테이블 초기화"
+  },
+  "DataGridColumnHeader": {
+    "asc": "오름차순",
+    "desc": "내림차순",
+    "pinLeft": "왼쪽에 고정",
+    "pinRight": "오른쪽에 고정",
+    "moveLeft": "왼쪽으로 이동",
+    "moveRight": "오른쪽으로 이동",
+    "columns": "열"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "페이지당 행 수"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "열 편집"
+  },
+  "TokenPage": {
+    "validationFailed": "검증에 실패했습니다. 다시 시도해 주세요.",
+    "goToExpiredPage": "만료 페이지로 이동"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "미터 이름",
+    "meterId": "미터 ID",
+    "consumedUnits": "소비된 단위",
+    "chargeableUnits": "청구 가능한 단위",
+    "freeThreshold": "무료 임계값",
+    "units": "단위",
+    "unitPrice": "단가",
+    "totalCost": "총 비용",
+    "actions": "작업",
+    "view": "보기"
+  },
+  "PaymentMethodsPage": {
+    "heading": "결제 수단",
+    "empty": "결제 수단을 찾을 수 없습니다"
+  },
+  "LicenseColumns": {
+    "licenseKey": "라이선스 키",
+    "status": "상태",
+    "productId": "상품 ID",
+    "expiry": "만료일(UTC)",
+    "neverExpires": "만료 없음",
+    "sameAsSubscription": "구독과 동일",
+    "activationsUsed": "사용한 활성화",
+    "paymentId": "결제 ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "결제 ID",
+    "status": "상태",
+    "paymentMethod": "결제 수단",
+    "amount": "금액",
+    "date": "날짜(UTC)",
+    "invoice": "인보이스",
+    "invoiceButtonLabel": "인보이스",
+    "files": "파일"
+  },
+  "TimeTooltip": {
+    "title": "시간대 변환",
+    "yourDevice": "내 기기",
+    "system": "시스템"
+  },
+  "DateFilter": {
+    "selectDateRange": "날짜 범위 선택",
+    "dialogDescription": "데이터를 필터링할 날짜 범위를 선택하세요",
+    "presets": "프리셋",
+    "calendar": "캘린더",
+    "cancel": "취소",
+    "applyFilter": "필터 적용",
+    "today": "오늘",
+    "yesterday": "어제",
+    "thisWeek": "이번 주",
+    "lastWeek": "지난주",
+    "thisMonth": "이번 달",
+    "lastMonth": "지난달",
+    "thisYear": "올해",
+    "lastYear": "작년",
+    "allTime": "전체 기간"
+  },
+  "FilterControls": {
+    "statusLabel": "상태"
+  },
+  "FilterDropdown": {
+    "filters": "필터",
+    "filterBy": "필터 기준:",
+    "clear": "지우기",
+    "filter": "필터"
+  },
+  "CountrySelect": {
+    "loading": "로딩 중...",
+    "searchPlaceholder": "국가 검색...",
+    "noCountryFound": "국가를 찾을 수 없습니다.",
+    "loadFailed": "국가 목록을 불러오지 못했습니다. 다시 시도해 주세요."
+  },
+  "DataTable": {
+    "noResults": "결과가 없습니다."
+  },
+  "Product": {
+    "qty": "수량: {value}",
+    "manageSubscription": "구독 관리",
+    "fetchSubscriptionFailed": "구독을 가져오지 못했습니다. 다시 시도해 주세요.",
+    "noAuthToken": "인증 토큰을 찾을 수 없습니다",
+    "loadDigitalProductsFailed": "디지털 상품을 불러오지 못했습니다.",
+    "fetchDigitalProductsFailed": "디지털 상품을 가져오지 못했습니다. 다시 시도해 주세요."
+  },
+  "BadgeStatus": {
+    "succeeded": "성공",
+    "failed": "실패",
+    "cancelled": "취소됨",
+    "expired": "만료됨",
+    "processing": "진행 중",
+    "pending": "대기 중",
+    "review": "검토 중",
+    "onHold": "보류 중",
+    "notInitiated": "시작되지 않음",
+    "noStatus": "상태 없음",
+    "verified": "확인됨",
+    "active": "활성",
+    "disabled": "비활성",
+    "preDispute": "분쟁 전",
+    "dispute": "분쟁",
+    "preArbitration": "중재 전",
+    "disputeOpened": "분쟁 시작됨",
+    "disputeExpired": "분쟁 만료됨",
+    "disputeAccepted": "분쟁 수락됨",
+    "disputeCancelled": "분쟁 취소됨",
+    "disputeChallenged": "분쟁 이의 제기됨",
+    "disputeWon": "분쟁 승소",
+    "disputeLost": "분쟁 패소",
+    "oneTime": "일회성",
+    "subscription": "구독",
+    "unknown": "알 수 없음"
+  }
+}

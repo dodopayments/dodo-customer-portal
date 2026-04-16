@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Ceva nu a mers bine",
+    "description": "Este posibil să aveți o problemă de conexiune la rețea, linkul poate fi expirat sau linkul/produsul poate fi nevalid."
+  },
+  "NotFoundPage": {
+    "title": "Pagina nu a fost găsită",
+    "description": "Pagina pe care o căutați nu există sau este posibil să fi fost mutată."
+  },
+  "ExpiredPage": {
+    "title": "Din motive de securitate, această pagină a expirat."
+  },
+  "LandingCard": {
+    "heading": "Cu ce vă putem ajuta astăzi?",
+    "actionsIntro": "Puteți face următoarele acțiuni:",
+    "actions": {
+      "changePaymentMethod": "Schimbați metoda de plată",
+      "cancelSubscription": "Anulați abonamentul",
+      "downloadInvoices": "Descărcați facturile",
+      "viewOrders": "Vedeți comenzile procesate prin Dodo Payments",
+      "otherQueries": "Alte întrebări"
+    },
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Introduceți e-mailul",
+    "emailInvalid": "Adresă de e-mail nevalidă",
+    "emailFailed": "Nu s-a putut trimite linkul de autentificare. Vă rugăm să încercați din nou.",
+    "lookUpPurchase": "Căutați achiziția mea",
+    "sendEmail": "Trimiteți e-mail",
+    "sending": "Se trimite...",
+    "sentTitle": "V-am trimis un e-mail!",
+    "sentDescription": "Folosiți linkul din e-mail pentru a vă autentifica în portalul self-service Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Ce este Dodo Payments?",
+    "description": "Dodo Payments este o platformă Merchant of Record (MoR) care gestionează plățile, conformitatea fiscală și infrastructura de facturare pentru un număr tot mai mare de afaceri digitale, inclusiv produse software, instrumente și servicii. Când faceți o achiziție sau vă abonați la un produs vândut de una dintre aceste companii, Dodo Payments se ocupă de tranzacție, facturare, suport pentru clienți, rambursări și dispute.",
+    "visitPrompt": "Vizitați <link>dodopayments.com</link> pentru a afla mai multe."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "Portalul de facturare al {businessName}",
+    "enterEmailDescription": "Introduceți e-mailul pentru a primi linkul de acces",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Introduceți e-mailul",
+    "emailInvalid": "Vă rugăm să introduceți o adresă de e-mail validă",
+    "emailRequired": "E-mailul este obligatoriu",
+    "getAccessLink": "Obțineți linkul de acces",
+    "sending": "Se trimite...",
+    "successTitle": "Aproape gata!",
+    "successDescription": "Linkul de acces a fost trimis la adresa {email}. Asigurați-vă că verificați și folderul Spam!",
+    "goBack": "Înapoi",
+    "loginLinkSent": "Linkul de autentificare a fost trimis pe e-mail",
+    "loginLinkFailed": "Nu s-a putut trimite linkul de autentificare. Vă rugăm să încercați din nou."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Căutați companii",
+    "emptyPage": "Nu s-au găsit companii pe această pagină",
+    "emptyAll": "Nu s-au găsit companii",
+    "fetchError": "Nu s-au putut prelua detaliile companiei",
+    "viewDetails": "Vedeți detalii"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Vedeți toate companiile",
+    "switchToLightMode": "Comutați la modul luminos",
+    "switchToDarkMode": "Comutați la modul întunecat",
+    "loggingOut": "Se deconectează...",
+    "logOut": "Deconectare",
+    "goBackToBusiness": "Înapoi la companie",
+    "goToOverview": "Mergeți la prezentare generală"
+  },
+  "LeftPanel": {
+    "goBackTo": "Înapoi la {businessName}",
+    "heading": "Gestionați abonamentul și setările de facturare",
+    "description": "Vedeți istoricul plăților, descărcați facturi și gestionați abonamentele și metodele de plată.",
+    "poweredBy": "Powered by",
+    "privacy": "Confidențialitate",
+    "terms": "Termeni"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Nu s-a putut schimba limba. Vă rugăm să încercați din nou."
+  },
+  "Subscriptions": {
+    "headingActive": "Abonamente active",
+    "headingAll": "Abonamente",
+    "emptyPage": "Nu s-au găsit abonamente pe această pagină",
+    "emptyActive": "Momentan nu există abonamente active",
+    "viewAll": "Vedeți toate abonamentele"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Gestionați abonamentul",
+    "updatePaymentMethod": "Actualizați metoda de plată",
+    "viewDetails": "Vedeți detalii",
+    "renewsOn": "se reînnoiește la",
+    "validTill": "valabil până la"
+  },
+  "SubscriptionDetails": {
+    "addons": "Add-ons",
+    "meters": "Metre",
+    "freeThreshold": "Prag gratuit",
+    "per": "per",
+    "qty": "Cant.: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Informații de facturare",
+    "name": "Nume",
+    "phoneNumber": "Număr de telefon",
+    "email": "E-mail",
+    "billingAddress": "Adresă de facturare"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Editați",
+    "sheetTitle": "Editați detaliile de facturare",
+    "customerName": "Numele clientului",
+    "fullNamePlaceholder": "Nume complet",
+    "billingAddress": "Adresă de facturare",
+    "loadingCountries": "Se încarcă...",
+    "addressLine": "Linia de adresă 1",
+    "state": "Stat/Regiune",
+    "city": "Oraș",
+    "postalCode": "Cod poștal",
+    "purchasingAsBusiness": "Cumpărați ca firmă",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax ID",
+    "saveDetails": "Salvați detaliile",
+    "updateSuccess": "Detaliile de facturare au fost actualizate cu succes",
+    "updateFailed": "Nu s-au putut actualiza detaliile de facturare. Vă rugăm să încercați din nou.",
+    "countriesLoadFailed": "Nu s-au putut încărca țările. Vă rugăm să încercați din nou."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Sigur doriți să anulați abonamentul la acest serviciu?",
+    "description": "Odată ce continuați, veți pierde accesul la toate beneficiile asociate, iar această acțiune nu poate fi anulată.",
+    "close": "Închideți",
+    "cancel": "Anulați",
+    "cancelling": "Se anulează..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Anulați abonamentul",
+    "triggerRevoke": "Revocați anularea",
+    "sheetTitle": "Ne pare rău să vă vedem plecând...",
+    "currentPlan": "Planul curent",
+    "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
+    "quantity": "Cantitate: {value}",
+    "scheduledCancellationWarning": "Acest abonament este programat să fie anulat la următoarea dată de facturare.",
+    "revokeCancellation": "Revocați anularea",
+    "revoking": "Se revocă...",
+    "cancelAtNextBilling": "Anulați la următoarea dată de facturare",
+    "cancelling": "Se anulează...",
+    "cancelSuccess": "Abonamentul a fost anulat cu succes",
+    "cancelScheduled": "Abonamentul va fi anulat la următoarea dată de facturare",
+    "cancelFailed": "Nu s-a putut anula abonamentul. Vă rugăm să încercați din nou.",
+    "revokeFailed": "Nu s-a putut revoca anularea. Vă rugăm să încercați din nou.",
+    "revokeSuccess": "Anularea abonamentului a fost revocată cu succes"
+  },
+  "SubscriptionInfo": {
+    "title": "Abonamentul dvs. este în prezent suspendat",
+    "description": "Vă rugăm să actualizați metoda de plată pentru a relua acest abonament"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Abonamentul dvs. este în prezent suspendat din cauza unei plăți eșuate. Vă rugăm să actualizați metoda de plată pentru a relua acest abonament",
+    "failed": "Acest abonament a eșuat. Vă rugăm să încercați din nou.",
+    "pending": "Plata nu a fost finalizată și finalizarea comenzii a rămas neterminată. Dacă doriți să vă abonați, vă rugăm să încercați din nou.",
+    "cancelledOn": "Acest abonament a fost anulat la data de {date}.",
+    "expired": "Acest abonament a expirat.",
+    "scheduledCancellation": "Abonamentul dvs. este în prezent programat pentru anulare la data de {date}.",
+    "scheduledCancellationNoDate": "Abonamentul dvs. este în prezent programat pentru anulare.",
+    "flexibleSubscription": "Acesta este un abonament flexibil, astfel încât {name} poate ajusta prețul pentru următorul ciclu de facturare.",
+    "flexibleSubscriptionUnknownMerchant": "Acesta este un abonament flexibil, astfel încât suma facturată poate fi ajustată pentru următorul ciclu de facturare.",
+    "discountApplied": "Reducere aplicată pentru {count, plural, one {încă # ciclu de facturare} other {încă # cicluri de facturare}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Schimbați planul",
+    "sheetTitle": "Selectați un plan nou",
+    "noProducts": "Nu există produse de abonament disponibile.",
+    "currentPlan": "Planul curent",
+    "proceed": "Continuați",
+    "unnamedGroup": "Grup fără nume"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Confirmați schimbarea planului",
+    "noPlanSelected": "Niciun plan selectat",
+    "loadingPreview": "Se încarcă previzualizarea...",
+    "current": "Curent",
+    "updated": "Actualizat",
+    "qty": "Cant.: {value}",
+    "viewAddons": "Vedeți add-ons",
+    "manageAddons": "Gestionați add-ons",
+    "noAddons": "Fără add-ons",
+    "tableItem": "Articol",
+    "tableQuantity": "Cantitate",
+    "tableUnitPrice": "Preț unitar",
+    "tableTax": "Taxe",
+    "tableTotal": "Total",
+    "creditToBalance": "Credit în sold",
+    "creditTooltip": "Creditul va fi folosit pentru a acoperi plățile viitoare",
+    "summaryTotal": "Total",
+    "summaryTax": "Taxe",
+    "summaryAmountDue": "Sumă de plată acum",
+    "payButton": "Plătiți {amount}",
+    "previewFailed": "Nu s-a putut încărca previzualizarea. Vă rugăm să încercați din nou.",
+    "changeFailed": "Nu s-a putut schimba planul. Vă rugăm să încercați din nou.",
+    "changeSuccess": "Planul a fost schimbat cu succes",
+    "addonRequired": "Vă rugăm să selectați cel puțin un add-on cu cantitatea 1 sau mai mult."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Editați",
+    "sheetTitle": "Editați metoda de plată",
+    "addPaymentMethod": "Adăugați o metodă de plată",
+    "noPaymentMethods": "Nu s-au găsit metode de plată eligibile.",
+    "confirmChanges": "Confirmați modificările",
+    "updating": "Se actualizează...",
+    "selectRequired": "Vă rugăm să selectați o metodă de plată",
+    "loadFailed": "Nu s-au putut încărca metodele de plată. Vă rugăm să încercați din nou.",
+    "updateSuccess": "Metoda de plată a fost actualizată cu succes",
+    "setupInitiated": "Inițializarea configurării metodei de plată a început",
+    "updateFailed": "Nu s-a putut actualiza metoda de plată. Vă rugăm să încercați din nou.",
+    "addFailed": "Nu s-a putut adăuga o nouă metodă de plată. Vă rugăm să încercați din nou."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Eliminați metoda de plată",
+    "dialogDescription": "Sigur doriți să eliminați această metodă de plată? Această acțiune nu poate fi anulată.",
+    "cancel": "Anulați",
+    "remove": "Eliminați",
+    "removing": "Se elimină...",
+    "removeAriaLabel": "Eliminați metoda de plată",
+    "removeSuccess": "Metoda de plată a fost eliminată",
+    "removeFailed": "Nu s-a putut elimina metoda de plată"
+  },
+  "PaymentMethodsSection": {
+    "title": "Metode de plată",
+    "empty": "Nu au fost adăugate metode de plată"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Adăugați o metodă de plată",
+    "sheetTitle": "Adăugați o metodă de plată",
+    "or": "SAU",
+    "card": "Card",
+    "cardNumber": "Număr card",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Data expirării",
+    "expiryDatePlaceholder": "LL/AA",
+    "securityCode": "Cod de securitate",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Prin furnizarea informațiilor cardului, permiteți Dodo Payments să debiteze cardul dvs. pentru plăți viitoare în conformitate cu termenii lor."
+  },
+  "Orders": {
+    "billingHistory": "Istoric facturare",
+    "emptyPage": "Nu s-au găsit achiziții pe această pagină",
+    "emptyAll": "Momentan nu există achiziții",
+    "noBillingHistory": "Nu este disponibil niciun istoric de facturare",
+    "fetchFailed": "Nu s-a putut prelua coșul de produse. Vă rugăm să încercați din nou."
+  },
+  "BillingHistoryColumns": {
+    "date": "Data",
+    "status": "Stare",
+    "amount": "Sumă",
+    "pricingType": "Tip de preț",
+    "entitlements": "Drepturi",
+    "invoice": "Factură"
+  },
+  "OrderCard": {
+    "paymentId": "ID plată",
+    "purchased": "Achiziționat",
+    "viewDetails": "Vedeți detalii",
+    "hideDetails": "Ascundeți detaliile",
+    "noProducts": "Nu există produse în această comandă.",
+    "fetchFailed": "Nu s-au putut prelua detaliile produsului. Vă rugăm să încercați din nou."
+  },
+  "RefundsTable": {
+    "title": "Istoric rambursări",
+    "empty": "Nu sunt disponibile rambursări"
+  },
+  "RefundColumns": {
+    "date": "Data",
+    "status": "Stare",
+    "amount": "Sumă",
+    "refundId": "ID rambursare",
+    "associatedPayment": "Plată asociată"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "Nu s-au găsit facturi pe această pagină",
+    "emptyAll": "Momentan nu există facturi",
+    "paymentId": "ID plată",
+    "date": "Data",
+    "amount": "Sumă",
+    "status": "Stare",
+    "download": "Descărcați"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Factura nu este disponibilă",
+    "downloadInvoice": "Descărcați factura",
+    "invoice": "Factură",
+    "generateInvoice": "Generați factura",
+    "fillDetailsTitle": "Introduceți adresa completă a clientului",
+    "existingAddressTitle": "Descărcați cu detaliile adresei existente",
+    "existingAddressDescription": "Această factură va include doar codul poștal și țara, așa cum au fost furnizate în timpul finalizării comenzii.",
+    "fullAddressTitle": "Descărcați cu detalii complete ale adresei",
+    "fullAddressDescription": "Această factură va include adresa completă a clientului. Vă rugăm să vă asigurați că completați toate detaliile înainte de descărcare.",
+    "fillDetails": "Completați detaliile"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Linia de adresă 1",
+    "state": "Stat/Regiune",
+    "city": "Oraș",
+    "postalCode": "Cod poștal",
+    "download": "Descărcați",
+    "downloadSuccess": "Factura a fost descărcată cu succes",
+    "updateFailed": "Nu s-au putut actualiza detaliile facturii. Vă rugăm să încercați din nou."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Produse digitale",
+    "description": "Accesați produsele digitale achiziționate și descărcările",
+    "accessExternal": "Accesați resursa externă",
+    "instructions": "Instrucțiuni",
+    "loadFailed": "Nu s-au putut încărca produsele digitale. Vă rugăm să încercați din nou."
+  },
+  "WalletsSection": {
+    "title": "Portofel",
+    "selectWallet": "Selectați portofelul",
+    "walletLabel": "Portofel {currency}",
+    "availableBalance": "Sold disponibil",
+    "tableType": "Tip",
+    "tableReason": "Motiv",
+    "tableAmount": "Sumă",
+    "noTransactions": "Încă nu există tranzacții",
+    "credit": "Credit",
+    "debit": "Debit"
+  },
+  "CreditsSection": {
+    "title": "Credite",
+    "selectCredit": "Selectați dreptul de credit",
+    "overageBalance": "Sold depășire",
+    "availableCreditBalance": "Sold de credit disponibil",
+    "tableType": "Tip",
+    "tableDescription": "Descriere",
+    "tableAmount": "Sumă",
+    "noTransactions": "Încă nu există tranzacții",
+    "credit": "Credit",
+    "debit": "Debit"
+  },
+  "UsageSummary": {
+    "emptyPage": "Nu s-a găsit istoric de utilizare pe această pagină",
+    "emptyAll": "Momentan nu există istoric de utilizare"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Istoric facturare",
+    "refundHistory": "Istoric rambursări",
+    "usageSummary": "Rezumat utilizare"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Cheie de licență",
+    "licenseKeysButton": "Chei de licență",
+    "licenseKeysTitle": "Chei de licență",
+    "migrateLicenseTitle": "Migrare - Cheie de licență",
+    "licenseKeyCardTitle": "Cheie de licență",
+    "clickToView": "Faceți clic pentru a vedea cheia de licență",
+    "hideLicenseKey": "Ascundeți cheia de licență",
+    "showLicenseKey": "Afișați cheia de licență",
+    "loadingLicenseKeys": "Se încarcă cheile de licență...",
+    "noLicenseKeys": "Nu sunt disponibile chei de licență.",
+    "expires": "Expiră",
+    "attachmentsButton": "Atașamente",
+    "attachmentButton": "Atașament",
+    "attachmentsTitle": "Produsele dvs. digitale",
+    "attachmentsDescription": "Accesați și descărcați aici produsele și fișierele digitale disponibile.",
+    "digitalProductsTitle": "Produse digitale",
+    "digitalProductsDescription": "Descărcați produsele dvs. digitale",
+    "noDigitalProducts": "Nu sunt disponibile produse digitale.",
+    "filesSection": "Fișiere",
+    "externalLink": "Link extern",
+    "open": "Deschideți",
+    "instructionsSection": "Instrucțiuni",
+    "loadFailed": "Nu s-au putut încărca produsele digitale.",
+    "fetchCartFailed": "Nu s-a putut prelua coșul de produse",
+    "fetchDigitalFailed": "Nu s-au putut prelua produsele digitale"
+  },
+  "ProfilePage": {
+    "billingDetails": "Detaliile dvs. de facturare",
+    "name": "Nume",
+    "email": "E-mail",
+    "walletsHeading": "Portofele",
+    "creditsHeading": "Credite",
+    "walletTabLabel": "Portofel {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Nu s-au găsit portofele",
+    "availableBalance": "Sold disponibil",
+    "recentTransactions": "Tranzacții recente",
+    "tableType": "Tip",
+    "tableReason": "Motiv",
+    "tableAmount": "Sumă",
+    "emptyPage": "Nu s-au găsit tranzacții pe această pagină",
+    "emptyAll": "Momentan nu există tranzacții"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Nu s-au găsit credite",
+    "selectPlaceholder": "Selectați dreptul de credit",
+    "overageBalance": "Sold depășire",
+    "availableCreditBalance": "Sold de credit disponibil",
+    "recentTransactions": "Tranzacții recente",
+    "tableType": "Tip",
+    "tableDescription": "Descriere",
+    "tableAmount": "Sumă",
+    "emptyPage": "Nu s-au găsit tranzacții pe această pagină",
+    "emptyAll": "Momentan nu există tranzacții"
+  },
+  "Pagination": {
+    "previous": "Anterior",
+    "next": "Următorul"
+  },
+  "BaseDataGrid": {
+    "noData": "Nu există date disponibile",
+    "reset": "Resetați tabelul"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Crescător",
+    "desc": "Descrescător",
+    "pinLeft": "Fixați la stânga",
+    "pinRight": "Fixați la dreapta",
+    "moveLeft": "Mutați la stânga",
+    "moveRight": "Mutați la dreapta",
+    "columns": "Coloane"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Rânduri pe pagină"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Editați coloanele"
+  },
+  "TokenPage": {
+    "validationFailed": "Validarea a eșuat. Vă rugăm să încercați din nou.",
+    "goToExpiredPage": "Mergeți la pagina expirată"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Nume metru",
+    "meterId": "ID metru",
+    "consumedUnits": "Unități consumate",
+    "chargeableUnits": "Unități facturabile",
+    "freeThreshold": "Prag gratuit",
+    "units": "unități",
+    "unitPrice": "Preț unitar",
+    "totalCost": "Cost total",
+    "actions": "Acțiuni",
+    "view": "Vedeți"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Metodele dvs. de plată",
+    "empty": "Nu s-au găsit metode de plată"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Cheie de licență",
+    "status": "Stare",
+    "productId": "ID produs",
+    "expiry": "Expirare (UTC)",
+    "neverExpires": "Nu expiră niciodată",
+    "sameAsSubscription": "La fel ca abonamentul",
+    "activationsUsed": "Activări folosite",
+    "paymentId": "ID plată"
+  },
+  "PaymentColumns": {
+    "paymentId": "ID plată",
+    "status": "Stare",
+    "paymentMethod": "Metodă de plată",
+    "amount": "Sumă",
+    "date": "Data (UTC)",
+    "invoice": "Factură",
+    "invoiceButtonLabel": "Factură",
+    "files": "Fișiere"
+  },
+  "TimeTooltip": {
+    "title": "Conversie fus orar",
+    "yourDevice": "Dispozitivul dvs.",
+    "system": "Sistem"
+  },
+  "DateFilter": {
+    "selectDateRange": "Selectați intervalul de date",
+    "dialogDescription": "Selectați intervalul de date pentru a filtra datele",
+    "presets": "Presetări",
+    "calendar": "Calendar",
+    "cancel": "Anulați",
+    "applyFilter": "Aplicați filtrul",
+    "today": "Astăzi",
+    "yesterday": "Ieri",
+    "thisWeek": "Săptămâna aceasta",
+    "lastWeek": "Săptămâna trecută",
+    "thisMonth": "Luna aceasta",
+    "lastMonth": "Luna trecută",
+    "thisYear": "Anul acesta",
+    "lastYear": "Anul trecut",
+    "allTime": "Tot timpul"
+  },
+  "FilterControls": {
+    "statusLabel": "Stare"
+  },
+  "FilterDropdown": {
+    "filters": "Filtre",
+    "filterBy": "Filtrați după:",
+    "clear": "Ștergeți",
+    "filter": "Filtrați"
+  },
+  "CountrySelect": {
+    "loading": "Se încarcă...",
+    "searchPlaceholder": "Căutați țara...",
+    "noCountryFound": "Nu s-a găsit nicio țară.",
+    "loadFailed": "Nu s-au putut încărca țările. Vă rugăm să încercați din nou."
+  },
+  "DataTable": {
+    "noResults": "Niciun rezultat."
+  },
+  "Product": {
+    "qty": "CANT.: {value}",
+    "manageSubscription": "Gestionați abonamentul",
+    "fetchSubscriptionFailed": "Nu s-a putut prelua abonamentul. Vă rugăm să încercați din nou.",
+    "noAuthToken": "Nu s-a găsit niciun token de autentificare",
+    "loadDigitalProductsFailed": "Nu s-au putut încărca produsele digitale.",
+    "fetchDigitalProductsFailed": "Nu s-au putut prelua produsele digitale. Vă rugăm să încercați din nou."
+  },
+  "BadgeStatus": {
+    "succeeded": "Reușit",
+    "failed": "Eșuat",
+    "cancelled": "Anulat",
+    "expired": "Expirat",
+    "processing": "În desfășurare",
+    "pending": "În așteptare",
+    "review": "În revizuire",
+    "onHold": "Suspendat",
+    "notInitiated": "Neinițiat",
+    "noStatus": "Fără stare",
+    "verified": "Verificat",
+    "active": "Activ",
+    "disabled": "Dezactivat",
+    "preDispute": "Pre-dispută",
+    "dispute": "Dispută",
+    "preArbitration": "Pre-arbitraj",
+    "disputeOpened": "Dispută deschisă",
+    "disputeExpired": "Dispută expirată",
+    "disputeAccepted": "Dispută acceptată",
+    "disputeCancelled": "Dispută anulată",
+    "disputeChallenged": "Dispută contestată",
+    "disputeWon": "Dispută câștigată",
+    "disputeLost": "Dispută pierdută",
+    "oneTime": "O singură dată",
+    "subscription": "Abonament",
+    "unknown": "Necunoscut"
+  }
+}

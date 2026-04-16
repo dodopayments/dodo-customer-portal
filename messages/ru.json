@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Что-то пошло не так",
+    "description": "Возможно, у вас проблемы с сетевым подключением, срок действия ссылки мог истечь или ссылка/продукт недействительны."
+  },
+  "NotFoundPage": {
+    "title": "Страница не найдена",
+    "description": "Страница, которую вы ищете, не существует или могла быть перемещена."
+  },
+  "ExpiredPage": {
+    "title": "В целях безопасности срок действия этой страницы истёк."
+  },
+  "LandingCard": {
+    "heading": "Чем мы можем помочь вам сегодня?",
+    "actionsIntro": "Вы можете выполнить следующие действия:",
+    "actions": {
+      "changePaymentMethod": "Изменить способ оплаты",
+      "cancelSubscription": "Отменить подписку",
+      "downloadInvoices": "Скачать счета",
+      "viewOrders": "Просмотреть заказы, обработанные через Dodo Payments",
+      "otherQueries": "Другие вопросы"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "Введите ваш email",
+    "emailInvalid": "Некорректный email-адрес",
+    "emailFailed": "Не удалось отправить ссылку для входа. Пожалуйста, попробуйте ещё раз.",
+    "lookUpPurchase": "Найти мою покупку",
+    "sendEmail": "Отправить email",
+    "sending": "Отправка...",
+    "sentTitle": "Мы отправили вам письмо!",
+    "sentDescription": "Используйте ссылку в письме, чтобы войти в self-serve портал Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Что такое Dodo Payments?",
+    "description": "Dodo Payments — это платформа Merchant of Record (MoR), которая управляет платежами, соблюдением налоговых требований и биллинговой инфраструктурой для растущего числа цифровых бизнесов, включая программные продукты, инструменты и сервисы. Когда вы совершаете покупку или оформляете подписку на продукт, продаваемый одной из таких компаний, именно Dodo Payments обрабатывает транзакцию, выставление счетов, поддержку клиентов, возвраты и споры.",
+    "visitPrompt": "Посетите <link>dodopayments.com</link>, чтобы узнать больше."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "Портал биллинга {businessName}",
+    "enterEmailDescription": "Введите ваш email, чтобы получить ссылку для доступа",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Введите ваш email",
+    "emailInvalid": "Пожалуйста, введите корректный email-адрес",
+    "emailRequired": "Email обязателен",
+    "getAccessLink": "Получить ссылку доступа",
+    "sending": "Отправка...",
+    "successTitle": "Почти готово!",
+    "successDescription": "Ссылка доступа отправлена на email {email}. Обязательно проверьте папку «Спам»!",
+    "goBack": "Назад",
+    "loginLinkSent": "Ссылка для входа отправлена на email",
+    "loginLinkFailed": "Не удалось отправить ссылку для входа. Пожалуйста, попробуйте ещё раз."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Поиск компаний",
+    "emptyPage": "На этой странице компании не найдены",
+    "emptyAll": "Компании не найдены",
+    "fetchError": "Не удалось получить сведения о компании",
+    "viewDetails": "Просмотреть детали"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Просмотреть все компании",
+    "switchToLightMode": "Переключить на светлую тему",
+    "switchToDarkMode": "Переключить на тёмную тему",
+    "loggingOut": "Выход...",
+    "logOut": "Выйти",
+    "goBackToBusiness": "Назад к компании",
+    "goToOverview": "Перейти к обзору"
+  },
+  "LeftPanel": {
+    "goBackTo": "Назад к {businessName}",
+    "heading": "Управляйте подпиской и настройками биллинга",
+    "description": "Просматривайте историю платежей, скачивайте счета и управляйте подписками и способами оплаты.",
+    "poweredBy": "Powered by",
+    "privacy": "Конфиденциальность",
+    "terms": "Условия"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Не удалось изменить язык. Пожалуйста, попробуйте ещё раз."
+  },
+  "Subscriptions": {
+    "headingActive": "Активные подписки",
+    "headingAll": "Подписки",
+    "emptyPage": "На этой странице подписки не найдены",
+    "emptyActive": "Сейчас нет активных подписок",
+    "viewAll": "Просмотреть все подписки"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Управлять подпиской",
+    "updatePaymentMethod": "Обновить способ оплаты",
+    "viewDetails": "Просмотреть детали",
+    "renewsOn": "продление",
+    "validTill": "действительно до"
+  },
+  "SubscriptionDetails": {
+    "addons": "Дополнения",
+    "meters": "Meters",
+    "freeThreshold": "Бесплатный порог",
+    "per": "за",
+    "qty": "Кол-во: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Платёжная информация",
+    "name": "Имя",
+    "phoneNumber": "Номер телефона",
+    "email": "Email",
+    "billingAddress": "Платёжный адрес"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Редактировать",
+    "sheetTitle": "Редактировать платёжные данные",
+    "customerName": "Имя клиента",
+    "fullNamePlaceholder": "Полное имя",
+    "billingAddress": "Платёжный адрес",
+    "loadingCountries": "Загрузка...",
+    "addressLine": "Адрес (строка 1)",
+    "state": "Регион/штат",
+    "city": "Город",
+    "postalCode": "Почтовый индекс",
+    "purchasingAsBusiness": "Покупка как компания",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax ID",
+    "saveDetails": "Сохранить",
+    "updateSuccess": "Платёжные данные успешно обновлены",
+    "updateFailed": "Не удалось обновить платёжные данные. Пожалуйста, попробуйте ещё раз.",
+    "countriesLoadFailed": "Не удалось загрузить список стран. Пожалуйста, попробуйте ещё раз."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Вы уверены, что хотите отменить подписку на этот сервис?",
+    "description": "После подтверждения вы потеряете доступ ко всем связанным преимуществам, и это действие нельзя будет отменить.",
+    "close": "Закрыть",
+    "cancel": "Отмена",
+    "cancelling": "Отмена..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Отменить подписку",
+    "triggerRevoke": "Отменить отмену",
+    "sheetTitle": "Нам жаль, что вы уходите...",
+    "currentPlan": "Текущий план",
+    "addOns": "{count, plural, one {# дополнение} few {# дополнения} many {# дополнений} other {# дополнения}}",
+    "quantity": "Количество: {value}",
+    "scheduledCancellationWarning": "Отмена этой подписки запланирована на следующую дату выставления счёта.",
+    "revokeCancellation": "Отменить отмену",
+    "revoking": "Отмена отмены...",
+    "cancelAtNextBilling": "Отменить со следующей датой выставления счёта",
+    "cancelling": "Отмена...",
+    "cancelSuccess": "Подписка успешно отменена",
+    "cancelScheduled": "Подписка будет отменена на следующую дату выставления счёта",
+    "cancelFailed": "Не удалось отменить подписку. Пожалуйста, попробуйте ещё раз.",
+    "revokeFailed": "Не удалось отменить отмену. Пожалуйста, попробуйте ещё раз.",
+    "revokeSuccess": "Отмена подписки успешно отменена"
+  },
+  "SubscriptionInfo": {
+    "title": "Ваша подписка сейчас приостановлена",
+    "description": "Пожалуйста, обновите способ оплаты, чтобы возобновить эту подписку"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Ваша подписка сейчас приостановлена из-за неуспешного платежа. Пожалуйста, обновите способ оплаты, чтобы возобновить подписку",
+    "failed": "Эта подписка завершилась неуспешно. Пожалуйста, попробуйте ещё раз.",
+    "pending": "Платёж не был завершён, и оформление покупки осталось незавершённым. Если вы хотите оформить подписку, пожалуйста, попробуйте ещё раз.",
+    "cancelledOn": "Эта подписка была отменена {date}.",
+    "expired": "Срок действия этой подписки истёк.",
+    "scheduledCancellation": "Отмена вашей подписки запланирована на {date}.",
+    "scheduledCancellationNoDate": "Отмена вашей подписки запланирована.",
+    "flexibleSubscription": "Это гибкая подписка, поэтому {name} может изменить цену для следующего платёжного периода.",
+    "flexibleSubscriptionUnknownMerchant": "Это гибкая подписка, поэтому сумма к оплате может быть изменена для следующего платёжного периода.",
+    "discountApplied": "Скидка применена на {count, plural, one {# платёжный период} few {# платёжных периода} many {# платёжных периодов} other {# платёжного периода}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Сменить план",
+    "sheetTitle": "Выберите новый план",
+    "noProducts": "Нет доступных продуктов по подписке.",
+    "currentPlan": "Текущий план",
+    "proceed": "Продолжить",
+    "unnamedGroup": "Группа без названия"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Подтвердить смену плана",
+    "noPlanSelected": "План не выбран",
+    "loadingPreview": "Загрузка предварительного расчёта...",
+    "current": "Текущий",
+    "updated": "Обновлённый",
+    "qty": "Кол-во: {value}",
+    "viewAddons": "Просмотреть дополнения",
+    "manageAddons": "Управлять дополнениями",
+    "noAddons": "Нет дополнений",
+    "tableItem": "Позиция",
+    "tableQuantity": "Количество",
+    "tableUnitPrice": "Цена за единицу",
+    "tableTax": "Налог",
+    "tableTotal": "Итого",
+    "creditToBalance": "Зачисление на баланс",
+    "creditTooltip": "Кредит будет использован для оплаты будущих платежей",
+    "summaryTotal": "Итого",
+    "summaryTax": "Налог",
+    "summaryAmountDue": "К оплате сейчас",
+    "payButton": "Оплатить {amount}",
+    "previewFailed": "Не удалось загрузить предварительный расчёт. Пожалуйста, попробуйте ещё раз.",
+    "changeFailed": "Не удалось сменить план. Пожалуйста, попробуйте ещё раз.",
+    "changeSuccess": "План успешно изменён",
+    "addonRequired": "Пожалуйста, выберите хотя бы одно дополнение с количеством 1 или больше."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Редактировать",
+    "sheetTitle": "Редактировать способ оплаты",
+    "addPaymentMethod": "Добавить способ оплаты",
+    "noPaymentMethods": "Подходящие способы оплаты не найдены.",
+    "confirmChanges": "Подтвердить изменения",
+    "updating": "Обновление...",
+    "selectRequired": "Пожалуйста, выберите способ оплаты",
+    "loadFailed": "Не удалось загрузить способы оплаты. Пожалуйста, попробуйте ещё раз.",
+    "updateSuccess": "Способ оплаты успешно обновлён",
+    "setupInitiated": "Настройка способа оплаты инициирована",
+    "updateFailed": "Не удалось обновить способ оплаты. Пожалуйста, попробуйте ещё раз.",
+    "addFailed": "Не удалось добавить новый способ оплаты. Пожалуйста, попробуйте ещё раз."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Удалить способ оплаты",
+    "dialogDescription": "Вы уверены, что хотите удалить этот способ оплаты? Это действие нельзя отменить.",
+    "cancel": "Отмена",
+    "remove": "Удалить",
+    "removing": "Удаление...",
+    "removeAriaLabel": "Удалить способ оплаты",
+    "removeSuccess": "Способ оплаты удалён",
+    "removeFailed": "Не удалось удалить способ оплаты"
+  },
+  "PaymentMethodsSection": {
+    "title": "Способы оплаты",
+    "empty": "Способы оплаты не добавлены"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Добавить способ оплаты",
+    "sheetTitle": "Добавить способ оплаты",
+    "or": "ИЛИ",
+    "card": "Карта",
+    "cardNumber": "Номер карты",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Срок действия",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "Код безопасности",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Предоставляя данные карты, вы разрешаете Dodo Payments списывать средства с вашей карты для будущих платежей в соответствии с их условиями."
+  },
+  "Orders": {
+    "billingHistory": "История биллинга",
+    "emptyPage": "На этой странице покупки не найдены",
+    "emptyAll": "Сейчас покупок нет",
+    "noBillingHistory": "История биллинга недоступна",
+    "fetchFailed": "Не удалось получить корзину продуктов. Пожалуйста, попробуйте ещё раз."
+  },
+  "BillingHistoryColumns": {
+    "date": "Дата",
+    "status": "Статус",
+    "amount": "Сумма",
+    "pricingType": "Тип тарификации",
+    "entitlements": "Права",
+    "invoice": "Счёт"
+  },
+  "OrderCard": {
+    "paymentId": "Payment ID",
+    "purchased": "Куплено",
+    "viewDetails": "Просмотреть детали",
+    "hideDetails": "Скрыть детали",
+    "noProducts": "В этом заказе нет продуктов.",
+    "fetchFailed": "Не удалось получить сведения о продукте. Пожалуйста, попробуйте ещё раз."
+  },
+  "RefundsTable": {
+    "title": "История возвратов",
+    "empty": "Возвраты недоступны"
+  },
+  "RefundColumns": {
+    "date": "Дата",
+    "status": "Статус",
+    "amount": "Сумма",
+    "refundId": "Refund ID",
+    "associatedPayment": "Связанный платеж"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "На этой странице счета не найдены",
+    "emptyAll": "Сейчас счетов нет",
+    "paymentId": "Payment ID",
+    "date": "Дата",
+    "amount": "Сумма",
+    "status": "Статус",
+    "download": "Скачать"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Счёт недоступен",
+    "downloadInvoice": "Скачать счёт",
+    "invoice": "Счёт",
+    "generateInvoice": "Сгенерировать счёт",
+    "fillDetailsTitle": "Введите полный адрес клиента",
+    "existingAddressTitle": "Скачать с существующими данными адреса",
+    "existingAddressDescription": "Этот счёт будет содержать только ваш почтовый индекс и страну, указанные при оформлении покупки.",
+    "fullAddressTitle": "Скачать с полными данными адреса",
+    "fullAddressDescription": "Этот счёт будет содержать полный адрес клиента. Пожалуйста, убедитесь, что вы заполнили все данные перед скачиванием.",
+    "fillDetails": "Заполнить данные"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Адрес (строка 1)",
+    "state": "Регион/штат",
+    "city": "Город",
+    "postalCode": "Почтовый индекс",
+    "download": "Скачать",
+    "downloadSuccess": "Счёт успешно скачан",
+    "updateFailed": "Не удалось обновить данные счёта. Пожалуйста, попробуйте ещё раз."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Цифровые продукты",
+    "description": "Доступ к купленным цифровым продуктам и загрузкам",
+    "accessExternal": "Открыть внешний ресурс",
+    "instructions": "Инструкции",
+    "loadFailed": "Не удалось загрузить цифровые продукты. Пожалуйста, попробуйте ещё раз."
+  },
+  "WalletsSection": {
+    "title": "Кошелёк",
+    "selectWallet": "Выберите кошелёк",
+    "walletLabel": "Кошелёк {currency}",
+    "availableBalance": "Доступный баланс",
+    "tableType": "Тип",
+    "tableReason": "Причина",
+    "tableAmount": "Сумма",
+    "noTransactions": "Транзакций пока нет",
+    "credit": "Зачисление",
+    "debit": "Списание"
+  },
+  "CreditsSection": {
+    "title": "Кредиты",
+    "selectCredit": "Выберите entitlement кредита",
+    "overageBalance": "Баланс перерасхода",
+    "availableCreditBalance": "Доступный кредитный баланс",
+    "tableType": "Тип",
+    "tableDescription": "Описание",
+    "tableAmount": "Сумма",
+    "noTransactions": "Транзакций пока нет",
+    "credit": "Зачисление",
+    "debit": "Списание"
+  },
+  "UsageSummary": {
+    "emptyPage": "На этой странице история использования не найдена",
+    "emptyAll": "Сейчас истории использования нет"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "История биллинга",
+    "refundHistory": "История возвратов",
+    "usageSummary": "Сводка использования"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Лицензионный ключ",
+    "licenseKeysButton": "Лицензионные ключи",
+    "licenseKeysTitle": "Лицензионные ключи",
+    "migrateLicenseTitle": "Перенос — лицензионный ключ",
+    "licenseKeyCardTitle": "Лицензионный ключ",
+    "clickToView": "Нажмите, чтобы посмотреть лицензионный ключ",
+    "hideLicenseKey": "Скрыть лицензионный ключ",
+    "showLicenseKey": "Показать лицензионный ключ",
+    "loadingLicenseKeys": "Загрузка лицензионных ключей...",
+    "noLicenseKeys": "Лицензионные ключи недоступны.",
+    "expires": "Истекает",
+    "attachmentsButton": "Вложения",
+    "attachmentButton": "Вложение",
+    "attachmentsTitle": "Ваши цифровые продукты",
+    "attachmentsDescription": "Здесь вы можете получить доступ и скачать доступные цифровые продукты и файлы.",
+    "digitalProductsTitle": "Цифровые продукты",
+    "digitalProductsDescription": "Скачать ваши цифровые продукты",
+    "noDigitalProducts": "Цифровые продукты недоступны.",
+    "filesSection": "Файлы",
+    "externalLink": "Внешняя ссылка",
+    "open": "Открыть",
+    "instructionsSection": "Инструкции",
+    "loadFailed": "Не удалось загрузить цифровые продукты.",
+    "fetchCartFailed": "Не удалось получить корзину продуктов",
+    "fetchDigitalFailed": "Не удалось получить цифровые продукты"
+  },
+  "ProfilePage": {
+    "billingDetails": "Ваши платёжные данные",
+    "name": "Имя",
+    "email": "Email",
+    "walletsHeading": "Кошельки",
+    "creditsHeading": "Кредиты",
+    "walletTabLabel": "Кошелёк {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Кошельки не найдены",
+    "availableBalance": "Доступный баланс",
+    "recentTransactions": "Последние транзакции",
+    "tableType": "Тип",
+    "tableReason": "Причина",
+    "tableAmount": "Сумма",
+    "emptyPage": "На этой странице транзакции не найдены",
+    "emptyAll": "Сейчас транзакций нет"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Кредиты не найдены",
+    "selectPlaceholder": "Выберите entitlement кредита",
+    "overageBalance": "Баланс перерасхода",
+    "availableCreditBalance": "Доступный кредитный баланс",
+    "recentTransactions": "Последние транзакции",
+    "tableType": "Тип",
+    "tableDescription": "Описание",
+    "tableAmount": "Сумма",
+    "emptyPage": "На этой странице транзакции не найдены",
+    "emptyAll": "Сейчас транзакций нет"
+  },
+  "Pagination": {
+    "previous": "Назад",
+    "next": "Вперёд"
+  },
+  "BaseDataGrid": {
+    "noData": "Данные недоступны",
+    "reset": "Сбросить таблицу"
+  },
+  "DataGridColumnHeader": {
+    "asc": "По возрастанию",
+    "desc": "По убыванию",
+    "pinLeft": "Закрепить слева",
+    "pinRight": "Закрепить справа",
+    "moveLeft": "Переместить влево",
+    "moveRight": "Переместить вправо",
+    "columns": "Столбцы"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Строк на странице"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Редактировать столбцы"
+  },
+  "TokenPage": {
+    "validationFailed": "Проверка не удалась. Пожалуйста, попробуйте ещё раз.",
+    "goToExpiredPage": "Перейти на страницу с истёкшим сроком"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Название meter",
+    "meterId": "Meter ID",
+    "consumedUnits": "Использовано единиц",
+    "chargeableUnits": "Платных единиц",
+    "freeThreshold": "Бесплатный порог",
+    "units": "единиц",
+    "unitPrice": "Цена за единицу",
+    "totalCost": "Итоговая стоимость",
+    "actions": "Действия",
+    "view": "Просмотреть"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Ваши способы оплаты",
+    "empty": "Способы оплаты не найдены"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Лицензионный ключ",
+    "status": "Статус",
+    "productId": "Product ID",
+    "expiry": "Срок действия (UTC)",
+    "neverExpires": "Не истекает",
+    "sameAsSubscription": "Как у подписки",
+    "activationsUsed": "Использовано активаций",
+    "paymentId": "Payment ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Payment ID",
+    "status": "Статус",
+    "paymentMethod": "Способ оплаты",
+    "amount": "Сумма",
+    "date": "Дата (UTC)",
+    "invoice": "Счёт",
+    "invoiceButtonLabel": "Счёт",
+    "files": "Файлы"
+  },
+  "TimeTooltip": {
+    "title": "Преобразование часового пояса",
+    "yourDevice": "Ваше устройство",
+    "system": "Система"
+  },
+  "DateFilter": {
+    "selectDateRange": "Выберите диапазон дат",
+    "dialogDescription": "Выберите диапазон дат, чтобы отфильтровать данные",
+    "presets": "Предустановки",
+    "calendar": "Календарь",
+    "cancel": "Отмена",
+    "applyFilter": "Применить фильтр",
+    "today": "Сегодня",
+    "yesterday": "Вчера",
+    "thisWeek": "Эта неделя",
+    "lastWeek": "Прошлая неделя",
+    "thisMonth": "Этот месяц",
+    "lastMonth": "Прошлый месяц",
+    "thisYear": "Этот год",
+    "lastYear": "Прошлый год",
+    "allTime": "За всё время"
+  },
+  "FilterControls": {
+    "statusLabel": "Статус"
+  },
+  "FilterDropdown": {
+    "filters": "Фильтры",
+    "filterBy": "Фильтровать по:",
+    "clear": "Очистить",
+    "filter": "Фильтр"
+  },
+  "CountrySelect": {
+    "loading": "Загрузка...",
+    "searchPlaceholder": "Поиск страны...",
+    "noCountryFound": "Страна не найдена.",
+    "loadFailed": "Не удалось загрузить список стран. Пожалуйста, попробуйте ещё раз."
+  },
+  "DataTable": {
+    "noResults": "Нет результатов."
+  },
+  "Product": {
+    "qty": "КОЛ-ВО: {value}",
+    "manageSubscription": "Управлять подпиской",
+    "fetchSubscriptionFailed": "Не удалось получить подписку. Пожалуйста, попробуйте ещё раз.",
+    "noAuthToken": "Токен аутентификации не найден",
+    "loadDigitalProductsFailed": "Не удалось загрузить цифровые продукты.",
+    "fetchDigitalProductsFailed": "Не удалось получить цифровые продукты. Пожалуйста, попробуйте ещё раз."
+  },
+  "BadgeStatus": {
+    "succeeded": "Успешно",
+    "failed": "Неуспешно",
+    "cancelled": "Отменено",
+    "expired": "Истёк срок",
+    "processing": "В процессе",
+    "pending": "В ожидании",
+    "review": "На проверке",
+    "onHold": "Приостановлено",
+    "notInitiated": "Не инициировано",
+    "noStatus": "Без статуса",
+    "verified": "Проверено",
+    "active": "Активно",
+    "disabled": "Отключено",
+    "preDispute": "До спора",
+    "dispute": "Спор",
+    "preArbitration": "До арбитража",
+    "disputeOpened": "Спор открыт",
+    "disputeExpired": "Срок спора истёк",
+    "disputeAccepted": "Спор принят",
+    "disputeCancelled": "Спор отменён",
+    "disputeChallenged": "Спор оспорен",
+    "disputeWon": "Спор выигран",
+    "disputeLost": "Спор проигран",
+    "oneTime": "Разовый",
+    "subscription": "Подписка",
+    "unknown": "Неизвестно"
+  }
+}

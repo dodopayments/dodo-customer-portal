@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "حدث خطأ ما",
+    "description": "قد تكون لديك مشكلة في اتصال الشبكة، أو ربما انتهت صلاحية الرابط، أو قد يكون الرابط/المنتج غير صالح."
+  },
+  "NotFoundPage": {
+    "title": "الصفحة غير موجودة",
+    "description": "الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها."
+  },
+  "ExpiredPage": {
+    "title": "لأسباب أمنية، انتهت صلاحية هذه الصفحة."
+  },
+  "LandingCard": {
+    "heading": "كيف يمكننا مساعدتك اليوم؟",
+    "actionsIntro": "يمكنك القيام بالإجراءات التالية:",
+    "actions": {
+      "changePaymentMethod": "تغيير طريقة الدفع",
+      "cancelSubscription": "إلغاء الاشتراك",
+      "downloadInvoices": "تنزيل الفواتير",
+      "viewOrders": "عرض الطلبات التي تمت معالجتها عبر Dodo Payments",
+      "otherQueries": "استفسارات أخرى"
+    },
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "emailInvalid": "عنوان بريد إلكتروني غير صالح",
+    "emailFailed": "فشل إرسال رابط تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "lookUpPurchase": "البحث عن عملية الشراء الخاصة بي",
+    "sendEmail": "إرسال بريد إلكتروني",
+    "sending": "جارٍ الإرسال...",
+    "sentTitle": "لقد أرسلنا لك بريدًا إلكترونيًا!",
+    "sentDescription": "استخدم الرابط الموجود في البريد الإلكتروني لتسجيل الدخول إلى بوابة الخدمة الذاتية لـ Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "ما هي Dodo Payments؟",
+    "description": "Dodo Payments هي منصة Merchant of Record (MoR) تدير المدفوعات والامتثال الضريبي وبنية الفوترة لعدد متزايد من الأعمال الرقمية، بما في ذلك منتجات البرمجيات والأدوات والخدمات. عند إجراء عملية شراء أو الاشتراك في منتج تبيعه إحدى هذه الأعمال، تتولى Dodo Payments معالجة المعاملة والفوترة ودعم العملاء وعمليات الاسترداد والنزاعات.",
+    "visitPrompt": "زُر <link>dodopayments.com</link> لمعرفة المزيد."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "بوابة الفوترة الخاصة بـ {businessName}",
+    "enterEmailDescription": "أدخل بريدك الإلكتروني لتلقي رابط الوصول",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "getAccessLink": "الحصول على رابط الوصول",
+    "sending": "جارٍ الإرسال...",
+    "successTitle": "بقي القليل!",
+    "successDescription": "تم إرسال رابط الوصول إلى البريد الإلكتروني {email}. تأكد من التحقق من مجلد البريد غير الهام (Spam)!",
+    "goBack": "رجوع",
+    "loginLinkSent": "تم إرسال رابط تسجيل الدخول إلى البريد الإلكتروني",
+    "loginLinkFailed": "فشل إرسال رابط تسجيل الدخول. يرجى المحاولة مرة أخرى."
+  },
+  "Businesses": {
+    "searchPlaceholder": "بحث عن الأعمال",
+    "emptyPage": "لم يتم العثور على أي أعمال في هذه الصفحة",
+    "emptyAll": "لم يتم العثور على أي أعمال",
+    "fetchError": "فشل جلب تفاصيل العمل",
+    "viewDetails": "عرض التفاصيل"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "عرض جميع الأعمال",
+    "switchToLightMode": "التبديل إلى الوضع الفاتح",
+    "switchToDarkMode": "التبديل إلى الوضع الداكن",
+    "loggingOut": "جارٍ تسجيل الخروج...",
+    "logOut": "تسجيل الخروج",
+    "goBackToBusiness": "العودة إلى العمل",
+    "goToOverview": "الانتقال إلى النظرة العامة"
+  },
+  "LeftPanel": {
+    "goBackTo": "العودة إلى {businessName}",
+    "heading": "إدارة إعدادات الاشتراك والفوترة",
+    "description": "عرض سجل المدفوعات، وتنزيل الفواتير، وإدارة الاشتراكات وطرق الدفع.",
+    "poweredBy": "مشغّل بواسطة",
+    "privacy": "الخصوصية",
+    "terms": "الشروط"
+  },
+  "LanguageSelector": {
+    "changeFailed": "فشل تغيير اللغة. يرجى المحاولة مرة أخرى."
+  },
+  "Subscriptions": {
+    "headingActive": "الاشتراكات النشطة",
+    "headingAll": "الاشتراكات",
+    "emptyPage": "لم يتم العثور على أي اشتراكات في هذه الصفحة",
+    "emptyActive": "لا توجد اشتراكات نشطة حاليًا",
+    "viewAll": "عرض جميع الاشتراكات"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "إدارة الاشتراك",
+    "updatePaymentMethod": "تحديث طريقة الدفع",
+    "viewDetails": "عرض التفاصيل",
+    "renewsOn": "يتجدد في",
+    "validTill": "صالح حتى"
+  },
+  "SubscriptionDetails": {
+    "addons": "الإضافات",
+    "meters": "العدادات",
+    "freeThreshold": "الحدّ المجاني",
+    "per": "لكل",
+    "qty": "الكمية: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "معلومات الفوترة",
+    "name": "الاسم",
+    "phoneNumber": "رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "billingAddress": "عنوان الفوترة"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "تعديل",
+    "sheetTitle": "تعديل تفاصيل الفوترة",
+    "customerName": "اسم العميل",
+    "fullNamePlaceholder": "الاسم الكامل",
+    "billingAddress": "عنوان الفوترة",
+    "loadingCountries": "جارٍ التحميل...",
+    "addressLine": "سطر العنوان 1",
+    "state": "الولاية/المنطقة",
+    "city": "المدينة",
+    "postalCode": "الرمز البريدي",
+    "purchasingAsBusiness": "الشراء كعمل تجاري",
+    "taxId": "المعرّف الضريبي",
+    "taxIdPlaceholder": "المعرّف الضريبي",
+    "saveDetails": "حفظ التفاصيل",
+    "updateSuccess": "تم تحديث تفاصيل الفوترة بنجاح",
+    "updateFailed": "فشل تحديث تفاصيل الفوترة. يرجى المحاولة مرة أخرى.",
+    "countriesLoadFailed": "فشل تحميل البلدان. يرجى المحاولة مرة أخرى."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "هل أنت متأكد أنك تريد إلغاء اشتراكك في هذه الخدمة؟",
+    "description": "بمجرد المتابعة، ستفقد الوصول إلى جميع المزايا المرتبطة ولا يمكن التراجع عن هذا الإجراء.",
+    "close": "إغلاق",
+    "cancel": "إلغاء",
+    "cancelling": "جارٍ الإلغاء..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "إلغاء الاشتراك",
+    "triggerRevoke": "إلغاء الإلغاء",
+    "sheetTitle": "نأسف لمغادرتك...",
+    "currentPlan": "الخطة الحالية",
+    "addOns": "{count, plural, one {إضافة واحدة} other {# إضافات}}",
+    "quantity": "الكمية: {value}",
+    "scheduledCancellationWarning": "تمت جدولة إلغاء هذا الاشتراك في تاريخ الفوترة التالي.",
+    "revokeCancellation": "إلغاء الإلغاء",
+    "revoking": "جارٍ الإلغاء...",
+    "cancelAtNextBilling": "إلغاء في تاريخ الفوترة التالي",
+    "cancelling": "جارٍ الإلغاء...",
+    "cancelSuccess": "تم إلغاء الاشتراك بنجاح",
+    "cancelScheduled": "سيتم إلغاء الاشتراك في تاريخ الفوترة التالي",
+    "cancelFailed": "فشل إلغاء الاشتراك. يرجى المحاولة مرة أخرى.",
+    "revokeFailed": "فشل إلغاء الإلغاء. يرجى المحاولة مرة أخرى.",
+    "revokeSuccess": "تم إلغاء إلغاء الاشتراك بنجاح"
+  },
+  "SubscriptionInfo": {
+    "title": "اشتراكك موقوف مؤقتًا حاليًا",
+    "description": "يرجى تحديث طريقة الدفع لاستئناف هذا الاشتراك"
+  },
+  "SubscriptionNotes": {
+    "onHold": "اشتراكك موقوف مؤقتًا حاليًا بسبب فشل عملية دفع. يرجى تحديث طريقة الدفع لاستئناف هذا الاشتراك",
+    "failed": "فشل هذا الاشتراك. يرجى المحاولة مرة أخرى.",
+    "pending": "لم تكتمل عملية الدفع وتم ترك صفحة الدفع دون إنهاء. إذا كنت ترغب في الاشتراك، يرجى المحاولة مرة أخرى.",
+    "cancelledOn": "تم إلغاء هذا الاشتراك في {date}.",
+    "expired": "انتهت صلاحية هذا الاشتراك.",
+    "scheduledCancellation": "تمت جدولة إلغاء اشتراكك في {date}.",
+    "scheduledCancellationNoDate": "تمت جدولة إلغاء اشتراكك.",
+    "flexibleSubscription": "هذا اشتراك مرن، لذا قد تقوم {name} بتعديل السعر لدورة الفوترة التالية.",
+    "flexibleSubscriptionUnknownMerchant": "هذا اشتراك مرن، لذا قد يتم تعديل مبلغ الفوترة لدورة الفوترة التالية.",
+    "discountApplied": "تم تطبيق خصم لمدة {count, plural, one {دورة فوترة واحدة إضافية} other {# دورات فوترة إضافية}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "تغيير الخطة",
+    "sheetTitle": "اختر خطة جديدة",
+    "noProducts": "لا توجد منتجات اشتراك متاحة.",
+    "currentPlan": "الخطة الحالية",
+    "proceed": "متابعة",
+    "unnamedGroup": "مجموعة بدون اسم"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "تأكيد تغيير الخطة",
+    "noPlanSelected": "لم يتم تحديد أي خطة",
+    "loadingPreview": "جارٍ تحميل المعاينة...",
+    "current": "الحالي",
+    "updated": "المحدّث",
+    "qty": "الكمية: {value}",
+    "viewAddons": "عرض الإضافات",
+    "manageAddons": "إدارة الإضافات",
+    "noAddons": "لا توجد إضافات",
+    "tableItem": "العنصر",
+    "tableQuantity": "الكمية",
+    "tableUnitPrice": "سعر الوحدة",
+    "tableTax": "الضريبة",
+    "tableTotal": "الإجمالي",
+    "creditToBalance": "رصيد إلى الرصيد",
+    "creditTooltip": "سيتم استخدام الرصيد لسداد المدفوعات المستقبلية",
+    "summaryTotal": "الإجمالي",
+    "summaryTax": "الضريبة",
+    "summaryAmountDue": "المبلغ المستحق الآن",
+    "payButton": "ادفع {amount}",
+    "previewFailed": "فشل تحميل المعاينة. يرجى المحاولة مرة أخرى.",
+    "changeFailed": "فشل تغيير الخطة. يرجى المحاولة مرة أخرى.",
+    "changeSuccess": "تم تغيير الخطة بنجاح",
+    "addonRequired": "يرجى تحديد إضافة واحدة على الأقل بكمية 1 أو أكثر."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "تعديل",
+    "sheetTitle": "تعديل طريقة الدفع",
+    "addPaymentMethod": "إضافة طريقة دفع",
+    "noPaymentMethods": "لم يتم العثور على طرق دفع مؤهلة.",
+    "confirmChanges": "تأكيد التغييرات",
+    "updating": "جارٍ التحديث...",
+    "selectRequired": "يرجى اختيار طريقة دفع",
+    "loadFailed": "فشل تحميل طرق الدفع. يرجى المحاولة مرة أخرى.",
+    "updateSuccess": "تم تحديث طريقة الدفع بنجاح",
+    "setupInitiated": "تم بدء إعداد طريقة الدفع",
+    "updateFailed": "فشل تحديث طريقة الدفع. يرجى المحاولة مرة أخرى.",
+    "addFailed": "فشل إضافة طريقة دفع جديدة. يرجى المحاولة مرة أخرى."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "إزالة طريقة الدفع",
+    "dialogDescription": "هل أنت متأكد أنك تريد إزالة طريقة الدفع هذه؟ لا يمكن التراجع عن هذا الإجراء.",
+    "cancel": "إلغاء",
+    "remove": "إزالة",
+    "removing": "جارٍ الإزالة...",
+    "removeAriaLabel": "إزالة طريقة الدفع",
+    "removeSuccess": "تمت إزالة طريقة الدفع",
+    "removeFailed": "فشلت إزالة طريقة الدفع"
+  },
+  "PaymentMethodsSection": {
+    "title": "طرق الدفع",
+    "empty": "لم تتم إضافة أي طرق دفع"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "إضافة طريقة دفع",
+    "sheetTitle": "إضافة طريقة دفع",
+    "or": "أو",
+    "card": "بطاقة",
+    "cardNumber": "رقم البطاقة",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "تاريخ الانتهاء",
+    "expiryDatePlaceholder": "MM/YY",
+    "securityCode": "رمز الأمان",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "بتقديم معلومات بطاقتك، فإنك تسمح لـ Dodo Payments بخصم مدفوعاتك المستقبلية من بطاقتك وفقًا لشروطهم."
+  },
+  "Orders": {
+    "billingHistory": "سجل الفوترة",
+    "emptyPage": "لم يتم العثور على أي مشتريات في هذه الصفحة",
+    "emptyAll": "لا توجد مشتريات حاليًا",
+    "noBillingHistory": "لا يتوفر سجل فوترة",
+    "fetchFailed": "فشل جلب سلة المنتجات. يرجى المحاولة مرة أخرى."
+  },
+  "BillingHistoryColumns": {
+    "date": "التاريخ",
+    "status": "الحالة",
+    "amount": "المبلغ",
+    "pricingType": "نوع التسعير",
+    "entitlements": "الاستحقاقات",
+    "invoice": "الفاتورة"
+  },
+  "OrderCard": {
+    "paymentId": "معرّف الدفع",
+    "purchased": "تم الشراء",
+    "viewDetails": "عرض التفاصيل",
+    "hideDetails": "إخفاء التفاصيل",
+    "noProducts": "لا توجد منتجات في هذا الطلب.",
+    "fetchFailed": "فشل جلب تفاصيل المنتج. يرجى المحاولة مرة أخرى."
+  },
+  "RefundsTable": {
+    "title": "سجل الاستردادات",
+    "empty": "لا توجد استردادات متاحة"
+  },
+  "RefundColumns": {
+    "date": "التاريخ",
+    "status": "الحالة",
+    "amount": "المبلغ",
+    "refundId": "معرّف الاسترداد",
+    "associatedPayment": "الدفع المرتبط"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "لم يتم العثور على أي فواتير في هذه الصفحة",
+    "emptyAll": "لا توجد فواتير حاليًا",
+    "paymentId": "معرّف الدفع",
+    "date": "التاريخ",
+    "amount": "المبلغ",
+    "status": "الحالة",
+    "download": "تنزيل"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "الفاتورة غير متاحة",
+    "downloadInvoice": "تنزيل الفاتورة",
+    "invoice": "الفاتورة",
+    "generateInvoice": "إنشاء فاتورة",
+    "fillDetailsTitle": "أدخل العنوان الكامل للعميل",
+    "existingAddressTitle": "تنزيل باستخدام تفاصيل العنوان الحالية",
+    "existingAddressDescription": "ستتضمن هذه الفاتورة الرمز البريدي والبلد فقط كما تم تقديمهما أثناء عملية الدفع.",
+    "fullAddressTitle": "تنزيل باستخدام تفاصيل العنوان الكامل",
+    "fullAddressDescription": "ستتضمن هذه الفاتورة العنوان الكامل للعميل. يرجى التأكد من تعبئة جميع التفاصيل قبل التنزيل.",
+    "fillDetails": "تعبئة التفاصيل"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "سطر العنوان 1",
+    "state": "الولاية/المنطقة",
+    "city": "المدينة",
+    "postalCode": "الرمز البريدي",
+    "download": "تنزيل",
+    "downloadSuccess": "تم تنزيل الفاتورة بنجاح",
+    "updateFailed": "فشل تحديث تفاصيل الفاتورة. يرجى المحاولة مرة أخرى."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "المنتجات الرقمية",
+    "description": "الوصول إلى المنتجات الرقمية التي اشتريتها والتنزيلات",
+    "accessExternal": "الوصول إلى مورد خارجي",
+    "instructions": "التعليمات",
+    "loadFailed": "فشل تحميل المنتجات الرقمية. يرجى المحاولة مرة أخرى."
+  },
+  "WalletsSection": {
+    "title": "المحفظة",
+    "selectWallet": "اختر المحفظة",
+    "walletLabel": "محفظة {currency}",
+    "availableBalance": "الرصيد المتاح",
+    "tableType": "النوع",
+    "tableReason": "السبب",
+    "tableAmount": "المبلغ",
+    "noTransactions": "لا توجد معاملات بعد",
+    "credit": "دائن",
+    "debit": "مدين"
+  },
+  "CreditsSection": {
+    "title": "الأرصدة",
+    "selectCredit": "اختر استحقاق الرصيد",
+    "overageBalance": "رصيد التجاوز",
+    "availableCreditBalance": "رصيد الأرصدة المتاح",
+    "tableType": "النوع",
+    "tableDescription": "الوصف",
+    "tableAmount": "المبلغ",
+    "noTransactions": "لا توجد معاملات بعد",
+    "credit": "دائن",
+    "debit": "مدين"
+  },
+  "UsageSummary": {
+    "emptyPage": "لم يتم العثور على سجل استخدام في هذه الصفحة",
+    "emptyAll": "لا يوجد سجل استخدام حاليًا"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "سجل الفوترة",
+    "refundHistory": "سجل الاستردادات",
+    "usageSummary": "ملخص الاستخدام"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "مفتاح الترخيص",
+    "licenseKeysButton": "مفاتيح الترخيص",
+    "licenseKeysTitle": "مفاتيح الترخيص",
+    "migrateLicenseTitle": "ترحيل - مفتاح الترخيص",
+    "licenseKeyCardTitle": "مفتاح الترخيص",
+    "clickToView": "انقر لعرض مفتاح الترخيص",
+    "hideLicenseKey": "إخفاء مفتاح الترخيص",
+    "showLicenseKey": "إظهار مفتاح الترخيص",
+    "loadingLicenseKeys": "جارٍ تحميل مفاتيح الترخيص...",
+    "noLicenseKeys": "لا تتوفر مفاتيح ترخيص.",
+    "expires": "ينتهي في",
+    "attachmentsButton": "المرفقات",
+    "attachmentButton": "مرفق",
+    "attachmentsTitle": "منتجاتك الرقمية",
+    "attachmentsDescription": "قم بالوصول إلى منتجاتك الرقمية وملفاتك المتاحة وتنزيلها من هنا.",
+    "digitalProductsTitle": "المنتجات الرقمية",
+    "digitalProductsDescription": "نزّل منتجاتك الرقمية",
+    "noDigitalProducts": "لا تتوفر منتجات رقمية.",
+    "filesSection": "الملفات",
+    "externalLink": "رابط خارجي",
+    "open": "فتح",
+    "instructionsSection": "التعليمات",
+    "loadFailed": "فشل تحميل المنتجات الرقمية.",
+    "fetchCartFailed": "فشل جلب سلة المنتجات",
+    "fetchDigitalFailed": "فشل جلب المنتجات الرقمية"
+  },
+  "ProfilePage": {
+    "billingDetails": "تفاصيل الفوترة الخاصة بك",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "walletsHeading": "المحافظ",
+    "creditsHeading": "الأرصدة",
+    "walletTabLabel": "محفظة {currency}"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "لم يتم العثور على أي محافظ",
+    "availableBalance": "الرصيد المتاح",
+    "recentTransactions": "المعاملات الأخيرة",
+    "tableType": "النوع",
+    "tableReason": "السبب",
+    "tableAmount": "المبلغ",
+    "emptyPage": "لم يتم العثور على معاملات في هذه الصفحة",
+    "emptyAll": "لا توجد معاملات حاليًا"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "لم يتم العثور على أي أرصدة",
+    "selectPlaceholder": "اختر استحقاق الرصيد",
+    "overageBalance": "رصيد التجاوز",
+    "availableCreditBalance": "رصيد الأرصدة المتاح",
+    "recentTransactions": "المعاملات الأخيرة",
+    "tableType": "النوع",
+    "tableDescription": "الوصف",
+    "tableAmount": "المبلغ",
+    "emptyPage": "لم يتم العثور على معاملات في هذه الصفحة",
+    "emptyAll": "لا توجد معاملات حاليًا"
+  },
+  "Pagination": {
+    "previous": "السابق",
+    "next": "التالي"
+  },
+  "BaseDataGrid": {
+    "noData": "لا تتوفر بيانات",
+    "reset": "إعادة تعيين الجدول"
+  },
+  "DataGridColumnHeader": {
+    "asc": "تصاعدي",
+    "desc": "تنازلي",
+    "pinLeft": "تثبيت إلى اليسار",
+    "pinRight": "تثبيت إلى اليمين",
+    "moveLeft": "نقل إلى اليسار",
+    "moveRight": "نقل إلى اليمين",
+    "columns": "الأعمدة"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "عدد الصفوف لكل صفحة"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "تعديل الأعمدة"
+  },
+  "TokenPage": {
+    "validationFailed": "فشل التحقق. يرجى المحاولة مرة أخرى.",
+    "goToExpiredPage": "الانتقال إلى صفحة انتهاء الصلاحية"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "اسم العداد",
+    "meterId": "معرّف العداد",
+    "consumedUnits": "الوحدات المستهلكة",
+    "chargeableUnits": "الوحدات القابلة للفوترة",
+    "freeThreshold": "الحدّ المجاني",
+    "units": "وحدات",
+    "unitPrice": "سعر الوحدة",
+    "totalCost": "التكلفة الإجمالية",
+    "actions": "الإجراءات",
+    "view": "عرض"
+  },
+  "PaymentMethodsPage": {
+    "heading": "طرق الدفع الخاصة بك",
+    "empty": "لم يتم العثور على طرق دفع"
+  },
+  "LicenseColumns": {
+    "licenseKey": "مفتاح الترخيص",
+    "status": "الحالة",
+    "productId": "معرّف المنتج",
+    "expiry": "تاريخ الانتهاء (UTC)",
+    "neverExpires": "لا ينتهي أبدًا",
+    "sameAsSubscription": "نفس الاشتراك",
+    "activationsUsed": "عمليات التفعيل المستخدمة",
+    "paymentId": "معرّف الدفع"
+  },
+  "PaymentColumns": {
+    "paymentId": "معرّف الدفع",
+    "status": "الحالة",
+    "paymentMethod": "طريقة الدفع",
+    "amount": "المبلغ",
+    "date": "التاريخ (UTC)",
+    "invoice": "الفاتورة",
+    "invoiceButtonLabel": "الفاتورة",
+    "files": "الملفات"
+  },
+  "TimeTooltip": {
+    "title": "تحويل المنطقة الزمنية",
+    "yourDevice": "جهازك",
+    "system": "النظام"
+  },
+  "DateFilter": {
+    "selectDateRange": "حدد نطاق التاريخ",
+    "dialogDescription": "حدد نطاق التاريخ لتصفية البيانات",
+    "presets": "الإعدادات المسبقة",
+    "calendar": "التقويم",
+    "cancel": "إلغاء",
+    "applyFilter": "تطبيق عامل التصفية",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "thisWeek": "هذا الأسبوع",
+    "lastWeek": "الأسبوع الماضي",
+    "thisMonth": "هذا الشهر",
+    "lastMonth": "الشهر الماضي",
+    "thisYear": "هذا العام",
+    "lastYear": "العام الماضي",
+    "allTime": "كل الوقت"
+  },
+  "FilterControls": {
+    "statusLabel": "الحالة"
+  },
+  "FilterDropdown": {
+    "filters": "عوامل التصفية",
+    "filterBy": "تصفية حسب:",
+    "clear": "مسح",
+    "filter": "تصفية"
+  },
+  "CountrySelect": {
+    "loading": "جارٍ التحميل...",
+    "searchPlaceholder": "ابحث عن بلد...",
+    "noCountryFound": "لم يتم العثور على أي بلد.",
+    "loadFailed": "فشل تحميل البلدان. يرجى المحاولة مرة أخرى."
+  },
+  "DataTable": {
+    "noResults": "لا توجد نتائج."
+  },
+  "Product": {
+    "qty": "الكمية: {value}",
+    "manageSubscription": "إدارة الاشتراك",
+    "fetchSubscriptionFailed": "فشل جلب الاشتراك. يرجى المحاولة مرة أخرى.",
+    "noAuthToken": "لم يتم العثور على رمز مصادقة",
+    "loadDigitalProductsFailed": "فشل تحميل المنتجات الرقمية.",
+    "fetchDigitalProductsFailed": "فشل جلب المنتجات الرقمية. يرجى المحاولة مرة أخرى."
+  },
+  "BadgeStatus": {
+    "succeeded": "ناجح",
+    "failed": "فشل",
+    "cancelled": "ملغي",
+    "expired": "منتهي الصلاحية",
+    "processing": "قيد المعالجة",
+    "pending": "معلّق",
+    "review": "قيد المراجعة",
+    "onHold": "موقوف مؤقتًا",
+    "notInitiated": "غير مبدوء",
+    "noStatus": "لا توجد حالة",
+    "verified": "تم التحقق",
+    "active": "نشط",
+    "disabled": "معطّل",
+    "preDispute": "ما قبل النزاع",
+    "dispute": "نزاع",
+    "preArbitration": "ما قبل التحكيم",
+    "disputeOpened": "تم فتح نزاع",
+    "disputeExpired": "انتهت صلاحية النزاع",
+    "disputeAccepted": "تم قبول النزاع",
+    "disputeCancelled": "تم إلغاء النزاع",
+    "disputeChallenged": "تم الطعن في النزاع",
+    "disputeWon": "تم الفوز بالنزاع",
+    "disputeLost": "تمت خسارة النزاع",
+    "oneTime": "لمرة واحدة",
+    "subscription": "اشتراك",
+    "unknown": "غير معروف"
+  }
+}

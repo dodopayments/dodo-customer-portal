@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Er is iets misgegaan",
+    "description": "Mogelijk heb je een probleem met je netwerkverbinding, is de link verlopen, of is de link/het product ongeldig."
+  },
+  "NotFoundPage": {
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die je zoekt bestaat niet of is mogelijk verplaatst."
+  },
+  "ExpiredPage": {
+    "title": "Om veiligheidsredenen is deze pagina verlopen."
+  },
+  "LandingCard": {
+    "heading": "Waarmee kunnen we je vandaag helpen?",
+    "actionsIntro": "Je kunt de volgende acties uitvoeren:",
+    "actions": {
+      "changePaymentMethod": "Betaalmethode wijzigen",
+      "cancelSubscription": "Abonnement opzeggen",
+      "downloadInvoices": "Facturen downloaden",
+      "viewOrders": "Bestellingen bekijken die via Dodo Payments zijn verwerkt",
+      "otherQueries": "Overige vragen"
+    },
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Voer je e-mailadres in",
+    "emailInvalid": "Ongeldig e-mailadres",
+    "emailFailed": "Verzenden van inloglink mislukt. Probeer het opnieuw.",
+    "lookUpPurchase": "Mijn aankoop opzoeken",
+    "sendEmail": "E-mail versturen",
+    "sending": "Bezig met verzenden...",
+    "sentTitle": "We hebben je een e-mail gestuurd!",
+    "sentDescription": "Gebruik de link in de e-mail om in te loggen op het selfserviceportaal van Dodo Payments"
+  },
+  "LandingInfoCard": {
+    "title": "Wat is Dodo Payments?",
+    "description": "Dodo Payments is een Merchant of Record (MoR)-platform dat betalingen, tax compliance en billing-infrastructuur beheert voor een groeiend aantal digitale bedrijven, waaronder softwareproducten, tools en diensten. Wanneer je een aankoop doet of je abonneert op een product dat door een van deze bedrijven wordt verkocht, is het Dodo Payments dat de transactie, facturering, klantenservice, refunds en disputes afhandelt.",
+    "visitPrompt": "Ga naar <link>dodopayments.com</link> voor meer informatie."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "Facturatieportaal van {businessName}",
+    "enterEmailDescription": "Voer je e-mailadres in om de toegangslink te ontvangen",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Voer je e-mailadres in",
+    "emailInvalid": "Voer een geldig e-mailadres in",
+    "emailRequired": "E-mail is verplicht",
+    "getAccessLink": "Toegangslink ontvangen",
+    "sending": "Bezig met verzenden...",
+    "successTitle": "Bijna klaar!",
+    "successDescription": "Toegangslink verzonden naar e-mailadres {email}. Controleer ook je spamfolder!",
+    "goBack": "Ga terug",
+    "loginLinkSent": "Inloglink verzonden naar e-mail",
+    "loginLinkFailed": "Verzenden van inloglink mislukt. Probeer het opnieuw."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Bedrijven zoeken",
+    "emptyPage": "Geen bedrijven gevonden op deze pagina",
+    "emptyAll": "Geen bedrijven gevonden",
+    "fetchError": "Ophalen van bedrijfsgegevens mislukt",
+    "viewDetails": "Details bekijken"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Alle bedrijven bekijken",
+    "switchToLightMode": "Overschakelen naar lichte modus",
+    "switchToDarkMode": "Overschakelen naar donkere modus",
+    "loggingOut": "Bezig met uitloggen...",
+    "logOut": "Uitloggen",
+    "goBackToBusiness": "Terug naar bedrijf",
+    "goToOverview": "Naar overzicht"
+  },
+  "LeftPanel": {
+    "goBackTo": "Terug naar {businessName}",
+    "heading": "Beheer je abonnement en facturatie-instellingen",
+    "description": "Bekijk betalingsgeschiedenis, download facturen en beheer abonnementen en betaalmethoden.",
+    "poweredBy": "Mogelijk gemaakt door",
+    "privacy": "Privacy",
+    "terms": "Voorwaarden"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Taal wijzigen mislukt. Probeer het opnieuw."
+  },
+  "Subscriptions": {
+    "headingActive": "Actieve abonnementen",
+    "headingAll": "Abonnementen",
+    "emptyPage": "Geen abonnementen gevonden op deze pagina",
+    "emptyActive": "Momenteel geen actieve abonnementen",
+    "viewAll": "Alle abonnementen bekijken"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Abonnement beheren",
+    "updatePaymentMethod": "Betaalmethode bijwerken",
+    "viewDetails": "Details bekijken",
+    "renewsOn": "wordt verlengd op",
+    "validTill": "geldig tot"
+  },
+  "SubscriptionDetails": {
+    "addons": "Add-ons",
+    "meters": "Meters",
+    "freeThreshold": "Gratis drempel",
+    "per": "per",
+    "qty": "Aantal: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Facturatiegegevens",
+    "name": "Naam",
+    "phoneNumber": "Telefoonnummer",
+    "email": "E-mail",
+    "billingAddress": "Factuuradres"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Bewerken",
+    "sheetTitle": "Facturatiegegevens bewerken",
+    "customerName": "Klantnaam",
+    "fullNamePlaceholder": "Volledige naam",
+    "billingAddress": "Factuuradres",
+    "loadingCountries": "Bezig met laden...",
+    "addressLine": "Adresregel 1",
+    "state": "Staat/provincie",
+    "city": "Stad",
+    "postalCode": "Postcode",
+    "purchasingAsBusiness": "Aankopen als bedrijf",
+    "taxId": "Belasting-ID",
+    "taxIdPlaceholder": "Belasting-ID",
+    "saveDetails": "Gegevens opslaan",
+    "updateSuccess": "Facturatiegegevens succesvol bijgewerkt",
+    "updateFailed": "Bijwerken van facturatiegegevens mislukt. Probeer het opnieuw.",
+    "countriesLoadFailed": "Laden van landen mislukt. Probeer het opnieuw."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Weet je zeker dat je je abonnement op deze dienst wilt opzeggen?",
+    "description": "Als je doorgaat, verlies je toegang tot alle bijbehorende voordelen en deze actie kan niet ongedaan worden gemaakt.",
+    "close": "Sluiten",
+    "cancel": "Annuleren",
+    "cancelling": "Bezig met opzeggen..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Abonnement opzeggen",
+    "triggerRevoke": "Opzegging intrekken",
+    "sheetTitle": "Jammer dat je weggaat...",
+    "currentPlan": "Huidig plan",
+    "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
+    "quantity": "Aantal: {value}",
+    "scheduledCancellationWarning": "Dit abonnement staat gepland om te worden opgezegd op de volgende facturatiedatum.",
+    "revokeCancellation": "Opzegging intrekken",
+    "revoking": "Bezig met intrekken...",
+    "cancelAtNextBilling": "Opzeggen op de volgende facturatiedatum",
+    "cancelling": "Bezig met opzeggen...",
+    "cancelSuccess": "Abonnement succesvol opgezegd",
+    "cancelScheduled": "Abonnement wordt opgezegd op de volgende facturatiedatum",
+    "cancelFailed": "Opzeggen van abonnement mislukt. Probeer het opnieuw.",
+    "revokeFailed": "Intrekken van opzegging mislukt. Probeer het opnieuw.",
+    "revokeSuccess": "Opzegging van abonnement succesvol ingetrokken"
+  },
+  "SubscriptionInfo": {
+    "title": "Je abonnement staat momenteel on hold",
+    "description": "Werk je betaalmethode bij om dit abonnement te hervatten"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Je abonnement staat momenteel on hold vanwege een mislukte betaling. Werk je betaalmethode bij om dit abonnement te hervatten",
+    "failed": "Dit abonnement is mislukt. Probeer het opnieuw.",
+    "pending": "Je betaling is niet voltooid en checkout is onafgerond gebleven. Als je wilt abonneren, probeer het dan opnieuw.",
+    "cancelledOn": "Dit abonnement is op {date} opgezegd.",
+    "expired": "Dit abonnement is verlopen.",
+    "scheduledCancellation": "Je abonnement staat momenteel gepland voor opzegging op {date}.",
+    "scheduledCancellationNoDate": "Je abonnement staat momenteel gepland voor opzegging.",
+    "flexibleSubscription": "Dit is een flexibel abonnement, dus {name} kan de prijs voor je volgende facturatiecyclus aanpassen.",
+    "flexibleSubscriptionUnknownMerchant": "Dit is een flexibel abonnement, dus het factuurbedrag kan worden aangepast voor je volgende facturatiecyclus.",
+    "discountApplied": "Korting toegepast voor {count, plural, one {# facturatiecyclus extra} other {# facturatiecycli extra}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Plan wijzigen",
+    "sheetTitle": "Selecteer een nieuw plan",
+    "noProducts": "Geen abonnementsproducten beschikbaar.",
+    "currentPlan": "Huidig plan",
+    "proceed": "Doorgaan",
+    "unnamedGroup": "Naamloze groep"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Planwijziging bevestigen",
+    "noPlanSelected": "Geen plan geselecteerd",
+    "loadingPreview": "Bezig met laden van preview...",
+    "current": "Huidig",
+    "updated": "Bijgewerkt",
+    "qty": "Aantal: {value}",
+    "viewAddons": "Add-ons bekijken",
+    "manageAddons": "Add-ons beheren",
+    "noAddons": "Geen add-ons",
+    "tableItem": "Item",
+    "tableQuantity": "Aantal",
+    "tableUnitPrice": "Eenheidsprijs",
+    "tableTax": "Belasting",
+    "tableTotal": "Totaal",
+    "creditToBalance": "Credit naar saldo",
+    "creditTooltip": "Credit wordt gebruikt om toekomstige betalingen te voldoen",
+    "summaryTotal": "Totaal",
+    "summaryTax": "Belasting",
+    "summaryAmountDue": "Nu te betalen bedrag",
+    "payButton": "Betaal {amount}",
+    "previewFailed": "Preview laden mislukt. Probeer het opnieuw.",
+    "changeFailed": "Plan wijzigen mislukt. Probeer het opnieuw.",
+    "changeSuccess": "Plan succesvol gewijzigd",
+    "addonRequired": "Selecteer minimaal één add-on met hoeveelheid 1 of meer."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Bewerken",
+    "sheetTitle": "Betaalmethode bewerken",
+    "addPaymentMethod": "Betaalmethode toevoegen",
+    "noPaymentMethods": "Geen in aanmerking komende betaalmethoden gevonden.",
+    "confirmChanges": "Wijzigingen bevestigen",
+    "updating": "Bezig met bijwerken...",
+    "selectRequired": "Selecteer een betaalmethode",
+    "loadFailed": "Laden van betaalmethoden mislukt. Probeer het opnieuw.",
+    "updateSuccess": "Betaalmethode succesvol bijgewerkt",
+    "setupInitiated": "Instellen van betaalmethode gestart",
+    "updateFailed": "Bijwerken van betaalmethode mislukt. Probeer het opnieuw.",
+    "addFailed": "Toevoegen van nieuwe betaalmethode mislukt. Probeer het opnieuw."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Betaalmethode verwijderen",
+    "dialogDescription": "Weet je zeker dat je deze betaalmethode wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+    "cancel": "Annuleren",
+    "remove": "Verwijderen",
+    "removing": "Bezig met verwijderen...",
+    "removeAriaLabel": "Betaalmethode verwijderen",
+    "removeSuccess": "Betaalmethode verwijderd",
+    "removeFailed": "Verwijderen van betaalmethode mislukt"
+  },
+  "PaymentMethodsSection": {
+    "title": "Betaalmethoden",
+    "empty": "Geen betaalmethoden toegevoegd"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Betaalmethode toevoegen",
+    "sheetTitle": "Betaalmethode toevoegen",
+    "or": "OF",
+    "card": "Kaart",
+    "cardNumber": "Kaartnummer",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Vervaldatum",
+    "expiryDatePlaceholder": "MM/JJ",
+    "securityCode": "Beveiligingscode",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Door je kaartgegevens te verstrekken, geef je Dodo Payments toestemming om je kaart in de toekomst te belasten voor betalingen in overeenstemming met hun voorwaarden."
+  },
+  "Orders": {
+    "billingHistory": "Facturatiegeschiedenis",
+    "emptyPage": "Geen aankopen gevonden op deze pagina",
+    "emptyAll": "Momenteel geen aankopen",
+    "noBillingHistory": "Geen facturatiegeschiedenis beschikbaar",
+    "fetchFailed": "Ophalen van productcart mislukt. Probeer het opnieuw."
+  },
+  "BillingHistoryColumns": {
+    "date": "Datum",
+    "status": "Status",
+    "amount": "Bedrag",
+    "pricingType": "Pricing Type",
+    "entitlements": "Entitlements",
+    "invoice": "Factuur"
+  },
+  "OrderCard": {
+    "paymentId": "Payment ID",
+    "purchased": "Aangekocht",
+    "viewDetails": "Details bekijken",
+    "hideDetails": "Details verbergen",
+    "noProducts": "Geen producten in deze bestelling.",
+    "fetchFailed": "Ophalen van productgegevens mislukt. Probeer het opnieuw."
+  },
+  "RefundsTable": {
+    "title": "Refundgeschiedenis",
+    "empty": "Geen refunds beschikbaar"
+  },
+  "RefundColumns": {
+    "date": "Datum",
+    "status": "Status",
+    "amount": "Bedrag",
+    "refundId": "Refund-ID",
+    "associatedPayment": "Gekoppelde betaling"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "Geen facturen gevonden op deze pagina",
+    "emptyAll": "Momenteel geen facturen",
+    "paymentId": "Payment ID",
+    "date": "Datum",
+    "amount": "Bedrag",
+    "status": "Status",
+    "download": "Downloaden"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Factuur niet beschikbaar",
+    "downloadInvoice": "Factuur downloaden",
+    "invoice": "Factuur",
+    "generateInvoice": "Factuur genereren",
+    "fillDetailsTitle": "Voer het volledige adres van de klant in",
+    "existingAddressTitle": "Downloaden met bestaande adresgegevens",
+    "existingAddressDescription": "Deze factuur bevat alleen je postcode en land zoals opgegeven tijdens het checkout-proces.",
+    "fullAddressTitle": "Downloaden met volledige adresgegevens",
+    "fullAddressDescription": "Deze factuur bevat het volledige adres van de klant. Zorg ervoor dat je alle gegevens invult voordat je downloadt.",
+    "fillDetails": "Gegevens invullen"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Adresregel 1",
+    "state": "Staat/provincie",
+    "city": "Stad",
+    "postalCode": "Postcode",
+    "download": "Downloaden",
+    "downloadSuccess": "Factuur succesvol gedownload",
+    "updateFailed": "Bijwerken van factuurgegevens mislukt. Probeer het opnieuw."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Digitale producten",
+    "description": "Toegang tot je gekochte digitale producten en downloads",
+    "accessExternal": "Toegang tot externe resource",
+    "instructions": "Instructies",
+    "loadFailed": "Laden van digitale producten mislukt. Probeer het opnieuw."
+  },
+  "WalletsSection": {
+    "title": "Wallet",
+    "selectWallet": "Wallet selecteren",
+    "walletLabel": "{currency}-wallet",
+    "availableBalance": "Beschikbaar saldo",
+    "tableType": "Type",
+    "tableReason": "Reden",
+    "tableAmount": "Bedrag",
+    "noTransactions": "Nog geen transacties",
+    "credit": "Credit",
+    "debit": "Debit"
+  },
+  "CreditsSection": {
+    "title": "Credits",
+    "selectCredit": "Credit-entitlement selecteren",
+    "overageBalance": "Overage-saldo",
+    "availableCreditBalance": "Beschikbaar credit-saldo",
+    "tableType": "Type",
+    "tableDescription": "Beschrijving",
+    "tableAmount": "Bedrag",
+    "noTransactions": "Nog geen transacties",
+    "credit": "Credit",
+    "debit": "Debit"
+  },
+  "UsageSummary": {
+    "emptyPage": "Geen gebruiksgeschiedenis gevonden op deze pagina",
+    "emptyAll": "Momenteel geen gebruiksgeschiedenis"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Facturatiegeschiedenis",
+    "refundHistory": "Refundgeschiedenis",
+    "usageSummary": "Gebruiks­overzicht"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Licentiesleutel",
+    "licenseKeysButton": "Licentiesleutels",
+    "licenseKeysTitle": "Licentiesleutels",
+    "migrateLicenseTitle": "Migreren - Licentiesleutel",
+    "licenseKeyCardTitle": "Licentiesleutel",
+    "clickToView": "Klik om licentiesleutel te bekijken",
+    "hideLicenseKey": "Licentiesleutel verbergen",
+    "showLicenseKey": "Licentiesleutel tonen",
+    "loadingLicenseKeys": "Bezig met laden van licentiesleutels...",
+    "noLicenseKeys": "Geen licentiesleutels beschikbaar.",
+    "expires": "Verloopt",
+    "attachmentsButton": "Bijlagen",
+    "attachmentButton": "Bijlage",
+    "attachmentsTitle": "Je digitale producten",
+    "attachmentsDescription": "Krijg hier toegang tot je beschikbare digitale producten en bestanden en download ze.",
+    "digitalProductsTitle": "Digitale producten",
+    "digitalProductsDescription": "Download je digitale producten",
+    "noDigitalProducts": "Geen digitale producten beschikbaar.",
+    "filesSection": "Bestanden",
+    "externalLink": "Externe link",
+    "open": "Openen",
+    "instructionsSection": "Instructies",
+    "loadFailed": "Laden van digitale producten mislukt.",
+    "fetchCartFailed": "Ophalen van productcart mislukt",
+    "fetchDigitalFailed": "Ophalen van digitale producten mislukt"
+  },
+  "ProfilePage": {
+    "billingDetails": "Je facturatiegegevens",
+    "name": "Naam",
+    "email": "E-mail",
+    "walletsHeading": "Wallets",
+    "creditsHeading": "Credits",
+    "walletTabLabel": "{currency}-wallet"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Geen wallets gevonden",
+    "availableBalance": "Beschikbaar saldo",
+    "recentTransactions": "Recente transacties",
+    "tableType": "Type",
+    "tableReason": "Reden",
+    "tableAmount": "Bedrag",
+    "emptyPage": "Geen transacties gevonden op deze pagina",
+    "emptyAll": "Momenteel geen transacties"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Geen credits gevonden",
+    "selectPlaceholder": "Credit-entitlement selecteren",
+    "overageBalance": "Overage-saldo",
+    "availableCreditBalance": "Beschikbaar credit-saldo",
+    "recentTransactions": "Recente transacties",
+    "tableType": "Type",
+    "tableDescription": "Beschrijving",
+    "tableAmount": "Bedrag",
+    "emptyPage": "Geen transacties gevonden op deze pagina",
+    "emptyAll": "Momenteel geen transacties"
+  },
+  "Pagination": {
+    "previous": "Vorige",
+    "next": "Volgende"
+  },
+  "BaseDataGrid": {
+    "noData": "Geen gegevens beschikbaar",
+    "reset": "Tabel resetten"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Oplopend",
+    "desc": "Aflopend",
+    "pinLeft": "Vastmaken aan links",
+    "pinRight": "Vastmaken aan rechts",
+    "moveLeft": "Naar links verplaatsen",
+    "moveRight": "Naar rechts verplaatsen",
+    "columns": "Kolommen"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Rijen per pagina"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Kolommen bewerken"
+  },
+  "TokenPage": {
+    "validationFailed": "Validatie mislukt. Probeer het opnieuw.",
+    "goToExpiredPage": "Naar verlopen pagina"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Meternaam",
+    "meterId": "Meter-ID",
+    "consumedUnits": "Verbruikte eenheden",
+    "chargeableUnits": "Te belasten eenheden",
+    "freeThreshold": "Gratis drempel",
+    "units": "eenheden",
+    "unitPrice": "Eenheidsprijs",
+    "totalCost": "Totale kosten",
+    "actions": "Acties",
+    "view": "Bekijken"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Je betaalmethoden",
+    "empty": "Geen betaalmethoden gevonden"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Licentiesleutel",
+    "status": "Status",
+    "productId": "Product-ID",
+    "expiry": "Vervaldatum (UTC)",
+    "neverExpires": "Verloopt nooit",
+    "sameAsSubscription": "Zelfde als abonnement",
+    "activationsUsed": "Gebruikte activaties",
+    "paymentId": "Payment ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Payment ID",
+    "status": "Status",
+    "paymentMethod": "Betaalmethode",
+    "amount": "Bedrag",
+    "date": "Datum (UTC)",
+    "invoice": "Factuur",
+    "invoiceButtonLabel": "Factuur",
+    "files": "Bestanden"
+  },
+  "TimeTooltip": {
+    "title": "Tijdzoneconversie",
+    "yourDevice": "Je apparaat",
+    "system": "Systeem"
+  },
+  "DateFilter": {
+    "selectDateRange": "Datumbereik selecteren",
+    "dialogDescription": "Selecteer het datumbereik om de gegevens te filteren",
+    "presets": "Voorinstellingen",
+    "calendar": "Kalender",
+    "cancel": "Annuleren",
+    "applyFilter": "Filter toepassen",
+    "today": "Vandaag",
+    "yesterday": "Gisteren",
+    "thisWeek": "Deze week",
+    "lastWeek": "Vorige week",
+    "thisMonth": "Deze maand",
+    "lastMonth": "Vorige maand",
+    "thisYear": "Dit jaar",
+    "lastYear": "Vorig jaar",
+    "allTime": "Altijd"
+  },
+  "FilterControls": {
+    "statusLabel": "Status"
+  },
+  "FilterDropdown": {
+    "filters": "Filters",
+    "filterBy": "Filteren op:",
+    "clear": "Wissen",
+    "filter": "Filteren"
+  },
+  "CountrySelect": {
+    "loading": "Bezig met laden...",
+    "searchPlaceholder": "Land zoeken...",
+    "noCountryFound": "Geen land gevonden.",
+    "loadFailed": "Laden van landen mislukt. Probeer het opnieuw."
+  },
+  "DataTable": {
+    "noResults": "Geen resultaten."
+  },
+  "Product": {
+    "qty": "AANTAL: {value}",
+    "manageSubscription": "Abonnement beheren",
+    "fetchSubscriptionFailed": "Ophalen van abonnement mislukt. Probeer het opnieuw.",
+    "noAuthToken": "Geen authenticatietoken gevonden",
+    "loadDigitalProductsFailed": "Laden van digitale producten mislukt.",
+    "fetchDigitalProductsFailed": "Ophalen van digitale producten mislukt. Probeer het opnieuw."
+  },
+  "BadgeStatus": {
+    "succeeded": "Geslaagd",
+    "failed": "Mislukt",
+    "cancelled": "Geannuleerd",
+    "expired": "Verlopen",
+    "processing": "In behandeling",
+    "pending": "In afwachting",
+    "review": "In review",
+    "onHold": "On hold",
+    "notInitiated": "Niet gestart",
+    "noStatus": "Geen status",
+    "verified": "Geverifieerd",
+    "active": "Actief",
+    "disabled": "Uitgeschakeld",
+    "preDispute": "Pre-dispute",
+    "dispute": "Dispute",
+    "preArbitration": "Pre-arbitration",
+    "disputeOpened": "Dispute geopend",
+    "disputeExpired": "Dispute verlopen",
+    "disputeAccepted": "Dispute geaccepteerd",
+    "disputeCancelled": "Dispute geannuleerd",
+    "disputeChallenged": "Dispute aangevochten",
+    "disputeWon": "Dispute gewonnen",
+    "disputeLost": "Dispute verloren",
+    "oneTime": "Eenmalig",
+    "subscription": "Abonnement",
+    "unknown": "Onbekend"
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "ErrorPage": {
+    "title": "Något gick fel",
+    "description": "Du kanske har problem med nätverksanslutningen, länken kan ha gått ut eller så kan länken/produkten vara ogiltig."
+  },
+  "NotFoundPage": {
+    "title": "Sidan hittades inte",
+    "description": "Sidan du letar efter finns inte eller kan ha flyttats."
+  },
+  "ExpiredPage": {
+    "title": "Av säkerhetsskäl har den här sidan gått ut."
+  },
+  "LandingCard": {
+    "heading": "Vad kan vi hjälpa dig med idag?",
+    "actionsIntro": "Du kan göra följande:",
+    "actions": {
+      "changePaymentMethod": "Ändra betalningsmetod",
+      "cancelSubscription": "Avsluta prenumeration",
+      "downloadInvoices": "Ladda ner fakturor",
+      "viewOrders": "Visa beställningar som hanterats via Dodo Payments",
+      "otherQueries": "Andra frågor"
+    },
+    "emailLabel": "E-post",
+    "emailPlaceholder": "Ange din e-post",
+    "emailInvalid": "Ogiltig e-postadress",
+    "emailFailed": "Det gick inte att skicka inloggningslänken. Försök igen.",
+    "lookUpPurchase": "Sök upp mitt köp",
+    "sendEmail": "Skicka e-post",
+    "sending": "Skickar...",
+    "sentTitle": "Vi har skickat ett e-postmeddelande!",
+    "sentDescription": "Använd länken i e-postmeddelandet för att logga in i Dodo Payments self-serve-portal"
+  },
+  "LandingInfoCard": {
+    "title": "Vad är Dodo Payments?",
+    "description": "Dodo Payments är en Merchant of Record (MoR)-plattform som hanterar betalningar, regelefterlevnad för skatt och faktureringsinfrastruktur för ett växande antal digitala företag, inklusive mjukvaruprodukter, verktyg och tjänster. När du gör ett köp eller tecknar en prenumeration på en produkt som säljs av något av dessa företag är det Dodo Payments som hanterar transaktionen, fakturering, kundsupport, återbetalningar och tvister.",
+    "visitPrompt": "Besök <link>dodopayments.com</link> för att läsa mer."
+  },
+  "LoginForm": {
+    "billingPortalTitle": "{businessName}s faktureringsportal",
+    "enterEmailDescription": "Ange din e-post för att få åtkomstlänken",
+    "emailLabel": "E-post",
+    "emailPlaceholder": "Ange din e-post",
+    "emailInvalid": "Ange en giltig e-postadress",
+    "emailRequired": "E-post krävs",
+    "getAccessLink": "Hämta åtkomstlänk",
+    "sending": "Skickar...",
+    "successTitle": "Nästan klart!",
+    "successDescription": "Åtkomstlänk skickad till e-post {email}. Se till att du även kollar din skräppost!",
+    "goBack": "Gå tillbaka",
+    "loginLinkSent": "Inloggningslänk skickad till e-post",
+    "loginLinkFailed": "Det gick inte att skicka inloggningslänken. Försök igen."
+  },
+  "Businesses": {
+    "searchPlaceholder": "Sök företag",
+    "emptyPage": "Inga företag hittades på den här sidan",
+    "emptyAll": "Inga företag hittades",
+    "fetchError": "Det gick inte att hämta företagsuppgifter",
+    "viewDetails": "Visa detaljer"
+  },
+  "SessionHeader": {
+    "viewAllBusinesses": "Visa alla företag",
+    "switchToLightMode": "Byt till ljust läge",
+    "switchToDarkMode": "Byt till mörkt läge",
+    "loggingOut": "Loggar ut...",
+    "logOut": "Logga ut",
+    "goBackToBusiness": "Gå tillbaka till företaget",
+    "goToOverview": "Gå till översikten"
+  },
+  "LeftPanel": {
+    "goBackTo": "Gå tillbaka till {businessName}",
+    "heading": "Hantera dina prenumerations- och faktureringsinställningar",
+    "description": "Visa betalningshistorik, ladda ner fakturor och hantera prenumerationer och betalningsmetoder.",
+    "poweredBy": "Drivs av",
+    "privacy": "Integritet",
+    "terms": "Villkor"
+  },
+  "LanguageSelector": {
+    "changeFailed": "Det gick inte att byta språk. Försök igen."
+  },
+  "Subscriptions": {
+    "headingActive": "Aktiva prenumerationer",
+    "headingAll": "Prenumerationer",
+    "emptyPage": "Inga prenumerationer hittades på den här sidan",
+    "emptyActive": "Inga aktiva prenumerationer för tillfället",
+    "viewAll": "Visa alla prenumerationer"
+  },
+  "SubscriptionCard": {
+    "manageSubscription": "Hantera prenumeration",
+    "updatePaymentMethod": "Uppdatera betalningsmetod",
+    "viewDetails": "Visa detaljer",
+    "renewsOn": "förnyas den",
+    "validTill": "giltig till"
+  },
+  "SubscriptionDetails": {
+    "addons": "Tillägg",
+    "meters": "Mätare",
+    "freeThreshold": "Gratisgräns",
+    "per": "per",
+    "qty": "Antal: {value}"
+  },
+  "SubscriptionBillingInfo": {
+    "title": "Faktureringsinformation",
+    "name": "Namn",
+    "phoneNumber": "Telefonnummer",
+    "email": "E-post",
+    "billingAddress": "Faktureringsadress"
+  },
+  "SubscriptionBillingEdit": {
+    "editButton": "Redigera",
+    "sheetTitle": "Redigera faktureringsuppgifter",
+    "customerName": "Kundnamn",
+    "fullNamePlaceholder": "Fullständigt namn",
+    "billingAddress": "Faktureringsadress",
+    "loadingCountries": "Laddar...",
+    "addressLine": "Adressrad 1",
+    "state": "Delstat/region",
+    "city": "Stad",
+    "postalCode": "Postnummer",
+    "purchasingAsBusiness": "Köper som företag",
+    "taxId": "Skatte-ID",
+    "taxIdPlaceholder": "Skatte-ID",
+    "saveDetails": "Spara uppgifter",
+    "updateSuccess": "Faktureringsuppgifter uppdaterades",
+    "updateFailed": "Det gick inte att uppdatera faktureringsuppgifterna. Försök igen.",
+    "countriesLoadFailed": "Det gick inte att ladda länder. Försök igen."
+  },
+  "CancelSubscriptionDialog": {
+    "title": "Är du säker på att du vill avsluta din prenumeration på den här tjänsten?",
+    "description": "När du fortsätter förlorar du åtkomst till alla tillhörande förmåner och den här åtgärden kan inte ångras.",
+    "close": "Stäng",
+    "cancel": "Avbryt",
+    "cancelling": "Avslutar..."
+  },
+  "CancelSubscriptionSheet": {
+    "triggerCancel": "Avsluta prenumeration",
+    "triggerRevoke": "Återkalla avslut",
+    "sheetTitle": "Tråkigt att se dig gå...",
+    "currentPlan": "Nuvarande plan",
+    "addOns": "{count, plural, one {# tillägg} other {# tillägg}}",
+    "quantity": "Antal: {value}",
+    "scheduledCancellationWarning": "Den här prenumerationen är schemalagd att avslutas vid nästa faktureringsdatum.",
+    "revokeCancellation": "Återkalla avslut",
+    "revoking": "Återkallar...",
+    "cancelAtNextBilling": "Avsluta vid nästa faktureringsdatum",
+    "cancelling": "Avslutar...",
+    "cancelSuccess": "Prenumerationen avslutades",
+    "cancelScheduled": "Prenumerationen avslutas vid nästa faktureringsdatum",
+    "cancelFailed": "Det gick inte att avsluta prenumerationen. Försök igen.",
+    "revokeFailed": "Det gick inte att återkalla avslutet. Försök igen.",
+    "revokeSuccess": "Avslut av prenumerationen återkallades"
+  },
+  "SubscriptionInfo": {
+    "title": "Din prenumeration är pausad",
+    "description": "Uppdatera din betalningsmetod för att återuppta prenumerationen"
+  },
+  "SubscriptionNotes": {
+    "onHold": "Din prenumeration är för närvarande pausad på grund av en misslyckad betalning. Uppdatera din betalningsmetod för att återuppta prenumerationen",
+    "failed": "Den här prenumerationen misslyckades. Försök igen.",
+    "pending": "Din betalning slutfördes inte och checkout lämnades oavslutad. Om du vill prenumerera, försök igen.",
+    "cancelledOn": "Den här prenumerationen avslutades den {date}.",
+    "expired": "Den här prenumerationen har löpt ut.",
+    "scheduledCancellation": "Din prenumeration är för närvarande schemalagd att avslutas den {date}.",
+    "scheduledCancellationNoDate": "Din prenumeration är för närvarande schemalagd att avslutas.",
+    "flexibleSubscription": "Det här är en flexibel prenumeration, så {name} kan justera priset för din nästa faktureringsperiod.",
+    "flexibleSubscriptionUnknownMerchant": "Det här är en flexibel prenumeration, så fakturabeloppet kan justeras för din nästa faktureringsperiod.",
+    "discountApplied": "Rabatt tillämpad i {count, plural, one {# faktureringsperiod till} other {# faktureringsperioder till}}."
+  },
+  "ChangePlanSheet": {
+    "trigger": "Byt plan",
+    "sheetTitle": "Välj en ny plan",
+    "noProducts": "Inga prenumerationsprodukter tillgängliga.",
+    "currentPlan": "Nuvarande plan",
+    "proceed": "Fortsätt",
+    "unnamedGroup": "Namnlös grupp"
+  },
+  "PlanPreview": {
+    "confirmPlanChange": "Bekräfta planbyte",
+    "noPlanSelected": "Ingen plan vald",
+    "loadingPreview": "Laddar förhandsvisning...",
+    "current": "Nuvarande",
+    "updated": "Uppdaterad",
+    "qty": "Antal: {value}",
+    "viewAddons": "Visa tillägg",
+    "manageAddons": "Hantera tillägg",
+    "noAddons": "Inga tillägg",
+    "tableItem": "Artikel",
+    "tableQuantity": "Antal",
+    "tableUnitPrice": "Styckpris",
+    "tableTax": "Moms",
+    "tableTotal": "Totalt",
+    "creditToBalance": "Kredit till saldo",
+    "creditTooltip": "Kredit kommer att användas för att betala framtida betalningar",
+    "summaryTotal": "Totalt",
+    "summaryTax": "Moms",
+    "summaryAmountDue": "Att betala nu",
+    "payButton": "Betala {amount}",
+    "previewFailed": "Det gick inte att ladda förhandsvisningen. Försök igen.",
+    "changeFailed": "Det gick inte att byta plan. Försök igen.",
+    "changeSuccess": "Planen ändrades",
+    "addonRequired": "Välj minst ett tillägg med antal 1 eller fler."
+  },
+  "UpdatePaymentMethodSheet": {
+    "editButton": "Redigera",
+    "sheetTitle": "Redigera betalningsmetod",
+    "addPaymentMethod": "Lägg till betalningsmetod",
+    "noPaymentMethods": "Inga giltiga betalningsmetoder hittades.",
+    "confirmChanges": "Bekräfta ändringar",
+    "updating": "Uppdaterar...",
+    "selectRequired": "Välj en betalningsmetod",
+    "loadFailed": "Det gick inte att ladda betalningsmetoder. Försök igen.",
+    "updateSuccess": "Betalningsmetoden uppdaterades",
+    "setupInitiated": "Konfiguration av betalningsmetod initierad",
+    "updateFailed": "Det gick inte att uppdatera betalningsmetoden. Försök igen.",
+    "addFailed": "Det gick inte att lägga till ny betalningsmetod. Försök igen."
+  },
+  "PaymentMethodCard": {
+    "dialogTitle": "Ta bort betalningsmetod",
+    "dialogDescription": "Är du säker på att du vill ta bort den här betalningsmetoden? Den här åtgärden kan inte ångras.",
+    "cancel": "Avbryt",
+    "remove": "Ta bort",
+    "removing": "Tar bort...",
+    "removeAriaLabel": "Ta bort betalningsmetod",
+    "removeSuccess": "Betalningsmetoden togs bort",
+    "removeFailed": "Det gick inte att ta bort betalningsmetoden"
+  },
+  "PaymentMethodsSection": {
+    "title": "Betalningsmetoder",
+    "empty": "Inga betalningsmetoder tillagda"
+  },
+  "AddPaymentMethodSheet": {
+    "trigger": "Lägg till betalningsmetod",
+    "sheetTitle": "Lägg till betalningsmetod",
+    "or": "ELLER",
+    "card": "Kort",
+    "cardNumber": "Kortnummer",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Utgångsdatum",
+    "expiryDatePlaceholder": "MM/ÅÅ",
+    "securityCode": "Säkerhetskod",
+    "securityCodePlaceholder": "123",
+    "cardTerms": "Genom att ange din kortinformation tillåter du Dodo Payments att debitera ditt kort för framtida betalningar i enlighet med deras villkor."
+  },
+  "Orders": {
+    "billingHistory": "Faktureringshistorik",
+    "emptyPage": "Inga köp hittades på den här sidan",
+    "emptyAll": "Inga köp för tillfället",
+    "noBillingHistory": "Ingen faktureringshistorik tillgänglig",
+    "fetchFailed": "Det gick inte att hämta produktkorgen. Försök igen."
+  },
+  "BillingHistoryColumns": {
+    "date": "Datum",
+    "status": "Status",
+    "amount": "Belopp",
+    "pricingType": "Pristyp",
+    "entitlements": "Rättigheter",
+    "invoice": "Faktura"
+  },
+  "OrderCard": {
+    "paymentId": "Betalnings-ID",
+    "purchased": "Köpt",
+    "viewDetails": "Visa detaljer",
+    "hideDetails": "Dölj detaljer",
+    "noProducts": "Inga produkter i den här beställningen.",
+    "fetchFailed": "Det gick inte att hämta produktdetaljer. Försök igen."
+  },
+  "RefundsTable": {
+    "title": "Återbetalningshistorik",
+    "empty": "Inga återbetalningar tillgängliga"
+  },
+  "RefundColumns": {
+    "date": "Datum",
+    "status": "Status",
+    "amount": "Belopp",
+    "refundId": "Återbetalnings-ID",
+    "associatedPayment": "Tillhörande betalning"
+  },
+  "InvoiceHistory": {
+    "emptyPage": "Inga fakturor hittades på den här sidan",
+    "emptyAll": "Inga fakturor för tillfället",
+    "paymentId": "Betalnings-ID",
+    "date": "Datum",
+    "amount": "Belopp",
+    "status": "Status",
+    "download": "Ladda ner"
+  },
+  "InvoiceDownloadSheet": {
+    "notAvailable": "Fakturan är inte tillgänglig",
+    "downloadInvoice": "Ladda ner faktura",
+    "invoice": "Faktura",
+    "generateInvoice": "Skapa faktura",
+    "fillDetailsTitle": "Ange kundens fullständiga adress",
+    "existingAddressTitle": "Ladda ner med befintliga adressuppgifter",
+    "existingAddressDescription": "Den här fakturan kommer endast att inkludera ditt postnummer och land som angavs under checkout-processen.",
+    "fullAddressTitle": "Ladda ner med fullständiga adressuppgifter",
+    "fullAddressDescription": "Den här fakturan kommer att inkludera kundens fullständiga adress. Se till att du fyller i alla uppgifter innan du laddar ner.",
+    "fillDetails": "Fyll i uppgifter"
+  },
+  "InvoiceFillDetails": {
+    "addressLine": "Adressrad 1",
+    "state": "Delstat/region",
+    "city": "Stad",
+    "postalCode": "Postnummer",
+    "download": "Ladda ner",
+    "downloadSuccess": "Fakturan laddades ner",
+    "updateFailed": "Det gick inte att uppdatera fakturauppgifterna. Försök igen."
+  },
+  "DigitalDeliveryDialog": {
+    "title": "Digitala produkter",
+    "description": "Få åtkomst till dina köpta digitala produkter och nedladdningar",
+    "accessExternal": "Öppna extern resurs",
+    "instructions": "Instruktioner",
+    "loadFailed": "Det gick inte att ladda digitala produkter. Försök igen."
+  },
+  "WalletsSection": {
+    "title": "Plånbok",
+    "selectWallet": "Välj plånbok",
+    "walletLabel": "{currency}-plånbok",
+    "availableBalance": "Tillgängligt saldo",
+    "tableType": "Typ",
+    "tableReason": "Orsak",
+    "tableAmount": "Belopp",
+    "noTransactions": "Inga transaktioner ännu",
+    "credit": "Kredit",
+    "debit": "Debet"
+  },
+  "CreditsSection": {
+    "title": "Krediter",
+    "selectCredit": "Välj krediträttighet",
+    "overageBalance": "Överskridningssaldo",
+    "availableCreditBalance": "Tillgängligt kreditsaldo",
+    "tableType": "Typ",
+    "tableDescription": "Beskrivning",
+    "tableAmount": "Belopp",
+    "noTransactions": "Inga transaktioner ännu",
+    "credit": "Kredit",
+    "debit": "Debet"
+  },
+  "UsageSummary": {
+    "emptyPage": "Ingen användningshistorik hittades på den här sidan",
+    "emptyAll": "Ingen användningshistorik för tillfället"
+  },
+  "SubscriptionTabsTable": {
+    "billingHistory": "Faktureringshistorik",
+    "refundHistory": "Återbetalningshistorik",
+    "usageSummary": "Användningssammanfattning"
+  },
+  "Entitlements": {
+    "licenseKeyButton": "Licensnyckel",
+    "licenseKeysButton": "Licensnycklar",
+    "licenseKeysTitle": "Licensnycklar",
+    "migrateLicenseTitle": "Migrera – licensnyckel",
+    "licenseKeyCardTitle": "Licensnyckel",
+    "clickToView": "Klicka för att visa licensnyckel",
+    "hideLicenseKey": "Dölj licensnyckel",
+    "showLicenseKey": "Visa licensnyckel",
+    "loadingLicenseKeys": "Laddar licensnycklar...",
+    "noLicenseKeys": "Inga licensnycklar tillgängliga.",
+    "expires": "Löper ut",
+    "attachmentsButton": "Bilagor",
+    "attachmentButton": "Bilaga",
+    "attachmentsTitle": "Dina digitala produkter",
+    "attachmentsDescription": "Få åtkomst till och ladda ner dina tillgängliga digitala produkter och filer här.",
+    "digitalProductsTitle": "Digitala produkter",
+    "digitalProductsDescription": "Ladda ner dina digitala produkter",
+    "noDigitalProducts": "Inga digitala produkter tillgängliga.",
+    "filesSection": "Filer",
+    "externalLink": "Extern länk",
+    "open": "Öppna",
+    "instructionsSection": "Instruktioner",
+    "loadFailed": "Det gick inte att ladda digitala produkter.",
+    "fetchCartFailed": "Det gick inte att hämta produktkorgen",
+    "fetchDigitalFailed": "Det gick inte att hämta digitala produkter"
+  },
+  "ProfilePage": {
+    "billingDetails": "Dina faktureringsuppgifter",
+    "name": "Namn",
+    "email": "E-post",
+    "walletsHeading": "Plånböcker",
+    "creditsHeading": "Krediter",
+    "walletTabLabel": "{currency}-plånbok"
+  },
+  "ProfileWallet": {
+    "noWalletsFound": "Inga plånböcker hittades",
+    "availableBalance": "Tillgängligt saldo",
+    "recentTransactions": "Senaste transaktioner",
+    "tableType": "Typ",
+    "tableReason": "Orsak",
+    "tableAmount": "Belopp",
+    "emptyPage": "Inga transaktioner hittades på den här sidan",
+    "emptyAll": "Inga transaktioner för tillfället"
+  },
+  "ProfileCredits": {
+    "noCreditsFound": "Inga krediter hittades",
+    "selectPlaceholder": "Välj krediträttighet",
+    "overageBalance": "Överskridningssaldo",
+    "availableCreditBalance": "Tillgängligt kreditsaldo",
+    "recentTransactions": "Senaste transaktioner",
+    "tableType": "Typ",
+    "tableDescription": "Beskrivning",
+    "tableAmount": "Belopp",
+    "emptyPage": "Inga transaktioner hittades på den här sidan",
+    "emptyAll": "Inga transaktioner för tillfället"
+  },
+  "Pagination": {
+    "previous": "Föregående",
+    "next": "Nästa"
+  },
+  "BaseDataGrid": {
+    "noData": "Ingen data tillgänglig",
+    "reset": "Återställ tabell"
+  },
+  "DataGridColumnHeader": {
+    "asc": "Stigande",
+    "desc": "Fallande",
+    "pinLeft": "Fäst till vänster",
+    "pinRight": "Fäst till höger",
+    "moveLeft": "Flytta åt vänster",
+    "moveRight": "Flytta åt höger",
+    "columns": "Kolumner"
+  },
+  "DataGridPagination": {
+    "rowsPerPage": "Rader per sida"
+  },
+  "DataGridColumnVisibility": {
+    "editColumns": "Redigera kolumner"
+  },
+  "TokenPage": {
+    "validationFailed": "Valideringen misslyckades. Försök igen.",
+    "goToExpiredPage": "Gå till sidan som har gått ut"
+  },
+  "UsageHistoryColumns": {
+    "meterName": "Mätarnamn",
+    "meterId": "Mätar-ID",
+    "consumedUnits": "Förbrukade enheter",
+    "chargeableUnits": "Debiterbara enheter",
+    "freeThreshold": "Gratisgräns",
+    "units": "enheter",
+    "unitPrice": "Styckpris",
+    "totalCost": "Total kostnad",
+    "actions": "Åtgärder",
+    "view": "Visa"
+  },
+  "PaymentMethodsPage": {
+    "heading": "Dina betalningsmetoder",
+    "empty": "Inga betalningsmetoder hittades"
+  },
+  "LicenseColumns": {
+    "licenseKey": "Licensnyckel",
+    "status": "Status",
+    "productId": "Produkt-ID",
+    "expiry": "Utgångsdatum (UTC)",
+    "neverExpires": "Löper aldrig ut",
+    "sameAsSubscription": "Samma som prenumeration",
+    "activationsUsed": "Använda aktiveringar",
+    "paymentId": "Betalnings-ID"
+  },
+  "PaymentColumns": {
+    "paymentId": "Betalnings-ID",
+    "status": "Status",
+    "paymentMethod": "Betalningsmetod",
+    "amount": "Belopp",
+    "date": "Datum (UTC)",
+    "invoice": "Faktura",
+    "invoiceButtonLabel": "Faktura",
+    "files": "Filer"
+  },
+  "TimeTooltip": {
+    "title": "Tidszonskonvertering",
+    "yourDevice": "Din enhet",
+    "system": "System"
+  },
+  "DateFilter": {
+    "selectDateRange": "Välj datumintervall",
+    "dialogDescription": "Välj datumintervall för att filtrera data",
+    "presets": "Förval",
+    "calendar": "Kalender",
+    "cancel": "Avbryt",
+    "applyFilter": "Tillämpa filter",
+    "today": "Idag",
+    "yesterday": "Igår",
+    "thisWeek": "Denna vecka",
+    "lastWeek": "Förra veckan",
+    "thisMonth": "Denna månad",
+    "lastMonth": "Förra månaden",
+    "thisYear": "Detta år",
+    "lastYear": "Förra året",
+    "allTime": "All tid"
+  },
+  "FilterControls": {
+    "statusLabel": "Status"
+  },
+  "FilterDropdown": {
+    "filters": "Filter",
+    "filterBy": "Filtrera efter:",
+    "clear": "Rensa",
+    "filter": "Filtrera"
+  },
+  "CountrySelect": {
+    "loading": "Laddar...",
+    "searchPlaceholder": "Sök land...",
+    "noCountryFound": "Inget land hittades.",
+    "loadFailed": "Det gick inte att ladda länder. Försök igen."
+  },
+  "DataTable": {
+    "noResults": "Inga resultat."
+  },
+  "Product": {
+    "qty": "ANTAL: {value}",
+    "manageSubscription": "Hantera prenumeration",
+    "fetchSubscriptionFailed": "Det gick inte att hämta prenumerationen. Försök igen.",
+    "noAuthToken": "Ingen autentiseringstoken hittades",
+    "loadDigitalProductsFailed": "Det gick inte att ladda digitala produkter.",
+    "fetchDigitalProductsFailed": "Det gick inte att hämta digitala produkter. Försök igen."
+  },
+  "BadgeStatus": {
+    "succeeded": "Lyckades",
+    "failed": "Misslyckades",
+    "cancelled": "Avbruten",
+    "expired": "Utgången",
+    "processing": "Pågår",
+    "pending": "Väntande",
+    "review": "Under granskning",
+    "onHold": "Pausad",
+    "notInitiated": "Inte initierad",
+    "noStatus": "Ingen status",
+    "verified": "Verifierad",
+    "active": "Aktiv",
+    "disabled": "Inaktiverad",
+    "preDispute": "Före tvist",
+    "dispute": "Tvist",
+    "preArbitration": "Före skiljedom",
+    "disputeOpened": "Tvist öppnad",
+    "disputeExpired": "Tvist utgången",
+    "disputeAccepted": "Tvist accepterad",
+    "disputeCancelled": "Tvist avbruten",
+    "disputeChallenged": "Tvist bestridd",
+    "disputeWon": "Tvist vunnen",
+    "disputeLost": "Tvist förlorad",
+    "oneTime": "Engångs",
+    "subscription": "Prenumeration",
+    "unknown": "Okänd"
+  }
+}
