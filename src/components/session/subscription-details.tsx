@@ -47,7 +47,6 @@ export async function SubscriptionDetails({
 }: {
   subscription: SubscriptionDetailsData;
 }) {
-  const t = await getTranslations("SubscriptionDetails");
   const paymentMethods = await fetchPaymentMethods();
   const currentPaymentMethod = subscription.payment_method_id
     ? paymentMethods?.find(
