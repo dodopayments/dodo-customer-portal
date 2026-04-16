@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
+import { Warning } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import Image from "next/image";
+import { getSessionToken } from "@/app/session/subscriptions/[id]/action";
 import parseError from "@/lib/clientErrorHelper";
+import { api } from "@/lib/http";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,11 +25,34 @@ import {
   getPaymentMethodLogoUrl,
   getPaymentMethodDisplayName,
 } from "./payment-method-logo";
-import { deletePaymentMethod } from "@/app/session/payment-methods/action";
 import { useTranslations } from "next-intl";
 
 interface PaymentMethodCardProps {
   paymentMethod: PaymentMethodItem;
+}
+
+async function deletePaymentMethodClient(paymentMethodId: string): Promise<void> {
+  const normalizedPaymentMethodId = paymentMethodId?.trim();
+
+  if (!normalizedPaymentMethodId) {
+    throw new Error("Missing payment method id");
+  }
+
+  const token = await getSessionToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
+  const encodedPaymentMethodId = encodeURIComponent(normalizedPaymentMethodId);
+
+  await api.delete(
+    `/customer-portal/payment-methods/${encodedPaymentMethodId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
 }
 
 export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
@@ -48,7 +74,7 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
   async function handleDelete() {
     setIsDeleting(true);
     try {
-      await deletePaymentMethod(paymentMethod.payment_method_id);
+      await deletePaymentMethodClient(paymentMethod.payment_method_id);
       toast.success(t("removeSuccess"));
       setOpen(false);
       router.refresh();
@@ -125,25 +151,35 @@ export function PaymentMethodCard({ paymentMethod }: PaymentMethodCardProps) {
       </Card>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>{t("dialogTitle")}</DialogTitle>
-            <DialogDescription>{t("dialogDescription")}</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline" disabled={isDeleting}>
-                {t("cancel")}
+        <DialogContent className="max-w-[95vw] rounded-lg sm:max-w-[480px]">
+          <div className="space-y-2">
+            <DialogHeader className="mb-3 space-y-0">
+              <div className="bg-bg-error-secondary p-3 w-fit h-fit rounded-full text-border-error dark:text-[#FECDCA]">
+                <Warning className="w-6 h-6" />
+              </div>
+              <DialogTitle className="pt-4">{t("dialogTitle")}</DialogTitle>
+              <DialogDescription>{t("dialogDescription")}</DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="gap-2 flex flex-row pt-4 w-full sm:gap-0">
+              <DialogClose asChild>
+                <Button
+                  variant="secondary"
+                  className="w-full"
+                  disabled={isDeleting}
+                >
+                  {t("cancel")}
+                </Button>
+              </DialogClose>
+              <Button
+                variant="destructive"
+                onClick={handleDelete}
+                className="w-full"
+                disabled={isDeleting}
+              >
+                {isDeleting ? t("removing") : t("remove")}
               </Button>
-            </DialogClose>
-            <Button
-              variant="destructive"
-              onClick={handleDelete}
-              disabled={isDeleting}
-            >
-              {isDeleting ? t("removing") : t("remove")}
-            </Button>
-          </DialogFooter>
+            </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </>
