@@ -6,7 +6,6 @@ import { getBadge } from "@/lib/badge-helper";
 import InvoiceDownloadSheet from "../invoice-download-sheet";
 import { api_url } from "@/lib/http";
 import { OrderData } from "./orders";
-import { EntitlementsCell } from "./entitlements-cell";
 import { TimeTooltip } from "@/components/custom/time-tooltip";
 import { CurrencyCode, decodeCurrency, formatCurrency } from "@/lib/currency-helper";
 
@@ -79,20 +78,6 @@ export function getBillingHistoryColumns(
                 >
                     {tBadge(badge.messageKey)}
                 </Badge>
-            );
-        },
-    },
-    {
-        id: "entitlements",
-        accessorKey: "digital_products_delivered",
-        header: t("entitlements"),
-        cell: ({ row }) => {
-            return (
-                <EntitlementsCell
-                    paymentId={row.original.payment_id}
-                    hasDigitalProducts={row.original.digital_products_delivered}
-                    hasLicenseKeys={row.original.has_license_key}
-                />
             );
         },
     },
