@@ -12,6 +12,8 @@ import { useCallback } from "react";
 import { RefundResponse } from "../refunds-column";
 import { RefundsTable } from "../refunds-table";
 import { SessionPageLayout } from "../session-page-layout";
+import { EntitlementsTable } from "../entitlements/entitlements-table";
+import type { PortalGrantResponse } from "@/app/session/entitlements/actions";
 
 interface BillingHistoryPagination {
     currentPage: number;
@@ -41,6 +43,7 @@ interface OverviewContentProps {
     walletLedgerByCurrency: Record<string, WalletLedgerItem[]>;
     creditEntitlements: CreditEntitlementItem[];
     creditLedgerByEntitlement: Record<string, CreditLedgerItem[]>;
+    grants: PortalGrantResponse[];
     /** Base path for billing history pagination (default: /session/overview) */
     paginationBasePath?: string;
 }
@@ -63,6 +66,7 @@ export function OverviewContent({
     walletLedgerByCurrency,
     creditEntitlements,
     creditLedgerByEntitlement,
+    grants,
     paginationBasePath = DEFAULT_PAGINATION_BASE_PATH,
 }: OverviewContentProps) {
     const router = useRouter();
@@ -112,6 +116,9 @@ export function OverviewContent({
                         entitlements={creditEntitlements}
                         creditLedgerByEntitlement={creditLedgerByEntitlement}
                     />
+                )}
+                {grants.length > 0 && (
+                    <EntitlementsTable grants={grants} />
                 )}
                 <Orders
                     ordersData={billingHistory}
