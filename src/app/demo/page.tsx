@@ -63,6 +63,7 @@ export default async function DemoPage({ searchParams }: DemoPageProps) {
       walletLedgerByCurrency={DEMO_WALLET_LEDGER}
       creditEntitlements={DEMO_CREDIT_ENTITLEMENTS}
       creditLedgerByEntitlement={DEMO_CREDIT_LEDGER}
+      grants={[]}
       paginationBasePath="/demo"
     />
   );

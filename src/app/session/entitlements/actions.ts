@@ -92,7 +92,7 @@ export async function fetchPortalEntitlements(): Promise<PortalGrantResponse[]> 
     }
 
     const data = await response.json();
-    console.log(data);
+    console.log(JSON.stringify(data, null, 2));
     return data.items || [];
   } catch (error) {
     parseError(error, "Failed to fetch entitlements");
@@ -148,11 +148,9 @@ export async function downloadEntitlementGrant(
   grantId: string
 ): Promise<DownloadResponse | null> {
   try {
-    console.log(`Downloading entitlement grant ${grantId}`);
     const response = await makeAuthenticatedRequest(
       `/customer-portal/entitlements/${grantId}/download`
     );
-    console.log(`Response: ${response.status}`);
     if (!response.ok) {
       throw new Error(`Failed to get download url: ${response.status}`);
     }

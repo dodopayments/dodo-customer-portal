@@ -189,6 +189,20 @@ function GrantDetailSheet({
                         </div>
                     )}
 
+                    {grant.status === "Delivered" && grant.oauth_url && (
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-text-secondary">OAuth connection</span>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => window.open(grant.oauth_url!, "_blank", "noopener,noreferrer")}
+                            >
+                                <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                                Reconnect
+                            </Button>
+                        </div>
+                    )}
+
                     {isDigitalFiles && grant.status !== "Delivered" && (
                         <p className="text-sm text-text-secondary">
                             Files will be available once the entitlement is delivered.

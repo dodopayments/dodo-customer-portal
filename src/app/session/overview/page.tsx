@@ -3,6 +3,7 @@ import { fetchSubscriptions } from "../subscriptions/actions";
 import { fetchPaymentMethods } from "../payment-methods/action";
 import { fetchPayments, fetchRefunds } from "../orders/actions";
 import { fetchWallets, fetchWalletLedger, fetchCreditEntitlements, fetchCreditEntitlementLedger } from "../profile/actions";
+import { fetchPortalEntitlements, type PortalGrantResponse } from "../entitlements/actions";
 import { OverviewContent } from "@/components/session/overview/overview-content";
 import { SubscriptionData } from "@/components/session/subscriptions/subscriptions";
 import { OrderData } from "@/components/session/orders/orders";
@@ -17,6 +18,7 @@ const getCachedPayments = cache(fetchPayments);
 const getCachedRefunds = cache(fetchRefunds);
 const getCachedWallets = cache(fetchWallets);
 const getCachedCreditEntitlements = cache(fetchCreditEntitlements);
+const getCachedPortalEntitlements = cache(fetchPortalEntitlements);
 
 export const dynamic = "force-dynamic";
 
@@ -100,7 +102,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         return { creditEntitlements: items, creditLedgerByEntitlement: ledger };
     }
 
-    let subscriptionsData, paymentMethods, billingHistoryData, refundHistoryData, walletsResult, creditsResult;
+    let subscriptionsData, paymentMethods, billingHistoryData, refundHistoryData, walletsResult, creditsResult, entitlementsData;
 
     try {
         [
@@ -109,7 +111,8 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             billingHistoryData,
             refundHistoryData,
             walletsResult,
-            creditsResult
+            creditsResult,
+            entitlementsData,
         ] = await Promise.all([
             getCachedSubscriptions(0, OVERVIEW_SUBSCRIPTIONS_SIZE),
             getCachedPaymentMethods(),
@@ -117,6 +120,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             getCachedRefunds(refundPage, OVERVIEW_REFUND_PAGE_SIZE),
             fetchWalletsWithLedger(),
             fetchCreditsWithLedger(),
+            getCachedPortalEntitlements(),
         ]);
     } catch (error) {
         console.error("Failed to fetch overview data:", error);
@@ -126,6 +130,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
         refundHistoryData = { data: [], totalCount: 0, hasNext: false };
         walletsResult = { walletItems: [] as WalletItem[], walletLedgerByCurrency: {} as Record<string, WalletLedgerItem[]> };
         creditsResult = { creditEntitlements: [] as CreditEntitlementItem[], creditLedgerByEntitlement: {} as Record<string, CreditLedgerItem[]> };
+        entitlementsData = [] as PortalGrantResponse[];
     }
 
     const safePaymentMethods = (paymentMethods || []) as PaymentMethodItem[];
@@ -133,6 +138,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
     const walletLedgerByCurrency = walletsResult.walletLedgerByCurrency;
     const creditEntitlements = creditsResult.creditEntitlements;
     const creditLedgerByEntitlement = creditsResult.creditLedgerByEntitlement;
+    const grants = (entitlementsData || []);
 
     return (
         <OverviewContent
@@ -159,6 +165,7 @@ export default async function OverviewPage({ searchParams }: OverviewPageProps) 
             walletLedgerByCurrency={walletLedgerByCurrency}
             creditEntitlements={creditEntitlements}
             creditLedgerByEntitlement={creditLedgerByEntitlement}
+            grants={grants}
         />
     );
 }
