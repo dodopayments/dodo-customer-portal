@@ -68,6 +68,179 @@ function statusBadgeVariant(status: PortalGrantResponse["status"]): BadgeVariant
     }
 }
 
+function ActionCell({ raw }: { raw: PortalGrantResponse }) {
+    const router = useRouter();
+    const [viewOpen, setViewOpen] = useState(false);
+    const [connecting, setConnecting] = useState(false);
+    const [reconnecting, setReconnecting] = useState(false);
+    const [telegramOpen, setTelegramOpen] = useState(false);
+    const [telegramUserId, setTelegramUserId] = useState("");
+    const [telegramSubmitting, setTelegramSubmitting] = useState(false);
+
+    const handleOAuthConnect = async () => {
+        setConnecting(true);
+        const res = await acceptEntitlementGrant(raw.id, {
+            return_to: typeof window !== "undefined" ? window.location.href : undefined,
+        });
+        setConnecting(false);
+        if (res?.oauth_url) {
+            window.open(res.oauth_url, "_blank", "noopener,noreferrer");
+            router.refresh();
+        } else {
+            toast.error("No authorization URL returned");
+        }
+    };
+
+    const handleTelegramSubmit = async () => {
+        const trimmed = telegramUserId.trim();
+        if (!trimmed) {
+            toast.error("Telegram user ID is required");
+            return;
+        }
+        setTelegramSubmitting(true);
+        const res = await acceptEntitlementGrant(raw.id, {
+            telegram_user_id: trimmed,
+        });
+        setTelegramSubmitting(false);
+        if (res) {
+            toast.success("Telegram account linked");
+            setTelegramOpen(false);
+            setTelegramUserId("");
+            router.refresh();
+        } else {
+            toast.error("Failed to link Telegram account");
+        }
+    };
+
+    const handleReconnect = async () => {
+        setReconnecting(true);
+        const res = await reconnectEntitlementGrant(raw.id);
+        setReconnecting(false);
+        if (res?.oauth_url) {
+            window.open(res.oauth_url, "_blank", "noopener,noreferrer");
+            router.refresh();
+        } else if (res) {
+            toast.success("Reconnected successfully");
+            router.refresh();
+        } else {
+            toast.error("Failed to reconnect");
+        }
+    };
+
+    const isPendingOAuth =
+        raw.status === "Pending" && raw.requires_action && raw.action_type === "oauth";
+    const isPendingTelegram =
+        raw.status === "Pending" && raw.requires_action && raw.action_type === "telegram_connect";
+    const isExpiredOAuth =
+        raw.status === "Delivered" && raw.oauth_expires_at && new Date(raw.oauth_expires_at) < new Date();
+
+    return (
+        <>
+            <div className="flex justify-end gap-2">
+                {isPendingOAuth && (
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleOAuthConnect}
+                        disabled={connecting}
+                    >
+                        {connecting ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
+                        ) : (
+                            <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                        )}
+                        Connect
+                    </Button>
+                )}
+
+                {isPendingTelegram && (
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setTelegramOpen(true)}
+                    >
+                        <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                        Connect
+                    </Button>
+                )}
+
+                {isExpiredOAuth && (
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleReconnect}
+                        disabled={reconnecting}
+                    >
+                        {reconnecting ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
+                        ) : (
+                            <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                        )}
+                        Reconnect
+                    </Button>
+                )}
+
+                {!isPendingOAuth && !isPendingTelegram && !isExpiredOAuth && (
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setViewOpen(true)}
+                    >
+                        {raw.entitlement.integration_type === "license_key" ? (
+                            <KeyRound className="w-3.5 h-3.5 mr-1.5" />
+                        ) : (
+                            <Eye className="w-3.5 h-3.5 mr-1.5" />
+                        )}
+                        View
+                    </Button>
+                )}
+            </div>
+            <GrantDetailSheet
+                grant={raw}
+                open={viewOpen}
+                onOpenChange={setViewOpen}
+            />
+            <Dialog open={telegramOpen} onOpenChange={setTelegramOpen}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Connect Telegram</DialogTitle>
+                        <DialogDescription>
+                            Enter your Telegram user ID to link your account to this entitlement.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-2 py-2">
+                        <Label htmlFor={`telegram-${raw.id}`}>Telegram user ID</Label>
+                        <Input
+                            id={`telegram-${raw.id}`}
+                            placeholder="e.g. 123456789"
+                            value={telegramUserId}
+                            onChange={(e) => setTelegramUserId(e.target.value)}
+                        />
+                    </div>
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => setTelegramOpen(false)}
+                            disabled={telegramSubmitting}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={handleTelegramSubmit}
+                            disabled={telegramSubmitting || !telegramUserId.trim()}
+                        >
+                            {telegramSubmitting && (
+                                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                            )}
+                            Link account
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </>
+    );
+}
+
 function statusLabel(status: PortalGrantResponse["status"]): string {
     switch (status) {
         case "Delivered":
@@ -348,178 +521,6 @@ export const EntitlementsColumns: ColumnDef<EntitlementRow>[] = [
     {
         id: "action",
         header: () => <div className="text-right">Action</div>,
-        cell: ({ row }) => {
-            const raw = row.original.raw;
-            const router = useRouter();
-            const [viewOpen, setViewOpen] = useState(false);
-            const [connecting, setConnecting] = useState(false);
-            const [reconnecting, setReconnecting] = useState(false);
-            const [telegramOpen, setTelegramOpen] = useState(false);
-            const [telegramUserId, setTelegramUserId] = useState("");
-            const [telegramSubmitting, setTelegramSubmitting] = useState(false);
-
-            const handleOAuthConnect = async () => {
-                setConnecting(true);
-                const res = await acceptEntitlementGrant(raw.id, {
-                    return_to: typeof window !== "undefined" ? window.location.href : undefined,
-                });
-                setConnecting(false);
-                if (res?.oauth_url) {
-                    window.open(res.oauth_url, "_blank", "noopener,noreferrer");
-                    router.refresh();
-                } else {
-                    toast.error("No authorization URL returned");
-                }
-            };
-
-            const handleTelegramSubmit = async () => {
-                const trimmed = telegramUserId.trim();
-                if (!trimmed) {
-                    toast.error("Telegram user ID is required");
-                    return;
-                }
-                setTelegramSubmitting(true);
-                const res = await acceptEntitlementGrant(raw.id, {
-                    telegram_user_id: trimmed,
-                });
-                setTelegramSubmitting(false);
-                if (res) {
-                    toast.success("Telegram account linked");
-                    setTelegramOpen(false);
-                    setTelegramUserId("");
-                    router.refresh();
-                } else {
-                    toast.error("Failed to link Telegram account");
-                }
-            };
-
-            const handleReconnect = async () => {
-                setReconnecting(true);
-                const res = await reconnectEntitlementGrant(raw.id);
-                setReconnecting(false);
-                if (res?.oauth_url) {
-                    window.open(res.oauth_url, "_blank", "noopener,noreferrer");
-                    router.refresh();
-                } else if (res) {
-                    toast.success("Reconnected successfully");
-                    router.refresh();
-                } else {
-                    toast.error("Failed to reconnect");
-                }
-            };
-
-            const isPendingOAuth =
-                raw.status === "Pending" && raw.requires_action && raw.action_type === "oauth";
-            const isPendingTelegram =
-                raw.status === "Pending" && raw.requires_action && raw.action_type === "telegram_connect";
-            const isExpiredOAuth =
-                raw.status === "Delivered" && raw.oauth_expires_at && new Date(raw.oauth_expires_at) < new Date();
-
-            return (
-                <>
-                    <div className="flex justify-end gap-2">
-                        {isPendingOAuth && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handleOAuthConnect}
-                                disabled={connecting}
-                            >
-                                {connecting ? (
-                                    <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
-                                ) : (
-                                    <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
-                                )}
-                                Connect
-                            </Button>
-                        )}
-
-                        {isPendingTelegram && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => setTelegramOpen(true)}
-                            >
-                                <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
-                                Connect
-                            </Button>
-                        )}
-
-                        {isExpiredOAuth && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handleReconnect}
-                                disabled={reconnecting}
-                            >
-                                {reconnecting ? (
-                                    <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
-                                ) : (
-                                    <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
-                                )}
-                                Reconnect
-                            </Button>
-                        )}
-
-                        {!isPendingOAuth && !isPendingTelegram && !isExpiredOAuth && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => setViewOpen(true)}
-                            >
-                                {raw.entitlement.integration_type === "license_key" ? (
-                                    <KeyRound className="w-3.5 h-3.5 mr-1.5" />
-                                ) : (
-                                    <Eye className="w-3.5 h-3.5 mr-1.5" />
-                                )}
-                                View
-                            </Button>
-                        )}
-                    </div>
-                    <GrantDetailSheet
-                        grant={raw}
-                        open={viewOpen}
-                        onOpenChange={setViewOpen}
-                    />
-                    <Dialog open={telegramOpen} onOpenChange={setTelegramOpen}>
-                        <DialogContent className="sm:max-w-md">
-                            <DialogHeader>
-                                <DialogTitle>Connect Telegram</DialogTitle>
-                                <DialogDescription>
-                                    Enter your Telegram user ID to link your account to this entitlement.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <div className="flex flex-col gap-2 py-2">
-                                <Label htmlFor={`telegram-${raw.id}`}>Telegram user ID</Label>
-                                <Input
-                                    id={`telegram-${raw.id}`}
-                                    placeholder="e.g. 123456789"
-                                    value={telegramUserId}
-                                    onChange={(e) => setTelegramUserId(e.target.value)}
-                                />
-                            </div>
-                            <DialogFooter>
-                                <Button
-                                    variant="outline"
-                                    onClick={() => setTelegramOpen(false)}
-                                    disabled={telegramSubmitting}
-                                >
-                                    Cancel
-                                </Button>
-                                <Button
-                                    onClick={handleTelegramSubmit}
-                                    disabled={telegramSubmitting || !telegramUserId.trim()}
-                                >
-                                    {telegramSubmitting && (
-                                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                                    )}
-                                    Link account
-                                </Button>
-                            </DialogFooter>
-                        </DialogContent>
-                    </Dialog>
-                </>
-            );
-        },
+        cell: ({ row }) => <ActionCell raw={row.original.raw} />,
     },
 ];
