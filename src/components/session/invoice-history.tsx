@@ -10,6 +10,7 @@ import { formatCurrency, decodeCurrency } from "@/lib/currency-helper";
 import { CircleSlash } from "lucide-react";
 import ServerPagination from "@/components/common/server-pagination";
 import InvoiceDownloadSheet from "./invoice-download-sheet";
+import IDTooltip from "../custom/truncate-tooltip";
 import { useTranslations, useLocale } from "next-intl";
 
 export function InvoiceHistory({
@@ -39,7 +40,9 @@ export function InvoiceHistory({
       accessorKey: "payment_id",
       header: t("paymentId"),
       cell: ({ row }: { row: any }) => (
-        <div className="text-left">{row.original.payment_id}</div>
+        <div className="text-left">
+          <IDTooltip idValue={row.original.payment_id} />
+        </div>
       ),
     },
     {

@@ -106,7 +106,7 @@ export async function SubscriptionDetails({
             </CardContent>
           </section>
           {subscription.status === "active" && (
-            <div className="flex flex-col sm:flex-row border border-border-secondary rounded-lg p-4 items-start sm:items-end gap-4 sm:gap-6 my-auto w-full lg:w-auto">
+            <div className="flex flex-row flex-wrap justify-between sm:justify-normal sm:flex-nowrap border border-border-secondary rounded-lg p-4 items-start sm:items-end gap-4 sm:gap-6 my-auto w-full lg:w-auto">
               {currentPaymentMethod && (
                 <CurrentPaymentMethod paymentMethod={currentPaymentMethod} />
               )}
