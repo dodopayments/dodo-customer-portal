@@ -96,8 +96,14 @@ checksums:
     SubscriptionBillingEdit/countriesLoadFailed: ad26d712c22f062c44ebc8bda1fc1ff2
     CancelSubscriptionDialog/title: 0cfcfca8a626977f40d15d21c2fb4177
     CancelSubscriptionDialog/description: f0f8201877fb5d8decfdf60578ae04f4
+    CancelSubscriptionDialog/titleNextBillingDate: 14d486de32c0d276e5c3a8b97032c299
+    CancelSubscriptionDialog/descriptionNextBillingDate: 20caa6be47a73cd0ecfa2ed09d8e0696
+    CancelSubscriptionDialog/feedbackLabel: e8b5a41c5eed0c8bdf2080c2aa62b077
+    CancelSubscriptionDialog/commentLabel: a9509a47e0456ae98ec3ddac3d6fad2c
+    CancelSubscriptionDialog/commentPlaceholder: 376d14ce1cda7d19ee68d526832423ff
     CancelSubscriptionDialog/close: 2c2e22f8424a1031de89063bd0022e16
     CancelSubscriptionDialog/cancel: 2e2a849c2223911717de8caa2c71bade
+    CancelSubscriptionDialog/confirmNextBillingDate: 1a62e76e1fdce86fff62e0eb426ac937
     CancelSubscriptionDialog/cancelling: 6dcf56d1fa7ed307f0f8b41cc351093f
     CancelSubscriptionSheet/triggerCancel: e96e506867f44b9271bb24f18d375626
     CancelSubscriptionSheet/triggerRevoke: ca6d924861ee51567d527c724b9e21ea
@@ -110,6 +116,10 @@ checksums:
     CancelSubscriptionSheet/revoking: 5239f74aac1eaa8fbf4ac3c727a32276
     CancelSubscriptionSheet/cancelAtNextBilling: 7ec0ecb0d87c7527d4e01c343a045458
     CancelSubscriptionSheet/cancelling: 6dcf56d1fa7ed307f0f8b41cc351093f
+    CancelSubscriptionSheet/feedbackLabel: f4eac23857afdc8b674ba077e25e8799
+    CancelSubscriptionSheet/feedbackPlaceholder: 29c961f6bb66e0688f246799ce4a5561
+    CancelSubscriptionSheet/commentLabel: e4516837c8a83e3ffe22fff5897d38e0
+    CancelSubscriptionSheet/commentPlaceholder: 376d14ce1cda7d19ee68d526832423ff
     CancelSubscriptionSheet/cancelSuccess: b893ec527f33a7420b7c13955ab088ae
     CancelSubscriptionSheet/cancelScheduled: 2fb854f59f76779ea39e649bcfa29948
     CancelSubscriptionSheet/cancelFailed: c1b31d5a57883edad1c59f5f288c63af

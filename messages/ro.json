@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Sigur doriți să anulați abonamentul la acest serviciu?",
     "description": "Odată ce continuați, veți pierde accesul la toate beneficiile asociate, iar această acțiune nu poate fi anulată.",
+    "titleNextBillingDate": "Anulezi la următoarea dată de facturare?",
+    "descriptionNextBillingDate": "Abonamentul tău va fi anulat la următoarea dată de facturare.",
+    "feedbackLabel": "Care este motivul pentru care anulezi?",
+    "commentLabel": "Mai ai ceva de împărtășit?",
+    "commentPlaceholder": "Spune-ne mai multe (opțional)",
     "close": "Închideți",
     "cancel": "Anulați",
+    "confirmNextBillingDate": "Confirmă anularea",
     "cancelling": "Se anulează..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Se revocă...",
     "cancelAtNextBilling": "Anulați la următoarea dată de facturare",
     "cancelling": "Se anulează...",
+    "feedbackLabel": "De ce anulezi?",
+    "feedbackPlaceholder": "Selectează un motiv",
+    "commentLabel": "Comentarii suplimentare",
+    "commentPlaceholder": "Spune-ne mai multe (opțional)",
     "cancelSuccess": "Abonamentul a fost anulat cu succes",
     "cancelScheduled": "Abonamentul va fi anulat la următoarea dată de facturare",
     "cancelFailed": "Nu s-a putut anula abonamentul. Vă rugăm să încercați din nou.",

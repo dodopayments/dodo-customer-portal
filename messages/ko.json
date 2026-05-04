@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "이 서비스 구독을 취소하시겠습니까?",
     "description": "계속 진행하면 관련된 모든 혜택에 대한 접근 권한이 사라지며, 이 작업은 되돌릴 수 없습니다.",
+    "titleNextBillingDate": "다음 결제일에 취소하시겠습니까?",
+    "descriptionNextBillingDate": "구독은 다음 결제일에 취소됩니다.",
+    "feedbackLabel": "취소하시는 이유가 무엇인가요?",
+    "commentLabel": "추가로 공유하고 싶은 내용이 있나요?",
+    "commentPlaceholder": "자세히 알려주세요(선택 사항)",
     "close": "닫기",
     "cancel": "취소",
+    "confirmNextBillingDate": "취소 확인",
     "cancelling": "취소 중..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "철회 중...",
     "cancelAtNextBilling": "다음 청구일에 취소",
     "cancelling": "취소 중...",
+    "feedbackLabel": "취소하시는 이유가 무엇인가요?",
+    "feedbackPlaceholder": "이유를 선택하세요",
+    "commentLabel": "추가 의견",
+    "commentPlaceholder": "자세히 알려주세요(선택 사항)",
     "cancelSuccess": "구독이 성공적으로 취소되었습니다",
     "cancelScheduled": "구독은 다음 청구일에 취소됩니다",
     "cancelFailed": "구독 취소에 실패했습니다. 다시 시도해 주세요.",

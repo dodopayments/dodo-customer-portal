@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Are you certain you want to cancel your subscription to this service?",
     "description": "Once you proceed, you will lose access to all associated benefits and this action cannot be reversed.",
+    "titleNextBillingDate": "Cancel at next billing date?",
+    "descriptionNextBillingDate": "Your subscription will be cancelled at the next billing date.",
+    "feedbackLabel": "What's your reason for cancelling?",
+    "commentLabel": "Anything else you'd like to share?",
+    "commentPlaceholder": "Tell us more (optional)",
     "close": "Close",
     "cancel": "Cancel",
+    "confirmNextBillingDate": "Confirm Cancellation",
     "cancelling": "Cancelling..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Revoking...",
     "cancelAtNextBilling": "Cancel at next billing date",
     "cancelling": "Cancelling...",
+    "feedbackLabel": "Why are you cancelling?",
+    "feedbackPlaceholder": "Select a reason",
+    "commentLabel": "Additional comments",
+    "commentPlaceholder": "Tell us more (optional)",
     "cancelSuccess": "Subscription cancelled successfully",
     "cancelScheduled": "Subscription will be cancelled at next billing date",
     "cancelFailed": "Failed to cancel subscription. Please try again.",

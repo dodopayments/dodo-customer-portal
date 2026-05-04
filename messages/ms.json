@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Adakah anda pasti mahu membatalkan langganan anda untuk perkhidmatan ini?",
     "description": "Sebaik sahaja anda meneruskan, anda akan kehilangan akses kepada semua manfaat berkaitan dan tindakan ini tidak boleh dibatalkan.",
+    "titleNextBillingDate": "Batal pada tarikh bil seterusnya?",
+    "descriptionNextBillingDate": "Langganan anda akan dibatalkan pada tarikh bil seterusnya.",
+    "feedbackLabel": "Apakah sebab anda membatalkan?",
+    "commentLabel": "Ada apa-apa lagi yang ingin anda kongsikan?",
+    "commentPlaceholder": "Beritahu kami lebih lanjut (pilihan)",
     "close": "Tutup",
     "cancel": "Batal",
+    "confirmNextBillingDate": "Sahkan Pembatalan",
     "cancelling": "Sedang membatalkan..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Sedang menarik balik...",
     "cancelAtNextBilling": "Batalkan pada tarikh pengebilan seterusnya",
     "cancelling": "Sedang membatalkan...",
+    "feedbackLabel": "Mengapa anda membatalkan?",
+    "feedbackPlaceholder": "Pilih sebab",
+    "commentLabel": "Komen tambahan",
+    "commentPlaceholder": "Beritahu kami lebih lanjut (pilihan)",
     "cancelSuccess": "Langganan berjaya dibatalkan",
     "cancelScheduled": "Langganan akan dibatalkan pada tarikh pengebilan seterusnya",
     "cancelFailed": "Gagal membatalkan langganan. Sila cuba lagi.",

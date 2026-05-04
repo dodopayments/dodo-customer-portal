@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Sind Sie sicher, dass Sie Ihr Abonnement für diesen Service kündigen möchten?",
     "description": "Wenn Sie fortfahren, verlieren Sie den Zugriff auf alle zugehörigen Vorteile, und diese Aktion kann nicht rückgängig gemacht werden.",
+    "titleNextBillingDate": "Zum nächsten Abrechnungsdatum kündigen?",
+    "descriptionNextBillingDate": "Dein Abonnement wird zum nächsten Abrechnungsdatum gekündigt.",
+    "feedbackLabel": "Was ist dein Grund für die Kündigung?",
+    "commentLabel": "Möchtest du sonst noch etwas teilen?",
+    "commentPlaceholder": "Erzähl uns mehr (optional)",
     "close": "Schließen",
     "cancel": "Abbrechen",
+    "confirmNextBillingDate": "Kündigung bestätigen",
     "cancelling": "Wird gekündigt..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Wird widerrufen...",
     "cancelAtNextBilling": "Zum nächsten Abrechnungsdatum kündigen",
     "cancelling": "Wird gekündigt...",
+    "feedbackLabel": "Warum kündigst du?",
+    "feedbackPlaceholder": "Wähle einen Grund aus",
+    "commentLabel": "Zusätzliche Kommentare",
+    "commentPlaceholder": "Erzähl uns mehr (optional)",
     "cancelSuccess": "Abonnement erfolgreich gekündigt",
     "cancelScheduled": "Abonnement wird zum nächsten Abrechnungsdatum gekündigt",
     "cancelFailed": "Kündigung des Abonnements fehlgeschlagen. Bitte versuchen Sie es erneut.",

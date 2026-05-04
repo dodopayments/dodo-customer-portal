@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Är du säker på att du vill avsluta din prenumeration på den här tjänsten?",
     "description": "När du fortsätter förlorar du åtkomst till alla tillhörande förmåner och den här åtgärden kan inte ångras.",
+    "titleNextBillingDate": "Avsluta vid nästa faktureringsdatum?",
+    "descriptionNextBillingDate": "Din prenumeration avslutas vid nästa faktureringsdatum.",
+    "feedbackLabel": "Vad är din anledning till att du avslutar?",
+    "commentLabel": "Något annat du vill dela med dig av?",
+    "commentPlaceholder": "Berätta mer (valfritt)",
     "close": "Stäng",
     "cancel": "Avbryt",
+    "confirmNextBillingDate": "Bekräfta avslut",
     "cancelling": "Avslutar..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Återkallar...",
     "cancelAtNextBilling": "Avsluta vid nästa faktureringsdatum",
     "cancelling": "Avslutar...",
+    "feedbackLabel": "Varför avslutar du?",
+    "feedbackPlaceholder": "Välj en anledning",
+    "commentLabel": "Ytterligare kommentarer",
+    "commentPlaceholder": "Berätta mer (valfritt)",
     "cancelSuccess": "Prenumerationen avslutades",
     "cancelScheduled": "Prenumerationen avslutas vid nästa faktureringsdatum",
     "cancelFailed": "Det gick inte att avsluta prenumerationen. Försök igen.",

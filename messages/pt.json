@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Tem a certeza de que pretende cancelar a sua subscrição deste serviço?",
     "description": "Depois de prosseguir, perderá acesso a todos os benefícios associados e esta ação não pode ser revertida.",
+    "titleNextBillingDate": "Cancelar na próxima data de faturação?",
+    "descriptionNextBillingDate": "A sua subscrição será cancelada na próxima data de faturação.",
+    "feedbackLabel": "Qual é o motivo do cancelamento?",
+    "commentLabel": "Gostaria de partilhar algo mais?",
+    "commentPlaceholder": "Diga-nos mais (opcional)",
     "close": "Fechar",
     "cancel": "Cancelar",
+    "confirmNextBillingDate": "Confirmar cancelamento",
     "cancelling": "A cancelar..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "A revogar...",
     "cancelAtNextBilling": "Cancelar na próxima data de faturação",
     "cancelling": "A cancelar...",
+    "feedbackLabel": "Por que está a cancelar?",
+    "feedbackPlaceholder": "Selecione um motivo",
+    "commentLabel": "Comentários adicionais",
+    "commentPlaceholder": "Diga-nos mais (opcional)",
     "cancelSuccess": "Subscrição cancelada com sucesso",
     "cancelScheduled": "A subscrição será cancelada na próxima data de faturação",
     "cancelFailed": "Falha ao cancelar a subscrição. Tente novamente.",
