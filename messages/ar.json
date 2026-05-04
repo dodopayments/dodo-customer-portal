@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "هل أنت متأكد أنك تريد إلغاء اشتراكك في هذه الخدمة؟",
     "description": "بمجرد المتابعة، ستفقد الوصول إلى جميع المزايا المرتبطة ولا يمكن التراجع عن هذا الإجراء.",
+    "titleNextBillingDate": "إلغاء الاشتراك في تاريخ الفوترة التالي؟",
+    "descriptionNextBillingDate": "سيتم إلغاء اشتراكك في تاريخ الفوترة التالي.",
+    "feedbackLabel": "ما سبب إلغائك؟",
+    "commentLabel": "هل هناك أي شيء آخر تود مشاركته؟",
+    "commentPlaceholder": "أخبرنا المزيد (اختياري)",
     "close": "إغلاق",
     "cancel": "إلغاء",
+    "confirmNextBillingDate": "تأكيد الإلغاء",
     "cancelling": "جارٍ الإلغاء..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "جارٍ الإلغاء...",
     "cancelAtNextBilling": "إلغاء في تاريخ الفوترة التالي",
     "cancelling": "جارٍ الإلغاء...",
+    "feedbackLabel": "لماذا تلغي؟",
+    "feedbackPlaceholder": "اختر سببًا",
+    "commentLabel": "تعليقات إضافية",
+    "commentPlaceholder": "أخبرنا المزيد (اختياري)",
     "cancelSuccess": "تم إلغاء الاشتراك بنجاح",
     "cancelScheduled": "سيتم إلغاء الاشتراك في تاريخ الفوترة التالي",
     "cancelFailed": "فشل إلغاء الاشتراك. يرجى المحاولة مرة أخرى.",

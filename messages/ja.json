@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "このサービスのサブスクリプションを解約してもよろしいですか？",
     "description": "続行すると、関連する特典へのアクセスがすべて失われ、この操作は取り消せません。",
+    "titleNextBillingDate": "次回請求日に解約しますか？",
+    "descriptionNextBillingDate": "サブスクリプションは次回請求日に解約されます。",
+    "feedbackLabel": "解約理由を教えてください。",
+    "commentLabel": "ほかに共有したいことはありますか？",
+    "commentPlaceholder": "詳しく教えてください（任意）",
     "close": "閉じる",
     "cancel": "キャンセル",
+    "confirmNextBillingDate": "解約を確定",
     "cancelling": "解約中..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "取り消し中...",
     "cancelAtNextBilling": "次回の請求日に解約",
     "cancelling": "解約中...",
+    "feedbackLabel": "解約する理由を教えてください。",
+    "feedbackPlaceholder": "理由を選択",
+    "commentLabel": "追加コメント",
+    "commentPlaceholder": "詳しく教えてください（任意）",
     "cancelSuccess": "サブスクリプションを解約しました",
     "cancelScheduled": "サブスクリプションは次回の請求日に解約されます",
     "cancelFailed": "サブスクリプションの解約に失敗しました。もう一度お試しください。",

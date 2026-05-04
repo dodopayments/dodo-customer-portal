@@ -74,10 +74,23 @@ export interface SubscriptionDetailsData {
   trial_period_days: number;
 }
 
+export type CancellationFeedback =
+  | "too_expensive"
+  | "missing_features"
+  | "switched_service"
+  | "unused"
+  | "customer_service"
+  | "low_quality"
+  | "too_complex"
+  | "other";
+
+
 export interface CancelSubscriptionParams {
   subscription_id: string;
   cancelAtNextBillingDate?: boolean;
   revokeCancelation?: boolean;
+  cancellation_feedback?: CancellationFeedback | null;
+  cancellation_comment?: string | null;
 }
 
 export interface UpdateBillingDetailsParams {

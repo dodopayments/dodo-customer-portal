@@ -15,7 +15,15 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cancelSubscription } from "@/app/session/subscriptions/[id]/action";
+import { CancellationFeedback } from "@/app/session/subscriptions/[id]/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
@@ -28,6 +36,18 @@ import {
 import ProductMarkdownDescription from "../common/product-markdown-description";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+
+const CANCELLATION_REASONS: { value: CancellationFeedback; label: string }[] =
+  [
+    { value: "too_expensive", label: "Too expensive" },
+    { value: "missing_features", label: "Missing features" },
+    { value: "switched_service", label: "Switched to another service" },
+    { value: "unused", label: "Not using it enough" },
+    { value: "customer_service", label: "Poor customer service" },
+    { value: "low_quality", label: "Low quality" },
+    { value: "too_complex", label: "Too complex" },
+    { value: "other", label: "Other" },
+  ];
 
 interface CancelSubscriptionSheetProps {
   subscription: SubscriptionDetailsData;
@@ -44,6 +64,9 @@ export function CancelSubscriptionSheet({
   const [isCancellingAtNextBilling, setIsCancellingAtNextBilling] =
     useState(false);
   const [addonsOpen, setAddonsOpen] = useState(false);
+  const [selectedFeedback, setSelectedFeedback] =
+    useState<CancellationFeedback | "">("");
+  const [comment, setComment] = useState("");
   const router = useRouter();
 
   const handleCancelSubscription = async (cancelAtNextBillingDate = false) => {
@@ -53,9 +76,11 @@ export function CancelSubscriptionSheet({
       const result = await cancelSubscription({
         subscription_id: subscriptionId,
         cancelAtNextBillingDate,
+        cancellation_feedback: selectedFeedback || null,
+        cancellation_comment: comment.trim() || null,
       });
       if (!result.success) {
-        toast.error(result.error || t("cancelFailed"));
+        toast.error(t("cancelFailed"));
         return;
       }
       toast.success(
@@ -101,7 +126,16 @@ export function CancelSubscriptionSheet({
   );
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet
+      open={open}
+      onOpenChange={(o) => {
+        setOpen(o);
+        if (!o) {
+          setSelectedFeedback("");
+          setComment("");
+        }
+      }}
+    >
       <SheetTrigger asChild>
         <Button
           variant={
@@ -188,6 +222,51 @@ export function CancelSubscriptionSheet({
               )}
             </div>
           </div>
+
+          {!subscription.cancel_at_next_billing_date && (
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1.5">
+                <p className="font-body font-normal text-[13px] leading-[20px] text-text-secondary">
+                  {t("feedbackLabel")}{" "}
+                  <span className="text-red-500">*</span>
+                </p>
+                <Select
+                  value={selectedFeedback}
+                  onValueChange={(val) =>
+                    setSelectedFeedback(val as CancellationFeedback)
+                  }
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder={t("feedbackPlaceholder")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CANCELLATION_REASONS.map((reason) => (
+                      <SelectItem key={reason.value} value={reason.value}>
+                        {reason.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <p className="font-body font-normal text-[13px] leading-[20px] text-text-secondary">
+                  {t("commentLabel")}
+                </p>
+                <textarea
+                  className="w-full rounded-lg border border-border-secondary bg-transparent px-3 py-2 text-[13px] text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-1 focus:ring-border-primary resize-none"
+                  rows={3}
+                  maxLength={500}
+                  placeholder={t("commentPlaceholder")}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+                <p className="text-xs text-text-tertiary text-right">
+                  {comment.length}/500
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-4 pt-4 border-t border-border-secondary">
@@ -208,18 +287,16 @@ export function CancelSubscriptionSheet({
               </Button>
             </>
           ) : (
-            <>
-              <Button
-                variant="secondary"
-                className="w-full h-10"
-                onClick={() => handleCancelSubscription(true)}
-                disabled={isLoading}
-              >
-                {isLoading && isCancellingAtNextBilling
-                  ? t("cancelling")
-                  : t("cancelAtNextBilling")}
-              </Button>
-            </>
+            <Button
+              variant="secondary"
+              className="w-full h-10"
+              onClick={() => handleCancelSubscription(true)}
+              disabled={isLoading || !selectedFeedback}
+            >
+              {isLoading && isCancellingAtNextBilling
+                ? t("cancelling")
+                : t("cancelAtNextBilling")}
+            </Button>
           )}
         </div>
       </SheetContent>

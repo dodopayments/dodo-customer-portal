@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Weet je zeker dat je je abonnement op deze dienst wilt opzeggen?",
     "description": "Als je doorgaat, verlies je toegang tot alle bijbehorende voordelen en deze actie kan niet ongedaan worden gemaakt.",
+    "titleNextBillingDate": "Opzeggen op de volgende factureringsdatum?",
+    "descriptionNextBillingDate": "Je abonnement wordt opgezegd op de volgende factureringsdatum.",
+    "feedbackLabel": "Wat is je reden om op te zeggen?",
+    "commentLabel": "Wil je verder nog iets delen?",
+    "commentPlaceholder": "Vertel ons meer (optioneel)",
     "close": "Sluiten",
     "cancel": "Annuleren",
+    "confirmNextBillingDate": "Opzegging bevestigen",
     "cancelling": "Bezig met opzeggen..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Bezig met intrekken...",
     "cancelAtNextBilling": "Opzeggen op de volgende facturatiedatum",
     "cancelling": "Bezig met opzeggen...",
+    "feedbackLabel": "Waarom zeg je op?",
+    "feedbackPlaceholder": "Selecteer een reden",
+    "commentLabel": "Aanvullende opmerkingen",
+    "commentPlaceholder": "Vertel ons meer (optioneel)",
     "cancelSuccess": "Abonnement succesvol opgezegd",
     "cancelScheduled": "Abonnement wordt opgezegd op de volgende facturatiedatum",
     "cancelFailed": "Opzeggen van abonnement mislukt. Probeer het opnieuw.",

@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Êtes-vous sûr de vouloir annuler votre abonnement à ce service ?",
     "description": "Une fois l’opération confirmée, vous perdrez l’accès à tous les avantages associés et cette action ne pourra pas être annulée.",
+    "titleNextBillingDate": "Annuler à la prochaine date de facturation ?",
+    "descriptionNextBillingDate": "Votre abonnement sera annulé à la prochaine date de facturation.",
+    "feedbackLabel": "Quelle est la raison de votre annulation ?",
+    "commentLabel": "Souhaitez-vous ajouter autre chose ?",
+    "commentPlaceholder": "Dites-nous en plus (facultatif)",
     "close": "Fermer",
     "cancel": "Annuler",
+    "confirmNextBillingDate": "Confirmer l’annulation",
     "cancelling": "Annulation..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Annulation en cours...",
     "cancelAtNextBilling": "Annuler à la prochaine date de facturation",
     "cancelling": "Annulation...",
+    "feedbackLabel": "Pourquoi annulez-vous ?",
+    "feedbackPlaceholder": "Sélectionnez une raison",
+    "commentLabel": "Commentaires supplémentaires",
+    "commentPlaceholder": "Dites-nous en plus (facultatif)",
     "cancelSuccess": "Abonnement annulé avec succès",
     "cancelScheduled": "L’abonnement sera annulé à la prochaine date de facturation",
     "cancelFailed": "Échec de l’annulation de l’abonnement. Veuillez réessayer.",

@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Czy na pewno chcesz anulować subskrypcję tej usługi?",
     "description": "Po kontynuowaniu utracisz dostęp do wszystkich powiązanych korzyści, a tej akcji nie można cofnąć.",
+    "titleNextBillingDate": "Anulować w następnym dniu rozliczeniowym?",
+    "descriptionNextBillingDate": "Twoja subskrypcja zostanie anulowana w następnym dniu rozliczeniowym.",
+    "feedbackLabel": "Jaki jest powód anulowania?",
+    "commentLabel": "Czy jest coś jeszcze, czym chcesz się podzielić?",
+    "commentPlaceholder": "Powiedz nam więcej (opcjonalnie)",
     "close": "Zamknij",
     "cancel": "Anuluj",
+    "confirmNextBillingDate": "Potwierdź anulowanie",
     "cancelling": "Anulowanie..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Cofanie...",
     "cancelAtNextBilling": "Anuluj w następnym terminie rozliczenia",
     "cancelling": "Anulowanie...",
+    "feedbackLabel": "Dlaczego anulowujesz?",
+    "feedbackPlaceholder": "Wybierz powód",
+    "commentLabel": "Dodatkowe uwagi",
+    "commentPlaceholder": "Powiedz nam więcej (opcjonalnie)",
     "cancelSuccess": "Subskrypcja została anulowana",
     "cancelScheduled": "Subskrypcja zostanie anulowana w następnym terminie rozliczenia",
     "cancelFailed": "Nie udało się anulować subskrypcji. Spróbuj ponownie.",

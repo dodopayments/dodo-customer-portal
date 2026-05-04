@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Segur que vols cancel·lar la subscripció a aquest servei?",
     "description": "Quan continuïs, perdràs l’accés a tots els beneficis associats i aquesta acció no es pot desfer.",
+    "titleNextBillingDate": "Cancel·lar a la propera data de facturació?",
+    "descriptionNextBillingDate": "La teva subscripció es cancel·larà a la propera data de facturació.",
+    "feedbackLabel": "Quin és el motiu de la cancel·lació?",
+    "commentLabel": "Hi ha res més que voldries compartir?",
+    "commentPlaceholder": "Explica'ns-en més (opcional)",
     "close": "Tanca",
     "cancel": "Cancel·la",
+    "confirmNextBillingDate": "Confirma la cancel·lació",
     "cancelling": "S’està cancel·lant..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "S’està revocant...",
     "cancelAtNextBilling": "Cancel·la a la propera data de facturació",
     "cancelling": "S’està cancel·lant...",
+    "feedbackLabel": "Per què cancel·les?",
+    "feedbackPlaceholder": "Selecciona un motiu",
+    "commentLabel": "Comentaris addicionals",
+    "commentPlaceholder": "Explica'ns-en més (opcional)",
     "cancelSuccess": "Subscripció cancel·lada correctament",
     "cancelScheduled": "La subscripció es cancel·larà a la propera data de facturació",
     "cancelFailed": "No s’ha pogut cancel·lar la subscripció. Torna-ho a provar.",

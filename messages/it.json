@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "Sei sicuro di voler annullare l'abbonamento a questo servizio?",
     "description": "Una volta confermato, perderai l'accesso a tutti i benefici associati e questa azione non può essere annullata.",
+    "titleNextBillingDate": "Annullare alla prossima data di fatturazione?",
+    "descriptionNextBillingDate": "L'abbonamento verrà annullato alla prossima data di fatturazione.",
+    "feedbackLabel": "Qual è il motivo dell'annullamento?",
+    "commentLabel": "C'è qualcos'altro che vorresti condividere?",
+    "commentPlaceholder": "Raccontaci di più (facoltativo)",
     "close": "Chiudi",
     "cancel": "Annulla",
+    "confirmNextBillingDate": "Conferma annullamento",
     "cancelling": "Annullamento in corso..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "Revoca in corso...",
     "cancelAtNextBilling": "Annulla alla prossima data di fatturazione",
     "cancelling": "Annullamento in corso...",
+    "feedbackLabel": "Perché stai annullando?",
+    "feedbackPlaceholder": "Seleziona un motivo",
+    "commentLabel": "Commenti aggiuntivi",
+    "commentPlaceholder": "Raccontaci di più (facoltativo)",
     "cancelSuccess": "Abbonamento annullato correttamente",
     "cancelScheduled": "L'abbonamento verrà annullato alla prossima data di fatturazione",
     "cancelFailed": "Impossibile annullare l'abbonamento. Riprova.",

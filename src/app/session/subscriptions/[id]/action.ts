@@ -22,10 +22,13 @@ export async function getSessionToken(): Promise<string | null> {
   return await getToken();
 }
 
+
 export async function cancelSubscription({
   subscription_id,
   cancelAtNextBillingDate,
   revokeCancelation,
+  cancellation_feedback,
+  cancellation_comment,
 }: CancelSubscriptionParams): Promise<ActionResult<unknown>> {
   try {
     let url = `/customer-portal/subscriptions/${subscription_id}`;
@@ -41,13 +44,18 @@ export async function cancelSubscription({
         method: "PATCH",
         body: JSON.stringify({
           cancel_at_next_billing_date: true,
+          ...(cancellation_feedback && { cancellation_feedback }),
+          ...(cancellation_comment && { cancellation_comment }),
         }),
       };
     } else {
       url += "/cancel";
       options = {
         method: "POST",
-        body: JSON.stringify({}),
+        body: JSON.stringify({
+          ...(cancellation_feedback && { cancellation_feedback }),
+          ...(cancellation_comment && { cancellation_comment }),
+        }),
       };
     }
 

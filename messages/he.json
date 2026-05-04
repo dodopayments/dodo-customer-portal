@@ -127,8 +127,14 @@
   "CancelSubscriptionDialog": {
     "title": "האם את/ה בטוח/ה שברצונך לבטל את המנוי לשירות זה?",
     "description": "לאחר שתמשיך/י, תאבד/י גישה לכל ההטבות המשויכות ולא ניתן יהיה לבטל פעולה זו.",
+    "titleNextBillingDate": "לבטל במועד החיוב הבא?",
+    "descriptionNextBillingDate": "המינוי שלך יבוטל במועד החיוב הבא.",
+    "feedbackLabel": "מה הסיבה לביטול?",
+    "commentLabel": "יש משהו נוסף שתרצה/י לשתף?",
+    "commentPlaceholder": "ספר/י לנו עוד (אופציונלי)",
     "close": "סגירה",
     "cancel": "ביטול",
+    "confirmNextBillingDate": "אישור ביטול",
     "cancelling": "מבטל..."
   },
   "CancelSubscriptionSheet": {
@@ -143,6 +149,10 @@
     "revoking": "מבטל...",
     "cancelAtNextBilling": "ביטול בתאריך החיוב הבא",
     "cancelling": "מבטל...",
+    "feedbackLabel": "למה את/ה מבטל/ת?",
+    "feedbackPlaceholder": "בחר/י סיבה",
+    "commentLabel": "הערות נוספות",
+    "commentPlaceholder": "ספר/י לנו עוד (אופציונלי)",
     "cancelSuccess": "המנוי בוטל בהצלחה",
     "cancelScheduled": "המנוי יבוטל בתאריך החיוב הבא",
     "cancelFailed": "ביטול המנוי נכשל. נסו שוב.",
