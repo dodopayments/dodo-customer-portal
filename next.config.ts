@@ -94,7 +94,6 @@ const sentryConfig = {
   sentryUrl: "https://sentry.dodopayments.tech/",
   silent: !process.env.CI,
   widenClientFileUpload: true,
-  disableLogger: true,
 };
 
 const config =

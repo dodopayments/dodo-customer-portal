@@ -3,8 +3,6 @@ import { Gabarito, Inter, Hanken_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/hooks/theme-provider";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import type { AbstractIntlMessages } from "next-intl";
 import { getUserLocale } from "@/lib/i18n-helper";
 import { LanguageSelector } from "@/components/custom/language-selector";
 import ThemeToaster from "@/hooks/theme-toaster";
@@ -59,14 +57,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  let locale: string = "en";
-  let messages: AbstractIntlMessages = {};
-  try {
-    locale = await getUserLocale();
-    messages = await getMessages();
-  } catch (error) {
-    console.error("[i18n] Root layout failed to load locale/messages", { error });
-  }
+  const locale = await getUserLocale();
 
   // Read theme_mode from cookie (set during session validation) — no API call
   const cookieStore = await cookies();
@@ -91,7 +82,7 @@ export default async function RootLayout({
           disableTransitionOnChange
           themeMode={themeMode}
         >
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider>
             <main className="h-full w-full">
               <ThemeToaster />
               {children}

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { locales, LOCALE_COOKIE_OPTIONS } from "@/i18n/config";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
   // Normalize BCP 47 tags (e.g. "en-US" → "en") and persist as cookie.
