@@ -54,11 +54,11 @@ function sanitizeMessage(message: string | undefined, fallback: string): string 
  * Server-side error parser.
  * Logs a normalized error message and returns it, without using any client-only APIs.
  */
-function parseError(
+async function parseError(
   error: unknown,
   customMessage?: string,
   storeFront?: boolean,
-): ParsedServerError {
+): Promise<ParsedServerError> {
   const defaultMessage = customMessage || "Something went wrong";
 
   if (!isErrorDetails(error)) {
