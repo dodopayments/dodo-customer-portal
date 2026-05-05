@@ -148,11 +148,12 @@ export function SubscriptionNoteDisplay({
   return (
     <div
       className={cn(
-        "px-4 pt-6 pb-3 rounded-b-xl",
+        "px-4 pt-6 pb-3 rounded-b-xl flex items-start gap-2",
         useOverride ? INFO_STYLE_OVERRIDE : badgeVariants[variant],
-        !useOverride && "border-t"
+        !useOverride && "border"
       )}
     >
+      <span className="mt-0.5">{note.icon}</span>
       <p
         className={cn(
           "text-sm",

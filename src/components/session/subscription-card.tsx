@@ -27,9 +27,10 @@ import ProductMarkdownDescription from "../common/product-markdown-description";
 import { CreditCard } from "lucide-react";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
 import { getPaymentMethodLogoUrl } from "./payment-methods/payment-method-logo";
-import { SubscriptionNotes } from "./subscription-notes";
+import { SubscriptionNotes, getSubscriptionNotes } from "./subscription-notes";
 import { useBusiness } from "@/hooks/use-business";
 import { useTranslations, useLocale } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface SubscriptionCardProps {
   item: SubscriptionData;
@@ -78,6 +79,9 @@ export const SubscriptionCard = ({
   const locale = useLocale();
   const router = useRouter();
   const { business } = useBusiness();
+  const hasNotes =
+    getSubscriptionNotes(item, business?.name || undefined, locale).length > 0;
+  const attachedToNotesClass = hasNotes ? "rounded-b-none shadow-none" : "";
 
   const getButtonText = (status: SubscriptionStatus) => {
     switch (status) {
@@ -97,7 +101,11 @@ export const SubscriptionCard = ({
     return (
       <div>
         <Card
-          className={`relative z-10 shadow-[0px_2px_12px_0px_rgba(68,81,104,0.1)] ${cardClassName}`}
+          className={cn(
+            "relative z-10 shadow-[0px_2px_12px_0px_rgba(68,81,104,0.1)]",
+            attachedToNotesClass,
+            cardClassName
+          )}
         >
           <CardContent className="p-4 sm:p-5 md:p-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
@@ -211,7 +219,7 @@ export const SubscriptionCard = ({
   // Detail variant - full design with image, description, badges
   return (
     <div>
-      <Card className={`relative z-10 ${cardClassName}`}>
+      <Card className={cn("relative z-10", attachedToNotesClass, cardClassName)}>
         <CardContent className="flex flex-col sm:flex-row items-start px-0 gap-4 pb-0 sm:pb-6">
           {item.product.image && (
             <Image
