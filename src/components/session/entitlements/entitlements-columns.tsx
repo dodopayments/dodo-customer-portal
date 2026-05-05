@@ -21,18 +21,11 @@ import {
     acceptEntitlementGrant,
 } from "@/app/session/entitlements/actions";
 
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Eye, EyeOff, Download, Loader2, ExternalLink, KeyRound, FileMinus } from "lucide-react";
+import { Mode } from "@/lib/http";
 
 export interface EntitlementRow {
     id: string;
@@ -201,43 +194,73 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
                 open={viewOpen}
                 onOpenChange={setViewOpen}
             />
-            <Dialog open={telegramOpen} onOpenChange={setTelegramOpen}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Connect Telegram</DialogTitle>
-                        <DialogDescription>
-                            Enter your Telegram user ID to link your account to this entitlement.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="flex flex-col gap-2 py-2">
-                        <Label htmlFor={`telegram-${raw.id}`}>Telegram user ID</Label>
-                        <Input
-                            id={`telegram-${raw.id}`}
-                            placeholder="e.g. 123456789"
-                            value={telegramUserId}
-                            onChange={(e) => setTelegramUserId(e.target.value)}
-                        />
-                    </div>
-                    <DialogFooter>
+            <Sheet open={telegramOpen} onOpenChange={setTelegramOpen}>
+                <SheetContent
+                    className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6"
+                    floating
+                    side="right"
+                >
+                    <SheetHeader>
+                        <SheetTitle>Connect Telegram</SheetTitle>
+                    </SheetHeader>
+                    <Separator className="my-4" />
+                    <div className="flex flex-col gap-4">
+                        <p className="text-sm text-text-secondary">
+                            Open{" "}
+                            <span className="font-mono text-text-primary">
+                                {Mode === "live"
+                                    ? "@dodo_payments_bot"
+                                    : "@DodoPaymentsTestBot"}
+                            </span>{" "}
+                            on Telegram and send{" "}
+                            <span className="font-mono text-text-primary">/start</span> to get your user ID. After linking, accept the join request the bot sends you.
+                        </p>
+
                         <Button
-                            variant="outline"
-                            onClick={() => setTelegramOpen(false)}
-                            disabled={telegramSubmitting}
+                            variant="secondary"
+                            className="w-fit"
+                            onClick={() =>
+                                window.open(
+                                    Mode === "live"
+                                        ? "https://t.me/dodo_payments_bot"
+                                        : "https://t.me/DodoPaymentsTestBot",
+                                    "_blank",
+                                    "noopener,noreferrer",
+                                )
+                            }
                         >
-                            Cancel
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Open Telegram bot
                         </Button>
+
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor={`telegram-${raw.id}`}>
+                                Telegram user ID
+                            </Label>
+                            <Input
+                                id={`telegram-${raw.id}`}
+                                placeholder="123456789"
+                                inputMode="numeric"
+                                value={telegramUserId}
+                                onChange={(e) => setTelegramUserId(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" && telegramUserId.trim() && !telegramSubmitting) {
+                                        handleTelegramSubmit();
+                                    }
+                                }}
+                            />
+                        </div>
+
                         <Button
+                            className="w-full mt-2"
                             onClick={handleTelegramSubmit}
                             disabled={telegramSubmitting || !telegramUserId.trim()}
                         >
-                            {telegramSubmitting && (
-                                <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                            )}
-                            Link account
+                            {telegramSubmitting ? "Linking" : "Link account"}
                         </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+                    </div>
+                </SheetContent>
+            </Sheet>
         </>
     );
 }
