@@ -55,6 +55,11 @@ export interface DigitalProductDelivery {
   external_url: string | null;
 }
 
+export interface FramerDelivery {
+  remix_link: string;
+  template_name?: string | null;
+}
+
 export interface PortalGrantResponse {
   id: string;
   entitlement: EntitlementSummary;
@@ -68,6 +73,7 @@ export interface PortalGrantResponse {
   oauth_url?: string | null;
   license_key: LicenseKeyGrant | null;
   digital_product_delivery: DigitalProductDelivery | null;
+  framer_delivery: FramerDelivery | null;
   error?: GrantErrorInfo | null;
 }
 

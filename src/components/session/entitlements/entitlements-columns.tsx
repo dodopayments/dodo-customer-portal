@@ -20,6 +20,7 @@ import {
     reconnectEntitlementGrant,
     acceptEntitlementGrant,
 } from "@/app/session/entitlements/actions";
+
 import {
     Dialog,
     DialogContent,
@@ -265,10 +266,29 @@ function GrantDetailSheet({
     open: boolean;
     onOpenChange: (open: boolean) => void;
 }) {
+    const router = useRouter();
     const [visible, setVisible] = useState(false);
+    const [reconnecting, setReconnecting] = useState(false);
 
     const isLicenseKey = grant?.entitlement.integration_type === "license_key";
     const isDigitalFiles = grant?.entitlement.integration_type === "digital_files";
+    const isFramer = grant?.entitlement.integration_type === "framer";
+
+    const handleReconnect = async () => {
+        if (!grant) return;
+        setReconnecting(true);
+        const res = await reconnectEntitlementGrant(grant.id);
+        setReconnecting(false);
+        if (res?.oauth_url) {
+            window.open(res.oauth_url, "_blank", "noopener,noreferrer");
+            router.refresh();
+        } else if (res) {
+            toast.success("Reconnected successfully");
+            router.refresh();
+        } else {
+            toast.error("Failed to reconnect");
+        }
+    };
 
     useEffect(() => {
         if (!open) setVisible(false);
@@ -362,17 +382,65 @@ function GrantDetailSheet({
                         </div>
                     )}
 
-                    {grant.status === "Delivered" && grant.oauth_url && (
+                    {grant.status === "Delivered" &&
+                        grant.oauth_expires_at &&
+                        new Date(grant.oauth_expires_at) < new Date() && (
                         <div className="flex items-center justify-between">
                             <span className="text-sm text-text-secondary">OAuth connection</span>
                             <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => window.open(grant.oauth_url!, "_blank", "noopener,noreferrer")}
+                                onClick={handleReconnect}
+                                disabled={reconnecting}
                             >
-                                <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                                {reconnecting ? (
+                                    <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
+                                ) : (
+                                    <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                                )}
                                 Reconnect
                             </Button>
+                        </div>
+                    )}
+
+                    {isFramer && grant.status !== "Delivered" && (
+                        <p className="text-sm text-text-secondary">
+                            Your Framer template link will be available once the entitlement is delivered.
+                        </p>
+                    )}
+
+                    {isFramer && grant.status === "Delivered" && (
+                        <div className="space-y-3">
+                            {grant.framer_delivery ? (
+                                <div className="space-y-3">
+                                    {grant.framer_delivery.template_name && (
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-text-secondary">Template</span>
+                                            <span className="text-sm text-text-primary font-medium">
+                                                {grant.framer_delivery.template_name}
+                                            </span>
+                                        </div>
+                                    )}
+                                    <Button
+                                        variant="secondary"
+                                        className="w-full"
+                                        onClick={() =>
+                                            window.open(
+                                                grant.framer_delivery!.remix_link,
+                                                "_blank",
+                                                "noopener,noreferrer",
+                                            )
+                                        }
+                                    >
+                                        <ExternalLink className="w-4 h-4 mr-2" />
+                                        Open in Framer
+                                    </Button>
+                                </div>
+                            ) : (
+                                <p className="text-sm text-text-secondary">
+                                    No Framer template link available.
+                                </p>
+                            )}
                         </div>
                     )}
 
