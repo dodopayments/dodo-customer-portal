@@ -207,7 +207,17 @@
     "previewFailed": "Gagal memuatkan pratonton. Sila cuba lagi.",
     "changeFailed": "Gagal menukar pelan. Sila cuba lagi.",
     "changeSuccess": "Pelan berjaya ditukar",
-    "addonRequired": "Sila pilih sekurang-kurangnya satu add-on dengan kuantiti 1 atau lebih."
+    "addonRequired": "Sila pilih sekurang-kurangnya satu add-on dengan kuantiti 1 atau lebih.",
+    "discountsTitle": "Discounts",
+    "discountsDescription": "Add or remove discount codes for the new plan. Max 20.",
+    "discountsSave": "Save",
+    "discountsPlaceholder": "Enter discount code",
+    "discountsAdd": "Add discount",
+    "discountsAddMore": "Add more",
+    "discountsRemove": "Remove discount code",
+    "discountsApplied": "Discounts applied",
+    "discountMaxReached": "Maximum of 20 discount codes allowed",
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Edit",

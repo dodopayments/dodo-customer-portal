@@ -24,6 +24,7 @@ import { PlanPreview } from "./plan-preview";
 import type {
   ProductCollectionData,
   ProductCollectionProduct,
+  DiscountDetailResponse,
 } from "@/app/session/subscriptions/[id]/types";
 import type { AddOn } from "@/app/session/subscriptions/[id]/types";
 import { useTranslations } from "next-intl";
@@ -81,6 +82,7 @@ interface ChangePlanSheetProps {
   subscriptionId: string;
   currentAddons: AddOn[];
   currentQuantity: number;
+  currentDiscounts?: DiscountDetailResponse[] | null;
   productCollection?: ProductCollectionData | null;
   allowMultipleSubscriptions?: boolean;
 }
@@ -128,6 +130,7 @@ export function ChangePlanSheet({
   subscriptionId,
   currentAddons,
   currentQuantity,
+  currentDiscounts,
   productCollection,
   allowMultipleSubscriptions = true,
 }: ChangePlanSheetProps) {
@@ -384,6 +387,7 @@ export function ChangePlanSheet({
             currentQuantity={currentQuantity}
             subscriptionId={subscriptionId}
             currentAddons={currentAddons}
+            currentDiscounts={currentDiscounts}
             onBackClick={() => setCurrentView("select")}
             onConfirm={() => {
               setOpen(false);

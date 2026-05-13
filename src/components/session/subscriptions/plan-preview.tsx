@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
-import { ArrowLeft, Info, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Info, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { SheetHeader } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -18,6 +19,7 @@ import type {
   ProrationBillingMode,
   ProductCollectionProduct,
   ChangeSubscriptionPlanPreviewResponse,
+  DiscountDetailResponse,
   LineItem,
   CustomerPortalAddonDetail,
 } from "@/app/session/subscriptions/[id]/types";
@@ -53,6 +55,7 @@ interface PlanPreviewProps {
   quantity: number;
   currentQuantity: number;
   currentAddons: AddOn[];
+  currentDiscounts?: DiscountDetailResponse[] | null;
 }
 
 const asCurrencyCode = (
@@ -512,6 +515,7 @@ export function PlanPreview({
   quantity,
   currentQuantity,
   currentAddons,
+  currentDiscounts,
 }: PlanPreviewProps) {
   const t = useTranslations("PlanPreview");
   const [isConfirming, setIsConfirming] = useState(false);
@@ -523,7 +527,48 @@ export function PlanPreview({
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
   const [editableAddons, setEditableAddons] = useState<AddOn[]>([]);
   const [productAddons, setProductAddons] = useState<CustomerPortalAddonDetail[]>([]);
+  const initialDiscountCodes = useMemo(
+    () =>
+      (currentDiscounts || [])
+        .slice()
+        .sort((a, b) => a.position - b.position)
+        .map((d) => d.code),
+    [currentDiscounts],
+  );
+  const [discountCodes, setDiscountCodes] = useState<string[]>(initialDiscountCodes);
+  const [savedCodes, setSavedCodes] = useState<string[]>(initialDiscountCodes);
+  const [discountError, setDiscountError] = useState(false);
+  const [isSavingDiscounts, setIsSavingDiscounts] = useState(false);
   const router = useRouter();
+
+  const discountsChanged =
+    discountCodes
+      .map((c) => c.trim())
+      .filter(Boolean)
+      .join(",") !== savedCodes.join(",");
+
+  const handleAddDiscount = () => {
+    if (discountCodes.length >= 20) {
+      toast.error(t("discountMaxReached"));
+      return;
+    }
+    setDiscountCodes((prev) => [...prev, ""]);
+    setDiscountError(false);
+  };
+
+  const handleRemoveDiscount = (index: number) => {
+    setDiscountCodes((prev) => prev.filter((_, i) => i !== index));
+    setDiscountError(false);
+  };
+
+  const handleEditDiscount = (index: number, value: string) => {
+    setDiscountCodes((prev) => {
+      const next = [...prev];
+      next[index] = value;
+      return next;
+    });
+    setDiscountError(false);
+  };
 
   const isUsageBasedProduct = (selectedProduct?.meters_count ?? 0) > 0;
   const requiresAtLeastOneAddon = currentAddons.length > 0 && !isUsageBasedProduct;
@@ -631,7 +676,9 @@ export function PlanPreview({
         const addonsToSend = isUsageBasedProduct 
           ? null 
           : editableAddons.filter(a => a.quantity > 0);
-        
+        const savedCodesDiffer =
+          savedCodes.join(",") !== initialDiscountCodes.join(",");
+
         const result = await changeSubscriptionPlanPreview({
           subscription_id: subscriptionId,
           data: {
@@ -640,6 +687,7 @@ export function PlanPreview({
             proration_billing_mode: billingMode,
             addons: addonsToSend && addonsToSend.length > 0 ? addonsToSend : null,
             metadata: null,
+            ...(savedCodesDiffer ? { discount_codes: savedCodes } : {}),
           },
         });
         if (!result.success) {
@@ -667,7 +715,50 @@ export function PlanPreview({
     editableAddons,
     onBackClick,
     isUsageBasedProduct,
+    savedCodes,
+    initialDiscountCodes,
+    t,
   ]);
+
+  const handleSaveDiscounts = async () => {
+    if (!selectedProduct) return;
+    const trimmed = discountCodes.map((c) => c.trim()).filter(Boolean);
+    const addonsToSend = isUsageBasedProduct
+      ? null
+      : editableAddons.filter((a) => a.quantity > 0);
+
+    setIsSavingDiscounts(true);
+    setDiscountError(false);
+    try {
+      const result = await changeSubscriptionPlanPreview({
+        subscription_id: subscriptionId,
+        data: {
+          product_id: selectedProduct.product_id,
+          quantity: Math.max(quantity, 1),
+          proration_billing_mode: billingMode,
+          addons:
+            addonsToSend && addonsToSend.length > 0 ? addonsToSend : null,
+          metadata: null,
+          discount_codes: trimmed,
+        },
+      });
+      if (!result.success) {
+        setDiscountError(true);
+        toast.error(result.error || t("discountsFailed"));
+        return;
+      }
+      setPreviewData(result.data);
+      setDiscountCodes(trimmed);
+      setSavedCodes(trimmed);
+      toast.success(t("discountsApplied"));
+    } catch (error) {
+      console.error("Failed to apply discounts:", error);
+      setDiscountError(true);
+      parseError(error, t("discountsFailed"));
+    } finally {
+      setIsSavingDiscounts(false);
+    }
+  };
 
   
   if (!selectedProduct) {
@@ -722,6 +813,8 @@ export function PlanPreview({
         ? []
         : editableAddons.filter(a => a.quantity > 0);
 
+      const savedCodesDiffer =
+        savedCodes.join(",") !== initialDiscountCodes.join(",");
       const result = await changeSubscriptionPlan({
         subscription_id: subscriptionId,
         data: {
@@ -730,6 +823,7 @@ export function PlanPreview({
           proration_billing_mode: billingMode,
           addons: addonsToSend,
           metadata: null,
+          ...(savedCodesDiffer ? { discount_codes: savedCodes } : {}),
         },
       });
       if (!result.success) {
@@ -883,6 +977,77 @@ export function PlanPreview({
               />
             )}
 
+            <Card className="border-border-secondary">
+              <CardContent className="p-4 flex flex-col gap-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex flex-col">
+                    <h5 className="text-text-primary font-medium text-sm">
+                      {t("discountsTitle")}
+                    </h5>
+                    <p className="text-text-secondary text-xs">
+                      {t("discountsDescription")}
+                    </p>
+                  </div>
+                  <Button
+                    size="sm"
+                    onClick={handleSaveDiscounts}
+                    disabled={isSavingDiscounts || !discountsChanged}
+                  >
+                    {isSavingDiscounts ? (
+                      <Loading className="h-4 w-4" />
+                    ) : (
+                      t("discountsSave")
+                    )}
+                  </Button>
+                </div>
+
+                {discountCodes.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    {discountCodes.map((code, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <Input
+                          value={code}
+                          onChange={(e) =>
+                            handleEditDiscount(index, e.target.value)
+                          }
+                          placeholder={t("discountsPlaceholder")}
+                          className={`flex-1 h-9 ${
+                            discountError
+                              ? "border-border-error-primary focus-visible:ring-border-error-primary"
+                              : ""
+                          }`}
+                          disabled={isSavingDiscounts}
+                        />
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          className="h-9 w-9 text-text-secondary hover:text-text-error-primary"
+                          onClick={() => handleRemoveDiscount(index)}
+                          disabled={isSavingDiscounts}
+                          aria-label={t("discountsRemove")}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={handleAddDiscount}
+                  disabled={discountCodes.length >= 20 || isSavingDiscounts}
+                  className="w-fit"
+                >
+                  <Plus className="h-4 w-4 mr-1" />
+                  {discountCodes.length === 0
+                    ? t("discountsAdd")
+                    : t("discountsAddMore")}
+                </Button>
+              </CardContent>
+            </Card>
+
             <div className="flex flex-col gap-3">
               <Card className="border-border-secondary">
                 <CardContent className="p-4 flex flex-col gap-0 bg-button-secondary-bg rounded-lg">
@@ -953,7 +1118,14 @@ export function PlanPreview({
             <Button
               className="w-full"
               onClick={handleConfirmChangePlan}
-              disabled={isConfirming || isLoadingPreview || !previewData}
+              disabled={
+                isConfirming ||
+                isLoadingPreview ||
+                !previewData ||
+                isSavingDiscounts ||
+                discountsChanged ||
+                discountError
+              }
               loading={isConfirming}
             >
               {previewData && summary

@@ -207,7 +207,17 @@
     "previewFailed": "No s’ha pogut carregar la previsualització. Torna-ho a provar.",
     "changeFailed": "No s’ha pogut canviar el pla. Torna-ho a provar.",
     "changeSuccess": "El pla s’ha canviat correctament",
-    "addonRequired": "Selecciona com a mínim un complement amb quantitat 1 o superior."
+    "addonRequired": "Selecciona com a mínim un complement amb quantitat 1 o superior.",
+    "discountsTitle": "Discounts",
+    "discountsDescription": "Add or remove discount codes for the new plan. Max 20.",
+    "discountsSave": "Save",
+    "discountsPlaceholder": "Enter discount code",
+    "discountsAdd": "Add discount",
+    "discountsAddMore": "Add more",
+    "discountsRemove": "Remove discount code",
+    "discountsApplied": "Discounts applied",
+    "discountMaxReached": "Maximum of 20 discount codes allowed",
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Edita",
