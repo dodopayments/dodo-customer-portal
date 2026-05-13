@@ -44,10 +44,7 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/session/overview/:path*",
-    "/session/orders/:path*",
     "/session/subscriptions/:path*",
-    "/session/payment-methods/:path*",
-    "/session/profile/:path*",
     "/businesses/:path*",
   ],
 };
