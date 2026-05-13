@@ -207,7 +207,17 @@
     "previewFailed": "Impossibile caricare l'anteprima. Riprova.",
     "changeFailed": "Impossibile cambiare piano. Riprova.",
     "changeSuccess": "Piano cambiato correttamente",
-    "addonRequired": "Seleziona almeno un add-on con quantità pari o superiore a 1."
+    "addonRequired": "Seleziona almeno un add-on con quantità pari o superiore a 1.",
+    "discountsTitle": "Discounts",
+    "discountsDescription": "Add or remove discount codes for the new plan. Max 20.",
+    "discountsSave": "Save",
+    "discountsPlaceholder": "Enter discount code",
+    "discountsAdd": "Add discount",
+    "discountsAddMore": "Add more",
+    "discountsRemove": "Remove discount code",
+    "discountsApplied": "Discounts applied",
+    "discountMaxReached": "Maximum of 20 discount codes allowed",
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Modifica",

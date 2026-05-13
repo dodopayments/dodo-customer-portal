@@ -43,6 +43,25 @@ export interface Product {
   name: string;
 }
 
+export interface DiscountDetailResponse {
+  position: number;
+  discount_id: string;
+  business_id: string;
+  type: string;
+  code: string;
+  amount: number;
+  times_used: number;
+  restricted_to?: string[] | null;
+  created_at: string;
+  preserve_on_plan_change: boolean;
+  metadata?: Record<string, unknown> | null;
+  cycles_remaining?: number | null;
+  expires_at?: string | null;
+  name?: string | null;
+  subscription_cycles?: number | null;
+  usage_limit?: number | null;
+}
+
 export interface SubscriptionDetailsData {
   billing: Billing;
   addons: AddOn[];
@@ -53,6 +72,7 @@ export interface SubscriptionDetailsData {
   customer: Customer;
   discount_cycles_remaining: number;
   discount_id: string;
+  discounts?: DiscountDetailResponse[] | null;
   expires_at: string;
   payment_method_id?: string;
   metadata: Record<string, string>;
@@ -114,6 +134,7 @@ export interface ChangeSubscriptionPlanParams {
   subscription_id: string;
   data: {
     addons: AddOn[] | null;
+    discount_codes?: string[] | null;
     metadata: Record<string, string> | null;
     product_id: string;
     proration_billing_mode: ProrationBillingMode;
@@ -182,6 +203,7 @@ export interface ChangeSubscriptionPlanPreviewParams {
   subscription_id: string;
   data: {
     addons: AddOn[] | null;
+    discount_codes?: string[] | null;
     metadata: Record<string, string> | null;
     product_id: string;
     proration_billing_mode: ProrationBillingMode;
@@ -243,6 +265,7 @@ export interface NewPlan {
   };
   discount_cycles_remaining: number;
   discount_id: string;
+  discounts?: DiscountDetailResponse[] | null;
   expires_at: string;
   metadata: Record<string, string>;
   meters: Meter[];

@@ -123,6 +123,7 @@ function HeaderActions({
           subscriptionId={subscriptionId}
           currentAddons={subscription.addons ?? []}
           currentQuantity={subscription.quantity ?? 1}
+          currentDiscounts={subscription.discounts}
           productCollection={productCollection ?? null}
           allowMultipleSubscriptions={allowMultipleSubscriptions}
         />

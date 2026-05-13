@@ -207,7 +207,17 @@
     "previewFailed": "Failed to load preview. Please try again.",
     "changeFailed": "Failed to change plan. Please try again.",
     "changeSuccess": "Plan changed successfully",
-    "addonRequired": "Please select at least one add-on with quantity 1 or more."
+    "addonRequired": "Please select at least one add-on with quantity 1 or more.",
+    "discountsTitle": "Discounts",
+    "discountsDescription": "Add or remove discount codes for the new plan. Max 20.",
+    "discountsSave": "Save",
+    "discountsPlaceholder": "Enter discount code",
+    "discountsAdd": "Add discount",
+    "discountsAddMore": "Add more",
+    "discountsRemove": "Remove discount code",
+    "discountsApplied": "Discounts applied",
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Edit",
