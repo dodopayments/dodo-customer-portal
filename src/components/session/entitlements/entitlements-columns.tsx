@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Badge, type BadgeVariant } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TimeTooltip } from "@/components/custom/time-tooltip";
+import { DataGridColumnHeader } from "@/components/ui/data-grid-column-header";
 import { parseIsoDate } from "@/lib/date-helper";
 import {
     Sheet,
@@ -130,18 +131,17 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
 
     return (
         <>
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-start gap-2">
                 {isPendingOAuth && (
                     <Button
-                        variant="outline"
-                        size="sm"
+                        variant="secondary"
                         onClick={handleOAuthConnect}
                         disabled={connecting}
                     >
                         {connecting ? (
-                            <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
+                            <Loader2 className="w-4 h-4 animate-spin mr-2" />
                         ) : (
-                            <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                            <ExternalLink className="w-4 h-4 mr-2" />
                         )}
                         Connect
                     </Button>
@@ -149,26 +149,24 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
 
                 {isPendingTelegram && (
                     <Button
-                        variant="outline"
-                        size="sm"
+                        variant="secondary"
                         onClick={() => setTelegramOpen(true)}
                     >
-                        <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                        <ExternalLink className="w-4 h-4 mr-2" />
                         Connect
                     </Button>
                 )}
 
                 {isExpiredOAuth && (
                     <Button
-                        variant="outline"
-                        size="sm"
+                        variant="secondary"
                         onClick={handleReconnect}
                         disabled={reconnecting}
                     >
                         {reconnecting ? (
-                            <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" />
+                            <Loader2 className="w-4 h-4 animate-spin mr-2" />
                         ) : (
-                            <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                            <ExternalLink className="w-4 h-4 mr-2" />
                         )}
                         Reconnect
                     </Button>
@@ -176,14 +174,13 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
 
                 {!isPendingOAuth && !isPendingTelegram && !isExpiredOAuth && (
                     <Button
-                        variant="outline"
-                        size="sm"
+                        variant="secondary"
                         onClick={() => setViewOpen(true)}
                     >
                         {raw.entitlement.integration_type === "license_key" ? (
-                            <KeyRound className="w-3.5 h-3.5 mr-1.5" />
+                            <KeyRound className="w-4 h-4 mr-2" />
                         ) : (
-                            <Eye className="w-3.5 h-3.5 mr-1.5" />
+                            <Eye className="w-4 h-4 mr-2" />
                         )}
                         View
                     </Button>
@@ -551,22 +548,24 @@ export const EntitlementsColumns: ColumnDef<EntitlementRow>[] = [
     {
         id: "name",
         accessorKey: "name",
-        header: "Name",
-        cell: ({ row }) => {
-            return (
-                <span className="text-sm text-text-primary font-medium">
-                    {row.original.name}
-                </span>
-            );
-        },
+        header: ({ column }) => (
+            <DataGridColumnHeader title="Name" column={column} />
+        ),
+        cell: ({ row }) => (
+            <span className="text-sm text-text-primary font-medium">
+                {row.original.name}
+            </span>
+        ),
+        enableSorting: true,
     },
     {
         id: "type",
         accessorKey: "type",
-        header: "Type",
+        header: ({ column }) => (
+            <DataGridColumnHeader title="Type" column={column} />
+        ),
         cell: ({ row }) => {
-            const label =
-                TYPE_LABELS[row.original.type] || row.original.type;
+            const label = TYPE_LABELS[row.original.type] || row.original.type;
             return (
                 <Badge
                     variant="default"
@@ -577,25 +576,29 @@ export const EntitlementsColumns: ColumnDef<EntitlementRow>[] = [
                 </Badge>
             );
         },
+        enableSorting: true,
     },
     {
         id: "date_accessed",
         accessorKey: "date_accessed",
-        header: "Date Accessed",
-        cell: ({ row }) => {
-            return (
-                <TimeTooltip
-                    timeStamp={row.original.date_accessed}
-                    className="text-sm text-text-primary font-medium"
-                    triggerFormat="shortDate"
-                />
-            );
-        },
+        header: ({ column }) => (
+            <DataGridColumnHeader title="Date Accessed" column={column} />
+        ),
+        cell: ({ row }) => (
+            <TimeTooltip
+                timeStamp={row.original.date_accessed}
+                className="text-sm text-text-primary font-medium"
+                showyear
+            />
+        ),
+        enableSorting: true,
     },
     {
         id: "status",
         accessorKey: "status",
-        header: "Status",
+        header: ({ column }) => (
+            <DataGridColumnHeader title="Status" column={column} />
+        ),
         cell: ({ row }) => {
             const raw = row.original.raw;
             return (
@@ -608,10 +611,11 @@ export const EntitlementsColumns: ColumnDef<EntitlementRow>[] = [
                 </Badge>
             );
         },
+        enableSorting: true,
     },
     {
         id: "action",
-        header: () => <div className="text-right">Action</div>,
+        header: "Action",
         cell: ({ row }) => <ActionCell raw={row.original.raw} />,
     },
 ];

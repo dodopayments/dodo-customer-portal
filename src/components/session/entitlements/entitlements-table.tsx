@@ -60,10 +60,10 @@ export function EntitlementsTable({ grants }: EntitlementsTableProps) {
                     initialPageSize={PAGE_SIZE}
                     tableLayout={{
                         autoWidth: false,
-                        columnsPinnable: false,
-                        columnsResizable: false,
-                        columnsMovable: false,
-                        columnsVisibility: false,
+                        columnsPinnable: true,
+                        columnsResizable: true,
+                        columnsMovable: true,
+                        columnsVisibility: true,
                         disableRowPerPage: true,
                     }}
                     disablePagination={data.length <= PAGE_SIZE}

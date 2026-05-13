@@ -291,7 +291,8 @@
     "date": "Date",
     "amount": "Amount",
     "status": "Status",
-    "download": "Download"
+    "download": "Download",
+    "invoice": "Invoice"
   },
   "InvoiceDownloadSheet": {
     "notAvailable": "Invoice not available",
@@ -303,7 +304,8 @@
     "existingAddressDescription": "This invoice will include only your zip code and country as provided during the checkout process.",
     "fullAddressTitle": "Download with full address details",
     "fullAddressDescription": "This invoice will include the complete address of the customer. Please ensure you fill in all the details before downloading.",
-    "fillDetails": "Fill Details"
+    "fillDetails": "Fill Details",
+    "download": "Download"
   },
   "InvoiceFillDetails": {
     "addressLine": "Address line 1",
