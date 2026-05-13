@@ -96,7 +96,8 @@
     "meters": "Meters",
     "freeThreshold": "Free Threshold",
     "per": "per",
-    "qty": "Qty: {value}"
+    "qty": "Qty: {value}",
+    "editPaymentMethod": "Edit Payment Method"
   },
   "SubscriptionBillingInfo": {
     "title": "Billing Information",
