@@ -98,7 +98,6 @@ export async function fetchPortalEntitlements(): Promise<PortalGrantResponse[]> 
     }
 
     const data = await response.json();
-    console.log(JSON.stringify(data, null, 2));
     return data.items || [];
   } catch (error) {
     parseError(error, "Failed to fetch entitlements");

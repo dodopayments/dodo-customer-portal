@@ -992,12 +992,9 @@ export function PlanPreview({
                     size="sm"
                     onClick={handleSaveDiscounts}
                     disabled={isSavingDiscounts || !discountsChanged}
+                    loading={isSavingDiscounts}
                   >
-                    {isSavingDiscounts ? (
-                      <Loading className="h-4 w-4" />
-                    ) : (
-                      t("discountsSave")
-                    )}
+                    {t("discountsSave")}
                   </Button>
                 </div>
 
