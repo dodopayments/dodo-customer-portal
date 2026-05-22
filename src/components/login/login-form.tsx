@@ -69,9 +69,11 @@ const MagicLinkStatus = ({
 export const LoginForm = ({
   className,
   initialBusiness,
+  isTestMode = false,
 }: {
   className?: string;
   initialBusiness: LoginBusiness | null;
+  isTestMode?: boolean;
 }) => {
   const t = useTranslations("LoginForm");
   const emailSchema = useMemo(
@@ -208,7 +210,7 @@ export const LoginForm = ({
 
               <Button
                 type="submit"
-                disabled={isLoading || !!turnstileState.error}
+                disabled={isLoading || !!turnstileState.error || isTestMode}
               >
                 {isLoading ? t("sending") : t("getAccessLink")}
               </Button>
