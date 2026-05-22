@@ -103,7 +103,9 @@
     "name": "Name",
     "phoneNumber": "Phone number",
     "email": "Email",
-    "billingAddress": "Billing Address"
+    "billingAddress": "Billing Address",
+    "taxId": "Sales Tax ID",
+    "businessName": "Business Name"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Edit",
@@ -117,7 +119,9 @@
     "city": "City",
     "postalCode": "Postal code",
     "purchasingAsBusiness": "Purchasing as a business",
-    "taxId": "Tax ID",
+    "businessName": "Business Name",
+    "businessNamePlaceholder": "Business Name",
+    "taxId": "Sales Tax ID",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Save Details",
     "updateSuccess": "Billing details updated successfully",

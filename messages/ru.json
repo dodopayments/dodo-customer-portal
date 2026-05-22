@@ -103,7 +103,9 @@
     "name": "Имя",
     "phoneNumber": "Номер телефона",
     "email": "Email",
-    "billingAddress": "Платёжный адрес"
+    "billingAddress": "Платёжный адрес",
+    "taxId": "Идентификатор налога с продаж",
+    "businessName": "Название компании"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Редактировать",
@@ -117,7 +119,9 @@
     "city": "Город",
     "postalCode": "Почтовый индекс",
     "purchasingAsBusiness": "Покупка как компания",
-    "taxId": "Tax ID",
+    "businessName": "Название компании",
+    "businessNamePlaceholder": "Название компании",
+    "taxId": "Идентификатор налога с продаж",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Сохранить",
     "updateSuccess": "Платёжные данные успешно обновлены",

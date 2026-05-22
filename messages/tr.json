@@ -103,7 +103,9 @@
     "name": "Ad",
     "phoneNumber": "Telefon numarası",
     "email": "E-posta",
-    "billingAddress": "Fatura Adresi"
+    "billingAddress": "Fatura Adresi",
+    "taxId": "Satış Vergisi Kimlik No.",
+    "businessName": "Şirket Adı"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Düzenle",
@@ -117,7 +119,9 @@
     "city": "Şehir",
     "postalCode": "Posta kodu",
     "purchasingAsBusiness": "İşletme olarak satın alıyorum",
-    "taxId": "Vergi Kimlik No",
+    "businessName": "Şirket Adı",
+    "businessNamePlaceholder": "Şirket Adı",
+    "taxId": "Satış Vergisi Kimlik No.",
     "taxIdPlaceholder": "Vergi Kimlik No",
     "saveDetails": "Bilgileri Kaydet",
     "updateSuccess": "Fatura bilgileri başarıyla güncellendi",

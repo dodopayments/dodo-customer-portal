@@ -103,7 +103,9 @@
     "name": "Imię i nazwisko",
     "phoneNumber": "Numer telefonu",
     "email": "E-mail",
-    "billingAddress": "Adres rozliczeniowy"
+    "billingAddress": "Adres rozliczeniowy",
+    "taxId": "Identyfikator podatku obrotowego",
+    "businessName": "Nazwa firmy"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Edytuj",
@@ -117,7 +119,9 @@
     "city": "Miasto",
     "postalCode": "Kod pocztowy",
     "purchasingAsBusiness": "Zakup jako firma",
-    "taxId": "NIP",
+    "businessName": "Nazwa firmy",
+    "businessNamePlaceholder": "Nazwa firmy",
+    "taxId": "Identyfikator podatku obrotowego",
     "taxIdPlaceholder": "NIP",
     "saveDetails": "Zapisz dane",
     "updateSuccess": "Pomyślnie zaktualizowano dane rozliczeniowe",

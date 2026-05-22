@@ -103,7 +103,9 @@
     "name": "שם",
     "phoneNumber": "מספר טלפון",
     "email": "אימייל",
-    "billingAddress": "כתובת לחיוב"
+    "billingAddress": "כתובת לחיוב",
+    "taxId": "מספר זיהוי מס מכירות",
+    "businessName": "שם העסק"
   },
   "SubscriptionBillingEdit": {
     "editButton": "עריכה",
@@ -117,7 +119,9 @@
     "city": "עיר",
     "postalCode": "מיקוד",
     "purchasingAsBusiness": "רכישה כעסק",
-    "taxId": "מספר מס",
+    "businessName": "שם העסק",
+    "businessNamePlaceholder": "שם העסק",
+    "taxId": "מספר זיהוי מס מכירות",
     "taxIdPlaceholder": "מספר מס",
     "saveDetails": "שמירת פרטים",
     "updateSuccess": "פרטי החיוב עודכנו בהצלחה",

@@ -103,7 +103,9 @@
     "name": "Nome",
     "phoneNumber": "Número de telefone",
     "email": "Email",
-    "billingAddress": "Endereço de faturação"
+    "billingAddress": "Endereço de faturação",
+    "taxId": "ID do imposto sobre vendas",
+    "businessName": "Nome da empresa"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Editar",
@@ -117,7 +119,9 @@
     "city": "Cidade",
     "postalCode": "Código postal",
     "purchasingAsBusiness": "Compra como empresa",
-    "taxId": "NIF",
+    "businessName": "Nome da empresa",
+    "businessNamePlaceholder": "Nome da empresa",
+    "taxId": "ID do imposto sobre vendas",
     "taxIdPlaceholder": "NIF",
     "saveDetails": "Guardar detalhes",
     "updateSuccess": "Detalhes de faturação atualizados com sucesso",

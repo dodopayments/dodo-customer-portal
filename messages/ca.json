@@ -103,7 +103,9 @@
     "name": "Nom",
     "phoneNumber": "Número de telèfon",
     "email": "Correu electrònic",
-    "billingAddress": "Adreça de facturació"
+    "billingAddress": "Adreça de facturació",
+    "taxId": "Identificador d'impost sobre vendes",
+    "businessName": "Nom de l'empresa"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Edita",
@@ -117,7 +119,9 @@
     "city": "Ciutat",
     "postalCode": "Codi postal",
     "purchasingAsBusiness": "Compra com a empresa",
-    "taxId": "NIF",
+    "businessName": "Nom de l'empresa",
+    "businessNamePlaceholder": "Nom de l'empresa",
+    "taxId": "Identificador d'impost sobre vendes",
     "taxIdPlaceholder": "NIF",
     "saveDetails": "Desa les dades",
     "updateSuccess": "Les dades de facturació s’han actualitzat correctament",

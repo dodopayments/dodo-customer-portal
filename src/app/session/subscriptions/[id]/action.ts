@@ -109,6 +109,10 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams): 
       billing: data.billing,
       customer_name: data.customer.name,
       tax_id: data.tax_id === "" ? null : data.tax_id,
+      customer_business_name:
+        data.customer_business_name === ""
+          ? null
+          : data.customer_business_name,
     };
 
     const response = await makeAuthenticatedRequest(
@@ -120,18 +124,28 @@ export async function updateBillingDetails(params: UpdateBillingDetailsParams): 
     );
 
     if (!response.ok) {
-      let errorMessage = `HTTP ${response.status}`;
+      const errorText = await response.text().catch(() => "");
+      let errorMessage = "";
+
       try {
-        const errorText = await response.text();
-        if (errorText && errorText.trim()) {
-          errorMessage += `: ${errorText}`;
-        } else {
-          errorMessage += ` (${response.statusText || "Unknown error"})`;
-        }
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorJson.error || "";
       } catch {
-        errorMessage += ` (${response.statusText || "Unknown error"})`;
+        errorMessage = errorText.trim().slice(0, 200);
       }
-      return { success: false, error: `Failed to update billing details: ${errorMessage}` };
+
+      if (response.status === 401 || response.status === 403) {
+        errorMessage =
+          errorMessage || "You are not authorized to update billing details";
+      } else if (response.status === 404) {
+        errorMessage = errorMessage || "Subscription not found";
+      } else if (response.status === 422) {
+        errorMessage = errorMessage || "Invalid billing details";
+      } else {
+        errorMessage = errorMessage || `HTTP ${response.status}`;
+      }
+
+      return { success: false, error: errorMessage };
     }
 
     return { success: true, data: await response.json() };

@@ -90,6 +90,7 @@ export interface SubscriptionDetailsData {
   subscription_period_count: number;
   subscription_period_interval: string;
   tax_id: string;
+  customer_business_name?: string | null;
   tax_inclusive: boolean;
   trial_period_days: number;
 }
@@ -127,6 +128,7 @@ export interface UpdateBillingDetailsParams {
       zipcode: string;
     };
     tax_id?: string | null;
+    customer_business_name?: string | null;
   };
 }
 
@@ -283,6 +285,7 @@ export interface NewPlan {
   subscription_period_count: number;
   subscription_period_interval: string;
   tax_id: string;
+  customer_business_name?: string | null;
   tax_inclusive: boolean;
   trial_period_days: number;
 }

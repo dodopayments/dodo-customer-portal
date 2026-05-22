@@ -103,7 +103,9 @@
     "name": "Nom",
     "phoneNumber": "Numéro de téléphone",
     "email": "E-mail",
-    "billingAddress": "Adresse de facturation"
+    "billingAddress": "Adresse de facturation",
+    "taxId": "Identifiant de taxe de vente",
+    "businessName": "Nom de l'entreprise"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Modifier",
@@ -117,7 +119,9 @@
     "city": "Ville",
     "postalCode": "Code postal",
     "purchasingAsBusiness": "Achat en tant qu’entreprise",
-    "taxId": "ID fiscal",
+    "businessName": "Nom de l'entreprise",
+    "businessNamePlaceholder": "Nom de l'entreprise",
+    "taxId": "Identifiant de taxe de vente",
     "taxIdPlaceholder": "ID fiscal",
     "saveDetails": "Enregistrer",
     "updateSuccess": "Informations de facturation mises à jour avec succès",

@@ -103,7 +103,9 @@
     "name": "氏名",
     "phoneNumber": "電話番号",
     "email": "メールアドレス",
-    "billingAddress": "請求先住所"
+    "billingAddress": "請求先住所",
+    "taxId": "売上税ID",
+    "businessName": "会社名"
   },
   "SubscriptionBillingEdit": {
     "editButton": "編集",
@@ -117,7 +119,9 @@
     "city": "市区町村",
     "postalCode": "郵便番号",
     "purchasingAsBusiness": "法人として購入する",
-    "taxId": "Tax ID",
+    "businessName": "会社名",
+    "businessNamePlaceholder": "会社名",
+    "taxId": "売上税ID",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "保存",
     "updateSuccess": "請求先情報を更新しました",

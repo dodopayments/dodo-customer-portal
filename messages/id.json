@@ -103,7 +103,9 @@
     "name": "Nama",
     "phoneNumber": "Nomor telepon",
     "email": "Email",
-    "billingAddress": "Alamat Billing"
+    "billingAddress": "Alamat Billing",
+    "taxId": "ID Pajak Penjualan",
+    "businessName": "Nama Bisnis"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Edit",
@@ -117,7 +119,9 @@
     "city": "Kota",
     "postalCode": "Kode pos",
     "purchasingAsBusiness": "Membeli sebagai bisnis",
-    "taxId": "Tax ID",
+    "businessName": "Nama Bisnis",
+    "businessNamePlaceholder": "Nama Bisnis",
+    "taxId": "ID Pajak Penjualan",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Simpan Detail",
     "updateSuccess": "Detail billing berhasil diperbarui",

@@ -103,7 +103,9 @@
     "name": "Nama",
     "phoneNumber": "Nombor telefon",
     "email": "E-mel",
-    "billingAddress": "Alamat Pengebilan"
+    "billingAddress": "Alamat Pengebilan",
+    "taxId": "ID Cukai Jualan",
+    "businessName": "Nama Perniagaan"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Edit",
@@ -117,7 +119,9 @@
     "city": "Bandar",
     "postalCode": "Poskod",
     "purchasingAsBusiness": "Membeli sebagai perniagaan",
-    "taxId": "ID Cukai",
+    "businessName": "Nama Perniagaan",
+    "businessNamePlaceholder": "Nama Perniagaan",
+    "taxId": "ID Cukai Jualan",
     "taxIdPlaceholder": "ID Cukai",
     "saveDetails": "Simpan Butiran",
     "updateSuccess": "Butiran pengebilan berjaya dikemas kini",

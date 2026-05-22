@@ -103,7 +103,9 @@
     "name": "Nume",
     "phoneNumber": "Număr de telefon",
     "email": "E-mail",
-    "billingAddress": "Adresă de facturare"
+    "billingAddress": "Adresă de facturare",
+    "taxId": "Cod fiscal de vânzări",
+    "businessName": "Numele companiei"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Editați",
@@ -117,7 +119,9 @@
     "city": "Oraș",
     "postalCode": "Cod poștal",
     "purchasingAsBusiness": "Cumpărați ca firmă",
-    "taxId": "Tax ID",
+    "businessName": "Numele companiei",
+    "businessNamePlaceholder": "Numele companiei",
+    "taxId": "Cod fiscal de vânzări",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Salvați detaliile",
     "updateSuccess": "Detaliile de facturare au fost actualizate cu succes",

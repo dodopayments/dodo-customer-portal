@@ -103,7 +103,9 @@
     "name": "Naam",
     "phoneNumber": "Telefoonnummer",
     "email": "E-mail",
-    "billingAddress": "Factuuradres"
+    "billingAddress": "Factuuradres",
+    "taxId": "Btw-/omzetbelastingnummer",
+    "businessName": "Bedrijfsnaam"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Bewerken",
@@ -117,7 +119,9 @@
     "city": "Stad",
     "postalCode": "Postcode",
     "purchasingAsBusiness": "Aankopen als bedrijf",
-    "taxId": "Belasting-ID",
+    "businessName": "Bedrijfsnaam",
+    "businessNamePlaceholder": "Bedrijfsnaam",
+    "taxId": "Btw-/omzetbelastingnummer",
     "taxIdPlaceholder": "Belasting-ID",
     "saveDetails": "Gegevens opslaan",
     "updateSuccess": "Facturatiegegevens succesvol bijgewerkt",

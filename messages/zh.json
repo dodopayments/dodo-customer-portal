@@ -103,7 +103,9 @@
     "name": "姓名",
     "phoneNumber": "电话号码",
     "email": "邮箱",
-    "billingAddress": "账单地址"
+    "billingAddress": "账单地址",
+    "taxId": "销售税号",
+    "businessName": "公司名称"
   },
   "SubscriptionBillingEdit": {
     "editButton": "编辑",
@@ -117,7 +119,9 @@
     "city": "城市",
     "postalCode": "邮政编码",
     "purchasingAsBusiness": "以企业身份购买",
-    "taxId": "税号",
+    "businessName": "公司名称",
+    "businessNamePlaceholder": "公司名称",
+    "taxId": "销售税号",
     "taxIdPlaceholder": "税号",
     "saveDetails": "保存详情",
     "updateSuccess": "账单详情更新成功",
