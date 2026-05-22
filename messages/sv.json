@@ -103,7 +103,9 @@
     "name": "Namn",
     "phoneNumber": "Telefonnummer",
     "email": "E-post",
-    "billingAddress": "Faktureringsadress"
+    "billingAddress": "Faktureringsadress",
+    "taxId": "Försäljningsskatte-ID",
+    "businessName": "Företagsnamn"
   },
   "SubscriptionBillingEdit": {
     "editButton": "Redigera",
@@ -117,7 +119,9 @@
     "city": "Stad",
     "postalCode": "Postnummer",
     "purchasingAsBusiness": "Köper som företag",
-    "taxId": "Skatte-ID",
+    "businessName": "Företagsnamn",
+    "businessNamePlaceholder": "Företagsnamn",
+    "taxId": "Försäljningsskatte-ID",
     "taxIdPlaceholder": "Skatte-ID",
     "saveDetails": "Spara uppgifter",
     "updateSuccess": "Faktureringsuppgifter uppdaterades",

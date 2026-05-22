@@ -103,7 +103,9 @@
     "name": "الاسم",
     "phoneNumber": "رقم الهاتف",
     "email": "البريد الإلكتروني",
-    "billingAddress": "عنوان الفوترة"
+    "billingAddress": "عنوان الفوترة",
+    "taxId": "رقم ضريبة المبيعات",
+    "businessName": "اسم الشركة"
   },
   "SubscriptionBillingEdit": {
     "editButton": "تعديل",
@@ -117,7 +119,9 @@
     "city": "المدينة",
     "postalCode": "الرمز البريدي",
     "purchasingAsBusiness": "الشراء كعمل تجاري",
-    "taxId": "المعرّف الضريبي",
+    "businessName": "اسم الشركة",
+    "businessNamePlaceholder": "اسم الشركة",
+    "taxId": "رقم ضريبة المبيعات",
     "taxIdPlaceholder": "المعرّف الضريبي",
     "saveDetails": "حفظ التفاصيل",
     "updateSuccess": "تم تحديث تفاصيل الفوترة بنجاح",

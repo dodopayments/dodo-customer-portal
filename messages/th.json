@@ -103,7 +103,9 @@
     "name": "ชื่อ",
     "phoneNumber": "หมายเลขโทรศัพท์",
     "email": "อีเมล",
-    "billingAddress": "ที่อยู่สำหรับเรียกเก็บเงิน"
+    "billingAddress": "ที่อยู่สำหรับเรียกเก็บเงิน",
+    "taxId": "เลขประจำตัวภาษีขาย",
+    "businessName": "ชื่อบริษัท"
   },
   "SubscriptionBillingEdit": {
     "editButton": "แก้ไข",
@@ -117,7 +119,9 @@
     "city": "เมือง",
     "postalCode": "รหัสไปรษณีย์",
     "purchasingAsBusiness": "ซื้อในนามธุรกิจ",
-    "taxId": "Tax ID",
+    "businessName": "ชื่อบริษัท",
+    "businessNamePlaceholder": "ชื่อบริษัท",
+    "taxId": "เลขประจำตัวภาษีขาย",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "บันทึกรายละเอียด",
     "updateSuccess": "อัปเดตรายละเอียดการเรียกเก็บเงินเรียบร้อยแล้ว",

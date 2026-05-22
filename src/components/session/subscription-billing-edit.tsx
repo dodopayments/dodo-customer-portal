@@ -54,8 +54,12 @@ export default function SubscriptionBillingEdit({
     subscription.billing.zipcode || ""
   );
   const [taxId, setTaxId] = useState<string>(subscription.tax_id || "");
+  const [businessName, setBusinessName] = useState<string>(
+    subscription.customer_business_name || ""
+  );
   const [isBusiness, setIsBusiness] = useState<boolean>(
-    subscription.tax_id ? true : false
+    Boolean(subscription.tax_id) ||
+      Boolean(subscription.customer_business_name)
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -96,6 +100,7 @@ export default function SubscriptionBillingEdit({
             zipcode: data.postalCode,
           },
           tax_id: data.taxId || null,
+          customer_business_name: data.businessName || null,
         },
       });
 
@@ -190,15 +195,26 @@ export default function SubscriptionBillingEdit({
       </div>
 
       {isBusiness && (
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="taxId">{t("taxId")}</Label>
-          <Input
-            id="taxId"
-            placeholder={t("taxIdPlaceholder")}
-            value={taxId}
-            onChange={(e) => setTaxId(e.target.value)}
-          />
-        </div>
+        <>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="businessName">{t("businessName")}</Label>
+            <Input
+              id="businessName"
+              placeholder={t("businessNamePlaceholder")}
+              value={businessName}
+              onChange={(e) => setBusinessName(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="taxId">{t("taxId")}</Label>
+            <Input
+              id="taxId"
+              placeholder={t("taxIdPlaceholder")}
+              value={taxId}
+              onChange={(e) => setTaxId(e.target.value)}
+            />
+          </div>
+        </>
       )}
 
       <div className="flex flex-row gap-2 mt-4">
@@ -213,7 +229,7 @@ export default function SubscriptionBillingEdit({
               state,
               city,
               postalCode,
-              ...(isBusiness ? { taxId } : {}),
+              ...(isBusiness ? { taxId, businessName } : {}),
             })
           }
           disabled={isLoading}

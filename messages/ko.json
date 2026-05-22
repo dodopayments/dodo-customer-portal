@@ -103,7 +103,9 @@
     "name": "이름",
     "phoneNumber": "전화번호",
     "email": "이메일",
-    "billingAddress": "청구지 주소"
+    "billingAddress": "청구지 주소",
+    "taxId": "판매세 ID",
+    "businessName": "회사 이름"
   },
   "SubscriptionBillingEdit": {
     "editButton": "수정",
@@ -117,7 +119,9 @@
     "city": "도시",
     "postalCode": "우편번호",
     "purchasingAsBusiness": "사업자로 구매",
-    "taxId": "Tax ID",
+    "businessName": "회사 이름",
+    "businessNamePlaceholder": "회사 이름",
+    "taxId": "판매세 ID",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "정보 저장",
     "updateSuccess": "청구 정보가 성공적으로 업데이트되었습니다",

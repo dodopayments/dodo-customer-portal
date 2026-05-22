@@ -54,6 +54,7 @@ export interface SubscriptionData {
     subscription_period_count: number;
     subscription_period_interval: string;
     tax_id: string;
+    customer_business_name?: string | null;
     tax_inclusive: boolean;
     trial_period_days: number;
     payment_method_id?: string;

@@ -8,6 +8,7 @@ export const billingDetailsFormSchema = z.object({
   city: z.string().min(1),
   postalCode: z.string().min(1),
   taxId: z.string().optional(),
+  businessName: z.string().optional(),
 });
 
 export type BillingDetailsFormValues = z.infer<typeof billingDetailsFormSchema>;
