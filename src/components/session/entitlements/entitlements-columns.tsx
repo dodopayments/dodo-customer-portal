@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Eye, EyeOff, Download, Loader2, ExternalLink, KeyRound, FileMinus } from "lucide-react";
+import { Eye, EyeOff, Download, Loader2, ExternalLink, KeyRound, FileMinus, Info } from "lucide-react";
 import { Mode } from "@/lib/http";
 
 export interface EntitlementRow {
@@ -70,6 +70,9 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
     const [telegramOpen, setTelegramOpen] = useState(false);
     const [telegramUserId, setTelegramUserId] = useState("");
     const [telegramSubmitting, setTelegramSubmitting] = useState(false);
+    const [notionOpen, setNotionOpen] = useState(false);
+
+    const isNotion = raw.entitlement.integration_type === "notion";
 
     const handleOAuthConnect = async () => {
         setConnecting(true);
@@ -135,7 +138,7 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
                     <Button
                         variant="outline"
                         size="sm"
-                        onClick={handleOAuthConnect}
+                        onClick={isNotion ? () => setNotionOpen(true) : handleOAuthConnect}
                         disabled={connecting}
                     >
                         {connecting ? (
@@ -261,6 +264,52 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
                     </div>
                 </SheetContent>
             </Sheet>
+            <Sheet open={notionOpen} onOpenChange={setNotionOpen}>
+                <SheetContent
+                    className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6"
+                    floating
+                    side="right"
+                >
+                    <SheetHeader>
+                        <SheetTitle>Connect Notion</SheetTitle>
+                        <SheetDescription>
+                            Before you continue, please review the following.
+                        </SheetDescription>
+                    </SheetHeader>
+                    <Separator className="my-4" />
+                    <div className="flex flex-col gap-4">
+                        <div className="rounded-lg border border-border-secondary bg-card p-3 flex gap-2.5">
+                            <Info className="w-4 h-4 shrink-0 mt-0.5 text-text-secondary" />
+                            <div className="space-y-2 text-sm text-text-secondary">
+                                <p>
+                                    On the Notion authorization page, the page you select will be used as the destination — your template will be added as a{" "}
+                                    <span className="text-text-primary font-medium">sub-page</span> under it.
+                                </p>
+                                <p>
+                                    Delivery is asynchronous and may take up to{" "}
+                                    <span className="text-text-primary font-medium">5 minutes</span> to appear in your Notion workspace after you authorize access.
+                                </p>
+                            </div>
+                        </div>
+
+                        <Button
+                            className="w-full mt-2"
+                            onClick={async () => {
+                                setNotionOpen(false);
+                                await handleOAuthConnect();
+                            }}
+                            disabled={connecting}
+                        >
+                            {connecting ? (
+                                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                            ) : (
+                                <ExternalLink className="w-4 h-4 mr-2" />
+                            )}
+                            Continue to Notion
+                        </Button>
+                    </div>
+                </SheetContent>
+            </Sheet>
         </>
     );
 }
@@ -296,6 +345,7 @@ function GrantDetailSheet({
     const isLicenseKey = grant?.entitlement.integration_type === "license_key";
     const isDigitalFiles = grant?.entitlement.integration_type === "digital_files";
     const isFramer = grant?.entitlement.integration_type === "framer";
+    const isNotion = grant?.entitlement.integration_type === "notion";
 
     const handleReconnect = async () => {
         if (!grant) return;
@@ -430,6 +480,22 @@ function GrantDetailSheet({
                         <p className="text-sm text-text-secondary">
                             Your Framer template link will be available once the entitlement is delivered.
                         </p>
+                    )}
+
+                    {isNotion && grant.status !== "Delivered" && (
+                        <div className="rounded-lg border border-border-secondary bg-card p-3 flex gap-2.5">
+                            <Info className="w-4 h-4 shrink-0 mt-0.5 text-text-secondary" />
+                            <div className="space-y-2 text-sm text-text-secondary">
+                                <p>
+                                    Notion template delivery is asynchronous and may take up to{" "}
+                                    <span className="text-text-primary font-medium">5 minutes</span> to be delivered after you authorize access.
+                                </p>
+                                <p>
+                                    The template will appear as a{" "}
+                                    <span className="text-text-primary font-medium">sub-page</span> inside the page you selected on Notion&apos;s authorization screen.
+                                </p>
+                            </div>
+                        </div>
                     )}
 
                     {isFramer && grant.status === "Delivered" && (
