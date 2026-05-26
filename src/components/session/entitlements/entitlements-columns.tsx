@@ -298,13 +298,8 @@ function ActionCell({ raw }: { raw: PortalGrantResponse }) {
                                 setNotionOpen(false);
                                 await handleOAuthConnect();
                             }}
-                            disabled={connecting}
                         >
-                            {connecting ? (
-                                <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                            ) : (
-                                <ExternalLink className="w-4 h-4 mr-2" />
-                            )}
+                            <ExternalLink className="w-4 h-4 mr-2" />
                             Continue to Notion
                         </Button>
                     </div>
@@ -482,7 +477,7 @@ function GrantDetailSheet({
                         </p>
                     )}
 
-                    {isNotion && grant.status !== "Delivered" && (
+                    {isNotion && grant.status === "Pending" && (
                         <div className="rounded-lg border border-border-secondary bg-card p-3 flex gap-2.5">
                             <Info className="w-4 h-4 shrink-0 mt-0.5 text-text-secondary" />
                             <div className="space-y-2 text-sm text-text-secondary">
