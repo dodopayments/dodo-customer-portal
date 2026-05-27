@@ -175,7 +175,6 @@ export async function changeSubscriptionPlan(
       const errorText = await response.text().catch(() => "");
       let errorMessage = "";
 
-      // Try to parse JSON error response
       try {
         const errorJson = JSON.parse(errorText);
         errorMessage = errorJson.message || errorText;
@@ -184,7 +183,7 @@ export async function changeSubscriptionPlan(
       }
 
       if (response.status === 403) {
-        errorMessage = errorMessage || "Products not in the same collection";
+        errorMessage = errorMessage || "Plan change is not allowed for this subscription";
       } else if (response.status === 404) {
         errorMessage = errorMessage || "Subscription not found";
       } else if (response.status === 422) {
@@ -229,7 +228,6 @@ export async function changeSubscriptionPlanPreview(
       const errorText = await response.text().catch(() => "");
       let errorMessage = "";
 
-      // Try to parse JSON error response
       try {
         const errorJson = JSON.parse(errorText);
         errorMessage = errorJson.message || errorText;
@@ -238,7 +236,7 @@ export async function changeSubscriptionPlanPreview(
       }
 
       if (response.status === 403) {
-        errorMessage = errorMessage || "Products not in the same collection";
+        errorMessage = errorMessage || "Plan change is not allowed for this subscription";
       } else if (response.status === 404) {
         errorMessage = errorMessage || "Subscription not found";
       } else if (response.status === 422) {

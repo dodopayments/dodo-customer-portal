@@ -13,11 +13,6 @@ export interface AddOn {
   image?: string | null;
 }
 
-export type ProrationBillingMode =
-  | "prorated_immediately"
-  | "full_immediately"
-  | "difference_immediately";
-
 export interface Billing {
   city: string;
   country: string;
@@ -139,7 +134,6 @@ export interface ChangeSubscriptionPlanParams {
     discount_codes?: string[] | null;
     metadata: Record<string, string> | null;
     product_id: string;
-    proration_billing_mode: ProrationBillingMode;
     quantity: number;
   };
 }
@@ -208,7 +202,6 @@ export interface ChangeSubscriptionPlanPreviewParams {
     discount_codes?: string[] | null;
     metadata: Record<string, string> | null;
     product_id: string;
-    proration_billing_mode: ProrationBillingMode;
     quantity: number;
   };
 }

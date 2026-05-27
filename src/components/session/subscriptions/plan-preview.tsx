@@ -16,7 +16,6 @@ import {
 } from "@/lib/currency-helper";
 import type {
   AddOn,
-  ProrationBillingMode,
   ProductCollectionProduct,
   ChangeSubscriptionPlanPreviewResponse,
   DiscountDetailResponse,
@@ -519,7 +518,6 @@ export function PlanPreview({
 }: PlanPreviewProps) {
   const t = useTranslations("PlanPreview");
   const [isConfirming, setIsConfirming] = useState(false);
-  const [billingMode] = useState<ProrationBillingMode>("prorated_immediately");
   const [isCurrentAddonsOpen, setIsCurrentAddonsOpen] = useState(false);
   const [isNewAddonsOpen, setIsNewAddonsOpen] = useState(false);
   const [previewData, setPreviewData] =
@@ -684,7 +682,6 @@ export function PlanPreview({
           data: {
             product_id: selectedProduct.product_id,
             quantity: Math.max(quantity, 1),
-            proration_billing_mode: billingMode,
             addons: addonsToSend && addonsToSend.length > 0 ? addonsToSend : null,
             metadata: null,
             ...(savedCodesDiffer ? { discount_codes: savedCodes } : {}),
@@ -711,7 +708,6 @@ export function PlanPreview({
     subscriptionId,
     selectedProduct,
     quantity,
-    billingMode,
     editableAddons,
     onBackClick,
     isUsageBasedProduct,
@@ -735,7 +731,6 @@ export function PlanPreview({
         data: {
           product_id: selectedProduct.product_id,
           quantity: Math.max(quantity, 1),
-          proration_billing_mode: billingMode,
           addons:
             addonsToSend && addonsToSend.length > 0 ? addonsToSend : null,
           metadata: null,
@@ -820,7 +815,6 @@ export function PlanPreview({
         data: {
           product_id: selectedProduct.product_id,
           quantity: Math.max(quantity, 1),
-          proration_billing_mode: billingMode,
           addons: addonsToSend,
           metadata: null,
           ...(savedCodesDiffer ? { discount_codes: savedCodes } : {}),
