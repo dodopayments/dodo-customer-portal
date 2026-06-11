@@ -153,16 +153,35 @@ export const parseCurrency = (value: number): string => {
 };
 
 const CURRENCY_PRECISION: Record<CurrencyCode, number> = {
-  BHD: 3, // Bahraini Dinar (1 dinar = 1000 fils)
-  IQD: 3, // Iraqi Dinar
-  JOD: 3, // Jordanian Dinar
-  KWD: 3, // Kuwaiti Dinar
-  LYD: 3, // Libyan Dinar
-  OMR: 3, // Omani Rial
-  TND: 3, // Tunisian Dinar
-  JPY: 0, // Japanese Yen
-  KRW: 0, // South Korean Won
-  VND: 0, // Vietnamese Dong
+  // Three-decimal currencies (Stripe-supported, ISO 4217).
+  // 1 major unit = 1000 subunits (e.g. 1.500 KWD = 1500 fils).
+  BHD: 3,
+  IQD: 3,
+  JOD: 3,
+  KWD: 3,
+  LYD: 3,
+  OMR: 3,
+  TND: 3,
+
+  // Zero-decimal currencies (Stripe-supported).
+  // The smallest unit IS the major unit (e.g. 1500 JPY = ¥1500, not ¥15.00).
+  BIF: 0,
+  CLP: 0,
+  DJF: 0,
+  GNF: 0,
+  JPY: 0,
+  KMF: 0,
+  KRW: 0,
+  MGA: 0,
+  PYG: 0,
+  RWF: 0,
+  UGX: 0,
+  VND: 0,
+  VUV: 0,
+  XAF: 0,
+  XOF: 0,
+  XPF: 0,
+
   USD: 2,
   EUR: 2,
   GBP: 2,
