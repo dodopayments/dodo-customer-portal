@@ -153,17 +153,8 @@ export const parseCurrency = (value: number): string => {
 };
 
 const CURRENCY_PRECISION: Record<CurrencyCode, number> = {
-  // Three-decimal currencies (Stripe-supported, ISO 4217).
-  // 1 major unit = 1000 subunits (e.g. 1.500 KWD = 1500 fils).
-  BHD: 3,
-  IQD: 3,
-  JOD: 3,
-  KWD: 3,
-  LYD: 3,
-  OMR: 3,
-  TND: 3,
-
-  // Zero-decimal currencies (Stripe-supported).
+  // Zero-decimal currencies (the only supported non-2-decimal currencies;
+  // no 3-decimal currencies are supported).
   // The smallest unit IS the major unit (e.g. 1500 JPY = ¥1500, not ¥15.00).
   BIF: 0,
   CLP: 0,
