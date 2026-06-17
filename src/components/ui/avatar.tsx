@@ -65,18 +65,16 @@ const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   AvatarFallbackProps
 >(({ className, name, singleInitials = false, ...props }, ref) => {
-  if (!name) {
-    name = "Dodo";
-  }
+  const displayName = name || "Dodo";
   const initials = React.useMemo(() => {
-    const nameParts = name.split(" ");
+    const nameParts = displayName.split(" ");
     if (nameParts.length === 1) {
       return nameParts[0].charAt(0).toUpperCase();
     }
     return `${nameParts[0].charAt(0)}${nameParts[nameParts.length - 1].charAt(
       0,
     )}`.toUpperCase();
-  }, [name]);
+  }, [displayName]);
 
   const colorClass = React.useMemo(() => {
     const group = getColorGroup(initials);
