@@ -4,13 +4,16 @@ import { BaseDataGrid } from "../table/BaseDataGrid";
 import { ColumnDef } from "@tanstack/react-table";
 import { InvoiceHistoryResponse } from "./subscription-tabs-table";
 import { useMemo } from "react";
-import { Badge } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { formatCurrency, decodeCurrency } from "@/lib/currency-helper";
 import { CircleSlash } from "lucide-react";
 import ServerPagination from "@/components/common/server-pagination";
 import InvoiceDownloadSheet from "./invoice-download-sheet";
-import { useTranslations, useLocale } from "next-intl";
+import IDTooltip from "../custom/truncate-tooltip";
+import { Badge, type BadgeVariant } from "../ui/badge";
+import { TimeTooltip } from "../custom/time-tooltip";
+import { DataGridColumnHeader } from "../ui/data-grid-column-header";
+import { useTranslations } from "next-intl";
 
 export function InvoiceHistory({
   invoiceHistory,
@@ -31,64 +34,72 @@ export function InvoiceHistory({
 }) {
   const t = useTranslations("InvoiceHistory");
   const tBadge = useTranslations("BadgeStatus");
-  const locale = useLocale();
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const InvoiceColumn: ColumnDef<any>[] = useMemo(() => [
-    {
-      accessorKey: "payment_id",
-      header: t("paymentId"),
-      cell: ({ row }: { row: any }) => (
-        <div className="text-left">{row.original.payment_id}</div>
-      ),
-    },
-    {
-      accessorKey: "date",
-      header: t("date"),
-      cell: ({ row }: { row: any }) => (
-        <div className="text-left">
-          {new Date(row.original.date).toLocaleDateString(locale, {
-            day: "numeric",
-            month: "short",
-            year: "2-digit",
-          })}
-        </div>
-      ),
-    },
-    {
-      accessorKey: "amount",
-      header: t("amount"),
-      cell: ({ row }: { row: any }) => (
-        <div className="text-left">
-          {formatCurrency(
+  const InvoiceColumn: ColumnDef<any>[] = useMemo(
+    () => [
+      {
+        accessorKey: "payment_id",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("paymentId")} column={column} />
+        ),
+        cell: ({ row }: { row: any }) => (
+          <IDTooltip idValue={row.original.payment_id} />
+        ),
+        enableSorting: true,
+      },
+      {
+        accessorKey: "date",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("date")} column={column} />
+        ),
+        cell: ({ row }: { row: any }) => (
+          <TimeTooltip timeStamp={row.original.date} />
+        ),
+        enableSorting: true,
+      },
+      {
+        accessorKey: "amount",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("amount")} column={column} />
+        ),
+        cell: ({ row }: { row: any }) =>
+          formatCurrency(
             decodeCurrency(row.original.amount, row.original.currency),
             row.original.currency
-          )}
-        </div>
-      ),
-    },
-    {
-      accessorKey: "status",
-      header: t("status"),
-      cell: ({ row }: { row: any }) => (
-        <Badge variant={getBadge(row.original.status).color as any}>
-          {tBadge(getBadge(row.original.status).messageKey)}
-        </Badge>
-      ),
-    },
-    {
-      accessorKey: "download",
-      header: t("download"),
-      cell: ({ row }: { row: any }) => (
-        <InvoiceDownloadSheet
-          key={row.original.payment_id}
-          paymentId={row.original.payment_id}
-          downloadUrl={row.original.download_url}
-          disabled={!(row.original.amount > 0)}
-        />
-      ),
-    },
-  ], [t, tBadge, locale]);
+          ),
+        enableSorting: true,
+      },
+      {
+        accessorKey: "status",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("status")} column={column} />
+        ),
+        cell: ({ row }: { row: any }) => (
+          <Badge
+            dot={false}
+            variant={getBadge(row.original.status).color as BadgeVariant}
+          >
+            {tBadge(getBadge(row.original.status).messageKey)}
+          </Badge>
+        ),
+        enableSorting: true,
+      },
+      {
+        accessorKey: "download",
+        header: t("invoice"),
+        cell: ({ row }: { row: any }) => (
+          <InvoiceDownloadSheet
+            key={row.original.payment_id}
+            paymentId={row.original.payment_id}
+            downloadUrl={row.original.download_url}
+            disabled={!(row.original.amount > 0)}
+          />
+        ),
+      },
+    ],
+    [t, tBadge]
+  );
 
   const data = useMemo(() => invoiceHistory, [invoiceHistory]);
 

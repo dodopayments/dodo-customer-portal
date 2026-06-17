@@ -33,6 +33,7 @@ import {
 interface UpdatePaymentMethodSheetProps {
   subscription_id: string;
   variant?: "secondary" | "default";
+  label?: string;
 }
 
 interface PaymentMethodOptionProps {
@@ -203,6 +204,7 @@ function PaymentMethodOption({
 export function UpdatePaymentMethodSheet({
   subscription_id,
   variant = "secondary",
+  label,
 }: UpdatePaymentMethodSheetProps) {
   const t = useTranslations("UpdatePaymentMethodSheet");
   const baseId = useId();
@@ -338,7 +340,7 @@ export function UpdatePaymentMethodSheet({
         variant={variant}
         className="my-auto"
       >
-        {t("editButton")}
+        {label ?? t("editButton")}
       </Button>
       <SheetContent className="flex flex-col p-0 overflow-y-auto border-border-secondary rounded-xl border m-6" floating side="right">
         <SheetHeader className="border-b p-6 border-border-secondary pb-4">

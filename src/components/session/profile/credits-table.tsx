@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import ServerPagination from "@/components/common/server-pagination";
 import { CircleSlash } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { DataGridColumnHeader } from "@/components/ui/data-grid-column-header";
 
 export function CreditsTable({
   creditLedger,
@@ -30,54 +31,56 @@ export function CreditsTable({
   const t = useTranslations("ProfileCredits");
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const CreditColumn: ColumnDef<any>[] = useMemo(() => [
-    {
-      accessorKey: "transaction_type",
-      header: t("tableType"),
-      cell: ({ row }) => {
-        const transactionType = row.original.transaction_type;
-        const formatted = transactionType
-          ? transactionType.replace(/_/g, " ")
-          : "-";
-        return (
-          <div className="text-left text-text-secondary capitalize">
-            {formatted}
-          </div>
-        );
+  const CreditColumn: ColumnDef<any>[] = useMemo(
+    () => [
+      {
+        accessorKey: "transaction_type",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("tableType")} column={column} />
+        ),
+        cell: ({ row }) => {
+          const transactionType = row.original.transaction_type;
+          const formatted = transactionType
+            ? transactionType.replace(/_/g, " ")
+            : "-";
+          return (
+            <span className="text-text-secondary capitalize">{formatted}</span>
+          );
+        },
+        enableSorting: true,
       },
-    },
-    {
-      accessorKey: "description",
-      header: t("tableDescription"),
-      cell: ({ row }) => {
-        const description = row.original.description;
-        return (
-          <div className="text-left text-text-secondary">
-            {description || "-"}
-          </div>
-        );
+      {
+        accessorKey: "description",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("tableDescription")} column={column} />
+        ),
+        cell: ({ row }) => (
+          <span className="text-text-secondary">
+            {row.original.description || "-"}
+          </span>
+        ),
+        enableSorting: true,
       },
-    },
-    {
-      accessorKey: "amount",
-      header: t("tableAmount"),
-      cell: ({ row }) => {
-        const amount = row.original.amount;
-        const isCredit = row.original.is_credit;
-        return (
-          <div
-            className={`text-left ${
-              isCredit ? "text-green-600" : "text-red-500"
-            }`}
-          >
-            {isCredit ? "+" : "-"}
-            {amount} {unit}
-          </div>
-        );
+      {
+        accessorKey: "amount",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("tableAmount")} column={column} />
+        ),
+        cell: ({ row }) => {
+          const amount = row.original.amount;
+          const isCredit = row.original.is_credit;
+          return (
+            <span className={isCredit ? "text-green-600" : "text-red-500"}>
+              {isCredit ? "+" : "-"}
+              {amount} {unit}
+            </span>
+          );
+        },
+        enableSorting: true,
       },
-    },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  ], [t, unit]);
+    ],
+    [t, unit]
+  );
 
   const data = useMemo(() => {
     return creditLedger;

@@ -40,6 +40,13 @@ export function useLogout(options: UseLogoutOptions = {}) {
       const response = await fetch("/api/auth/logout", { method: "POST" });
       if (!response.ok) throw new Error("Logout failed");
 
+      // Clear theme from localStorage
+      try {
+        window.localStorage.removeItem("theme");
+      } catch {
+        // localStorage unavailable
+      }
+
       const redirectTo =
         !hasBusinessToken && businessId ? `/login/${businessId}` : "/";
       window.location.replace(redirectTo);

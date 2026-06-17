@@ -29,7 +29,7 @@ const TooltipContent = React.forwardRef<
     >
       {props.children}
       {showArrow && (
-        <TooltipPrimitive.Arrow className="-my-px w-4 h-2 fill-popover drop-shadow-[0_1px_0_hsl(var(--border))]" />
+        <TooltipPrimitive.Arrow className="-my-px w-4 h-2 fill-[var(--bg-primary)] drop-shadow-[0_1px_0_var(--border-primary)]" />
       )}
     </TooltipPrimitive.Content>
   </TooltipPrimitive.Portal>
