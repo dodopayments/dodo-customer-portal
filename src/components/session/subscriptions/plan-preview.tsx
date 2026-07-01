@@ -805,7 +805,7 @@ export function PlanPreview({
     try {
       setIsConfirming(true);
       const addonsToSend = isUsageBasedProduct
-        ? []
+        ? null
         : editableAddons.filter(a => a.quantity > 0);
 
       const savedCodesDiffer =
@@ -815,7 +815,7 @@ export function PlanPreview({
         data: {
           product_id: selectedProduct.product_id,
           quantity: Math.max(quantity, 1),
-          addons: addonsToSend,
+          addons: addonsToSend && addonsToSend.length > 0 ? addonsToSend : null,
           metadata: null,
           ...(savedCodesDiffer ? { discount_codes: savedCodes } : {}),
         },
