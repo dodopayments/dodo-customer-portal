@@ -45,6 +45,7 @@ const TYPE_LABELS: Record<string, string> = {
     framer: "Framer Template",
     digital_files: "Digital Product Delivery",
     license_key: "License Key",
+    feature_flag: "Feature Flag",
 };
 
 function statusBadgeVariant(status: PortalGrantResponse["status"]): BadgeVariant {
@@ -296,6 +297,7 @@ function GrantDetailSheet({
     const isLicenseKey = grant?.entitlement.integration_type === "license_key";
     const isDigitalFiles = grant?.entitlement.integration_type === "digital_files";
     const isFramer = grant?.entitlement.integration_type === "framer";
+    const isFeatureFlag = grant?.entitlement.integration_type === "feature_flag";
 
     const handleReconnect = async () => {
         if (!grant) return;
@@ -528,6 +530,15 @@ function GrantDetailSheet({
                                     )}
                                 </div>
                             )}
+                        </div>
+                    )}
+
+                    {isFeatureFlag && grant.entitlement.description && (
+                        <div className="space-y-2">
+                            <span className="text-sm text-text-secondary">Description</span>
+                            <p className="text-sm text-text-primary whitespace-pre-line">
+                                {grant.entitlement.description}
+                            </p>
                         </div>
                     )}
 
