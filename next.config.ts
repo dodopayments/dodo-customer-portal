@@ -94,6 +94,9 @@ const sentryConfig = {
   sentryUrl: "https://sentry.dodopayments.tech/",
   silent: !process.env.CI,
   widenClientFileUpload: true,
+  // Route browser requests to Sentry through a Next.js rewrite to circumvent
+  // ad-blockers. Safe: `/monitoring` is not matched by the proxy.ts matcher.
+  tunnelRoute: "/monitoring",
 };
 
 const config =
