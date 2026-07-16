@@ -194,10 +194,10 @@ export const EntitlementsCell = ({
                                                 <CardTitle className="text-base">{t("licenseKeyCardTitle")}</CardTitle>
                                             </CardHeader>
                                             <CardContent className="p-0">
-                                                <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-                                                    <p className="text-sm font-medium text-text-secondary">
+                                                <div className="flex items-center justify-between gap-2 rounded-lg border bg-card px-4 py-3">
+                                                    <p className="min-w-0 flex-1 text-sm font-medium text-text-secondary">
                                                         {isVisible ? (
-                                                            <span className="font-mono text-text-primary">
+                                                            <span className="block font-mono text-text-primary break-all">
                                                                 {licenseKey.key}
                                                             </span>
                                                         ) : (
@@ -209,7 +209,7 @@ export const EntitlementsCell = ({
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
-                                                        className="text-text-secondary"
+                                                        className="shrink-0 text-text-secondary"
                                                         onClick={() => toggleVisibility(licenseKey.id)}
                                                         aria-label={isVisible ? t("hideLicenseKey") : t("showLicenseKey")}
                                                     >
