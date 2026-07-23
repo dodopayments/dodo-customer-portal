@@ -14,6 +14,7 @@ import {
   SubscriptionData,
   SubscriptionStatus,
 } from "./subscriptions/subscriptions";
+import { OrderData } from "./orders/orders";
 import { Badge, type BadgeVariant } from "../ui/badge";
 import { getBadge } from "@/lib/badge-helper";
 import { useRouter } from "next/navigation";
@@ -43,6 +44,12 @@ interface SubscriptionCardProps {
    * Payment method to display (only used in compact variant)
    */
   paymentMethod?: PaymentMethodItem;
+  /**
+   * The most recent payment for this subscription. When provided in the compact variant,
+   * its currency and total_amount are used for display instead of the subscription's base
+   * currency, ensuring the correct local currency is shown when adaptive pricing is active.
+   */
+  lastPayment?: OrderData;
 }
 
 // Helper to get payment method display info
@@ -72,6 +79,7 @@ export const SubscriptionCard = ({
   cardClassName,
   variant = "detail",
   paymentMethod,
+  lastPayment,
 }: SubscriptionCardProps) => {
   const t = useTranslations("SubscriptionCard");
   const tBadge = useTranslations("BadgeStatus");
@@ -93,6 +101,14 @@ export const SubscriptionCard = ({
   // Compact variant - minimal design for overview
   if (variant === "compact") {
     const paymentDisplay = getPaymentMethodDisplay(paymentMethod);
+
+    // Use the most recent payment's currency and amount when available.
+    // This ensures the correct local currency is displayed when adaptive pricing
+    // is active (e.g. a USD product purchased in INR should show ₹ not $).
+    const displayCurrency = (lastPayment?.currency ?? item.currency) as CurrencyCode;
+    const displayAmount = lastPayment != null
+      ? lastPayment.total_amount
+      : item.recurring_pre_tax_amount;
 
     return (
       <div>
@@ -119,10 +135,10 @@ export const SubscriptionCard = ({
                   <p className="text-lg sm:text-xl font-display font-semibold text-text-primary">
                     {formatCurrency(
                       decodeCurrency(
-                        item.recurring_pre_tax_amount,
-                        item.currency as CurrencyCode,
+                        displayAmount,
+                        displayCurrency,
                       ),
-                      item.currency as CurrencyCode,
+                      displayCurrency,
                     )}
                     <span className="text-sm sm:text-base font-normal text-text-primary">
                       /{item.payment_frequency_interval}
