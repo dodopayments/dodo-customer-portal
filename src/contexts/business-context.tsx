@@ -13,6 +13,8 @@ export interface CustomerBusinessTrackingDetails {
 export interface Business {
     /** if null assume false */
     allow_customer_portal_sub_change_plan?: boolean | null;
+    /** if null assume true; when false the cancel subscription action is disabled */
+    allow_customers_to_cancel_subscription?: boolean | null;
     business_id: string;
     country?: null | string;
     description?: string | null;
