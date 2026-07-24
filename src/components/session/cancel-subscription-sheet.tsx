@@ -16,6 +16,12 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -52,11 +58,14 @@ const CANCELLATION_REASONS: { value: CancellationFeedback; label: string }[] =
 interface CancelSubscriptionSheetProps {
   subscription: SubscriptionDetailsData;
   subscriptionId: string;
+  /** Business disallows cancellation from the portal */
+  disabled?: boolean;
 }
 
 export function CancelSubscriptionSheet({
   subscription,
   subscriptionId,
+  disabled = false,
 }: CancelSubscriptionSheetProps) {
   const t = useTranslations("CancelSubscriptionSheet");
   const [open, setOpen] = useState(false);
@@ -124,6 +133,26 @@ export function CancelSubscriptionSheet({
     ),
     subscription.currency as CurrencyCode
   );
+
+  // A scheduled cancellation can still be revoked even when the business
+  // disallows new cancellations, so only the cancel trigger is blocked.
+  if (disabled && !subscription.cancel_at_next_billing_date) {
+    return (
+      <TooltipProvider>
+        <Tooltip delayDuration={100}>
+          <TooltipTrigger asChild>
+            {/* Disabled buttons don't emit pointer events; the span keeps the tooltip working */}
+            <span tabIndex={0}>
+              <Button variant="secondary" disabled>
+                {t("triggerCancel")}
+              </Button>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>{t("cancelDisabledTooltip")}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
 
   return (
     <Sheet
