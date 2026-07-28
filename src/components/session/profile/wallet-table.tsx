@@ -12,6 +12,7 @@ import {
 import ServerPagination from "@/components/common/server-pagination";
 import { CircleSlash } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { DataGridColumnHeader } from "@/components/ui/data-grid-column-header";
 
 export function WalletTable({
   walletLedger,
@@ -33,47 +34,53 @@ export function WalletTable({
   const t = useTranslations("ProfileWallet");
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const WalletColumn: ColumnDef<any>[] = useMemo(() => [
-    {
-      accessorKey: "event_type",
-      header: t("tableType"),
-      cell: ({ row }) => {
-        const eventType = row.original.event_type;
-        return (
-          <div className="text-left text-text-secondary">
-            {eventType || "-"}
-          </div>
-        );
+  const WalletColumn: ColumnDef<any>[] = useMemo(
+    () => [
+      {
+        accessorKey: "event_type",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("tableType")} column={column} />
+        ),
+        cell: ({ row }) => (
+          <span className="text-text-secondary">
+            {row.original.event_type || "-"}
+          </span>
+        ),
+        enableSorting: true,
       },
-    },
-    {
-      accessorKey: "description",
-      header: t("tableReason"),
-      cell: ({ row }) => {
-        const description = row.original.reason || row.original.description;
-        return (
-          <div className="text-left text-text-secondary">
-            {description || "-"}
-          </div>
-        );
+      {
+        accessorKey: "description",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("tableReason")} column={column} />
+        ),
+        cell: ({ row }) => (
+          <span className="text-text-secondary">
+            {row.original.reason || row.original.description || "-"}
+          </span>
+        ),
+        enableSorting: true,
       },
-    },
-    {
-      accessorKey: "amount",
-      header: t("tableAmount"),
-      cell: ({ row }) => {
-        const amount = row.original.amount;
-        const currency = row.original.currency as CurrencyCode;
-        const decodedAmount = decodeCurrency(amount, currency);
-        return (
-          <div className="text-left text-text-secondary">
-            {formatCurrency(decodedAmount, currency)}
-          </div>
-        );
+      {
+        accessorKey: "amount",
+        header: ({ column }) => (
+          <DataGridColumnHeader title={t("tableAmount")} column={column} />
+        ),
+        cell: ({ row }) => {
+          const currency = row.original.currency as CurrencyCode;
+          return (
+            <span className="text-text-secondary">
+              {formatCurrency(
+                decodeCurrency(row.original.amount, currency),
+                currency
+              )}
+            </span>
+          );
+        },
+        enableSorting: true,
       },
-    },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  ], [t]);
+    ],
+    [t]
+  );
 
   const data = useMemo(() => {
     return walletLedger;

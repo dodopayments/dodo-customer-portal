@@ -4,6 +4,7 @@ import { BusinessProvider } from "@/contexts/business-context";
 import { fetchBusiness, getBusinessToken, getToken } from "@/lib/server-actions";
 import { CustomerPortalAnalyticsWrapper } from "@/components/analytics/customer-portal-analytics-wrapper";
 import ThemeWrapper from "@/components/providers/theme-wrapper";
+import { ThemeSync } from "@/components/session/theme-sync";
 
 const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
   let businessData = null;
@@ -25,6 +26,7 @@ const Dashboardlayout = async ({ children }: { children: React.ReactNode }) => {
       sessionThemeConfig={businessData?.theme_config}
     >
       <BusinessProvider initialBusiness={businessData} hasBusinessToken={hasBusinessToken}>
+        <ThemeSync />
         <CustomerPortalAnalyticsWrapper>
           <div className="flex flex-col h-screen w-full bg-bg-primary">
             <NextTopLoader

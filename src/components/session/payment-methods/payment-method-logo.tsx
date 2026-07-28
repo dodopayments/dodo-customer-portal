@@ -37,13 +37,7 @@ export function getPaymentMethodLogoUrl(
   cardNetwork?: string,
   cardType?: string
 ): LogoResult | null {
-  // 1. Check PaymentMethodType first (local files > datatrans > generic)
-  if (paymentMethodType) {
-    const result = getLogoFromPaymentMethodType(paymentMethodType);
-    if (result) return result;
-  }
-
-  // 2. Check card network
+  // 1. Card network takes priority for cards so brand (Visa/Mastercard/etc.) is shown
   if (cardNetwork) {
     const network = cardNetwork.toLowerCase();
     const cardLogos: Record<string, LogoResult> = {
@@ -86,6 +80,12 @@ export function getPaymentMethodLogoUrl(
     };
 
     if (cardLogos[network]) return cardLogos[network];
+  }
+
+  // 2. Fall back to PaymentMethodType (local files > datatrans > generic)
+  if (paymentMethodType) {
+    const result = getLogoFromPaymentMethodType(paymentMethodType);
+    if (result) return result;
   }
 
   // 3. Check card type (credit/debit)

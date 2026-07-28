@@ -90,10 +90,10 @@ export function RefundsTable({
           }}
           tableLayout={{
             autoWidth: false,
-            columnsPinnable: false,
-            columnsResizable: false,
-            columnsMovable: false,
-            columnsVisibility: false,
+            columnsPinnable: true,
+            columnsResizable: true,
+            columnsMovable: true,
+            columnsVisibility: true,
             disableRowPerPage: true,
           }}
         />

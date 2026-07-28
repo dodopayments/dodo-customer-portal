@@ -53,6 +53,7 @@ export async function SubscriptionDetails({
         (pm) => pm.payment_method_id === subscription.payment_method_id,
       )
     : null;
+  const t = await getTranslations("SubscriptionDetails");
 
   return (
     <div className="flex flex-col gap-8">
@@ -106,12 +107,19 @@ export async function SubscriptionDetails({
             </CardContent>
           </section>
           {subscription.status === "active" && (
-            <div className="flex flex-col sm:flex-row border border-border-secondary rounded-lg p-4 items-start sm:items-end gap-4 sm:gap-6 my-auto w-full lg:w-auto">
+            <div
+              className={
+                currentPaymentMethod
+                  ? "flex flex-row flex-wrap justify-between sm:justify-normal sm:flex-nowrap border border-border-secondary rounded-lg p-4 items-start sm:items-end gap-4 sm:gap-6 my-auto w-full lg:w-auto"
+                  : "flex items-center"
+              }
+            >
               {currentPaymentMethod && (
                 <CurrentPaymentMethod paymentMethod={currentPaymentMethod} />
               )}
               <UpdatePaymentMethodSheet
                 subscription_id={subscription.subscription_id}
+                label={currentPaymentMethod ? undefined : t("editPaymentMethod")}
               />
             </div>
           )}

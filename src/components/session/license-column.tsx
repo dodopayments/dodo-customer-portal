@@ -4,8 +4,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import IDTooltip from "../custom/truncate-tooltip";
 import { Badge } from "../ui/badge";
+import { DataGridColumnHeader } from "../ui/data-grid-column-header";
+import { TimeTooltip } from "../custom/time-tooltip";
 import { getBadge } from "@/lib/badge-helper";
-import parseIso from "@/lib/date-helper";
 
 interface LicenseResponse {
   activations_limit: number;
@@ -27,64 +28,66 @@ export function getLicenseColumns(
   t: (key: string) => string,
 ): ColumnDef<LicenseResponse>[] {
   return [
-  {
-    accessorKey: "key",
-    header: t("licenseKey"),
-    cell: ({ row }) => (
-      <div className="flex items-center">
-        <IDTooltip idValue={row.getValue("key")} />
-      </div>
-    ),
-  },
-  {
-    accessorKey: "status",
-    header: t("status"),
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      const { color, messageKey } = getBadge(status, false, true);
-      return (
-        <Badge dot={false} variant={color as any}>
-          {tBadge(messageKey)}
-        </Badge>
-      );
+    {
+      accessorKey: "key",
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("licenseKey")} column={column} />
+      ),
+      cell: ({ row }) => <IDTooltip idValue={row.getValue("key")} />,
+      enableSorting: true,
     },
-  },
-  {
-    accessorKey: "product_id",
-    header: t("productId"),
-    cell: ({ row }) => {
-      return (
-        <div className="flex items-center">
-          <IDTooltip idValue={row.getValue("product_id")} />
-        </div>
-      );
+    {
+      accessorKey: "status",
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("status")} column={column} />
+      ),
+      cell: ({ row }) => {
+        const status = row.getValue("status") as string;
+        const { color, messageKey } = getBadge(status, false, true);
+        return (
+          <Badge dot={false} variant={color as any}>
+            {tBadge(messageKey)}
+          </Badge>
+        );
+      },
+      enableSorting: true,
     },
-  },
-  {
-    accessorKey: "expires_at",
-    header: t("expiry"),
-    cell: ({ row }) => {
-      const isoDate = row.getValue("expires_at") as string;
-      if (isoDate === "Never Expires" || isoDate === "Same as Subscripton") {
-        return <div className="pl-3">{t("neverExpires")}</div>;
-      }
-      return <div className="pl-3">{parseIso(isoDate)}</div>;
+    {
+      accessorKey: "product_id",
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("productId")} column={column} />
+      ),
+      cell: ({ row }) => <IDTooltip idValue={row.getValue("product_id")} />,
+      enableSorting: true,
     },
-  },
-  {
-    accessorKey: "instances_count",
-    header: t("activationsUsed"),
-  },
-  {
-    accessorKey: "payment_id",
-    header: t("paymentId"),
-    cell: ({ row }) => {
-      return (
-        <div className="flex items-center">
-          <IDTooltip idValue={row.getValue("payment_id")} />
-        </div>
-      );
+    {
+      accessorKey: "expires_at",
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("expiry")} column={column} />
+      ),
+      cell: ({ row }) => {
+        const isoDate = row.getValue("expires_at") as string;
+        if (isoDate === "Never Expires" || isoDate === "Same as Subscripton") {
+          return t("neverExpires");
+        }
+        return <TimeTooltip timeStamp={isoDate} showyear />;
+      },
+      enableSorting: true,
     },
-  },
+    {
+      accessorKey: "instances_count",
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("activationsUsed")} column={column} />
+      ),
+      enableSorting: true,
+    },
+    {
+      accessorKey: "payment_id",
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("paymentId")} column={column} />
+      ),
+      cell: ({ row }) => <IDTooltip idValue={row.getValue("payment_id")} />,
+      enableSorting: true,
+    },
   ];
 }

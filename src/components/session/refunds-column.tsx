@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
 import IDTooltip from "../custom/truncate-tooltip";
-import { Badge } from "../ui/badge";
+import { Badge, type BadgeVariant } from "../ui/badge";
+import { DataGridColumnHeader } from "../ui/data-grid-column-header";
 import {
   CurrencyCode,
   decodeCurrency,
@@ -32,60 +32,66 @@ export function getRefundColumns(
   return [
     {
       accessorKey: "created_at",
-      header: t("date"),
-      cell: ({ row }) => {
-        return (
-          <TimeTooltip
-            timeStamp={row.original.created_at}
-            className="text-sm text-text-primary font-medium"
-            triggerFormat="shortDate"
-          />
-        );
-      },
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("date")} column={column} />
+      ),
+      cell: ({ row }) => (
+        <TimeTooltip
+          timeStamp={row.original.created_at}
+          className="text-sm text-text-primary font-medium"
+          showyear
+        />
+      ),
+      enableSorting: true,
     },
     {
       accessorKey: "status",
-      header: t("status"),
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("status")} column={column} />
+      ),
       cell: ({ row }) => {
         const status = row.getValue("status") as string;
         const badge = getBadge(status);
         return (
-          <Badge dot={false} variant={badge.color as any}>
+          <Badge dot={false} variant={badge.color as BadgeVariant}>
             {tBadge(badge.messageKey)}
           </Badge>
         );
       },
+      enableSorting: true,
     },
     {
       accessorKey: "amount",
-      header: t("amount"),
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("amount")} column={column} />
+      ),
       cell: ({ row }) => {
         const amount = row.original.amount;
         const currency = row.original.currency;
-        if (amount === null || currency === null) {
-          return <div className="text-left">-</div>;
-        }
+        if (amount === null || currency === null) return "-";
         const currencyCode = currency as CurrencyCode;
-        const formatted = formatCurrency(
+        return formatCurrency(
           decodeCurrency(amount, currencyCode),
-          currencyCode,
+          currencyCode
         );
-        return <div className="text-left">{formatted}</div>;
       },
+      enableSorting: true,
     },
     {
       accessorKey: "refund_id",
-      header: t("refundId"),
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("refundId")} column={column} />
+      ),
       cell: ({ row }) => <IDTooltip idValue={row.getValue("refund_id")} />,
+      enableSorting: true,
     },
     {
       accessorKey: "payment_id",
-      header: t("associatedPayment"),
-      cell: ({ row }) => (
-        <div className="flex gap-2 items-center">
-          <IDTooltip idValue={row.getValue("payment_id")} />
-        </div>
+      header: ({ column }) => (
+        <DataGridColumnHeader title={t("associatedPayment")} column={column} />
       ),
+      cell: ({ row }) => <IDTooltip idValue={row.getValue("payment_id")} />,
+      enableSorting: true,
     },
   ];
 }
