@@ -204,7 +204,7 @@
     "tableTotal": "Total",
     "creditToBalance": "Crèdit al saldo",
     "creditTooltip": "El crèdit s’utilitzarà per pagar pagaments futurs",
-    "summaryTotal": "Total",
+    "summarySubtotal": "Subtotal",
     "summaryTax": "Impost",
     "summaryAmountDue": "Import a pagar ara",
     "payButton": "Paga {amount}",

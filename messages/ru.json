@@ -204,7 +204,7 @@
     "tableTotal": "Итого",
     "creditToBalance": "Зачисление на баланс",
     "creditTooltip": "Кредит будет использован для оплаты будущих платежей",
-    "summaryTotal": "Итого",
+    "summarySubtotal": "Промежуточный итог",
     "summaryTax": "Налог",
     "summaryAmountDue": "К оплате сейчас",
     "payButton": "Оплатить {amount}",

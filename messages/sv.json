@@ -204,7 +204,7 @@
     "tableTotal": "Totalt",
     "creditToBalance": "Kredit till saldo",
     "creditTooltip": "Kredit kommer att användas för att betala framtida betalningar",
-    "summaryTotal": "Totalt",
+    "summarySubtotal": "Delsumma",
     "summaryTax": "Moms",
     "summaryAmountDue": "Att betala nu",
     "payButton": "Betala {amount}",

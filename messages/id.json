@@ -204,7 +204,7 @@
     "tableTotal": "Total",
     "creditToBalance": "Kredit ke Saldo",
     "creditTooltip": "Kredit akan digunakan untuk membayar pembayaran di masa mendatang",
-    "summaryTotal": "Total",
+    "summarySubtotal": "Subtotal",
     "summaryTax": "Pajak",
     "summaryAmountDue": "Jumlah yang harus dibayar sekarang",
     "payButton": "Bayar {amount}",

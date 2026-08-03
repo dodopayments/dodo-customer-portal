@@ -204,7 +204,7 @@
     "tableTotal": "Toplam",
     "creditToBalance": "Bakiyeye Kredi",
     "creditTooltip": "Kredi, gelecekteki ödemeleri karşılamak için kullanılacak",
-    "summaryTotal": "Toplam",
+    "summarySubtotal": "Ara Toplam",
     "summaryTax": "Vergi",
     "summaryAmountDue": "Şimdi ödenecek tutar",
     "payButton": "{amount} öde",

@@ -271,7 +271,9 @@ function LineItemRow({
   if (item.type === "meter") {
     const meterTax = item.tax ?? 0;
     const meterSubtotal = item.subtotal ?? 0;
-    const meterTotal = meterSubtotal + meterTax;
+    // Tax-inclusive subtotals already contain the tax, so adding it again would
+    // overstate the line.
+    const meterTotal = meterSubtotal + (item.tax_inclusive ? 0 : meterTax);
 
     return (
       <>
@@ -322,8 +324,10 @@ function LineItemRow({
   // Unit price = abs(unit_price * proration_factor)
   const displayUnitPrice = Math.abs(item.unit_price * (item.proration_factor ?? 1));
 
-  // Calculate total: (unit_price * quantity) + tax
-  const lineTotal = displayUnitPrice * displayQuantity + displayTax;
+  // Calculate total: (unit_price * quantity) + tax. Tax-inclusive unit prices
+  // already contain the tax, so adding it again would overstate the line.
+  const lineTotal =
+    displayUnitPrice * displayQuantity + (item.tax_inclusive ? 0 : displayTax);
 
   return (
     <>
@@ -791,6 +795,13 @@ export function PlanPreview({
 
   const summary = previewData?.immediate_charge?.summary;
 
+  // `settlement_amount` is already post-tax (the backend derives it from
+  // `immediate_payment_post_tax_amount`), so the tax must be subtracted out for
+  // the subtotal rather than added on for the total.
+  const hasSummary = Boolean(previewData && summary);
+  const settlementAmount = summary?.settlement_amount || 0;
+  const settlementTax = summary?.settlement_tax || 0;
+
   const formatSettlementAmount = (amount: number) => {
     if (!settlementCurrency) return "—";
     return formatDecodedCurrency(amount, settlementCurrency);
@@ -1044,30 +1055,20 @@ export function PlanPreview({
                 <CardContent className="p-4 flex flex-col gap-0 bg-button-secondary-bg rounded-lg">
                   {[
                     {
-                      label: t("summaryTotal"),
-                      value:
-                        previewData && summary
-                          ? Math.abs(summary.settlement_amount || 0)
-                          : null,
+                      label: t("summarySubtotal"),
+                      value: hasSummary
+                        ? settlementAmount - settlementTax
+                        : null,
                       showSeparator: true,
                     },
                     {
                       label: t("summaryTax"),
-                      value:
-                        previewData && summary
-                          ? Math.abs(summary.settlement_tax || 0)
-                          : null,
+                      value: hasSummary ? settlementTax : null,
                       showSeparator: true,
                     },
                     {
                       label: t("summaryAmountDue"),
-                      value:
-                        previewData && summary
-                          ? Math.abs(
-                            (summary.settlement_amount || 0) +
-                            (summary.settlement_tax || 0)
-                          )
-                          : null,
+                      value: hasSummary ? settlementAmount : null,
                       isBold: true,
                       showSeparator: false,
                     },
@@ -1119,14 +1120,9 @@ export function PlanPreview({
               }
               loading={isConfirming}
             >
-              {previewData && summary
+              {hasSummary
                 ? t("payButton", {
-                  amount: formatSettlementAmount(
-                    Math.abs(
-                      (summary.settlement_amount || 0) +
-                      (summary.settlement_tax || 0)
-                    )
-                  ),
+                  amount: formatSettlementAmount(settlementAmount),
                 })
                 : t("confirmPlanChange")}
             </Button>

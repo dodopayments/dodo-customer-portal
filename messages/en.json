@@ -205,7 +205,7 @@
     "tableTotal": "Total",
     "creditToBalance": "Credit to Balance",
     "creditTooltip": "Credit will be used to pay off future payments",
-    "summaryTotal": "Total",
+    "summarySubtotal": "Subtotal",
     "summaryTax": "Tax",
     "summaryAmountDue": "Amount due now",
     "payButton": "Pay {amount}",

@@ -204,7 +204,7 @@
     "tableTotal": "Razem",
     "creditToBalance": "Uznanie salda",
     "creditTooltip": "Uznanie zostanie wykorzystane do rozliczenia przyszłych płatności",
-    "summaryTotal": "Razem",
+    "summarySubtotal": "Suma częściowa",
     "summaryTax": "Podatek",
     "summaryAmountDue": "Kwota do zapłaty teraz",
     "payButton": "Zapłać {amount}",

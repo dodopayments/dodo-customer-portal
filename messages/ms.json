@@ -204,7 +204,7 @@
     "tableTotal": "Jumlah",
     "creditToBalance": "Kredit ke Baki",
     "creditTooltip": "Kredit akan digunakan untuk membayar pembayaran pada masa hadapan",
-    "summaryTotal": "Jumlah",
+    "summarySubtotal": "Subjumlah",
     "summaryTax": "Cukai",
     "summaryAmountDue": "Jumlah perlu dibayar sekarang",
     "payButton": "Bayar {amount}",

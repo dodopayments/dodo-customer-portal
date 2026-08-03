@@ -204,7 +204,7 @@
     "tableTotal": "סה״כ",
     "creditToBalance": "זיכוי ליתרה",
     "creditTooltip": "הזיכוי ישמש לתשלום תשלומים עתידיים",
-    "summaryTotal": "סה״כ",
+    "summarySubtotal": "סכום ביניים",
     "summaryTax": "מס",
     "summaryAmountDue": "סכום לתשלום כעת",
     "payButton": "תשלום {amount}",

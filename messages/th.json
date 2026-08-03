@@ -204,7 +204,7 @@
     "tableTotal": "รวม",
     "creditToBalance": "เครดิตเข้ายอดคงเหลือ",
     "creditTooltip": "เครดิตจะถูกใช้เพื่อชำระการชำระเงินในอนาคต",
-    "summaryTotal": "รวม",
+    "summarySubtotal": "ยอดย่อย",
     "summaryTax": "ภาษี",
     "summaryAmountDue": "ยอดที่ต้องชำระตอนนี้",
     "payButton": "ชำระ {amount}",
