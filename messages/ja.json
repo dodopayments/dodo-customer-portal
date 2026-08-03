@@ -204,7 +204,7 @@
     "tableTotal": "合計",
     "creditToBalance": "残高へのクレジット",
     "creditTooltip": "クレジットは今後の支払いに充当されます",
-    "summaryTotal": "合計",
+    "summarySubtotal": "小計",
     "summaryTax": "税",
     "summaryAmountDue": "今回の支払い金額",
     "payButton": "{amount} を支払う",

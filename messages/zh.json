@@ -204,7 +204,7 @@
     "tableTotal": "合计",
     "creditToBalance": "计入余额",
     "creditTooltip": "余额将用于支付未来的付款",
-    "summaryTotal": "合计",
+    "summarySubtotal": "小计",
     "summaryTax": "税费",
     "summaryAmountDue": "当前应付金额",
     "payButton": "支付 {amount}",

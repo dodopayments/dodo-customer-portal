@@ -204,7 +204,7 @@
     "tableTotal": "الإجمالي",
     "creditToBalance": "رصيد إلى الرصيد",
     "creditTooltip": "سيتم استخدام الرصيد لسداد المدفوعات المستقبلية",
-    "summaryTotal": "الإجمالي",
+    "summarySubtotal": "المجموع الفرعي",
     "summaryTax": "الضريبة",
     "summaryAmountDue": "المبلغ المستحق الآن",
     "payButton": "ادفع {amount}",

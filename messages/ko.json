@@ -204,7 +204,7 @@
     "tableTotal": "합계",
     "creditToBalance": "잔액으로 크레딧",
     "creditTooltip": "크레딧은 향후 결제에 사용됩니다",
-    "summaryTotal": "합계",
+    "summarySubtotal": "소계",
     "summaryTax": "세금",
     "summaryAmountDue": "지금 결제할 금액",
     "payButton": "{amount} 결제",

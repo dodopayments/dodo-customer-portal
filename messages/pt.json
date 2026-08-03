@@ -204,7 +204,7 @@
     "tableTotal": "Total",
     "creditToBalance": "Crédito para saldo",
     "creditTooltip": "O crédito será usado para pagar pagamentos futuros",
-    "summaryTotal": "Total",
+    "summarySubtotal": "Subtotal",
     "summaryTax": "Imposto",
     "summaryAmountDue": "Valor a pagar agora",
     "payButton": "Pagar {amount}",

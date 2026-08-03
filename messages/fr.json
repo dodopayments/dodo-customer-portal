@@ -204,7 +204,7 @@
     "tableTotal": "Total",
     "creditToBalance": "Crédit au solde",
     "creditTooltip": "Le crédit sera utilisé pour régler les paiements futurs",
-    "summaryTotal": "Total",
+    "summarySubtotal": "Sous-total",
     "summaryTax": "Taxe",
     "summaryAmountDue": "Montant dû maintenant",
     "payButton": "Payer {amount}",

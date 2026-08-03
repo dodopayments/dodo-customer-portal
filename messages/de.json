@@ -204,7 +204,7 @@
     "tableTotal": "Gesamt",
     "creditToBalance": "Gutschrift auf Guthaben",
     "creditTooltip": "Die Gutschrift wird zur Begleichung zukünftiger Zahlungen verwendet",
-    "summaryTotal": "Gesamt",
+    "summarySubtotal": "Zwischensumme",
     "summaryTax": "Steuern",
     "summaryAmountDue": "Jetzt fälliger Betrag",
     "payButton": "{amount} bezahlen",

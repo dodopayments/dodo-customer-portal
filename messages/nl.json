@@ -204,7 +204,7 @@
     "tableTotal": "Totaal",
     "creditToBalance": "Credit naar saldo",
     "creditTooltip": "Credit wordt gebruikt om toekomstige betalingen te voldoen",
-    "summaryTotal": "Totaal",
+    "summarySubtotal": "Subtotaal",
     "summaryTax": "Belasting",
     "summaryAmountDue": "Nu te betalen bedrag",
     "payButton": "Betaal {amount}",

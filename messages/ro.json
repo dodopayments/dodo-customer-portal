@@ -204,7 +204,7 @@
     "tableTotal": "Total",
     "creditToBalance": "Credit în sold",
     "creditTooltip": "Creditul va fi folosit pentru a acoperi plățile viitoare",
-    "summaryTotal": "Total",
+    "summarySubtotal": "Subtotal",
     "summaryTax": "Taxe",
     "summaryAmountDue": "Sumă de plată acum",
     "payButton": "Plătiți {amount}",
