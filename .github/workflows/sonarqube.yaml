@@ -1,0 +1,58 @@
+---
+# SonarQube static analysis against https://sonarqube.dodopayments.com
+#
+# push-to-main ONLY, deliberately. SonarQube Community Build analyses only the
+# main branch -- PR and branch analysis are Developer Edition features. With no
+# usable PR parameters the scanner attributes every analysis to MAIN, so a scan
+# from ANY non-main ref overwrites main's results with that ref's code and
+# silently corrupts main's quality history.
+#
+# Re-add `pull_request:` ONLY if this instance moves to Developer Edition. At
+# that point PR analysis becomes correct and this constraint no longer applies.
+#
+# The `if: github.ref` guard on the job is the other half of that defence:
+# workflow_dispatch lets the dispatcher choose any ref, reopening the same hole
+# through a different door, with no warning in the Actions UI that it is
+# destructive.
+#
+# No quality-gate step yet: this repo has no SonarQube baseline, and a blocking
+# gate on the first scan fails on pre-existing findings nobody has triaged.
+# Enable gating once a baseline exists and the new-code period is meaningful.
+name: SonarQube Analysis
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonarqube-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sonarqube:
+    name: SonarQube Scan
+    # Without this, a manual dispatch from a feature branch overwrites main's
+    # analysis. See the header comment.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          # full history: SonarQube needs it for blame attribution and to
+          # compute the new-code period
+          fetch-depth: 0
+
+      - name: SonarQube Scan
+        # Pinned to a commit SHA, not a tag: this step receives SONAR_TOKEN,
+        # so a retargeted or compromised release tag would hand credentials to
+        # replacement action code.
+        uses: SonarSource/sonarqube-scan-action@22918119ff8e1ca75a623e15c8296b6ea4fbe28f # v8.2.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
