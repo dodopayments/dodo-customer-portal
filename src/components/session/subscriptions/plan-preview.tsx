@@ -321,13 +321,19 @@ function LineItemRow({
   // Tax = tax * proration_factor
   const displayTax = item.tax * (item.proration_factor ?? 1);
 
-  // Unit price = abs(unit_price * proration_factor)
-  const displayUnitPrice = Math.abs(item.unit_price * (item.proration_factor ?? 1));
+  // Unit price = abs(unit_price * proration_factor). `tax` is line-level while
+  // `unit_price` is per-unit (the backend divides the line price by quantity), so
+  // a tax-inclusive unit price has its own per-unit share of the tax baked in.
+  // Strip that out rather than zeroing the tax, so the Unit Price / Tax / Total
+  // columns still reconcile.
+  const perUnitTax = item.tax / (item.quantity || 1);
+  const preTaxUnitPrice = item.tax_inclusive
+    ? item.unit_price - perUnitTax
+    : item.unit_price;
+  const displayUnitPrice = Math.abs(preTaxUnitPrice * (item.proration_factor ?? 1));
 
-  // Calculate total: (unit_price * quantity) + tax. Tax-inclusive unit prices
-  // already contain the tax, so adding it again would overstate the line.
-  const lineTotal =
-    displayUnitPrice * displayQuantity + (item.tax_inclusive ? 0 : displayTax);
+  // Calculate total: (unit_price * quantity) + tax
+  const lineTotal = displayUnitPrice * displayQuantity + displayTax;
 
   return (
     <>
@@ -798,9 +804,17 @@ export function PlanPreview({
   // `settlement_amount` is already post-tax (the backend derives it from
   // `immediate_payment_post_tax_amount`), so the tax must be subtracted out for
   // the subtotal rather than added on for the total.
-  const hasSummary = Boolean(previewData && summary);
+  //
+  // It is also post-credit, while `settlement_tax` is the raw pre-credit tax.
+  // `customer_credits` is on the same basis and in the same currency (negative
+  // when credits were spent to offset the charge, positive when credits were
+  // added), so subtracting it reconstructs the pre-credit charge and keeps every
+  // row of the card on one basis: subtotal + tax + credits = amount due.
+  const hasSummary = Boolean(summary);
   const settlementAmount = summary?.settlement_amount || 0;
   const settlementTax = summary?.settlement_tax || 0;
+  const customerCredits = summary?.customer_credits || 0;
+  const preCreditAmount = settlementAmount - customerCredits;
 
   const formatSettlementAmount = (amount: number) => {
     if (!settlementCurrency) return "—";
@@ -1057,7 +1071,7 @@ export function PlanPreview({
                     {
                       label: t("summarySubtotal"),
                       value: hasSummary
-                        ? settlementAmount - settlementTax
+                        ? preCreditAmount - settlementTax
                         : null,
                       showSeparator: true,
                     },
@@ -1066,6 +1080,15 @@ export function PlanPreview({
                       value: hasSummary ? settlementTax : null,
                       showSeparator: true,
                     },
+                    ...(customerCredits !== 0
+                      ? [
+                        {
+                          label: t("creditToBalance"),
+                          value: customerCredits,
+                          showSeparator: true,
+                        },
+                      ]
+                      : []),
                     {
                       label: t("summaryAmountDue"),
                       value: hasSummary ? settlementAmount : null,
