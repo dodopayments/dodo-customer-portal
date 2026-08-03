@@ -1,15 +1,19 @@
 ---
 # SonarQube static analysis against https://sonarqube.dodopayments.com
 #
-# push-to-main ONLY, deliberately. SonarQube Community Build has no pull
-# request analysis (/api/project_pull_requests/list is not a registered
-# endpoint on 26.7.x), so a scan from ANY non-main ref is stored against the
-# MAIN branch and overwrites main's results with that ref's code.
+# push-to-main ONLY, deliberately. SonarQube Community Build analyses only the
+# main branch -- PR and branch analysis are Developer Edition features. With no
+# usable PR parameters the scanner attributes every analysis to MAIN, so a scan
+# from ANY non-main ref overwrites main's results with that ref's code and
+# silently corrupts main's quality history.
 #
-# The `if: github.ref` guard on the job is part of that same defence:
-# workflow_dispatch lets the dispatcher choose any ref, which would reopen the
-# exact hole the missing `pull_request:` trigger closes -- just via a different
-# door, and with no warning in the Actions UI that it is destructive.
+# Re-add `pull_request:` ONLY if this instance moves to Developer Edition. At
+# that point PR analysis becomes correct and this constraint no longer applies.
+#
+# The `if: github.ref` guard on the job is the other half of that defence:
+# workflow_dispatch lets the dispatcher choose any ref, reopening the same hole
+# through a different door, with no warning in the Actions UI that it is
+# destructive.
 #
 # No quality-gate step yet: this repo has no SonarQube baseline, and a blocking
 # gate on the first scan fails on pre-existing findings nobody has triaged.
