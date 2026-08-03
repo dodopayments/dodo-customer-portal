@@ -1,0 +1,43 @@
+---
+# SonarQube static analysis against https://sonarqube.dodopayments.com
+#
+# push-to-main ONLY, deliberately. SonarQube Community Build has no pull
+# request analysis (/api/project_pull_requests/list does not exist on this
+# build), so a scan triggered from a PR is stored against the MAIN branch and
+# overwrites main's results with the PR's code. Adding `pull_request:` here
+# would silently corrupt main's quality history.
+#
+# No quality-gate step yet: this repo has no SonarQube baseline, and a blocking
+# gate on first scan fails on pre-existing findings nobody has triaged. Enable
+# gating once a baseline exists and the "new code" period is meaningful.
+name: SonarQube Analysis
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonarqube-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sonarqube:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # full history: SonarQube uses it to attribute issues to authors
+          # and to compute the new-code period
+          fetch-depth: 0
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
