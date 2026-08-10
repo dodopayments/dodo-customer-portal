@@ -152,11 +152,20 @@ export interface UpdatePaymentMethodResponse {
   payment_link: string | null;
 }
 
+/**
+ * PATCH body for `/customer-portal/payments/{id}/invoices`.
+ *
+ * Every key is optional on purpose: this is a partial update, so a field the
+ * customer did not fill in must be omitted rather than sent as `null`. An
+ * explicit `null` is read by the API as "clear this value", which is rejected
+ * for countries where the invoice zipcode is tax-determining and therefore
+ * immutable after checkout.
+ */
 export interface InvoiceDetailsPayload {
-  street: string | null;
-  state: string | null;
-  city: string | null;
-  zipcode: string | null;
+  street?: string;
+  state?: string;
+  city?: string;
+  zipcode?: string;
 }
 
 export interface ProductCollectionProduct {

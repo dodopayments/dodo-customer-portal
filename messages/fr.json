@@ -326,7 +326,9 @@
     "postalCode": "Code postal",
     "download": "Télécharger",
     "downloadSuccess": "Facture téléchargée avec succès",
-    "updateFailed": "Échec de la mise à jour des informations de facturation. Veuillez réessayer."
+    "updateFailed": "Échec de la mise à jour des informations de facturation. Veuillez réessayer.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Produits digitaux",

@@ -326,7 +326,9 @@
     "postalCode": "Poskod",
     "download": "Muat turun",
     "downloadSuccess": "Invois berjaya dimuat turun",
-    "updateFailed": "Gagal mengemas kini butiran invois. Sila cuba lagi."
+    "updateFailed": "Gagal mengemas kini butiran invois. Sila cuba lagi.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Produk Digital",

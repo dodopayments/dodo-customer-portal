@@ -326,7 +326,9 @@
     "postalCode": "Почтовый индекс",
     "download": "Скачать",
     "downloadSuccess": "Счёт успешно скачан",
-    "updateFailed": "Не удалось обновить данные счёта. Пожалуйста, попробуйте ещё раз."
+    "updateFailed": "Не удалось обновить данные счёта. Пожалуйста, попробуйте ещё раз.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Цифровые продукты",

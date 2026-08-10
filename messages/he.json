@@ -326,7 +326,9 @@
     "postalCode": "מיקוד",
     "download": "הורדה",
     "downloadSuccess": "החשבונית הורדה בהצלחה",
-    "updateFailed": "עדכון פרטי החשבונית נכשל. נסו שוב."
+    "updateFailed": "עדכון פרטי החשבונית נכשל. נסו שוב.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "מוצרים דיגיטליים",

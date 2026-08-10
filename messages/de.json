@@ -326,7 +326,9 @@
     "postalCode": "Postleitzahl",
     "download": "Download",
     "downloadSuccess": "Rechnung erfolgreich heruntergeladen",
-    "updateFailed": "Rechnungsdetails konnten nicht aktualisiert werden. Bitte versuchen Sie es erneut."
+    "updateFailed": "Rechnungsdetails konnten nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Digitale Produkte",
