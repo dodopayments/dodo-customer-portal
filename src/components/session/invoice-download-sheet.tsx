@@ -81,7 +81,7 @@ export function InvoiceDownloadSheet({
         <Separator className="my-3" />
         {isFillDetailsOpen ? (
           <InvoiceFillDetails
-            url={paymentId}
+            paymentId={paymentId}
             onDownloadComplete={handleDownloadComplete}
           />
         ) : (

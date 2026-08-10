@@ -326,7 +326,9 @@
     "postalCode": "Codi postal",
     "download": "Descarrega",
     "downloadSuccess": "Factura descarregada correctament",
-    "updateFailed": "No s’han pogut actualitzar les dades de la factura. Torna-ho a provar."
+    "updateFailed": "No s’han pogut actualitzar les dades de la factura. Torna-ho a provar.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Productes digitals",

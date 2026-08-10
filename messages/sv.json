@@ -326,7 +326,9 @@
     "postalCode": "Postnummer",
     "download": "Ladda ner",
     "downloadSuccess": "Fakturan laddades ner",
-    "updateFailed": "Det gick inte att uppdatera fakturauppgifterna. Försök igen."
+    "updateFailed": "Det gick inte att uppdatera fakturauppgifterna. Försök igen.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Digitala produkter",

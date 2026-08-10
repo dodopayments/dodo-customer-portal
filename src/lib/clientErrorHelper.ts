@@ -46,49 +46,72 @@ function sanitizeMessage(message: string | undefined, fallback: string): string 
   return trimmedMessage.length > 0 ? trimmedMessage : fallback;
 }
 
-function parseError(
+export interface ParsedError {
+  message: string;
+  severity: "error" | "warning";
+}
+
+/**
+ * Resolves an unknown error into a user-facing message without displaying it.
+ *
+ * Use this when the error needs to be rendered inline (next to the offending
+ * field, or as a persistent banner) instead of, or in addition to, a toast.
+ * `parseError` is a thin wrapper around this for the toast-only case.
+ */
+export function getErrorMessage(
   error: unknown,
   customMessage?: string,
   storeFront?: boolean
-) {
+): ParsedError {
   const defaultMessage = customMessage || "Something went wrong";
 
   if (!isErrorDetails(error)) {
     const fallback = error instanceof Error ? error.message : undefined;
-    const message = sanitizeMessage(fallback, defaultMessage);
-    if (toast) {
-      return toast.error(message);
-    }
-    // Server-side: log error instead
-    console.error(message);
-    return;
+    return {
+      message: sanitizeMessage(fallback, defaultMessage),
+      severity: "error",
+    };
   }
 
   const status = error.status ?? error.response?.status;
 
   if (status === 401 || status === 403) {
-    const message = "You are not authorized to perform this action";
-    if (toast) {
-      return toast.warning(message);
-    }
-    console.error(message);
-    return;
+    return {
+      message: "You are not authorized to perform this action",
+      severity: "warning",
+    };
   }
 
   if (storeFront && status === 409) {
-    const message = "Slug is already taken, please try another one";
-    if (toast) {
-      return toast.warning(message);
-    }
-    console.error(message);
-    return;
+    return {
+      message: "Slug is already taken, please try another one",
+      severity: "warning",
+    };
   }
 
   const responseMessage = extractResponseMessage(error.response?.data);
-  const message = sanitizeMessage(responseMessage || error.message, defaultMessage);
-  
+  return {
+    message: sanitizeMessage(
+      responseMessage || error.message,
+      defaultMessage
+    ),
+    severity: "error",
+  };
+}
+
+function parseError(
+  error: unknown,
+  customMessage?: string,
+  storeFront?: boolean
+) {
+  const { message, severity } = getErrorMessage(
+    error,
+    customMessage,
+    storeFront
+  );
+
   if (toast) {
-    return toast.error(message);
+    return severity === "warning" ? toast.warning(message) : toast.error(message);
   }
   // Server-side: log error instead
   console.error(message);

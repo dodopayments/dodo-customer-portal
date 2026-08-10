@@ -326,7 +326,9 @@
     "postalCode": "Postcode",
     "download": "Downloaden",
     "downloadSuccess": "Factuur succesvol gedownload",
-    "updateFailed": "Bijwerken van factuurgegevens mislukt. Probeer het opnieuw."
+    "updateFailed": "Bijwerken van factuurgegevens mislukt. Probeer het opnieuw.",
+    "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
   },
   "DigitalDeliveryDialog": {
     "title": "Digitale producten",
