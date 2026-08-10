@@ -328,7 +328,8 @@
     "downloadSuccess": "請求書をダウンロードしました",
     "updateFailed": "請求書情報の更新に失敗しました。もう一度お試しください。",
     "blankFieldsHint": "Leave a field blank to keep the details captured at checkout. For some countries the postal code cannot be changed after checkout.",
-    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again."
+    "popupBlocked": "Your browser blocked the invoice tab. Please allow pop-ups for this site and try again.",
+    "openInvoice": "Open invoice"
   },
   "DigitalDeliveryDialog": {
     "title": "デジタル製品",
