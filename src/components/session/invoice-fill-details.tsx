@@ -11,8 +11,6 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { InvoiceDetailsPayload } from "@/app/session/subscriptions/[id]/types";
 
-type InvoiceAddressField = keyof InvoiceDetailsPayload;
-
 async function updateInvoiceDetails(
   paymentId: string,
   payload: InvoiceDetailsPayload,
@@ -49,6 +47,9 @@ export function InvoiceFillDetails({
   const [postalCode, setPostalCode] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [blockedInvoiceUrl, setBlockedInvoiceUrl] = useState<string | null>(
+    null,
+  );
 
   /**
    * Only the fields the customer actually filled in are sent.
@@ -60,7 +61,7 @@ export function InvoiceFillDetails({
    * key leaves the stored value untouched.
    */
   const payload = useMemo<InvoiceDetailsPayload>(() => {
-    const fields: Array<[InvoiceAddressField, string]> = [
+    const fields: Array<[keyof InvoiceDetailsPayload, string]> = [
       ["street", address],
       ["state", state],
       ["city", city],
@@ -78,15 +79,24 @@ export function InvoiceFillDetails({
 
   const hasChanges = Object.keys(payload).length > 0;
 
-  // The invoice renders in a new tab, so "success" is only true if that tab
-  // actually opened. Claiming success while the pop-up was blocked leaves the
-  // customer with no invoice and no explanation.
-  const reportDownloadOutcome = (opened: boolean) => {
+  /**
+   * The invoice renders in a new tab, so the flow is only complete once that
+   * tab actually opened.
+   *
+   * If it was blocked, the address update itself still succeeded, so the sheet
+   * stays open and offers a direct link instead. Closing it here would leave
+   * the customer with no invoice and no way back other than restarting the
+   * whole flow.
+   */
+  const finishDownload = (opened: boolean, invoiceUrl: string) => {
     if (opened) {
       toast.success(t("downloadSuccess"));
-    } else {
-      toast.warning(t("popupBlocked"));
+      onDownloadComplete?.();
+      return;
     }
+
+    toast.warning(t("popupBlocked"));
+    setBlockedInvoiceUrl(invoiceUrl);
   };
 
   const handleDownload = async () => {
@@ -94,6 +104,7 @@ export function InvoiceFillDetails({
 
     setIsSubmitting(true);
     setErrorMessage(null);
+    setBlockedInvoiceUrl(null);
 
     const invoiceUrl = `${api_url}/invoices/payments/${paymentId}`;
 
@@ -103,8 +114,7 @@ export function InvoiceFillDetails({
     if (!hasChanges) {
       const opened = window.open(invoiceUrl, "_blank");
       setIsSubmitting(false);
-      reportDownloadOutcome(Boolean(opened));
-      onDownloadComplete?.();
+      finishDownload(Boolean(opened), invoiceUrl);
       return;
     }
 
@@ -121,8 +131,7 @@ export function InvoiceFillDetails({
         opened = true;
       }
 
-      reportDownloadOutcome(opened);
-      onDownloadComplete?.();
+      finishDownload(opened, invoiceUrl);
     } catch (error) {
       invoiceWindow?.close();
       // Surfaced inline rather than as a toast so the sheet stays open and the
@@ -186,6 +195,22 @@ export function InvoiceFillDetails({
         <p className="text-sm text-text-error-primary" role="alert">
           {errorMessage}
         </p>
+      )}
+
+      {blockedInvoiceUrl && (
+        // A real click on an anchor is never pop-up blocked, so this always
+        // gets the customer their invoice without repeating the update.
+        <Button asChild variant="secondary" className="w-full">
+          <a
+            href={blockedInvoiceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => onDownloadComplete?.()}
+          >
+            <Download className="w-4 h-4 mr-2" />
+            {t("openInvoice")}
+          </a>
+        </Button>
       )}
 
       <div className="flex mt-4">
