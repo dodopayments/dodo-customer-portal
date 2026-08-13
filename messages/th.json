@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "ซื้อในนามธุรกิจ",
     "businessName": "ชื่อบริษัท",
     "businessNamePlaceholder": "ชื่อบริษัท",
-    "taxId": "เลขประจำตัวภาษีขาย",
+    "taxId": "รหัสประจำตัวผู้เสียภาษีการขาย",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "บันทึกรายละเอียด",
     "updateSuccess": "อัปเดตรายละเอียดการเรียกเก็บเงินเรียบร้อยแล้ว",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "ยกเลิกการสมัครสมาชิก",
     "triggerRevoke": "ยกเลิกการยกเลิก",
+    "cancelDisabledTooltip": "การยกเลิกถูกปิดใช้งานสำหรับการสมัครใช้งานนี้ โปรดติดต่อผู้ขายเพื่อทำการยกเลิก",
     "sheetTitle": "เสียใจที่ต้องเห็นคุณจากไป...",
     "currentPlan": "แผนปัจจุบัน",
     "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "แก้ไข",

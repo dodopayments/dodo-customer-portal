@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "Покупка как компания",
     "businessName": "Название компании",
     "businessNamePlaceholder": "Название компании",
-    "taxId": "Идентификатор налога с продаж",
+    "taxId": "ID налога с продаж",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Сохранить",
     "updateSuccess": "Платёжные данные успешно обновлены",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "Отменить подписку",
     "triggerRevoke": "Отменить отмену",
+    "cancelDisabledTooltip": "Отмена отключена для этой подписки. Пожалуйста, свяжитесь с продавцом, чтобы отменить подписку.",
     "sheetTitle": "Нам жаль, что вы уходите...",
     "currentPlan": "Текущий план",
     "addOns": "{count, plural, one {# дополнение} few {# дополнения} many {# дополнений} other {# дополнения}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Редактировать",

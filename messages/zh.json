@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "以企业身份购买",
     "businessName": "公司名称",
     "businessNamePlaceholder": "公司名称",
-    "taxId": "销售税号",
+    "taxId": "销售税税号",
     "taxIdPlaceholder": "税号",
     "saveDetails": "保存详情",
     "updateSuccess": "账单详情更新成功",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "取消订阅",
     "triggerRevoke": "撤销取消",
+    "cancelDisabledTooltip": "此订阅无法取消。请联系商家进行取消。",
     "sheetTitle": "很遗憾看到你离开...",
     "currentPlan": "当前方案",
     "addOns": "{count, plural, one {# 个附加项} other {# 个附加项}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "编辑",

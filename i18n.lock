@@ -77,6 +77,8 @@ checksums:
     SubscriptionBillingInfo/phoneNumber: 3249becf06d2e11d04191093f47e6ade
     SubscriptionBillingInfo/email: e7f34943a0c2fb849db1839ff6ef5cb5
     SubscriptionBillingInfo/billingAddress: 48980a775bfc7292b0c4f9b74b4d352e
+    SubscriptionBillingInfo/taxId: 23bb9a70404121d07118cb2224bc6393
+    SubscriptionBillingInfo/businessName: ef562676333beeaa453517749d5f1a4a
     SubscriptionBillingEdit/editButton: eee7f39ff90b18852afc1671f21fbaa9
     SubscriptionBillingEdit/sheetTitle: 01fc99d7e9257c319a468f964cbc329b
     SubscriptionBillingEdit/customerName: 0de2e49b864602d51500cec1cfb18d07
@@ -88,7 +90,9 @@ checksums:
     SubscriptionBillingEdit/city: 1831f32e1babbb29af27fac3053504a2
     SubscriptionBillingEdit/postalCode: a3133251f4c5dcb6ea9ad4bcc789607d
     SubscriptionBillingEdit/purchasingAsBusiness: 635410b03cc794af350e9dda750c5279
-    SubscriptionBillingEdit/taxId: 3be38fb9a842dacd042525c3f4b1baee
+    SubscriptionBillingEdit/businessName: ef562676333beeaa453517749d5f1a4a
+    SubscriptionBillingEdit/businessNamePlaceholder: ef562676333beeaa453517749d5f1a4a
+    SubscriptionBillingEdit/taxId: 23bb9a70404121d07118cb2224bc6393
     SubscriptionBillingEdit/taxIdPlaceholder: 3be38fb9a842dacd042525c3f4b1baee
     SubscriptionBillingEdit/saveDetails: 67ba602bfe60dd6417a146c0315e363c
     SubscriptionBillingEdit/updateSuccess: db810a8522076975e5e19dac9f5e43c1
@@ -107,6 +111,7 @@ checksums:
     CancelSubscriptionDialog/cancelling: 6dcf56d1fa7ed307f0f8b41cc351093f
     CancelSubscriptionSheet/triggerCancel: e96e506867f44b9271bb24f18d375626
     CancelSubscriptionSheet/triggerRevoke: ca6d924861ee51567d527c724b9e21ea
+    CancelSubscriptionSheet/cancelDisabledTooltip: 01a610a03e39af0a1339bc5d0b98e1ab
     CancelSubscriptionSheet/sheetTitle: cd76f7091dbc6cac2c725b9fd725d966
     CancelSubscriptionSheet/currentPlan: 53ac259fd40a361274861ee7c7498424
     CancelSubscriptionSheet/addOns: 1b3b6e7c46d18b946ac4305922a5abe6
@@ -159,7 +164,7 @@ checksums:
     PlanPreview/tableTotal: f60dc0a14e9b1bace656c644de25de5b
     PlanPreview/creditToBalance: 48cde98105785a1b6dce3df3fb14f4da
     PlanPreview/creditTooltip: 2bdeaa1a9941015164acd44bb763c731
-    PlanPreview/summaryTotal: f60dc0a14e9b1bace656c644de25de5b
+    PlanPreview/summarySubtotal: ae69fc06016ffe52ecf38e8855f027e2
     PlanPreview/summaryTax: d3fcfe0d706125207807c386716724ee
     PlanPreview/summaryAmountDue: ce0fd06c7ee8fb1ad6540501deac2ce2
     PlanPreview/payButton: 60907d3451a6b7b3a2213c78ee17e043
@@ -167,6 +172,16 @@ checksums:
     PlanPreview/changeFailed: f40d10cb05199821daf5e9e4da3c1b72
     PlanPreview/changeSuccess: f18b1ceac3542e27f15678139edf213e
     PlanPreview/addonRequired: 3ac06285f13c219dee815665bbc9d1e4
+    PlanPreview/discountsTitle: b75ca030eadf1a8b6a1d55dc646ce8ec
+    PlanPreview/discountsDescription: 86b3d16ee9730b0559bb49304f0592d1
+    PlanPreview/discountsSave: f7a2929f33bc420195e59ac5a8bcd454
+    PlanPreview/discountsPlaceholder: 906f7a2490ca027dfb3c8e903ca64412
+    PlanPreview/discountsAdd: 6ba9782f32c71196c9bb46bb287bf251
+    PlanPreview/discountsAddMore: 81594be142178561005070421ed6a434
+    PlanPreview/discountsRemove: 1ec104f4cc708e964f154d3f72662cca
+    PlanPreview/discountsApplied: af9fca3840dc898cc9be895664ece80e
+    PlanPreview/discountsFailed: cf4b8fd77980b5d2eb4fdd593a1a08f9
+    PlanPreview/discountMaxReached: 51d40c9ac44dac04ce23d3b2fde06a9a
     UpdatePaymentMethodSheet/editButton: eee7f39ff90b18852afc1671f21fbaa9
     UpdatePaymentMethodSheet/sheetTitle: 51ac7275437cf6e6986bacff430f508c
     UpdatePaymentMethodSheet/addPaymentMethod: 0d3902a770e7bfaf91d577cc4718d869
@@ -247,6 +262,9 @@ checksums:
     InvoiceFillDetails/download: 56b7d0834952b39ee394b44bd8179178
     InvoiceFillDetails/downloadSuccess: de65432c3ec7f8044197bb21e9ed1f4f
     InvoiceFillDetails/updateFailed: f9396391f17ed219e5d3c2873bf46436
+    InvoiceFillDetails/blankFieldsHint: 0a14a46721af115c928ca62db966894e
+    InvoiceFillDetails/popupBlocked: 1b7be0f3992c408e4397614aa71ddef1
+    InvoiceFillDetails/openInvoice: 7b539bcfac03f43972347129ee927599
     DigitalDeliveryDialog/title: cb59fd45cfd10674d2fd5f2d3969ac90
     DigitalDeliveryDialog/description: 2167ed33ede9f44d404263603af2347e
     DigitalDeliveryDialog/accessExternal: c16730775a46478b37b5338c05922d67

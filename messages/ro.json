@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "Cumpărați ca firmă",
     "businessName": "Numele companiei",
     "businessNamePlaceholder": "Numele companiei",
-    "taxId": "Cod fiscal de vânzări",
+    "taxId": "ID taxă pe vânzări",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Salvați detaliile",
     "updateSuccess": "Detaliile de facturare au fost actualizate cu succes",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "Anulați abonamentul",
     "triggerRevoke": "Revocați anularea",
+    "cancelDisabledTooltip": "Anularea este dezactivată pentru acest abonament. Te rugăm să contactezi comerciantul pentru a anula.",
     "sheetTitle": "Ne pare rău să vă vedem plecând...",
     "currentPlan": "Planul curent",
     "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Editați",
