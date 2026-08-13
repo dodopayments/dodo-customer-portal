@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "Compra com a empresa",
     "businessName": "Nom de l'empresa",
     "businessNamePlaceholder": "Nom de l'empresa",
-    "taxId": "Identificador d'impost sobre vendes",
+    "taxId": "NIF de l’impost sobre vendes",
     "taxIdPlaceholder": "NIF",
     "saveDetails": "Desa les dades",
     "updateSuccess": "Les dades de facturació s’han actualitzat correctament",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "Cancel·la la subscripció",
     "triggerRevoke": "Revoca la cancel·lació",
+    "cancelDisabledTooltip": "La cancel·lació està desactivada per a aquesta subscripció. Poseu-vos en contacte amb el comerç per cancel·lar-la.",
     "sheetTitle": "Ens sap greu veure’t marxar...",
     "currentPlan": "Pla actual",
     "addOns": "{count, plural, one {# complement} other {# complements}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Edita",

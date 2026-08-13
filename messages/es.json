@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "Compra como empresa",
     "businessName": "Nombre de la empresa",
     "businessNamePlaceholder": "Nombre de la empresa",
-    "taxId": "Identificador del impuesto sobre ventas",
+    "taxId": "ID del impuesto sobre las ventas",
     "taxIdPlaceholder": "Tax ID",
     "saveDetails": "Guardar datos",
     "updateSuccess": "Los datos de facturación se actualizaron correctamente",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "Cancelar suscripción",
     "triggerRevoke": "Revocar cancelación",
+    "cancelDisabledTooltip": "La cancelación está deshabilitada para esta suscripción. Ponte en contacto con el comerciante para cancelar.",
     "sheetTitle": "Sentimos verte marchar...",
     "currentPlan": "Plan actual",
     "addOns": "{count, plural, one {# add-on} other {# add-ons}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Editar",

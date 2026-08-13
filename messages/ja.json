@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "サブスクリプションを解約",
     "triggerRevoke": "解約を取り消す",
+    "cancelDisabledTooltip": "このサブスクリプションではキャンセルが無効になっています。キャンセルするには加盟店にお問い合わせください。",
     "sheetTitle": "ご利用ありがとうございました...",
     "currentPlan": "現在のプラン",
     "addOns": "{count, plural, one {# 件のアドオン} other {# 件のアドオン}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "編集",

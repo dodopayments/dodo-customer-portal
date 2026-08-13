@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "Batalkan Langganan",
     "triggerRevoke": "Tarik Balik Pembatalan",
+    "cancelDisabledTooltip": "Pembatalan dinyahdayakan untuk langganan ini. Sila hubungi pedagang untuk membatalkan.",
     "sheetTitle": "Kami sedih melihat anda pergi...",
     "currentPlan": "Pelan semasa",
     "addOns": "{count, plural, one {# add-on} other {# add-on}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Edit",

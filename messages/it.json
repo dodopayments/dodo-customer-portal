@@ -121,7 +121,7 @@
     "purchasingAsBusiness": "Acquisto come azienda",
     "businessName": "Nome dell'azienda",
     "businessNamePlaceholder": "Nome dell'azienda",
-    "taxId": "Codice imposta sulle vendite",
+    "taxId": "ID imposta sulle vendite",
     "taxIdPlaceholder": "Partita IVA",
     "saveDetails": "Salva dettagli",
     "updateSuccess": "Dettagli di fatturazione aggiornati correttamente",
@@ -144,6 +144,7 @@
   "CancelSubscriptionSheet": {
     "triggerCancel": "Annulla abbonamento",
     "triggerRevoke": "Revoca annullamento",
+    "cancelDisabledTooltip": "L'annullamento è disabilitato per questo abbonamento. Contatta l’esercente per annullarlo.",
     "sheetTitle": "Ci dispiace vederti andare...",
     "currentPlan": "Piano attuale",
     "addOns": "{count, plural, one {# add-on} other {# add-on}}",
@@ -220,8 +221,8 @@
     "discountsAddMore": "Add more",
     "discountsRemove": "Remove discount code",
     "discountsApplied": "Discounts applied",
-    "discountMaxReached": "Maximum of 20 discount codes allowed",
-    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again."
+    "discountsFailed": "Failed to apply discount codes. Please check the codes and try again.",
+    "discountMaxReached": "Maximum of 20 discount codes allowed"
   },
   "UpdatePaymentMethodSheet": {
     "editButton": "Modifica",
