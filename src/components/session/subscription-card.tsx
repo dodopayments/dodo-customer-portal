@@ -82,6 +82,7 @@ export const SubscriptionCard = ({
   const getButtonText = (status: SubscriptionStatus) => {
     switch (status) {
       case "active":
+      case "paused":
         return t("manageSubscription");
       case "on_hold":
         return t("updatePaymentMethod");

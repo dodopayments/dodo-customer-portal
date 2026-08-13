@@ -62,6 +62,9 @@ export function getBadge(
     // License Status
     active: { color: "green", messageKey: "active" },
     disabled: { color: "yellow", messageKey: "disabled" },
+
+    // Subscription Status
+    paused: { color: "orange", messageKey: "paused" },
   };
 
   return (

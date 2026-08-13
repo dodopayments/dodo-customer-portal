@@ -109,6 +109,29 @@ export interface CancelSubscriptionParams {
   cancellation_comment?: string | null;
 }
 
+/**
+ * PATCH body for pause and resume.
+ *
+ * The API reads `pause` from the JSON body only, and rejects a body that
+ * combines `pause` with any other field with a 422. Keep this payload alone in
+ * its own request. Send `true` to pause. Send `false` to resume.
+ */
+export interface PauseSubscriptionParams {
+  subscription_id: string;
+  pause: boolean;
+}
+
+/** Error codes the API returns for a pause or resume request. */
+export type PauseSubscriptionErrorCode =
+  | "SUBSCRIPTION_ALREADY_PAUSED"
+  | "SUBSCRIPTION_PAUSE_ALREADY_PENDING"
+  | "SUBSCRIPTION_NOT_ELIGIBLE_FOR_PAUSE"
+  | "SUBSCRIPTION_PAUSE_REQUIRES_PAYMENT_METHOD"
+  | "SUBSCRIPTION_NOT_PAUSED"
+  | "SUBSCRIPTION_CUSTOMER_PAUSE_DISABLED"
+  | "BUSINESS_SETTINGS_UNAVAILABLE"
+  | "INVALID_REQUEST_BODY";
+
 export interface UpdateBillingDetailsParams {
   subscription_id: string;
   data: {

@@ -4,6 +4,7 @@ import { makeAuthenticatedRequest, getToken } from "@/lib/server-actions";
 import {
   SubscriptionDetailsData,
   CancelSubscriptionParams,
+  PauseSubscriptionParams,
   UpdateBillingDetailsParams,
   ChangeSubscriptionPlanParams,
   ChangeSubscriptionPlanPreviewParams,
@@ -72,6 +73,52 @@ export async function cancelSubscription({
         operation = "cancel subscription immediately";
       }
       return { success: false, error: `Failed to ${operation}: ${errorText}` };
+    }
+
+    return { success: true, data: await response.json() };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+/**
+ * Pauses or resumes a subscription.
+ *
+ * `pause` is the only field in the body on purpose. The API returns 422
+ * `INVALID_REQUEST_BODY` when a request combines `pause` with any other
+ * subscription field, so this action must not be merged into
+ * `updateBillingDetails` or `cancelSubscription`.
+ *
+ * On failure it returns the API error `code` rather than a prose message. The
+ * caller maps that code to translated copy.
+ */
+export async function pauseSubscription({
+  subscription_id,
+  pause,
+}: PauseSubscriptionParams): Promise<ActionResult<unknown>> {
+  try {
+    const response = await makeAuthenticatedRequest(
+      `/customer-portal/subscriptions/${subscription_id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ pause }),
+      },
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => "");
+      let code = "";
+
+      try {
+        code = JSON.parse(errorText).code ?? "";
+      } catch {
+        code = "";
+      }
+
+      return { success: false, error: code || `HTTP ${response.status}` };
     }
 
     return { success: true, data: await response.json() };
