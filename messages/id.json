@@ -164,6 +164,34 @@
     "revokeFailed": "Gagal mencabut pembatalan. Silakan coba lagi.",
     "revokeSuccess": "Pembatalan langganan berhasil dicabut"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Jeda Langganan",
+    "triggerResume": "Lanjutkan Langganan",
+    "pauseDisabledTooltip": "Fitur jeda dinonaktifkan untuk langganan ini. Silakan hubungi merchant untuk menjeda.",
+    "pauseSheetTitle": "Jeda langganan Anda",
+    "resumeSheetTitle": "Lanjutkan langganan Anda",
+    "currentPlan": "Paket saat ini",
+    "pauseExplanation": "Langganan Anda akan tetap dijeda sampai Anda melanjutkannya. Tanggal penagihan berikutnya dan tanggal perpanjangan Anda akan sama-sama maju sesuai durasi jeda.",
+    "resumeExplanation": "Langganan Anda akan aktif kembali segera. Penagihan dimulai kembali dari hari ini, dan tanggal penagihan berikutnya telah dimajukan sesuai durasi jeda.",
+    "confirmPause": "Jeda langganan",
+    "confirmResume": "Lanjutkan langganan",
+    "pausing": "Menjeda...",
+    "resuming": "Melanjutkan...",
+    "pauseSuccess": "Langganan berhasil dijeda",
+    "resumeSuccess": "Langganan berhasil dilanjutkan",
+    "pauseFailed": "Gagal menjeda langganan. Silakan coba lagi.",
+    "resumeFailed": "Gagal melanjutkan langganan. Silakan coba lagi.",
+    "errors": {
+      "alreadyPaused": "Langganan ini sudah dijeda.",
+      "pausePending": "Permintaan jeda sebelumnya masih diproses. Silakan coba lagi sebentar lagi.",
+      "notEligible": "Langganan ini tidak dapat dijeda saat ini.",
+      "requiresPaymentMethod": "Silakan tambahkan metode pembayaran sebelum Anda menjeda. Pemakaian yang belum dibayar harus ditagihkan terlebih dahulu.",
+      "notPaused": "Langganan ini tidak sedang dijeda.",
+      "customerPauseDisabled": "Fitur jeda dinonaktifkan untuk langganan ini. Silakan hubungi merchant.",
+      "settingsUnavailable": "Kami tidak dapat memeriksa pengaturan jeda merchant. Silakan coba lagi.",
+      "invalidRequest": "Gagal memperbarui langganan. Silakan coba lagi."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Langganan Anda saat ini ditahan",
     "description": "Silakan perbarui metode pembayaran Anda untuk melanjutkan langganan ini"
@@ -172,6 +200,7 @@
     "onHold": "Langganan Anda saat ini ditahan karena pembayaran gagal. Silakan perbarui metode pembayaran Anda untuk melanjutkan langganan ini",
     "failed": "Langganan ini gagal. Silakan coba lagi.",
     "pending": "Pembayaran Anda tidak selesai dan checkout dibiarkan belum selesai. Jika Anda ingin berlangganan, silakan coba lagi.",
+    "paused": "Langganan ini sedang dijeda. Lanjutkan untuk memulai kembali penagihan dan melanjutkan akses Anda.",
     "cancelledOn": "Langganan ini dibatalkan pada {date}.",
     "expired": "Langganan ini telah kedaluwarsa.",
     "scheduledCancellation": "Langganan Anda saat ini dijadwalkan untuk dibatalkan pada {date}.",
@@ -554,6 +583,7 @@
     "verified": "Terverifikasi",
     "active": "Aktif",
     "disabled": "Dinonaktifkan",
+    "paused": "Dijeda",
     "preDispute": "Pra-Dispute",
     "dispute": "Dispute",
     "preArbitration": "Pra-Arbitration",

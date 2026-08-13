@@ -164,6 +164,34 @@
     "revokeFailed": "撤销取消失败。请重试。",
     "revokeSuccess": "已成功撤销订阅取消"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "暂停订阅",
+    "triggerResume": "恢复订阅",
+    "pauseDisabledTooltip": "此订阅不支持暂停。请联系商家以暂停。",
+    "pauseSheetTitle": "暂停你的订阅",
+    "resumeSheetTitle": "恢复你的订阅",
+    "currentPlan": "当前方案",
+    "pauseExplanation": "你的订阅将保持暂停状态，直到你恢复为止。你的下一次账单日期和续订日期都会按暂停时长顺延。",
+    "resumeExplanation": "你的订阅将立即重新生效。计费将从今天重新开始，你的下一次账单日期已按暂停时长顺延。",
+    "confirmPause": "暂停订阅",
+    "confirmResume": "恢复订阅",
+    "pausing": "正在暂停...",
+    "resuming": "正在恢复...",
+    "pauseSuccess": "订阅已成功暂停",
+    "resumeSuccess": "订阅已成功恢复",
+    "pauseFailed": "暂停订阅失败。请重试。",
+    "resumeFailed": "恢复订阅失败。请重试。",
+    "errors": {
+      "alreadyPaused": "此订阅已处于暂停状态。",
+      "pausePending": "先前的暂停请求仍在处理中。请稍后重试。",
+      "notEligible": "此订阅当前无法暂停。",
+      "requiresPaymentMethod": "请在暂停前添加一种支付方式。必须先为未结算的用量完成计费。",
+      "notPaused": "此订阅未处于暂停状态。",
+      "customerPauseDisabled": "此订阅不支持暂停。请联系商家。",
+      "settingsUnavailable": "无法检查商家的暂停设置。请重试。",
+      "invalidRequest": "更新订阅失败。请重试。"
+    }
+  },
   "SubscriptionInfo": {
     "title": "你的订阅当前已暂停",
     "description": "请更新你的付款方式以恢复此订阅"
@@ -172,6 +200,7 @@
     "onHold": "由于付款失败，你的订阅当前已暂停。请更新你的付款方式以恢复此订阅",
     "failed": "此订阅失败。请重试。",
     "pending": "你的付款未完成，结账流程未完成。如果你想订阅，请重试。",
+    "paused": "此订阅已暂停。恢复后将重新开始计费并继续为你提供访问权限。",
     "cancelledOn": "此订阅已于 {date} 取消。",
     "expired": "此订阅已过期。",
     "scheduledCancellation": "你的订阅当前已安排于 {date} 取消。",
@@ -554,6 +583,7 @@
     "verified": "已验证",
     "active": "有效",
     "disabled": "已禁用",
+    "paused": "已暂停",
     "preDispute": "争议前",
     "dispute": "争议",
     "preArbitration": "仲裁前",

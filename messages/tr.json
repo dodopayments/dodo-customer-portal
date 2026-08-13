@@ -164,6 +164,34 @@
     "revokeFailed": "İptal geri alınamadı. Lütfen tekrar deneyin.",
     "revokeSuccess": "Abonelik iptali başarıyla geri alındı"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Aboneliği duraklat",
+    "triggerResume": "Aboneliği devam ettir",
+    "pauseDisabledTooltip": "Bu abonelik için duraklatma devre dışı. Duraklatmak için lütfen satıcıyla iletişime geçin.",
+    "pauseSheetTitle": "Aboneliğinizi duraklatın",
+    "resumeSheetTitle": "Aboneliğinize devam edin",
+    "currentPlan": "Mevcut plan",
+    "pauseExplanation": "Aboneliğiniz, siz devam ettirene kadar duraklatılmış kalır. Sonraki faturalandırma tarihiniz ve yenileme tarihiniz, duraklatma süresi kadar ileri alınır.",
+    "resumeExplanation": "Aboneliğiniz hemen yeniden etkinleşir. Faturalandırma bugünden itibaren yeniden başlar ve sonraki faturalandırma tarihiniz duraklatma süresi kadar ileri alınmıştır.",
+    "confirmPause": "Aboneliği duraklat",
+    "confirmResume": "Aboneliği devam ettir",
+    "pausing": "Duraklatılıyor...",
+    "resuming": "Devam ettiriliyor...",
+    "pauseSuccess": "Abonelik başarıyla duraklatıldı",
+    "resumeSuccess": "Abonelik başarıyla devam ettirildi",
+    "pauseFailed": "Abonelik duraklatılamadı. Lütfen tekrar deneyin.",
+    "resumeFailed": "Aboneliğe devam edilemedi. Lütfen tekrar deneyin.",
+    "errors": {
+      "alreadyPaused": "Bu abonelik zaten duraklatılmış.",
+      "pausePending": "Önceki bir duraklatma isteği hâlâ işleniyor. Lütfen kısa süre sonra tekrar deneyin.",
+      "notEligible": "Bu abonelik şu anda duraklatılamaz.",
+      "requiresPaymentMethod": "Duraklatmadan önce lütfen bir ödeme yöntemi ekleyin. Önce ödenmemiş kullanımınızın faturalandırılması gerekir.",
+      "notPaused": "Bu abonelik duraklatılmamış.",
+      "customerPauseDisabled": "Bu abonelik için duraklatma devre dışı. Lütfen satıcıyla iletişime geçin.",
+      "settingsUnavailable": "Satıcının duraklatma ayarlarını kontrol edemedik. Lütfen tekrar deneyin.",
+      "invalidRequest": "Abonelik güncellenemedi. Lütfen tekrar deneyin."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Aboneliğiniz şu anda askıda",
     "description": "Bu aboneliği devam ettirmek için lütfen ödeme yönteminizi güncelleyin"
@@ -172,6 +200,7 @@
     "onHold": "Başarısız bir ödeme nedeniyle aboneliğiniz şu anda askıda. Bu aboneliği devam ettirmek için lütfen ödeme yönteminizi güncelleyin",
     "failed": "Bu abonelik başarısız oldu. Lütfen tekrar deneyin.",
     "pending": "Ödemeniz tamamlanmadı ve checkout işlemi yarım kaldı. Abone olmak istiyorsanız, lütfen tekrar deneyin.",
+    "paused": "Bu abonelik duraklatıldı. Faturalandırmayı yeniden başlatmak ve erişiminize devam etmek için devam ettirin.",
     "cancelledOn": "Bu abonelik {date} tarihinde iptal edildi.",
     "expired": "Bu aboneliğin süresi doldu.",
     "scheduledCancellation": "Aboneliğinizin {date} tarihinde iptal edilmesi planlanmış.",
@@ -554,6 +583,7 @@
     "verified": "Doğrulandı",
     "active": "Aktif",
     "disabled": "Devre dışı",
+    "paused": "Duraklatıldı",
     "preDispute": "İtiraz Öncesi",
     "dispute": "İtiraz",
     "preArbitration": "Tahkim Öncesi",

@@ -130,11 +130,36 @@ checksums:
     CancelSubscriptionSheet/cancelFailed: c1b31d5a57883edad1c59f5f288c63af
     CancelSubscriptionSheet/revokeFailed: efe999e76f77f46165462581d80f4634
     CancelSubscriptionSheet/revokeSuccess: 36199d11ee82bd0e02b055189aadfa86
+    PauseSubscriptionSheet/triggerPause: 2d511030a66de37fa68b483bbf83d9fb
+    PauseSubscriptionSheet/triggerResume: 72591a31edc5e501e2d12d8d9adf5e55
+    PauseSubscriptionSheet/pauseDisabledTooltip: 08d294bfd5f334e35fae6124464e5bb5
+    PauseSubscriptionSheet/pauseSheetTitle: 6b2d4b1472fd6837e79d76a6d19d994a
+    PauseSubscriptionSheet/resumeSheetTitle: 763ec44cd1d71ce55b1b13bde6027730
+    PauseSubscriptionSheet/currentPlan: 53ac259fd40a361274861ee7c7498424
+    PauseSubscriptionSheet/pauseExplanation: ecf464b1c8c76dfdb4f64486defd73ce
+    PauseSubscriptionSheet/resumeExplanation: f61ab55b3814326972372d7af81ab178
+    PauseSubscriptionSheet/confirmPause: 3a74679795f3ff8a523d1cfc5257dd37
+    PauseSubscriptionSheet/confirmResume: 8f50b5a30492461e87cfe1b28782cc6e
+    PauseSubscriptionSheet/pausing: 2620864bd4bf776f2e1eee6ae68dcb12
+    PauseSubscriptionSheet/resuming: 16e24ad5776ac9c9f1e1f1f1b47caf6c
+    PauseSubscriptionSheet/pauseSuccess: a0e5af468feefe3ee91988bdf5d9c4ee
+    PauseSubscriptionSheet/resumeSuccess: 156fe7d03ab657b9edc4ec171c4d1683
+    PauseSubscriptionSheet/pauseFailed: a865d20c9cdfc2666f45d0e07811f284
+    PauseSubscriptionSheet/resumeFailed: 2de45a6976baec22830e505128cf6882
+    PauseSubscriptionSheet/errors/alreadyPaused: c5767e02927e6bf5ff967742567591a2
+    PauseSubscriptionSheet/errors/pausePending: d9211094a2bb396960bb70f86e9518a4
+    PauseSubscriptionSheet/errors/notEligible: 9466f94292e3b7c5e6cbdf8cdf908529
+    PauseSubscriptionSheet/errors/requiresPaymentMethod: ad80065b0e34acd487c9c2f790bec335
+    PauseSubscriptionSheet/errors/notPaused: bcd4156cc9e46aa4a0b9f1f4652d217d
+    PauseSubscriptionSheet/errors/customerPauseDisabled: ca76c616276491908c7546fffaefa026
+    PauseSubscriptionSheet/errors/settingsUnavailable: d652fe59080dc4ee9333e143cf54a0ef
+    PauseSubscriptionSheet/errors/invalidRequest: 887efeceaaa93aeda9fd51ab2fe8551b
     SubscriptionInfo/title: d7564700e1d27a6b1dcf411e7099a1c6
     SubscriptionInfo/description: f666060add3df84ffd584866061491fc
     SubscriptionNotes/onHold: af350c6f300928062febf616aa36b945
     SubscriptionNotes/failed: 99917af4da611f6681f911e87a5be90e
     SubscriptionNotes/pending: 3645f721e50a3be3edfc3a274aec8c65
+    SubscriptionNotes/paused: be5658c2783d8b482e37e1a37666e3b2
     SubscriptionNotes/cancelledOn: 3d8662f79076ebff5a1f2d93a32d05bd
     SubscriptionNotes/expired: bc6e9beaea25340c7d0558f7994444b1
     SubscriptionNotes/scheduledCancellation: dc5addc0926953f90fc7f536722011c6
@@ -434,6 +459,7 @@ checksums:
     BadgeStatus/verified: 9566bd61c1f754dd5082eea5101f15a8
     BadgeStatus/active: 3e1ec025c4a50830bbb9ad57a176630a
     BadgeStatus/disabled: 0889a3dfd914a7ef638611796b17bf72
+    BadgeStatus/paused: edb1f7b7219e1c9b7aa67159090d6991
     BadgeStatus/preDispute: 8e02b0307e81ba7f87c52e6f8d7135a0
     BadgeStatus/dispute: 18544ec04e88cbdbcf61c2b31243bcd1
     BadgeStatus/preArbitration: f8a14883c86f1eee69015637db689ff8

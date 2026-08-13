@@ -164,6 +164,34 @@
     "revokeFailed": "Nu s-a putut revoca anularea. Vă rugăm să încercați din nou.",
     "revokeSuccess": "Anularea abonamentului a fost revocată cu succes"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Pauzează abonamentul",
+    "triggerResume": "Reia abonamentul",
+    "pauseDisabledTooltip": "Pauzarea este dezactivată pentru acest abonament. Te rugăm să contactezi comerciantul pentru a-l pune pe pauză.",
+    "pauseSheetTitle": "Pauzează-ți abonamentul",
+    "resumeSheetTitle": "Reia-ți abonamentul",
+    "currentPlan": "Planul curent",
+    "pauseExplanation": "Abonamentul tău rămâne în pauză până când îl reiei. Atât următoarea dată de facturare, cât și data de reînnoire se decalează cu durata pauzei.",
+    "resumeExplanation": "Abonamentul tău devine activ din nou imediat. Facturarea reîncepe de astăzi, iar următoarea dată de facturare s-a decalat cu durata pauzei.",
+    "confirmPause": "Pauzează abonamentul",
+    "confirmResume": "Reia abonamentul",
+    "pausing": "Se pune pe pauză...",
+    "resuming": "Se reia...",
+    "pauseSuccess": "Abonamentul a fost pus pe pauză cu succes",
+    "resumeSuccess": "Abonamentul a fost reluat cu succes",
+    "pauseFailed": "Nu s-a putut pune abonamentul pe pauză. Te rugăm să încerci din nou.",
+    "resumeFailed": "Nu s-a putut relua abonamentul. Te rugăm să încerci din nou.",
+    "errors": {
+      "alreadyPaused": "Acest abonament este deja pus pe pauză.",
+      "pausePending": "O solicitare anterioară de pauzare este încă în procesare. Te rugăm să încerci din nou în scurt timp.",
+      "notEligible": "Acest abonament nu poate fi pus pe pauză momentan.",
+      "requiresPaymentMethod": "Te rugăm să adaugi o metodă de plată înainte de a pune pe pauză. Utilizarea neplătită trebuie facturată mai întâi.",
+      "notPaused": "Acest abonament nu este pus pe pauză.",
+      "customerPauseDisabled": "Pauzarea este dezactivată pentru acest abonament. Te rugăm să contactezi comerciantul.",
+      "settingsUnavailable": "Nu am putut verifica setările de pauzare ale comerciantului. Te rugăm să încerci din nou.",
+      "invalidRequest": "Nu s-a putut actualiza abonamentul. Te rugăm să încerci din nou."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Abonamentul dvs. este în prezent suspendat",
     "description": "Vă rugăm să actualizați metoda de plată pentru a relua acest abonament"
@@ -172,6 +200,7 @@
     "onHold": "Abonamentul dvs. este în prezent suspendat din cauza unei plăți eșuate. Vă rugăm să actualizați metoda de plată pentru a relua acest abonament",
     "failed": "Acest abonament a eșuat. Vă rugăm să încercați din nou.",
     "pending": "Plata nu a fost finalizată și finalizarea comenzii a rămas neterminată. Dacă doriți să vă abonați, vă rugăm să încercați din nou.",
+    "paused": "Acest abonament este pus pe pauză. Reia-l pentru a reporni facturarea și pentru a-ți continua accesul.",
     "cancelledOn": "Acest abonament a fost anulat la data de {date}.",
     "expired": "Acest abonament a expirat.",
     "scheduledCancellation": "Abonamentul dvs. este în prezent programat pentru anulare la data de {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verificat",
     "active": "Activ",
     "disabled": "Dezactivat",
+    "paused": "Pus pe pauză",
     "preDispute": "Pre-dispută",
     "dispute": "Dispută",
     "preArbitration": "Pre-arbitraj",

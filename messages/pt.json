@@ -164,6 +164,34 @@
     "revokeFailed": "Falha ao revogar o cancelamento. Tente novamente.",
     "revokeSuccess": "Cancelamento da subscrição revogado com sucesso"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Pausar subscrição",
+    "triggerResume": "Retomar subscrição",
+    "pauseDisabledTooltip": "A pausa está desativada para esta subscrição. Contacte o comerciante para pausar.",
+    "pauseSheetTitle": "Pausar a sua subscrição",
+    "resumeSheetTitle": "Retomar a sua subscrição",
+    "currentPlan": "Plano atual",
+    "pauseExplanation": "A sua subscrição mantém-se pausada até a retomar. A sua próxima data de faturação e a data de renovação avançam ambas pela duração da pausa.",
+    "resumeExplanation": "A sua subscrição volta a ficar ativa imediatamente. A faturação recomeça a partir de hoje, e a sua próxima data de faturação avançou pela duração da pausa.",
+    "confirmPause": "Pausar subscrição",
+    "confirmResume": "Retomar subscrição",
+    "pausing": "A pausar...",
+    "resuming": "A retomar...",
+    "pauseSuccess": "Subscrição pausada com sucesso",
+    "resumeSuccess": "Subscrição retomada com sucesso",
+    "pauseFailed": "Falha ao pausar a subscrição. Tente novamente.",
+    "resumeFailed": "Falha ao retomar a subscrição. Tente novamente.",
+    "errors": {
+      "alreadyPaused": "Esta subscrição já está pausada.",
+      "pausePending": "Um pedido de pausa anterior ainda está a ser processado. Tente novamente dentro de instantes.",
+      "notEligible": "Não é possível pausar esta subscrição neste momento.",
+      "requiresPaymentMethod": "Adicione um método de pagamento antes de pausar. A sua utilização por pagar tem de ser faturada primeiro.",
+      "notPaused": "Esta subscrição não está pausada.",
+      "customerPauseDisabled": "A pausa está desativada para esta subscrição. Contacte o comerciante.",
+      "settingsUnavailable": "Não foi possível verificar as definições de pausa do comerciante. Tente novamente.",
+      "invalidRequest": "Falha ao atualizar a subscrição. Tente novamente."
+    }
+  },
   "SubscriptionInfo": {
     "title": "A sua subscrição está atualmente suspensa",
     "description": "Atualize o seu método de pagamento para retomar esta subscrição"
@@ -172,6 +200,7 @@
     "onHold": "A sua subscrição está atualmente suspensa devido a um pagamento falhado. Atualize o seu método de pagamento para retomar esta subscrição",
     "failed": "Esta subscrição falhou. Tente novamente.",
     "pending": "O seu pagamento não foi concluído e o checkout ficou por finalizar. Se quiser subscrever, tente novamente.",
+    "paused": "Esta subscrição está pausada. Retome-a para reiniciar a faturação e continuar o seu acesso.",
     "cancelledOn": "Esta subscrição foi cancelada em {date}.",
     "expired": "Esta subscrição expirou.",
     "scheduledCancellation": "A sua subscrição está atualmente agendada para cancelamento em {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verificado",
     "active": "Ativo",
     "disabled": "Desativado",
+    "paused": "Pausada",
     "preDispute": "Pré-disputa",
     "dispute": "Disputa",
     "preArbitration": "Pré-arbitragem",

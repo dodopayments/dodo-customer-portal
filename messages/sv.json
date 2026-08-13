@@ -164,6 +164,34 @@
     "revokeFailed": "Det gick inte att återkalla avslutet. Försök igen.",
     "revokeSuccess": "Avslut av prenumerationen återkallades"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Pausa prenumeration",
+    "triggerResume": "Återuppta prenumeration",
+    "pauseDisabledTooltip": "Pausning är inaktiverad för den här prenumerationen. Kontakta handlaren för att pausa.",
+    "pauseSheetTitle": "Pausa din prenumeration",
+    "resumeSheetTitle": "Återuppta din prenumeration",
+    "currentPlan": "Nuvarande plan",
+    "pauseExplanation": "Din prenumeration förblir pausad tills du återupptar den. Ditt nästa faktureringsdatum och förnyelsedatum flyttas båda fram med pausens längd.",
+    "resumeExplanation": "Din prenumeration blir aktiv igen direkt. Faktureringen startar om från och med i dag, och ditt nästa faktureringsdatum har flyttats fram med pausens längd.",
+    "confirmPause": "Pausa prenumeration",
+    "confirmResume": "Återuppta prenumeration",
+    "pausing": "Pausar...",
+    "resuming": "Återupptar...",
+    "pauseSuccess": "Prenumerationen har pausats",
+    "resumeSuccess": "Prenumerationen har återupptagits",
+    "pauseFailed": "Det gick inte att pausa prenumerationen. Försök igen.",
+    "resumeFailed": "Det gick inte att återuppta prenumerationen. Försök igen.",
+    "errors": {
+      "alreadyPaused": "Den här prenumerationen är redan pausad.",
+      "pausePending": "En tidigare pausbegäran behandlas fortfarande. Försök igen om en stund.",
+      "notEligible": "Den här prenumerationen kan inte pausas just nu.",
+      "requiresPaymentMethod": "Lägg till en betalningsmetod innan du pausar. Din obetalda användning måste faktureras först.",
+      "notPaused": "Den här prenumerationen är inte pausad.",
+      "customerPauseDisabled": "Pausning är inaktiverad för den här prenumerationen. Kontakta handlaren.",
+      "settingsUnavailable": "Vi kunde inte kontrollera handlarens pausinställningar. Försök igen.",
+      "invalidRequest": "Det gick inte att uppdatera prenumerationen. Försök igen."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Din prenumeration är pausad",
     "description": "Uppdatera din betalningsmetod för att återuppta prenumerationen"
@@ -172,6 +200,7 @@
     "onHold": "Din prenumeration är för närvarande pausad på grund av en misslyckad betalning. Uppdatera din betalningsmetod för att återuppta prenumerationen",
     "failed": "Den här prenumerationen misslyckades. Försök igen.",
     "pending": "Din betalning slutfördes inte och checkout lämnades oavslutad. Om du vill prenumerera, försök igen.",
+    "paused": "Den här prenumerationen är pausad. Återuppta den för att starta om faktureringen och fortsätta ha åtkomst.",
     "cancelledOn": "Den här prenumerationen avslutades den {date}.",
     "expired": "Den här prenumerationen har löpt ut.",
     "scheduledCancellation": "Din prenumeration är för närvarande schemalagd att avslutas den {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verifierad",
     "active": "Aktiv",
     "disabled": "Inaktiverad",
+    "paused": "Pausad",
     "preDispute": "Före tvist",
     "dispute": "Tvist",
     "preArbitration": "Före skiljedom",

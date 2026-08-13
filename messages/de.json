@@ -164,6 +164,34 @@
     "revokeFailed": "Widerruf der Kündigung fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "revokeSuccess": "Kündigung des Abonnements erfolgreich widerrufen"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Abonnement pausieren",
+    "triggerResume": "Abonnement fortsetzen",
+    "pauseDisabledTooltip": "Das Pausieren ist für dieses Abonnement deaktiviert. Bitte kontaktieren Sie den Händler, um es zu pausieren.",
+    "pauseSheetTitle": "Pausieren Sie Ihr Abonnement",
+    "resumeSheetTitle": "Setzen Sie Ihr Abonnement fort",
+    "currentPlan": "Aktueller Plan",
+    "pauseExplanation": "Ihr Abonnement bleibt pausiert, bis Sie es fortsetzen. Ihr nächstes Rechnungsdatum und Ihr Verlängerungsdatum werden beide um die Dauer der Pause nach vorne verschoben.",
+    "resumeExplanation": "Ihr Abonnement wird sofort wieder aktiv. Die Abrechnung beginnt ab heute erneut, und Ihr nächstes Rechnungsdatum wurde um die Dauer der Pause nach vorne verschoben.",
+    "confirmPause": "Abonnement pausieren",
+    "confirmResume": "Abonnement fortsetzen",
+    "pausing": "Wird pausiert...",
+    "resuming": "Wird fortgesetzt...",
+    "pauseSuccess": "Abonnement erfolgreich pausiert",
+    "resumeSuccess": "Abonnement erfolgreich fortgesetzt",
+    "pauseFailed": "Abonnement konnte nicht pausiert werden. Bitte versuchen Sie es erneut.",
+    "resumeFailed": "Abonnement konnte nicht fortgesetzt werden. Bitte versuchen Sie es erneut.",
+    "errors": {
+      "alreadyPaused": "Dieses Abonnement ist bereits pausiert.",
+      "pausePending": "Eine frühere Pausierungsanfrage wird noch verarbeitet. Bitte versuchen Sie es in Kürze erneut.",
+      "notEligible": "Dieses Abonnement kann derzeit nicht pausiert werden.",
+      "requiresPaymentMethod": "Bitte fügen Sie eine Zahlungsmethode hinzu, bevor Sie pausieren. Ihre unbezahlte Nutzung muss zuerst abgerechnet werden.",
+      "notPaused": "Dieses Abonnement ist nicht pausiert.",
+      "customerPauseDisabled": "Das Pausieren ist für dieses Abonnement deaktiviert. Bitte kontaktieren Sie den Händler.",
+      "settingsUnavailable": "Wir konnten die Pausierungseinstellungen des Händlers nicht prüfen. Bitte versuchen Sie es erneut.",
+      "invalidRequest": "Abonnement konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Ihr Abonnement ist derzeit pausiert",
     "description": "Bitte aktualisieren Sie Ihre Zahlungsmethode, um dieses Abonnement fortzusetzen"
@@ -172,6 +200,7 @@
     "onHold": "Ihr Abonnement ist derzeit aufgrund einer fehlgeschlagenen Zahlung pausiert. Bitte aktualisieren Sie Ihre Zahlungsmethode, um dieses Abonnement fortzusetzen",
     "failed": "Dieses Abonnement ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "pending": "Ihre Zahlung wurde nicht abgeschlossen und der Checkout wurde nicht beendet. Wenn Sie abonnieren möchten, versuchen Sie es bitte erneut.",
+    "paused": "Dieses Abonnement ist pausiert. Setzen Sie es fort, um die Abrechnung wieder zu starten und Ihren Zugriff fortzusetzen.",
     "cancelledOn": "Dieses Abonnement wurde am {date} gekündigt.",
     "expired": "Dieses Abonnement ist abgelaufen.",
     "scheduledCancellation": "Ihr Abonnement ist derzeit zur Kündigung am {date} vorgesehen.",
@@ -554,6 +583,7 @@
     "verified": "Verifiziert",
     "active": "Aktiv",
     "disabled": "Deaktiviert",
+    "paused": "Pausiert",
     "preDispute": "Vor Dispute",
     "dispute": "Dispute",
     "preArbitration": "Vor Arbitration",

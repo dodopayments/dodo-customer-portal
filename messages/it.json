@@ -164,6 +164,34 @@
     "revokeFailed": "Impossibile revocare l'annullamento. Riprova.",
     "revokeSuccess": "Annullamento dell'abbonamento revocato correttamente"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Metti in pausa l’abbonamento",
+    "triggerResume": "Riprendi l’abbonamento",
+    "pauseDisabledTooltip": "La messa in pausa è disabilitata per questo abbonamento. Contatta il merchant per metterlo in pausa.",
+    "pauseSheetTitle": "Metti in pausa il tuo abbonamento",
+    "resumeSheetTitle": "Riprendi il tuo abbonamento",
+    "currentPlan": "Piano attuale",
+    "pauseExplanation": "Il tuo abbonamento resterà in pausa finché non lo riprenderai. La prossima data di fatturazione e la data di rinnovo saranno entrambe posticipate della durata della pausa.",
+    "resumeExplanation": "Il tuo abbonamento torna attivo immediatamente. La fatturazione riparte da oggi e la prossima data di fatturazione è stata posticipata della durata della pausa.",
+    "confirmPause": "Metti in pausa l’abbonamento",
+    "confirmResume": "Riprendi l’abbonamento",
+    "pausing": "Messa in pausa...",
+    "resuming": "Ripresa...",
+    "pauseSuccess": "Abbonamento messo in pausa correttamente",
+    "resumeSuccess": "Abbonamento ripreso correttamente",
+    "pauseFailed": "Impossibile mettere in pausa l’abbonamento. Riprova.",
+    "resumeFailed": "Impossibile riprendere l’abbonamento. Riprova.",
+    "errors": {
+      "alreadyPaused": "Questo abbonamento è già in pausa.",
+      "pausePending": "Una precedente richiesta di messa in pausa è ancora in elaborazione. Riprova tra poco.",
+      "notEligible": "Al momento non è possibile mettere in pausa questo abbonamento.",
+      "requiresPaymentMethod": "Aggiungi un metodo di pagamento prima di mettere in pausa. Prima è necessario fatturare l’utilizzo non pagato.",
+      "notPaused": "Questo abbonamento non è in pausa.",
+      "customerPauseDisabled": "La messa in pausa è disabilitata per questo abbonamento. Contatta il merchant.",
+      "settingsUnavailable": "Non è stato possibile verificare le impostazioni di messa in pausa del merchant. Riprova.",
+      "invalidRequest": "Impossibile aggiornare l’abbonamento. Riprova."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Il tuo abbonamento è attualmente in sospeso",
     "description": "Aggiorna il metodo di pagamento per riattivare questo abbonamento"
@@ -172,6 +200,7 @@
     "onHold": "Il tuo abbonamento è attualmente in sospeso a causa di un pagamento non riuscito. Aggiorna il metodo di pagamento per riattivare questo abbonamento",
     "failed": "Questo abbonamento non è andato a buon fine. Riprova.",
     "pending": "Il pagamento non è stato completato e il checkout è stato lasciato incompleto. Se desideri abbonarti, riprova.",
+    "paused": "Questo abbonamento è in pausa. Riprendilo per riavviare la fatturazione e continuare ad accedere.",
     "cancelledOn": "Questo abbonamento è stato annullato il {date}.",
     "expired": "Questo abbonamento è scaduto.",
     "scheduledCancellation": "Il tuo abbonamento è attualmente programmato per l'annullamento il {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verificato",
     "active": "Attivo",
     "disabled": "Disabilitato",
+    "paused": "In pausa",
     "preDispute": "Pre-contestazione",
     "dispute": "Contestazione",
     "preArbitration": "Pre-arbitrato",

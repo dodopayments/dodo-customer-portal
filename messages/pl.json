@@ -164,6 +164,34 @@
     "revokeFailed": "Nie udało się cofnąć anulowania. Spróbuj ponownie.",
     "revokeSuccess": "Pomyślnie cofnięto anulowanie subskrypcji"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Wstrzymaj subskrypcję",
+    "triggerResume": "Wznów subskrypcję",
+    "pauseDisabledTooltip": "Wstrzymanie jest wyłączone dla tej subskrypcji. Skontaktuj się ze sprzedawcą, aby ją wstrzymać.",
+    "pauseSheetTitle": "Wstrzymaj subskrypcję",
+    "resumeSheetTitle": "Wznów subskrypcję",
+    "currentPlan": "Aktualny plan",
+    "pauseExplanation": "Subskrypcja pozostanie wstrzymana do momentu jej wznowienia. Zarówno następna data rozliczenia, jak i data odnowienia zostaną przesunięte o długość okresu wstrzymania.",
+    "resumeExplanation": "Subskrypcja stanie się ponownie aktywna od razu. Rozliczanie zostanie wznowione od dziś, a następna data rozliczenia została przesunięta o długość okresu wstrzymania.",
+    "confirmPause": "Wstrzymaj subskrypcję",
+    "confirmResume": "Wznów subskrypcję",
+    "pausing": "Wstrzymywanie...",
+    "resuming": "Wznawianie...",
+    "pauseSuccess": "Subskrypcja została pomyślnie wstrzymana",
+    "resumeSuccess": "Subskrypcja została pomyślnie wznowiona",
+    "pauseFailed": "Nie udało się wstrzymać subskrypcji. Spróbuj ponownie.",
+    "resumeFailed": "Nie udało się wznowić subskrypcji. Spróbuj ponownie.",
+    "errors": {
+      "alreadyPaused": "Ta subskrypcja jest już wstrzymana.",
+      "pausePending": "Poprzednie żądanie wstrzymania jest nadal przetwarzane. Spróbuj ponownie za chwilę.",
+      "notEligible": "Tej subskrypcji nie można teraz wstrzymać.",
+      "requiresPaymentMethod": "Dodaj metodę płatności przed wstrzymaniem. Najpierw trzeba rozliczyć nieopłacone użycie.",
+      "notPaused": "Ta subskrypcja nie jest wstrzymana.",
+      "customerPauseDisabled": "Wstrzymanie jest wyłączone dla tej subskrypcji. Skontaktuj się ze sprzedawcą.",
+      "settingsUnavailable": "Nie mogliśmy sprawdzić ustawień wstrzymania u sprzedawcy. Spróbuj ponownie.",
+      "invalidRequest": "Nie udało się zaktualizować subskrypcji. Spróbuj ponownie."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Twoja subskrypcja jest obecnie wstrzymana",
     "description": "Zaktualizuj metodę płatności, aby wznowić tę subskrypcję"
@@ -172,6 +200,7 @@
     "onHold": "Twoja subskrypcja jest obecnie wstrzymana z powodu nieudanej płatności. Zaktualizuj metodę płatności, aby wznowić tę subskrypcję",
     "failed": "Ta subskrypcja nie powiodła się. Spróbuj ponownie.",
     "pending": "Płatność nie została ukończona, a checkout został pozostawiony niedokończony. Jeśli chcesz zasubskrybować, spróbuj ponownie.",
+    "paused": "Ta subskrypcja jest wstrzymana. Wznów ją, aby ponownie rozpocząć rozliczanie i kontynuować dostęp.",
     "cancelledOn": "Ta subskrypcja została anulowana {date}.",
     "expired": "Ta subskrypcja wygasła.",
     "scheduledCancellation": "Twoja subskrypcja jest obecnie zaplanowana do anulowania {date}.",
@@ -554,6 +583,7 @@
     "verified": "Zweryfikowane",
     "active": "Aktywne",
     "disabled": "Wyłączone",
+    "paused": "Wstrzymana",
     "preDispute": "Przed sporem",
     "dispute": "Spór",
     "preArbitration": "Przed arbitrażem",

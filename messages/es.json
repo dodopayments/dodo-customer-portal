@@ -164,6 +164,34 @@
     "revokeFailed": "No se pudo revocar la cancelación. Inténtalo de nuevo.",
     "revokeSuccess": "La cancelación de la suscripción se revocó correctamente"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Pausar suscripción",
+    "triggerResume": "Reanudar suscripción",
+    "pauseDisabledTooltip": "La pausa está deshabilitada para esta suscripción. Ponte en contacto con el comercio para pausar.",
+    "pauseSheetTitle": "Pausa tu suscripción",
+    "resumeSheetTitle": "Reanuda tu suscripción",
+    "currentPlan": "Plan actual",
+    "pauseExplanation": "Tu suscripción permanecerá en pausa hasta que la reanudes. Tu próxima fecha de facturación y la fecha de renovación se aplazarán por la duración de la pausa.",
+    "resumeExplanation": "Tu suscripción vuelve a estar activa de inmediato. La facturación se reanuda desde hoy y tu próxima fecha de facturación se ha aplazado por la duración de la pausa.",
+    "confirmPause": "Pausar suscripción",
+    "confirmResume": "Reanudar suscripción",
+    "pausing": "Pausando...",
+    "resuming": "Reanudando...",
+    "pauseSuccess": "Suscripción pausada correctamente",
+    "resumeSuccess": "Suscripción reanudada correctamente",
+    "pauseFailed": "No se pudo pausar la suscripción. Inténtalo de nuevo.",
+    "resumeFailed": "No se pudo reanudar la suscripción. Inténtalo de nuevo.",
+    "errors": {
+      "alreadyPaused": "Esta suscripción ya está en pausa.",
+      "pausePending": "Una solicitud de pausa anterior todavía se está procesando. Vuelve a intentarlo en breve.",
+      "notEligible": "Esta suscripción no se puede pausar en este momento.",
+      "requiresPaymentMethod": "Añade un método de pago antes de pausar. Primero debe facturarse el uso pendiente de pago.",
+      "notPaused": "Esta suscripción no está en pausa.",
+      "customerPauseDisabled": "La pausa está deshabilitada para esta suscripción. Ponte en contacto con el comercio.",
+      "settingsUnavailable": "No pudimos comprobar la configuración de pausa del comercio. Inténtalo de nuevo.",
+      "invalidRequest": "No se pudo actualizar la suscripción. Inténtalo de nuevo."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Tu suscripción está en pausa",
     "description": "Actualiza tu método de pago para reanudar esta suscripción"
@@ -172,6 +200,7 @@
     "onHold": "Tu suscripción está en pausa debido a un pago fallido. Actualiza tu método de pago para reanudarla",
     "failed": "Esta suscripción ha fallado. Inténtalo de nuevo.",
     "pending": "Tu pago no se completó y el checkout se dejó sin finalizar. Si quieres suscribirte, inténtalo de nuevo.",
+    "paused": "Esta suscripción está en pausa. Reanúdala para reiniciar la facturación y continuar tu acceso.",
     "cancelledOn": "Esta suscripción se canceló el {date}.",
     "expired": "Esta suscripción ha caducado.",
     "scheduledCancellation": "Tu suscripción está programada para cancelarse el {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verificado",
     "active": "Activo",
     "disabled": "Deshabilitado",
+    "paused": "En pausa",
     "preDispute": "Pre-disputa",
     "dispute": "Disputa",
     "preArbitration": "Pre-arbitraje",

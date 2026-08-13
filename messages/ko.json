@@ -164,6 +164,34 @@
     "revokeFailed": "취소 철회에 실패했습니다. 다시 시도해 주세요.",
     "revokeSuccess": "구독 취소가 성공적으로 철회되었습니다"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "구독 일시정지",
+    "triggerResume": "구독 재개",
+    "pauseDisabledTooltip": "이 구독에서는 일시정지가 비활성화되어 있습니다. 일시정지를 요청하려면 판매자에게 문의하세요.",
+    "pauseSheetTitle": "구독을 일시정지하세요",
+    "resumeSheetTitle": "구독을 재개하세요",
+    "currentPlan": "현재 플랜",
+    "pauseExplanation": "재개할 때까지 구독은 일시정지 상태로 유지됩니다. 다음 청구일과 갱신일은 일시정지 기간만큼 모두 뒤로 미뤄집니다.",
+    "resumeExplanation": "구독이 즉시 다시 활성화됩니다. 청구는 오늘부터 다시 시작되며, 다음 청구일은 일시정지 기간만큼 뒤로 미뤄졌습니다.",
+    "confirmPause": "구독 일시정지",
+    "confirmResume": "구독 재개",
+    "pausing": "일시정지 중...",
+    "resuming": "재개 중...",
+    "pauseSuccess": "구독이 성공적으로 일시정지되었습니다",
+    "resumeSuccess": "구독이 성공적으로 재개되었습니다",
+    "pauseFailed": "구독을 일시정지하지 못했습니다. 다시 시도해 주세요.",
+    "resumeFailed": "구독을 재개하지 못했습니다. 다시 시도해 주세요.",
+    "errors": {
+      "alreadyPaused": "이 구독은 이미 일시정지되어 있습니다.",
+      "pausePending": "이전에 요청한 일시정지가 아직 처리 중입니다. 잠시 후 다시 시도해 주세요.",
+      "notEligible": "현재 이 구독은 일시정지할 수 없습니다.",
+      "requiresPaymentMethod": "일시정지하기 전에 결제 수단을 추가해 주세요. 미결제 사용량을 먼저 청구해야 합니다.",
+      "notPaused": "이 구독은 일시정지 상태가 아닙니다.",
+      "customerPauseDisabled": "이 구독에서는 일시정지가 비활성화되어 있습니다. 판매자에게 문의하세요.",
+      "settingsUnavailable": "판매자의 일시정지 설정을 확인할 수 없습니다. 다시 시도해 주세요.",
+      "invalidRequest": "구독을 업데이트하지 못했습니다. 다시 시도해 주세요."
+    }
+  },
   "SubscriptionInfo": {
     "title": "현재 구독이 보류 중입니다",
     "description": "이 구독을 재개하려면 결제 수단을 업데이트해 주세요"
@@ -172,6 +200,7 @@
     "onHold": "결제 실패로 인해 현재 구독이 보류 중입니다. 이 구독을 재개하려면 결제 수단을 업데이트해 주세요",
     "failed": "이 구독은 실패했습니다. 다시 시도해 주세요.",
     "pending": "결제가 완료되지 않아 체크아웃이 마무리되지 않았습니다. 구독을 원하시면 다시 시도해 주세요.",
+    "paused": "이 구독은 일시정지되어 있습니다. 청구를 다시 시작하고 이용을 계속하려면 재개하세요.",
     "cancelledOn": "이 구독은 {date}에 취소되었습니다.",
     "expired": "이 구독은 만료되었습니다.",
     "scheduledCancellation": "현재 구독은 {date}에 취소되도록 예정되어 있습니다.",
@@ -554,6 +583,7 @@
     "verified": "확인됨",
     "active": "활성",
     "disabled": "비활성",
+    "paused": "일시정지됨",
     "preDispute": "분쟁 전",
     "dispute": "분쟁",
     "preArbitration": "중재 전",

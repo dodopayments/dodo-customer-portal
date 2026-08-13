@@ -164,6 +164,34 @@
     "revokeFailed": "Intrekken van opzegging mislukt. Probeer het opnieuw.",
     "revokeSuccess": "Opzegging van abonnement succesvol ingetrokken"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Abonnement pauzeren",
+    "triggerResume": "Abonnement hervatten",
+    "pauseDisabledTooltip": "Pauzeren is uitgeschakeld voor dit abonnement. Neem contact op met de merchant om te pauzeren.",
+    "pauseSheetTitle": "Pauzeer je abonnement",
+    "resumeSheetTitle": "Hervat je abonnement",
+    "currentPlan": "Huidig plan",
+    "pauseExplanation": "Je abonnement blijft gepauzeerd totdat je het hervat. Je volgende factuurdatum en verlengingsdatum worden beide vooruitgeschoven met de duur van de pauze.",
+    "resumeExplanation": "Je abonnement wordt meteen weer actief. Facturering wordt hervat vanaf vandaag en je volgende factuurdatum is vooruitgeschoven met de duur van de pauze.",
+    "confirmPause": "Abonnement pauzeren",
+    "confirmResume": "Abonnement hervatten",
+    "pausing": "Bezig met pauzeren...",
+    "resuming": "Bezig met hervatten...",
+    "pauseSuccess": "Abonnement is succesvol gepauzeerd",
+    "resumeSuccess": "Abonnement is succesvol hervat",
+    "pauseFailed": "Abonnement pauzeren is mislukt. Probeer het opnieuw.",
+    "resumeFailed": "Abonnement hervatten is mislukt. Probeer het opnieuw.",
+    "errors": {
+      "alreadyPaused": "Dit abonnement is al gepauzeerd.",
+      "pausePending": "Een eerdere pauzeaanvraag wordt nog verwerkt. Probeer het zo meteen opnieuw.",
+      "notEligible": "Dit abonnement kan nu niet worden gepauzeerd.",
+      "requiresPaymentMethod": "Voeg een betaalmethode toe voordat je pauzeert. Je onbetaalde verbruik moet eerst worden gefactureerd.",
+      "notPaused": "Dit abonnement is niet gepauzeerd.",
+      "customerPauseDisabled": "Pauzeren is uitgeschakeld voor dit abonnement. Neem contact op met de merchant.",
+      "settingsUnavailable": "We konden de pauze-instellingen van de merchant niet controleren. Probeer het opnieuw.",
+      "invalidRequest": "Abonnement bijwerken is mislukt. Probeer het opnieuw."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Je abonnement staat momenteel on hold",
     "description": "Werk je betaalmethode bij om dit abonnement te hervatten"
@@ -172,6 +200,7 @@
     "onHold": "Je abonnement staat momenteel on hold vanwege een mislukte betaling. Werk je betaalmethode bij om dit abonnement te hervatten",
     "failed": "Dit abonnement is mislukt. Probeer het opnieuw.",
     "pending": "Je betaling is niet voltooid en checkout is onafgerond gebleven. Als je wilt abonneren, probeer het dan opnieuw.",
+    "paused": "Dit abonnement is gepauzeerd. Hervat het om de facturering opnieuw te starten en je toegang voort te zetten.",
     "cancelledOn": "Dit abonnement is op {date} opgezegd.",
     "expired": "Dit abonnement is verlopen.",
     "scheduledCancellation": "Je abonnement staat momenteel gepland voor opzegging op {date}.",
@@ -554,6 +583,7 @@
     "verified": "Geverifieerd",
     "active": "Actief",
     "disabled": "Uitgeschakeld",
+    "paused": "Gepauzeerd",
     "preDispute": "Pre-dispute",
     "dispute": "Dispute",
     "preArbitration": "Pre-arbitration",

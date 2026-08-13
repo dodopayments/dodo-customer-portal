@@ -164,6 +164,34 @@
     "revokeFailed": "Échec de l’annulation de l’annulation. Veuillez réessayer.",
     "revokeSuccess": "Annulation de l’abonnement révoquée avec succès"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Mettre l’abonnement en pause",
+    "triggerResume": "Reprendre l’abonnement",
+    "pauseDisabledTooltip": "La mise en pause est désactivée pour cet abonnement. Veuillez contacter le marchand pour le mettre en pause.",
+    "pauseSheetTitle": "Mettre votre abonnement en pause",
+    "resumeSheetTitle": "Reprendre votre abonnement",
+    "currentPlan": "Forfait actuel",
+    "pauseExplanation": "Votre abonnement reste en pause jusqu’à ce que vous le repreniez. Votre prochaine date de facturation et votre date de renouvellement sont toutes deux repoussées de la durée de la pause.",
+    "resumeExplanation": "Votre abonnement redevient actif immédiatement. La facturation reprend à partir d’aujourd’hui, et votre prochaine date de facturation a été repoussée de la durée de la pause.",
+    "confirmPause": "Mettre l’abonnement en pause",
+    "confirmResume": "Reprendre l’abonnement",
+    "pausing": "Mise en pause…",
+    "resuming": "Reprise…",
+    "pauseSuccess": "Abonnement mis en pause avec succès",
+    "resumeSuccess": "Abonnement repris avec succès",
+    "pauseFailed": "Échec de la mise en pause de l’abonnement. Veuillez réessayer.",
+    "resumeFailed": "Échec de la reprise de l’abonnement. Veuillez réessayer.",
+    "errors": {
+      "alreadyPaused": "Cet abonnement est déjà en pause.",
+      "pausePending": "Une demande de mise en pause précédente est encore en cours de traitement. Veuillez réessayer dans un instant.",
+      "notEligible": "Cet abonnement ne peut pas être mis en pause pour le moment.",
+      "requiresPaymentMethod": "Veuillez ajouter un moyen de paiement avant de mettre en pause. Votre utilisation impayée doit d’abord être facturée.",
+      "notPaused": "Cet abonnement n’est pas en pause.",
+      "customerPauseDisabled": "La mise en pause est désactivée pour cet abonnement. Veuillez contacter le marchand.",
+      "settingsUnavailable": "Nous n’avons pas pu vérifier les paramètres de mise en pause du marchand. Veuillez réessayer.",
+      "invalidRequest": "Échec de la mise à jour de l’abonnement. Veuillez réessayer."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Votre abonnement est actuellement en pause",
     "description": "Veuillez mettre à jour votre mode de paiement pour reprendre cet abonnement"
@@ -172,6 +200,7 @@
     "onHold": "Votre abonnement est actuellement en pause en raison d’un échec de paiement. Veuillez mettre à jour votre mode de paiement pour reprendre cet abonnement",
     "failed": "Cet abonnement a échoué. Veuillez réessayer.",
     "pending": "Votre paiement n’a pas été finalisé et le checkout a été laissé inachevé. Si vous souhaitez vous abonner, veuillez réessayer.",
+    "paused": "Cet abonnement est en pause. Reprenez-le pour relancer la facturation et continuer à y accéder.",
     "cancelledOn": "Cet abonnement a été annulé le {date}.",
     "expired": "Cet abonnement a expiré.",
     "scheduledCancellation": "Votre abonnement est actuellement programmé pour être annulé le {date}.",
@@ -554,6 +583,7 @@
     "verified": "Vérifié",
     "active": "Actif",
     "disabled": "Désactivé",
+    "paused": "En pause",
     "preDispute": "Pré-litige",
     "dispute": "Litige",
     "preArbitration": "Pré-arbitrage",

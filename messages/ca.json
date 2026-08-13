@@ -164,6 +164,34 @@
     "revokeFailed": "No s’ha pogut revocar la cancel·lació. Torna-ho a provar.",
     "revokeSuccess": "S’ha revocat correctament la cancel·lació de la subscripció"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Pausa la subscripció",
+    "triggerResume": "Reprèn la subscripció",
+    "pauseDisabledTooltip": "La pausa està desactivada per a aquesta subscripció. Contacta amb el comerç per posar-la en pausa.",
+    "pauseSheetTitle": "Pausa la teva subscripció",
+    "resumeSheetTitle": "Reprèn la teva subscripció",
+    "currentPlan": "Pla actual",
+    "pauseExplanation": "La teva subscripció romandrà en pausa fins que la reprenguis. Tant la teva propera data de facturació com la data de renovació s’ajornen segons la durada de la pausa.",
+    "resumeExplanation": "La teva subscripció torna a estar activa immediatament. La facturació es reprèn a partir d’avui i la teva propera data de facturació s’ha ajornat segons la durada de la pausa.",
+    "confirmPause": "Pausa la subscripció",
+    "confirmResume": "Reprèn la subscripció",
+    "pausing": "Posant en pausa...",
+    "resuming": "Reprenent...",
+    "pauseSuccess": "Subscripció posada en pausa correctament",
+    "resumeSuccess": "Subscripció represa correctament",
+    "pauseFailed": "No s’ha pogut posar en pausa la subscripció. Torna-ho a provar.",
+    "resumeFailed": "No s’ha pogut reprendre la subscripció. Torna-ho a provar.",
+    "errors": {
+      "alreadyPaused": "Aquesta subscripció ja està en pausa.",
+      "pausePending": "Encara s’està processant una sol·licitud de pausa anterior. Torna-ho a provar d’aquí a poc.",
+      "notEligible": "Ara mateix no es pot posar en pausa aquesta subscripció.",
+      "requiresPaymentMethod": "Afegeix un mètode de pagament abans de posar en pausa. Primer s’ha de facturar l’ús pendent de pagament.",
+      "notPaused": "Aquesta subscripció no està en pausa.",
+      "customerPauseDisabled": "La pausa està desactivada per a aquesta subscripció. Contacta amb el comerç.",
+      "settingsUnavailable": "No hem pogut comprovar la configuració de pausa del comerç. Torna-ho a provar.",
+      "invalidRequest": "No s’ha pogut actualitzar la subscripció. Torna-ho a provar."
+    }
+  },
   "SubscriptionInfo": {
     "title": "La teva subscripció està en pausa",
     "description": "Actualitza la teva forma de pagament per reprendre aquesta subscripció"
@@ -172,6 +200,7 @@
     "onHold": "La teva subscripció està en pausa a causa d’un pagament fallit. Actualitza la teva forma de pagament per reprendre aquesta subscripció",
     "failed": "Aquesta subscripció ha fallat. Torna-ho a provar.",
     "pending": "El pagament no s’ha completat i el checkout ha quedat inacabat. Si vols subscriure’t, torna-ho a provar.",
+    "paused": "Aquesta subscripció està en pausa. Reprèn-la per reiniciar la facturació i continuar tenint-hi accés.",
     "cancelledOn": "Aquesta subscripció es va cancel·lar el {date}.",
     "expired": "Aquesta subscripció ha caducat.",
     "scheduledCancellation": "La teva subscripció està programada per cancel·lar-se el {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verificat",
     "active": "Actiu",
     "disabled": "Desactivat",
+    "paused": "En pausa",
     "preDispute": "Pre-dispute",
     "dispute": "Dispute",
     "preArbitration": "Pre-arbitration",
