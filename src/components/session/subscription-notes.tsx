@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, Clock, Zap, Info } from "lucide-react";
+import { AlertCircle, Clock, Zap, Info, PauseCircle } from "lucide-react";
 import type { BadgeVariant } from "@/components/ui/badge";
 import { badgeVariants } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -44,6 +44,14 @@ export function getSubscriptionNotes(
       type: "info",
       messageKey: "pending",
       icon: <Info className="w-4 h-4 flex-shrink-0" />,
+    });
+  }
+
+  if (subscription.status === "paused") {
+    notes.push({
+      type: "warning",
+      messageKey: "paused",
+      icon: <PauseCircle className="w-4 h-4 flex-shrink-0" />,
     });
   }
 

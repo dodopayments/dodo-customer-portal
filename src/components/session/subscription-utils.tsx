@@ -32,6 +32,16 @@ export function renderSubscriptionBadges(
     );
   }
 
+  // A paused subscription has no meaningful renewal date to show: the API
+  // shifts `next_billing_date` forward by the pause length once it resumes.
+  if (subscription.status === "paused") {
+    return (
+      <Badge variant="orange" dot={false} className={badgeClassName}>
+        paused
+      </Badge>
+    );
+  }
+
   const nextBillingDate = parseIsoDateDMY(subscription.next_billing_date);
 
   if (subscription.cancel_at_next_billing_date) {

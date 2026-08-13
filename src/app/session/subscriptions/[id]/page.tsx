@@ -4,6 +4,7 @@ import { SubscriptionDetails } from "@/components/session/subscription-details";
 import { SubscriptionBillingInfo } from "@/components/session/subscription-billing-info";
 import { SubscriptionTabsTable } from "@/components/session/subscription-tabs-table";
 import { CancelSubscriptionSheet } from "@/components/session/cancel-subscription-sheet";
+import { PauseSubscriptionSheet } from "@/components/session/pause-subscription-sheet";
 import { SubscriptionDetailsData } from "./types";
 import { extractPaginationParams } from "@/lib/pagination-utils";
 import SubscriptionInfo from "@/components/session/subscriptions/subscription-info";
@@ -36,6 +37,7 @@ export default async function SubscriptionPage({
   const business = await fetchBusiness();
   const canChangePlan = business?.allow_customer_portal_sub_change_plan ?? false;
   const canCancel = business?.allow_customers_to_cancel_subscription ?? true;
+  const canPause = business?.allow_customers_to_pause_subscription ?? false;
   const allowMultipleSubscriptions = business?.allow_multiple_sub_per_customer ?? false;
 
   const invoiceParams = await extractPaginationParams(
@@ -64,6 +66,7 @@ export default async function SubscriptionPage({
       productCollection={productCollection}
       canChangePlan={canChangePlan}
       canCancel={canCancel}
+      canPause={canPause}
       allowMultipleSubscriptions={allowMultipleSubscriptions}
     />
   );
@@ -110,6 +113,7 @@ function HeaderActions({
   productCollection,
   canChangePlan,
   canCancel,
+  canPause,
   allowMultipleSubscriptions,
 }: {
   subscription: SubscriptionDetailsData;
@@ -117,11 +121,20 @@ function HeaderActions({
   productCollection: ProductCollectionData | null;
   canChangePlan: boolean;
   canCancel: boolean;
+  canPause: boolean;
   allowMultipleSubscriptions: boolean;
 }) {
+  // Changing the plan while paused would price a proration against billing
+  // dates the API is about to shift by the pause length, so hide it until the
+  // subscription resumes.
+  const canShowChangePlan =
+    canChangePlan &&
+    subscription.status !== "cancelled" &&
+    subscription.status !== "paused";
+
   return (
     <>
-      {productCollection && canChangePlan && subscription.status !== "cancelled" && (
+      {productCollection && canShowChangePlan && (
         <ChangePlanSheet
           currentProductId={subscription.product.id}
           subscriptionId={subscriptionId}
@@ -132,6 +145,11 @@ function HeaderActions({
           allowMultipleSubscriptions={allowMultipleSubscriptions}
         />
       )}
+      <PauseSubscriptionSheet
+        subscription={subscription}
+        subscriptionId={subscriptionId}
+        disabled={!canPause}
+      />
       {subscription.status != "cancelled" && (
         <CancelSubscriptionSheet
           subscription={subscription}

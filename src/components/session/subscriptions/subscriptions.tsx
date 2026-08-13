@@ -9,12 +9,15 @@ import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-const ACTIVE_OR_ON_HOLD = ["active", "on_hold"];
+// A paused subscription is still a live one, so it groups with active here.
+// Leaving it out drops it from the overview and makes the page claim the
+// customer has no subscriptions.
+const ACTIVE_ON_HOLD_OR_PAUSED = ["active", "on_hold", "paused"];
 const CANCELLED_FAILED_EXPIRED = ["cancelled", "failed", "expired"];
 const PENDING = ["pending"];
 const OVERVIEW_MAX = 5;
 
-export type SubscriptionStatus = "active" | "inactive" | "pending" | "cancelled" | "failed" | "expired" | "on_hold";
+export type SubscriptionStatus = "active" | "inactive" | "pending" | "cancelled" | "failed" | "expired" | "on_hold" | "paused";
 
 export interface SubscriptionData {
     billing: {
@@ -99,7 +102,7 @@ export const Subscriptions = ({
     const router = useRouter();
     const isEmpty = subscriptionData.length === 0;
 
-    const tier1 = subscriptionData.filter((s) => ACTIVE_OR_ON_HOLD.includes(s.status));
+    const tier1 = subscriptionData.filter((s) => ACTIVE_ON_HOLD_OR_PAUSED.includes(s.status));
     const tier2 = subscriptionData.filter((s) => CANCELLED_FAILED_EXPIRED.includes(s.status));
     const tier3 = subscriptionData.filter((s) => PENDING.includes(s.status));
     const prioritized = tier1.length ? tier1 : tier2.length ? tier2 : tier3;

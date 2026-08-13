@@ -164,6 +164,34 @@
     "revokeFailed": "Failed to revoke cancellation. Please try again.",
     "revokeSuccess": "Subscription cancellation revoked successfully"
   },
+  "PauseSubscriptionSheet": {
+    "triggerPause": "Pause Subscription",
+    "triggerResume": "Resume Subscription",
+    "pauseDisabledTooltip": "Pausing is disabled for this subscription. Please contact the merchant to pause.",
+    "pauseSheetTitle": "Pause your subscription",
+    "resumeSheetTitle": "Resume your subscription",
+    "currentPlan": "Current plan",
+    "pauseExplanation": "Your subscription stays paused until you resume it. Your next billing date and renewal date both move forward by the length of the pause.",
+    "resumeExplanation": "Your subscription becomes active again straight away. Billing restarts from today, and your next billing date has moved forward by the length of the pause.",
+    "confirmPause": "Pause subscription",
+    "confirmResume": "Resume subscription",
+    "pausing": "Pausing...",
+    "resuming": "Resuming...",
+    "pauseSuccess": "Subscription paused successfully",
+    "resumeSuccess": "Subscription resumed successfully",
+    "pauseFailed": "Failed to pause subscription. Please try again.",
+    "resumeFailed": "Failed to resume subscription. Please try again.",
+    "errors": {
+      "alreadyPaused": "This subscription is already paused.",
+      "pausePending": "An earlier pause request is still being processed. Please try again shortly.",
+      "notEligible": "This subscription cannot be paused right now.",
+      "requiresPaymentMethod": "Please add a payment method before you pause. Your unpaid usage must be billed first.",
+      "notPaused": "This subscription is not paused.",
+      "customerPauseDisabled": "Pausing is disabled for this subscription. Please contact the merchant.",
+      "settingsUnavailable": "We could not check the merchant's pause settings. Please try again.",
+      "invalidRequest": "Failed to update subscription. Please try again."
+    }
+  },
   "SubscriptionInfo": {
     "title": "Your subscription is currently on hold",
     "description": "Please update your payment method to resume this subscription"
@@ -172,6 +200,7 @@
     "onHold": "Your subscription is currently on hold due to a failed payment. Please update your payment method to resume this subscription",
     "failed": "This subscription has failed. Please try again.",
     "pending": "Your payment wasn't completed and checkout was left unfinished. If you'd like to subscribe, please try again.",
+    "paused": "This subscription is paused. Resume it to restart billing and continue your access.",
     "cancelledOn": "This subscription was cancelled on {date}.",
     "expired": "This subscription has expired.",
     "scheduledCancellation": "Your subscription is currently scheduled for cancellation on {date}.",
@@ -554,6 +583,7 @@
     "verified": "Verified",
     "active": "Active",
     "disabled": "Disabled",
+    "paused": "Paused",
     "preDispute": "Pre-Dispute",
     "dispute": "Dispute",
     "preArbitration": "Pre-Arbitration",
