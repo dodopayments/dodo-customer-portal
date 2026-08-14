@@ -124,9 +124,15 @@ function HeaderActions({
   canPause: boolean;
   allowMultipleSubscriptions: boolean;
 }) {
-  // Changing the plan while paused would price a proration against billing
-  // dates the API is about to shift by the pause length, so hide it until the
-  // subscription resumes.
+  // Changing the plan while paused would charge an immediate proration for
+  // access the customer does not currently have: pausing revokes entitlements
+  // until the subscription resumes. The proration would also price against
+  // billing dates the API shifts forward by the pause length. Hide the action
+  // until the subscription is active again.
+  //
+  // This hides the portal's own immediate change-plan flow only. It does not
+  // touch a change already scheduled through another surface, which the API
+  // keeps through a pause and applies at the shifted billing date.
   const canShowChangePlan =
     canChangePlan &&
     subscription.status !== "cancelled" &&

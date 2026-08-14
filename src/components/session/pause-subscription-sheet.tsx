@@ -26,7 +26,9 @@ import {
   decodeCurrency,
 } from "@/lib/currency-helper";
 import ProductMarkdownDescription from "../common/product-markdown-description";
+import { badgeVariants } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { AlertCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 /**
@@ -176,6 +178,22 @@ export function PauseSubscriptionSheet({
               )}
             </div>
           </div>
+
+          {/* Losing access is the consequence a customer is least likely to
+              expect, so it leads, above the billing-date explanation. */}
+          {!isPaused && (
+            <div
+              className={cn(
+                "flex gap-3 p-3 rounded-lg border",
+                badgeVariants["red"],
+              )}
+            >
+              <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <p className="font-body font-normal text-sm">
+                {t("pauseAccessWarning")}
+              </p>
+            </div>
+          )}
 
           <div className="p-3 rounded-lg bg-warning-primary border border-warning-secondary">
             <p className="font-body font-normal text-sm text-text-primary">
