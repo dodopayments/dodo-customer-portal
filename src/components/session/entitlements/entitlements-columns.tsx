@@ -332,7 +332,7 @@ function GrantDetailSheet({
     return (
         <Sheet open={open} onOpenChange={onOpenChange}>
             <SheetContent
-                className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6"
+                className="sm:max-w-md mx-auto border-border-secondary rounded-xl border m-6 flex flex-col gap-0 overflow-hidden"
                 floating
                 side="right"
             >
@@ -343,7 +343,7 @@ function GrantDetailSheet({
                     </SheetDescription>
                 </SheetHeader>
                 <Separator className="my-4" />
-                <div className="space-y-4">
+                <div className="flex-1 min-h-0 overflow-y-auto space-y-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex items-center justify-between">
                         <span className="text-sm text-text-secondary">Status</span>
                         <Badge variant={statusBadgeVariant(grant.status)} dot={false}>
