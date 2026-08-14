@@ -167,7 +167,6 @@
   "PauseSubscriptionSheet": {
     "triggerPause": "Pause Subscription",
     "triggerResume": "Resume Subscription",
-    "pauseDisabledTooltip": "Pausing is disabled for this subscription. Please contact the merchant to pause.",
     "pauseSheetTitle": "Pause your subscription",
     "resumeSheetTitle": "Resume your subscription",
     "currentPlan": "Current plan",

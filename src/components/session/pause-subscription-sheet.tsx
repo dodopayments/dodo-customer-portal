@@ -10,12 +10,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { pauseSubscription } from "@/app/session/subscriptions/[id]/action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -100,26 +94,17 @@ export function PauseSubscriptionSheet({
     return null;
   }
 
-  // A customer can always resume a pause they started themselves, so the
-  // business setting must not hide the resume trigger. The API is the authority
-  // here: it rejects a resume the customer may not perform with a 403, which
-  // `handleSubmit` surfaces as the `customerPauseDisabled` message.
+  // The business disallows pausing, so hide the trigger outright rather than
+  // showing it disabled. The API keeps a 403 as its own backstop.
+  //
+  // The resume trigger is deliberately exempt. A customer can always resume a
+  // pause they started themselves, and this response shape carries no
+  // `paused_at` or initiator, so the portal cannot tell a customer-started
+  // pause from a merchant-started one. The API is the authority: it rejects a
+  // resume the customer may not perform with a 403, which `handleSubmit`
+  // surfaces as the `customerPauseDisabled` message.
   if (disabled && !isPaused) {
-    return (
-      <TooltipProvider>
-        <Tooltip delayDuration={100}>
-          <TooltipTrigger asChild>
-            {/* Disabled buttons don't emit pointer events; the span keeps the tooltip working */}
-            <span tabIndex={0}>
-              <Button variant="secondary" disabled>
-                {t("triggerPause")}
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>{t("pauseDisabledTooltip")}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
+    return null;
   }
 
   const formattedPrice = formatCurrency(
