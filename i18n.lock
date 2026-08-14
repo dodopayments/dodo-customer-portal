@@ -132,12 +132,12 @@ checksums:
     CancelSubscriptionSheet/revokeSuccess: 36199d11ee82bd0e02b055189aadfa86
     PauseSubscriptionSheet/triggerPause: 2d511030a66de37fa68b483bbf83d9fb
     PauseSubscriptionSheet/triggerResume: 72591a31edc5e501e2d12d8d9adf5e55
-    PauseSubscriptionSheet/pauseDisabledTooltip: 08d294bfd5f334e35fae6124464e5bb5
     PauseSubscriptionSheet/pauseSheetTitle: 6b2d4b1472fd6837e79d76a6d19d994a
     PauseSubscriptionSheet/resumeSheetTitle: 763ec44cd1d71ce55b1b13bde6027730
     PauseSubscriptionSheet/currentPlan: 53ac259fd40a361274861ee7c7498424
     PauseSubscriptionSheet/pauseExplanation: ecf464b1c8c76dfdb4f64486defd73ce
-    PauseSubscriptionSheet/resumeExplanation: f61ab55b3814326972372d7af81ab178
+    PauseSubscriptionSheet/pauseAccessWarning: e7052d1507b9238b83242e316d77ef6e
+    PauseSubscriptionSheet/resumeExplanation: 1f17a60b4dfa9b4b720e5863a798aceb
     PauseSubscriptionSheet/confirmPause: 3a74679795f3ff8a523d1cfc5257dd37
     PauseSubscriptionSheet/confirmResume: 8f50b5a30492461e87cfe1b28782cc6e
     PauseSubscriptionSheet/pausing: 2620864bd4bf776f2e1eee6ae68dcb12
