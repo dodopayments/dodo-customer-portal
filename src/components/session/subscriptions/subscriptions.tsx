@@ -5,6 +5,7 @@ import { RefreshCcw } from "lucide-react";
 import { SubscriptionCard } from "../subscription-card";
 import ServerPagination from "@/components/common/server-pagination";
 import { PaymentMethodItem } from "@/app/session/payment-methods/type";
+import { OrderData } from "../orders/orders";
 import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -76,6 +77,12 @@ interface SubscriptionsProps {
     paymentMethods?: PaymentMethodItem[];
     /** Total subscriptions count for overview CTA */
     totalCount?: number;
+    /**
+     * Map of subscription_id -> most recent payment. Used in overview variant to display
+     * the actual payment currency (e.g. INR) instead of the product's base currency (e.g. USD)
+     * when adaptive pricing is enabled.
+     */
+    lastPaymentBySubscriptionId?: Record<string, OrderData>;
     /** Pagination props - required for detail variant */
     currentPage?: number;
     pageSize?: number;
@@ -97,6 +104,7 @@ export const Subscriptions = ({
     variant = "detail",
     paymentMethods = [],
     totalCount,
+    lastPaymentBySubscriptionId = {},
 }: SubscriptionsProps) => {
     const t = useTranslations("Subscriptions");
     const router = useRouter();
@@ -141,6 +149,7 @@ export const Subscriptions = ({
                             const matchedPaymentMethod = item.payment_method_id
                                 ? paymentMethods.find(pm => pm.payment_method_id === item.payment_method_id)
                                 : undefined;
+                            const lastPayment = lastPaymentBySubscriptionId[item.subscription_id];
                             return (
                                 <SubscriptionCard
                                     key={item.subscription_id}
@@ -148,6 +157,7 @@ export const Subscriptions = ({
                                     variant="compact"
                                     paymentMethod={matchedPaymentMethod}
                                     cardClassName={cardClassName}
+                                    lastPayment={lastPayment}
                                 />
                             );
                         })}

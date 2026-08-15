@@ -90,6 +90,21 @@ export function OverviewContent({
         pushPage(REFUND_PAGE_PARAM, newPage);
     }, [pushPage]);
 
+    // Build a map of subscription_id -> most recent successful payment
+    // so subscription cards can show the actual payment currency instead of
+    // the product's base currency (which may differ when adaptive currency is used).
+    const lastPaymentBySubscriptionId = billingHistory.reduce<Record<string, OrderData>>(
+        (acc, payment) => {
+            if (!payment.subscription_id) return acc;
+            const existing = acc[payment.subscription_id];
+            if (!existing || new Date(payment.created_at) > new Date(existing.created_at)) {
+                acc[payment.subscription_id] = payment;
+            }
+            return acc;
+        },
+        {}
+    );
+
     return (
         <SessionPageLayout>
             <div className="space-y-8">
@@ -99,6 +114,7 @@ export function OverviewContent({
                         variant="overview"
                         paymentMethods={paymentMethods}
                         totalCount={subscriptionsTotalCount}
+                        lastPaymentBySubscriptionId={lastPaymentBySubscriptionId}
                     />
                 )}
                 {paymentMethods.length > 0 && (
