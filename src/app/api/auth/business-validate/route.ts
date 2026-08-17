@@ -2,6 +2,11 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { BUSINESS_TOKEN_COOKIE_NAME, BUSINESS_TOKEN_EXPIRY_COOKIE_NAME } from "@/lib/token-helper";
 import parseError from "@/lib/serverErrorHelper";
+import {
+  BUSINESS_ARCHIVED_ROUTE,
+  isBusinessArchived,
+  readResponseBody,
+} from "@/lib/business-archived";
 import { ssrProxyFetch } from "@/lib/ssr-proxy";
 
 async function validateBusinessToken(token: string, nextUrl?: string | null) {
@@ -19,6 +24,11 @@ async function validateBusinessToken(token: string, nextUrl?: string | null) {
   if (!response.ok) {
     if (response.status === 401) {
       return { success: false, redirect: "/expired" };
+    }
+    // Terminal: the merchant archived the business, so there is no session to
+    // recover. The body is plain text on this route, not JSON.
+    if (isBusinessArchived(response.status, await readResponseBody(response))) {
+      return { success: false, redirect: BUSINESS_ARCHIVED_ROUTE };
     }
     throw new Error(`HTTP error! status: ${response.status}`);
   }

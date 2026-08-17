@@ -1,5 +1,10 @@
 "use server";
 
+import {
+  isBusinessArchived,
+  isBusinessLookupFailure,
+} from "./business-archived";
+
 interface ErrorPayload {
   message?: string;
   errors?: Array<{ message?: string }>;
@@ -74,6 +79,21 @@ async function parseError(
   }
 
   const status = error.status ?? error.response?.status;
+
+  // Checked before the generic 401/403 branch, which would otherwise absorb it
+  // into a "not authorized" message. This one is terminal.
+  if (isBusinessArchived(status, error.response?.data)) {
+    const message =
+      "This store is no longer available. Please contact the merchant.";
+    console.error(message, { error });
+    return { message, originalError: error, status };
+  }
+
+  if (isBusinessLookupFailure(status, error.response?.data)) {
+    const message = "We could not reach this store. Please try again shortly.";
+    console.error(message, { error });
+    return { message, originalError: error, status };
+  }
 
   if (status === 401 || status === 403) {
     const message = "You are not authorized to perform this action";

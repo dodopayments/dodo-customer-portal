@@ -1,5 +1,9 @@
 import axios from "axios";
 import { tokenHelper } from "./token-helper";
+import {
+  BUSINESS_ARCHIVED_ROUTE,
+  isBusinessArchived,
+} from "./business-archived";
 
 // Client-side initialization
 let API_URL: string;
@@ -66,3 +70,19 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// The token extractor guards every portal route, so an archive mid-session can
+// surface on any request. It is terminal: drop the session and send the
+// customer to the dead-end page rather than toasting a retryable-looking error.
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status;
+    const body = error?.response?.data;
+    if (isBusinessArchived(status, body) && typeof window !== "undefined") {
+      tokenHelper.clear();
+      window.location.assign(BUSINESS_ARCHIVED_ROUTE);
+    }
+    return Promise.reject(error);
+  }
+);
