@@ -1,6 +1,10 @@
 "use client";
 
 import { toast } from "sonner";
+import {
+  isBusinessArchived,
+  isBusinessLookupFailure,
+} from "./business-archived";
 
 interface ErrorPayload {
   message?: string;
@@ -74,6 +78,22 @@ export function getErrorMessage(
   }
 
   const status = error.status ?? error.response?.status;
+
+  // Checked before the generic 401/403 branch, which would otherwise absorb it
+  // into a dismissible "not authorized" warning. This one is terminal.
+  if (isBusinessArchived(status, error.response?.data)) {
+    return {
+      message: "This store is no longer available. Please contact the merchant.",
+      severity: "error",
+    };
+  }
+
+  if (isBusinessLookupFailure(status, error.response?.data)) {
+    return {
+      message: "We could not reach this store. Please try again shortly.",
+      severity: "warning",
+    };
+  }
 
   if (status === 401 || status === 403) {
     return {
