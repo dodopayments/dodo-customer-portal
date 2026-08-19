@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge, type BadgeVariant } from "@/components/ui/badge";
@@ -21,10 +21,12 @@ import {
     acceptEntitlementGrant,
 } from "@/app/session/entitlements/actions";
 
+import { LicenseKeyField } from "./license-key-field";
+import { LicenseKeyInstances } from "./license-key-instances";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Eye, EyeOff, Download, Loader2, ExternalLink, KeyRound, FileMinus } from "lucide-react";
+import { Eye, Download, Loader2, ExternalLink, KeyRound, FileMinus } from "lucide-react";
 import { Mode } from "@/lib/http";
 
 export interface EntitlementRow {
@@ -291,7 +293,6 @@ function GrantDetailSheet({
     onOpenChange: (open: boolean) => void;
 }) {
     const router = useRouter();
-    const [visible, setVisible] = useState(false);
     const [reconnecting, setReconnecting] = useState(false);
 
     const isLicenseKey = grant?.entitlement.integration_type === "license_key";
@@ -314,10 +315,6 @@ function GrantDetailSheet({
             toast.error("Failed to reconnect");
         }
     };
-
-    useEffect(() => {
-        if (!open) setVisible(false);
-    }, [open]);
 
     if (!grant) return null;
 
@@ -376,35 +373,20 @@ function GrantDetailSheet({
                     )}
 
                     {isLicenseKey && grant.status === "Delivered" && grant.license_key && (
-                        <div className="space-y-2">
-                            <span className="text-sm text-text-secondary">License Key</span>
-                            <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-                                <p className="text-sm font-medium">
-                                    {visible ? (
-                                        <span className="font-mono text-text-primary">
-                                            {grant.license_key.key}
-                                        </span>
-                                    ) : (
-                                        <span className="italic text-text-secondary">
-                                            Click to view license key
-                                        </span>
-                                    )}
-                                </p>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="text-text-secondary"
-                                    onClick={() => setVisible((v) => !v)}
-                                >
-                                    {visible ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                                </Button>
-                            </div>
-                            {grant.license_key.expires_at && (
-                                <p className="text-xs text-text-secondary">
-                                    Expires {parseIsoDate(grant.license_key.expires_at)}
-                                </p>
-                            )}
-                        </div>
+                        <>
+                            <LicenseKeyField
+                                licenseKey={grant.license_key.key}
+                                expiresAt={grant.license_key.expires_at}
+                                status={grant.license_key.status}
+                            />
+                            <Separator />
+                            <LicenseKeyInstances
+                                grantId={grant.id}
+                                licenseKey={grant.license_key.key}
+                                activationsLimit={grant.license_key.activations_limit}
+                                status={grant.license_key.status}
+                            />
+                        </>
                     )}
 
                     {grant.status === "Delivered" &&
