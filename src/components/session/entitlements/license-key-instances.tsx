@@ -59,7 +59,7 @@ function InstanceIdentity({ instance }: { instance: LicenseKeyInstance }) {
 
 function InstanceRowSkeleton() {
     return (
-        <div className="flex items-center justify-between gap-3 rounded-lg border bg-card px-3 py-2">
+        <div className="flex items-center justify-between gap-3 rounded-lg border bg-bg-primary px-3 py-2">
             <div className="w-full space-y-1.5">
                 <Skeleton className="h-3.5 w-32" />
                 <Skeleton className="h-3 w-44" />
@@ -195,7 +195,7 @@ export function LicenseKeyInstances({
                     <p className="text-sm text-text-secondary">
                         Failed to load instances.
                     </p>
-                    <Button variant="outline" size="sm" onClick={handleRetry}>
+                    <Button variant="secondary" size="sm" onClick={handleRetry}>
                         Retry
                     </Button>
                 </div>
@@ -215,11 +215,11 @@ export function LicenseKeyInstances({
                     {instances.map((instance) => (
                         <div
                             key={instance.id}
-                            className="flex items-center justify-between gap-3 rounded-lg border bg-card px-3 py-2"
+                            className="flex items-center justify-between gap-3 rounded-lg border bg-bg-primary px-3 py-2"
                         >
                             <InstanceIdentity instance={instance} />
                             <Button
-                                variant="outline"
+                                variant="secondary"
                                 size="sm"
                                 className="shrink-0 hover:text-text-error-primary"
                                 onClick={() => setPendingInstance(instance)}
@@ -260,7 +260,7 @@ export function LicenseKeyInstances({
                             </DialogDescription>
                         </DialogHeader>
                         {pendingInstance && (
-                            <div className="rounded-lg border bg-card px-3 py-2">
+                            <div className="rounded-lg border bg-bg-primary px-3 py-2">
                                 <InstanceIdentity instance={pendingInstance} />
                             </div>
                         )}
