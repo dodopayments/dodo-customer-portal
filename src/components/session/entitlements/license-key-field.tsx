@@ -56,7 +56,7 @@ export function LicenseKeyField({
     return (
         <div className="space-y-2">
             <span className="text-sm text-text-secondary">License Key</span>
-            <div className="flex items-center gap-1 rounded-lg border bg-card px-3 py-2">
+            <div className="flex items-center gap-1 rounded-lg border bg-bg-primary px-3 py-2">
                 <p
                     className={cn(
                         "flex-1 min-w-0 truncate font-mono text-sm",
