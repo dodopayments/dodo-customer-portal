@@ -10,6 +10,12 @@
 # Re-add `pull_request:` ONLY if this instance moves to Developer Edition. At
 # that point PR analysis becomes correct and this constraint no longer applies.
 #
+# A SECOND constraint does NOT disappear with Developer Edition: this job now
+# runs on an in-cluster self-hosted runner with reach into the internal network,
+# so a `pull_request:` trigger would execute fork-authored code there. The
+# paragraph above stops applying if the edition changes; this one does not.
+# Re-examine the runner before you re-add the trigger.
+#
 # The `if: github.ref` guard on the job is the other half of that defence:
 # workflow_dispatch lets the dispatcher choose any ref, reopening the same hole
 # through a different door, with no warning in the Actions UI that it is
@@ -38,7 +44,13 @@ jobs:
     # Without this, a manual dispatch from a feature branch overwrites main's
     # analysis. See the header comment.
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    # In-cluster ARC scale set, not a hosted runner: SonarQube is moving to a
+    # VPN-only internal host that GitHub-hosted runners cannot reach. The image
+    # also carries the dirmngr that sonarqube-scan-action v8 needs to verify the
+    # scanner's GPG signature. A queued job here means the label resolved to
+    # nothing: check the listener AND that this repo is in the arc-shared runner
+    # group -- a group scoped to selected repos fails the same way.
+    runs-on: arc-shared
     timeout-minutes: 15
     steps:
       - name: Checkout repository
