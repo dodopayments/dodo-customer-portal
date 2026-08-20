@@ -38,7 +38,7 @@ jobs:
     # Without this, a manual dispatch from a feature branch overwrites main's
     # analysis. See the header comment.
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    runs-on: arc-shared
     timeout-minutes: 15
     steps:
       - name: Checkout repository
